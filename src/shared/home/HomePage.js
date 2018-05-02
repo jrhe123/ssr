@@ -21,7 +21,7 @@ export class HomePage extends Component {
                 <Helmet
                     title="Welcome"
                 />
-                <h1>Homepage</h1>
+                <h1 style={{color: 'yellow'}}>Homepage3</h1>
                 <p>{format(new Date(), 'dddd DD MMMM YYYY', { locale })}</p>
                 {gists.length > 0 && <GistsList gists={gists.slice(0, 10)} />}
             </div>
