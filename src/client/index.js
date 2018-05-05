@@ -13,7 +13,7 @@ import createSagaMiddleware from 'redux-saga';
 import App from '../shared/app';
 import gistReducers from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
-import sagas from '../shared/home/sagas';
+import sagas from '../shared/sagas';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;

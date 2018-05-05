@@ -5,21 +5,39 @@ import {
     FETCH_GISTS_REQUESTED,
     FETCH_GISTS__SUCCEEDED,
     FETCH_GISTS__FAILED,
-} from './actions';
 
-export const fetchUrl = () => fetch('https://api.github.com/gists', {
-    method: 'get',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-    },
-}).then((response) => {
-    if (!response.ok) {
-        throw new Error();
-    }
+    ADD_GIST_REQUESTED,
+    ADD_GIST__SUCCEEDED,
+    ADD_GIST__FAILED,
 
-    return response.json();
-});
+    REMOVE_GIST_REQUESTED,
+    REMOVE_GIST__SUCCEEDED,
+    REMOVE_GIST__FAILED,
+} from './constants';
+
+// Libraries
+import uuidv1 from 'uuid/v1';
+import loremIpsum from 'lorem-ipsum';
+
+
+// FETCH GIST
+export const fetchUrl = () => {
+    return (
+        fetch('https://api.github.com/gists', {
+            method: 'get',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return response.json();
+        })
+    )
+}
 
 export function* fetchGists() {
     try {
@@ -30,7 +48,7 @@ export function* fetchGists() {
             payload: {
                 gists: gists.map(gist => ({
                     id: gist.id,
-                    title: gist.description || 'pas de titre',
+                    title: gist.description || 'default string',
                 })),
             },
         });
@@ -46,8 +64,95 @@ export function* fetchGistsSaga() {
     yield takeEvery(FETCH_GISTS_REQUESTED, fetchGists);
 }
 
-export default function* rootSaga() {
-    yield all([
-        fetchGistsSaga(),
-    ]);
+
+// ADD GIST
+export const addUrl = () => {
+    console.log('api called');
+    return (    
+        fetch('https://api.github.com/gists', {
+            method: 'get',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return {
+                "title": loremIpsum(),
+                "id": uuidv1(),
+            };
+        })
+    )
+}
+
+export function* addGist() {
+    console.log('add request called');
+    try {
+        const gist = yield call(addUrl);
+
+        yield put({
+            type: ADD_GIST__SUCCEEDED,
+            payload: {
+                gist: gist,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: ADD_GIST__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* addGistSaga() {
+    yield takeEvery(ADD_GIST_REQUESTED, addGist);
+}
+
+
+// REMOVE GIST
+export const removeUrl = (params) => {
+    console.log('api called');
+    return (    
+        fetch('https://api.github.com/gists', {
+            method: 'get',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return {
+                "id": params.id
+            };
+        })
+    )
+}
+
+export function* removeGist(action) {
+    console.log('remvoe request called');
+    try {
+        const id = yield call(removeUrl, action.payload);
+
+        yield put({
+            type: REMOVE_GIST__SUCCEEDED,
+            payload: {
+                id
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: REMOVE_GIST__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* removeGistSaga() {
+    yield takeEvery(REMOVE_GIST_REQUESTED, removeGist);
 }

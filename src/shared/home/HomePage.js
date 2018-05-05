@@ -5,13 +5,34 @@ import locale from 'date-fns/locale/fr';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
+import { 
+    fetchGists as fetchGistsAction,
+    addGist as addGistAction,
+    removeGist as removeGistAction,
+} from './actions';
 
-import { fetchGists as fetchGistsAction } from './actions';
+
 import GistsList from './GistList';
 
+import {
+	FadeInDiv,
+} from '../styles/utils';
+
 export class HomePage extends Component {
+
     componentWillMount() {
         this.props.loadGists();
+    }
+
+    handleAddClick(){
+        this.props.addGist();
+    }
+
+    handleRemoveClick(){
+        let { gists } = this.props;
+        let target = gists[0];
+        let { id } = target;
+        this.props.removeGist(id);
     }
 
     render() {
@@ -21,9 +42,17 @@ export class HomePage extends Component {
                 <Helmet
                     title="Welcome"
                 />
-                <h1 style={{color: 'yellow'}}>Homepage3</h1>
-                <p>{format(new Date(), 'dddd DD MMMM YYYY', { locale })}</p>
-                {gists.length > 0 && <GistsList gists={gists.slice(0, 10)} />}
+
+                <a onClick={() => this.handleAddClick()}>add</a>
+                <br/>
+                <a onClick={() => this.handleRemoveClick()}>remove</a>
+                {
+                    gists.length > 0 ?
+
+                    <GistsList gists={gists.slice(0, 10)} />
+                    :
+                    null
+                }
             </div>
         );
     }
@@ -45,4 +74,8 @@ const mapStateToProps = ({ gists }) => ({
     gists,
 });
 
-export default connect(mapStateToProps, { loadGists: fetchGistsAction })(HomePage);
+export default connect(mapStateToProps, { 
+    loadGists: fetchGistsAction,
+    addGist: addGistAction,
+    removeGist: removeGistAction,
+})(HomePage);

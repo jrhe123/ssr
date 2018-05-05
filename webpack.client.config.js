@@ -36,6 +36,9 @@ module.exports = {
         filename: '[name].js',
         publicPath: '/assets/',
     },
+    devServer: {
+        historyApiFallback: true
+    },
     resolve: {
         modules: ['node_modules', 'src'],
         extensions: ['*', '.js', '.json'],

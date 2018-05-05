@@ -1,13 +1,30 @@
-export const FETCH_GISTS_REQUESTED = 'FETCH_GISTS_REQUESTED';
-export const FETCH_GISTS__SUCCEEDED = 'FETCH_GISTS__SUCCEEDED';
-export const FETCH_GISTS__FAILED = 'FETCH_GISTS__FAILED';
+import {
+    FETCH_GISTS_REQUESTED,
+    ADD_GIST_REQUESTED,
+    REMOVE_GIST_REQUESTED,
+} from './constants';
 
-export const fetchGists = () => ({
-    type: FETCH_GISTS_REQUESTED,
-    payload: {},
-});
+export const fetchGists = () => {
+    return {
+        type: FETCH_GISTS_REQUESTED,
+        payload: {},
+    }
+}
 
-export const receiveGists = payload => ({
-    type: FETCH_GISTS__SUCCEEDED,
-    payload,
-});
+export const addGist = () => {
+    console.log('action called');
+    return {
+        type:  ADD_GIST_REQUESTED,
+        payload: {},
+    }
+}
+
+export const removeGist = (id) => {
+    console.log('action called: ', id);
+    return {
+        type:  REMOVE_GIST_REQUESTED,
+        payload: {
+            id
+        },
+    }
+}

@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import App from '../shared/app';
 import configureStore from './store';
 import { renderHeader, renderFooter } from './render';
-import sagas from '../shared/home/sagas';
+import sagas from '../shared/sagas';
 
 const createStyleManager = () =>
     MuiThemeProvider.createDefaultContext({
