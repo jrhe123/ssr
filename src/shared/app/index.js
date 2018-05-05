@@ -34,6 +34,7 @@ const App = () => (
             <Route path="/playlists" component={Routes.PlayListsPage} />
             <Route path="/search-album" component={Routes.SearchAlbumPage} />
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} />
+            <Route path="/demo" component={Routes.DemoPage} />
         </Switch>
     </div>
 );

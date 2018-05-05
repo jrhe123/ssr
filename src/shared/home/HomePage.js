@@ -36,7 +36,7 @@ export class HomePage extends Component {
     }
 
     handleTest = () => {
-        console.log('hit me');
+        console.log('hit you');
     }
 
     render() {
@@ -47,7 +47,7 @@ export class HomePage extends Component {
                     title="Welcome"
                 />
 
-                <a onClick={() => this.handleTest()}>arrow func</a>
+                <a onClick={() => this.handleTest()}>arrow</a>
                 <br/>
                 <a onClick={() => this.handleAddClick()}>add</a>
                 <br/>
