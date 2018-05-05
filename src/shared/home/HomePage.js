@@ -35,6 +35,10 @@ export class HomePage extends Component {
         this.props.removeGist(id);
     }
 
+    handleTest = () => {
+        console.log('hit me');
+    }
+
     render() {
         const { gists } = this.props;
         return (
@@ -43,6 +47,8 @@ export class HomePage extends Component {
                     title="Welcome"
                 />
 
+                <a onClick={() => this.handleTest()}>arrow func</a>
+                <br/>
                 <a onClick={() => this.handleAddClick()}>add</a>
                 <br/>
                 <a onClick={() => this.handleRemoveClick()}>remove</a>
