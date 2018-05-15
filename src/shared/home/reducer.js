@@ -4,29 +4,36 @@ import {
     REMOVE_GIST__SUCCEEDED,
 } from './constants';
 
-const initialState = [];
+const initialState = {
+    gists: [],
+};
 
 const homeReducers = (previousState = initialState, { type, payload }) => {
     
-    let arr = Object.assign([], previousState);
+    let updated = Object.assign({}, previousState);
     switch (type) {
 
         case FETCH_GISTS__SUCCEEDED:
-            return payload.gists;
+            updated.gists = payload.gists;
+            return updated;
 
         case ADD_GIST__SUCCEEDED:
             console.log('reducer called');
-            arr.unshift(payload.gist);
-            return arr;
+            let addGists = Object.assign([], updated.gists);
+            addGists.unshift(payload.gist);
+            updated.gists = addGists;
+            return updated;
         
         case REMOVE_GIST__SUCCEEDED:
             console.log('reducer called');
-            for(let i = 0; i < arr.length; i++){
-                if(arr[i].id === payload.id.id){
-                    arr.splice(i, 1);
+            let removeGists = Object.assign([], updated.gists);
+            for(let i = 0; i < removeGists.length; i++){
+                if(removeGists[i].id === payload.id.id){
+                    removeGists.splice(i, 1);
                 }
             }
-            return arr;
+            updated.gists = removeGists;
+            return updated;
 
         default:
             return previousState;

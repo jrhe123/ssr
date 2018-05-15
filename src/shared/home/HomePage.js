@@ -78,7 +78,7 @@ HomePage.defaultProps = {
 
 const stateToProps = (state) => {
     return {
-        gists: state.gists
+        gists: state.gists.gists
     }
 }
 
