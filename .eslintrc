@@ -10,7 +10,7 @@
         "beforeEach": true,
         "afterEach": true,
         "before": true,
-        "after": true,
+        "after": true
     },
     "parser": "babel-eslint",
     "rules": {
