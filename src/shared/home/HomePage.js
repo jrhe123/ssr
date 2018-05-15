@@ -76,7 +76,7 @@ HomePage.defaultProps = {
     gists: [],
 };
 
-const mapStateToProps = ({ gists }) => ({
+const stateToProps = ({ gists }) => ({
     gists,
 });
 
@@ -86,4 +86,4 @@ const dispatchToPros = {
     removeGist: removeGistAction,
 }
 
-export default connect(mapStateToProps, dispatchToPros)(HomePage);
+export default connect(stateToProps, dispatchToPros)(HomePage);
