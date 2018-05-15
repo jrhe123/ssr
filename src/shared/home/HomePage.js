@@ -76,9 +76,11 @@ HomePage.defaultProps = {
     gists: [],
 };
 
-const stateToProps = ({ gists }) => ({
-    gists,
-});
+const stateToProps = (state) => {
+    return {
+        gists: state.gists
+    }
+}
 
 const dispatchToPros = { 
     loadGists: fetchGistsAction,
