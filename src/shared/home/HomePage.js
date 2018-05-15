@@ -80,8 +80,10 @@ const mapStateToProps = ({ gists }) => ({
     gists,
 });
 
-export default connect(mapStateToProps, { 
+const dispatchToPros = { 
     loadGists: fetchGistsAction,
     addGist: addGistAction,
     removeGist: removeGistAction,
-})(HomePage);
+}
+
+export default connect(mapStateToProps, dispatchToPros)(HomePage);
