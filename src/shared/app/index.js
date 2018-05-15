@@ -2,9 +2,11 @@ import React from 'react';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 
 import * as Routes from './routes';
-import MainMenu from './mainMenu';
+import MainMenu from '../components/mainMenu/MainMenu';
+import AlertBar from '../components/alertBar/AlertBar';
 
 const styleSheet = createStyleSheet('ButtonAppBar', {
     root: {
@@ -27,7 +29,7 @@ const App = () => (
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             ]}
         />
-        <MainMenu />
+        {/* <MainMenu /> */}
         <Switch>
             <Route exact path="/" component={Routes.HomePage} />
             <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
