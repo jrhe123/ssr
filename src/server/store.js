@@ -6,6 +6,8 @@ import { routerMiddleware } from 'react-router-redux';
 import gistsReducer from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
 import rootReducer from '../shared/reducer';
+import socketReducer from '../shared/socketReducer';
+import socketIoMiddleware from '../shared/socket';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,9 +22,10 @@ export default (initialState) => {
             gists: gistsReducer,
             playlists: playlistReducer,
             root: rootReducer,
+            socketReducer: socketReducer,
         }),
         initialState,
-        compose(applyMiddleware(...reduxMiddlewares)),
+        compose(applyMiddleware(...reduxMiddlewares, socketIoMiddleware)),
     );
 
     store.runSaga = sagaMiddleware.run;

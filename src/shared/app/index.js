@@ -38,7 +38,7 @@ const App = ({ alertBar }) => (
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} />
             <Route path="/demo" component={Routes.DemoPage} />
         </Switch>
-        
+
         <AlertBar alertBar={alertBar}/>
     </div>
 );

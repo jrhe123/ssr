@@ -11,6 +11,8 @@ import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 
 import App from '../shared/app';
+import socketIoMiddleware from '../shared/socket';
+import socketReducer from '../shared/socketReducer';
 import rootReducer from '../shared/reducer';
 import gistReducer from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
@@ -20,6 +22,7 @@ import sagas from '../shared/sagas';
 const preloadedState = window.__PRELOADED_STATE__;
 
 const reducer = combineReducers({
+    socketReducer: socketReducer,
     root: rootReducer,
     gists: gistReducer,
     playlists: playlistReducer,
@@ -35,7 +38,7 @@ const store = createStore(
     reducer,
     preloadedState,
     compose(
-        applyMiddleware(routerMiddleware(history), sagaMiddleware),
+        applyMiddleware(routerMiddleware(history), sagaMiddleware, socketIoMiddleware),
         window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
 );
