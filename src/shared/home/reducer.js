@@ -8,7 +8,7 @@ const initialState = {
     gists: [],
 };
 
-const homeReducers = (previousState = initialState, { type, payload }) => {
+const homeReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
     switch (type) {
@@ -40,4 +40,4 @@ const homeReducers = (previousState = initialState, { type, payload }) => {
     }
 };
 
-export default homeReducers;
+export default homeReducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const AlertBar = ({ isDisplay }) => (
-    <div>{`Hi ${isDisplay}`}</div>
+const AlertBar = ({ alertBar }) => (
+    <div>{`Hi ${JSON.stringify(alertBar)}`}</div>
 )
 
 export default AlertBar;

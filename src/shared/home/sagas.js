@@ -23,7 +23,7 @@ import loremIpsum from 'lorem-ipsum';
 // FETCH GIST
 export const fetchUrl = () => {
     return (
-        fetch('https://api.github.com/gists', {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -69,7 +69,7 @@ export function* fetchGistsSaga() {
 export const addUrl = () => {
     console.log('api called');
     return (    
-        fetch('https://api.github.com/gists', {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -116,7 +116,7 @@ export function* addGistSaga() {
 export const removeUrl = (params) => {
     console.log('api called');
     return (    
-        fetch('https://api.github.com/gists', {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
             headers: {
                 Accept: 'application/json',

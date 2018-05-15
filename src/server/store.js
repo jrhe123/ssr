@@ -5,6 +5,7 @@ import { routerMiddleware } from 'react-router-redux';
 
 import gistsReducer from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
+import rootReducer from '../shared/reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +19,7 @@ export default (initialState) => {
         combineReducers({
             gists: gistsReducer,
             playlists: playlistReducer,
+            root: rootReducer,
         }),
         initialState,
         compose(applyMiddleware(...reduxMiddlewares)),

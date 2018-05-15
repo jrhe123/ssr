@@ -11,7 +11,8 @@ import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 
 import App from '../shared/app';
-import gistReducers from '../shared/home/reducer';
+import rootReducer from '../shared/reducer';
+import gistReducer from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
 import sagas from '../shared/sagas';
 
@@ -19,7 +20,8 @@ import sagas from '../shared/sagas';
 const preloadedState = window.__PRELOADED_STATE__;
 
 const reducer = combineReducers({
-    gists: gistReducers,
+    root: rootReducer,
+    gists: gistReducer,
     playlists: playlistReducer,
     routing: routerReducer,
 });

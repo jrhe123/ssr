@@ -18,7 +18,7 @@ const styleSheet = createStyleSheet('ButtonAppBar', {
     },
 });
 
-const App = () => (
+const App = ({ alertBar }) => (
     <div>
         <Helmet
             htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
@@ -38,6 +38,15 @@ const App = () => (
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} />
             <Route path="/demo" component={Routes.DemoPage} />
         </Switch>
+        
+        <AlertBar alertBar={alertBar}/>
     </div>
 );
-export default withStyles(styleSheet)(App);
+
+const stateToProps = (state) => {
+    return {
+        alertBar: state.root.alertBar
+    }
+}
+
+export default connect(stateToProps, null)(withStyles(styleSheet)(App));
