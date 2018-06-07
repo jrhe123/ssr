@@ -10,14 +10,15 @@ import { Redirect } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import { 
-    dxLogout as dxLogoutAction
+    dxLogout as dxLogoutAction,
+    dxValidateToken as dxValidateTokenAction,
 } from './actions';
 
 export class DashboardPage extends Component {
 
     componentDidMount(){
         let token = localStorage.getItem('token');
-        // this.props.dxValidateToken(token);
+        this.props.dxValidateTokenAction(token, 'ac51e815-92f4-4ab4-9d47-8528114ac8e4');
     }
 
     handleLogoutClick = () => {
@@ -61,6 +62,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = { 
     dxLogoutAction,
+    dxValidateTokenAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DashboardPage);

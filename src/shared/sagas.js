@@ -5,9 +5,10 @@ import {
     dxLoginSaga,
 } from './login/sagas';
 
-// Logout
+// Dashboard
 import { 
     dxLogoutSaga,
+    dxValidateTokenSaga,
 } from './dashboard/sagas';
 
 export default function* rootSaga() {
@@ -15,7 +16,8 @@ export default function* rootSaga() {
         // Login
         dxLoginSaga(),
 
-        // Logout
+        // Dashboard
         dxLogoutSaga(),
+        dxValidateTokenSaga(),
     ]);
 }

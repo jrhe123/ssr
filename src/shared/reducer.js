@@ -8,6 +8,8 @@ import {
 import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+
+    VALIDATE_TOKEN__FAILED,
 } from './dashboard';
 
 const initialState = {
@@ -34,6 +36,11 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             return updated;
         
         case LOGOUT__SUCCEEDED:
+            updated.isAuthenticated = false;
+            updated.user = {};
+            return updated;
+
+        case VALIDATE_TOKEN__FAILED:
             updated.isAuthenticated = false;
             updated.user = {};
             return updated;
