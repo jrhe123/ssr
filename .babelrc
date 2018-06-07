@@ -8,7 +8,8 @@
             "polyfill": false,
             "regenerator": true,
             "moduleName": "babel-runtime"
-        }]
+        }],
+        ["emotion"]
     ],
     "presets": [
         "react",

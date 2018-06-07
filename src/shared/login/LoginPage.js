@@ -14,6 +14,7 @@ import {
 import {
 	FadeInDiv,
 } from '../styles/utils';
+import Load from '../components/load/Load';
 
 export class LoginPage extends Component {
 
@@ -23,7 +24,9 @@ export class LoginPage extends Component {
                 <Helmet
                     title="Login"
                 />
-                hello world!!
+                <Load 
+                    loading={true}
+                />
             </div>
         );
     }
@@ -35,8 +38,8 @@ const stateToProps = (state) => {
     }
 }
 
-const dispatchToPros = { 
+const dispatchToProps = { 
     
 }
 
-export default connect(stateToProps, dispatchToPros)(LoginPage);
+export default connect(stateToProps, dispatchToProps)(LoginPage);
