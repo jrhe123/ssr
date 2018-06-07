@@ -1,5 +1,5 @@
 import {
-    FETCH_GISTS__SUCCEEDED,
+    LOGOUT__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -11,7 +11,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let updated = Object.assign({}, previousState);
     switch (type) {
 
-        case FETCH_GISTS__SUCCEEDED:
+        case LOGOUT__SUCCEEDED:
             updated.gists = payload.gists;
             return updated;
 

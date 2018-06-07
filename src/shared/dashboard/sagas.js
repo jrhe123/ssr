@@ -2,14 +2,13 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
 import {
-    FETCH_GISTS_REQUESTED,
-    FETCH_GISTS__SUCCEEDED,
-    FETCH_GISTS__FAILED,
-
+    LOGOUT_REQUESTED,
+    LOGOUT__SUCCEEDED,
+    LOGOUT__FAILED,
 } from './constants';
 
-// FETCH GIST
-export const fetchUrl = () => {
+// Logout
+export const dxLogoutUrl = () => {
     return (
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
@@ -19,35 +18,34 @@ export const fetchUrl = () => {
             },
         })
         .then((response) => {
+
             if (!response.ok) {
                 throw new Error();
             }
             return response.json();
         })
+        .catch((error) => {
+            return error;
+        })
     )
 }
 
-export function* fetchGists() {
+export function* dxLogout() {
     try {
-        const gists = yield call(fetchUrl);
-
+        const response = yield call(dxLogoutUrl);
+        localStorage.clear();
         yield put({
-            type: FETCH_GISTS__SUCCEEDED,
-            payload: {
-                gists: gists.map(gist => ({
-                    id: gist.id,
-                    title: gist.description || 'default string',
-                })),
-            },
+            type: LOGOUT__SUCCEEDED,
+            payload: {},
         });
     } catch (error) {
         yield put({
-            type: FETCH_GISTS__FAILED,
+            type: LOGOUT__FAILED,
             payload: error,
         });
     }
 }
 
-export function* fetchGistsSaga() {
-    yield takeEvery(FETCH_GISTS_REQUESTED, fetchGists);
+export function* dxLogoutSaga() {
+    yield takeEvery(LOGOUT_REQUESTED, dxLogout);
 }

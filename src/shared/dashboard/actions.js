@@ -1,10 +1,10 @@
 import {
-    
+    LOGOUT_REQUESTED
 } from './constants';
 
-export const fetchGists = () => {
+export const dxLogout = () => {
     return {
-        type: 'test',
+        type: LOGOUT_REQUESTED,
         payload: {},
     }
 }
