@@ -12,9 +12,6 @@ import { connect } from 'react-redux';
 import * as Routes from './routes';
 import AlertBar from '../components/alertBar/AlertBar';
 
-// libraries
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-
 const App = ({ alertBar }) => (
     <div>
         {/* SEO */}
@@ -31,12 +28,13 @@ const App = ({ alertBar }) => (
         {/* <MainMenu /> */}
         {/* config router */}
         <Switch>
-            <Route exact path="/" component={Routes.HomePage} />
-            <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
+            <Route exact path="/" component={Routes.LoginPage} />
+
+            {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
             <Route path="/playlists" component={Routes.PlayListsPage} />
             <Route path="/search-album" component={Routes.SearchAlbumPage} />
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} />
-            <Route path="/demo" component={Routes.DemoPage} />
+            <Route path="/demo" component={Routes.DemoPage} /> */}
         </Switch>
 
         {/* global alert bar */}
@@ -50,4 +48,4 @@ const stateToProps = (state) => {
     }
 }
 
-export default connect(stateToProps, null)(withStyles(styleSheet)(App));
+export default connect(stateToProps, null)(App);
