@@ -16,7 +16,7 @@ import socketIoMiddleware from '../shared/socket';
 import socketReducer from '../shared/socketReducer';
 import rootReducer from '../shared/reducer';
 import loginReducer from '../shared/login/reducer';
-
+import dashboardReducer from '../shared/dashboard/reducer';
 
 import sagas from '../shared/sagas';
 
@@ -28,6 +28,7 @@ const reducer = combineReducers({
     socketReducer: socketReducer,
     root: rootReducer,
     login: loginReducer,
+    dashboard: dashboardReducer,
 });
 
 const history = createHistory();

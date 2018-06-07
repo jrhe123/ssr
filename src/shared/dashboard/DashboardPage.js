@@ -4,16 +4,19 @@ import format from 'date-fns/format';
 import locale from 'date-fns/locale/fr';
 import Helmet from 'react-helmet';
 
+// router
+import { Redirect } from 'react-router-dom';
+
 // redux
 import { connect } from 'react-redux';
 import { 
-    
+    dxLogout as dxLogoutAction
 } from './actions';
 
 export class DashboardPage extends Component {
 
     handleLogoutClick = () => {
-        console.log('logout now');
+        this.props.dxLogoutAction();
     }
 
     render() {
@@ -31,7 +34,9 @@ export class DashboardPage extends Component {
                         )
                         :
                         (
-                            <div>please login</div>
+                            <Redirect to={{
+                                pathname: '/', state: {}
+                            }} />
                         )
                 }
             </div>
@@ -41,13 +46,13 @@ export class DashboardPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.isAuthenticated,
-        user: state.auth.user,
+        isAuthenticated: state.root.isAuthenticated,
+        user: state.root.user,
     }
 }
 
 const dispatchToProps = { 
-    
+    dxLogoutAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DashboardPage);

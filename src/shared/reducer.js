@@ -4,6 +4,12 @@ import {
     LOGIN__FAILED,
 } from './login';
 
+// Logout
+import {
+    LOGOUT__SUCCEEDED,
+    LOGOUT__FAILED,
+} from './dashboard';
+
 const initialState = {
 
     isAuthenticated: false,
@@ -25,6 +31,11 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case LOGIN__SUCCEEDED:
             updated.isAuthenticated = true;
             updated.user = payload.User;
+            return updated;
+        
+        case LOGOUT__SUCCEEDED:
+            updated.isAuthenticated = false;
+            updated.user = {};
             return updated;
 
         default:
