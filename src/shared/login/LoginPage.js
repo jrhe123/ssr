@@ -4,17 +4,14 @@ import format from 'date-fns/format';
 import locale from 'date-fns/locale/fr';
 import Helmet from 'react-helmet';
 
+// router
+import { Redirect } from 'react-router-dom';
+
 // redux
 import { connect } from 'react-redux';
 import {
     dxLogin as dxLoginAction,
 } from './actions';
-
-// components
-import {
-    FadeInDiv,
-} from '../styles/utils';
-import Load from '../components/load/Load';
 
 export class LoginPage extends Component {
 
@@ -28,7 +25,18 @@ export class LoginPage extends Component {
                 <Helmet
                     title="Login"
                 />
-                <a onClick={() => this.handleLoginClick()}>login</a>
+                {
+                    this.props.isAuthenticated ?
+                        (
+                            <Redirect to={{
+                                pathname: '/dashboard', state: {}
+                            }} />
+                        )
+                        :
+                        (
+                            <a onClick={() => this.handleLoginClick()}>login</a>
+                        )
+                }
             </div>
         );
     }
@@ -36,7 +44,7 @@ export class LoginPage extends Component {
 
 const stateToProps = (state) => {
     return {
-
+        isAuthenticated: state.auth.isAuthenticated,
     }
 }
 
