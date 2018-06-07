@@ -10,16 +10,13 @@ import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-r
 import createHistory from 'history/createBrowserHistory';
 import createSagaMiddleware from 'redux-saga';
 
+
 import App from '../shared/app';
 import socketIoMiddleware from '../shared/socket';
 import socketReducer from '../shared/socketReducer';
 import rootReducer from '../shared/reducer';
-import gistReducer from '../shared/home/reducer';
-import playlistReducer from '../shared/playlists/reducer';
-
-
-
 import loginReducer from '../shared/login/reducer';
+
 
 import sagas from '../shared/sagas';
 
@@ -27,15 +24,10 @@ import sagas from '../shared/sagas';
 const preloadedState = window.__PRELOADED_STATE__;
 
 const reducer = combineReducers({
+    routing: routerReducer,
     socketReducer: socketReducer,
     root: rootReducer,
-    gists: gistReducer,
-    playlists: playlistReducer,
-    routing: routerReducer,
-
-
-    
-    auth: loginReducer,
+    login: loginReducer,
 });
 
 const history = createHistory();
