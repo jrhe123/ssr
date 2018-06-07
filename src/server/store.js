@@ -9,6 +9,10 @@ import rootReducer from '../shared/reducer';
 import socketReducer from '../shared/socketReducer';
 import socketIoMiddleware from '../shared/socket';
 
+
+import loginReducer from '../shared/login/reducer';
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 const reduxMiddlewares = [
@@ -23,6 +27,9 @@ export default (initialState) => {
             playlists: playlistReducer,
             root: rootReducer,
             socketReducer: socketReducer,
+
+
+            auth: loginReducer,
         }),
         initialState,
         compose(applyMiddleware(...reduxMiddlewares, socketIoMiddleware)),

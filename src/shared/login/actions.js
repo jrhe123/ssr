@@ -1,10 +1,10 @@
 import {
-    
+    LOGIN_REQUESTED,
 } from './constants';
 
-export const fetchGists = () => {
+export const dxLogin = () => {
     return {
-        type: 'test',
+        type: LOGIN_REQUESTED,
         payload: {},
     }
 }

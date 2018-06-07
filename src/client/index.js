@@ -16,6 +16,11 @@ import socketReducer from '../shared/socketReducer';
 import rootReducer from '../shared/reducer';
 import gistReducer from '../shared/home/reducer';
 import playlistReducer from '../shared/playlists/reducer';
+
+
+
+import loginReducer from '../shared/login/reducer';
+
 import sagas from '../shared/sagas';
 
 // Grab the state from a global variable injected into the server-generated HTML
@@ -27,6 +32,10 @@ const reducer = combineReducers({
     gists: gistReducer,
     playlists: playlistReducer,
     routing: routerReducer,
+
+
+    
+    auth: loginReducer,
 });
 
 const history = createHistory();

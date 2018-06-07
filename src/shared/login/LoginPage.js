@@ -6,17 +6,21 @@ import Helmet from 'react-helmet';
 
 // redux
 import { connect } from 'react-redux';
-import { 
-    
+import {
+    dxLogin as dxLoginAction,
 } from './actions';
 
 // components
 import {
-	FadeInDiv,
+    FadeInDiv,
 } from '../styles/utils';
 import Load from '../components/load/Load';
 
 export class LoginPage extends Component {
+
+    handleLoginClick = () => {
+        this.props.dxLoginAction();
+    }
 
     render() {
         return (
@@ -24,7 +28,7 @@ export class LoginPage extends Component {
                 <Helmet
                     title="Login"
                 />
-                login page
+                <a onClick={() => this.handleLoginClick()}>login</a>
             </div>
         );
     }
@@ -32,12 +36,12 @@ export class LoginPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        
+
     }
 }
 
-const dispatchToProps = { 
-    
+const dispatchToProps = {
+    dxLoginAction
 }
 
 export default connect(stateToProps, dispatchToProps)(LoginPage);

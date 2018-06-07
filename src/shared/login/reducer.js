@@ -1,9 +1,10 @@
 import {
-    FETCH_GISTS__SUCCEEDED,
+    LOGIN__SUCCEEDED,
 } from './constants';
 
 const initialState = {
-    gists: [],
+    isAuthenticated: false,
+    user: {},
 };
 
 const loginReducer = (previousState = initialState, { type, payload }) => {
@@ -11,8 +12,9 @@ const loginReducer = (previousState = initialState, { type, payload }) => {
     let updated = Object.assign({}, previousState);
     switch (type) {
 
-        case FETCH_GISTS__SUCCEEDED:
-            updated.gists = payload.gists;
+        case LOGIN__SUCCEEDED:
+            updated.isAuthenticated = true;
+            updated.user = payload.User;
             return updated;
 
         default:

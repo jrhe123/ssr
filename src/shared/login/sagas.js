@@ -2,14 +2,13 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
 import {
-    FETCH_GISTS_REQUESTED,
-    FETCH_GISTS__SUCCEEDED,
-    FETCH_GISTS__FAILED,
-
+    LOGIN_REQUESTED,
+    LOGIN__SUCCEEDED,
+    LOGIN__FAILED,
 } from './constants';
 
-// FETCH GIST
-export const fetchUrl = () => {
+// LOGIN
+export const dxLoginUrl = () => {
     return (
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
@@ -19,35 +18,41 @@ export const fetchUrl = () => {
             },
         })
         .then((response) => {
+
             if (!response.ok) {
                 throw new Error();
             }
             return response.json();
         })
+        .catch((error) => {
+            return error;
+        })
     )
 }
 
-export function* fetchGists() {
+export function* dxLogin() {
     try {
-        const gists = yield call(fetchUrl);
-
+        const response = yield call(dxLoginUrl);
+        let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';        
+        localStorage.setItem('token', token);
         yield put({
-            type: FETCH_GISTS__SUCCEEDED,
+            type: LOGIN__SUCCEEDED,
             payload: {
-                gists: gists.map(gist => ({
-                    id: gist.id,
-                    title: gist.description || 'default string',
-                })),
+                user: {
+                    UserGUID: "5f92de5b-e627-43e5-a42f-75f9e4715380",
+                    UserTypeID: 1,
+                    AuthorizationToken: token
+                }
             },
         });
     } catch (error) {
         yield put({
-            type: FETCH_GISTS__FAILED,
+            type: LOGIN__FAILED,
             payload: error,
         });
     }
 }
 
-export function* fetchGistsSaga() {
-    yield takeEvery(FETCH_GISTS_REQUESTED, fetchGists);
+export function* dxLoginSaga() {
+    yield takeEvery(LOGIN_REQUESTED, dxLogin);
 }
