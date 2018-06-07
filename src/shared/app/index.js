@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 // components
 import * as Routes from './routes';
 import AlertBar from '../components/alertBar/AlertBar';
-import HomePage from '../home/HomePage';
 
 const App = ({ alertBar }) => (
     <div>
@@ -26,7 +25,6 @@ const App = ({ alertBar }) => (
             ]}
         />
 
-        {/* <MainMenu /> */}
         {/* config router */}
         <Switch>
             <Route exact path="/" component={Routes.LoginPage} />
@@ -39,7 +37,6 @@ const App = ({ alertBar }) => (
         </Switch>
 
         {/* global alert bar */}
-        <HomePage />
         <AlertBar 
             alertBar={alertBar} 
         />

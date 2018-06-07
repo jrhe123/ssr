@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 // redux
 import { connect } from 'react-redux';
 import { 
-    fetchGists as fetchGistsAction,
+    
 } from './actions';
 
 // components
@@ -18,7 +18,6 @@ import {
 export class LoginPage extends Component {
 
     render() {
-        const { gists } = this.props;
         return (
             <div>
                 <Helmet
@@ -32,12 +31,12 @@ export class LoginPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        gists: state.gists.gists
+        
     }
 }
 
 const dispatchToPros = { 
-    loadGists: fetchGistsAction,
+    
 }
 
 export default connect(stateToProps, dispatchToPros)(LoginPage);
