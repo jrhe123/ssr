@@ -83,9 +83,16 @@ export const dxValidateTokenUrl = (params) => {
 export function* dxValidateToken(action) {
     try {
         const response = yield call(dxValidateTokenUrl, action.payload);
+        let token = localStorage.getItem('token', token);
         yield put({
             type: VALIDATE_TOKEN__SUCCEEDED,
-            payload: {},
+            payload: {
+                user: {
+                    UserGUID: "5f92de5b-e627-43e5-a42f-75f9e4715380",
+                    UserTypeID: 1,
+                    AuthorizationToken: token
+                }
+            },
         });
     } catch (error) {
         localStorage.clear();
