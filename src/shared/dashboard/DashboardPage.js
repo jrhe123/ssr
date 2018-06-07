@@ -16,15 +16,15 @@ import {
 } from '../styles/utils';
 import Load from '../components/load/Load';
 
-export class LoginPage extends Component {
+export class DashboardPage extends Component {
 
     render() {
         return (
             <div>
                 <Helmet
-                    title="Login"
+                    title="Dashboard"
                 />
-                login page
+                DashboardPage page
             </div>
         );
     }
@@ -40,4 +40,4 @@ const dispatchToProps = {
     
 }
 
-export default connect(stateToProps, dispatchToProps)(LoginPage);
+export default connect(stateToProps, dispatchToProps)(DashboardPage);

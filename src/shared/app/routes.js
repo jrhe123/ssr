@@ -10,3 +10,4 @@ export const DemoPage = loadable(() => import('../demo/DemoPage'));
 
 
 export const LoginPage = loadable(() => import('../login/LoginPage'));
+export const DashboardPage = loadable(() => import('../dashboard/DashboardPage'));

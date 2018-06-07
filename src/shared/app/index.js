@@ -34,6 +34,11 @@ const App = ({ alertBar }) => (
                 path="/" 
                 component={Routes.LoginPage} 
             />
+            <Route 
+                exact 
+                path="/Dashboard" 
+                component={Routes.DashboardPage} 
+            />
 
             {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
             <Route path="/playlists" component={Routes.PlayListsPage} />
