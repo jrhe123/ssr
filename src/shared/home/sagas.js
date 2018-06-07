@@ -94,10 +94,15 @@ export function* addGist() {
         const gist = yield call(addUrl);
 
         yield put({
-            type: ADD_GIST__SUCCEEDED,
+            // type: ADD_GIST__SUCCEEDED,
+            // payload: {
+            //     gist: gist,
+            // },
+
+            type: ADD_GIST__FAILED,
             payload: {
-                gist: gist,
-            },
+                message: 'error msg goes here'
+            }
         });
     } catch (error) {
         yield put({

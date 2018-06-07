@@ -4,22 +4,33 @@ import React, { Component } from 'react';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import '../../../../assets/css/index.css';
+import '../../../../assets/scss/index.scss';
 
 class AlertBar extends Component {
 
-    handleClick = () => {
-        console.log('clicked');
+    componentWillReceiveProps(nextProps) {
+        let {
+            isError,
+            message,
+        } = nextProps.alertBar;
+
+        if(isError){
+            Alert.error(`<p>${message}</p>`);
+        }else{
+            Alert.success(`<p>${message}</p>`);
+        }
     }
 
     render() {
         return (
-            <div>
-                <Alert
-                    position='top-right'
-                    stack={{ limit: 1 }}
-                />
-                <a onClick={() => this.handleClick()}>click me</a>
-            </div>
+            <Alert
+                position='bottom'
+                stack={{ limit: 1 }}
+                timeout={3000000}
+                effect='jelly'
+                html={true}
+            />
         )
     }
 }

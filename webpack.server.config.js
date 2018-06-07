@@ -19,7 +19,7 @@ module.exports = {
     },
     resolve: {
         modules: ['node_modules', 'src'],
-        extensions: ['*', '.js', '.json'],
+        extensions: ['*', '.js', '.json', '.css'],
     },
     module: {
         rules: [
@@ -37,6 +37,18 @@ module.exports = {
                     ],
                 },
             },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader",
+                    "css-loader", 
+                    "sass-loader" 
+                ]
+            }
         ],
     },
     externals: nodeExternals(),
