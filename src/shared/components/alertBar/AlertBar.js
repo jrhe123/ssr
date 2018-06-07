@@ -10,10 +10,14 @@ class AlertBar extends Component {
 
     componentWillReceiveProps(nextProps) {
         let {
+            isDisplay,
             isError,
             message,
         } = nextProps.alertBar;
 
+        if(!isDisplay){
+            return;
+        }
         if(isError){
             Alert.error(`<p>${message}</p>`);
         }else{
@@ -26,7 +30,7 @@ class AlertBar extends Component {
             <Alert
                 position='bottom'
                 stack={{ limit: 1 }}
-                timeout={3000000}
+                timeout={3000}
                 effect='jelly'
                 html={true}
             />

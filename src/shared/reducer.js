@@ -4,6 +4,7 @@ import {
 
 const initialState = {
     alertBar: {
+        isDisplay: false,
         isError: false,
         message: ''
     }
@@ -16,6 +17,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
 
         case ADD_GIST__FAILED:
             let updatedAlertBar = Object.assign({}, updated.alertBar);
+            updatedAlertBar.isDisplay = true;
             updatedAlertBar.isError = true;
             updatedAlertBar.message = payload.message;
             updated.alertBar = updatedAlertBar;

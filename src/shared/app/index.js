@@ -2,10 +2,12 @@ import React from 'react';
 import { 
     Route, 
     Switch, 
+    Redirect,
 } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
 // redux
+import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // components
@@ -27,13 +29,19 @@ const App = ({ alertBar }) => (
 
         {/* config router */}
         <Switch>
-            <Route exact path="/" component={Routes.LoginPage} />
+            <Route 
+                exact 
+                path="/" 
+                component={Routes.LoginPage} 
+            />
 
             {/* <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
             <Route path="/playlists" component={Routes.PlayListsPage} />
             <Route path="/search-album" component={Routes.SearchAlbumPage} />
             <Route path="/albums/:albumSlug" component={Routes.AlbumPage} />
             <Route path="/demo" component={Routes.DemoPage} /> */}
+
+            <Route path="*" render={() => (<Redirect to="/" />)} /> 
         </Switch>
 
         {/* global alert bar */}
@@ -49,4 +57,4 @@ const stateToProps = (state) => {
     }
 }
 
-export default connect(stateToProps, null)(App);
+export default withRouter(connect(stateToProps, null)(App));
