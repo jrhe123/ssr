@@ -20,6 +20,7 @@ export class DashboardPage extends Component {
     }
 
     render() {
+        console.log('check here: ', this.props.location);
         return (
             <div>
                 <Helmet
@@ -35,7 +36,9 @@ export class DashboardPage extends Component {
                         :
                         (
                             <Redirect to={{
-                                pathname: '/', state: {}
+                                pathname: '/', state: {
+                                    from: this.props.location
+                                }
                             }} />
                         )
                 }
@@ -46,6 +49,8 @@ export class DashboardPage extends Component {
 
 const stateToProps = (state) => {
     return {
+        location: state.routing.location,
+
         isAuthenticated: state.root.isAuthenticated,
         user: state.root.user,
     }
