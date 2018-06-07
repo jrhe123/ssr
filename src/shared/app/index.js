@@ -1,35 +1,35 @@
 import React from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { Route, Switch } from 'react-router-dom';
+import { 
+    Route, 
+    Switch, 
+} from 'react-router-dom';
 import Helmet from 'react-helmet';
+
+// redux
 import { connect } from 'react-redux';
 
+// components
 import * as Routes from './routes';
-import MainMenu from '../components/mainMenu/MainMenu';
 import AlertBar from '../components/alertBar/AlertBar';
 
-const styleSheet = createStyleSheet('ButtonAppBar', {
-    root: {
-        marginTop: 30,
-        width: '100%',
-    },
-    flex: {
-        flex: 1,
-    },
-});
+// libraries
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const App = ({ alertBar }) => (
     <div>
+        {/* SEO */}
         <Helmet
             htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
-            titleTemplate="%s | Universal React POC "
+            titleTemplate="%s | DigitalXi - PublishXi "
             titleAttributes={{ itemprop: 'name', lang: 'en' }}
             meta={[
-                { name: 'description', content: 'Server side rendering example' },
+                { name: 'description', content: 'DigitalXi - PublishXi' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             ]}
         />
+
         {/* <MainMenu /> */}
+        {/* config router */}
         <Switch>
             <Route exact path="/" component={Routes.HomePage} />
             <Route path="/playlists/:playlistId(pl-[a-z]{0,4})" component={Routes.PlaylistPage} />
@@ -39,7 +39,8 @@ const App = ({ alertBar }) => (
             <Route path="/demo" component={Routes.DemoPage} />
         </Switch>
 
-        <AlertBar alertBar={alertBar}/>
+        {/* global alert bar */}
+        <AlertBar alertBar={alertBar} />
     </div>
 );
 

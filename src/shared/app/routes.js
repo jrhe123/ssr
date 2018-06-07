@@ -1,5 +1,6 @@
 import loadable from 'loadable-components';
 
+// Load the pieces of pages
 export const AlbumPage = loadable(() => import('../albums/AlbumPage'));
 export const HomePage = loadable(() => import('../home/HomePage'));
 export const PlaylistPage = loadable(() => import('../playlists/PlaylistPage'));
