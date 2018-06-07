@@ -10,13 +10,11 @@ import {
     
 } from './actions';
 
-// components
-import {
-	FadeInDiv,
-} from '../styles/utils';
-import Load from '../components/load/Load';
-
 export class DashboardPage extends Component {
+
+    handleLogoutClick = () => {
+        console.log('logout now');
+    }
 
     render() {
         return (
@@ -24,7 +22,18 @@ export class DashboardPage extends Component {
                 <Helmet
                     title="Dashboard"
                 />
-                DashboardPage page
+                {
+                    this.props.isAuthenticated ?
+                        (
+                            <div>
+                                <a onClick={() => this.handleLogoutClick()}>logout</a>
+                            </div>
+                        )
+                        :
+                        (
+                            <div>please login</div>
+                        )
+                }
             </div>
         );
     }
@@ -32,7 +41,8 @@ export class DashboardPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        
+        isAuthenticated: state.auth.isAuthenticated,
+        user: state.auth.user,
     }
 }
 
