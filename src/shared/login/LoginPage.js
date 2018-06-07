@@ -16,7 +16,9 @@ import {
 export class LoginPage extends Component {
 
     handleLoginClick = () => {
-        this.props.dxLoginAction();
+        let userName = 'roy@digitalxi.com';
+        let password = 'e10adc3949ba59abbe56e057f20f883e';
+        this.props.dxLoginAction(userName, password);
     }
 
     render() {

@@ -15,12 +15,16 @@ import {
 
 export class DashboardPage extends Component {
 
+    componentDidMount(){
+        let token = localStorage.getItem('token');
+        // this.props.dxValidateToken(token);
+    }
+
     handleLogoutClick = () => {
         this.props.dxLogoutAction();
     }
 
     render() {
-        console.log('check here: ', this.props.location);
         return (
             <div>
                 <Helmet
@@ -50,7 +54,6 @@ export class DashboardPage extends Component {
 const stateToProps = (state) => {
     return {
         location: state.routing.location,
-
         isAuthenticated: state.root.isAuthenticated,
         user: state.root.user,
     }

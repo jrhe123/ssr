@@ -8,7 +8,9 @@ import {
 } from './constants';
 
 // LOGIN
-export const dxLoginUrl = () => {
+export const dxLoginUrl = (params) => {
+
+    // console.log('login params: ', params);
     return (
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
@@ -30,9 +32,9 @@ export const dxLoginUrl = () => {
     )
 }
 
-export function* dxLogin() {
+export function* dxLogin(action) {
     try {
-        const response = yield call(dxLoginUrl);
+        const response = yield call(dxLoginUrl, action.payload);
         let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';        
         localStorage.setItem('token', token);
         yield put({

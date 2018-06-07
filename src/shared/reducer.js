@@ -30,7 +30,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
 
         case LOGIN__SUCCEEDED:
             updated.isAuthenticated = true;
-            updated.user = payload.User;
+            updated.user = payload.user;
             return updated;
         
         case LOGOUT__SUCCEEDED:
