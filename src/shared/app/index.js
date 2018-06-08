@@ -16,6 +16,8 @@ import { connect } from 'react-redux';
 import * as Routes from './routes';
 import AlertBar from '../components/alertBar/AlertBar';
 
+// styles
+import '../../../assets/css/index.css';
 
 const LoginRoute
     = ({ isAuthenticated, ...props }) =>
