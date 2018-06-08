@@ -29,30 +29,42 @@ class MainMenu extends Component {
     render() {
 
         return (
-            <Tabs
-                defaultActiveKey={'2'}
-                renderTabBar={
-                    () => 
-                    <ScrollableInkTabBar onTabClick={this.onTabClick} />
-                }
-                renderTabContent={
-                    () => 
-                    <TabContent />
-                }
-            >
-                <TabPane 
-                    tab={`tab 1`} 
-                    key="3"
+            <div>
+                <Toolbar>
+                    <nav style={styles.navBar}>
+                        <Link to="/123123">Home</Link>
+                    </nav>
+                </Toolbar>
+                <Tabs
+                    defaultActiveKey={'2'}
+                    renderTabBar={
+                        () =>
+                            <ScrollableInkTabBar 
+                                style={{color: "yellow"}}
+                                onTabClick={this.onTabClick} 
+                            />
+                    }
+                    renderTabContent={
+                        () =>
+                            <TabContent style={{color: 'red'}}/>
+                    }
                 >
-                    tab 1 content
+                    <TabPane
+                        tab={`tab 1`}
+                        key="3"
+                    >
+                        tab 1 content
                 </TabPane>
-                <TabPane 
-                    tab={`tab 2`} 
-                    key="2"
-                >
-                    tab 2 content
+                    <TabPane
+                        tab={`tab 2`}
+                        key="2"
+                    >
+                        tab 2 content
                 </TabPane>
-            </Tabs>
+                </Tabs>
+
+
+            </div>
         )
     }
 }

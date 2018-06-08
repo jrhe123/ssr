@@ -76,6 +76,12 @@ class App extends Component {
                         component={Routes.DashboardPage}
                     />
 
+                    <Route
+                        exact
+                        path="/123123"
+                        component={Routes.LoginPage}
+                    />
+
                     {/* <Route path="*" render={() => (<Redirect to="/" />)} /> */}
                     <Route path="*" render={() => {
                         this.props.history.goBack();
