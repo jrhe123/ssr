@@ -8,8 +8,13 @@ import {
 // Dashboard
 import { 
     dxLogoutSaga,
-    dxValidateTokenSaga,
 } from './dashboard/sagas';
+
+// Global
+import {
+    dxValidateTokenSaga,
+} from './globalSagas';
+
 
 export default function* rootSaga() {
     yield all([
@@ -18,6 +23,8 @@ export default function* rootSaga() {
 
         // Dashboard
         dxLogoutSaga(),
+
+        // Global
         dxValidateTokenSaga(),
     ]);
 }

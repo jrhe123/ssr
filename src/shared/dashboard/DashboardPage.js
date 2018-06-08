@@ -11,15 +11,13 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     dxLogout as dxLogoutAction,
-    dxValidateToken as dxValidateTokenAction,
 } from './actions';
 
 export class DashboardPage extends Component {
 
-
-    // handleLogoutClick = () => {
-    //     this.props.dxLogoutAction();
-    // }
+    handleLogoutClick = () => {
+        this.props.dxLogoutAction();
+    }
 
     render() {
         return (
@@ -44,7 +42,6 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxLogoutAction,
-    dxValidateTokenAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DashboardPage);

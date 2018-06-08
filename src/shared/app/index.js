@@ -11,6 +11,9 @@ import { withRouter } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxValidateToken as dxValidateTokenAction,
+} from '../actions';
 
 // components
 import * as Routes from './routes';
@@ -34,13 +37,15 @@ const ProtectedRoute
 
 class App extends Component {
 
+    componentDidMount(){
+        let token = localStorage.getItem('token');
+    }
+
     render() {
         const {
             isAuthenticated,
             alertBar,
         } = this.props;
-
-        console.log('this.props: ', this.props);
 
         return (
             <div>
