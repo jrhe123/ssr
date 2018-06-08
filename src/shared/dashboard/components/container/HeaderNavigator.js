@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 
-// Libraries
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+// components
+import NavBar from '../../../components/navBar/NavBar';
 
+// Libraries
 import Tabs, { TabPane } from 'rc-tabs';
 import TabContent from 'rc-tabs/lib/TabContent';
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import 'rc-tabs/assets/index.css';
 
-// router
-import { Link } from 'react-router-dom';
-
-class MainMenu extends Component {
+class HeaderNavigator extends Component{
 
     state = {
         start: 0,
@@ -20,16 +17,17 @@ class MainMenu extends Component {
     };
 
     onTabClick = (key) => {
-        console.log(`onTabClick ${key}`);
         this.setState({
             tabKey: key,
         });
     }
 
-    render() {
+    render(){
 
-        return (
+        return(
             <div>
+                <NavBar />
+{/*                 
                 <Tabs
                     defaultActiveKey={'2'}
                     renderTabBar={
@@ -49,18 +47,17 @@ class MainMenu extends Component {
                         key="3"
                     >
                         tab 1 content
-                </TabPane>
+                    </TabPane>
                     <TabPane
                         tab={`tab 2`}
                         key="2"
                     >
                         tab 2 content
-                </TabPane>
-                </Tabs>
+                    </TabPane>
+                </Tabs> */}
             </div>
         )
     }
 }
 
-
-export default MainMenu;
+export default HeaderNavigator;
