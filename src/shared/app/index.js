@@ -37,8 +37,9 @@ const ProtectedRoute
 
 class App extends Component {
 
-    componentDidMount(){
+    componentWillMount(){
         let token = localStorage.getItem('token');
+        if(token) this.props.dxValidateTokenAction(token, '5f92de5b-e627-43e5-a42f-75f9e4715380')
     }
 
     render() {
@@ -98,4 +99,8 @@ const stateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(stateToProps, null)(App));
+const dispatchToProps = {
+    dxValidateTokenAction,
+}
+
+export default withRouter(connect(stateToProps, dispatchToProps)(App));
