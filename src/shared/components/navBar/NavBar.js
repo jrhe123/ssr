@@ -47,20 +47,26 @@ class NavBar extends Component {
 const styles = {
 
     mainContainerStyle: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
         height: 90,
-        backgroundColor: colors.whiteColor
+        width: '100%',
+        backgroundColor: colors.whiteColor,
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor,
     },
     leftContainerStyle: {
         display: 'inline-block',
         height: 90,
-        width: 120,
+        width: 180,
         float: 'left',
     },
     imageContainerStyle: {
         position: 'relative',
         display: 'table',
         height: 90,
-        width: 120,
+        width: 180,
     },
     imageWrapperStyle: {
         display: 'table-cell',
@@ -75,16 +81,14 @@ const styles = {
     middleContainerStyle: {
         display: 'inline-block',
         height: 90,
-        width: 'calc(100% - 240px)',
+        width: 'calc(100% - 360px)',
         float: 'left',
-        backgroundColor: 'green'
     },
     rightContainerStyle: {
         display: 'inline-block',
         height: 90,
-        width: 120,
+        width: 180,
         float: 'left',
-        backgroundColor: 'yellow'
     },
 }
 

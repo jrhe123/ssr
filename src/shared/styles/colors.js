@@ -1,4 +1,5 @@
 export default {
+    borderColor: '#D9DDE2',
     whiteColor : '#FFFFFF',
     blackColor : '#000000',
     blueColor : '#2A75F6',
