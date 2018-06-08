@@ -16,7 +16,7 @@ import {
 
 export class DashboardPage extends Component {
 
-    componentDidMount(){
+    componentWillMount(){
         let token = localStorage.getItem('token');
         this.props.dxValidateTokenAction(token, 'ac51e815-92f4-4ab4-9d47-8528114ac8e4');
     }
