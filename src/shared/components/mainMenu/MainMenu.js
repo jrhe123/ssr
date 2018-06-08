@@ -30,11 +30,6 @@ class MainMenu extends Component {
 
         return (
             <div>
-                <Toolbar>
-                    <nav style={styles.navBar}>
-                        <Link to="/123123">Home</Link>
-                    </nav>
-                </Toolbar>
                 <Tabs
                     defaultActiveKey={'2'}
                     renderTabBar={
@@ -62,19 +57,10 @@ class MainMenu extends Component {
                         tab 2 content
                 </TabPane>
                 </Tabs>
-
-
             </div>
         )
     }
 }
 
-const styles = {
-
-    navBar: {
-        display: 'block',
-        position: 'fixed',
-    }
-}
 
 export default MainMenu;
