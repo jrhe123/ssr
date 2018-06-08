@@ -7,6 +7,9 @@ import Helmet from 'react-helmet';
 // router
 import { Redirect } from 'react-router-dom';
 
+// component
+import MainMenu from '../components/mainMenu/MainMenu';
+
 // redux
 import { connect } from 'react-redux';
 import {
@@ -25,7 +28,7 @@ export class DashboardPage extends Component {
                 <Helmet
                     title="Dashboard"
                 />
-                dashboard page
+                <MainMenu />
                 <div>
                     <a onClick={() => this.handleLogoutClick()}>logout</a>
                 </div>
