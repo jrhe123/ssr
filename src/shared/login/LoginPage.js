@@ -27,18 +27,7 @@ export class LoginPage extends Component {
                 <Helmet
                     title="Login"
                 />
-                {
-                    this.props.isAuthenticated ?
-                        (
-                            <Redirect to={{
-                                pathname: '/dashboard', state: {}
-                            }} />
-                        )
-                        :
-                        (
-                            <a onClick={() => this.handleLoginClick()}>login</a>
-                        )
-                }
+                <a onClick={() => this.handleLoginClick()}>login</a>
             </div>
         );
     }
@@ -46,7 +35,7 @@ export class LoginPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        isAuthenticated: state.root.isAuthenticated,
+
     }
 }
 

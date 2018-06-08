@@ -9,21 +9,17 @@ import { Redirect } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux';
-import { 
+import {
     dxLogout as dxLogoutAction,
     dxValidateToken as dxValidateTokenAction,
 } from './actions';
 
 export class DashboardPage extends Component {
 
-    componentWillMount(){
-        let token = localStorage.getItem('token');
-        this.props.dxValidateTokenAction(token, 'ac51e815-92f4-4ab4-9d47-8528114ac8e4');
-    }
 
-    handleLogoutClick = () => {
-        this.props.dxLogoutAction();
-    }
+    // handleLogoutClick = () => {
+    //     this.props.dxLogoutAction();
+    // }
 
     render() {
         return (
@@ -31,22 +27,10 @@ export class DashboardPage extends Component {
                 <Helmet
                     title="Dashboard"
                 />
-                {
-                    this.props.isAuthenticated ?
-                        (
-                            <div>
-                                <a onClick={() => this.handleLogoutClick()}>logout</a>
-                            </div>
-                        )
-                        :
-                        (
-                            <Redirect to={{
-                                pathname: '/', state: {
-                                    from: this.props.location
-                                }
-                            }} />
-                        )
-                }
+                dashboard page
+                <div>
+                    <a onClick={() => this.handleLogoutClick()}>logout</a>
+                </div>
             </div>
         );
     }
@@ -54,13 +38,11 @@ export class DashboardPage extends Component {
 
 const stateToProps = (state) => {
     return {
-        location: state.routing.location,
-        isAuthenticated: state.root.isAuthenticated,
-        user: state.root.user,
+
     }
 }
 
-const dispatchToProps = { 
+const dispatchToProps = {
     dxLogoutAction,
     dxValidateTokenAction,
 }
