@@ -39,6 +39,7 @@
     "pm2": "^2.10.3",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
+    "rc-tabs": "^9.2.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-helmet": "5.2.0",
