@@ -19,6 +19,8 @@ class NavBar extends Component {
 
             leftContainerStyle,
             imageContainerStyle,
+            imageWrapperStyle,
+            imageStyle,
 
             middleContainerStyle,
             rightContainerStyle,
@@ -28,7 +30,11 @@ class NavBar extends Component {
             <div style={mainContainerStyle}>
                 <div style={leftContainerStyle}>
                     <div style={imageContainerStyle}>
-                        <img src={require('../../../../assets/images/logo.jpeg')} />
+                        <div style={imageWrapperStyle}>
+                            <img 
+                                style={imageStyle}
+                                src={require('../../../../assets/images/logo.jpeg')} />
+                        </div>
                     </div>
                 </div>
                 <div style={middleContainerStyle}>1</div>
@@ -51,7 +57,20 @@ const styles = {
         float: 'left',
     },
     imageContainerStyle: {
-
+        position: 'relative',
+        display: 'table',
+        height: 90,
+        width: 120,
+    },
+    imageWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+    },
+    imageStyle: {
+        display: 'block',
+        margin: '0 auto',
+        width: 96,
+        height: 64,
     },
     middleContainerStyle: {
         display: 'inline-block',
