@@ -10,7 +10,6 @@ import {
 // LOGIN
 export const dxLoginUrl = (params) => {
 
-    // console.log('login params: ', params);
     return (
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',

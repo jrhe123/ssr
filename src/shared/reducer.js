@@ -4,14 +4,17 @@ import {
     LOGIN__FAILED,
 } from './login';
 
-// Logout
+// Dashboard
 import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+} from './dashboard';
 
+// Global
+import {
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
-} from './dashboard';
+} from './constants';
 
 const initialState = {
 

@@ -4,9 +4,6 @@ import format from 'date-fns/format';
 import locale from 'date-fns/locale/fr';
 import Helmet from 'react-helmet';
 
-// router
-import { Redirect } from 'react-router-dom';
-
 // redux
 import { connect } from 'react-redux';
 import {
