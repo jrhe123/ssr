@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 // Libraries
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+import {
+    Button
+} from 'material-ui';
+// import AccessAlarmIcon from 'material-ui-icons/AccessAlarm';
 
 // constants
 import colors from '../../styles/colors';
@@ -38,7 +40,15 @@ class NavBar extends Component {
                     </div>
                 </div>
                 <div style={middleContainerStyle}>1</div>
-                <div style={rightContainerStyle}>1</div>
+                <div style={rightContainerStyle}>
+                    <Button
+                        label="Label before"
+                        labelPosition="before"
+                        primary={true}
+                    >
+                        123 
+                    </Button>
+                </div>
             </div>
         )
     }
