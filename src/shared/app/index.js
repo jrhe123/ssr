@@ -40,6 +40,8 @@ class App extends Component {
             alertBar,
         } = this.props;
 
+        console.log('this.props: ', this.props);
+
         return (
             <div>
                 {/* SEO */}
@@ -68,7 +70,10 @@ class App extends Component {
                         component={Routes.DashboardPage}
                     />
 
-                    <Route path="*" render={() => (<Redirect to="/" />)} />
+                    {/* <Route path="*" render={() => (<Redirect to="/" />)} /> */}
+                    <Route path="*" render={() => {
+                        this.props.history.goBack();
+                    }} />
                 </Switch>
 
                 {/* global alert bar */}
