@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../assets/css/ui-material.css';
+import '../../../../assets/css/ui-material/ui-material.css';
 
 // Libraries
 import PropTypes from 'prop-types';

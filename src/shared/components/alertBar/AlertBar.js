@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 // Libraries
 import Alert from 'react-s-alert';
-import '../../../../assets/css/s-alert-default.css';
-import '../../../../assets/css/jelly.css';
-import '../../../../assets/css/react-s-alert.css';
+import '../../../../assets/css/alertbar/react-s-alert.css';
 
 class AlertBar extends Component {
 
