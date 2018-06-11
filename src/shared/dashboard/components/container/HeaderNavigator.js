@@ -63,7 +63,7 @@ class HeaderNavigator extends Component {
                     navArr={navArr}
                     index={this.state.index}
                     handleChange={(index) => this.handleChange(index)}
-                    handleLogoutClick={this.handleLogoutClick()}
+                    handleLogoutClick={() => this.handleLogoutClick()}
                 />
                 <SwipeableViews
                     axis='x'
