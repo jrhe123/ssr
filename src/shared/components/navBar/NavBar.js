@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 
 // styles
+import '../../../../assets/css/react-dd-menu.css';
 import '../../../../assets/css/ui-material/ui-material.css';
 
 // Libraries
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-
-
-import Button from '@material-ui/core/Button';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
-
-
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import DropdownMenu from 'react-dd-menu';
 
 // constants
 import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 // router
 import { Link } from 'react-router-dom';
@@ -36,9 +31,26 @@ const tabWidth = 64;
 
 class NavBar extends Component {
 
-    state = {
-        isOpen: false,
-        anchorEl: null,
+    constructor() {
+        super();
+        this.state = {
+            isMenuOpen: false
+        };
+        this.click = this.click.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.close = this.close.bind(this);
+    }
+
+    toggle() {
+        this.setState({ isMenuOpen: !this.state.isMenuOpen });
+    }
+
+    close() {
+        this.setState({ isMenuOpen: false });
+    }
+
+    click() {
+        console.log('You clicked an item');
     }
 
     handleChange = (index) => {
@@ -69,11 +81,18 @@ class NavBar extends Component {
 
         const {
             mainContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
             leftContainerStyle,
             midContainerStyle,
             midTopContainerStyle,
+            smallNavContainerStyle,
+            smallNavStyle,
             midBottomContainerStyle,
             rightContainerStyle,
+            rightTopContainerStyle,
+            infoLabelStyle,
+            rightBottomContainerStyle,
         } = styles;
 
         return (
@@ -82,13 +101,30 @@ class NavBar extends Component {
                     position="static"
                     style={mainContainerStyle}>
 
-                    <div style={leftContainerStyle}>left here</div>
+                    <div style={leftContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                logo image
+                            </div>
+                        </div>
+                    </div>
 
                     <div
                         className={classes.root}
                         style={Object.assign({}, midContainerStyle, { width: tabWidth * navArr.length })}>
 
-                        <div style={midTopContainerStyle}>top</div>
+                        <div style={midTopContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <div style={smallNavContainerStyle}>
+                                        <div style={smallNavStyle}>New features</div>
+                                        <div style={smallNavStyle}>Help & Support</div>
+                                        <div style={smallNavStyle}>Community</div>
+                                        <div style={smallNavStyle}>News</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div style={midBottomContainerStyle}>
                             <Tabs
                                 value={index}
@@ -113,35 +149,27 @@ class NavBar extends Component {
                     </div>
 
                     <div style={rightContainerStyle}>
-
+                        <div style={rightTopContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <p style={infoLabelStyle}>UPGRADE NOW</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={rightBottomContainerStyle}>
+                            <DropdownMenu
+                                isOpen={this.state.isMenuOpen}
+                                close={this.close}
+                                toggle={<Button onClick={this.toggle}>profile</Button>}
+                                align='right'
+                            >
+                                <div><Button>Default</Button></div>
+                                <div><Button>Default</Button></div>
+                            </DropdownMenu>
+                        </div>
                     </div>
 
                 </AppBar>
-
-                <div>
-
-                    <Button variant="contained" onClick={this.handleClick}>
-                        Open Popover
-                    </Button>
-                    <Popover
-                        open={Boolean(anchorEl)}
-                        anchorEl={anchorEl}
-                        onClose={this.handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}
-                    >
-                        <Typography className={classes.typography}>123123.</Typography>
-                    </Popover>
-
-                </div>
-
-
             </div>
         )
     }
@@ -150,12 +178,25 @@ class NavBar extends Component {
 const styles = {
 
     mainContainerStyle: {
-        height: 96,
+        height: 84,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
         background: colors.whiteColor,
         color: colors.blackColor
+    },
+
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
     },
 
     leftContainerStyle: {
@@ -172,14 +213,40 @@ const styles = {
         flex: 1,
     },
 
+    smallNavContainerStyle: {
+        display: 'flex'
+    },
+
+    smallNavStyle: {
+        display: 1,
+        color: colors.lightGreyColor,
+        fontSize: fonts.h4,
+        paddingLeft: 18,
+        paddingRight: 18
+    },
+
     midBottomContainerStyle: {
         flex: 1,
     },
 
     rightContainerStyle: {
         flex: 1,
-        border: '1px solid red'
+        display: 'flex',
+        flexDirection: 'column',
     },
+
+    rightTopContainerStyle: {
+        flex: 1,
+    },
+
+    infoLabelStyle: {
+        color: colors.greenColor,
+        fontSize: fonts.h4
+    },
+
+    rightBottomContainerStyle: {
+        flex: 1,
+    }
 
 }
 

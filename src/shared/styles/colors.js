@@ -6,5 +6,6 @@ export default {
     lightBlueColor : '#F1F7FE',
     greyColor : '#DFDFDF',
     lightGreyColor : '#ABB7C4',
+    greenColor: '#6FB8A4',
     backgroundColor: '#F2F3F6',
 }
