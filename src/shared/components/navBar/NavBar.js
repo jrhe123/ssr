@@ -164,7 +164,11 @@ class NavBar extends Component {
                                 align='right'
                             >
                                 <div><Button>Default</Button></div>
-                                <div><Button>Default</Button></div>
+                                <div>
+                                    <Button onClick={() => this.props.handleLogoutClick()}>
+                                        logout
+                                    </Button>
+                                </div>
                             </DropdownMenu>
                         </div>
                     </div>

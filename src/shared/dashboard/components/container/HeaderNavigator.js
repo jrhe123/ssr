@@ -6,6 +6,12 @@ import NavBar from '../../../components/navBar/NavBar';
 // libraries
 import SwipeableViews from 'react-swipeable-views';
 
+// redux
+import { connect } from 'react-redux';
+import {
+    dxLogout as dxLogoutAction,
+} from '../../actions';
+
 const navArr = [
     {
         title: 'Experiences',
@@ -35,6 +41,10 @@ class HeaderNavigator extends Component {
         index: 0,
     };
 
+    handleLogoutClick = () => {
+        this.props.dxLogoutAction();
+    }
+
     handleChange = (index) => {
         this.setState({
             index
@@ -53,6 +63,7 @@ class HeaderNavigator extends Component {
                     navArr={navArr}
                     index={this.state.index}
                     handleChange={(index) => this.handleChange(index)}
+                    handleLogoutClick={this.handleLogoutClick()}
                 />
                 <SwipeableViews
                     axis='x'
@@ -94,4 +105,14 @@ class HeaderNavigator extends Component {
     }
 }
 
-export default HeaderNavigator;
+const stateToProps = (state) => {
+    return {
+
+    }
+}
+
+const dispatchToProps = {
+    dxLogoutAction,
+}
+
+export default connect(stateToProps, dispatchToProps)(HeaderNavigator);
