@@ -25,21 +25,13 @@ const styles = theme => ({
 
 class NavBar extends Component {
 
-    state = {
-        value: 0,
-    };
-
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
-
-    handleChangeIndex = index => {
-        this.setState({ value: index });
+    handleChange = (index) => {
+        this.props.handleChange(index);
     };
 
     render() {
 
-        const { classes, theme } = this.props;
+        const { classes } = this.props;
 
         return (
             <div className={classes.root}>
@@ -48,8 +40,10 @@ class NavBar extends Component {
                     color="default"
                 >
                     <Tabs
-                        value={this.state.value}
-                        onChange={this.handleChange}
+                        value={this.props.index}
+                        onChange={
+                            (event, value) => this.handleChange(value)
+                        }
                         fullWidth
                         textColor="secondary"
                         indicatorColor="secondary"
@@ -61,13 +55,11 @@ class NavBar extends Component {
                 </AppBar>
                 <SwipeableViews
                     axis='x'
-                    index={this.state.value}
-                    onChangeIndex={this.handleChangeIndex}
+                    index={this.props.index}
                 >
                     <div>Item One</div>
                     <div>Item Two</div>
                     <div>Item Three</div>
-
                 </SwipeableViews>
             </div>
         )
