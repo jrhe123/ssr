@@ -4,3 +4,12 @@
 .jss63{
     background-color: #2A75F6 !important;
 }
+button.jss46{
+    text-transform: none !important;
+}
+
+@media (min-width: 960px){
+    .jss46 {
+        min-width: 72px !important;
+    }
+}

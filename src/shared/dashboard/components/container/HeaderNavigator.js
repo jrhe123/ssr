@@ -30,6 +30,10 @@ const navArr = [
         type: 'AUDIENCE'
     },
     {
+        title: 'DRM',
+        type: 'DRM'
+    },
+    {
         title: 'Insights',
         type: 'INSIGHTS'
     },

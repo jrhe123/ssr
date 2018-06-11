@@ -24,10 +24,11 @@ import { Link } from 'react-router-dom';
 const themeStyles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
+        width: 600,
     }
 });
 
-const tabWidth = 64;
+const tabWidth = 48;
 
 class NavBar extends Component {
 
@@ -89,6 +90,7 @@ class NavBar extends Component {
             smallNavContainerStyle,
             smallNavStyle,
             midBottomContainerStyle,
+            tabLabelStyle,
             rightContainerStyle,
             rightTopContainerStyle,
             infoLabelStyle,
@@ -110,37 +112,39 @@ class NavBar extends Component {
                     </div>
 
                     <div
-                        className={classes.root}
-                        style={Object.assign({}, midContainerStyle, { width: tabWidth * navArr.length })}>
+                        
+                        style={midContainerStyle}>
 
                         <div style={midTopContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <div style={smallNavContainerStyle}>
-                                        <div style={smallNavStyle}>New features</div>
-                                        <div style={smallNavStyle}>Help & Support</div>
-                                        <div style={smallNavStyle}>Community</div>
-                                        <div style={smallNavStyle}>News</div>
+                                        <Link style={smallNavStyle} to="/features">New features</Link>
+                                        <Link style={smallNavStyle} to="/help">Help & Support</Link>
+                                        <Link style={smallNavStyle} to="/community">Community</Link>
+                                        <Link style={smallNavStyle} to="/news">News</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div style={midBottomContainerStyle}>
+                        <div 
+                            className={classes.root} 
+                            style={Object.assign({}, midBottomContainerStyle)}>
                             <Tabs
                                 value={index}
                                 onChange={
                                     (event, value) => this.handleChange(value)
                                 }
-                                fullWidth
                                 textColor="secondary"
                                 indicatorColor="secondary"
+                                centered
                             >
                                 {
                                     navArr.map((nav, idx) => (
                                         <Tab
                                             key={idx}
                                             label={nav.title}
-                                            style={{ color: colors.blackColor }}
+                                            style={tabLabelStyle}
                                         />
                                     ))
                                 }
@@ -152,24 +156,30 @@ class NavBar extends Component {
                         <div style={rightTopContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <p style={infoLabelStyle}>UPGRADE NOW</p>
+                                    <Link style={infoLabelStyle} to="/news">UPGRADE NOW</Link>
                                 </div>
                             </div>
                         </div>
                         <div style={rightBottomContainerStyle}>
-                            <DropdownMenu
-                                isOpen={this.state.isMenuOpen}
-                                close={this.close}
-                                toggle={<Button onClick={this.toggle}>profile</Button>}
-                                align='right'
-                            >
-                                <div><Button>Default</Button></div>
-                                <div>
-                                    <Button onClick={() => this.props.handleLogoutClick()}>
-                                        logout
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <DropdownMenu
+                                        isOpen={this.state.isMenuOpen}
+                                        close={this.close}
+                                        toggle={
+                                            <Button onClick={this.toggle}>profile</Button>
+                                        }
+                                        align='right'
+                                    >
+                                        <div><Button>Default</Button></div>
+                                        <div>
+                                            <Button onClick={() => this.props.handleLogoutClick()}>
+                                                logout
                                     </Button>
+                                        </div>
+                                    </DropdownMenu>
                                 </div>
-                            </DropdownMenu>
+                            </div>
                         </div>
                     </div>
 
@@ -226,11 +236,18 @@ const styles = {
         color: colors.lightGreyColor,
         fontSize: fonts.h4,
         paddingLeft: 18,
-        paddingRight: 18
+        paddingRight: 18,
+        textDecoration: 'none'
     },
 
     midBottomContainerStyle: {
         flex: 1,
+        margin: '0 auto'
+    },
+
+    tabLabelStyle: {
+        color: colors.blackColor,
+        fontSize: fonts.h3,
     },
 
     rightContainerStyle: {
@@ -245,7 +262,8 @@ const styles = {
 
     infoLabelStyle: {
         color: colors.greenColor,
-        fontSize: fonts.h4
+        fontSize: fonts.h4,
+        textDecoration: 'none'
     },
 
     rightBottomContainerStyle: {
