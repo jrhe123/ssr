@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
+// styles
+import '../../../../assets/css/ui-material.css';
+
 // Libraries
-import {
-    Button
-} from 'material-ui';
-// import AccessAlarmIcon from 'material-ui-icons/AccessAlarm';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableViews from 'react-swipeable-views';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
 
 // constants
 import colors from '../../styles/colors';
@@ -12,94 +18,71 @@ import colors from '../../styles/colors';
 // router
 import { Link } from 'react-router-dom';
 
+function TabContainer({ children, dir }) {
+    return (
+        <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+            {children}
+        </Typography>
+    );
+}
+
+TabContainer.propTypes = {
+    children: PropTypes.node.isRequired,
+    dir: PropTypes.string.isRequired,
+};
+
+const styles = theme => ({
+    root: {
+        backgroundColor: theme.palette.background.paper,
+        width: 500,
+    }
+});
+
 class NavBar extends Component {
+
+    state = {
+        value: 0,
+    };
+
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
+
+    handleChangeIndex = index => {
+        this.setState({ value: index });
+    };
 
     render() {
 
-        const {
-            mainContainerStyle,
-
-            leftContainerStyle,
-            imageContainerStyle,
-            imageWrapperStyle,
-            imageStyle,
-
-            middleContainerStyle,
-            rightContainerStyle,
-        } = styles;
+        const { classes, theme } = this.props;
 
         return (
-            <div style={mainContainerStyle}>
-                <div style={leftContainerStyle}>
-                    <div style={imageContainerStyle}>
-                        <div style={imageWrapperStyle}>
-                            <img 
-                                style={imageStyle}
-                                src={require('../../../../assets/images/logo.jpeg')} />
-                        </div>
-                    </div>
-                </div>
-                <div style={middleContainerStyle}>1</div>
-                <div style={rightContainerStyle}>
-                    <Button
-                        label="Label before"
-                        labelPosition="before"
-                        primary={true}
+            <div className={classes.root}>
+                <AppBar position="static" color="default">
+                    <Tabs
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        fullWidth
+                        textColor="secondary"
+                        indicatorColor="secondary"
                     >
-                        123 
-                    </Button>
-                </div>
+                        <Tab label="Item One" />
+                        <Tab label="Item Two" />
+                        <Tab label="Item Three" />
+                    </Tabs>
+                </AppBar>
+                <SwipeableViews
+                    axis='x'
+                    index={this.state.value}
+                    onChangeIndex={this.handleChangeIndex}
+                >
+                    <TabContainer>Item One</TabContainer>
+                    <TabContainer>Item Two</TabContainer>
+                    <TabContainer>Item Three</TabContainer>
+                </SwipeableViews>
             </div>
         )
     }
 }
 
-const styles = {
-
-    mainContainerStyle: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: 90,
-        width: '100%',
-        backgroundColor: colors.whiteColor,
-        borderBottom: '1px solid',
-        borderColor: colors.borderColor,
-    },
-    leftContainerStyle: {
-        display: 'inline-block',
-        height: 90,
-        width: 180,
-        float: 'left',
-    },
-    imageContainerStyle: {
-        position: 'relative',
-        display: 'table',
-        height: 90,
-        width: 180,
-    },
-    imageWrapperStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
-    },
-    imageStyle: {
-        display: 'block',
-        margin: '0 auto',
-        width: 96,
-        height: 64,
-    },
-    middleContainerStyle: {
-        display: 'inline-block',
-        height: 90,
-        width: 'calc(100% - 360px)',
-        float: 'left',
-    },
-    rightContainerStyle: {
-        display: 'inline-block',
-        height: 90,
-        width: 180,
-        float: 'left',
-    },
-}
-
-export default NavBar;
+export default withStyles(styles)(NavBar);

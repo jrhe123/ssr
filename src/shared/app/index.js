@@ -37,7 +37,7 @@ const ProtectedRoute
 
 class App extends Component {
 
-    componentWillMount(){
+    componentDidMount(){
         let token = localStorage.getItem('token');
         if(token) this.props.dxValidateTokenAction(token, '5f92de5b-e627-43e5-a42f-75f9e4715380')
     }
