@@ -54,7 +54,6 @@ class HeaderNavigator extends Component {
                     index={this.state.index}
                     handleChange={(index) => this.handleChange(index)}
                 />
-
                 <SwipeableViews
                     axis='x'
                     index={this.state.index}
