@@ -29,25 +29,29 @@ const navArr = [
     },
 ];
 
-class HeaderNavigator extends Component{
+class HeaderNavigator extends Component {
 
     state = {
         index: 0,
     };
 
     handleChange = (index) => {
-        this.setState({ 
+        this.setState({
             index
         });
     };
 
-    render(){
+    render() {
 
-        return(
+        const {
+            index
+        } = this.state;
+
+        return (
             <div>
-                <NavBar 
+                <NavBar
                     navArr={navArr}
-                    index={this.state.index} 
+                    index={this.state.index}
                     handleChange={(index) => this.handleChange(index)}
                 />
 
@@ -55,9 +59,36 @@ class HeaderNavigator extends Component{
                     axis='x'
                     index={this.state.index}
                 >
-                    <div>Item One</div>
-                    <div>Item Two</div>
-                    <div>Item Three</div>
+                    {
+                        index == 0 ? 
+                        (<div>first page</div>)
+                        :
+                        null
+                    }
+                    {
+                        index == 1 ? 
+                        (<div>second page</div>)
+                        :
+                        null
+                    }
+                    {
+                        index == 2 ? 
+                        (<div>third page</div>)
+                        :
+                        null
+                    }
+                    {
+                        index == 3 ? 
+                        (<div>fourth page</div>)
+                        :
+                        null
+                    }
+                    {
+                        index == 4 ? 
+                        (<div>fifth page</div>)
+                        :
+                        null
+                    }
                 </SwipeableViews>
             </div>
         )
