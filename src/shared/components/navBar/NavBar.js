@@ -5,7 +5,6 @@ import '../../../../assets/css/ui-material/ui-material.css';
 
 // Libraries
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -29,39 +28,35 @@ class NavBar extends Component {
 
     render() {
 
-        const { 
-            classes, 
-            index, 
-            navArr, 
+        const {
+            classes,
+            index,
+            navArr,
         } = this.props;
 
         return (
-            <div 
-                className={classes.root} 
-                style={{width: 120 * navArr.length}}>
-                <AppBar
-                    position="static"
-                    color="default"
+            <div
+                className={classes.root}
+                style={{ width: 120 * navArr.length }}>
+
+                <Tabs
+                    value={index}
+                    onChange={
+                        (event, value) => this.handleChange(value)
+                    }
+                    fullWidth
+                    textColor="secondary"
+                    indicatorColor="secondary"
                 >
-                    <Tabs
-                        value={index}
-                        onChange={
-                            (event, value) => this.handleChange(value)
-                        }
-                        fullWidth
-                        textColor="secondary"
-                        indicatorColor="secondary"
-                    >
-                        {
-                            navArr.map((nav, idx)=>(
-                                <Tab 
-                                    key={idx}
-                                    label={nav.title}
-                                />
-                            ))
-                        }
-                    </Tabs>
-                </AppBar>
+                    {
+                        navArr.map((nav, idx) => (
+                            <Tab
+                                key={idx}
+                                label={nav.title}
+                            />
+                        ))
+                    }
+                </Tabs>
             </div>
         )
     }
