@@ -5,7 +5,6 @@ import '../../../../assets/css/ui-material/ui-material.css';
 
 // Libraries
 import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -19,7 +18,6 @@ import { Link } from 'react-router-dom';
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        width: 360,
     }
 });
 
@@ -31,16 +29,22 @@ class NavBar extends Component {
 
     render() {
 
-        const { classes } = this.props;
+        const { 
+            classes, 
+            index, 
+            navArr, 
+        } = this.props;
 
         return (
-            <div className={classes.root}>
+            <div 
+                className={classes.root} 
+                style={{width: 120 * navArr.length}}>
                 <AppBar
                     position="static"
                     color="default"
                 >
                     <Tabs
-                        value={this.props.index}
+                        value={index}
                         onChange={
                             (event, value) => this.handleChange(value)
                         }
@@ -48,19 +52,16 @@ class NavBar extends Component {
                         textColor="secondary"
                         indicatorColor="secondary"
                     >
-                        <Tab label="Item One" />
-                        <Tab label="Item Two" />
-                        <Tab label="Item Three" />
+                        {
+                            navArr.map((nav, idx)=>(
+                                <Tab 
+                                    key={idx}
+                                    label={nav.title}
+                                />
+                            ))
+                        }
                     </Tabs>
                 </AppBar>
-                <SwipeableViews
-                    axis='x'
-                    index={this.props.index}
-                >
-                    <div>Item One</div>
-                    <div>Item Two</div>
-                    <div>Item Three</div>
-                </SwipeableViews>
             </div>
         )
     }
