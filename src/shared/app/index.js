@@ -82,10 +82,10 @@ class App extends Component {
                         component={Routes.LoginPage}
                     />
 
-                    {/* <Route path="*" render={() => (<Redirect to="/" />)} /> */}
-                    <Route path="*" render={() => {
+                    <Route path="*" render={() => (<Redirect to="/" />)} />
+                    {/* <Route path="*" render={() => {
                         this.props.history.goBack();
-                    }} />
+                    }} /> */}
                 </Switch>
 
                 {/* global alert bar */}
