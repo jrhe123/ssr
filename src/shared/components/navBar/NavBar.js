@@ -37,37 +37,22 @@ class NavBar extends Component {
         this.state = {
             isMenuOpen: false
         };
-        this.click = this.click.bind(this);
-        this.toggle = this.toggle.bind(this);
-        this.close = this.close.bind(this);
     }
 
-    toggle() {
+    toggle = () => {
         this.setState({ isMenuOpen: !this.state.isMenuOpen });
     }
 
-    close() {
+    close = () => {
         this.setState({ isMenuOpen: false });
     }
 
-    click() {
+    click = () => {
         console.log('You clicked an item');
     }
 
     handleChange = (index) => {
         this.props.handleChange(index);
-    };
-
-    handleClick = event => {
-        this.setState({
-            anchorEl: event.currentTarget,
-        });
-    };
-
-    handleClose = () => {
-        this.setState({
-            anchorEl: null,
-        });
     };
 
     render() {
@@ -77,8 +62,6 @@ class NavBar extends Component {
             index,
             navArr,
         } = this.props;
-
-        const { anchorEl } = this.state;
 
         const {
             mainContainerStyle,
@@ -242,7 +225,6 @@ const styles = {
 
     midBottomContainerStyle: {
         flex: 1,
-        margin: '0 auto'
     },
 
     tabLabelStyle: {
