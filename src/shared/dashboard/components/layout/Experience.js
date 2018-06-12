@@ -8,12 +8,30 @@ import Button from '@material-ui/core/Button';
 import colors from '../../../styles/colors';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 
+// data
+import ExperienceData from '../../../../../data/ExperienceData';
+
 class Experience extends Component {
+
+    state = {
+        experienceData: {}
+    }
+
+    componentDidMount() {
+        this.setState({
+            experienceData: ExperienceData
+        })
+    }
 
     render() {
 
         const {
             mainContainerStyle,
+
+            newContentContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
+
             contentContainerStyle,
             newContainerStyle,
             newBtnContainerStyle,
@@ -21,21 +39,40 @@ class Experience extends Component {
             iconStyle,
         } = styles;
 
+        const {
+            experienceData,
+        } = this.state;
+
         return (
             <div style={mainContainerStyle}>
-                <div style={contentContainerStyle}>
-                    <ExperienceList />
-                </div>
-                <div style={newContainerStyle}>
-                    <div style={newBtnContainerStyle}>
-                        <Button
-                            style={btnStyle}
-                            variant="Add new experience">
-                            Add Experience
-                        </Button>
-                        <HelpOutline style={iconStyle}/>
-                    </div>
-                </div>
+                {
+                    experienceData.length ?
+                        (
+                            <div>
+                                <div style={contentContainerStyle}>
+                                    <ExperienceList />
+                                </div>
+                                <div style={newContainerStyle}>
+                                    <div style={newBtnContainerStyle}>
+                                        <Button
+                                            style={btnStyle}
+                                            variant="Add new experience">
+                                            Add Experience
+                                        </Button>
+                                        <HelpOutline style={iconStyle} />
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
+                        <div style={newContentContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <img src={require('../../../../../assets/images/experience.png')} />
+                                </div>
+                            </div>
+                        </div>
+                }
             </div>
         )
     }
@@ -45,6 +82,23 @@ const styles = {
     mainContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
+    },
+    newContentContainerStyle: {
+        height: 'calc(100vh - 84px)',
+        width: '100%'
+    },
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: 'calc(100vh - 84px)',
+        border: '1px solie blue'
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center',
+        border: '1px solie green'
     },
     contentContainerStyle: {
         flex: 4
@@ -67,7 +121,7 @@ const styles = {
         top: 6,
         left: 138,
         cursor: 'pointer'
-    }
+    },
 }
 
 export default Experience;
