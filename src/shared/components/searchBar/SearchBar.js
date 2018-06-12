@@ -10,6 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
 import Close from '@material-ui/icons/Close';
+import fonts from '../../styles/fonts';
 
 class SearchBar extends Component {
 
@@ -45,6 +46,7 @@ class SearchBar extends Component {
             searchIconContainerStyle,
             iconStyle,
             clearIconContainerStyle,
+            inputStyle,
         } = styles;
 
         const {
@@ -68,9 +70,10 @@ class SearchBar extends Component {
                         />
                     </Grid>
                     <Grid
-                        style={{ width: isShort ? 120 : 240 }}
+                        style={{ width: isShort ? 110 : 220 }}
                         item>
                         <Input
+                            style={inputStyle}
                             value={content}
                             fullWidth
                             placeholder={placeholder}
@@ -108,7 +111,7 @@ const styles = {
     searchIconContainerStyle: {
         marginLeft: 1,
         marginRight: -3,
-        marginBottom: -3,
+        marginBottom: -9,
         paddingLeft: 0,
     },
     iconStyle: {
@@ -117,6 +120,9 @@ const styles = {
     clearIconContainerStyle: {
         marginRight: -12
     },
+    inputStyle: {
+        fontSize: fonts.h3,
+    }
 }
 
 export default SearchBar;
