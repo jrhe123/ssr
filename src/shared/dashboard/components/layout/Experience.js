@@ -29,6 +29,8 @@ class Experience extends Component {
             mainContainerStyle,
 
             newContentContainerStyle,
+            imgStyle,
+            labelStyle,
             tableContainerStyle,
             tableWrapperStyle,
 
@@ -68,7 +70,15 @@ class Experience extends Component {
                         <div style={newContentContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <img src={require('../../../../../assets/images/experience.png')} />
+                                    <img 
+                                        style={imgStyle}
+                                        src={require('../../../../../assets/images/experience.png')} 
+                                    />
+                                    <p 
+                                        style={labelStyle}
+                                    >
+                                        Let's create an amzing experiences for your audience!
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -86,6 +96,10 @@ const styles = {
     newContentContainerStyle: {
         height: 'calc(100vh - 84px)',
         width: '100%'
+    },
+    imgStyle: {
+        width: 200,
+        height: 140
     },
     tableContainerStyle: {
         position: 'relative',
