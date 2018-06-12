@@ -10,8 +10,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import AddAlert from '@material-ui/icons/AddAlert';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
@@ -80,6 +80,7 @@ class NavBar extends Component {
             rightTopContainerStyle,
             infoLabelStyle,
             rightBottomContainerStyle,
+            userInfoStyle,
         } = styles;
 
         return (
@@ -99,10 +100,7 @@ class NavBar extends Component {
                         </div>
                     </div>
 
-                    <div
-                        
-                        style={midContainerStyle}>
-
+                    <div style={midContainerStyle}>
                         <div style={midTopContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
@@ -155,7 +153,9 @@ class NavBar extends Component {
                                         isOpen={this.state.isMenuOpen}
                                         close={this.close}
                                         toggle={
-                                            <Button onClick={this.toggle}>profile</Button>
+                                            <Button onClick={this.toggle}>
+                                                <AddAlert /><span style={userInfoStyle}>Roy</span><ExpandMore />
+                                            </Button>
                                         }
                                         align='right'
                                     >
@@ -266,6 +266,10 @@ const styles = {
 
     rightBottomContainerStyle: {
         flex: 2,
+    },
+
+    userInfoStyle: {
+        paddingLeft: 12,
     }
 
 }
