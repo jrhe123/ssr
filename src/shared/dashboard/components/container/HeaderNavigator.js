@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 // components
 import NavBar from '../../../components/navBar/NavBar';
+import {
+    AudiencePage,
+    ChannelPage,
+    DRMPage,
+    ExperiencePage,
+    InsightPage,
+    StreamPage,
+} from '../../screens'
 
 // libraries
 import SwipeableViews from 'react-swipeable-views';
@@ -11,6 +19,7 @@ import { connect } from 'react-redux';
 import {
     dxLogout as dxLogoutAction,
 } from '../../actions';
+import { Stream } from 'stream';
 
 const navArr = [
     {
@@ -75,31 +84,37 @@ class HeaderNavigator extends Component {
                 >
                     {
                         index == 0 ? 
-                        (<div>first page</div>)
+                        (<ExperiencePage />)
                         :
                         null
                     }
                     {
                         index == 1 ? 
-                        (<div>second page</div>)
+                        (<ChannelPage />)
                         :
                         null
                     }
                     {
                         index == 2 ? 
-                        (<div>third page</div>)
+                        (<StreamPage />)
                         :
                         null
                     }
                     {
                         index == 3 ? 
-                        (<div>fourth page</div>)
+                        (<AudiencePage />)
                         :
                         null
                     }
                     {
                         index == 4 ? 
-                        (<div>fifth page</div>)
+                        (<DRMPage />)
+                        :
+                        null
+                    }
+                    {
+                        index == 5 ? 
+                        (<InsightPage />)
                         :
                         null
                     }
