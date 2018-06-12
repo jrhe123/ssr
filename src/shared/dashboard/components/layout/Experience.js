@@ -5,11 +5,14 @@ import ExperienceList from '../container/ExperienceList';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import colors from '../../../styles/colors';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 
 // data
 import ExperienceData from '../../../../../data/ExperienceData';
+
+// constants
+import fonts from '../../../styles/fonts';
+import colors from '../../../styles/colors';
 
 class Experience extends Component {
 
@@ -33,6 +36,7 @@ class Experience extends Component {
             labelStyle,
             tableContainerStyle,
             tableWrapperStyle,
+            fullBtnStyle,
 
             contentContainerStyle,
             newContainerStyle,
@@ -74,11 +78,14 @@ class Experience extends Component {
                                         style={imgStyle}
                                         src={require('../../../../../assets/images/experience.png')} 
                                     />
-                                    <p 
-                                        style={labelStyle}
-                                    >
+                                    <p style={labelStyle}>
                                         Let's create an amzing experiences for your audience!
                                     </p>
+                                    <Button
+                                        style={fullBtnStyle}
+                                        variant="Add new experience">
+                                        Create an experience
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -98,8 +105,21 @@ const styles = {
         width: '100%'
     },
     imgStyle: {
+        display: 'block',
         width: 200,
-        height: 140
+        height: 140,
+        margin: '0 auto',
+        marginBottom: 36
+    },
+    labelStyle: {
+        fontSize: fonts.h1,
+        color: colors.lightGreyColor,
+        marginBottom: 36
+    },
+    fullBtnStyle: {
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
+        textTransform: 'capitalize',
     },
     tableContainerStyle: {
         position: 'relative',
