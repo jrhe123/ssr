@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 // components
-import HeaderNavigator from '../container/HeaderNavigator';
+import DashboardNavigator from '../container/DashboardNavigator';
 
 class Dashboard extends Component {
 
     render() {
 
         return (
-            <HeaderNavigator />
+            <DashboardNavigator />
         )
     }
 }

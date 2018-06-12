@@ -19,7 +19,6 @@ import { connect } from 'react-redux';
 import {
     dxLogout as dxLogoutAction,
 } from '../../actions';
-import { Stream } from 'stream';
 
 const navArr = [
     {
@@ -48,7 +47,7 @@ const navArr = [
     },
 ];
 
-class HeaderNavigator extends Component {
+class DashboardNavigator extends Component {
 
     state = {
         index: 0,
@@ -67,6 +66,10 @@ class HeaderNavigator extends Component {
     render() {
 
         const {
+            conentWrapperStyle
+        } = styles;
+
+        const {
             index
         } = this.state;
 
@@ -81,6 +84,7 @@ class HeaderNavigator extends Component {
                 <SwipeableViews
                     axis='x'
                     index={this.state.index}
+                    style={conentWrapperStyle}
                 >
                     {
                         index == 0 ? 
@@ -124,6 +128,14 @@ class HeaderNavigator extends Component {
     }
 }
 
+const styles = {
+    conentWrapperStyle: {
+        width: 'calc(100% - 24px)',
+        margin: '0 auto',
+        background: 'red'
+    }
+}
+
 const stateToProps = (state) => {
     return {
 
@@ -134,4 +146,4 @@ const dispatchToProps = {
     dxLogoutAction,
 }
 
-export default connect(stateToProps, dispatchToProps)(HeaderNavigator);
+export default connect(stateToProps, dispatchToProps)(DashboardNavigator);
