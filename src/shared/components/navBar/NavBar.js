@@ -68,10 +68,12 @@ class NavBar extends Component {
             tableContainerStyle,
             tableWrapperStyle,
             leftContainerStyle,
+            imgStyle,
             midContainerStyle,
             midTopContainerStyle,
             smallNavContainerStyle,
             smallNavStyle,
+            firstNavStyle,
             midBottomContainerStyle,
             tabLabelStyle,
             rightContainerStyle,
@@ -89,7 +91,10 @@ class NavBar extends Component {
                     <div style={leftContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                logo image
+                                <img 
+                                    style={imgStyle}
+                                    src={require('../../../../assets/images/logo.png')}
+                                />
                             </div>
                         </div>
                     </div>
@@ -102,7 +107,7 @@ class NavBar extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <div style={smallNavContainerStyle}>
-                                        <Link style={smallNavStyle} to="/features">New features</Link>
+                                        <Link style={Object.assign({}, smallNavStyle, firstNavStyle)} to="/features">New features</Link>
                                         <Link style={smallNavStyle} to="/help">Help & Support</Link>
                                         <Link style={smallNavStyle} to="/community">Community</Link>
                                         <Link style={smallNavStyle} to="/news">News</Link>
@@ -200,6 +205,13 @@ const styles = {
         flex: 1
     },
 
+    imgStyle: {
+        display: 'block',
+        width: 42,
+        height: 42,
+        margin: '0 auto'
+    },
+
     midContainerStyle: {
         flex: 5,
         display: 'flex',
@@ -223,6 +235,10 @@ const styles = {
         textDecoration: 'none'
     },
 
+    firstNavStyle: {
+        paddingLeft: 68
+    },
+
     midBottomContainerStyle: {
         flex: 1,
     },
@@ -244,12 +260,12 @@ const styles = {
 
     infoLabelStyle: {
         color: colors.greenColor,
-        fontSize: fonts.h4,
+        fontSize: fonts.h5,
         textDecoration: 'none'
     },
 
     rightBottomContainerStyle: {
-        flex: 1,
+        flex: 2,
     }
 
 }
