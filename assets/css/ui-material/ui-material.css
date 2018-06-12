@@ -7,7 +7,9 @@
 button.jss46{
     text-transform: none !important;
 }
-
+.jss194:after{
+    border-bottom-color: #2A75F6 !important;
+}
 .jss55{
     padding-bottom: 0 !important;
 }

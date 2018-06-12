@@ -132,7 +132,6 @@ const styles = {
     conentWrapperStyle: {
         width: 'calc(100% - 24px)',
         margin: '0 auto',
-        background: 'red'
     }
 }
 

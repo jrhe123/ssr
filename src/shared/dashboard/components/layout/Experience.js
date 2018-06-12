@@ -28,13 +28,15 @@ class Experience extends Component{
 
 const styles = {
     mainContainerStyle: {
-        
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 36
     },
     contentContainerStyle: {
-
+        flex: 4
     },
     newContainerStyle: {
-
+        flex: 1
     },
 }
 
