@@ -24,7 +24,7 @@ import { Link } from 'react-router-dom';
 const themeStyles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        width: 720,
+        maxWidth: 720,
     }
 });
 
@@ -74,6 +74,7 @@ class NavBar extends Component {
             smallNavContainerStyle,
             smallNavStyle,
             firstNavStyle,
+            notifiNavStyle,
             midBottomContainerStyle,
             tabLabelStyle,
             rightContainerStyle,
@@ -81,6 +82,7 @@ class NavBar extends Component {
             infoLabelStyle,
             rightBottomContainerStyle,
             userInfoStyle,
+            bellStyle,
         } = styles;
 
         return (
@@ -105,7 +107,11 @@ class NavBar extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <div style={smallNavContainerStyle}>
-                                        <Link style={Object.assign({}, smallNavStyle, firstNavStyle)} to="/features">New features</Link>
+                                        <Link 
+                                            style={Object.assign({}, smallNavStyle, firstNavStyle)} 
+                                            to="/features">
+                                                New features<span style={notifiNavStyle}></span>
+                                        </Link>
                                         <Link style={smallNavStyle} to="/help">Help & Support</Link>
                                         <Link style={smallNavStyle} to="/community">Community</Link>
                                         <Link style={smallNavStyle} to="/news">News</Link>
@@ -153,8 +159,9 @@ class NavBar extends Component {
                                         isOpen={this.state.isMenuOpen}
                                         close={this.close}
                                         toggle={
-                                            <Button onClick={this.toggle}>
-                                                <AddAlert /><span style={userInfoStyle}>Roy</span><ExpandMore />
+                                            <Button style={{position: 'relative'}} onClick={this.toggle}>
+                                                <AddAlert /><span style={bellStyle}/>
+                                                <span style={userInfoStyle}>Roy</span><ExpandMore />
                                             </Button>
                                         }
                                         align='right'
@@ -227,7 +234,7 @@ const styles = {
     },
 
     smallNavStyle: {
-        display: 1,
+        position: 'relative',
         color: colors.lightGreyColor,
         fontSize: fonts.h4,
         paddingLeft: 18,
@@ -237,6 +244,17 @@ const styles = {
 
     firstNavStyle: {
         paddingLeft: 54
+    },
+
+    notifiNavStyle: {
+        position: 'absolute',
+        top: 6,
+        right: 9,
+        zIndex: 99,
+        width: 6,
+        height: 6,
+        borderRadius: '50%',
+        backgroundColor: colors.greenColor
     },
 
     midBottomContainerStyle: {
@@ -270,6 +288,17 @@ const styles = {
 
     userInfoStyle: {
         paddingLeft: 12,
+    },
+
+    bellStyle: {
+        position: 'absolute',
+        top: 6,
+        left: 30,
+        zIndex: 99,
+        width: 9,
+        height: 9,
+        borderRadius: '50%',
+        backgroundColor: colors.blueColor
     }
 
 }
