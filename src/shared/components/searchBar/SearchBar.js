@@ -14,7 +14,24 @@ import Close from '@material-ui/icons/Close';
 class SearchBar extends Component {
 
     state = {
+        hasClear: false,
         content: '',
+    }
+
+    handleValueChange = (event) => {
+
+        let val = event.target.value.trim();
+        this.setState({
+            hasClear: val.length > 0 ? true : false,
+            content: val
+        })
+    }
+
+    handleClearContent = () => {
+        this.setState({
+            hasClear: false,
+            content: '',
+        })
     }
 
     render() {
@@ -25,20 +42,26 @@ class SearchBar extends Component {
         } = this.props;
 
         const {
-            iconContainerStyle,
+            searchIconContainerStyle,
             iconStyle,
+            clearIconContainerStyle,
         } = styles;
+
+        const {
+            hasClear,
+            content,
+        } = this.state;
 
         return (
             <div>
-                <Grid 
-                    container 
-                    spacing={8} 
+                <Grid
+                    container
+                    spacing={8}
                     alignItems="flex-end"
                 >
                     <Grid
                         item
-                        style={iconContainerStyle}
+                        style={searchIconContainerStyle}
                     >
                         <Search
                             style={iconStyle}
@@ -48,20 +71,29 @@ class SearchBar extends Component {
                         style={{ width: isShort ? 120 : 240 }}
                         item>
                         <Input
+                            value={content}
                             fullWidth
                             placeholder={placeholder}
                             inputProps={{
                                 'aria-label': 'Search',
                             }}
+                            onChange={(event) => this.handleValueChange(event)}
                             endAdornment={
-                                <InputAdornment 
-                                    position="end">
-                                    <IconButton
-                                        aria-label="Empty search field"
-                                    >
-                                        <Close />
-                                    </IconButton>
-                                </InputAdornment>
+                                hasClear ?
+                                    (
+                                        <InputAdornment
+                                            style={clearIconContainerStyle}
+                                            position="end">
+                                            <IconButton
+                                                onClick={() => this.handleClearContent()}
+                                                aria-label="Empty search field"
+                                            >
+                                                <Close />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                    :
+                                    null
                             }
                         />
                     </Grid>
@@ -73,12 +105,15 @@ class SearchBar extends Component {
 
 const styles = {
 
-    iconContainerStyle: {
+    searchIconContainerStyle: {
         marginRight: -3,
         marginBottom: -3
     },
     iconStyle: {
         color: colors.lightGreyColor
+    },
+    clearIconContainerStyle: {
+        marginRight: -12
     },
 }
 
