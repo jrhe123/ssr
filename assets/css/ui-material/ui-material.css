@@ -13,6 +13,9 @@ button.jss46{
 .jss55{
     padding-bottom: 0 !important;
 }
+.jss56{
+    font-size: 16px !important;
+}
 
 @media (min-width: 960px){
     .jss46 {

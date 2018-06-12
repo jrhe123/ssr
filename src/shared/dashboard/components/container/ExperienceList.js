@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 
+// constatnt
+import fonts from '../../../styles/fonts';
+import colors from '../../../styles/colors';
+
 class ExperienceList extends Component {
 
     render() {
@@ -11,6 +15,8 @@ class ExperienceList extends Component {
             searchBarContainerStyle,
             experiencelistContainerStyle,
             experienceSortContainerStyle,
+            experienceSortTitleStyle,
+            titleSpanStyle,
             experiencelistContentContainerStyle,
         } = styles;
 
@@ -24,7 +30,8 @@ class ExperienceList extends Component {
                 </div>
                 <div style={experiencelistContainerStyle}>
                     <div style={experienceSortContainerStyle}>
-                        1 Experience(s)
+                        <p style={experienceSortTitleStyle}>1 Experience(s)</p>
+                        <span style={titleSpanStyle}/>
                     </div>
                     <div style={experiencelistContentContainerStyle}>
                         {/* list of experiences */}
@@ -46,13 +53,27 @@ class ExperienceList extends Component {
 const styles = {
 
     searchBarContainerStyle: {
-
+        marginTop: 48,
+        marginBottom: 48,
     },
     experiencelistContainerStyle: {
 
     },
     experienceSortContainerStyle: {
-
+        position: 'relative',
+        height: 36
+    },
+    experienceSortTitleStyle: {
+        fontSize: fonts.h2,
+        marginBottom: 6,
+    },
+    titleSpanStyle: {
+        height: 1,
+        width: 360,
+        backgroundColor: colors.lightGreyColor,
+        position: 'absolute',
+        left: 0,
+        bottom: 9
     },
 }
 

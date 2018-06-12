@@ -24,7 +24,7 @@ import { Link } from 'react-router-dom';
 const themeStyles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        width: 600,
+        width: 720,
     }
 });
 
@@ -236,7 +236,7 @@ const styles = {
     },
 
     firstNavStyle: {
-        paddingLeft: 68
+        paddingLeft: 54
     },
 
     midBottomContainerStyle: {
@@ -245,7 +245,7 @@ const styles = {
 
     tabLabelStyle: {
         color: colors.blackColor,
-        fontSize: fonts.h3,
+        fontSize: fonts.h2,
     },
 
     rightContainerStyle: {
