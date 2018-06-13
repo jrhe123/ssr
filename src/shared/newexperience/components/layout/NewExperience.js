@@ -9,6 +9,10 @@ import sizes from '../../../styles/sizes';
 
 class NewExperience extends Component {
 
+    handleGoback = () => {
+        this.props.history.push('/dashboard');
+    }
+
     render() {
 
         const {
@@ -17,7 +21,9 @@ class NewExperience extends Component {
 
         return (
             <div>
-                <ExperienceNavigator />
+                <ExperienceNavigator 
+                    handleGoback={() => this.handleGoback()}
+                />
                 <div style={mainContainerStyle}>
                     <ExperiencePanel />
                 </div>

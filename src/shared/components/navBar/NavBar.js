@@ -214,6 +214,7 @@ class NavBar extends Component {
                                     <div style={backBtnContainerStyle}>
                                         <Button
                                             variant="back"
+                                            onClick={() => this.props.handleGoback()}
                                         >
                                             <NavigateBefore />
                                             Back

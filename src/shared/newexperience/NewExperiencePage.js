@@ -12,7 +12,9 @@ export class NewExperiencePage extends Component {
                 <Helmet
                     title="Experience"
                 />
-                <NewExperience />
+                <NewExperience 
+                    history={this.props.history}
+                />
             </div>
         );
     }

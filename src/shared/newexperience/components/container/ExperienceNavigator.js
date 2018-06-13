@@ -15,6 +15,7 @@ class ExperienceNavigator extends Component {
             <NavBar
                 isRoute={false}
                 handleInputChange={(e) => this.handleTitleChange(e)}
+                handleGoback={() => this.props.handleGoback()}
             />
         )
     }
