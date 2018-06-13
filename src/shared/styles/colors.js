@@ -8,4 +8,5 @@ export default {
     lightGreyColor : '#ABB7C4',
     greenColor: '#6FB8A4',
     backgroundColor: '#F2F3F6',
+    headerGreyColor: '#818E98',
 }
