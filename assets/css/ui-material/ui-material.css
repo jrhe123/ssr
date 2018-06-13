@@ -1,21 +1,27 @@
+.dx-tab{
+    width: 100px !important;
+}
+.dx-tab>span{
+    margin-bottom: -12px;
+}
 .dx-tab[aria-selected="true"]{
     color: #2A75F6 !important;
 }
+.dx-tabs>div>div>div{
+    justify-content: flex-start !important;
+}
 .dx-tabs>div>div>span{
     background-color: #2A75F6 !important;
-}
-button.dx-tab{
-    text-transform: none !important;
 }
 .dx-tab>span>span{
     padding-bottom: 0 !important;
 }
 .dx-tab>span>span>span{
-    font-size: 16px !important;
+    font-size: 12px !important;
 }
 
 @media (min-width: 960px){
-    .dx-tabs {
-        min-width: 72px !important;
+    .dx-tab {
+        min-width: 110px !important;
     }
 }
