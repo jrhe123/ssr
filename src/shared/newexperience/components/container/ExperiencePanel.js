@@ -6,6 +6,7 @@ import DropdownMenu from 'react-dd-menu';
 
 // constants
 import colors from '../../../styles/colors';
+import fonts from '../../../styles/fonts';
 
 class ExperiencePanel extends Component {
 
@@ -19,7 +20,13 @@ class ExperiencePanel extends Component {
             mainContainerStyle,
             optionContainerStyle,
             leftContainerStyle,
+            imgStyle,
+            labelStyle,
+            spanLabelStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
             rightContainerStyle,
+            btnContainerStyle,
             btnStyle,
         } = styles;
 
@@ -27,7 +34,7 @@ class ExperiencePanel extends Component {
             <div style={mainContainerStyle}>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
-                        <p>Type</p>
+                        <p style={labelStyle}>Type</p>
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Select what kind of experience you would like your end user to experience?</p>
@@ -48,34 +55,48 @@ class ExperiencePanel extends Component {
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <img
+                            style={imgStyle}
                             src={require('../../../../../assets/images/card_option.png')}
                         />
-                        <span>Card</span>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <p style={Object.assign({}, labelStyle, spanLabelStyle)}>Card</p>
+                            </div>
+                        </div>
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Cards are the entry point to your end user's experience</p>
-                        {/* <Button
-                            style={btnStyle}
-                            variant="Create card">
-                            Create a card
-                        </Button> */}
                     </div>
+                </div>
+                <div style={btnContainerStyle}>
+                    <Button
+                        style={btnStyle}
+                        variant="Create card">
+                        Create a card
+                    </Button>
                 </div>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <img
+                            style={imgStyle}
                             src={require('../../../../../assets/images/page_option.png')}
                         />
-                        <span>Page(s)</span>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <p style={Object.assign({}, labelStyle, spanLabelStyle)}>Page(s)</p>
+                            </div>
+                        </div>
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
-                        {/* <Button
-                            style={btnStyle}
-                            variant="Create pages">
-                            Create page(s)
-                        </Button> */}
                     </div>
+                </div>
+                <div style={btnContainerStyle}>
+                    <Button
+                        style={btnStyle}
+                        variant="Create pages">
+                        Create page(s)
+                    </Button>
                 </div>
             </div>
         )
@@ -90,13 +111,44 @@ const styles = {
     },
     optionContainerStyle: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 36,
     },
     leftContainerStyle: {
-        flex: 1
+        flex: 1,
+        color: colors.blackColor,
+        fontSize: fonts.h3,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    imgStyle: {
+        display: 'block'
+    },
+    labelStyle: {
+        textAlign: 'left',
+    },
+    spanLabelStyle: {
+        paddingLeft: 12
+    },
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
     },
     rightContainerStyle: {
-        flex: 3
+        flex: 4,
+        color: colors.labelColor,
+        fontSize: fonts.h4
+    },
+    btnContainerStyle: {
+        marginTop: 12,
+        marginLeft: 144
     },
     btnStyle: {
         backgroundColor: colors.blueColor,
