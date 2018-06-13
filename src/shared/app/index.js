@@ -29,11 +29,16 @@ const LoginRoute
             : <Redirect to="/dashboard" />;
 
 const ProtectedRoute
-    = ({ isAuthenticated, route, ...props }) =>
+    = ({ isAuthenticated, route, ...props }) => 
         isAuthenticated
             ? <Route {...props} />
             : <Redirect to={"/"+route} />;
 
+const ProtectedRouteWithParams
+    = ({ isAuthenticated, route, ...props }) => 
+        isAuthenticated
+            ? <Route {...props} />
+            : <Redirect to={"/"+route+'/'+props.computedMatch.params.experienceType} />;
 
 class App extends Component {
 
@@ -76,18 +81,15 @@ class App extends Component {
                         component={Routes.DashboardPage}
                     />
 
-                    <ProtectedRoute
+                    <ProtectedRouteWithParams
                         isAuthenticated={isAuthenticated}
                         route="new_experience"
                         exact
-                        path="/new_experience"
+                        path="/new_experience/:experienceType(0|1)"
                         component={Routes.NewExperiencePage}
                     />
 
                     <Route path="*" render={() => (<Redirect to="/" />)} />
-                    {/* <Route path="*" render={() => {
-                        this.props.history.goBack();
-                    }} /> */}
                 </Switch>
 
                 {/* global alert bar */}
