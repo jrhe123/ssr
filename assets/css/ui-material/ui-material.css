@@ -1,19 +1,29 @@
-.jss50.jss51{
+.dx-tab{
+    width: 110px !important;
+}
+.dx-tab>span{
+    margin-bottom: -12px;
+}
+.dx-tab[aria-selected="true"]{
     color: #2A75F6 !important;
 }
-.jss63{
+.dx-tabs>div>div>div{
+    justify-content: flex-start !important;
+}
+.dx-tabs>div>div>span{
     background-color: #2A75F6 !important;
 }
-button.jss46{
-    text-transform: none !important;
-}
-
-.jss55{
+.dx-tab>span>span{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
     padding-bottom: 0 !important;
 }
-
+.dx-tab>span>span>span{
+    font-size: 12px !important;
+}
 @media (min-width: 960px){
-    .jss46 {
-        min-width: 72px !important;
+    .dx-tab {
+        min-width: 110px !important;
     }
+    
 }

@@ -9,7 +9,11 @@ import {
     ExperiencePage,
     InsightPage,
     StreamPage,
+    OnboardPage,
 } from '../../screens'
+
+// constants
+import sizes from '../../../styles/sizes';
 
 // libraries
 import SwipeableViews from 'react-swipeable-views';
@@ -44,6 +48,10 @@ const navArr = [
     {
         title: 'Insights',
         type: 'INSIGHTS'
+    },
+    {
+        title: 'Onboard',
+        type: 'ONBOARD'
     },
 ];
 
@@ -122,6 +130,12 @@ class DashboardNavigator extends Component {
                         :
                         null
                     }
+                    {
+                        index == 6 ? 
+                        (<OnboardPage />)
+                        :
+                        null
+                    }
                 </SwipeableViews>
             </div>
         )
@@ -130,9 +144,8 @@ class DashboardNavigator extends Component {
 
 const styles = {
     conentWrapperStyle: {
-        width: 'calc(100% - 24px)',
+        width: sizes.dxWidth,
         margin: '0 auto',
-        background: 'red'
     }
 }
 

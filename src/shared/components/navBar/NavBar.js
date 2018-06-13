@@ -17,6 +17,7 @@ import DropdownMenu from 'react-dd-menu';
 // constants
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
+import sizes from '../../styles/sizes';
 
 // router
 import { Link } from 'react-router-dom';
@@ -24,7 +25,7 @@ import { Link } from 'react-router-dom';
 const themeStyles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        width: 600,
+        width: 770,
     }
 });
 
@@ -65,6 +66,7 @@ class NavBar extends Component {
 
         const {
             mainContainerStyle,
+            mainWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
             leftContainerStyle,
@@ -74,6 +76,7 @@ class NavBar extends Component {
             smallNavContainerStyle,
             smallNavStyle,
             firstNavStyle,
+            notifiNavStyle,
             midBottomContainerStyle,
             tabLabelStyle,
             rightContainerStyle,
@@ -81,18 +84,19 @@ class NavBar extends Component {
             infoLabelStyle,
             rightBottomContainerStyle,
             userInfoStyle,
+            bellStyle,
         } = styles;
 
         return (
-            <div>
-                <AppBar
-                    position="static"
-                    style={mainContainerStyle}>
+            <AppBar
+                position="static"
+                style={mainContainerStyle}>
 
+                <div style={mainWrapperStyle}>
                     <div style={leftContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <img 
+                                <img
                                     style={imgStyle}
                                     src={require('../../../../assets/images/logo.png')}
                                 />
@@ -105,18 +109,23 @@ class NavBar extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <div style={smallNavContainerStyle}>
-                                        <Link style={Object.assign({}, smallNavStyle, firstNavStyle)} to="/features">New features</Link>
-                                        <Link style={smallNavStyle} to="/help">Help & Support</Link>
-                                        <Link style={smallNavStyle} to="/community">Community</Link>
-                                        <Link style={smallNavStyle} to="/news">News</Link>
+                                        <Link
+                                            style={Object.assign({}, smallNavStyle, firstNavStyle)}
+                                            to="/features">
+                                            NEW FEATURES<span style={notifiNavStyle}></span>
+                                        </Link>
+                                        <Link style={smallNavStyle} to="/help">HELP & SUPPORT</Link>
+                                        <Link style={smallNavStyle} to="/community">COMMUNITY</Link>
+                                        <Link style={smallNavStyle} to="/news">NEWS</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div 
-                            className={classes.root} 
+                        <div
+                            className={classes.root}
                             style={Object.assign({}, midBottomContainerStyle)}>
                             <Tabs
+                                className="dx-tabs"
                                 value={index}
                                 onChange={
                                     (event, value) => this.handleChange(value)
@@ -128,6 +137,7 @@ class NavBar extends Component {
                                 {
                                     navArr.map((nav, idx) => (
                                         <Tab
+                                            className="dx-tab"
                                             key={idx}
                                             label={nav.title}
                                             style={tabLabelStyle}
@@ -153,8 +163,9 @@ class NavBar extends Component {
                                         isOpen={this.state.isMenuOpen}
                                         close={this.close}
                                         toggle={
-                                            <Button onClick={this.toggle}>
-                                                <AddAlert /><span style={userInfoStyle}>Roy</span><ExpandMore />
+                                            <Button style={{ position: 'relative' }} onClick={this.toggle}>
+                                                <AddAlert /><span style={bellStyle} />
+                                                <span style={userInfoStyle}>Roy</span><ExpandMore />
                                             </Button>
                                         }
                                         align='right'
@@ -170,9 +181,8 @@ class NavBar extends Component {
                             </div>
                         </div>
                     </div>
-
-                </AppBar>
-            </div>
+                </div>
+            </AppBar>
         )
     }
 }
@@ -180,12 +190,18 @@ class NavBar extends Component {
 const styles = {
 
     mainContainerStyle: {
+        background: colors.whiteColor,
+        color: colors.blackColor,
+        minWidth: sizes.dxWidth,
+    },
+
+    mainWrapperStyle: {
         height: 84,
         width: '100%',
+        maxWidth: sizes.dxWidth,
         display: 'flex',
         flexDirection: 'row',
-        background: colors.whiteColor,
-        color: colors.blackColor
+        margin: '0 auto'
     },
 
     tableContainerStyle: {
@@ -202,7 +218,8 @@ const styles = {
     },
 
     leftContainerStyle: {
-        flex: 1
+        flex: 1,
+        paddingLeft: 12
     },
 
     imgStyle: {
@@ -216,6 +233,8 @@ const styles = {
         flex: 5,
         display: 'flex',
         flexDirection: 'column',
+        paddingLeft: 24,
+        paddingRight: 24
     },
 
     midTopContainerStyle: {
@@ -227,16 +246,27 @@ const styles = {
     },
 
     smallNavStyle: {
-        display: 1,
+        position: 'relative',
         color: colors.lightGreyColor,
         fontSize: fonts.h4,
         paddingLeft: 18,
         paddingRight: 18,
-        textDecoration: 'none'
+        textDecoration: 'none',
     },
 
     firstNavStyle: {
-        paddingLeft: 68
+        paddingLeft: 12
+    },
+
+    notifiNavStyle: {
+        position: 'absolute',
+        top: 6,
+        right: 9,
+        zIndex: 99,
+        width: 6,
+        height: 6,
+        borderRadius: '50%',
+        backgroundColor: colors.greenColor
     },
 
     midBottomContainerStyle: {
@@ -245,13 +275,14 @@ const styles = {
 
     tabLabelStyle: {
         color: colors.blackColor,
-        fontSize: fonts.h3,
+        fontSize: fonts.h2,
     },
 
     rightContainerStyle: {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        paddingRight: 12
     },
 
     rightTopContainerStyle: {
@@ -270,6 +301,17 @@ const styles = {
 
     userInfoStyle: {
         paddingLeft: 12,
+    },
+
+    bellStyle: {
+        position: 'absolute',
+        top: 6,
+        left: 30,
+        zIndex: 99,
+        width: 9,
+        height: 9,
+        borderRadius: '50%',
+        backgroundColor: colors.blueColor
     }
 
 }
