@@ -11,6 +11,9 @@ import {
     StreamPage,
 } from '../../screens'
 
+// constants
+import sizes from '../../../styles/sizes';
+
 // libraries
 import SwipeableViews from 'react-swipeable-views';
 
@@ -131,6 +134,7 @@ class DashboardNavigator extends Component {
 const styles = {
     conentWrapperStyle: {
         width: 'calc(100% - 24px)',
+        maxWidth: sizes.dxWidth,
         margin: '0 auto',
     }
 }
