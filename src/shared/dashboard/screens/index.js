@@ -4,6 +4,7 @@ import DRMPage from './DRMPage';
 import ExperiencePage from './ExperiencePage';
 import InsightPage from './InsightPage';
 import StreamPage from './StreamPage';
+import OnboardPage from './OnboardPage';
 
 export{
     AudiencePage,
@@ -12,4 +13,5 @@ export{
     ExperiencePage,
     InsightPage,
     StreamPage,
+    OnboardPage,
 }

@@ -9,6 +9,7 @@ import {
     ExperiencePage,
     InsightPage,
     StreamPage,
+    OnboardPage,
 } from '../../screens'
 
 // constants
@@ -47,6 +48,10 @@ const navArr = [
     {
         title: 'Insights',
         type: 'INSIGHTS'
+    },
+    {
+        title: 'Onboard',
+        type: 'ONBOARD'
     },
 ];
 
@@ -122,6 +127,12 @@ class DashboardNavigator extends Component {
                     {
                         index == 5 ? 
                         (<InsightPage />)
+                        :
+                        null
+                    }
+                    {
+                        index == 6 ? 
+                        (<OnboardPage />)
                         :
                         null
                     }

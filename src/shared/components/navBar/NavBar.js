@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom';
 const themeStyles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        width: 720,
+        width: 770,
     }
 });
 
