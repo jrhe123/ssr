@@ -95,6 +95,7 @@ class NavBar extends Component {
 
 
             leftBtnContainerStyle,
+            backBtnContainerStyle,
             midContextContainerStyle,
             rightBtnContainerStyle,
             btnStyle,
@@ -210,12 +211,14 @@ class NavBar extends Component {
                         <div style={leftBtnContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <Button
-                                        variant="back"
-                                    >
-                                        <NavigateBefore />
-                                        Back
-                                    </Button>
+                                    <div style={backBtnContainerStyle}>
+                                        <Button
+                                            variant="back"
+                                        >
+                                            <NavigateBefore />
+                                            Back
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -359,8 +362,9 @@ const styles = {
     // version 2
     leftBtnContainerStyle: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+    },
+    backBtnContainerStyle: {
+        paddingRight: 66
     },
     midContextContainerStyle: {
         flex: 5,
