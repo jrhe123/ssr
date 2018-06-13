@@ -123,6 +123,7 @@ class NavBar extends Component {
                             className={classes.root} 
                             style={Object.assign({}, midBottomContainerStyle)}>
                             <Tabs
+                                className="dx-tabs"
                                 value={index}
                                 onChange={
                                     (event, value) => this.handleChange(value)
@@ -134,6 +135,7 @@ class NavBar extends Component {
                                 {
                                     navArr.map((nav, idx) => (
                                         <Tab
+                                            className="dx-tab"
                                             key={idx}
                                             label={nav.title}
                                             style={tabLabelStyle}

@@ -1,27 +1,21 @@
-.jss50.jss51{
+.dx-tab[aria-selected="true"]{
     color: #2A75F6 !important;
 }
-.jss63{
+.dx-tabs>div>div>span{
     background-color: #2A75F6 !important;
 }
-button.jss46{
+button.dx-tab{
     text-transform: none !important;
 }
-.jss194:after{
-    border-bottom-color: #2A75F6 !important;
-}
-.jss55{
+.dx-tab>span>span{
     padding-bottom: 0 !important;
 }
-.jss56{
+.dx-tab>span>span>span{
     font-size: 16px !important;
-}
-.jss198{
-    padding-bottom: 3px !important;
 }
 
 @media (min-width: 960px){
-    .jss46 {
+    .dx-tabs {
         min-width: 72px !important;
     }
 }
