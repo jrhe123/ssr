@@ -191,7 +191,7 @@ class NavBar extends Component {
                                             <div>
                                                 <Button onClick={() => this.props.handleLogoutClick()}>
                                                     logout
-                                    </Button>
+                                                </Button>
                                             </div>
                                         </DropdownMenu>
                                     </div>
