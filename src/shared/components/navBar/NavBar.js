@@ -238,7 +238,7 @@ const styles = {
         minWidth: sizes.dxWidth,
     },
     mainWrapperStyle: {
-        height: 72,
+        height: sizes.headerHeight,
         width: '100%',
         maxWidth: sizes.dxWidth,
         display: 'flex',

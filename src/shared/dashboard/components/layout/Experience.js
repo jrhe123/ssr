@@ -14,6 +14,7 @@ import ExperienceData from '../../../../../data/ExperienceData';
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
+import sizes from '../../../styles/sizes';
 
 class Experience extends Component {
 
@@ -121,7 +122,7 @@ const styles = {
         flexDirection: 'row',
     },
     newContentContainerStyle: {
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%'
     },
     imgStyle: {
@@ -145,7 +146,7 @@ const styles = {
         position: 'relative',
         display: 'table',
         width: '100%',
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
         border: '1px solie blue'
     },
     tableWrapperStyle: {
