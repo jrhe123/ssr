@@ -5,7 +5,6 @@ import NewChannelModal from '../container/NewChannelModal.js';
 
 // libraries
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
 // data
 import ChannelData from '../../../../../data/ChannelData';
@@ -13,32 +12,6 @@ import ChannelData from '../../../../../data/ChannelData';
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
-
-const themeStyles = theme => ({
-    root: {
-        width: '227px',
-        backgroundColor: '#0071FF',
-        textTransform: 'none',
-        height:'50px',
-        color: colors.whiteColor,
-        fontSize: fonts.h1,
-        fontFamily: 'Avenir',
-        border: '2px',
-        boxShadow: 'none',
-        '&:hover': {
-            boxShadow: 'none',
-            backgroundColor: '#0071FF',
-          },
-          '&:active': {
-            boxShadow: 'none',
-            backgroundColor: '#0071FF',
-          },
-          '&:focus': {
-            boxShadow: 'none',
-            backgroundColor: '#0071FF',
-          },
-    }
-});
 
 class Channel extends Component {
 
@@ -66,16 +39,16 @@ class Channel extends Component {
     }
 
     render() {
-        const {
-            classes,
-        } = this.props;
 
         const {
             mainContainerStyle,
+
             mainWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
+
             buttonWrapperStyle,
+            fullBtnStyle,
             header1Style,
             header2Style,
             header3Style,
@@ -91,27 +64,33 @@ class Channel extends Component {
                 <div style={mainWrapperStyle}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <div style={header1Style}> Reach your audience via channel.</div>
+                            <div style={header1Style}> Reach your audience via channel.
+                            </div>
                             <div>
                                 <img 
                                     style={imgStyle}
                                     src={require('../../../../../assets/images/channelPage.png')}
                                 />
                             </div>
-                            <div style={header2Style}> Let's create a channel to stream your experience(s) </div>
+                            <div style={header2Style}> Let's create a channel to stream your experience(s)
+                            </div>
                             <div style={buttonWrapperStyle}>
-                                <Button variant="contained" className={classes.root} onClick={() => this.handleCreateChannel()}>
+                                <Button 
+                                    variant="Add a new channel" 
+                                    style={fullBtnStyle}
+                                    onClick={() => this.handleCreateChannel()}>
                                     Create a channel
                                 </Button>
                             </div>
-                            <div style={header3Style}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.</div>
+                            <div style={header3Style}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                            </div>
+                            <NewChannelModal 
+                                open={this.state.newChannelModalOpen}
+                                onCloseModal={() => this.handleCloseChannelModal()}
+                            />
                         </div>
                     </div>
                 </div>
-                <NewChannelModal 
-                    open={this.state.newChannelModalOpen}
-                    onCloseModal={() => this.handleCloseChannelModal()}
-                />
             </div>
         );
     }
@@ -119,29 +98,19 @@ class Channel extends Component {
 
 const styles = {
     mainContainerStyle: {
-        display: 'flex',
-        // flexWrap: 'wrap',
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        height: 'calc(100vh - 84px)',
-        // backgroundColor:'yellow'
-        backgroundColor: colors.backgroundColor
+        display:'flex',
+        flexDirection:'row'
     },
     mainWrapperStyle:{
-        display: 'flex',
-        // flexWrap: 'wrap',
-        //define width for the content wrapper here
-        width:'60%',
-        // backgroundColor:'blue'
+        height: 'calc(100vh - 84px)',
+        width: '100%',
+        flex:1
     },
     tableContainerStyle: {
         position: 'relative',
         display: 'table',
-        height: '100%',
         width: '100%',
-        // paddingLeft: '10%',
-        // paddingRight: '10%',
+        height: 'calc(100vh - 84px)',
     },
     tableWrapperStyle: {
         display: 'table-cell',
@@ -152,28 +121,24 @@ const styles = {
         marginTop: '38px',
         marginBottom:'27px'
     },
+    fullBtnStyle: {
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
+        textTransform: 'none',
+    },
     header1Style: {
-        color: colors.headerGreyColor,
-        fontSize: fonts.channelHeader,
-        fontFamily: 'Avenir',
-        fontWeight: '300',
-        marginTop:'240px'
+        fontSize: fonts.h1,
+        color: colors.lightGreyColor,
     },
     header2Style: {
-        color: colors.headerGreyColor,
-        fontSize: fonts.channelHeader,
-        fontFamily: 'Avenir',
-        fontWeight: '300'
+        fontSize: fonts.h1,
+        color: colors.lightGreyColor,
     },
     header3Style:{
-        color: colors.headerGreyColor,
-        fontSize: fonts.h3,
-        fontFamily: 'Avenir',
-        fontWeight: '300',
-        marginBottom:'246px'
+        fontSize: fonts.h4,
+        color: colors.lightGreyColor,
     },
     imgStyle:{
-        // display:'block',
         height:'131px',
         width:'142px',
         marginTop:'47px',
@@ -181,4 +146,4 @@ const styles = {
     }
 };
 
-export default withStyles(themeStyles)(Channel);
+export default Channel;
