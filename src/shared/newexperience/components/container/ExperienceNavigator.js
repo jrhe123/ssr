@@ -6,7 +6,6 @@ import NavBar from '../../../components/navBar/NavBar';
 class ExperienceNavigator extends Component {
 
     handleTitleChange = (e) => {
-
         console.log('getting val from: ', e.target.value);
     }
 

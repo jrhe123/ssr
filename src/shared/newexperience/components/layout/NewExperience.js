@@ -3,14 +3,36 @@ import React, { Component } from 'react';
 // components
 import ExperienceNavigator from '../container/ExperienceNavigator';
 
-class NewExperience extends Component{
+// constants
+import sizes from '../../../styles/sizes';
 
-    render(){
+class NewExperience extends Component {
 
-        return(
-            <ExperienceNavigator />
+    render() {
+
+        const {
+            mainContainerStyle,
+        } = styles;
+
+        return (
+            <div>
+                <ExperienceNavigator />
+                <div style={mainContainerStyle}>
+                    content list
+                </div>
+            </div>
         )
     }
+}
+
+const styles = {
+
+    mainContainerStyle: {
+        height: `calc(100vh - ${sizes.headerHeight})`,
+        width: '100%',
+        backgroundColor: 'red'
+    },
+
 }
 
 export default NewExperience;
