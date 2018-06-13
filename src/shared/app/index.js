@@ -72,14 +72,14 @@ class App extends Component {
                     <ProtectedRoute
                         isAuthenticated={isAuthenticated}
                         exact
-                        path="/Dashboard"
+                        path="/dashboard"
                         component={Routes.DashboardPage}
                     />
 
                     <Route
                         exact
-                        path="/123123"
-                        component={Routes.LoginPage}
+                        path="/new_experience"
+                        component={Routes.NewExperiencePage}
                     />
 
                     <Route path="*" render={() => (<Redirect to="/" />)} />
