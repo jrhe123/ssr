@@ -29,10 +29,10 @@ const LoginRoute
             : <Redirect to="/dashboard" />;
 
 const ProtectedRoute
-    = ({ isAuthenticated, ...props }) =>
+    = ({ isAuthenticated, route, ...props }) =>
         isAuthenticated
             ? <Route {...props} />
-            : <Redirect to="/" />;
+            : <Redirect to={"/"+route} />;
 
 
 class App extends Component {
@@ -76,7 +76,9 @@ class App extends Component {
                         component={Routes.DashboardPage}
                     />
 
-                    <Route
+                    <ProtectedRoute
+                        isAuthenticated={isAuthenticated}
+                        route="new_experience"
                         exact
                         path="/new_experience"
                         component={Routes.NewExperiencePage}
