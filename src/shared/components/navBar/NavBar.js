@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import AddAlert from '@material-ui/icons/AddAlert';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import NavigateBefore from '@material-ui/icons/NavigateBefore';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
@@ -28,8 +29,6 @@ const themeStyles = theme => ({
         width: 770,
     }
 });
-
-const tabWidth = 48;
 
 class NavBar extends Component {
 
@@ -59,6 +58,7 @@ class NavBar extends Component {
     render() {
 
         const {
+            isRoute,
             classes,
             index,
             navArr,
@@ -85,104 +85,147 @@ class NavBar extends Component {
             rightBottomContainerStyle,
             userInfoStyle,
             bellStyle,
+
+
+            leftBtnContainerStyle,
+            midContextContainerStyle,
+            rightBtnContainerStyle,
         } = styles;
 
         return (
-            <AppBar
-                position="static"
-                style={mainContainerStyle}>
 
-                <div style={mainWrapperStyle}>
-                    <div style={leftContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <img
-                                    style={imgStyle}
-                                    src={require('../../../../assets/images/logo.png')}
-                                />
-                            </div>
-                        </div>
-                    </div>
+            isRoute ?
 
-                    <div style={midContainerStyle}>
-                        <div style={midTopContainerStyle}>
+                <AppBar
+                    position="static"
+                    style={mainContainerStyle}>
+
+                    <div style={mainWrapperStyle}>
+                        <div style={leftContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <div style={smallNavContainerStyle}>
-                                        <Link
-                                            style={Object.assign({}, smallNavStyle, firstNavStyle)}
-                                            to="/features">
-                                            NEW FEATURES<span style={notifiNavStyle}></span>
-                                        </Link>
-                                        <Link style={smallNavStyle} to="/help">HELP & SUPPORT</Link>
-                                        <Link style={smallNavStyle} to="/community">COMMUNITY</Link>
-                                        <Link style={smallNavStyle} to="/news">NEWS</Link>
+                                    <img
+                                        style={imgStyle}
+                                        src={require('../../../../assets/images/logo.png')}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={midContainerStyle}>
+                            <div style={midTopContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <div style={smallNavContainerStyle}>
+                                            <Link
+                                                style={Object.assign({}, smallNavStyle, firstNavStyle)}
+                                                to="/features">
+                                                NEW FEATURES<span style={notifiNavStyle}></span>
+                                            </Link>
+                                            <Link style={smallNavStyle} to="/help">HELP & SUPPORT</Link>
+                                            <Link style={smallNavStyle} to="/community">COMMUNITY</Link>
+                                            <Link style={smallNavStyle} to="/news">NEWS</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                className={classes.root}
+                                style={Object.assign({}, midBottomContainerStyle)}>
+                                <Tabs
+                                    className="dx-tabs"
+                                    value={index}
+                                    onChange={
+                                        (event, value) => this.handleChange(value)
+                                    }
+                                    textColor="secondary"
+                                    indicatorColor="secondary"
+                                    centered
+                                >
+                                    {
+                                        navArr.map((nav, idx) => (
+                                            <Tab
+                                                className="dx-tab"
+                                                key={idx}
+                                                label={nav.title}
+                                                style={tabLabelStyle}
+                                            />
+                                        ))
+                                    }
+                                </Tabs>
+                            </div>
+                        </div>
+
+                        <div style={rightContainerStyle}>
+                            <div style={rightTopContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <Link style={infoLabelStyle} to="/news">UPGRADE NOW</Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={rightBottomContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <DropdownMenu
+                                            isOpen={this.state.isMenuOpen}
+                                            close={this.close}
+                                            toggle={
+                                                <Button style={{ position: 'relative' }} onClick={this.toggle}>
+                                                    <AddAlert /><span style={bellStyle} />
+                                                    <span style={userInfoStyle}>Roy</span><ExpandMore />
+                                                </Button>
+                                            }
+                                            align='right'
+                                        >
+                                            <div><Button>Default</Button></div>
+                                            <div>
+                                                <Button onClick={() => this.props.handleLogoutClick()}>
+                                                    logout
+                                    </Button>
+                                            </div>
+                                        </DropdownMenu>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className={classes.root}
-                            style={Object.assign({}, midBottomContainerStyle)}>
-                            <Tabs
-                                className="dx-tabs"
-                                value={index}
-                                onChange={
-                                    (event, value) => this.handleChange(value)
-                                }
-                                textColor="secondary"
-                                indicatorColor="secondary"
-                                centered
-                            >
-                                {
-                                    navArr.map((nav, idx) => (
-                                        <Tab
-                                            className="dx-tab"
-                                            key={idx}
-                                            label={nav.title}
-                                            style={tabLabelStyle}
-                                        />
-                                    ))
-                                }
-                            </Tabs>
-                        </div>
                     </div>
+                </AppBar>
 
-                    <div style={rightContainerStyle}>
-                        <div style={rightTopContainerStyle}>
+                :
+
+                <AppBar
+                    position="static"
+                    style={mainContainerStyle}>
+
+                    <div style={mainWrapperStyle}>
+                        <div style={leftBtnContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <Link style={infoLabelStyle} to="/news">UPGRADE NOW</Link>
+                                    <Button
+                                        variant="back"
+                                        size="small"
+                                    >
+                                        <NavigateBefore />
+                                        Back
+                                    </Button>
                                 </div>
                             </div>
                         </div>
-                        <div style={rightBottomContainerStyle}>
-                            <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
-                                    <DropdownMenu
-                                        isOpen={this.state.isMenuOpen}
-                                        close={this.close}
-                                        toggle={
-                                            <Button style={{ position: 'relative' }} onClick={this.toggle}>
-                                                <AddAlert /><span style={bellStyle} />
-                                                <span style={userInfoStyle}>Roy</span><ExpandMore />
-                                            </Button>
-                                        }
-                                        align='right'
-                                    >
-                                        <div><Button>Default</Button></div>
-                                        <div>
-                                            <Button onClick={() => this.props.handleLogoutClick()}>
-                                                logout
-                                    </Button>
-                                        </div>
-                                    </DropdownMenu>
-                                </div>
-                            </div>
+
+                        <div style={midContainerStyle}>
+                            <div style={midContextContainerStyle}>
+                                2
+                        </div>
+                        </div>
+
+                        <div style={rightContainerStyle}>
+                            <div style={rightBtnContainerStyle}>
+                                3
+                        </div>
                         </div>
                     </div>
-                </div>
-            </AppBar>
+                </AppBar>
         )
     }
 }
@@ -194,41 +237,35 @@ const styles = {
         color: colors.blackColor,
         minWidth: sizes.dxWidth,
     },
-
     mainWrapperStyle: {
-        height: 84,
+        height: 72,
         width: '100%',
         maxWidth: sizes.dxWidth,
         display: 'flex',
         flexDirection: 'row',
         margin: '0 auto'
     },
-
     tableContainerStyle: {
         position: 'relative',
         display: 'table',
         height: '100%',
         width: '100%',
     },
-
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center'
     },
-
     leftContainerStyle: {
         flex: 1,
         paddingLeft: 12
     },
-
     imgStyle: {
         display: 'block',
         width: 42,
         height: 42,
         margin: '0 auto'
     },
-
     midContainerStyle: {
         flex: 5,
         display: 'flex',
@@ -236,28 +273,23 @@ const styles = {
         paddingLeft: 24,
         paddingRight: 24
     },
-
     midTopContainerStyle: {
-        flex: 1,
+        flex: 2,
     },
-
     smallNavContainerStyle: {
         display: 'flex'
     },
-
     smallNavStyle: {
         position: 'relative',
         color: colors.lightGreyColor,
-        fontSize: fonts.h4,
+        fontSize: fonts.h5,
         paddingLeft: 18,
         paddingRight: 18,
         textDecoration: 'none',
     },
-
     firstNavStyle: {
         paddingLeft: 12
     },
-
     notifiNavStyle: {
         position: 'absolute',
         top: 6,
@@ -268,41 +300,33 @@ const styles = {
         borderRadius: '50%',
         backgroundColor: colors.greenColor
     },
-
     midBottomContainerStyle: {
         flex: 1,
     },
-
     tabLabelStyle: {
         color: colors.blackColor,
         fontSize: fonts.h2,
     },
-
     rightContainerStyle: {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
         paddingRight: 12
     },
-
     rightTopContainerStyle: {
         flex: 1,
     },
-
     infoLabelStyle: {
         color: colors.greenColor,
         fontSize: fonts.h5,
         textDecoration: 'none'
     },
-
     rightBottomContainerStyle: {
         flex: 2,
     },
-
     userInfoStyle: {
         paddingLeft: 12,
     },
-
     bellStyle: {
         position: 'absolute',
         top: 6,
@@ -312,7 +336,19 @@ const styles = {
         height: 9,
         borderRadius: '50%',
         backgroundColor: colors.blueColor
-    }
+    },
+
+
+    // version 2
+    leftBtnContainerStyle: {
+        flex: 1,
+    },
+    midContextContainerStyle: {
+
+    },
+    rightBtnContainerStyle: {
+
+    },
 
 }
 

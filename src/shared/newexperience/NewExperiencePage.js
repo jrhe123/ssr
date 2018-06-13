@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-// redux
-import { connect } from 'react-redux';
-import {
-
-} from './actions';
+// component
+import NewExperience from './components/layout/NewExperience';
 
 export class NewExperiencePage extends Component {
 
     render() {
         return (
             <div>
-                new experience route
+                <Helmet
+                    title="Experience"
+                />
+                <NewExperience />
             </div>
         );
     }
 }
 
-const stateToProps = (state) => {
-    return {
-
-    }
-}
-
-const dispatchToProps = {
-
-}
-
-export default connect(stateToProps, dispatchToProps)(NewExperiencePage);
+export default NewExperiencePage;

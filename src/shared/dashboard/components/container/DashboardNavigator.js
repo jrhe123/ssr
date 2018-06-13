@@ -84,6 +84,7 @@ class DashboardNavigator extends Component {
         return (
             <div>
                 <NavBar
+                    isRoute={true}
                     navArr={navArr}
                     index={this.state.index}
                     handleChange={(index) => this.handleChange(index)}
