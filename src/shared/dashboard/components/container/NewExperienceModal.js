@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Libraries
 import Modal from 'react-responsive-modal';
+import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -17,7 +18,7 @@ import '../../../../../assets/css/modal/rrm.css';
 class NewExperienceModal extends Component {
 
     state = {
-        value: 'female',
+        value: '0',
     };
 
     handleChange = event => {
@@ -27,6 +28,10 @@ class NewExperienceModal extends Component {
     onCloseModal = () => {
         this.props.onCloseModal();
     };
+
+    handleCreateExperience = () => {
+        console.log('go to next route');
+    }
 
     render() {
         const {
@@ -40,6 +45,8 @@ class NewExperienceModal extends Component {
             tableContainerStyle,
             tableWrapperStyle,
             subLabelStyle,
+            btnContainerStyle,
+            btnStyle,
         } = styles;
         const { open } = this.props;
         return (
@@ -68,11 +75,11 @@ class NewExperienceModal extends Component {
                             >
                                 <FormControlLabel
                                     value="0"
-                                    control={<Radio style={{color: colors.blackColor}} />}
+                                    control={<Radio style={{ color: colors.blackColor }} />}
                                     label={<p style={labelStyle}>Card only experience</p>}
                                 />
                                 <div style={descContainerStyle}>
-                                    <img 
+                                    <img
                                         src={require('../../../../../assets/images/card_only.png')}
                                         style={imgStyle}
                                     />
@@ -84,11 +91,11 @@ class NewExperienceModal extends Component {
                                 </div>
                                 <FormControlLabel
                                     value="1"
-                                    control={<Radio style={{color: colors.blackColor}} />}
+                                    control={<Radio style={{ color: colors.blackColor }} />}
                                     label={<p style={labelStyle}>Card + page(s) experience</p>}
                                 />
                                 <div style={descContainerStyle}>
-                                    <img 
+                                    <img
                                         src={require('../../../../../assets/images/card_exp.png')}
                                         style={imgStyle}
                                     />
@@ -100,6 +107,14 @@ class NewExperienceModal extends Component {
                                 </div>
                             </RadioGroup>
                         </FormControl>
+                    </div>
+                    <div style={btnContainerStyle}>
+                        <Button
+                            onClick={() => this.handleCreateExperience()}
+                            style={btnStyle}
+                            variant="Create new experience">
+                            Continue
+                        </Button>
                     </div>
                 </div>
             </Modal>
@@ -152,6 +167,15 @@ const styles = {
     subLabelStyle: {
         color: colors.lightGreyColor,
         fontSize: fonts.h4,
+    },
+    btnContainerStyle: {
+        marginTop: 60,
+        textAlign: 'center'
+    },
+    btnStyle: {
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
+        textTransform: 'capitalize',
     },
 }
 
