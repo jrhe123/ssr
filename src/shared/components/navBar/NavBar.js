@@ -20,6 +20,9 @@ import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 import sizes from '../../styles/sizes';
 
+// components
+import DxInput from '../dxInput/DxInput';
+
 // router
 import { Link } from 'react-router-dom';
 
@@ -54,6 +57,10 @@ class NavBar extends Component {
     handleChange = (index) => {
         this.props.handleChange(index);
     };
+
+    handleInputChange = (e) => {
+        this.props.handleInputChange(e);
+    }
 
     render() {
 
@@ -214,7 +221,14 @@ class NavBar extends Component {
                         </div>
 
                         <div style={midContextContainerStyle}>
-                            input here
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <DxInput
+                                        placeholder="untitled experience"
+                                        handleValChange={(e) => this.handleInputChange(e)}
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <div style={rightBtnContainerStyle}>

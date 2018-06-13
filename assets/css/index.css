@@ -7,3 +7,7 @@ body{
     background-color: #F2F3F6;
     font-family: 'Open Sans', sans-serif;
 }
+
+.dx_input:focus{
+    outline: none;
+}
