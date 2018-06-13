@@ -46,6 +46,7 @@
     "react-dom": "^16.0.0",
     "react-helmet": "5.2.0",
     "react-redux": "^5.0.5",
+    "react-responsive-modal": "^3.0.3",
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-s-alert": "^1.4.1",

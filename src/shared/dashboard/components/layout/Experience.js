@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // component
 import ExperienceList from '../container/ExperienceList';
+import NewExperienceModal from '../container/NewExperienceModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -17,12 +18,25 @@ import colors from '../../../styles/colors';
 class Experience extends Component {
 
     state = {
+        newExperienceModalOpen: false,
         experienceData: {}
     }
 
     componentDidMount() {
         this.setState({
             experienceData: ExperienceData
+        })
+    }
+
+    handleCreateExperience = () => {
+        this.setState({
+            newExperienceModalOpen: true
+        })
+    }
+
+    handleCloseExperienceModal = () => {
+        this.setState({
+            newExperienceModalOpen: false
         })
     }
 
@@ -82,6 +96,7 @@ class Experience extends Component {
                                         Let's create an amzing experiences for your audience!
                                     </p>
                                     <Button
+                                        onClick={() => this.handleCreateExperience()}
                                         style={fullBtnStyle}
                                         variant="Add new experience">
                                         Create an experience
@@ -90,6 +105,11 @@ class Experience extends Component {
                             </div>
                         </div>
                 }
+
+                <NewExperienceModal 
+                    open={this.state.newExperienceModalOpen}
+                    onCloseModal={() => this.handleCloseExperienceModal()}
+                />
             </div>
         )
     }
