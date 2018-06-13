@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 
+//component
+import NewChannelModal from '../container/NewChannelModal.js';
+
 // libraries
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+
+// data
+import ChannelData from '../../../../../data/ChannelData';
 
 // constants
 import colors from '../../../styles/colors';
@@ -10,7 +16,6 @@ import fonts from '../../../styles/fonts';
 
 const themeStyles = theme => ({
     root: {
-        // backgroundColor: theme.palette.background.paper,
         width: '227px',
         backgroundColor: '#0071FF',
         textTransform: 'none',
@@ -20,9 +25,6 @@ const themeStyles = theme => ({
         fontFamily: 'Avenir',
         border: '2px',
         boxShadow: 'none',
-        // '&:hover': 'none',
-        // '&:focus': 'none',
-        // '&:active': 'none',
         '&:hover': {
             boxShadow: 'none',
             backgroundColor: '#0071FF',
@@ -39,6 +41,29 @@ const themeStyles = theme => ({
 });
 
 class Channel extends Component {
+
+    state = {
+        newChannelModalOpen: false,
+        channelData: {}
+    }
+
+    componentDidMount() {
+        this.setState({
+            channelData: ChannelData
+        })
+    }
+
+    handleCreateChannel = () => {
+        this.setState({
+            newChannelModalOpen: true
+        })
+    }
+
+    handleCloseChannelModal = () => {
+        this.setState({
+            newChannelModalOpen: false
+        })
+    }
 
     render() {
         const {
@@ -57,6 +82,10 @@ class Channel extends Component {
             imgStyle
         } = styles;
 
+        const {
+            channelData,
+        } = this.state;
+
         return (
             <div style={mainContainerStyle}>
                 <div style={mainWrapperStyle}>
@@ -71,7 +100,7 @@ class Channel extends Component {
                             </div>
                             <div style={header2Style}> Let's create a channel to stream your experience(s) </div>
                             <div style={buttonWrapperStyle}>
-                                <Button variant="contained" className={classes.root}>
+                                <Button variant="contained" className={classes.root} onClick={() => this.handleCreateChannel()}>
                                     Create a channel
                                 </Button>
                             </div>
@@ -79,6 +108,10 @@ class Channel extends Component {
                         </div>
                     </div>
                 </div>
+                <NewChannelModal 
+                    open={this.state.newChannelModalOpen}
+                    onCloseModal={() => this.handleCloseChannelModal()}
+                />
             </div>
         );
     }
