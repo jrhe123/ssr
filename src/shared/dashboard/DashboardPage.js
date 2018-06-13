@@ -12,7 +12,7 @@ export class DashboardPage extends Component {
                 <Helmet
                     title="Dashboard"
                 />
-                <Dashboard />
+                <Dashboard history={this.props.history}/>
             </div>
         );
     }

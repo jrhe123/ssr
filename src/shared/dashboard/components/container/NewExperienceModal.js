@@ -30,7 +30,7 @@ class NewExperienceModal extends Component {
     };
 
     handleCreateExperience = () => {
-        console.log('go to next route');
+        this.props.navigateToNewexperience(this.state.value);
     }
 
     render() {

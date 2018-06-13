@@ -97,7 +97,11 @@ class DashboardNavigator extends Component {
                 >
                     {
                         index == 0 ? 
-                        (<ExperiencePage />)
+                        (
+                            <ExperiencePage 
+                                history={this.props.history}
+                            />
+                        )
                         :
                         null
                     }

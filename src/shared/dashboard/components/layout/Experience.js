@@ -41,6 +41,13 @@ class Experience extends Component {
         })
     }
 
+    navigateToNewexperience = (val) => {
+        this.setState({
+            newExperienceModalOpen: false
+        });
+        this.props.history.push(`/new_experience/`+val)
+    }
+
     render() {
 
         const {
@@ -110,6 +117,7 @@ class Experience extends Component {
                 <NewExperienceModal 
                     open={this.state.newExperienceModalOpen}
                     onCloseModal={() => this.handleCloseExperienceModal()}
+                    navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
                 />
             </div>
         )
