@@ -133,8 +133,7 @@ class DashboardNavigator extends Component {
 
 const styles = {
     conentWrapperStyle: {
-        width: 'calc(100% - 24px)',
-        maxWidth: sizes.dxWidth,
+        width: sizes.dxWidth,
         margin: '0 auto',
     }
 }
