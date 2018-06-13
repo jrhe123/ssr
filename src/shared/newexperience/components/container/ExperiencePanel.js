@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// styles
+import '../../../../../assets/css/dd-menu/dd_menu.css';
+
 // Libraries
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
@@ -8,10 +11,19 @@ import DropdownMenu from 'react-dd-menu';
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
 class ExperiencePanel extends Component {
 
     state = {
         isMenuOpen: false,
+    }
+
+    toggle = () => {
+        this.setState({ 
+            isMenuOpen: !this.state.isMenuOpen 
+        });
     }
 
     render() {
@@ -28,6 +40,7 @@ class ExperiencePanel extends Component {
             rightContainerStyle,
             btnContainerStyle,
             btnStyle,
+            outlineBtnStyle,
         } = styles;
 
         return (
@@ -38,18 +51,28 @@ class ExperiencePanel extends Component {
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Select what kind of experience you would like your end user to experience?</p>
-                        {/* <DropdownMenu
+                        <DropdownMenu
                             isOpen={this.state.isMenuOpen}
                             close={this.close}
                             toggle={
-                                <Button style={{ position: 'relative' }} onClick={this.toggle}>
-                                    open
-                                </Button>
+                                <div>
+                                    <DxInput 
+                                        placeholder="type"
+                                        width="120px"
+                                        disabled={true}
+                                    />
+                                    <Button 
+                                        style={outlineBtnStyle}
+                                        onClick={() => this.toggle()}>
+                                        EDIT
+                                    </Button>
+                                </div>
                             }
-                            align='center'
+                            align='left'
                         >
-                            <div><Button>Default</Button></div>
-                        </DropdownMenu> */}
+                            <div><Button className="dx-lower-case">Card only</Button></div>
+                            <div><Button className="dx-lower-case">Card + page(s)</Button></div>
+                        </DropdownMenu>
                     </div>
                 </div>
                 <div style={optionContainerStyle}>
@@ -155,7 +178,10 @@ const styles = {
         color: colors.whiteColor,
         textTransform: 'capitalize',
         width: 132
-    }
+    },
+    outlineBtnStyle: {
+        color: colors.blueColor,
+    },
 }
 
 export default ExperiencePanel;

@@ -229,6 +229,9 @@ class NavBar extends Component {
                                     <DxInput
                                         placeholder="untitled experience"
                                         handleValChange={(e) => this.handleInputChange(e)}
+                                        isDark={true}
+                                        width="240px"
+                                        disabled={false}
                                     />
                                 </div>
                             </div>
