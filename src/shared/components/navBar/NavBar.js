@@ -112,11 +112,11 @@ class NavBar extends Component {
                                         <Link
                                             style={Object.assign({}, smallNavStyle, firstNavStyle)}
                                             to="/features">
-                                            New features<span style={notifiNavStyle}></span>
+                                            NEW FEATURES<span style={notifiNavStyle}></span>
                                         </Link>
-                                        <Link style={smallNavStyle} to="/help">Help & Support</Link>
-                                        <Link style={smallNavStyle} to="/community">Community</Link>
-                                        <Link style={smallNavStyle} to="/news">News</Link>
+                                        <Link style={smallNavStyle} to="/help">HELP & SUPPORT</Link>
+                                        <Link style={smallNavStyle} to="/community">COMMUNITY</Link>
+                                        <Link style={smallNavStyle} to="/news">NEWS</Link>
                                     </div>
                                 </div>
                             </div>
@@ -219,6 +219,7 @@ const styles = {
 
     leftContainerStyle: {
         flex: 1,
+        paddingLeft: 12
     },
 
     imgStyle: {
@@ -281,6 +282,7 @@ const styles = {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        paddingRight: 12
     },
 
     rightTopContainerStyle: {

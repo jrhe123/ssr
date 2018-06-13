@@ -1,5 +1,5 @@
 .dx-tab{
-    width: 100px !important;
+    width: 110px !important;
 }
 .dx-tab>span{
     margin-bottom: -12px;
@@ -14,14 +14,16 @@
     background-color: #2A75F6 !important;
 }
 .dx-tab>span>span{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
     padding-bottom: 0 !important;
 }
 .dx-tab>span>span>span{
     font-size: 12px !important;
 }
-
 @media (min-width: 960px){
     .dx-tab {
         min-width: 110px !important;
     }
+    
 }
