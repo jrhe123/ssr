@@ -106,7 +106,7 @@ class ExperiencePanel extends Component {
 const styles = {
 
     mainContainerStyle: {
-        width: 720,
+        width: 600,
         margin: '0 auto',
     },
     optionContainerStyle: {
@@ -148,7 +148,7 @@ const styles = {
     },
     btnContainerStyle: {
         marginTop: 12,
-        marginLeft: 144
+        marginLeft: 120
     },
     btnStyle: {
         backgroundColor: colors.blueColor,
