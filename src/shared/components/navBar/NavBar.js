@@ -90,6 +90,7 @@ class NavBar extends Component {
             leftBtnContainerStyle,
             midContextContainerStyle,
             rightBtnContainerStyle,
+            btnStyle,
         } = styles;
 
         return (
@@ -204,7 +205,6 @@ class NavBar extends Component {
                                 <div style={tableWrapperStyle}>
                                     <Button
                                         variant="back"
-                                        size="small"
                                     >
                                         <NavigateBefore />
                                         Back
@@ -213,16 +213,19 @@ class NavBar extends Component {
                             </div>
                         </div>
 
-                        <div style={midContainerStyle}>
-                            <div style={midContextContainerStyle}>
-                                2
-                        </div>
+                        <div style={midContextContainerStyle}>
+                            input here
                         </div>
 
-                        <div style={rightContainerStyle}>
-                            <div style={rightBtnContainerStyle}>
-                                3
-                        </div>
+                        <div style={rightBtnContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <Button
+                                        variant="save experience"
+                                        style={btnStyle}
+                                    >Save</Button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </AppBar>
@@ -342,12 +345,20 @@ const styles = {
     // version 2
     leftBtnContainerStyle: {
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     midContextContainerStyle: {
-
+        flex: 5,
+        paddingLeft: 24,
+        paddingRight: 24
     },
     rightBtnContainerStyle: {
-
+        flex: 1,
+    },
+    btnStyle: {
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
     },
 
 }

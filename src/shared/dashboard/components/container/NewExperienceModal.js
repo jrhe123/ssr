@@ -112,7 +112,9 @@ class NewExperienceModal extends Component {
                         <Button
                             onClick={() => this.handleCreateExperience()}
                             style={btnStyle}
-                            variant="Create new experience">
+                            variant="Create new experience"
+                            
+                        >
                             Continue
                         </Button>
                     </div>
