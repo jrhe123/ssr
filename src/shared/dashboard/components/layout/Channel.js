@@ -64,16 +64,16 @@ class Channel extends Component {
                 <div style={mainWrapperStyle}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <div style={header1Style}> Reach your audience via channel.
-                            </div>
+                            <p style={header1Style}> Reach your audience via channel.
+                            </p>
                             <div>
                                 <img 
                                     style={imgStyle}
                                     src={require('../../../../../assets/images/channelPage.png')}
                                 />
                             </div>
-                            <div style={header2Style}> Let's create a channel to stream your experience(s)
-                            </div>
+                            <p style={header2Style}> Let's create a channel to stream your experience(s)
+                            </p>
                             <div style={buttonWrapperStyle}>
                                 <Button 
                                     variant="Add a new channel" 
@@ -82,8 +82,8 @@ class Channel extends Component {
                                     Create a channel
                                 </Button>
                             </div>
-                            <div style={header3Style}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
-                            </div>
+                            <p style={header3Style}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                            </p>
                             <NewChannelModal 
                                 open={this.state.newChannelModalOpen}
                                 onCloseModal={() => this.handleCloseChannelModal()}
