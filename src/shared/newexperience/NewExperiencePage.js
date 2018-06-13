@@ -14,6 +14,7 @@ export class NewExperiencePage extends Component {
                 />
                 <NewExperience 
                     history={this.props.history}
+                    experienceType={this.props.match.params.experienceType}
                 />
             </div>
         );

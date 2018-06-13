@@ -64,6 +64,7 @@ class ExperiencePanel extends Component {
                                         placeholder="type"
                                         width="120px"
                                         disabled={true}
+                                        value={this.props.experienceType == 0 ? 'card only' : 'card + page(s)'}
                                     />
                                     <Button 
                                         style={outlineBtnStyle}

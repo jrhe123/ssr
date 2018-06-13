@@ -12,7 +12,8 @@ class DxInput extends Component{
             placeholder,
             isDark,
             width,
-            disabled
+            disabled,
+            value,
         } = this.props;
 
         const extra = {};
@@ -31,6 +32,7 @@ class DxInput extends Component{
                 placeholder={placeholder}
                 onChange={(e) => this.props.handleValChange(e)}
                 disabled={disabled ? true : false}
+                value={value}
             />
         )
     }
