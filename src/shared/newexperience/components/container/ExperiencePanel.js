@@ -25,6 +25,10 @@ class ExperiencePanel extends Component {
             isMenuOpen: !this.state.isMenuOpen 
         });
     }
+    
+    close = () => {
+        this.setState({ isMenuOpen: false });
+    }
 
     render() {
 
