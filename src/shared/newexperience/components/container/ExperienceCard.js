@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 
-class ExperienceCard extends Component{
+// data
+import ExperienceCardData from '../../../../../data/ExperienceCardData';
 
-    render(){
+class ExperienceCard extends Component {
+
+    componentDidMount() {
+        console.log('check: ', ExperienceCardData);
+    }
+
+    render() {
 
         const {
             mainContainerStyle,
         } = styles;
 
-        return(
+        return (
             <div style={mainContainerStyle}>
                 experience card here
             </div>
