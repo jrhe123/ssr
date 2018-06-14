@@ -17,8 +17,10 @@ class ExperienceCard extends Component {
         activeTab: 0
     }
 
-    componentDidMount() {
-        //console.log('check: ', ExperienceCardData);
+    handleClickCate = (activeTab) => {
+        this.setState({
+            activeTab
+        })
     }
 
     render() {
@@ -43,11 +45,12 @@ class ExperienceCard extends Component {
             <div style={mainContainerStyle}>
                 <div style={leftContainerStyle}>
                     <div style={cateContainerStyle}>
-                        <div style={optionBtnContainerStyle}>
+                        <div>
                             <Button
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 0 ? activeOptionBtnStyle : {})}
                                 variant="Popular"
+                                onClick={() => this.handleClickCate(0)}
                             >
                                 Popular
                             </Button>
@@ -57,6 +60,7 @@ class ExperienceCard extends Component {
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 1 ? activeOptionBtnStyle : {})}
                                 variant="Image"
+                                onClick={() => this.handleClickCate(1)}
                             >
                                 Image
                             </Button>
@@ -66,6 +70,7 @@ class ExperienceCard extends Component {
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 2 ? activeOptionBtnStyle : {})}
                                 variant="Text"
+                                onClick={() => this.handleClickCate(2)}
                             >
                                 Text
                             </Button>
@@ -75,6 +80,7 @@ class ExperienceCard extends Component {
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 3 ? activeOptionBtnStyle : {})}
                                 variant="Video"
+                                onClick={() => this.handleClickCate(3)}
                             >
                                 Video
                             </Button>
@@ -84,6 +90,7 @@ class ExperienceCard extends Component {
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 4 ? activeOptionBtnStyle : {})}
                                 variant="Stacked"
+                                onClick={() => this.handleClickCate(4)}
                             >
                                 Stacked
                             </Button>
@@ -93,6 +100,7 @@ class ExperienceCard extends Component {
                                 className="dx-cat-btn"
                                 style={Object.assign({}, btnStyle, activeTab == 5 ? activeOptionBtnStyle : {})}
                                 variant="Examples"
+                                onClick={() => this.handleClickCate(5)}
                             >
                                 Examples
                             </Button>
@@ -117,7 +125,10 @@ const styles = {
     leftContainerStyle: {
         flex: 1,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: colors.whiteColor,
+        borderTop: '1px solid',
+        borderColor: colors.borderColor
     },
     cateContainerStyle: {
         flex: 1,
