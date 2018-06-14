@@ -35,6 +35,8 @@ const initialState = {
 const rootReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
+    let tmpUser;
+    
     switch (type) {
 
         case LOGIN__SUCCEEDED:
