@@ -9,7 +9,7 @@ import sizes from '../../../styles/sizes';
 class ExperienceCard extends Component {
 
     componentDidMount() {
-        console.log('check: ', ExperienceCardData);
+        //console.log('check: ', ExperienceCardData);
     }
 
     render() {
