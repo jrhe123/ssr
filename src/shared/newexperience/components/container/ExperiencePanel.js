@@ -27,11 +27,11 @@ class ExperiencePanel extends Component {
     }
 
     handleToggle = () => {
-        this.setState({ 
-            isMenuOpen: !this.state.isMenuOpen 
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
         });
     }
-    
+
     handleClose = () => {
         this.setState({ isMenuOpen: false });
     }
@@ -71,13 +71,13 @@ class ExperiencePanel extends Component {
                             close={() => this.handleClose()}
                             toggle={
                                 <div>
-                                    <DxInput 
+                                    <DxInput
                                         placeholder="type"
                                         width="120px"
                                         disabled={true}
                                         value={this.props.experienceType == 0 ? 'card only' : 'card + page(s)'}
                                     />
-                                    <Button 
+                                    <Button
                                         style={outlineBtnStyle}
                                         onClick={() => this.handleToggle()}>
                                         EDIT
@@ -87,20 +87,21 @@ class ExperiencePanel extends Component {
                             align='left'
                         >
                             <div onClick={() => this.handleClickOption(0)}>
-                                <Button 
+                                <Button
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
                                 >
                                     Card only
                                 </Button>
                             </div>
+
                             <div onClick={() => this.handleClickOption(1)}>
-                                <Button 
+                                <Button
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
                                 >
                                     Card + page(s)
-                                </Button>
+                                        </Button>
                             </div>
                         </DropdownMenu>
                     </div>
@@ -128,29 +129,38 @@ class ExperiencePanel extends Component {
                         Create a card
                     </Button>
                 </div>
-                <div style={optionContainerStyle}>
-                    <div style={leftContainerStyle}>
-                        <img
-                            style={imgStyle}
-                            src={require('../../../../../assets/images/page_option.png')}
-                        />
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={Object.assign({}, labelStyle, spanLabelStyle)}>Page(s)</p>
+                {
+                    this.props.experienceType == 1 ?
+                        (
+                            <div>
+                                <div style={optionContainerStyle}>
+                                    <div style={leftContainerStyle}>
+                                        <img
+                                            style={imgStyle}
+                                            src={require('../../../../../assets/images/page_option.png')}
+                                        />
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={Object.assign({}, labelStyle, spanLabelStyle)}>Page(s)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={rightContainerStyle}>
+                                        <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
+                                    </div>
+                                </div>
+                                <div style={btnContainerStyle}>
+                                    <Button
+                                        style={btnStyle}
+                                        variant="Create pages">
+                                        Create page(s)
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div style={rightContainerStyle}>
-                        <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
-                    </div>
-                </div>
-                <div style={btnContainerStyle}>
-                    <Button
-                        style={btnStyle}
-                        variant="Create pages">
-                        Create page(s)
-                    </Button>
-                </div>
+                        )
+                        :
+                        null
+                }
             </div>
         )
     }
