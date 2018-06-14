@@ -29,7 +29,7 @@ class ExperienceNavigator extends Component {
             experience,
         } = this.props;
         let content = e.target.value;
-        
+
         if(experience.index == 0){
             this.props.dxExperienceTitleUpdateAction('EXPERIENCE', content);
         }else if(experience.index == 1){

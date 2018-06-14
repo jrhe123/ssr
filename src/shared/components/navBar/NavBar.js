@@ -104,14 +104,18 @@ class NavBar extends Component {
             btnStyle,
         } = styles;
 
-        let title;
+        let title, placeholder;
         if(experience.index == 0){
             title = experience.experienceTitle;
+            placeholder = 'untitle experience';
         }else if(experience.index == 1){
             title = experience.cardTitle;
+            placeholder = 'untitle card';
         }else if(experience.index == 2){
             title = experience.pageTitle;
+            placeholder = 'untitle page';
         }
+
         return (
 
             isRoute ?
@@ -239,7 +243,7 @@ class NavBar extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <DxInput
-                                        placeholder="untitled experience"
+                                        placeholder={placeholder}
                                         handleValChange={(e) => this.handleInputChange(e)}
                                         isDark={true}
                                         width="240px"
