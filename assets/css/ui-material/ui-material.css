@@ -35,3 +35,6 @@
 .dx-lower-case{
     text-transform: lowercase !important;
 }
+.dx-cat-btn>span{
+    justify-content: flex-start !important;
+}
