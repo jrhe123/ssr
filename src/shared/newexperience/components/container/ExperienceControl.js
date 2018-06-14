@@ -14,6 +14,7 @@ import sizes from '../../../styles/sizes';
 
 // components
 import ExperiencePanel from './ExperiencePanel';
+import ExperienceCard from './ExperienceCard';
 
 class ExperienceControl extends Component {
 
@@ -50,9 +51,7 @@ class ExperienceControl extends Component {
                 {
                     experienceIndex == 1 ?
                         (
-                            <div style={{ border: '1px solid red' }}>
-                                <a onClick={() => this.handleChange(0)}>click</a>
-                            </div>
+                            <ExperienceCard />
                         )
                         :
                         null
