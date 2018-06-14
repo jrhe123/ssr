@@ -18,7 +18,14 @@ import colors from '../../../styles/colors';
 class ExperienceCard extends Component {
 
     state = {
-        activeTab: 0
+        activeTab: 0,
+        cardTemplates: []
+    }
+
+    componentDidMount(){
+        this.setState({
+            cardTemplates: ExperienceCardData.CardTemplates
+        })
     }
 
     handleClickCate = (activeTab) => {
@@ -120,8 +127,14 @@ class ExperienceCard extends Component {
                             />
                         </div>
                         <div style={templateContainerStyle}>
-                            <CardTemplate />
-                            <CardTemplate />
+                            {
+                                this.state.cardTemplates.map((template, index) => (
+                                    <CardTemplate 
+                                        key={index}
+                                        template={template}
+                                    />
+                                ))
+                            }                            
                         </div>
                     </div>
                 </div>
@@ -166,11 +179,12 @@ const styles = {
     },
     searchBarContainerStyle: {
         marginTop: 12,
-        marginBottom: 12,
-        paddingLeft: 12
+        paddingLeft: 12,
+        height: 42
     },
     templateContainerStyle: {
-        overflowY: 'auto'
+        overflowY: 'auto',
+        height: `calc(100vh - ${sizes.headerHeight} - 42px)`
     },
     rightContainerStyle: {
         flex: 2,
