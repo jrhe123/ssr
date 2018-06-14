@@ -16,11 +16,19 @@ class ExperienceCard extends Component {
 
         const {
             mainContainerStyle,
+            leftContainerStyle,
+            cateContainerStyle,
+            itemContainerStyle,
+            rightContainerStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
-                experience card here
+                <div style={leftContainerStyle}>
+                    <div style={cateContainerStyle}>category</div>
+                    <div style={itemContainerStyle}>items</div>
+                </div>
+                <div style={rightContainerStyle}>right</div>
             </div>
         )
     }
@@ -31,7 +39,25 @@ const styles = {
         width: sizes.dxWidth,
         height: `calc(100vh - ${sizes.headerHeight})`,
         margin: '0 auto',
-        background: 'red'
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    leftContainerStyle: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    cateContainerStyle: {
+        flex: 1,
+        background: 'purple',
+    },
+    itemContainerStyle: {
+        flex: 3,
+        background: 'yellow',
+    },
+    rightContainerStyle: {
+        flex: 2,
+        background: 'green'
     },
 }
 
