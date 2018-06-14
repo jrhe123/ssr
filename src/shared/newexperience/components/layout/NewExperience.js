@@ -9,12 +9,15 @@ import sizes from '../../../styles/sizes';
 
 class NewExperience extends Component {
 
-    state = {
-        experienceType: 0
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
     }
 
     componentDidMount(){
-        
+        console.log('props: ', this.props);
     }
 
     handleGoback = () => {

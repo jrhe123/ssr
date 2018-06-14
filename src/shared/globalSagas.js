@@ -5,12 +5,15 @@ import {
     VALIDATE_TOKEN_REQUESTED,
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
+
+    NAVIGATE_HISTORY_REQUESTED,
+    NAVIGATE_HISTORY__SUCCEEDED,
+    NAVIGATE_HISTORY__FAILED,
 } from './constants';
 
 // Validate token
 export const dxValidateTokenUrl = (params) => {
 
-    // console.log('login params: ', params);
     return (
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'get',
@@ -57,4 +60,25 @@ export function* dxValidateToken(action) {
 
 export function* dxValidateTokenSaga() {
     yield takeEvery(VALIDATE_TOKEN_REQUESTED, dxValidateToken);
+}
+
+// Navigate history
+export function* dxNavigateHistory(action) {
+    try {
+        yield put({
+            type: NAVIGATE_HISTORY__SUCCEEDED,
+            payload: {
+                history: action.payload.history
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: NAVIGATE_HISTORY__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxNavigateHistorySaga() {
+    yield takeEvery(NAVIGATE_HISTORY_REQUESTED, dxNavigateHistory);
 }

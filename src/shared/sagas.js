@@ -13,6 +13,7 @@ import {
 // Global
 import {
     dxValidateTokenSaga,
+    dxNavigateHistorySaga,
 } from './globalSagas';
 
 
@@ -26,5 +27,6 @@ export default function* rootSaga() {
 
         // Global
         dxValidateTokenSaga(),
+        dxNavigateHistorySaga(),
     ]);
 }

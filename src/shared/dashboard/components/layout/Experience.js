@@ -11,6 +11,9 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 // data
 import ExperienceData from '../../../../../data/ExperienceData';
 
+// redux
+import { connect } from 'react-redux';
+
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
@@ -187,4 +190,14 @@ const styles = {
     },
 }
 
-export default Experience;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(Experience);

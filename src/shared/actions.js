@@ -1,5 +1,6 @@
 import {
     VALIDATE_TOKEN_REQUESTED,
+    NAVIGATE_HISTORY_REQUESTED,
 } from './constants';
 
 export const dxValidateToken = (token, userGUID) => {
@@ -8,6 +9,15 @@ export const dxValidateToken = (token, userGUID) => {
         payload: {
             token,
             userGUID,
+        },
+    }
+}
+
+export const dxNavigateHistory = (history) => {
+    return {
+        type: NAVIGATE_HISTORY_REQUESTED,
+        payload: {
+            history
         },
     }
 }

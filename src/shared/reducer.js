@@ -14,10 +14,14 @@ import {
 import {
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
+
+    NAVIGATE_HISTORY__SUCCEEDED,
+    NAVIGATE_HISTORY__FAILED,
 } from './constants';
 
 const initialState = {
 
+    history: null,
     isAuthenticated: false,
     user: {},
 
@@ -51,6 +55,10 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case VALIDATE_TOKEN__FAILED:
             updated.isAuthenticated = false;
             updated.user = {};
+            return updated;
+
+        case NAVIGATE_HISTORY__SUCCEEDED:
+            updated.history = payload.history;
             return updated;
 
         default:

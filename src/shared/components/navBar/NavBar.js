@@ -316,7 +316,7 @@ const styles = {
     },
     notifiNavStyle: {
         position: 'absolute',
-        top: 6,
+        top: 4,
         right: 9,
         zIndex: 99,
         width: 6,
