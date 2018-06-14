@@ -6,33 +6,44 @@ import NavBar from '../../../components/navBar/NavBar';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction
+    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
+    dxExperienceTitleUpdate as dxExperienceTitleUpdateAction,
 } from '../../actions';
 
 class ExperienceNavigator extends Component {
 
     handleGoback = () => {
         const {
-            experienceIndex,
+            experience,
         } = this.props;
 
-        if(experienceIndex == 0){
+        if(experience.index == 0){
             this.props.history.push('/dashboard');
-        }else if(experienceIndex == 1){
+        }else if(experience.index == 1){
             this.props.dxExperienceIndexUpdateAction(0);
         }
     }
 
     handleTitleChange = (e) => {
-        console.log('getting val from: ', e.target.value);
+        const {
+            experience,
+        } = this.props;
+        let content = e.target.value;
+        
+        if(experience.index == 0){
+            this.props.dxExperienceTitleUpdateAction('EXPERIENCE', content);
+        }else if(experience.index == 1){
+            this.props.dxExperienceTitleUpdateAction('CARD', content);
+        }else if(experience.index == 2){
+            this.props.dxExperienceTitleUpdateAction('PAGE', content);
+        }
     }
 
     render() {
-
         return (
             <NavBar
                 isRoute={false}
-                itTitle={this.props.experienceIndex == 0 ? true : false}
+                experience={this.props.experience}
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleGoback={() => this.handleGoback()}
             />
@@ -43,12 +54,13 @@ class ExperienceNavigator extends Component {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        experienceIndex: state.newexperience.experience.index
+        experience: state.newexperience.experience,
     }
 }
 
 const dispatchToProps = {
     dxExperienceIndexUpdateAction,
+    dxExperienceTitleUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceNavigator);

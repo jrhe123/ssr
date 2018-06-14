@@ -67,8 +67,11 @@ class NavBar extends Component {
         const {
             isRoute,
             classes,
-            index,
+
             navArr,
+
+            index,
+            experience,
         } = this.props;
 
         const {
@@ -101,6 +104,14 @@ class NavBar extends Component {
             btnStyle,
         } = styles;
 
+        let title;
+        if(experience.index == 0){
+            title = experience.experienceTitle;
+        }else if(experience.index == 1){
+            title = experience.cardTitle;
+        }else if(experience.index == 2){
+            title = experience.pageTitle;
+        }
         return (
 
             isRoute ?
@@ -233,6 +244,7 @@ class NavBar extends Component {
                                         isDark={true}
                                         width="240px"
                                         disabled={false}
+                                        value={title}
                                     />
                                 </div>
                             </div>

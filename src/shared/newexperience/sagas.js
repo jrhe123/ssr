@@ -13,6 +13,10 @@ import {
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__FAILED,
+
+    EXPERIENCE_TITLE_UPDATE_REQUESTED,
+    EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
+    EXPERIENCE_TITLE_UPDATE__FAILED,
 } from './constants';
 
 // Experience type request
@@ -76,4 +80,26 @@ export function* experienceIndexUpdate(action) {
 
 export function* dxExperienceIndexUpdateSaga() {
     yield takeEvery(EXPERIENCE_INDEX_UPDATE_REQUESTED, experienceIndexUpdate);
+}
+
+// Experience title update
+export function* experienceTitleUpdate(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
+            payload: {
+                type: action.payload.type,
+                title: action.payload.title,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_TITLE_UPDATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceTitleUpdateSaga() {
+    yield takeEvery(EXPERIENCE_TITLE_UPDATE_REQUESTED, experienceTitleUpdate);
 }
