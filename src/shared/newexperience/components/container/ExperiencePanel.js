@@ -123,12 +123,13 @@ class ExperiencePanel extends Component {
                     </div>
                 </div>
                 <div style={btnContainerStyle}>
-                    <Button
+                    {/* <Button
                         style={btnStyle}
                         variant="Create card"
                         onClick={() => this.props.handleCreateCard()}>
                         Create a card
-                    </Button>
+                    </Button> */}
+                    <a onClick={() => this.props.handleCreateCard()}>click here</a>
                 </div>
                 {
                     this.props.experienceType == 1 ?

@@ -26,6 +26,7 @@ class ExperienceControl extends Component {
         const {
             conentWrapperStyle
         } = styles;
+
         const {
             experienceIndex
         } = this.props;
@@ -39,12 +40,9 @@ class ExperienceControl extends Component {
                 {
                     experienceIndex == 0 ?
                         (
-                            <div style={{ border: '1px solid red' }}>
-                                <a onClick={() => this.setState({ index: 1 })}>click</a>
-                                <ExperiencePanel 
-                                   handleCreateCard={() => this.handleCreateCard()}
-                                />
-                            </div>
+                            <ExperiencePanel
+                                handleCreateCard={() => this.handleChange(1)}
+                            />
                         )
                         :
                         null
@@ -53,7 +51,7 @@ class ExperienceControl extends Component {
                     experienceIndex == 1 ?
                         (
                             <div style={{ border: '1px solid red' }}>
-                                <a onClick={() => this.setState({ index: 0 })}>click</a>
+                                <a onClick={() => this.handleChange(0)}>click</a>
                             </div>
                         )
                         :
