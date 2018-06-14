@@ -121,6 +121,7 @@ class ExperienceCard extends Component {
                         </div>
                         <div style={templateContainerStyle}>
                             <CardTemplate />
+                            <CardTemplate />
                         </div>
                     </div>
                 </div>
