@@ -1,5 +1,6 @@
 import {
     EXPERIENCE_TYPE__SUCCEEDED,
+    EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -16,7 +17,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_TYPE__SUCCEEDED:
             updated.experience.type = payload.experienceType;
             return updated;
-        
+
+        case EXPERIENCE_TYPE_UPDATE__SUCCEEDED:
+            updated.experience.type = payload.experienceType;
+            return updated;
+
         default:
             return previousState;
     }

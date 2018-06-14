@@ -9,6 +9,9 @@ import DropdownMenu from 'react-dd-menu';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxExperienceTypeUpdate as dxExperienceTypeUpdateAction
+} from '../../actions';
 
 // constants
 import colors from '../../../styles/colors';
@@ -34,8 +37,7 @@ class ExperiencePanel extends Component {
     }
 
     handleClickOption = (val) => {
-
-        console.log('val: ', val);
+        this.props.dxExperienceTypeUpdateAction(val);
     }
 
     render() {
@@ -222,7 +224,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-
+    dxExperienceTypeUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

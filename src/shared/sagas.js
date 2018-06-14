@@ -13,6 +13,7 @@ import {
 // NewExperience
 import { 
     dxExperienceTypeSaga,
+    dxExperienceTypeUpdateSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -32,6 +33,7 @@ export default function* rootSaga() {
 
         // NewExperience
         dxExperienceTypeSaga(),
+        dxExperienceTypeUpdateSaga(),
         
         // Global
         dxValidateTokenSaga(),
