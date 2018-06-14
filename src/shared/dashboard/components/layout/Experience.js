@@ -44,7 +44,7 @@ class Experience extends Component {
         })
     }
 
-    navigateToNewexperience = (val) => {
+    handleNavigateToNewexperience = (val) => {
         this.setState({
             newExperienceModalOpen: false
         });
@@ -120,7 +120,7 @@ class Experience extends Component {
                 <NewExperienceModal 
                     open={this.state.newExperienceModalOpen}
                     onCloseModal={() => this.handleCloseExperienceModal()}
-                    navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
+                    navigateToNewexperience={(val) => this.handleNavigateToNewexperience(val)}
                 />
             </div>
         )

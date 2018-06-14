@@ -16,10 +16,6 @@ class NewExperience extends Component {
         this.props.history.push('/dashboard');
     }
 
-    handleClickOption = () => {
-
-    }
-
     render() {
 
         const {
@@ -32,9 +28,7 @@ class NewExperience extends Component {
                     handleGoback={() => this.handleGoback()}
                 />
                 <div style={mainContainerStyle}>
-                    <ExperiencePanel 
-                        handleClickOption={(val) => this.handleClickOption(val)}
-                    />
+                    <ExperiencePanel />
                 </div>
             </div>
         )

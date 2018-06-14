@@ -23,14 +23,19 @@ class ExperiencePanel extends Component {
         isMenuOpen: false,
     }
 
-    toggle = () => {
+    handleToggle = () => {
         this.setState({ 
             isMenuOpen: !this.state.isMenuOpen 
         });
     }
     
-    close = () => {
+    handleClose = () => {
         this.setState({ isMenuOpen: false });
+    }
+
+    handleClickOption = (val) => {
+
+        console.log('val: ', val);
     }
 
     render() {
@@ -61,7 +66,7 @@ class ExperiencePanel extends Component {
                         <p>Select what kind of experience you would like your end user to experience?</p>
                         <DropdownMenu
                             isOpen={this.state.isMenuOpen}
-                            close={this.close}
+                            close={() => this.handleClose()}
                             toggle={
                                 <div>
                                     <DxInput 
@@ -72,14 +77,14 @@ class ExperiencePanel extends Component {
                                     />
                                     <Button 
                                         style={outlineBtnStyle}
-                                        onClick={() => this.toggle()}>
+                                        onClick={() => this.handleToggle()}>
                                         EDIT
                                     </Button>
                                 </div>
                             }
                             align='left'
                         >
-                            <div onClick={() => this.props.handleClickOption(0)}>
+                            <div onClick={() => this.handleClickOption(0)}>
                                 <Button 
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
@@ -87,7 +92,7 @@ class ExperiencePanel extends Component {
                                     Card only
                                 </Button>
                             </div>
-                            <div onClick={() => this.props.handleClickOption(1)}>
+                            <div onClick={() => this.handleClickOption(1)}>
                                 <Button 
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
