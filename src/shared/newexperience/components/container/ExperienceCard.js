@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 // data
 import ExperienceCardData from '../../../../../data/ExperienceCardData';
 
+// components
+import SearchBar from '../../../components/searchBar/SearchBar';
+import CardTemplate from '../presentation/CardTemplate';
+
 // Libraries
 import Button from '@material-ui/core/Button';
 
@@ -37,6 +41,7 @@ class ExperienceCard extends Component {
             btnStyle,
             itemContainerStyle,
             searchBarContainerStyle,
+            templateContainerStyle,
             rightContainerStyle,
         } = styles;
 
@@ -109,9 +114,14 @@ class ExperienceCard extends Component {
                     </div>
                     <div style={itemContainerStyle}>
                         <div style={searchBarContainerStyle}>
-                        1123
+                            <SearchBar
+                                isShort={false}
+                                placeholder="search for layout"
+                            />
                         </div>
-                        <div>list</div>
+                        <div style={templateContainerStyle}>
+                            <CardTemplate />
+                        </div>
                     </div>
                 </div>
                 <div style={rightContainerStyle}>right</div>
@@ -154,7 +164,12 @@ const styles = {
         flex: 3,
     },
     searchBarContainerStyle: {
-        
+        marginTop: 12,
+        marginBottom: 12,
+        paddingLeft: 12
+    },
+    templateContainerStyle: {
+        overflowY: 'auto'
     },
     rightContainerStyle: {
         flex: 2,
