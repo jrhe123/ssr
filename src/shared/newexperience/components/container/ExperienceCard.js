@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 // data
 import ExperienceCardData from '../../../../../data/ExperienceCardData';
 
+// constants
+import sizes from '../../../styles/sizes';
+
 class ExperienceCard extends Component {
 
     componentDidMount() {
@@ -24,9 +27,11 @@ class ExperienceCard extends Component {
 }
 
 const styles = {
-
     mainContainerStyle: {
-        border: '1px solid red',
+        width: sizes.dxWidth,
+        height: `calc(100vh - ${sizes.headerHeight})`,
+        margin: '0 auto',
+        background: 'red'
     },
 }
 
