@@ -89,7 +89,7 @@ class ExperiencePanel extends Component {
                             <div onClick={() => this.handleClickOption(0)}>
                                 <Button
                                     style={optionBtnStyle}
-                                    className="dx-lower-case"
+                                    className="dx-lower-case dx-cat-btn"
                                 >
                                     Card only
                                 </Button>
@@ -98,7 +98,7 @@ class ExperiencePanel extends Component {
                             <div onClick={() => this.handleClickOption(1)}>
                                 <Button
                                     style={optionBtnStyle}
-                                    className="dx-lower-case"
+                                    className="dx-lower-case dx-cat-btn"
                                 >
                                     Card + page(s)
                                         </Button>

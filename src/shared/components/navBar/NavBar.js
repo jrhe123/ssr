@@ -105,17 +105,19 @@ class NavBar extends Component {
         } = styles;
 
         let title, placeholder;
-        if(experience.index == 0){
-            title = experience.experienceTitle;
-            placeholder = 'untitle experience';
-        }else if(experience.index == 1){
-            title = experience.cardTitle;
-            placeholder = 'untitle card';
-        }else if(experience.index == 2){
-            title = experience.pageTitle;
-            placeholder = 'untitle page';
+        if(experience){
+            if(experience.index == 0){
+                title = experience.experienceTitle;
+                placeholder = 'untitle experience';
+            }else if(experience.index == 1){
+                title = experience.cardTitle;
+                placeholder = 'untitle card';
+            }else if(experience.index == 2){
+                title = experience.pageTitle;
+                placeholder = 'untitle page';
+            }
         }
-
+        
         return (
 
             isRoute ?

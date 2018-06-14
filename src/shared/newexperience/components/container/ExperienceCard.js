@@ -36,6 +36,7 @@ class ExperienceCard extends Component {
             optionBtnContainerStyle,
             btnStyle,
             itemContainerStyle,
+            searchBarContainerStyle,
             rightContainerStyle,
         } = styles;
 
@@ -106,7 +107,12 @@ class ExperienceCard extends Component {
                             </Button>
                         </div>
                     </div>
-                    <div style={itemContainerStyle}>items</div>
+                    <div style={itemContainerStyle}>
+                        <div style={searchBarContainerStyle}>
+                        1123
+                        </div>
+                        <div>list</div>
+                    </div>
                 </div>
                 <div style={rightContainerStyle}>right</div>
             </div>
@@ -146,6 +152,9 @@ const styles = {
     },
     itemContainerStyle: {
         flex: 3,
+    },
+    searchBarContainerStyle: {
+        
     },
     rightContainerStyle: {
         flex: 2,
