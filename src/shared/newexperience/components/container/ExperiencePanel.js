@@ -45,6 +45,7 @@ class ExperiencePanel extends Component {
             btnContainerStyle,
             btnStyle,
             outlineBtnStyle,
+            optionBtnStyle,
         } = styles;
 
         return (
@@ -75,8 +76,22 @@ class ExperiencePanel extends Component {
                             }
                             align='left'
                         >
-                            <div><Button className="dx-lower-case">Card only</Button></div>
-                            <div><Button className="dx-lower-case">Card + page(s)</Button></div>
+                            <div onClick={() => this.props.handleClickOption(0)}>
+                                <Button 
+                                    style={optionBtnStyle}
+                                    className="dx-lower-case"
+                                >
+                                    Card only
+                                </Button>
+                            </div>
+                            <div onClick={() => this.props.handleClickOption(1)}>
+                                <Button 
+                                    style={optionBtnStyle}
+                                    className="dx-lower-case"
+                                >
+                                    Card + page(s)
+                                </Button>
+                            </div>
                         </DropdownMenu>
                     </div>
                 </div>
@@ -187,6 +202,9 @@ const styles = {
     outlineBtnStyle: {
         color: colors.blueColor,
     },
+    optionBtnStyle: {
+        width: 144
+    }
 }
 
 export default ExperiencePanel;

@@ -9,8 +9,20 @@ import sizes from '../../../styles/sizes';
 
 class NewExperience extends Component {
 
+    state = {
+        experienceType: 0
+    }
+
+    componentDidMount(){
+        
+    }
+
     handleGoback = () => {
         this.props.history.push('/dashboard');
+    }
+
+    handleClickOption = () => {
+
     }
 
     render() {
@@ -27,6 +39,7 @@ class NewExperience extends Component {
                 <div style={mainContainerStyle}>
                     <ExperiencePanel 
                         experienceType={this.props.experienceType}
+                        handleClickOption={(val) => this.handleClickOption(val)}
                     />
                 </div>
             </div>
