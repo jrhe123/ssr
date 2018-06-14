@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // components
 import ExperienceNavigator from '../container/ExperienceNavigator';
-import ExperiencePanel from '../container/ExperiencePanel';
+import ExperienceControl from '../container/ExperienceControl';
 
 // redux
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ class NewExperience extends Component {
                     handleGoback={() => this.handleGoback()}
                 />
                 <div style={mainContainerStyle}>
-                    <ExperiencePanel />
+                    <ExperienceControl />
                 </div>
             </div>
         )
