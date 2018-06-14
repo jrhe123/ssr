@@ -7,6 +7,9 @@ import '../../../../../assets/css/dd-menu/dd_menu.css';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 
+// redux
+import { connect } from 'react-redux';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -207,4 +210,14 @@ const styles = {
     }
 }
 
-export default ExperiencePanel;
+const stateToProps = (state) => {
+    return {
+        experienceType: state.newexperience.experience.type
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

@@ -10,6 +10,11 @@ import {
     dxLogoutSaga,
 } from './dashboard/sagas';
 
+// NewExperience
+import { 
+    dxExperienceTypeSaga,
+} from './newexperience/sagas';
+
 // Global
 import {
     dxValidateTokenSaga,
@@ -25,6 +30,9 @@ export default function* rootSaga() {
         // Dashboard
         dxLogoutSaga(),
 
+        // NewExperience
+        dxExperienceTypeSaga(),
+        
         // Global
         dxValidateTokenSaga(),
         dxNavigateHistorySaga(),

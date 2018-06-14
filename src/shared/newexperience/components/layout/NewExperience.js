@@ -4,21 +4,13 @@ import React, { Component } from 'react';
 import ExperienceNavigator from '../container/ExperienceNavigator';
 import ExperiencePanel from '../container/ExperiencePanel';
 
+// redux
+import { connect } from 'react-redux';
+
 // constants
 import sizes from '../../../styles/sizes';
 
 class NewExperience extends Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
-
-    componentDidMount(){
-        console.log('props: ', this.props);
-    }
 
     handleGoback = () => {
         this.props.history.push('/dashboard');
@@ -41,7 +33,6 @@ class NewExperience extends Component {
                 />
                 <div style={mainContainerStyle}>
                     <ExperiencePanel 
-                        experienceType={this.props.experienceType}
                         handleClickOption={(val) => this.handleClickOption(val)}
                     />
                 </div>
@@ -60,4 +51,14 @@ const styles = {
 
 }
 
-export default NewExperience;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(NewExperience);
