@@ -126,7 +126,7 @@ class Experience extends Component {
         )
     }
 }
-
+``
 const styles = {
     mainContainerStyle: {
         display: 'flex',
