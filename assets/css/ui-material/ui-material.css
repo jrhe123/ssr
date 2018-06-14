@@ -1,11 +1,15 @@
 .dx-tab{
     width: 110px !important;
+    min-height: 40px !important;
 }
 .dx-tab>span{
     margin-bottom: -12px;
 }
 .dx-tab[aria-selected="true"]{
     color: #2A75F6 !important;
+}
+.dx-tabs{
+    min-height: 40px !important;
 }
 .dx-tabs>div>div>div{
     justify-content: flex-start !important;
@@ -16,7 +20,7 @@
 .dx-tab>span>span{
     padding-left: 24px !important;
     padding-right: 24px !important;
-    padding-bottom: 0 !important;
+    padding-bottom: 12px !important;
 }
 .dx-tab>span>span>span{
     font-size: 12px !important;
@@ -26,4 +30,8 @@
         min-width: 110px !important;
     }
     
+}
+
+.dx-lower-case{
+    text-transform: lowercase !important;
 }

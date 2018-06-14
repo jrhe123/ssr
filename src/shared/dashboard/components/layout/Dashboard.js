@@ -8,7 +8,9 @@ class Dashboard extends Component {
     render() {
 
         return (
-            <DashboardNavigator />
+            <DashboardNavigator 
+                history={this.props.history}
+            />
         )
     }
 }

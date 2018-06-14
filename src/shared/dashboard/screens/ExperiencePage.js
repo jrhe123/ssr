@@ -7,7 +7,9 @@ class ExperiencePage extends Component{
 
     render(){
         return(
-            <Experience />
+            <Experience 
+                history={this.props.history}
+            />
         )
     }
 }

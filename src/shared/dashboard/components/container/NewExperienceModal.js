@@ -30,7 +30,7 @@ class NewExperienceModal extends Component {
     };
 
     handleCreateExperience = () => {
-        console.log('go to next route');
+        this.props.navigateToNewexperience(this.state.value);
     }
 
     render() {
@@ -112,7 +112,9 @@ class NewExperienceModal extends Component {
                         <Button
                             onClick={() => this.handleCreateExperience()}
                             style={btnStyle}
-                            variant="Create new experience">
+                            variant="Create new experience"
+                            
+                        >
                             Continue
                         </Button>
                     </div>

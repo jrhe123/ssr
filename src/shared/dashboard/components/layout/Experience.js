@@ -14,6 +14,7 @@ import ExperienceData from '../../../../../data/ExperienceData';
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
+import sizes from '../../../styles/sizes';
 
 class Experience extends Component {
 
@@ -38,6 +39,13 @@ class Experience extends Component {
         this.setState({
             newExperienceModalOpen: false
         })
+    }
+
+    navigateToNewexperience = (val) => {
+        this.setState({
+            newExperienceModalOpen: false
+        });
+        this.props.history.push(`/new_experience/`+val)
     }
 
     render() {
@@ -109,6 +117,7 @@ class Experience extends Component {
                 <NewExperienceModal 
                     open={this.state.newExperienceModalOpen}
                     onCloseModal={() => this.handleCloseExperienceModal()}
+                    navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
                 />
             </div>
         )
@@ -121,7 +130,7 @@ const styles = {
         flexDirection: 'row',
     },
     newContentContainerStyle: {
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%'
     },
     imgStyle: {
@@ -145,7 +154,7 @@ const styles = {
         position: 'relative',
         display: 'table',
         width: '100%',
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
         border: '1px solie blue'
     },
     tableWrapperStyle: {
