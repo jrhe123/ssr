@@ -123,13 +123,10 @@ class ExperiencePanel extends Component {
                     </div>
                 </div>
                 <div style={btnContainerStyle}>
-                    {/* <Button
-                        style={btnStyle}
+                    <a style={btnStyle}
+                        onClick={() => this.props.handleCreateCard()}
                         variant="Create card"
-                        onClick={() => this.props.handleCreateCard()}>
-                        Create a card
-                    </Button> */}
-                    <a onClick={() => this.props.handleCreateCard()}>click here</a>
+                    >Create a card</a>
                 </div>
                 {
                     this.props.experienceType == 1 ?
@@ -152,11 +149,10 @@ class ExperiencePanel extends Component {
                                     </div>
                                 </div>
                                 <div style={btnContainerStyle}>
-                                    <Button
-                                        style={btnStyle}
-                                        variant="Create pages">
-                                        Create page(s)
-                                    </Button>
+                                    <a style={btnStyle}
+                                        onClick={() => this.props.handleCreateCard()}
+                                        variant="Create card"
+                                    >Create page(s)</a>
                                 </div>
                             </div>
                         )
@@ -216,10 +212,14 @@ const styles = {
         marginLeft: 120
     },
     btnStyle: {
+        cursor: 'pointer',
+        display: 'block',
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
-        textTransform: 'capitalize',
-        width: 132
+        borderRadius: '4px',
+        padding: '10px 18px',
+        width: 120,
+        textAlign: 'center'
     },
     outlineBtnStyle: {
         color: colors.blueColor,
