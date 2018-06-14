@@ -38,6 +38,14 @@ class Channel extends Component {
         })
     }
 
+    // dhan added jun14
+    // navigateToNewexperience = (val) => {
+    //     this.setState({
+    //         newExperienceModalOpen: false
+    //     });
+    //     this.props.history.push(`/new_experience/`+val)
+    // }
+
     render() {
 
         const {
@@ -87,6 +95,7 @@ class Channel extends Component {
                             <NewChannelModal 
                                 open={this.state.newChannelModalOpen}
                                 onCloseModal={() => this.handleCloseChannelModal()}
+                                // navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
                             />
                         </div>
                     </div>
@@ -139,10 +148,13 @@ const styles = {
         color: colors.lightGreyColor,
     },
     imgStyle:{
+        display:'block',
         height:'131px',
         width:'142px',
         marginTop:'47px',
-        marginBottom:'38px'
+        marginBottom:'38px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     }
 };
 
