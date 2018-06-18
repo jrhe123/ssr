@@ -9,4 +9,5 @@ export default {
     greenColor: '#6FB8A4',
     labelColor: '#64697C',
     backgroundColor: '#F2F3F6',
+    blueCardColor: '#4397C9',
 }

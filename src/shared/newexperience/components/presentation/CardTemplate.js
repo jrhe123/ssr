@@ -17,6 +17,7 @@ class CardTemplate extends Component {
             rightImageContainerStyle,
             imgStyle,
             txtStyle,
+            overlayContainerStyle,
         } = styles;
 
         let card;
@@ -29,7 +30,7 @@ class CardTemplate extends Component {
                             src={require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
-                    <div style={rightTextContainerStyle}>
+                    <div style={Object.assign({}, rightTextContainerStyle, {backgroundColor: colors.lightBlueColor})}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
                                 <p style={txtStyle}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
@@ -41,7 +42,7 @@ class CardTemplate extends Component {
         } else if (template.Type == 'RIGHT_IMAGE_TEXT') {
             card = (
                 <div>
-                    <div style={leftTextContainerStyle}>
+                    <div style={Object.assign({}, leftTextContainerStyle, {backgroundColor: colors.lightBlueColor})}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
                                 <p style={txtStyle}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
@@ -53,6 +54,29 @@ class CardTemplate extends Component {
                             style={imgStyle}
                             src={require('../../../../../assets/images/demo.jpg')}
                         />
+                    </div>
+                </div>
+            );
+        } else if (template.Type == 'BACKGROUND_TEXT') {
+            card = (
+                <div style={Object.assign({}, tableContainerStyle, { backgroundColor: colors.blueCardColor })}>
+                    <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
+                        <p style={Object.assign({}, txtStyle, { color: colors.whiteColor })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                </div>
+            );
+        } else if (template.Type == 'BACKGROUND_IMAGE_TEXT') {
+            card = (
+                <div style={Object.assign({}, 
+                        tableContainerStyle, 
+                        overlayContainerStyle, 
+                        { 
+                            backgroundImage: `url(${require('../../../../../assets/images/demo.jpg')})`,
+                            backgroundSize: 'cover' 
+                        })
+                    }>
+                    <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
+                        <p style={Object.assign({}, txtStyle, { color: colors.whiteColor })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </div>
                 </div>
             );
@@ -118,7 +142,6 @@ const styles = {
         width: 'calc(100% - 24px)',
         height: 90,
         margin: '0 auto',
-        background: colors.lightBlueColor,
     },
     leftImageContainerStyle: {
         display: 'inline-block',
@@ -151,6 +174,10 @@ const styles = {
     },
     txtStyle: {
         fontSize: fonts.h5
+    },
+    overlayContainerStyle: {
+        backgroundColor: 'rgba(0, 0, 0, .3)',
+        zIndex: 99
     },
 }
 
