@@ -30,7 +30,7 @@ class ExperienceCard extends Component {
         cardTemplates: []
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             cardTemplates: ExperienceCardData.CardTemplates
         })
@@ -71,23 +71,23 @@ class ExperienceCard extends Component {
             demoCardContainerStyle,
         } = styles;
 
-        const activeOptionBtnStyle = {backgroundColor: colors.lightBlueColor};
+        const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
 
         return (
             <div style={mainContainerStyle}>
-                <div 
+                <div
                     className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={this.props.experience.isCardTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
                 >
                     <DropdownMenu
                         isOpen={this.props.experience.isCardTemplateMenuOpen}
-                        close={() => {}}
+                        close={() => { }}
                         align="center"
                         className="dx-layout-menu"
                         closeOnInsideClick={false}
                     >
                         <div style={leftWrapperStyle}>
-                            
+
                             <div style={cateContainerStyle}>
                                 <div>
                                     <Button
@@ -160,44 +160,49 @@ class ExperienceCard extends Component {
                                 <div style={templateContainerStyle}>
                                     {
                                         this.state.cardTemplates.map((template, index) => (
-                                            <CardTemplate 
+                                            <CardTemplate
                                                 key={index}
                                                 isWithTitle={true}
                                                 template={template}
                                                 handleSelectCardTemplate={(template) => this.handleSelectCardTemplate(template)}
                                             />
                                         ))
-                                    }                            
+                                    }
                                 </div>
                             </div>
                         </div>
-                    </DropdownMenu>  
+                    </DropdownMenu>
                 </div>
 
-                <div 
+                <div
                     className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
                     <div style={optionBarContainerStyle}>
                         <div style={optionBarWrapperStyle}>
-                            <CardOption />
+                            {
+                                this.props.experience.cardTemplate ?
+                                    <CardOption />
+                                    :
+                                    null
+                            }
                         </div>
                     </div>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <div style={demoCardContainerStyle}>                            
+                            <div style={demoCardContainerStyle}>
                                 {
                                     this.props.experience.cardTemplate ?
-                                    <CardTemplate 
-                                        isWithTitle={false}
-                                        template={this.props.experience.cardTemplate}
-                                    />
-                                    :
-                                    null
+                                        <CardTemplate
+                                            isWithTitle={false}
+                                            template={this.props.experience.cardTemplate}
+                                        />
+                                        :
+                                        null
                                 }
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
             </div>
@@ -215,7 +220,7 @@ const styles = {
         justifyContent: 'flex-start'
     },
     hiddenLeftContainerStyle: {
-        width: 0        
+        width: 0
     },
     leftContainerStyle: {
         flex: 1,
