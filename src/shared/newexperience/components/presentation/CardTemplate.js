@@ -7,6 +7,11 @@ import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 
 class CardTemplate extends Component {
 
+    handleSelectCardTemplate = (template) => {
+        if(this.props.isClickable)
+            this.props.handleSelectCardTemplate(template)
+    }
+
     renderCard = (template) => {
 
         const {
@@ -141,7 +146,7 @@ class CardTemplate extends Component {
                 }
                 <div style={cardContainerStyle}
                     className="dx_card"
-                    onClick={() => this.props.handleSelectCardTemplate(template)}
+                    onClick={() => this.handleSelectCardTemplate(template)}
                     >
                     {
                         this.renderCard(template)

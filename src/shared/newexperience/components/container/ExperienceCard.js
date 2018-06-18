@@ -163,6 +163,7 @@ class ExperienceCard extends Component {
                                             <CardTemplate
                                                 key={index}
                                                 isWithTitle={true}
+                                                isClickable={true}
                                                 template={template}
                                                 handleSelectCardTemplate={(template) => this.handleSelectCardTemplate(template)}
                                             />
@@ -195,6 +196,7 @@ class ExperienceCard extends Component {
                                     this.props.experience.cardTemplate ?
                                         <CardTemplate
                                             isWithTitle={false}
+                                            isClickable={false}
                                             template={this.props.experience.cardTemplate}
                                         />
                                         :
