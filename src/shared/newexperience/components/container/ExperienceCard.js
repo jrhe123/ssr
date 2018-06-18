@@ -178,13 +178,13 @@ const styles = {
         flex: 3,
     },
     searchBarContainerStyle: {
-        marginTop: 12,
+        paddingTop: 12,
         paddingLeft: 12,
         height: 42
     },
     templateContainerStyle: {
         overflowY: 'auto',
-        height: `calc(100vh - ${sizes.headerHeight} - 42px)`
+        height: `calc(100vh - ${sizes.headerHeight} - 54px)`,
     },
     rightContainerStyle: {
         flex: 2,
