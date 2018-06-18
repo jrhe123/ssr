@@ -13,6 +13,9 @@ import DropdownMenu from 'react-dd-menu';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxExperienceCardTemplateSelect as dxExperienceCardTemplateSelectAction
+} from '../../actions';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -36,6 +39,10 @@ class ExperienceCard extends Component {
         this.setState({
             activeTab
         })
+    }
+
+    handleSelectCardTemplate = (template) => {
+        this.props.dxExperienceCardTemplateSelectAction(template);
     }
 
     render() {
@@ -64,7 +71,7 @@ class ExperienceCard extends Component {
                 <div style={leftContainerStyle}>
                     <DropdownMenu
                         isOpen={this.props.experience.isCardTemplateMenuOpen}
-                        close={() => console.log('outter click')}
+                        close={() => {}}
                         align="center"
                         className="dx-layout-menu"
                         closeOnInsideClick={false}
@@ -146,6 +153,7 @@ class ExperienceCard extends Component {
                                             <CardTemplate 
                                                 key={index}
                                                 template={template}
+                                                handleSelectCardTemplate={(template) => this.handleSelectCardTemplate(template)}
                                             />
                                         ))
                                     }                            
@@ -217,7 +225,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-
+    dxExperienceCardTemplateSelectAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceCard);

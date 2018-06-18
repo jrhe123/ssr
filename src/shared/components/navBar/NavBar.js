@@ -263,8 +263,15 @@ class NavBar extends Component {
                                             style={layoutOptionContainerStyle}
                                             onClick={() => this.props.handleCardTemplateMenu()}>
                                             <div style={layoutOptionWrapperStyle}>
-                                                <span style={layoutSubLabelStyle}>123</span>
-                                                <KeyboardArrowDown style={menuDownStyle}/>
+                                                {
+                                                    experience.cardTemplate ?
+                                                    <div>
+                                                        <span style={layoutSubLabelStyle}>{experience.cardTemplate.Title}</span>
+                                                        <KeyboardArrowDown style={menuDownStyle}/>
+                                                    </div>
+                                                    :
+                                                    <span style={layoutSubLabelStyle}>choose a card below</span>
+                                                }
                                             </div>
                                         </div>
                                     </div>

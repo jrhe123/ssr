@@ -4,6 +4,7 @@ import {
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
     EXPERIENCE_TITLE_UPDATE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -48,6 +49,15 @@ export const dxExperienceCardTemplateMenuUpdate = (toggle) => {
         type: EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED,
         payload: {
             toggle,
+        },
+    }
+}
+
+export const dxExperienceCardTemplateSelect = (template) => {
+    return {
+        type: EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED,
+        payload: {
+            template,
         },
     }
 }

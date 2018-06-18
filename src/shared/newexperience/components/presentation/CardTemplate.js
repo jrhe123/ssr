@@ -133,7 +133,10 @@ class CardTemplate extends Component {
                 <div style={titleContainerStyle}>
                     <p style={titleStyle}>{template.Title}</p>
                 </div>
-                <div style={cardContainerStyle}>
+                <div style={cardContainerStyle}
+                    className="dx-card"
+                    onClick={() => this.props.handleSelectCardTemplate(template)}
+                    >
                     {
                         this.renderCard(template)
                     }
@@ -172,6 +175,7 @@ const styles = {
         width: 'calc(100% - 24px)',
         height: 90,
         margin: '0 auto',
+        cursor: 'pointer'
     },
     leftImageContainerStyle: {
         display: 'inline-block',
