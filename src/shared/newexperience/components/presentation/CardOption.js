@@ -21,6 +21,12 @@ class CardOption extends Component {
     }
 
     renderOption = (setting) => {
+
+        const {
+            imgInputContainerStyle,
+            imgInputStyle,
+        } = styles;
+
         let option;
         if (setting == 'IMAGE') {
             option = (<div style={imgInputContainerStyle}>
@@ -59,8 +65,6 @@ class CardOption extends Component {
 
         const {
             mainContainerStyle,
-            imgInputContainerStyle,
-            imgInputStyle,
         } = styles;
 
         return (
