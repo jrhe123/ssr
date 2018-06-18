@@ -3,32 +3,61 @@
         {
             "CardTemplateGUID": "e2f6b85d-d378-4af6-9f7e-ad318736258b",
             "Title": "Left Image with text",
-            "Type": "LEFT_IMAGE_TEXT"
+            "Type": "LEFT_IMAGE_TEXT",
+            "Settings": [
+                "IMAGE",
+                "BACKGROUND_COLOR",
+                "COLOR",
+                "TEXT"
+            ]
         },
         {
             "CardTemplateGUID": "6aad869c-7d8a-485d-bf31-26862dc6f706",
             "Title": "Text with background",
-            "Type": "BACKGROUND_TEXT"
+            "Type": "BACKGROUND_TEXT",
+            "Settings": [
+                "BACKGROUND_COLOR",
+                "COLOR",
+                "TEXT"
+            ]
         },
         {
             "CardTemplateGUID": "8b3cc482-1ca9-46e1-9e4d-0a2ceaa33b38",
             "Title": "Image with overlay text",
-            "Type": "BACKGROUND_IMAGE_TEXT"
+            "Type": "BACKGROUND_IMAGE_TEXT",
+            "Settings": [
+                "IMAGE",
+                "COLOR",
+                "TEXT"
+            ]
         },
         {
             "CardTemplateGUID": "c14d6a0f-017e-417c-91a8-f9e32be05d9f",
             "Title": "Video",
-            "Type": "VIDEO"
+            "Type": "VIDEO",
+            "Settings": [
+                "IMAGE",
+                "VIDEO"
+            ]
         },
         {
             "CardTemplateGUID": "69ff92c6-6efa-44b0-8abb-f952a43d16f7",
             "Title": "Image",
-            "Type": "IMAGE"
+            "Type": "IMAGE",
+            "Settings": [
+                "IMAGE"
+            ]
         },
         {
             "CardTemplateGUID": "1e52dc9c-1083-4700-a004-96037ba10c41",
             "Title": "Right Image with text",
-            "Type": "RIGHT_IMAGE_TEXT"
+            "Type": "RIGHT_IMAGE_TEXT",
+            "Settings": [
+                "IMAGE",
+                "BACKGROUND_COLOR",
+                "COLOR",
+                "TEXT"
+            ]
         }
     ]
 }
