@@ -267,7 +267,9 @@ class NavBar extends Component {
                                                     experience.cardTemplate ?
                                                     <div>
                                                         <span style={layoutSubLabelStyle}>{experience.cardTemplate.Title}</span>
-                                                        <KeyboardArrowDown style={menuDownStyle}/>
+                                                        <KeyboardArrowDown 
+                                                            className={experience.isCardTemplateMenuOpen ? "dx-arrow-up-down active-up" : "dx-arrow-up-down"}
+                                                            style={menuDownStyle}/>
                                                     </div>
                                                     :
                                                     <span style={layoutSubLabelStyle}>choose a card below</span>
