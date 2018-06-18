@@ -134,7 +134,7 @@ class CardTemplate extends Component {
                     <p style={titleStyle}>{template.Title}</p>
                 </div>
                 <div style={cardContainerStyle}
-                    className="dx-card"
+                    className="dx_card"
                     onClick={() => this.props.handleSelectCardTemplate(template)}
                     >
                     {

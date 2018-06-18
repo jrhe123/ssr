@@ -12,18 +12,28 @@ body{
     outline: none;
 }
 
-.dx-card:hover{
+.dx_card:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.dx-arrow-up-down{
+.dx_arrow_up_down{
     transform: rotate(0deg);
     transition: transform .3s linear;
     transform-origin: center;
 }
-.dx-arrow-up-down.active-up{
+.dx_arrow_up_down.active_up{
     transform: rotate(180deg);
     transition: transform .3s linear;
     transform-origin: center;
+}
+
+.dx_scale_container{
+    flex-shrink: 1;
+    flex-basis: auto;
+    transition: all 0.3s;
+    flex-grow: 0.001;
+}
+.dx_scale_container.active_expand{
+    flex-grow: 1;
 }

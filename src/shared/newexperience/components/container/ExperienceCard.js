@@ -53,6 +53,7 @@ class ExperienceCard extends Component {
 
         const {
             mainContainerStyle,
+            hiddenLeftContainerStyle,
             leftContainerStyle,
             leftWrapperStyle,
             cateContainerStyle,
@@ -62,13 +63,18 @@ class ExperienceCard extends Component {
             searchBarContainerStyle,
             templateContainerStyle,
             rightContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
         } = styles;
 
         const activeOptionBtnStyle = {backgroundColor: colors.lightBlueColor};
 
         return (
             <div style={mainContainerStyle}>
-                <div style={leftContainerStyle}>
+                <div 
+                    className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
+                    style={this.props.experience.isCardTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                >
                     <DropdownMenu
                         isOpen={this.props.experience.isCardTemplateMenuOpen}
                         close={() => {}}
@@ -163,7 +169,15 @@ class ExperienceCard extends Component {
                     </DropdownMenu>  
                 </div>
 
-                <div style={rightContainerStyle}>right</div>
+                <div 
+                    className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                    style={rightContainerStyle}>
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            123
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -175,7 +189,11 @@ const styles = {
         height: `calc(100vh - ${sizes.headerHeight})`,
         margin: '0 auto',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
+    },
+    hiddenLeftContainerStyle: {
+        width: 0        
     },
     leftContainerStyle: {
         flex: 1,
@@ -215,6 +233,18 @@ const styles = {
     },
     rightContainerStyle: {
         flex: 2,
+        border: '1px solid red',
+    },
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
     },
 }
 
