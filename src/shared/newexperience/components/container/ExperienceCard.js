@@ -63,8 +63,10 @@ class ExperienceCard extends Component {
             searchBarContainerStyle,
             templateContainerStyle,
             rightContainerStyle,
+            optionBarContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
+            demoCardContainerStyle,
         } = styles;
 
         const activeOptionBtnStyle = {backgroundColor: colors.lightBlueColor};
@@ -172,12 +174,17 @@ class ExperienceCard extends Component {
                 <div 
                     className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
+
+                    <div style={optionBarContainerStyle}>option bar here</div>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            123
+                            <div style={demoCardContainerStyle}>
+                                demo card
+                            </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
+
             </div>
         )
     }
@@ -201,9 +208,7 @@ const styles = {
     leftWrapperStyle: {
         flex: 1,
         display: 'flex',
-        flexDirection: 'row',
-        borderTop: '1px solid',
-        borderColor: colors.borderColor
+        flexDirection: 'row'
     },
     cateContainerStyle: {
         flex: 1,
@@ -233,7 +238,17 @@ const styles = {
     },
     rightContainerStyle: {
         flex: 2,
-        border: '1px solid red',
+        position: 'relative',
+        border: '1px solid red'
+    },
+    optionBarContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 99,
+        height: 48,
+        width: '100%',
+        backgroundColor: 'red'
     },
     tableContainerStyle: {
         position: 'relative',
@@ -245,6 +260,12 @@ const styles = {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center'
+    },
+    demoCardContainerStyle: {
+        margin: '0 auto',
+        height: 90,
+        width: 276,
+        border: '1px solid green'
     },
 }
 
