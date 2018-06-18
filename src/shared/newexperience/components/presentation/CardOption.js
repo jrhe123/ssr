@@ -20,11 +20,41 @@ class CardOption extends Component {
         console.log(colors);
     }
 
+    renderOption = (setting) => {
+        let option;
+        if (setting == 'IMAGE') {
+            option = (<div style={imgInputContainerStyle}>
+                <input
+                    style={imgInputStyle}
+                    type="file"
+                    onChange={(event) => this.handleImageChange(event)}
+                />
+                <img src={this.state.file} />
+            </div>)
+        } else if (setting == 'BACKGROUND_COLOR') {
+            option = (
+                <ColorPicker
+                    animation="slide-up"
+                    color={'#36c'}
+                    onChange={(colors) => this.handleChangeHandler(colors)}
+                />
+            )
+        } else if (setting == 'COLOR') {
+            option = (
+                <ColorPicker
+                    animation="slide-up"
+                    color={'#36c'}
+                    onChange={(colors) => this.handleChangeHandler(colors)}
+                />
+            )
+        }
+        return option;
+    }
+
     render() {
 
         const {
-            isImage,
-            isColor,
+            setting,
         } = this.props;
 
         const {
@@ -35,29 +65,23 @@ class CardOption extends Component {
 
         return (
             <div style={mainContainerStyle}>
+
                 {
+                    this.renderOption(setting)
+                }
+
+                {/* {
                     isImage ?
-                        <div style={imgInputContainerStyle}>
-                            <input
-                                style={imgInputStyle}
-                                type="file"
-                                onChange={(event) => this.handleImageChange(event)}
-                            />
-                            <img src={this.state.file} />
-                        </div>
+                        
                         :
                         null
                 }
                 {
                     isColor ?
-                        <ColorPicker
-                            animation="slide-up"
-                            color={'#36c'}
-                            onChange={(colors) => this.handleChangeHandler(colors)}
-                        />
+                        
                         :
                         null
-                }
+                } */}
             </div>
         )
     }
@@ -68,7 +92,9 @@ const styles = {
     mainContainerStyle: {
         height: 48,
         width: 48,
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+        marginLeft: 6,
+        marginRight: 6,
     },
     imgInputContainerStyle: {
         position: 'relative',

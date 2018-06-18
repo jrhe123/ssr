@@ -183,7 +183,12 @@ class ExperienceCard extends Component {
                         <div style={optionBarWrapperStyle}>
                             {
                                 this.props.experience.cardTemplate ?
-                                    <CardOption />
+                                    this.props.experience.cardTemplate.Settings.map((setting, index) => (
+                                        <CardOption
+                                            key={index}
+                                            setting={setting}
+                                        />
+                                    ))
                                     :
                                     null
                             }
@@ -274,7 +279,7 @@ const styles = {
         width: 360,
         margin: '0 auto',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     tableContainerStyle: {
         position: 'relative',
