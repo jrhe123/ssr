@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 
 class CardTemplate extends Component {
 
@@ -20,6 +21,7 @@ class CardTemplate extends Component {
             overlayContainerStyle,
             overlayWrapperStyle,
             overlayImgStyle,
+            iconStyle,
         } = styles;
 
         let card;
@@ -81,6 +83,31 @@ class CardTemplate extends Component {
                             </div>
                         </div>
                     </div>
+                </div>
+            );
+        } else if (template.Type == 'VIDEO') {
+            card = (
+                <div style={overlayContainerStyle}>
+                    <img 
+                        style={overlayImgStyle} 
+                        src={require('../../../../../assets/images/demo.jpg')} 
+                    />
+                    <div style={overlayWrapperStyle}>
+                        <div style={Object.assign({}, tableContainerStyle)}>
+                            <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
+                                <PlayCircleOutline style={Object.assign({}, iconStyle, { color: colors.whiteColor })}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else if (template.Type == 'IMAGE') {
+            card = (
+                <div style={overlayContainerStyle}>
+                    <img 
+                        style={overlayImgStyle} 
+                        src={require('../../../../../assets/images/demo.jpg')} 
+                    />
                 </div>
             );
         }
@@ -197,6 +224,9 @@ const styles = {
         height: 90,
         width: '100%',
     },
+    iconStyle: {
+        fontSize: '42px'
+    }
 }
 
 export default CardTemplate;
