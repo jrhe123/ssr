@@ -401,8 +401,6 @@ const styles = {
     },
     midContextContainerStyle: {
         flex: 1,
-        paddingLeft: 24,
-        paddingRight: 24
     },
     rightBtnContainerStyle: {
         flex: '180px 0 0',
