@@ -97,6 +97,7 @@ class NavBar extends Component {
             bellStyle,
 
 
+            mainWrapperV2Style,
             leftBtnContainerStyle,
             backBtnContainerStyle,
             midContextContainerStyle,
@@ -224,7 +225,8 @@ class NavBar extends Component {
                     position="static"
                     style={mainContainerStyle}>
 
-                    <div style={mainWrapperStyle}>
+                    <div style={mainWrapperV2Style}>
+
                         <div style={leftBtnContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
@@ -266,6 +268,7 @@ class NavBar extends Component {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </AppBar>
         )
@@ -382,19 +385,27 @@ const styles = {
 
 
     // version 2
+    mainWrapperV2Style: {
+        height: sizes.headerHeight,
+        width: '100%',
+        maxWidth: sizes.dxWidth,
+        display: 'flex',
+        margin: '0 auto',
+        flexDirection: 'row',
+    },
     leftBtnContainerStyle: {
-        flex: 1,
+        flex: '100px 0 0',
     },
     backBtnContainerStyle: {
-        paddingRight: 66
+        border: '1px solid red'
     },
     midContextContainerStyle: {
-        flex: 5,
+        flex: 1,
         paddingLeft: 24,
         paddingRight: 24
     },
     rightBtnContainerStyle: {
-        flex: 1,
+        flex: '180px 0 0',
     },
     btnStyle: {
         backgroundColor: colors.blueColor,
