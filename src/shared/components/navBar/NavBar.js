@@ -74,6 +74,8 @@ class NavBar extends Component {
             experience,
         } = this.props;
 
+        console.log('experience: ', experience);
+
         const {
             mainContainerStyle,
             mainWrapperStyle,
@@ -101,6 +103,11 @@ class NavBar extends Component {
             leftBtnContainerStyle,
             backBtnContainerStyle,
             midContextContainerStyle,
+            cardLayoutContainerStyle,
+            layoutLabelContainerStyle,
+            layoutLabelStyle,
+            layoutOptionContainerStyle,
+            layoutSubLabelStyle,
             rightBtnContainerStyle,
             btnStyle,
         } = styles;
@@ -244,6 +251,21 @@ class NavBar extends Component {
                         </div>
 
                         <div style={midContextContainerStyle}>
+                            {
+                                experience.index == 1 ?
+                                (
+                                    <div style={cardLayoutContainerStyle}>
+                                        <div style={layoutLabelContainerStyle}>
+                                            <p style={layoutLabelStyle}>Card Layout</p>
+                                        </div>
+                                        <div style={layoutOptionContainerStyle}>
+                                            123
+                                        </div>
+                                    </div>
+                                )
+                                :
+                                null
+                            }
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <DxInput
@@ -397,10 +419,36 @@ const styles = {
         flex: '100px 0 0',
     },
     backBtnContainerStyle: {
-        border: '1px solid red'
+
     },
     midContextContainerStyle: {
         flex: 1,
+        position: 'relative',
+    },
+    cardLayoutContainerStyle: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: 276,
+        height: '100%',
+        backgroundColor: colors.lightBlueColor,
+        paddingLeft: 12,
+        paddingRight: 12
+    },
+    layoutLabelContainerStyle: {
+        marginTop: 12,
+        marginBottom: 12
+    },
+    layoutLabelStyle: {
+        fontSize: fonts.h4,
+        margin: 0
+    },
+    layoutOptionContainerStyle: {
+        border: '1px solid red'
+    },
+    layoutSubLabelStyle: {
+        fontSize: fonts.h4,
+        fontWeight: 'bold'
     },
     rightBtnContainerStyle: {
         flex: '180px 0 0',
@@ -409,7 +457,6 @@ const styles = {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
     },
-
 }
 
 export default withStyles(themeStyles)(NavBar);
