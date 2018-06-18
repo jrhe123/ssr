@@ -69,23 +69,9 @@ class CardOption extends Component {
 
         return (
             <div style={mainContainerStyle}>
-
                 {
                     this.renderOption(setting)
                 }
-
-                {/* {
-                    isImage ?
-                        
-                        :
-                        null
-                }
-                {
-                    isColor ?
-                        
-                        :
-                        null
-                } */}
             </div>
         )
     }
