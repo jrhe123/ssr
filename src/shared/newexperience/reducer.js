@@ -12,7 +12,7 @@ const initialState = {
         index: '0',
 
         isCardTemplateMenuOpen: true,
-        cardTemplateGUID: null,
+        cardTemplate: {},
 
         experienceTitle: null,
         cardTitle: null,

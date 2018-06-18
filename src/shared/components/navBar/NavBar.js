@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import AddAlert from '@material-ui/icons/AddAlert';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import NavigateBefore from '@material-ui/icons/NavigateBefore';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
@@ -105,6 +106,8 @@ class NavBar extends Component {
             layoutLabelContainerStyle,
             layoutLabelStyle,
             layoutOptionContainerStyle,
+            layoutOptionWrapperStyle,
+            menuDownStyle,
             layoutSubLabelStyle,
             rightBtnContainerStyle,
             btnStyle,
@@ -256,10 +259,13 @@ class NavBar extends Component {
                                         <div style={layoutLabelContainerStyle}>
                                             <p style={layoutLabelStyle}>Card Layout</p>
                                         </div>
-                                        <div style={layoutOptionContainerStyle}>
-                                            <a 
-                                                onClick={() => this.props.handleCardTemplateMenu()}
-                                            >click me</a>
+                                        <div 
+                                            style={layoutOptionContainerStyle}
+                                            onClick={() => this.props.handleCardTemplateMenu()}>
+                                            <div style={layoutOptionWrapperStyle}>
+                                                <span style={layoutSubLabelStyle}>123</span>
+                                                <KeyboardArrowDown style={menuDownStyle}/>
+                                            </div>
                                         </div>
                                     </div>
                                 )
@@ -445,7 +451,14 @@ const styles = {
         margin: 0
     },
     layoutOptionContainerStyle: {
-        border: '1px solid red'
+        position: 'relative',
+    },
+    layoutOptionWrapperStyle: {
+        cursor: 'pointer'
+    },
+    menuDownStyle: {
+        float: 'right',
+        fontSize: 24
     },
     layoutSubLabelStyle: {
         fontSize: fonts.h4,

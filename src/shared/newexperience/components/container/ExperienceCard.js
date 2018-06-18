@@ -72,7 +72,7 @@ class ExperienceCard extends Component {
                     <DropdownMenu
                         isOpen={this.props.experience.isCardTemplateMenuOpen}
                         close={() => this.handleMenuClose()}
-                        align="left"
+                        align="center"
                         className="dx-layout-menu"
                         closeOnInsideClick={false}
                     >
