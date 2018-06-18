@@ -74,8 +74,6 @@ class NavBar extends Component {
             experience,
         } = this.props;
 
-        console.log('experience: ', experience);
-
         const {
             mainContainerStyle,
             mainWrapperStyle,
@@ -259,7 +257,9 @@ class NavBar extends Component {
                                             <p style={layoutLabelStyle}>Card Layout</p>
                                         </div>
                                         <div style={layoutOptionContainerStyle}>
-                                            123
+                                            <a 
+                                                onClick={() => this.props.handleCardTemplateMenu()}
+                                            >click me</a>
                                         </div>
                                     </div>
                                 )
@@ -433,7 +433,8 @@ const styles = {
         height: '100%',
         backgroundColor: colors.lightBlueColor,
         paddingLeft: 12,
-        paddingRight: 12
+        paddingRight: 12,
+        zIndex: 99
     },
     layoutLabelContainerStyle: {
         marginTop: 12,

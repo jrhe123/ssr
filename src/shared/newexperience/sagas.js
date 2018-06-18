@@ -17,6 +17,10 @@ import {
     EXPERIENCE_TITLE_UPDATE_REQUESTED,
     EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
     EXPERIENCE_TITLE_UPDATE__FAILED,
+
+    EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_TOGGLE__FAILED,
 } from './constants';
 
 // Experience type request
@@ -102,4 +106,25 @@ export function* experienceTitleUpdate(action) {
 
 export function* dxExperienceTitleUpdateSaga() {
     yield takeEvery(EXPERIENCE_TITLE_UPDATE_REQUESTED, experienceTitleUpdate);
+}
+
+// Experience card template toggle
+export function* dxExperienceCardTemplateMenuToggle(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
+            payload: {
+                toggle: action.payload.toggle,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_TOGGLE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCardTemplateMenuToggleSaga() {
+    yield takeEvery(EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED, dxExperienceCardTemplateMenuToggle);
 }

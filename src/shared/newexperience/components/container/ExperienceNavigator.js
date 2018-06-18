@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdate as dxExperienceTitleUpdateAction,
+    dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
 } from '../../actions';
 
 class ExperienceNavigator extends Component {
@@ -22,6 +23,11 @@ class ExperienceNavigator extends Component {
         }else if(experience.index == 1){
             this.props.dxExperienceIndexUpdateAction(0);
         }
+    }
+
+    handleCardTemplateMenu = () => {
+        let toggle = !this.props.experience.isCardTemplateMenuOpen;
+        this.props.dxExperienceCardTemplateMenuUpdateAction(toggle);
     }
 
     handleTitleChange = (e) => {
@@ -46,6 +52,7 @@ class ExperienceNavigator extends Component {
                 experience={this.props.experience}
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleGoback={() => this.handleGoback()}
+                handleCardTemplateMenu={() => this.handleCardTemplateMenu()}
             />
         )
     }
@@ -61,6 +68,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdateAction,
+    dxExperienceCardTemplateMenuUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceNavigator);

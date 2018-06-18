@@ -3,6 +3,7 @@ import {
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
     EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
         type: '0',
         index: '0',
 
+        isCardTemplateMenuOpen: true,
         cardTemplateGUID: null,
 
         experienceTitle: null,
@@ -48,6 +50,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             }else if(payload.type == 'PAGE'){
                 tmpExperience.pageTitle = payload.title;
             }
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED:
+            tmpExperience.isCardTemplateMenuOpen = payload.toggle;
             updated.experience = tmpExperience;
             return updated;
 
