@@ -18,6 +18,8 @@ class CardTemplate extends Component {
             imgStyle,
             txtStyle,
             overlayContainerStyle,
+            overlayWrapperStyle,
+            overlayImgStyle,
         } = styles;
 
         let card;
@@ -67,16 +69,17 @@ class CardTemplate extends Component {
             );
         } else if (template.Type == 'BACKGROUND_IMAGE_TEXT') {
             card = (
-                <div style={Object.assign({}, 
-                        tableContainerStyle, 
-                        overlayContainerStyle, 
-                        { 
-                            backgroundImage: `url(${require('../../../../../assets/images/demo.jpg')})`,
-                            backgroundSize: 'cover' 
-                        })
-                    }>
-                    <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                        <p style={Object.assign({}, txtStyle, { color: colors.whiteColor })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <div style={overlayContainerStyle}>
+                    <img 
+                        style={overlayImgStyle} 
+                        src={require('../../../../../assets/images/demo.jpg')} 
+                    />
+                    <div style={overlayWrapperStyle}>
+                        <div style={Object.assign({}, tableContainerStyle)}>
+                            <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
+                                <p style={Object.assign({}, txtStyle, { color: colors.whiteColor })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -176,8 +179,23 @@ const styles = {
         fontSize: fonts.h5
     },
     overlayContainerStyle: {
-        backgroundColor: 'rgba(0, 0, 0, .3)',
+        position: 'relative',
+        height: 90,
+        width: '100%',
+    },
+    overlayWrapperStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        display: 'block',
+        background: 'rgba(0, 0, 0, .4)',
         zIndex: 99
+    },
+    overlayImgStyle: {
+        height: 90,
+        width: '100%',
     },
 }
 
