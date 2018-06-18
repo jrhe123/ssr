@@ -118,6 +118,7 @@ class CardTemplate extends Component {
     render() {
 
         const {
+            isWithTitle,
             template,
         } = this.props;
 
@@ -130,9 +131,14 @@ class CardTemplate extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <div style={titleContainerStyle}>
-                    <p style={titleStyle}>{template.Title}</p>
-                </div>
+                {
+                    isWithTitle ?
+                    <div style={titleContainerStyle}>
+                        <p style={titleStyle}>{template.Title}</p>
+                    </div>
+                    :
+                    null
+                }
                 <div style={cardContainerStyle}
                     className="dx_card"
                     onClick={() => this.props.handleSelectCardTemplate(template)}

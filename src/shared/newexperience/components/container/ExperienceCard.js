@@ -162,6 +162,7 @@ class ExperienceCard extends Component {
                                         this.state.cardTemplates.map((template, index) => (
                                             <CardTemplate 
                                                 key={index}
+                                                isWithTitle={true}
                                                 template={template}
                                                 handleSelectCardTemplate={(template) => this.handleSelectCardTemplate(template)}
                                             />
@@ -184,8 +185,16 @@ class ExperienceCard extends Component {
                     </div>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <div style={demoCardContainerStyle}>
-                                demo card
+                            <div style={demoCardContainerStyle}>                            
+                                {
+                                    this.props.experience.cardTemplate ?
+                                    <CardTemplate 
+                                        isWithTitle={false}
+                                        template={this.props.experience.cardTemplate}
+                                    />
+                                    :
+                                    null
+                                }
                             </div>
                         </div>
                     </div> 
@@ -274,8 +283,7 @@ const styles = {
     demoCardContainerStyle: {
         margin: '0 auto',
         height: 90,
-        width: 276,
-        border: '1px solid green'
+        width: 300,
     },
 }
 
