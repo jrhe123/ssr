@@ -6,6 +6,7 @@ import ExperienceCardData from '../../../../../data/ExperienceCardData';
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 import CardTemplate from '../presentation/CardTemplate';
+import CardOption from '../presentation/CardOption';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -64,6 +65,7 @@ class ExperienceCard extends Component {
             templateContainerStyle,
             rightContainerStyle,
             optionBarContainerStyle,
+            optionBarWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
             demoCardContainerStyle,
@@ -175,7 +177,11 @@ class ExperienceCard extends Component {
                     className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    <div style={optionBarContainerStyle}>option bar here</div>
+                    <div style={optionBarContainerStyle}>
+                        <div style={optionBarWrapperStyle}>
+                            <CardOption />
+                        </div>
+                    </div>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={demoCardContainerStyle}>
@@ -239,16 +245,20 @@ const styles = {
     rightContainerStyle: {
         flex: 2,
         position: 'relative',
-        border: '1px solid red'
     },
     optionBarContainerStyle: {
         position: 'absolute',
-        top: 0,
+        top: 36,
         left: 0,
         zIndex: 99,
         height: 48,
         width: '100%',
-        backgroundColor: 'red'
+    },
+    optionBarWrapperStyle: {
+        width: 360,
+        margin: '0 auto',
+        display: 'flex',
+        justifyContent: 'center'
     },
     tableContainerStyle: {
         position: 'relative',
