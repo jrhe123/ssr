@@ -8,11 +8,11 @@ import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 class CardTemplate extends Component {
 
     handleSelectCardTemplate = (template) => {
-        if(this.props.isClickable)
+        if (this.props.isClickable)
             this.props.handleSelectCardTemplate(template)
     }
 
-    renderCard = (template) => {
+    renderCard = (template, isEditable) => {
 
         const {
             tableContainerStyle,
@@ -39,10 +39,18 @@ class CardTemplate extends Component {
                             src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
-                    <div style={Object.assign({}, rightTextContainerStyle, {backgroundColor: template.Settings[1].Default})}>
+                    <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                {
+                                    isEditable ?
+                                        <input
+                                            style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}
+                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+                                        />
+                                        :
+                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -51,10 +59,18 @@ class CardTemplate extends Component {
         } else if (template.Type == 'RIGHT_IMAGE_TEXT') {
             card = (
                 <div>
-                    <div style={Object.assign({}, leftTextContainerStyle, {backgroundColor: template.Settings[1].Default})}>
+                    <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                {
+                                    isEditable ?
+                                        <input
+                                            style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}
+                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+                                        />
+                                        :
+                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -70,21 +86,37 @@ class CardTemplate extends Component {
             card = (
                 <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.Settings[0].Default })}>
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                        <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        {
+                            isEditable ?
+                                <input
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}
+                                    value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+                                />
+                                :
+                                <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        }
                     </div>
                 </div>
             );
         } else if (template.Type == 'BACKGROUND_IMAGE_TEXT') {
             card = (
                 <div style={overlayContainerStyle}>
-                    <img 
-                        style={overlayImgStyle} 
+                    <img
+                        style={overlayImgStyle}
                         src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                                <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                {
+                                    isEditable ?
+                                        <input
+                                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}
+                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+                                        />
+                                        :
+                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -93,14 +125,14 @@ class CardTemplate extends Component {
         } else if (template.Type == 'VIDEO') {
             card = (
                 <div style={overlayContainerStyle}>
-                    <img 
-                        style={overlayImgStyle} 
+                    <img
+                        style={overlayImgStyle}
                         src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                                <PlayCircleOutline style={Object.assign({}, iconStyle, { color: colors.whiteColor })}/>
+                                <PlayCircleOutline style={Object.assign({}, iconStyle, { color: colors.whiteColor })} />
                             </div>
                         </div>
                     </div>
@@ -109,8 +141,8 @@ class CardTemplate extends Component {
         } else if (template.Type == 'IMAGE') {
             card = (
                 <div style={overlayContainerStyle}>
-                    <img 
-                        style={overlayImgStyle} 
+                    <img
+                        style={overlayImgStyle}
                         src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                 </div>
@@ -124,6 +156,7 @@ class CardTemplate extends Component {
 
         const {
             isWithTitle,
+            isEditable,
             template,
         } = this.props;
 
@@ -138,18 +171,18 @@ class CardTemplate extends Component {
             <div style={mainContainerStyle}>
                 {
                     isWithTitle ?
-                    <div style={titleContainerStyle}>
-                        <p style={titleStyle}>{template.Title}</p>
-                    </div>
-                    :
-                    null
+                        <div style={titleContainerStyle}>
+                            <p style={titleStyle}>{template.Title}</p>
+                        </div>
+                        :
+                        null
                 }
                 <div style={cardContainerStyle}
                     className="dx_card"
                     onClick={() => this.handleSelectCardTemplate(template)}
-                    >
+                >
                     {
-                        this.renderCard(template)
+                        this.renderCard(template, isEditable)
                     }
                 </div>
             </div>
