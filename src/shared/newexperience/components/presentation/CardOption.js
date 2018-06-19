@@ -10,8 +10,8 @@ class CardOption extends Component {
         this.props.handleImageChange(event.target.files[0]);
     }
 
-    handleChangeHandler = (colors) => {
-        console.log(colors);
+    handleColorChange = (colors, type) => {
+        this.props.handleColorChange(colors, type);
     }
 
     renderOption = (setting) => {
@@ -47,7 +47,7 @@ class CardOption extends Component {
                 <ColorPicker
                     animation="slide-up"
                     color={setting.Default}
-                    onChange={(colors) => this.handleChangeHandler(colors)}
+                    onChange={(colors) => this.handleColorChange(colors, 'BACKGROUND_COLOR')}
                 />
             )
         } else if (setting.Type == 'COLOR') {
@@ -55,7 +55,7 @@ class CardOption extends Component {
                 <ColorPicker
                     animation="slide-up"
                     color={setting.Default}
-                    onChange={(colors) => this.handleChangeHandler(colors)}
+                    onChange={(colors) => this.handleColorChange(colors, 'COLOR')}
                 />
             )
         }

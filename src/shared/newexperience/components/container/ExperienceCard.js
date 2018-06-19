@@ -18,6 +18,7 @@ import {
     dxExperienceCardTemplateFetch as dxExperienceCardTemplateFetchAction,
     dxExperienceCardTemplateSelect as dxExperienceCardTemplateSelectAction,
     dxExperienceCardTemplateUpdateImage as dxExperienceCardTemplateUpdateImageAction,
+    dxExperienceCardTemplateUpdateColor as dxExperienceCardTemplateUpdateColorAction,
 } from '../../actions';
 
 // constants
@@ -47,6 +48,10 @@ class ExperienceCard extends Component {
 
     handleImageChange = (imgFile) => {
         this.props.dxExperienceCardTemplateUpdateImageAction(imgFile);
+    }
+
+    handleColorChange = (colors, type) => {
+        this.props.dxExperienceCardTemplateUpdateColorAction(colors.color, type);
     }
 
     render() {
@@ -192,6 +197,7 @@ class ExperienceCard extends Component {
                                             setting={setting}
                                             imgFile={this.props.experience.cardTemplate.Settings[0].Default}
                                             handleImageChange={(file) => this.handleImageChange(file)}
+                                            handleColorChange={(colors, type) => this.handleColorChange(colors, type)}
                                         />
                                     ))
                                     :
@@ -315,6 +321,7 @@ const dispatchToProps = {
     dxExperienceCardTemplateFetchAction,
     dxExperienceCardTemplateSelectAction,
     dxExperienceCardTemplateUpdateImageAction,
+    dxExperienceCardTemplateUpdateColorAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceCard);

@@ -7,6 +7,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -25,10 +26,11 @@ const initialState = {
 };
 
 const newexperienceReducer = (previousState = initialState, { type, payload }) => {
-    
+
     let updated = Object.assign({}, previousState);
     let tmpExperience = Object.assign({}, updated.experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
+    let tmpSettingIndex;
 
     switch (type) {
 
@@ -41,18 +43,18 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.type = payload.experienceType;
             updated.experience = tmpExperience;
             return updated;
-        
+
         case EXPERIENCE_INDEX_UPDATE__SUCCEEDED:
             tmpExperience.index = payload.experienceIndex;
             updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_TITLE_UPDATE__SUCCEEDED:
-            if(payload.type == 'EXPERIENCE'){
+            if (payload.type == 'EXPERIENCE') {
                 tmpExperience.experienceTitle = payload.title;
-            }else if(payload.type == 'CARD'){
+            } else if (payload.type == 'CARD') {
                 tmpExperience.cardTitle = payload.title;
-            }else if(payload.type == 'PAGE'){
+            } else if (payload.type == 'PAGE') {
                 tmpExperience.pageTitle = payload.title;
             }
             updated.experience = tmpExperience;
@@ -79,9 +81,23 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             updated.experience = tmpExperience;
             return updated;
 
+        case EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED:
+            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.Settings,payload.type);
+            tmpCardTemplate.Settings[tmpSettingIndex].Default = payload.color;
+            tmpExperience.cardTemplate = tmpCardTemplate;
+            updated.experience = tmpExperience;
+            return updated;
+
         default:
             return previousState;
     }
 };
+
+const search_object_index_by_value = (arr, value) => {
+    for (let i = 0, iLen = arr.length; i < iLen; i++) {
+        if (arr[i].Type == value) return i;
+    }
+    return null;
+}
 
 export default newexperienceReducer;

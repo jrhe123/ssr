@@ -7,6 +7,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -78,6 +79,16 @@ export const dxExperienceCardTemplateUpdateImage = (imgFile) => {
         type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE_REQUESTED,
         payload: {
             imgFile,
+        },
+    }
+}
+
+export const dxExperienceCardTemplateUpdateColor = (color, type) => {
+    return {
+        type: EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR_REQUESTED,
+        payload: {
+            color,
+            type,
         },
     }
 }
