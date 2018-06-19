@@ -25,23 +25,34 @@ class CardOption extends Component {
         const {
             imgInputContainerStyle,
             imgInputStyle,
+            displayImgContainerStyle,
+            displayImgStyle,
         } = styles;
 
         let option;
         if (setting == 'IMAGE') {
             option = (<div style={imgInputContainerStyle}>
                 <input
+                    name="dx_img_upload"
                     style={imgInputStyle}
                     type="file"
                     onChange={(event) => this.handleImageChange(event)}
                 />
-                <img src={this.state.file} />
+                <label 
+                    style={displayImgContainerStyle} 
+                    htmlFor="dx_img_upload"
+                >
+                    <img 
+                        style={displayImgStyle}
+                        src={this.state.file} 
+                    />
+                </label>
             </div>)
         } else if (setting == 'BACKGROUND_COLOR') {
             option = (
                 <ColorPicker
                     animation="slide-up"
-                    color={'#36c'}
+                    color={'#FFF'}
                     onChange={(colors) => this.handleChangeHandler(colors)}
                 />
             )
@@ -49,7 +60,7 @@ class CardOption extends Component {
             option = (
                 <ColorPicker
                     animation="slide-up"
-                    color={'#36c'}
+                    color={'#000'}
                     onChange={(colors) => this.handleChangeHandler(colors)}
                 />
             )
@@ -96,7 +107,17 @@ const styles = {
         width: 48,
         height: 48,
         opacity: 0,
+        overflow: 'hidden',
         cursor: 'pointer',
+    },
+    displayImgContainerStyle: {
+        width: 48,
+        height: 48,
+    },
+    displayImgStyle: {
+        display: 'block',
+        width: 48,
+        height: 48,
     },
 }
 
