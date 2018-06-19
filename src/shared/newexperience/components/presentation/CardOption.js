@@ -44,7 +44,7 @@ class CardOption extends Component {
                 >
                     <img 
                         style={displayImgStyle}
-                        src={this.state.file} 
+                        src={this.state.file ? this.state.file : require('../../../../../assets/images/demo.jpg')} 
                     />
                 </label>
             </div>)

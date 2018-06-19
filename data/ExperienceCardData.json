@@ -5,9 +5,17 @@
             "Title": "Left Image with text",
             "Type": "LEFT_IMAGE_TEXT",
             "Settings": [
-                "IMAGE",
-                "BACKGROUND_COLOR",
-                "COLOR"
+                {
+                    "Type": "IMAGE"
+                },
+                {
+                    "Type": "BACKGROUND_COLOR",
+                    "Default": "#F1F7FE"
+                },
+                {
+                    "Type": "COLOR",
+                    "Default": "#000000"
+                }
             ],
             "Textable": true
         },
@@ -16,8 +24,14 @@
             "Title": "Text with background",
             "Type": "BACKGROUND_TEXT",
             "Settings": [
-                "BACKGROUND_COLOR",
-                "COLOR"
+                {
+                    "Type": "BACKGROUND_COLOR",
+                    "Default": "#4397C9"
+                },
+                {
+                    "Type": "COLOR",
+                    "Default": "#FFFFFF"
+                }
             ],
             "Textable": true
         },
@@ -26,8 +40,13 @@
             "Title": "Image with overlay text",
             "Type": "BACKGROUND_IMAGE_TEXT",
             "Settings": [
-                "IMAGE",
-                "COLOR"
+                {
+                    "Type": "IMAGE"
+                },
+                {
+                    "Type": "COLOR",
+                    "Default": "#FFFFFF"
+                }
             ],
             "Textable": true
         },
@@ -36,7 +55,9 @@
             "Title": "Video",
             "Type": "VIDEO",
             "Settings": [
-                "IMAGE"
+                {
+                    "Type": "IMAGE"
+                }
             ],
             "Textable": false
         },
@@ -45,7 +66,9 @@
             "Title": "Image",
             "Type": "IMAGE",
             "Settings": [
-                "IMAGE"
+                {
+                    "Type": "IMAGE"
+                }
             ],
             "Textable": false
         },
@@ -54,9 +77,17 @@
             "Title": "Right Image with text",
             "Type": "RIGHT_IMAGE_TEXT",
             "Settings": [
-                "IMAGE",
-                "BACKGROUND_COLOR",
-                "COLOR"
+                {
+                    "Type": "IMAGE"
+                },
+                {
+                    "Type": "BACKGROUND_COLOR",
+                    "Default": "#F1F7FE"
+                },
+                {
+                    "Type": "COLOR",
+                    "Default": "#000000"
+                }
             ],
             "Textable": true
         }
