@@ -403,3 +403,8 @@
     }
   }
   
+
+  .rc-color-picker-trigger{
+    width: 42px;
+    height: 42px;
+  }
