@@ -15,7 +15,9 @@ import DropdownMenu from 'react-dd-menu';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperienceCardTemplateSelect as dxExperienceCardTemplateSelectAction
+    dxExperienceCardTemplateFetch as dxExperienceCardTemplateFetchAction,
+    dxExperienceCardTemplateSelect as dxExperienceCardTemplateSelectAction,
+    dxExperienceCardTemplateUpdateImage as dxExperienceCardTemplateUpdateImageAction,
 } from '../../actions';
 
 // constants
@@ -27,13 +29,10 @@ class ExperienceCard extends Component {
 
     state = {
         activeTab: 0,
-        cardTemplates: []
     }
 
     componentDidMount() {
-        this.setState({
-            cardTemplates: ExperienceCardData.CardTemplates
-        })
+        this.props.dxExperienceCardTemplateFetchAction(ExperienceCardData.CardTemplates);
     }
 
     handleClickCate = (activeTab) => {
@@ -44,6 +43,10 @@ class ExperienceCard extends Component {
 
     handleSelectCardTemplate = (template) => {
         this.props.dxExperienceCardTemplateSelectAction(template);
+    }
+
+    handleImageChange = (imgFile) => {
+        this.props.dxExperienceCardTemplateUpdateImageAction(imgFile);
     }
 
     render() {
@@ -159,7 +162,7 @@ class ExperienceCard extends Component {
                                 </div>
                                 <div style={templateContainerStyle}>
                                     {
-                                        this.state.cardTemplates.map((template, index) => (
+                                        this.props.cardTemplates.map((template, index) => (
                                             <CardTemplate
                                                 key={index}
                                                 isWithTitle={true}
@@ -187,6 +190,8 @@ class ExperienceCard extends Component {
                                         <CardOption
                                             key={index}
                                             setting={setting}
+                                            imgFile={this.props.experience.cardTemplate.Settings[0].Default}
+                                            handleImageChange={(file) => this.handleImageChange(file)}
                                         />
                                     ))
                                     :
@@ -301,12 +306,15 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
+        cardTemplates: state.newexperience.cardTemplates,
         experience: state.newexperience.experience,
     }
 }
 
 const dispatchToProps = {
+    dxExperienceCardTemplateFetchAction,
     dxExperienceCardTemplateSelectAction,
+    dxExperienceCardTemplateUpdateImageAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceCard);

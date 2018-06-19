@@ -6,14 +6,8 @@ import '../../../../../assets/css/rc-color-picker/rc-color-picker.css';
 
 class CardOption extends Component {
 
-    state = {
-        file: null
-    };
-
     handleImageChange = (event) => {
-        this.setState({
-            file: URL.createObjectURL(event.target.files[0])
-        })
+        this.props.handleImageChange(event.target.files[0]);
     }
 
     handleChangeHandler = (colors) => {
@@ -44,7 +38,7 @@ class CardOption extends Component {
                 >
                     <img 
                         style={displayImgStyle}
-                        src={this.state.file ? this.state.file : require('../../../../../assets/images/demo.jpg')} 
+                        src={this.props.file ? URL.createObjectURL(this.props.file) : require('../../../../../assets/images/demo.jpg')} 
                     />
                 </label>
             </div>)

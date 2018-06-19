@@ -36,7 +36,7 @@ class CardTemplate extends Component {
                     <div style={leftImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={require('../../../../../assets/images/demo.jpg')}
+                            src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                     <div style={Object.assign({}, rightTextContainerStyle, {backgroundColor: template.Settings[1].Default})}>
@@ -61,7 +61,7 @@ class CardTemplate extends Component {
                     <div style={rightImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={require('../../../../../assets/images/demo.jpg')}
+                            src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 </div>
@@ -79,7 +79,7 @@ class CardTemplate extends Component {
                 <div style={overlayContainerStyle}>
                     <img 
                         style={overlayImgStyle} 
-                        src={require('../../../../../assets/images/demo.jpg')} 
+                        src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -95,7 +95,7 @@ class CardTemplate extends Component {
                 <div style={overlayContainerStyle}>
                     <img 
                         style={overlayImgStyle} 
-                        src={require('../../../../../assets/images/demo.jpg')} 
+                        src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -111,7 +111,7 @@ class CardTemplate extends Component {
                 <div style={overlayContainerStyle}>
                     <img 
                         style={overlayImgStyle} 
-                        src={require('../../../../../assets/images/demo.jpg')} 
+                        src={template.Settings[0].Default ? URL.createObjectURL(template.Settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                 </div>
             );

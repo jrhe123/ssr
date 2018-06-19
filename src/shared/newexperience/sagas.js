@@ -22,9 +22,17 @@ import {
     EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_TOGGLE__FAILED,
 
+    EXPERIENCE_CARD_TEMPLATE_FETCH_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_FETCH__FAILED,
+
     EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SELECT__FAILED,
+
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
 } from './constants';
 
 // Experience type request
@@ -133,6 +141,27 @@ export function* dxExperienceCardTemplateMenuToggleSaga() {
     yield takeEvery(EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED, dxExperienceCardTemplateMenuToggle);
 }
 
+// Experience card template fetch
+export function* dxExperienceCardTemplateFetch(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED,
+            payload: {
+                templates: action.payload.templates,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCardTemplateFetchSaga() {
+    yield takeEvery(EXPERIENCE_CARD_TEMPLATE_FETCH_REQUESTED, dxExperienceCardTemplateFetch);
+}
+
 // Experience card template select
 export function* dxExperienceCardTemplateSelect(action) {
     try {
@@ -152,4 +181,25 @@ export function* dxExperienceCardTemplateSelect(action) {
 
 export function* dxExperienceCardTemplateSelectSaga() {
     yield takeEvery(EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED, dxExperienceCardTemplateSelect);
+}
+
+// Experience card template update image
+export function* dxExperienceCardTemplateUpdateImage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+            payload: {
+                imgFile: action.payload.imgFile,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCardTemplateUpdateImageSaga() {
+    yield takeEvery(EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE_REQUESTED, dxExperienceCardTemplateUpdateImage);
 }

@@ -4,10 +4,13 @@ import {
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
     EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
 } from './constants';
 
 const initialState = {
+    cardTemplates: [],
     experience: {
         type: '0',
         index: '0',
@@ -25,6 +28,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     
     let updated = Object.assign({}, previousState);
     let tmpExperience = Object.assign({}, updated.experience);
+    let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
 
     switch (type) {
 
@@ -59,8 +63,19 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             updated.experience = tmpExperience;
             return updated;
 
+        case EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED:
+            updated.cardTemplates = payload.templates;
+            return updated;
+
         case EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED:
-            tmpExperience.cardTemplate = payload.template;
+            tmpCardTemplate = payload.template;
+            tmpExperience.cardTemplate = tmpCardTemplate;
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED:
+            tmpCardTemplate.Settings[0].Default = payload.imgFile;
+            tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
 
