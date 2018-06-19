@@ -30,7 +30,7 @@ class CardOption extends Component {
         } = styles;
 
         let option;
-        if (setting == 'IMAGE') {
+        if (setting.Type == 'IMAGE') {
             option = (<div style={imgInputContainerStyle}>
                 <input
                     name="dx_img_upload"
@@ -48,19 +48,19 @@ class CardOption extends Component {
                     />
                 </label>
             </div>)
-        } else if (setting == 'BACKGROUND_COLOR') {
+        } else if (setting.Type == 'BACKGROUND_COLOR') {
             option = (
                 <ColorPicker
                     animation="slide-up"
-                    color={'#FFF'}
+                    color={setting.Default}
                     onChange={(colors) => this.handleChangeHandler(colors)}
                 />
             )
-        } else if (setting == 'COLOR') {
+        } else if (setting.Type == 'COLOR') {
             option = (
                 <ColorPicker
                     animation="slide-up"
-                    color={'#000'}
+                    color={setting.Default}
                     onChange={(colors) => this.handleChangeHandler(colors)}
                 />
             )
