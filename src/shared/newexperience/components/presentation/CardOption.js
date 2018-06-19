@@ -38,7 +38,7 @@ class CardOption extends Component {
                 >
                     <img 
                         style={displayImgStyle}
-                        src={this.props.file ? URL.createObjectURL(this.props.file) : require('../../../../../assets/images/demo.jpg')} 
+                        src={this.props.imgFile ? URL.createObjectURL(this.props.imgFile) : require('../../../../../assets/images/demo.jpg')} 
                     />
                 </label>
             </div>)

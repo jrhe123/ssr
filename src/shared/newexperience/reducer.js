@@ -68,7 +68,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED:
-            tmpCardTemplate = payload.template;
+            tmpCardTemplate = JSON.parse(JSON.stringify(payload.template));
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
