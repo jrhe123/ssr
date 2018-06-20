@@ -248,7 +248,7 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 144,
+        height: 210,
         width: 300,
     },
 }

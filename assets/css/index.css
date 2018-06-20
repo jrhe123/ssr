@@ -41,3 +41,10 @@ body{
 .dx_editable_p:focus{
     /* outline: none; */
 }
+
+.dx_card_template_bottom_bar_menu>div.dd-menu-items{
+    margin: 0 !important;
+}
+.dx_card_template_bottom_bar_menu>div.dd-menu-items{
+    width: 88px;
+}

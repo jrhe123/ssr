@@ -11,11 +11,13 @@ import DxInput from '../../../components/dxInput/DxInput';
 
 // Libraries
 import Button from '@material-ui/core/Button';
+import DropdownMenu from 'react-dd-menu';
 
 class CardTemplate extends Component {
 
     state = {
         videoInsert: false,
+        isMenuOpen: false,
     }
 
     handleSelectCardTemplate = (template) => {
@@ -37,6 +39,14 @@ class CardTemplate extends Component {
 
     handleVideoInputChange = (e) => {
         this.props.handleContentChange(e.target.value);
+    }
+
+    handleToggleBurger = () => {
+        this.setState({ isMenuOpen: !this.state.isMenuOpen });
+    }
+
+    handleMenuClose = () => {
+        this.setState({ isMenuOpen: false });
     }
 
     renderCard = (template, isEditable) => {
@@ -249,11 +259,26 @@ class CardTemplate extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div style={cardTemplateEditContainerStyle}>
                                 <div style={cardTemplateEditBurgerContainerStyle}>
-                                    <MoreHoriz style={editBurgerStyle}/>
+                                    <DropdownMenu
+                                        className="dx_card_template_bottom_bar_menu"
+                                        isOpen={this.state.isMenuOpen}
+                                        close={() => this.handleMenuClose()}
+                                        toggle={
+                                            <MoreHoriz 
+                                                onClick={() => this.handleToggleBurger()}
+                                                style={editBurgerStyle} />
+                                        }
+                                        align='right'
+                                        closeOnInsideClick={false}
+                                    >
+                                        <Button>Edit</Button>
+                                        <Button>Remove</Button>
+                                    </DropdownMenu>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -388,7 +413,7 @@ const styles = {
     cardTemplateEditBurgerContainerStyle: {
         position: 'absolute',
         top: 0,
-        right: 6,
+        right: 0,
         height: 30,
         width: 30,
     },
