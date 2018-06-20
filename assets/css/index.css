@@ -12,7 +12,7 @@ body{
     outline: none;
 }
 
-.dx_card:hover{
+.dx_card:hover, .dx_card_bottom_bar{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: box-shadow 0.3s ease-in-out;
 }

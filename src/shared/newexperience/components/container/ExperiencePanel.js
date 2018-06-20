@@ -137,10 +137,12 @@ class ExperiencePanel extends Component {
                             <div style={demoCardContainerStyle}>
                                 <CardTemplate
                                     isWithTitle={false}
+                                    isWithBottomBar={true}
                                     isCenterCard={false}
                                     isEditable={false}
                                     isClickable={false}
                                     isVideoInsertClickable={false}
+                                    cardTitle={this.props.experience.cardTitle}
                                     template={this.props.experience.cardTemplate}
                                 />
                             </div>
@@ -246,7 +248,7 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 90,
+        height: 144,
         width: 300,
     },
 }

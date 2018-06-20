@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
+import MoreHoriz from '@material-ui/icons/MoreHoriz';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
@@ -70,7 +71,7 @@ class CardTemplate extends Component {
                     </div>
                     <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
-                            <div style={Object.assign({}, tableWrapperStyle, {textAlign: 'left'})}>
+                            <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
@@ -86,7 +87,7 @@ class CardTemplate extends Component {
                 <div>
                     <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
-                            <div style={Object.assign({}, tableWrapperStyle, {textAlign: 'left'})}>
+                            <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
@@ -194,16 +195,27 @@ class CardTemplate extends Component {
 
         const {
             isWithTitle,
+            isWithBottomBar,
             isEditable,
             isCenterCard,
             template,
+            cardTitle,
         } = this.props;
 
         const {
             mainContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
             titleContainerStyle,
             titleStyle,
             cardContainerStyle,
+            bottomEditContainerStyle,
+            cardTemplateNameContainerStyle,
+            cardTemplateEditContainerStyle,
+            cardTemplateTitleContainerStyle,
+            cardTemplateTitleStyle,
+            cardTemplateEditBurgerContainerStyle,
+            editBurgerStyle,
         } = styles;
 
         return (
@@ -216,7 +228,7 @@ class CardTemplate extends Component {
                         :
                         null
                 }
-                <div style={Object.assign({}, cardContainerStyle, isCenterCard ? {margin: '0 auto'} : {})}
+                <div style={Object.assign({}, cardContainerStyle, isCenterCard ? { margin: '0 auto' } : {})}
                     className="dx_card"
                     onClick={() => this.handleSelectCardTemplate(template)}
                 >
@@ -224,6 +236,30 @@ class CardTemplate extends Component {
                         this.renderCard(template, isEditable)
                     }
                 </div>
+                {
+                    isWithBottomBar ?
+                        <div style={Object.assign({}, bottomEditContainerStyle, isCenterCard ? { margin: '0 auto' } : {})}
+                            className="dx_card_bottom_bar"
+                        >
+                            <div style={cardTemplateNameContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <div style={cardTemplateTitleContainerStyle}>
+                                            <p style={cardTemplateTitleStyle}>{cardTitle}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div style={cardTemplateEditContainerStyle}>
+                                <div style={cardTemplateEditBurgerContainerStyle}>
+                                    <MoreHoriz style={editBurgerStyle} />
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        null
+                }
             </div>
         )
     }
@@ -328,6 +364,37 @@ const styles = {
         textTransform: 'capitalize',
         marginLeft: 6
     },
+    bottomEditContainerStyle: {
+        width: 'calc(100% - 24px)',
+        height: 30,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    cardTemplateNameContainerStyle: {
+        flex: 1
+    },
+    cardTemplateEditContainerStyle: {
+        flex: 1,
+        position: 'relative'
+    },
+    cardTemplateTitleContainerStyle: {
+        marginLeft: 6
+    },
+    cardTemplateTitleStyle: {
+        margin: 0,
+        fontSize: fonts.h3
+    },
+    cardTemplateEditBurgerContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        right: 6,
+        height: 30,
+        width: 30,
+    },
+    editBurgerStyle: {
+        fontSize: 30,
+        cursor: 'pointer'
+    }
 }
 
 export default CardTemplate;
