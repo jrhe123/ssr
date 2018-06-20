@@ -259,7 +259,6 @@ class CardTemplate extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div style={cardTemplateEditContainerStyle}>
                                 <div style={cardTemplateEditBurgerContainerStyle}>
@@ -278,7 +277,6 @@ class CardTemplate extends Component {
                                         <Button>Edit</Button>
                                         <Button>Remove</Button>
                                     </DropdownMenu>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -400,7 +398,7 @@ const styles = {
         flex: 1
     },
     cardTemplateEditContainerStyle: {
-        flex: 1,
+        flex: '30px 0 0',
         position: 'relative'
     },
     cardTemplateTitleContainerStyle: {
@@ -408,7 +406,11 @@ const styles = {
     },
     cardTemplateTitleStyle: {
         margin: 0,
-        fontSize: fonts.h3
+        fontSize: fonts.h3,
+        width: 180,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
     },
     cardTemplateEditBurgerContainerStyle: {
         position: 'absolute',
