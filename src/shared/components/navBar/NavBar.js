@@ -301,6 +301,7 @@ class NavBar extends Component {
                                     <Button
                                         variant="save experience"
                                         style={btnStyle}
+                                        onClick={() => this.props.handleSaveBtnClick()}
                                     >Save</Button>
                                 </div>
                             </div>

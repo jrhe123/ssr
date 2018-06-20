@@ -25,7 +25,11 @@ class ExperienceNavigator extends Component {
         }
     }
 
-    handleCardTemplateMenu = () => {
+    handleSaveBtnClick = () => {
+        console.log('click save out here');
+    }
+
+    handleCardTemplateMenuToggle = () => {
         let toggle = !this.props.experience.isCardTemplateMenuOpen;
         this.props.dxExperienceCardTemplateMenuUpdateAction(toggle);
     }
@@ -50,9 +54,10 @@ class ExperienceNavigator extends Component {
             <NavBar
                 isRoute={false}
                 experience={this.props.experience}
-                handleInputChange={(e) => this.handleTitleChange(e)}
                 handleGoback={() => this.handleGoback()}
-                handleCardTemplateMenu={() => this.handleCardTemplateMenu()}
+                handleSaveBtnClick={() => this.handleSaveBtnClick()}
+                handleInputChange={(e) => this.handleTitleChange(e)}
+                handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
             />
         )
     }
