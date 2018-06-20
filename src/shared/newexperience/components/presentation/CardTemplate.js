@@ -15,7 +15,6 @@ class CardTemplate extends Component {
 
     state = {
         videoInsert: false,
-        videoUrl: ''
     }
 
     handleSelectCardTemplate = (template) => {
@@ -30,10 +29,13 @@ class CardTemplate extends Component {
         })
     }
 
+    handleContentChange = () => {
+        let textContent = this.refs.dx_editable_p.textContent;
+        this.props.handleContentChange(textContent);
+    }
+
     handleVideoInputChange = (e) => {
-        this.setState({
-            videoUrl: e.target.value
-        })
+        this.props.handleContentChange(e.target.value);
     }
 
     renderCard = (template, isEditable) => {
@@ -69,8 +71,10 @@ class CardTemplate extends Component {
                     <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <p className="dx_editable_p"
+                                <p ref="dx_editable_p"
+                                    className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
+                                    onInput={() => this.handleContentChange()}
                                     style={Object.assign({}, txtStyle, { color: template.Settings[2].Default, textAlign: 'left' })}>{template.Content}</p>
                             </div>
                         </div>
@@ -150,7 +154,7 @@ class CardTemplate extends Component {
                                                     isDark={true}
                                                     width="144px"
                                                     disabled={false}
-                                                    value={this.state.videoUrl}
+                                                    value={template.Content}
                                                 />
                                             </div>
                                             <Button

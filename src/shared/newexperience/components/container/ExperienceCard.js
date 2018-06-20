@@ -19,6 +19,7 @@ import {
     dxExperienceCardTemplateSelect as dxExperienceCardTemplateSelectAction,
     dxExperienceCardTemplateUpdateImage as dxExperienceCardTemplateUpdateImageAction,
     dxExperienceCardTemplateUpdateColor as dxExperienceCardTemplateUpdateColorAction,
+    dxExperienceCardTemplateUpdateContent as dxExperienceCardTemplateUpdateContentAction,
 } from '../../actions';
 
 // constants
@@ -52,6 +53,10 @@ class ExperienceCard extends Component {
 
     handleColorChange = (colors, type) => {
         this.props.dxExperienceCardTemplateUpdateColorAction(colors.color, type);
+    }
+
+    handleCardTemplateContentChange = (val) => {
+        this.props.dxExperienceCardTemplateUpdateContentAction(val);
     }
 
     render() {
@@ -218,6 +223,7 @@ class ExperienceCard extends Component {
                                             isClickable={false}
                                             isVideoInsertClickable={true}
                                             template={this.props.experience.cardTemplate}
+                                            handleContentChange={(val) => this.handleCardTemplateContentChange(val)}
                                         />
                                         :
                                         null
@@ -326,6 +332,7 @@ const dispatchToProps = {
     dxExperienceCardTemplateSelectAction,
     dxExperienceCardTemplateUpdateImageAction,
     dxExperienceCardTemplateUpdateColorAction,
+    dxExperienceCardTemplateUpdateContentAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceCard);

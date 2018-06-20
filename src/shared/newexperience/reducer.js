@@ -8,6 +8,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -82,8 +83,14 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED:
-            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.Settings,payload.type);
+            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.Settings, payload.type);
             tmpCardTemplate.Settings[tmpSettingIndex].Default = payload.color;
+            tmpExperience.cardTemplate = tmpCardTemplate;
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED:
+            tmpCardTemplate.Content = payload.content;
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;

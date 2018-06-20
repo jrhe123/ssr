@@ -37,6 +37,10 @@ import {
     EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__FAILED,
+
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__FAILED,
 } from './constants';
 
 // Experience type request
@@ -228,4 +232,25 @@ export function* dxExperienceCardTemplateUpdateColor(action) {
 
 export function* dxExperienceCardTemplateUpdateColorSaga() {
     yield takeEvery(EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR_REQUESTED, dxExperienceCardTemplateUpdateColor);
+}
+
+// Experience card template update content
+export function* dxExperienceCardTemplateUpdateContent(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED,
+            payload: {
+                content: action.payload.content
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCardTemplateUpdateContentSaga() {
+    yield takeEvery(EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT_REQUESTED, dxExperienceCardTemplateUpdateContent);
 }
