@@ -44,7 +44,7 @@ class CardTemplate extends Component {
                             <div style={tableWrapperStyle}>
                                 <p className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default, textAlign: 'left' })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ class CardTemplate extends Component {
                             <div style={tableWrapperStyle}>
                                 <p className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default, textAlign: 'left' })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ class CardTemplate extends Component {
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
                         <p className="dx_editable_p"
                             contenteditable={isEditable ? "true" : "false"}
-                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                     </div>
                 </div>
             );
@@ -92,7 +92,7 @@ class CardTemplate extends Component {
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
                                 <p className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>

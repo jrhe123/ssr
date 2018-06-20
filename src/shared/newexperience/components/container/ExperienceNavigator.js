@@ -36,7 +36,9 @@ class ExperienceNavigator extends Component {
         if (experience.index == 0) {
             this.props.dxAlertAction(true, true, 'test here');
         } else if (experience.index == 1) {
-            this.props.dxAlertAction(true, true, 'test here');
+            // this.props.dxAlertAction(true, true, 'test here');
+
+            console.log('exp: ', experience);
         }
     }
 

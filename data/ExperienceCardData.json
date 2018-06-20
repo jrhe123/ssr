@@ -17,7 +17,7 @@
                     "Default": "#000000"
                 }
             ],
-            "Textable": true
+            "Content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         },
         {
             "CardTemplateGUID": "6aad869c-7d8a-485d-bf31-26862dc6f706",
@@ -33,7 +33,7 @@
                     "Default": "#FFFFFF"
                 }
             ],
-            "Textable": true
+            "Content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         },
         {
             "CardTemplateGUID": "8b3cc482-1ca9-46e1-9e4d-0a2ceaa33b38",
@@ -48,7 +48,7 @@
                     "Default": "#FFFFFF"
                 }
             ],
-            "Textable": true
+            "Content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         },
         {
             "CardTemplateGUID": "c14d6a0f-017e-417c-91a8-f9e32be05d9f",
@@ -59,7 +59,7 @@
                     "Type": "IMAGE"
                 }
             ],
-            "Textable": false
+            "Content": ""
         },
         {
             "CardTemplateGUID": "69ff92c6-6efa-44b0-8abb-f952a43d16f7",
@@ -70,7 +70,7 @@
                     "Type": "IMAGE"
                 }
             ],
-            "Textable": false
+            "Content": ""
         },
         {
             "CardTemplateGUID": "1e52dc9c-1083-4700-a004-96037ba10c41",
@@ -89,7 +89,7 @@
                     "Default": "#000000"
                 }
             ],
-            "Textable": true
+            "Content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         }
     ]
 }
