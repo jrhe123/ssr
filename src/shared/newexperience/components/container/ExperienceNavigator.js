@@ -29,6 +29,8 @@ class ExperienceNavigator extends Component {
             this.props.history.push('/dashboard');
         } else if (experience.index == 1) {
             this.props.dxExperienceIndexUpdateAction(0);
+        } else if (experience.index == 2) {
+            this.props.dxExperienceIndexUpdateAction(0);
         }
     }
 
@@ -42,7 +44,9 @@ class ExperienceNavigator extends Component {
         } else if (experience.index == 1) {
             let { IsError, Message } = this.validateExperienceCard(experience);
             this.props.dxAlertAction(true, IsError, Message);
-            if(!IsError) this.props.dxExperienceCardTemplateSaveAction();
+            if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
+        } else if (experience.index == 2) {
+            console.log('save pages');
         }
     }
 
@@ -52,28 +56,28 @@ class ExperienceNavigator extends Component {
             Message: '',
         }
         let cardTemplate = experience.cardTemplate;
-        
+
         if (!cardTemplate) {
             res.Message = 'Please select a card template';
             return res;
-        } 
+        }
         if (!experience.cardTitle) {
             res.Message = 'Please enter card title';
             return res;
-        } 
-        
+        }
+
         let imageIdx = search_object_index_by_value(cardTemplate.Settings, 'IMAGE');
         if (imageIdx != null
             && !cardTemplate.Settings[imageIdx].Default) {
             res.Message = 'Please select a image';
             return res;
-        } 
+        }
 
         if (cardTemplate.Type == 'VIDEO'
             && !cardTemplate.Content) {
             res.Message = 'Please enter video url';
             return res;
-        } 
+        }
 
         res.IsError = false;
         res.Message = 'Card has been saved';
