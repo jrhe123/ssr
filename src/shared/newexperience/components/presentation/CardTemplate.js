@@ -70,12 +70,12 @@ class CardTemplate extends Component {
                     </div>
                     <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
+                            <div style={Object.assign({}, tableWrapperStyle, {textAlign: 'left'})}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
-                                    onInput={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default, textAlign: 'left' })}>{template.Content}</p>
+                                    onBlur={() => this.handleContentChange()}
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
@@ -86,10 +86,12 @@ class CardTemplate extends Component {
                 <div>
                     <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p className="dx_editable_p"
+                            <div style={Object.assign({}, tableWrapperStyle, {textAlign: 'left'})}>
+                                <p ref="dx_editable_p"
+                                    className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default, textAlign: 'left' })}>{template.Content}</p>
+                                    onBlur={() => this.handleContentChange()}
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
@@ -105,8 +107,10 @@ class CardTemplate extends Component {
             card = (
                 <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.Settings[0].Default })}>
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                        <p className="dx_editable_p"
+                        <p ref="dx_editable_p"
+                            className="dx_editable_p"
                             contenteditable={isEditable ? "true" : "false"}
+                            onBlur={() => this.handleContentChange()}
                             style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                     </div>
                 </div>
@@ -121,8 +125,10 @@ class CardTemplate extends Component {
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                                <p className="dx_editable_p"
+                                <p ref="dx_editable_p"
+                                    className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
+                                    onBlur={() => this.handleContentChange()}
                                     style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                             </div>
                         </div>
