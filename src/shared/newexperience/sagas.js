@@ -45,6 +45,10 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SAVE__FAILED,
+
+    EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
+    EXPERIENCE_CARD_TEMPLATE_REMOVE__FAILED,
 } from './constants';
 
 // Experience type request
@@ -276,4 +280,23 @@ export function* dxExperienceCardTemplateSave(action) {
 
 export function* dxExperienceCardTemplateSaveSaga() {
     yield takeEvery(EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED, dxExperienceCardTemplateSave);
+}
+
+// Experience card template remove
+export function* dxExperienceCardTemplateRemove(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_REMOVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCardTemplateRemoveSaga() {
+    yield takeEvery(EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED, dxExperienceCardTemplateRemove);
 }

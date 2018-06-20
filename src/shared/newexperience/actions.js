@@ -10,6 +10,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
+    EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -107,6 +108,14 @@ export const dxExperienceCardTemplateUpdateContent = (content) => {
 export const dxExperienceCardTemplateSave = () => {
     return {
         type: EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
+        payload: {},
+    }
+}
+
+export const dxExperienceCardTemplateRemove = () => {
+    console.log('action called');
+    return {
+        type: EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
         payload: {},
     }
 }

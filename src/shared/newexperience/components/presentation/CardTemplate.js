@@ -274,8 +274,8 @@ class CardTemplate extends Component {
                                         align='right'
                                         closeOnInsideClick={false}
                                     >
-                                        <Button>Edit</Button>
-                                        <Button>Remove</Button>
+                                        <Button onClick={() => this.props.handleEditCardTemplateClick()}>Edit</Button>
+                                        <Button onClick={() => this.props.handleRemoveCardTemplateClick()}>Remove</Button>
                                     </DropdownMenu>
                                 </div>
                             </div>

@@ -6,8 +6,12 @@ import SwipeableViews from 'react-swipeable-views';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction
+    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
+    dxExperienceCardTemplateRemove as dxExperienceCardTemplateRemoveAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -18,9 +22,14 @@ import ExperienceCard from './ExperienceCard';
 
 class ExperienceControl extends Component {
 
-    handleChange = (index) => {
+    handleChangeProgressIndex = (index) => {
         this.props.dxExperienceIndexUpdateAction(index);
     };
+
+    handleRemoveCardTemplateClick = () => {
+        this.props.dxExperienceCardTemplateRemoveAction();
+        this.props.dxAlertAction(true, false, 'Card has been removed');
+    }
 
     render() {
 
@@ -42,7 +51,9 @@ class ExperienceControl extends Component {
                     experienceIndex == 0 ?
                         (
                             <ExperiencePanel
-                                handleCreateCard={() => this.handleChange(1)}
+                                handleCreateCard={() => this.handleChangeProgressIndex(1)}
+                                handleEditCardTemplateClick={() => this.handleChangeProgressIndex(1)}
+                                handleRemoveCardTemplateClick={() => this.handleRemoveCardTemplateClick()}
                             />
                         )
                         :
@@ -76,6 +87,9 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxExperienceIndexUpdateAction,
+    dxExperienceCardTemplateRemoveAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceControl);

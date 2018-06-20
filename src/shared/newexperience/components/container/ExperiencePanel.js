@@ -10,7 +10,7 @@ import DropdownMenu from 'react-dd-menu';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperienceTypeUpdate as dxExperienceTypeUpdateAction
+    dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
 } from '../../actions';
 
 // constants
@@ -144,6 +144,8 @@ class ExperiencePanel extends Component {
                                     isVideoInsertClickable={false}
                                     cardTitle={this.props.experience.cardTitle}
                                     template={this.props.experience.cardTemplate}
+                                    handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
+                                    handleRemoveCardTemplateClick={() => this.props.handleRemoveCardTemplateClick()}
                                 />
                             </div>
                     }
