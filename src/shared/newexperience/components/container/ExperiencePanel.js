@@ -172,7 +172,7 @@ class ExperiencePanel extends Component {
                                 </div>
                                 <div style={editContainerStyle}>
                                     <a style={btnStyle}
-                                        onClick={() => this.props.handleCreateCard()}
+                                        onClick={() => this.props.handleCreatePages()}
                                         variant="Create card"
                                     >Create page(s)</a>
                                 </div>

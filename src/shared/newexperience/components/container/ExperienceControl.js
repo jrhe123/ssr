@@ -19,6 +19,7 @@ import sizes from '../../../styles/sizes';
 // components
 import ExperiencePanel from './ExperiencePanel';
 import ExperienceCard from './ExperienceCard';
+import ExperiencePages from './ExperiencePages';
 
 class ExperienceControl extends Component {
 
@@ -52,6 +53,7 @@ class ExperienceControl extends Component {
                         (
                             <ExperiencePanel
                                 handleCreateCard={() => this.handleChangeProgressIndex(1)}
+                                handleCreatePages={() => this.handleChangeProgressIndex(2)}
                                 handleEditCardTemplateClick={() => this.handleChangeProgressIndex(1)}
                                 handleRemoveCardTemplateClick={() => this.handleRemoveCardTemplateClick()}
                             />
@@ -63,6 +65,14 @@ class ExperienceControl extends Component {
                     experienceIndex == 1 ?
                         (
                             <ExperienceCard />
+                        )
+                        :
+                        null
+                }
+                {
+                    experienceIndex == 2 ?
+                        (
+                            <ExperiencePages />
                         )
                         :
                         null
