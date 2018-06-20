@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     dxValidateToken as dxValidateTokenAction,
+    dxAlert as dxAlertAction,
 } from '../actions';
 
 // components
@@ -45,6 +46,10 @@ class App extends Component {
     componentDidMount(){
         let token = localStorage.getItem('token');
         if(token) this.props.dxValidateTokenAction(token, '5f92de5b-e627-43e5-a42f-75f9e4715380')
+    }
+
+    handleAlertBarClose = () => {
+        this.props.dxAlertAction(false, false, '');
     }
 
     render() {
@@ -95,6 +100,7 @@ class App extends Component {
                 {/* global alert bar */}
                 <AlertBar
                     alertBar={alertBar}
+                    handleAlertBarClose={() => this.handleAlertBarClose()}
                 />
             </div>
         )
@@ -111,6 +117,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxValidateTokenAction,
+    dxAlertAction,
 }
 
 export default withRouter(connect(stateToProps, dispatchToProps)(App));

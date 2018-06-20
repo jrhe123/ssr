@@ -31,6 +31,7 @@ class AlertBar extends Component {
                 timeout={3000}
                 effect='jelly'
                 html={true}
+                onClose={() => this.props.handleAlertBarClose()}
             />
         )
     }
