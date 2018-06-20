@@ -111,6 +111,9 @@ class NavBar extends Component {
             layoutSubLabelStyle,
             rightBtnContainerStyle,
             btnStyle,
+            pageElementContainerStyle,
+            leftElemContainerStyle,
+            rightElemContainerStyle,
         } = styles;
 
         let title, placeholder;
@@ -276,6 +279,17 @@ class NavBar extends Component {
                                                 }
                                             </div>
                                         </div>
+                                    </div>
+                                )
+                                :
+                                null
+                            }
+                            {
+                                experience.index == 2 ?
+                                (
+                                    <div style={pageElementContainerStyle}>
+                                        <div style={leftElemContainerStyle}>1</div>
+                                        <div style={rightElemContainerStyle}>2</div>
                                     </div>
                                 )
                                 :
@@ -480,6 +494,31 @@ const styles = {
     btnStyle: {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
+    },
+    pageElementContainerStyle: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: 300,
+        height: '100%',
+        zIndex: 99,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    leftElemContainerStyle: {
+        flex: 1,
+        border: '1px solid',
+        borderColor: colors.borderColor,
+        paddingLeft: 6,
+        paddingRight: 6,
+    },
+    rightElemContainerStyle: {
+        flex: 1,
+        border: '1px solid',
+        borderLeft: 'none',
+        borderColor: colors.borderColor,
+        paddingLeft: 6,
+        paddingRight: 6,
     },
 }
 
