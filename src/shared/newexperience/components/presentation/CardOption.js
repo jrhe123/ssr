@@ -6,8 +6,14 @@ import '../../../../../assets/css/rc-color-picker/rc-color-picker.css';
 
 class CardOption extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     handleImageChange = (event) => {
         this.props.handleImageChange(event.target.files[0]);
+        let img_input = this.refs.img_input;
+        img_input.value = "";
     }
 
     handleColorChange = (colors, type) => {
@@ -27,6 +33,7 @@ class CardOption extends Component {
         if (setting.Type == 'IMAGE') {
             option = (<div style={imgInputContainerStyle}>
                 <input
+                    ref="img_input"
                     name="dx_img_upload"
                     style={imgInputStyle}
                     type="file"
