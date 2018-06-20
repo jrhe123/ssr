@@ -173,6 +173,7 @@ class ExperienceCard extends Component {
                                                 isWithTitle={true}
                                                 isEditable={false}
                                                 isClickable={true}
+                                                isVideoInsertClickable={false}
                                                 template={template}
                                                 handleSelectCardTemplate={(template) => this.handleSelectCardTemplate(template)}
                                             />
@@ -215,6 +216,7 @@ class ExperienceCard extends Component {
                                             isWithTitle={false}
                                             isEditable={true}
                                             isClickable={false}
+                                            isVideoInsertClickable={true}
                                             template={this.props.experience.cardTemplate}
                                         />
                                         :

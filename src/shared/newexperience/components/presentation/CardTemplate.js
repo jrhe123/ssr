@@ -23,7 +23,8 @@ class CardTemplate extends Component {
             this.props.handleSelectCardTemplate(template)
     }
 
-    handleVideoInsertClick = (toggle) => {
+    handleVideoInsertClick = (toggle, isVideoInsertClickable) => {
+        if (!isVideoInsertClickable) return;
         this.setState({
             videoInsert: toggle
         })
@@ -51,7 +52,7 @@ class CardTemplate extends Component {
             overlayImgStyle,
             iconStyle,
             videoInputContainerStyle,
-            videoInputStyle,
+            videoInputWrapperStyle,
             videoInputBtnStyle,
         } = styles;
 
@@ -138,22 +139,23 @@ class CardTemplate extends Component {
                                     !this.state.videoInsert ?
                                         <PlayCircleOutline
                                             style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
-                                            onClick={() => this.handleVideoInsertClick(true)}
+                                            onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
                                         />
                                         :
                                         <div style={videoInputContainerStyle}>
-                                            <DxInput
-                                                style={videoInputStyle}
-                                                placeholder="Embed video url"
-                                                handleValChange={(e) => this.handleVideoInputChange(e)}
-                                                isDark={true}
-                                                width="144px"
-                                                disabled={false}
-                                                value={this.state.videoUrl}
-                                            />
+                                            <div style={videoInputWrapperStyle}>
+                                                <DxInput
+                                                    placeholder="Embed video url"
+                                                    handleValChange={(e) => this.handleVideoInputChange(e)}
+                                                    isDark={true}
+                                                    width="144px"
+                                                    disabled={false}
+                                                    value={this.state.videoUrl}
+                                                />
+                                            </div>
                                             <Button
                                                 style={videoInputBtnStyle}
-                                                onClick={() => this.handleVideoInsertClick(false)}
+                                                onClick={() => this.handleVideoInsertClick(false, this.props.isVideoInsertClickable)}
                                                 variant="Enter video url">
                                                 Confirm
                                             </Button>
@@ -305,9 +307,9 @@ const styles = {
         display: 'flex',
         flexDirection: 'row'
     },
-    videoInputStyle: {
+    videoInputWrapperStyle: {
         flex: 4,
-        marginTop: 2
+        marginTop: 4
     },
     videoInputBtnStyle: {
         flex: 1,
