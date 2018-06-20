@@ -42,15 +42,8 @@ class CardTemplate extends Component {
                     <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                {
-                                    isEditable ?
-                                        <input
-                                            style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}
-                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-                                        />
-                                        :
-                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                }
+                                <p contenteditable={isEditable ? "true" : "false"}
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                             </div>
                         </div>
                     </div>
@@ -62,15 +55,8 @@ class CardTemplate extends Component {
                     <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                {
-                                    isEditable ?
-                                        <input
-                                            style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}
-                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-                                        />
-                                        :
-                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                }
+                                <p contenteditable={isEditable ? "true" : "false"}
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                             </div>
                         </div>
                     </div>
@@ -86,15 +72,8 @@ class CardTemplate extends Component {
             card = (
                 <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.Settings[0].Default })}>
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                        {
-                            isEditable ?
-                                <input
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}
-                                    value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-                                />
-                                :
-                                <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        }
+                        <p contenteditable={isEditable ? "true" : "false"}
+                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </div>
                 </div>
             );
@@ -108,15 +87,8 @@ class CardTemplate extends Component {
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                                {
-                                    isEditable ?
-                                        <input
-                                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}
-                                            value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-                                        />
-                                        :
-                                        <p style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                }
+                                <p contenteditable={isEditable ? "true" : "false"}
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                             </div>
                         </div>
                     </div>
