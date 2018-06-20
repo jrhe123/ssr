@@ -37,3 +37,7 @@ body{
 .dx_scale_container.active_expand{
     flex-grow: 1;
 }
+
+.dx_editable_p:focus{
+    /* outline: none; */
+}
