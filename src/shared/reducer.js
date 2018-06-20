@@ -17,6 +17,8 @@ import {
 
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
+
+    ALERT__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -36,6 +38,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
     let tmpUser;
+    let tempAlertBar;
     
     switch (type) {
 
@@ -61,6 +64,11 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
 
         case NAVIGATE_HISTORY__SUCCEEDED:
             updated.history = payload.history;
+            return updated;
+        
+        case ALERT__SUCCEEDED:
+            tempAlertBar = payload;
+            updated.alertBar = tempAlertBar;
             return updated;
 
         default:

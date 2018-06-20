@@ -10,6 +10,9 @@ import {
     dxExperienceTitleUpdate as dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 class ExperienceNavigator extends Component {
 
@@ -26,7 +29,15 @@ class ExperienceNavigator extends Component {
     }
 
     handleSaveBtnClick = () => {
-        console.log('click save out here');
+        let {
+            experience,
+        } = this.props;
+
+        if(experience.index == 0){
+            this.props.dxAlertAction(true, true, 'test here');
+        }else if(experience.index == 1){
+            this.props.dxAlertAction(true, true, 'test here');
+        }
     }
 
     handleCardTemplateMenuToggle = () => {
@@ -74,6 +85,8 @@ const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdateAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceNavigator);

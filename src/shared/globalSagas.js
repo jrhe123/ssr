@@ -9,6 +9,10 @@ import {
     NAVIGATE_HISTORY_REQUESTED,
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
+
+    ALERT_REQUESTED,
+    ALERT__SUCCEEDED,
+    ALERT__FAILED,
 } from './constants';
 
 // Validate token
@@ -81,4 +85,27 @@ export function* dxNavigateHistory(action) {
 
 export function* dxNavigateHistorySaga() {
     yield takeEvery(NAVIGATE_HISTORY_REQUESTED, dxNavigateHistory);
+}
+
+// Alert
+export function* dxAlert(action) {
+    try {
+        yield put({
+            type: ALERT__SUCCEEDED,
+            payload: {
+                isDisplay: action.payload.isDisplay,
+                isError: action.payload.isError,
+                message: action.payload.message,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: ALERT__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxAlertSaga() {
+    yield takeEvery(ALERT_REQUESTED, dxAlert);
 }
