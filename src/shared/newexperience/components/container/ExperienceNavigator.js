@@ -12,6 +12,7 @@ import {
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdate as dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
+    dxExperienceCardTemplateSave as dxExperienceCardTemplateSaveAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -41,7 +42,7 @@ class ExperienceNavigator extends Component {
         } else if (experience.index == 1) {
             let { IsError, Message } = this.validateExperienceCard(experience);
             this.props.dxAlertAction(true, IsError, Message);
-            if(!IsError) this.props.dxExperienceIndexUpdateAction(0);
+            if(!IsError) this.props.dxExperienceCardTemplateSaveAction();
         }
     }
 
@@ -124,6 +125,7 @@ const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdateAction,
+    dxExperienceCardTemplateSaveAction,
 
     dxAlertAction,
 }

@@ -22,6 +22,7 @@ import {
     dxExperienceCardTemplateUpdateImageSaga,
     dxExperienceCardTemplateUpdateColorSaga,
     dxExperienceCardTemplateUpdateContentSaga,
+    dxExperienceCardTemplateSaveSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -51,6 +52,7 @@ export default function* rootSaga() {
         dxExperienceCardTemplateUpdateImageSaga(),
         dxExperienceCardTemplateUpdateColorSaga(),
         dxExperienceCardTemplateUpdateContentSaga(),
+        dxExperienceCardTemplateSaveSaga(),
         
         // Global
         dxValidateTokenSaga(),
