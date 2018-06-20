@@ -41,6 +41,7 @@ class ExperienceNavigator extends Component {
         } else if (experience.index == 1) {
             let { IsError, Message } = this.validateExperienceCard(experience);
             this.props.dxAlertAction(true, IsError, Message);
+            if(!IsError) this.props.dxExperienceIndexUpdateAction(0);
         }
     }
 
