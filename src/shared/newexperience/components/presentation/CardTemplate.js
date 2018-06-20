@@ -229,7 +229,7 @@ class CardTemplate extends Component {
                         null
                 }
                 <div style={Object.assign({}, cardContainerStyle, isCenterCard ? { margin: '0 auto' } : {})}
-                    className="dx_card"
+                    className={!isWithBottomBar ? "dx_card" : "dx_card_bottom_bar"}
                     onClick={() => this.handleSelectCardTemplate(template)}
                 >
                     {
@@ -253,7 +253,7 @@ class CardTemplate extends Component {
                             </div>
                             <div style={cardTemplateEditContainerStyle}>
                                 <div style={cardTemplateEditBurgerContainerStyle}>
-                                    <MoreHoriz style={editBurgerStyle} />
+                                    <MoreHoriz style={editBurgerStyle}/>
                                 </div>
                             </div>
                         </div>
@@ -368,7 +368,8 @@ const styles = {
         width: 'calc(100% - 24px)',
         height: 30,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: colors.whiteColor,
     },
     cardTemplateNameContainerStyle: {
         flex: 1
