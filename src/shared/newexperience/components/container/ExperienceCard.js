@@ -176,6 +176,7 @@ class ExperienceCard extends Component {
                                             <CardTemplate
                                                 key={index}
                                                 isWithTitle={true}
+                                                isCenterCard={true}
                                                 isEditable={false}
                                                 isClickable={true}
                                                 isVideoInsertClickable={false}
@@ -219,6 +220,7 @@ class ExperienceCard extends Component {
                                     this.props.experience.cardTemplate ?
                                         <CardTemplate
                                             isWithTitle={false}
+                                            isCenterCard={true}
                                             isEditable={true}
                                             isClickable={false}
                                             isVideoInsertClickable={true}

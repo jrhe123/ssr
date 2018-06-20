@@ -19,6 +19,7 @@ import fonts from '../../../styles/fonts';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
+import CardTemplate from '../presentation/CardTemplate';
 
 class ExperiencePanel extends Component {
 
@@ -52,11 +53,16 @@ class ExperiencePanel extends Component {
             tableContainerStyle,
             tableWrapperStyle,
             rightContainerStyle,
-            btnContainerStyle,
+            editContainerStyle,
             btnStyle,
             outlineBtnStyle,
             optionBtnStyle,
+            demoCardContainerStyle,
         } = styles;
+
+        const {
+            experience
+        } = this.props;
 
         return (
             <div style={mainContainerStyle}>
@@ -75,7 +81,7 @@ class ExperiencePanel extends Component {
                                         placeholder="type"
                                         width="120px"
                                         disabled={true}
-                                        value={this.props.experienceType == 0 ? 'card only' : 'card + page(s)'}
+                                        value={experience.type == 0 ? 'card only' : 'card + page(s)'}
                                     />
                                     <Button
                                         style={outlineBtnStyle}
@@ -99,9 +105,7 @@ class ExperiencePanel extends Component {
                                 <Button
                                     style={optionBtnStyle}
                                     className="dx-lower-case dx-cat-btn"
-                                >
-                                    Card + page(s)
-                                        </Button>
+                                >Card + page(s)</Button>
                             </div>
                         </DropdownMenu>
                     </div>
@@ -122,14 +126,28 @@ class ExperiencePanel extends Component {
                         <p>Cards are the entry point to your end user's experience</p>
                     </div>
                 </div>
-                <div style={btnContainerStyle}>
-                    <a style={btnStyle}
-                        onClick={() => this.props.handleCreateCard()}
-                        variant="Create card"
-                    >Create a card</a>
+                <div style={editContainerStyle}>
+                    {
+                        !experience.isCardTemplateSaved ?
+                            <a style={btnStyle}
+                                onClick={() => this.props.handleCreateCard()}
+                                variant="Create card"
+                            >Create a card</a>
+                            :
+                            <div style={demoCardContainerStyle}>
+                                <CardTemplate
+                                    isWithTitle={false}
+                                    isCenterCard={false}
+                                    isEditable={false}
+                                    isClickable={false}
+                                    isVideoInsertClickable={false}
+                                    template={this.props.experience.cardTemplate}
+                                />
+                            </div>
+                    }
                 </div>
                 {
-                    this.props.experienceType == 1 ?
+                    experience.type == 1 ?
                         (
                             <div>
                                 <div style={optionContainerStyle}>
@@ -148,7 +166,7 @@ class ExperiencePanel extends Component {
                                         <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
                                     </div>
                                 </div>
-                                <div style={btnContainerStyle}>
+                                <div style={editContainerStyle}>
                                     <a style={btnStyle}
                                         onClick={() => this.props.handleCreateCard()}
                                         variant="Create card"
@@ -207,7 +225,7 @@ const styles = {
         color: colors.labelColor,
         fontSize: fonts.h4
     },
-    btnContainerStyle: {
+    editContainerStyle: {
         marginTop: 12,
         marginLeft: 120
     },
@@ -226,12 +244,16 @@ const styles = {
     },
     optionBtnStyle: {
         width: 144
-    }
+    },
+    demoCardContainerStyle: {
+        height: 90,
+        width: 300,
+    },
 }
 
 const stateToProps = (state) => {
     return {
-        experienceType: state.newexperience.experience.type
+        experience: state.newexperience.experience
     }
 }
 

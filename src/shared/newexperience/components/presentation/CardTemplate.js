@@ -195,6 +195,7 @@ class CardTemplate extends Component {
         const {
             isWithTitle,
             isEditable,
+            isCenterCard,
             template,
         } = this.props;
 
@@ -215,7 +216,7 @@ class CardTemplate extends Component {
                         :
                         null
                 }
-                <div style={cardContainerStyle}
+                <div style={Object.assign({}, cardContainerStyle, isCenterCard ? {margin: '0 auto'} : {})}
                     className="dx_card"
                     onClick={() => this.handleSelectCardTemplate(template)}
                 >
@@ -256,7 +257,6 @@ const styles = {
     cardContainerStyle: {
         width: 'calc(100% - 24px)',
         height: 90,
-        margin: '0 auto',
         cursor: 'pointer'
     },
     leftImageContainerStyle: {
