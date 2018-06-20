@@ -5,11 +5,34 @@ import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
+// Libraries
+import Button from '@material-ui/core/Button';
+
 class CardTemplate extends Component {
+
+    state = {
+        videoInsert: false,
+        videoUrl: ''
+    }
 
     handleSelectCardTemplate = (template) => {
         if (this.props.isClickable)
             this.props.handleSelectCardTemplate(template)
+    }
+
+    handleVideoInsertClick = (toggle) => {
+        this.setState({
+            videoInsert: toggle
+        })
+    }
+
+    handleVideoInputChange = (e) => {
+        this.setState({
+            videoUrl: e.target.value
+        })
     }
 
     renderCard = (template, isEditable) => {
@@ -27,6 +50,9 @@ class CardTemplate extends Component {
             overlayWrapperStyle,
             overlayImgStyle,
             iconStyle,
+            videoInputContainerStyle,
+            videoInputStyle,
+            videoInputBtnStyle,
         } = styles;
 
         let card;
@@ -108,7 +134,31 @@ class CardTemplate extends Component {
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
-                                <PlayCircleOutline style={Object.assign({}, iconStyle, { color: colors.whiteColor })} />
+                                {
+                                    !this.state.videoInsert ?
+                                        <PlayCircleOutline
+                                            style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
+                                            onClick={() => this.handleVideoInsertClick(true)}
+                                        />
+                                        :
+                                        <div style={videoInputContainerStyle}>
+                                            <DxInput
+                                                style={videoInputStyle}
+                                                placeholder="Embed video url"
+                                                handleValChange={(e) => this.handleVideoInputChange(e)}
+                                                isDark={true}
+                                                width="144px"
+                                                disabled={false}
+                                                value={this.state.videoUrl}
+                                            />
+                                            <Button
+                                                style={videoInputBtnStyle}
+                                                onClick={() => this.handleVideoInsertClick(false)}
+                                                variant="Enter video url">
+                                                Confirm
+                                            </Button>
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -250,7 +300,22 @@ const styles = {
     },
     iconStyle: {
         fontSize: '42px'
-    }
+    },
+    videoInputContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    videoInputStyle: {
+        flex: 4,
+        marginTop: 2
+    },
+    videoInputBtnStyle: {
+        flex: 1,
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
+        textTransform: 'capitalize',
+        marginLeft: 6
+    },
 }
 
 export default CardTemplate;
