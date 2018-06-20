@@ -26,6 +26,8 @@ const initialState = {
         isCardTemplateSaved: false,
         cardTemplate: null,
 
+        isPageTemplateMenuOpen: true,
+
         experienceTitle: null,
         cardTitle: null,
         pageTitle: null

@@ -234,7 +234,6 @@ class ExperienceCard extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
