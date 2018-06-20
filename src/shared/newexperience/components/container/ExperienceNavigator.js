@@ -21,9 +21,9 @@ class ExperienceNavigator extends Component {
             experience,
         } = this.props;
 
-        if(experience.index == 0){
+        if (experience.index == 0) {
             this.props.history.push('/dashboard');
-        }else if(experience.index == 1){
+        } else if (experience.index == 1) {
             this.props.dxExperienceIndexUpdateAction(0);
         }
     }
@@ -33,9 +33,9 @@ class ExperienceNavigator extends Component {
             experience,
         } = this.props;
 
-        if(experience.index == 0){
+        if (experience.index == 0) {
             this.props.dxAlertAction(true, true, 'test here');
-        }else if(experience.index == 1){
+        } else if (experience.index == 1) {
             this.props.dxAlertAction(true, true, 'test here');
         }
     }
@@ -51,11 +51,11 @@ class ExperienceNavigator extends Component {
         } = this.props;
         let content = e.target.value;
 
-        if(experience.index == 0){
+        if (experience.index == 0) {
             this.props.dxExperienceTitleUpdateAction('EXPERIENCE', content);
-        }else if(experience.index == 1){
+        } else if (experience.index == 1) {
             this.props.dxExperienceTitleUpdateAction('CARD', content);
-        }else if(experience.index == 2){
+        } else if (experience.index == 2) {
             this.props.dxExperienceTitleUpdateAction('PAGE', content);
         }
     }
