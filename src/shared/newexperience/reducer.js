@@ -11,6 +11,9 @@ import {
     EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED,
 } from './constants';
 
+// helpers
+import { search_object_index_by_value } from '../helpers'
+
 const initialState = {
     cardTemplates: [],
     experience: {
@@ -99,12 +102,5 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return previousState;
     }
 };
-
-const search_object_index_by_value = (arr, value) => {
-    for (let i = 0, iLen = arr.length; i < iLen; i++) {
-        if (arr[i].Type == value) return i;
-    }
-    return null;
-}
 
 export default newexperienceReducer;

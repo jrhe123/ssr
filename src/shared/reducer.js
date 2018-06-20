@@ -67,7 +67,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             return updated;
         
         case ALERT__SUCCEEDED:
-            tempAlertBar = payload;
+            tempAlertBar =  Object.assign({}, payload);
             updated.alertBar = tempAlertBar;
             return updated;
 

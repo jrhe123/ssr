@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 // components
 import NavBar from '../../../components/navBar/NavBar';
 
+// helpers
+import { search_object_index_by_value } from '../../../helpers';
+
 // redux
 import { connect } from 'react-redux';
 import {
@@ -36,10 +39,43 @@ class ExperienceNavigator extends Component {
         if (experience.index == 0) {
             this.props.dxAlertAction(true, true, 'test here');
         } else if (experience.index == 1) {
-            // this.props.dxAlertAction(true, true, 'test here');
-
-            console.log('exp: ', experience);
+            let { IsError, Message } = this.validateExperienceCard(experience);
+            this.props.dxAlertAction(true, IsError, Message);
         }
+    }
+
+    validateExperienceCard = (experience) => {
+        let res = {
+            IsError: true,
+            Message: '',
+        }
+        let cardTemplate = experience.cardTemplate;
+        
+        if (!cardTemplate) {
+            res.Message = 'Please select a card template';
+            return res;
+        } 
+        if (!experience.cardTitle) {
+            res.Message = 'Please enter card title';
+            return res;
+        } 
+        
+        let imageIdx = search_object_index_by_value(cardTemplate.Settings, 'IMAGE');
+        if (imageIdx != null
+            && !cardTemplate.Settings[imageIdx].Default) {
+            res.Message = 'Please select a image';
+            return res;
+        } 
+
+        if (cardTemplate.Type == 'VIDEO'
+            && !cardTemplate.Content) {
+            res.Message = 'Please enter video url';
+            return res;
+        } 
+
+        res.IsError = false;
+        res.Message = 'Card has been saved';
+        return res;
     }
 
     handleCardTemplateMenuToggle = () => {
