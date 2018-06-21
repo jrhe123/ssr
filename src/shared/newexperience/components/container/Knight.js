@@ -21,13 +21,15 @@ class Knight extends Component {
         const { connectDragSource, isDragging } = this.props
 
         return connectDragSource(
-            <div action={this.action} style={{
-                backgroundColor: isDragging ? 'transparent' : 'transparent',
-                opacity: isDragging ? 0.25 : 1,
-                fontSize: 40,
-                fontWeight: 'bold',
-                cursor: 'move'
-            }}>
+            <div action={this.action} 
+                style={{
+                    backgroundColor: 'transparent',
+                    opacity: isDragging ? 0.25 : 1,
+                    fontSize: 40,
+                    fontWeight: 'bold',
+                    cursor: 'move'
+                }}
+            >
                 ♘
             </div>
         )
