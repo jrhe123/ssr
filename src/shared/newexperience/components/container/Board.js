@@ -67,7 +67,11 @@ class Board extends Component {
     }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => {
+    return {
+        position: state.newexperience.position
+    }
+}
 
 Board = DragDropContext(HTML5Backend)(Board)
 Board = connect(mapStateToProps, { setKnightPosition })(Board)

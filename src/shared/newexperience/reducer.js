@@ -38,7 +38,9 @@ const initialState = {
         experienceTitle: null,
         cardTitle: null,
         pageTitle: null
-    }
+    },
+
+    position: {kx: 7, ky: 7}
 };
 
 const newexperienceReducer = (previousState = initialState, { type, payload }) => {

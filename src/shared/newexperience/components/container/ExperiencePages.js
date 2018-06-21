@@ -6,6 +6,7 @@ import ExperiencePageData from '../../../../../data/ExperiencePageData';
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 import PageTemplate from '../presentation/PageTemplate';
+import Board from './Board';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -145,7 +146,7 @@ class ExperiencePages extends Component {
                     className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    here
+                    <Board />
                 </div>
             </div>
         )
