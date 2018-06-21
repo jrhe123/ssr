@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
+// constants
+import colors from '../../../styles/colors';
+import fonts from '../../../styles/fonts';
+
 class PageTemplate extends Component {
+
+    renderPage = (template) => {
+        console.log('template: ', template);
+        return (
+            <div>page here</div>
+        )
+    }
 
     render() {
 
@@ -10,11 +21,16 @@ class PageTemplate extends Component {
 
         const {
             mainContainerStyle,
+            pageContainerStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
-                template here 123
+                <div style={pageContainerStyle}>
+                    {
+                        this.renderPage(template)
+                    }
+                </div>
             </div>
         )
     }
@@ -34,6 +50,7 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
+        textAlign: 'center',
         paddingLeft: 6,
         paddingRight: 6
     },
@@ -49,6 +66,7 @@ const styles = {
     pageContainerStyle: {
         width: 'calc(100% - 24px)',
         height: 90,
+        margin: '0 auto',
         cursor: 'pointer'
     },
 }
