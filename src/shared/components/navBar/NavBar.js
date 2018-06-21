@@ -305,7 +305,18 @@ class NavBar extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={rightElemContainerStyle}>2</div>
+                                        <div style={rightElemContainerStyle}>
+                                            <div style={tableContainerStyle}>
+                                                <div style={tableWrapperStyle}>
+                                                    <div style={pageElemTitleContainerStyle}>
+                                                        <p style={pageElemTitleStyle}>Reference documents</p>
+                                                    </div>
+                                                    <div style={pageElemSubtitleContainerStyle}>
+                                                        <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                                 :
@@ -528,8 +539,8 @@ const styles = {
         border: '1px solid',
         borderTop: 'none',
         borderColor: colors.borderColor,
-        paddingLeft: 6,
-        paddingRight: 6,
+        paddingLeft: 12,
+        paddingRight: 12,
     },
     pageElemTitleContainerStyle: {
         flex: 1,
@@ -538,7 +549,8 @@ const styles = {
     },
     pageElemTitleStyle: {
         margin: 0,
-        fontSize: fonts.h4
+        fontSize: fonts.h4,
+        fontWeight: 'bold'
     },
     pageElemSubtitleContainerStyle: {
         flex: 1
@@ -554,8 +566,8 @@ const styles = {
         borderTop: 'none',
         borderLeft: 'none',
         borderColor: colors.borderColor,
-        paddingLeft: 6,
-        paddingRight: 6,
+        paddingLeft: 12,
+        paddingRight: 12,
     },
 }
 
