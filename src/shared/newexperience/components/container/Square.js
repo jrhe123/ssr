@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Square extends React.Component {
+class Square extends Component {
 
     render() {
         const { black } = this.props;
@@ -20,4 +20,4 @@ class Square extends React.Component {
     }
 }
 
-export default Square
+export default Square;

@@ -1,4 +1,3 @@
-/* @flow */
 import React, { Component } from 'react'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from '../../constants'
