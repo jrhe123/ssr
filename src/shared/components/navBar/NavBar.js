@@ -120,6 +120,7 @@ class NavBar extends Component {
             pageElemSubtitleContainerStyle,
             pageElemSubtitleStyle,
             rightElemContainerStyle,
+            flowMenuDownStyle,
         } = styles;
 
         let title, placeholder;
@@ -296,28 +297,36 @@ class NavBar extends Component {
                                     <div style={pageElementContainerStyle}>
                                         <div className="dx_flow_tab"
                                             style={Object.assign({}, leftElemContainerStyle, experience.activePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
-                                            onClick={() => this.props.handleSelectPageElemOption(0)}>
+                                            >
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <div style={pageElemTitleContainerStyle}>
+                                                    <div style={pageElemTitleContainerStyle}
+                                                        onClick={() => this.props.handleSelectPageElemOption(0)}>
                                                         <p style={pageElemTitleStyle}>Page Elements</p>
                                                     </div>
                                                     <div style={pageElemSubtitleContainerStyle}>
                                                         <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
+                                                        <KeyboardArrowDown 
+                                                            className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                            style={flowMenuDownStyle}/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="dx_flow_tab" 
                                             style={Object.assign({}, rightElemContainerStyle, experience.activePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
-                                            onClick={() => this.props.handleSelectPageElemOption(1)}>
+                                            >
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <div style={pageElemTitleContainerStyle}>
+                                                    <div style={pageElemTitleContainerStyle}
+                                                        onClick={() => this.props.handleSelectPageElemOption(1)}>
                                                         <p style={pageElemTitleStyle}>Reference documents</p>
                                                     </div>
                                                     <div style={pageElemSubtitleContainerStyle}>
                                                         <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
+                                                        <KeyboardArrowDown 
+                                                            className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                            style={flowMenuDownStyle}/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -547,14 +556,15 @@ const styles = {
         border: '1px solid',
         borderTop: 'none',
         borderColor: colors.borderColor,
-        paddingLeft: 12,
-        paddingRight: 12,
-        cursor: 'pointer',
+        position: 'relative',
     },
     pageElemTitleContainerStyle: {
         flex: 1,
         paddingTop: 9,
-        paddingBottom: 9
+        paddingBottom: 9,
+        paddingLeft: 9,
+        paddingRight: 12,
+        cursor: 'pointer',
     },
     pageElemTitleStyle: {
         margin: 0,
@@ -562,7 +572,9 @@ const styles = {
         fontWeight: 'bold'
     },
     pageElemSubtitleContainerStyle: {
-        flex: 1
+        flex: 1,
+        paddingLeft: 9,
+        paddingRight: 12,
     },
     pageElemSubtitleStyle: {
         margin: 0,
@@ -575,8 +587,13 @@ const styles = {
         borderTop: 'none',
         borderLeft: 'none',
         borderColor: colors.borderColor,
-        paddingLeft: 12,
-        paddingRight: 12,
+        position: 'relative',
+    },
+    flowMenuDownStyle: {
+        fontSize: 18,
+        position: 'absolute',
+        bottom: 9,
+        right: 0,
         cursor: 'pointer',
     },
 }
