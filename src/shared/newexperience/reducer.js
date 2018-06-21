@@ -13,6 +13,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
 
+    EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
 } from './constants';
 
@@ -117,6 +118,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.isCardTemplateSaved = false;
             tmpExperience.cardTemplate = null;
             tmpExperience.cardTitle = '';
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:
+            tmpExperience.isPageTemplateMenuOpen = payload.toggle;
             updated.experience = tmpExperience;
             return updated;
 

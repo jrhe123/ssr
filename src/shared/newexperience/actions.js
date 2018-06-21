@@ -13,6 +13,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
 
+    EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
 } from './constants';
 
@@ -119,6 +120,15 @@ export const dxExperienceCardTemplateRemove = () => {
     return {
         type: EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxExperiencePageTemplateMenuUpdate = (toggle) => {
+    return {
+        type: EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
+        payload: {
+            toggle,
+        },
     }
 }
 

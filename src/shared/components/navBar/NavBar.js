@@ -307,6 +307,7 @@ class NavBar extends Component {
                                                     <div style={pageElemSubtitleContainerStyle}>
                                                         <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
                                                         <KeyboardArrowDown 
+                                                            onClick={() => this.props.handlePageTemplateMenu()}
                                                             className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                                             style={flowMenuDownStyle}/>
                                                     </div>
@@ -325,6 +326,7 @@ class NavBar extends Component {
                                                     <div style={pageElemSubtitleContainerStyle}>
                                                         <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
                                                         <KeyboardArrowDown 
+                                                            onClick={() => this.props.handlePageTemplateMenu()}
                                                             className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                                             style={flowMenuDownStyle}/>
                                                     </div>

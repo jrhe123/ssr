@@ -15,6 +15,7 @@ import {
     dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSave as dxExperienceCardTemplateSaveAction,
 
+    dxExperiencePageTemplateMenuUpdate as dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
 } from '../../actions';
 import {
@@ -92,6 +93,11 @@ class ExperienceNavigator extends Component {
         this.props.dxExperienceCardTemplateMenuUpdateAction(toggle);
     }
 
+    handlePageTemplateMenuToggle = () => {
+        let toggle = !this.props.experience.isPageTemplateMenuOpen;
+        this.props.dxExperiencePageTemplateMenuUpdateAction(toggle);
+    }
+
     handleSelectPageElemOption = (val) => {
         this.props.dxExperiencePageTemplateOptionSelectAction(val);
     }
@@ -120,6 +126,7 @@ class ExperienceNavigator extends Component {
                 handleSaveBtnClick={() => this.handleSaveBtnClick()}
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
+                handlePageTemplateMenu={() => this.handlePageTemplateMenuToggle()}
                 handleSelectPageElemOption={(val) => this.handleSelectPageElemOption(val)}
             />
         )
@@ -138,6 +145,7 @@ const dispatchToProps = {
     dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSaveAction,
+    dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
 
     dxAlertAction,
