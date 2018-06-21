@@ -7,7 +7,6 @@ import fonts from '../../../styles/fonts';
 class PageTemplate extends Component {
 
     renderPage = (template) => {
-        console.log('template: ', template);
         return (
             <div>page here</div>
         )
