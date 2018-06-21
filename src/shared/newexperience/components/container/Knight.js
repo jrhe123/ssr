@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { ItemTypes } from './constants'
+import { ItemTypes } from '../../constants'
 import { DragSource } from 'react-dnd'
 import knightImage from './knight.png'
 
 const knightSource = {
     beginDrag(props, dnd, element) {
-        console.log('props of knight, since these aren\'t in the docs')
-        console.log(props, dnd, element)
+        // console.log('props of knight, since these aren\'t in the docs')
+        // console.log(props, dnd, element)
         return {}
     }
 }
@@ -24,7 +24,7 @@ class Knight extends Component {
     componentDidMount() {
         const img = new Image();
         img.src = knightImage
-        this.props.connectDragPreview(img);
+        // this.props.connectDragPreview(img);
     }
 
     render() {
@@ -39,7 +39,7 @@ class Knight extends Component {
                 cursor: 'move'
             }}>
                 ♘
-      </div>
+            </div>
         )
     }
 }

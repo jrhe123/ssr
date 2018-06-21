@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Knight from './Knight'
 import BoardSquare from './BoardSquare'
-import { setKnightPosition } from './actions'
+import { setKnightPosition } from '../../actions'
 
 class Board extends Component {
 
@@ -19,7 +19,7 @@ class Board extends Component {
     }
 
     movePiece = (x, y) => {
-        if (!this.canMove(x, y)) return false
+        if (!this.canMove(x, y)) return false;
         this.props.setKnightPosition(x, y)
     }
 

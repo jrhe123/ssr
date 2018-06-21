@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react'
 import { DropTarget } from 'react-dnd'
-import { ItemTypes } from './constants'
+import { ItemTypes } from '../../constants'
 import Square from './Square'
 
 const squareTarget = {

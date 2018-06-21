@@ -16,6 +16,8 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
+
+    MOVE_KNIGHT_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -148,5 +150,17 @@ export const dxExperiencePageTemplateOptionSelect = (index) => {
         payload: {
             index,
         },
+    }
+}
+
+export const setKnightPosition = (kx, ky) => {
+    return {
+        type: MOVE_KNIGHT_REQUESTED,
+        payload: { 
+            position: {
+                kx,
+                ky
+            }
+        }
     }
 }
