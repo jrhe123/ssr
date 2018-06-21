@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// data
+import ExperiencePageData from '../../../../../data/ExperiencePageData';
+
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 
@@ -22,6 +25,11 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
+    }
+
+    componentDidMount() {
+        console.log('ExperiencePageData: ', ExperiencePageData.PageTemplates);
+        // this.props.dxExperienceCardTemplateFetchAction(ExperienceCardData.CardTemplates);
     }
 
     handleClickCate = (activeTab) => {
