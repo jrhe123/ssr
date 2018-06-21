@@ -5,6 +5,7 @@ import ExperiencePageData from '../../../../../data/ExperiencePageData';
 
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
+import PageTemplate from '../presentation/PageTemplate';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -127,7 +128,9 @@ class ExperiencePages extends Component {
                                 <div style={templateContainerStyle}>
                                     {
                                         this.props.pageTemplates.map((template, index) => (
-                                            <div>some template</div>
+                                            <PageTemplate 
+                                                template={template}
+                                            />
                                         ))
                                     }
                                 </div>

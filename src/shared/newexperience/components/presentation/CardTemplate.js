@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
-import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
 
 // Libraries
 import Button from '@material-ui/core/Button';
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
+import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 
 class CardTemplate extends Component {
