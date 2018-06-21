@@ -47,6 +47,8 @@ class ExperiencePages extends Component {
             itemContainerStyle,
             searchBarContainerStyle,
             templateContainerStyle,
+
+            rightContainerStyle,
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
@@ -123,7 +125,12 @@ class ExperiencePages extends Component {
                     </DropdownMenu>
                 </div>
 
-                
+                <div
+                    className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                    style={rightContainerStyle}>
+
+                    here
+                </div>
             </div>
         )
     }
@@ -174,6 +181,10 @@ const styles = {
     templateContainerStyle: {
         overflowY: 'auto',
         height: `calc(100vh - ${sizes.headerHeight} - 54px)`,
+    },
+
+    rightContainerStyle: {
+        flex: 2,
     },
 }
 
