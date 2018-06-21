@@ -14,6 +14,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
 
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
 } from './constants';
 
@@ -128,6 +129,15 @@ export const dxExperiencePageTemplateMenuUpdate = (toggle) => {
         type: EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
         payload: {
             toggle,
+        },
+    }
+}
+
+export const dxExperiencePageTemplateFetch = (templates) => {
+    return {
+        type: EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
+        payload: {
+            templates,
         },
     }
 }

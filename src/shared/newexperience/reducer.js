@@ -15,6 +15,7 @@ import {
 
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
+    EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED
 } from './constants';
 
 // helpers
@@ -22,6 +23,7 @@ import { search_object_index_by_value } from '../helpers'
 
 const initialState = {
     cardTemplates: [],
+    pageTemplates: [],
     experience: {
         type: '0',
         index: '0',
@@ -129,6 +131,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED:
             tmpExperience.activePageTemplateOptionIndex = payload.index;
             updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED:
+            updated.pageTemplates = payload.templates;
             return updated;
 
         default:

@@ -57,6 +57,10 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__FAILED,
+
+    EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
+    EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
+    EXPERIENCE_PAGE_TEMPLATE_FETCH__FAILED,
 } from './constants';
 
 // Experience type request
@@ -349,4 +353,25 @@ export function* dxExperiencePageTemplateOptionSelect(action) {
 
 export function* dxExperiencePageTemplateOptionSelectSaga() {
     yield takeEvery(EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED, dxExperiencePageTemplateOptionSelect);
+}
+
+// Experience page template fetch
+export function* dxExperiencePageTemplateFetch(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
+            payload: {
+                templates: action.payload.templates,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_TEMPLATE_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageTemplateFetchSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED, dxExperiencePageTemplateFetch);
 }

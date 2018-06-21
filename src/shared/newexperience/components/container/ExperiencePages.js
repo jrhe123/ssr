@@ -13,7 +13,7 @@ import DropdownMenu from 'react-dd-menu';
 // redux
 import { connect } from 'react-redux';
 import {
-
+    dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction
 } from '../../actions';
 
 // constants
@@ -28,8 +28,7 @@ class ExperiencePages extends Component {
     }
 
     componentDidMount() {
-        console.log('ExperiencePageData: ', ExperiencePageData.PageTemplates);
-        // this.props.dxExperienceCardTemplateFetchAction(ExperienceCardData.CardTemplates);
+        this.props.dxExperiencePageTemplateFetchAction(ExperiencePageData.PageTemplates);
     }
 
     handleClickCate = (activeTab) => {
@@ -126,7 +125,11 @@ class ExperiencePages extends Component {
                                     />
                                 </div>
                                 <div style={templateContainerStyle}>
-                                    items here
+                                    {
+                                        this.props.pageTemplates.map((template, index) => (
+                                            <div>some template</div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -198,12 +201,13 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
+        pageTemplates: state.newexperience.pageTemplates,
         experience: state.newexperience.experience,
     }
 }
 
 const dispatchToProps = {
-
+    dxExperiencePageTemplateFetchAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePages);

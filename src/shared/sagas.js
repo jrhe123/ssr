@@ -28,6 +28,7 @@ import {
 
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
+    dxExperiencePageTemplateFetchSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -51,6 +52,7 @@ export default function* rootSaga() {
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),
         dxExperienceTitleUpdateSaga(),
+        
         dxExperienceCardTemplateMenuToggleSaga(),
         dxExperienceCardTemplateFetchSaga(),
         dxExperienceCardTemplateSelectSaga(),
@@ -59,8 +61,10 @@ export default function* rootSaga() {
         dxExperienceCardTemplateUpdateContentSaga(),
         dxExperienceCardTemplateSaveSaga(),
         dxExperienceCardTemplateRemoveSaga(),
+
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
+        dxExperiencePageTemplateFetchSaga(),
         
         // Global
         dxValidateTokenSaga(),
