@@ -215,4 +215,4 @@ const dispatchToProps = {
     dxExperiencePageTemplateFetchAction,
 }
 
-export default connect(stateToProps, dispatchToProps)(ExperiencePages);
+export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));
