@@ -3,6 +3,7 @@ import {
     EXPERIENCE_TYPE_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
     EXPERIENCE_TITLE_UPDATE_REQUESTED,
+
     EXPERIENCE_CARD_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SELECT_REQUESTED,
@@ -11,6 +12,8 @@ import {
     EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
+
+    EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -113,9 +116,17 @@ export const dxExperienceCardTemplateSave = () => {
 }
 
 export const dxExperienceCardTemplateRemove = () => {
-    console.log('action called');
     return {
         type: EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxExperiencePageTemplateOptionSelect = (index) => {
+    return {
+        type: EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
+        payload: {
+            index,
+        },
     }
 }

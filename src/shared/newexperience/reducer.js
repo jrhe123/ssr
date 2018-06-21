@@ -3,6 +3,7 @@ import {
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
     EXPERIENCE_TITLE_UPDATE__SUCCEEDED,
+
     EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED,
@@ -11,6 +12,8 @@ import {
     EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
+
+    EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -27,6 +30,7 @@ const initialState = {
         cardTemplate: null,
 
         isPageTemplateMenuOpen: true,
+        activePageTemplateOptionIndex: 0,
 
         experienceTitle: null,
         cardTitle: null,
@@ -113,6 +117,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.isCardTemplateSaved = false;
             tmpExperience.cardTemplate = null;
             tmpExperience.cardTitle = '';
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED:
+            tmpExperience.activePageTemplateOptionIndex = payload.index;
             updated.experience = tmpExperience;
             return updated;
 

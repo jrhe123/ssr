@@ -11,8 +11,11 @@ import { connect } from 'react-redux';
 import {
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTitleUpdate as dxExperienceTitleUpdateAction,
+
     dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSave as dxExperienceCardTemplateSaveAction,
+
+    dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -89,6 +92,10 @@ class ExperienceNavigator extends Component {
         this.props.dxExperienceCardTemplateMenuUpdateAction(toggle);
     }
 
+    handleSelectPageElemOption = (val) => {
+        this.props.dxExperiencePageTemplateOptionSelectAction(val);
+    }
+
     handleTitleChange = (e) => {
         const {
             experience,
@@ -113,6 +120,7 @@ class ExperienceNavigator extends Component {
                 handleSaveBtnClick={() => this.handleSaveBtnClick()}
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
+                handleSelectPageElemOption={(val) => this.handleSelectPageElemOption(val)}
             />
         )
     }
@@ -130,6 +138,7 @@ const dispatchToProps = {
     dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSaveAction,
+    dxExperiencePageTemplateOptionSelectAction,
 
     dxAlertAction,
 }

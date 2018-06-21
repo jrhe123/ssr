@@ -48,3 +48,7 @@ body{
 .dx_card_template_bottom_bar_menu>div.dd-menu-items{
     width: 90px;
 }
+
+.dx_flow_tab{
+    transition: background-color .2s linear;
+}

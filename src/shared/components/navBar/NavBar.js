@@ -98,7 +98,6 @@ class NavBar extends Component {
             userInfoStyle,
             bellStyle,
 
-
             mainWrapperV2Style,
             leftBtnContainerStyle,
             backBtnContainerStyle,
@@ -112,7 +111,9 @@ class NavBar extends Component {
             layoutSubLabelStyle,
             rightBtnContainerStyle,
             btnStyle,
+
             pageElementContainerStyle,
+            activePageElemContainerStyle,
             leftElemContainerStyle,
             pageElemTitleContainerStyle,
             pageElemTitleStyle,
@@ -293,7 +294,9 @@ class NavBar extends Component {
                                 experience.index == 2 ?
                                 (
                                     <div style={pageElementContainerStyle}>
-                                        <div style={leftElemContainerStyle}>
+                                        <div className="dx_flow_tab"
+                                            style={Object.assign({}, leftElemContainerStyle, experience.activePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
+                                            onClick={() => this.props.handleSelectPageElemOption(0)}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
                                                     <div style={pageElemTitleContainerStyle}>
@@ -305,7 +308,9 @@ class NavBar extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={rightElemContainerStyle}>
+                                        <div className="dx_flow_tab" 
+                                            style={Object.assign({}, rightElemContainerStyle, experience.activePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
+                                            onClick={() => this.props.handleSelectPageElemOption(1)}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
                                                     <div style={pageElemTitleContainerStyle}>
@@ -534,6 +539,9 @@ const styles = {
         display: 'flex',
         flexDirection: 'row'
     },
+    activePageElemContainerStyle: {
+        backgroundColor: colors.lightBlueColor
+    },
     leftElemContainerStyle: {
         flex: 1,
         border: '1px solid',
@@ -541,6 +549,7 @@ const styles = {
         borderColor: colors.borderColor,
         paddingLeft: 12,
         paddingRight: 12,
+        cursor: 'pointer',
     },
     pageElemTitleContainerStyle: {
         flex: 1,
@@ -568,6 +577,7 @@ const styles = {
         borderColor: colors.borderColor,
         paddingLeft: 12,
         paddingRight: 12,
+        cursor: 'pointer',
     },
 }
 
