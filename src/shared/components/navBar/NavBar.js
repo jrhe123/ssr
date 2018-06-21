@@ -80,6 +80,7 @@ class NavBar extends Component {
             mainWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
+            txtCenterStyle,
             leftContainerStyle,
             imgStyle,
             midContainerStyle,
@@ -113,6 +114,10 @@ class NavBar extends Component {
             btnStyle,
             pageElementContainerStyle,
             leftElemContainerStyle,
+            pageElemTitleContainerStyle,
+            pageElemTitleStyle,
+            pageElemSubtitleContainerStyle,
+            pageElemSubtitleStyle,
             rightElemContainerStyle,
         } = styles;
 
@@ -141,7 +146,7 @@ class NavBar extends Component {
                     <div style={mainWrapperStyle}>
                         <div style={leftContainerStyle}>
                             <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <img
                                         style={imgStyle}
                                         src={require('../../../../assets/images/logo.png')}
@@ -153,7 +158,7 @@ class NavBar extends Component {
                         <div style={midContainerStyle}>
                             <div style={midTopContainerStyle}>
                                 <div style={tableContainerStyle}>
-                                    <div style={tableWrapperStyle}>
+                                    <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                         <div style={smallNavContainerStyle}>
                                             <Link
                                                 style={Object.assign({}, smallNavStyle, firstNavStyle)}
@@ -197,14 +202,14 @@ class NavBar extends Component {
                         <div style={rightContainerStyle}>
                             <div style={rightTopContainerStyle}>
                                 <div style={tableContainerStyle}>
-                                    <div style={tableWrapperStyle}>
+                                    <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                         <Link style={infoLabelStyle} to="/news">UPGRADE NOW</Link>
                                     </div>
                                 </div>
                             </div>
                             <div style={rightBottomContainerStyle}>
                                 <div style={tableContainerStyle}>
-                                    <div style={tableWrapperStyle}>
+                                    <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                         <DropdownMenu
                                             isOpen={this.state.isMenuOpen}
                                             close={this.close}
@@ -240,7 +245,7 @@ class NavBar extends Component {
 
                         <div style={leftBtnContainerStyle}>
                             <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <div style={backBtnContainerStyle}>
                                         <Button
                                             variant="back"
@@ -288,7 +293,18 @@ class NavBar extends Component {
                                 experience.index == 2 ?
                                 (
                                     <div style={pageElementContainerStyle}>
-                                        <div style={leftElemContainerStyle}>1</div>
+                                        <div style={leftElemContainerStyle}>
+                                            <div style={tableContainerStyle}>
+                                                <div style={tableWrapperStyle}>
+                                                    <div style={pageElemTitleContainerStyle}>
+                                                        <p style={pageElemTitleStyle}>Page Elements</p>
+                                                    </div>
+                                                    <div style={pageElemSubtitleContainerStyle}>
+                                                        <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div style={rightElemContainerStyle}>2</div>
                                     </div>
                                 )
@@ -296,7 +312,7 @@ class NavBar extends Component {
                                 null
                             }
                             <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <DxInput
                                         placeholder={placeholder}
                                         handleValChange={(e) => this.handleInputChange(e)}
@@ -311,7 +327,7 @@ class NavBar extends Component {
 
                         <div style={rightBtnContainerStyle}>
                             <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <Button
                                         variant="save experience"
                                         style={btnStyle}
@@ -351,6 +367,8 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
+    },
+    txtCenterStyle: {
         textAlign: 'center'
     },
     leftContainerStyle: {
@@ -508,13 +526,32 @@ const styles = {
     leftElemContainerStyle: {
         flex: 1,
         border: '1px solid',
+        borderTop: 'none',
         borderColor: colors.borderColor,
         paddingLeft: 6,
         paddingRight: 6,
     },
+    pageElemTitleContainerStyle: {
+        flex: 1,
+        paddingTop: 9,
+        paddingBottom: 9
+    },
+    pageElemTitleStyle: {
+        margin: 0,
+        fontSize: fonts.h4
+    },
+    pageElemSubtitleContainerStyle: {
+        flex: 1
+    },
+    pageElemSubtitleStyle: {
+        margin: 0,
+        fontSize: fonts.h5,
+        color: colors.lightGreyColor
+    },
     rightElemContainerStyle: {
         flex: 1,
         border: '1px solid',
+        borderTop: 'none',
         borderLeft: 'none',
         borderColor: colors.borderColor,
         paddingLeft: 6,
