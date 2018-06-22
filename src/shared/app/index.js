@@ -39,7 +39,7 @@ const ProtectedRouteWithParams
     = ({ isAuthenticated, route, ...props }) => 
         isAuthenticated
             ? <Route {...props} />
-            : <Redirect to={"/"+route+'/'+props.computedMatch.params.experienceType} />;
+            : <Redirect to={"/"+route+'/'+props.computedMatch.params.param} />;
 
 class App extends Component {
 
@@ -90,7 +90,7 @@ class App extends Component {
                         isAuthenticated={isAuthenticated}
                         route="new_experience"
                         exact
-                        path="/new_experience/:experienceType(0|1)"
+                        path="/new_experience/:param(0|1)"
                         component={Routes.NewExperiencePage}
                     />
 
