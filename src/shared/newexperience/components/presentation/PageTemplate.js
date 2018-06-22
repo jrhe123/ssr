@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
 
 // Libraries
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SignalCellular0Bar from '@material-ui/icons/SignalCellular0Bar';
 import Wifi from '@material-ui/icons/Wifi';
 import Bluetooth from '@material-ui/icons/Bluetooth';
 import BatteryFull from '@material-ui/icons/BatteryFull';
-
+import MoreVert from '@material-ui/icons/MoreVert';
+import Search from '@material-ui/icons/Search';
 
 // constants
 import colors from '../../../styles/colors';
@@ -67,6 +69,10 @@ class PageTemplate extends Component {
             statusbarIconStyle,
             statusbarLabelStyle,
             toolbarContainerStyle,
+            leftToolbarContainerStyle,
+            leftToolbarWrapperStyle,
+            rightToolbarContainerStyle,
+            rightToolbarWrapperStyle,
             splashContentContainerStyle,
         } = styles;
 
@@ -173,7 +179,7 @@ class PageTemplate extends Component {
                         <div style={midStatusContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <p style={Object.assign({}, txtCenterStyle, statusbarLabelStyle, {width: '100%'})}>9:41 AM</p>
+                                    <p style={Object.assign({}, txtCenterStyle, statusbarLabelStyle, { width: '100%' })}>9:41 AM</p>
                                 </div>
                             </div>
                         </div>
@@ -196,8 +202,34 @@ class PageTemplate extends Component {
                             </div>
                         </div>
                     </div>
-                    <div style={toolbarContainerStyle}>tool bar</div>
-                    <div style={splashContentContainerStyle}>content</div>
+                    <div style={toolbarContainerStyle}>
+                        <div style={leftToolbarContainerStyle}>
+                            <div style={leftToolbarWrapperStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <KeyboardArrowLeft />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={rightToolbarContainerStyle}>
+                            <div style={rightToolbarWrapperStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <Search />
+                                        <MoreVert />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={splashContentContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <p style={Object.assign({}, txtStyle, txtCenterStyle)}>Splash image with page title</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         } else if (template.Type == 'VIDEO') {
@@ -237,7 +269,7 @@ class PageTemplate extends Component {
 const styles = {
 
     mainContainerStyle: {
-        marginBottom: 24
+        marginBottom: 24,        
     },
     txtCenterStyle: {
         textAlign: 'center'
@@ -325,6 +357,7 @@ const styles = {
     splashContainerStyle: {
         height: 120,
         cursor: 'pointer',
+        color: colors.whiteColor,
     },
     statusbarContainerStyle: {
         height: 24,
@@ -366,10 +399,22 @@ const styles = {
     },
     toolbarContainerStyle: {
         height: 24,
-        backgroundColor: 'green',
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    leftToolbarContainerStyle: {
+        flex: 1
+    },
+    leftToolbarWrapperStyle: {
+        float: 'left'
+    },
+    rightToolbarContainerStyle: {
+        flex: 1
+    },
+    rightToolbarWrapperStyle: {
+        float: 'right'
     },
     splashContentContainerStyle: {
-        backgroundColor: 'blue',
         height: 72,
     },
 }
