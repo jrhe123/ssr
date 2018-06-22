@@ -33,6 +33,7 @@ class PageTemplate extends Component {
     renderPage = (template) => {
 
         const {
+            pageContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
             leftImageContainerStyle,
@@ -47,12 +48,16 @@ class PageTemplate extends Component {
             expandIconContainerStyle,
             expandIconStyle,
             bottomDescContainerStyle,
+            splashContainerStyle,
+            statusbarContainerStyle,
+            toolbarContainerStyle,
+            splashContentContainerStyle,
         } = styles;
 
         let card;
         if (template.Type == 'EDITOR') {
             card = (
-                <div>
+                <div style={pageContainerStyle}>
                     <div style={leftImageContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
@@ -74,7 +79,7 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'BUTTON') {
             card = (
-                <div style={btnPageContainerStyle}>
+                <div style={Object.assign({}, pageContainerStyle, btnPageContainerStyle)}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={topBtnContainerStyle}>
@@ -108,7 +113,7 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'EMBED_PDF') {
             card = (
-                <div>
+                <div style={Object.assign({}, pageContainerStyle)}>
                     <div style={leftImageContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
@@ -130,11 +135,19 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'SPLASH') {
             card = (
-                <div>SPLASH</div>
+                <div style={Object.assign({}, pageContainerStyle)}>
+                    <div style={splashContainerStyle}>
+                        <div style={statusbarContainerStyle}>status bar</div>
+                        <div style={toolbarContainerStyle}>tool bar</div>
+                        <div style={splashContentContainerStyle}>content</div>
+                    </div>
+                </div>
             )
         } else if (template.Type == 'VIDEO') {
             card = (
-                <div>VIDEO</div>
+                <div style={Object.assign({}, pageContainerStyle)}>
+                    VIDEO
+                </div>
             )
         }
         return card;
@@ -150,12 +163,11 @@ class PageTemplate extends Component {
 
         const {
             mainContainerStyle,
-            pageContainerStyle,
         } = styles;
 
         return connectDragSource(
             <div style={mainContainerStyle}>
-                <div style={Object.assign({}, pageContainerStyle, { opacity })}
+                <div style={Object.assign({}, {width: 'calc(100% - 24px)', margin: '0 auto'} ,{ opacity })}
                     className="dx_page"
                 >
                     {this.renderPage(template)}
@@ -181,10 +193,8 @@ const styles = {
         verticalAlign: 'middle',
     },
     pageContainerStyle: {
-        width: 'calc(100% - 24px)',
         height: 90,
         cursor: 'pointer',
-        margin: '0 auto'
     },
     leftImageContainerStyle: {
         display: 'inline-block',
@@ -245,6 +255,22 @@ const styles = {
         marginTop: 6,
         paddingLeft: 12,
         paddingRight: 12
+    },
+    splashContainerStyle: {
+        height: 90,
+        backgroundColor: 'red'
+    },
+    statusbarContainerStyle: {
+        height: 18,
+        backgroundColor: 'yellow',
+    },
+    toolbarContainerStyle: {
+        height: 18,
+        backgroundColor: 'green',
+    },
+    splashContentContainerStyle: {
+        backgroundColor: 'blue',
+        height: 54,
     },
 }
 
