@@ -10,6 +10,7 @@ import Bluetooth from '@material-ui/icons/Bluetooth';
 import BatteryFull from '@material-ui/icons/BatteryFull';
 import MoreVert from '@material-ui/icons/MoreVert';
 import Search from '@material-ui/icons/Search';
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 
 // constants
 import colors from '../../../styles/colors';
@@ -77,6 +78,9 @@ class PageTemplate extends Component {
             overlayContainerStyle,
             overlayWrapperStyle,
             overlayImgStyle,
+            playIconStyle,
+            videoOverlayContainerStyle,
+            videoOverlayImgStyle,
         } = styles;
 
         let card;
@@ -245,8 +249,23 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'VIDEO') {
             card = (
-                <div style={Object.assign({}, pageContainerStyle)}>
-                    VIDEO
+                <div style={videoOverlayContainerStyle}>
+                    <img
+                        style={videoOverlayImgStyle}
+                        src={require('../../../../../assets/images/demo.jpg')}
+                    />
+                    <div style={overlayWrapperStyle}>
+                        <div style={Object.assign({}, pageContainerStyle)}>
+                            <div style={Object.assign({}, tableContainerStyle)}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
+                                    <PlayCircleOutline
+                                        style={Object.assign({}, playIconStyle, { color: colors.whiteColor })}
+                                        onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }
@@ -445,6 +464,18 @@ const styles = {
     },
     overlayImgStyle: {
         height: 120,
+        width: '100%',
+    },
+    playIconStyle: {
+        fontSize: 40
+    },
+    videoOverlayContainerStyle: {
+        position: 'relative',
+        height: 90,
+        width: '100%',
+    },
+    videoOverlayImgStyle: {
+        height: 90,
         width: '100%',
     }
 }
