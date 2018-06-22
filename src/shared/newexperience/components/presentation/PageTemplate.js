@@ -74,6 +74,9 @@ class PageTemplate extends Component {
             rightToolbarContainerStyle,
             rightToolbarWrapperStyle,
             splashContentContainerStyle,
+            overlayContainerStyle,
+            overlayWrapperStyle,
+            overlayImgStyle,
         } = styles;
 
         let card;
@@ -157,76 +160,84 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'SPLASH') {
             card = (
-                <div style={splashContainerStyle}>
-                    <div style={statusbarContainerStyle}>
-                        <div style={leftStatusContainerStyle}>
-                            <div style={leftStatusWrapperStyle}>
-                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
-                                    <SignalCellular0Bar
-                                        style={statusbarIconStyle}
-                                    />
+                <div style={overlayContainerStyle}>
+                    <img
+                        style={overlayImgStyle}
+                        src={require('../../../../../assets/images/demo.jpg')}
+                    />
+                    <div style={overlayWrapperStyle}>
+                        <div style={splashContainerStyle}>
+                            <div style={statusbarContainerStyle}>
+                                <div style={leftStatusContainerStyle}>
+                                    <div style={leftStatusWrapperStyle}>
+                                        <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                            <SignalCellular0Bar
+                                                style={statusbarIconStyle}
+                                            />
+                                        </div>
+                                        <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                            <span style={statusbarLabelStyle}>Sketch</span>
+                                        </div>
+                                        <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                            <Wifi
+                                                style={statusbarIconStyle}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
-                                    <span style={statusbarLabelStyle}>Sketch</span>
+                                <div style={midStatusContainerStyle}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <p style={Object.assign({}, txtCenterStyle, statusbarLabelStyle, { width: '100%' })}>9:41 AM</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
-                                    <Wifi
-                                        style={statusbarIconStyle}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div style={midStatusContainerStyle}>
-                            <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
-                                    <p style={Object.assign({}, txtCenterStyle, statusbarLabelStyle, { width: '100%' })}>9:41 AM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={rightStatusContainerStyle}>
-                            <div style={rightStatusWrapperStyle}>
-                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
-                                    <Bluetooth
-                                        style={statusbarIconStyle}
-                                    />
-                                </div>
-                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
-                                    <span style={statusbarLabelStyle}>100%</span>
-                                </div>
-                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
-                                    <BatteryFull
-                                        className="dx_battery_icon"
-                                        style={statusbarIconStyle}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={toolbarContainerStyle}>
-                        <div style={leftToolbarContainerStyle}>
-                            <div style={leftToolbarWrapperStyle}>
-                                <div style={tableContainerStyle}>
-                                    <div style={tableWrapperStyle}>
-                                        <KeyboardArrowLeft />
+                                <div style={rightStatusContainerStyle}>
+                                    <div style={rightStatusWrapperStyle}>
+                                        <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                            <Bluetooth
+                                                style={statusbarIconStyle}
+                                            />
+                                        </div>
+                                        <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                            <span style={statusbarLabelStyle}>100%</span>
+                                        </div>
+                                        <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                            <BatteryFull
+                                                className="dx_battery_icon"
+                                                style={statusbarIconStyle}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div style={rightToolbarContainerStyle}>
-                            <div style={rightToolbarWrapperStyle}>
-                                <div style={tableContainerStyle}>
-                                    <div style={tableWrapperStyle}>
-                                        <Search />
-                                        <MoreVert />
+                            <div style={toolbarContainerStyle}>
+                                <div style={leftToolbarContainerStyle}>
+                                    <div style={leftToolbarWrapperStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <KeyboardArrowLeft />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={rightToolbarContainerStyle}>
+                                    <div style={rightToolbarWrapperStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <Search />
+                                                <MoreVert />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div style={splashContentContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={Object.assign({}, txtStyle, txtCenterStyle)}>Splash image with page title</p>
+                            <div style={splashContentContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={Object.assign({}, txtStyle, txtCenterStyle)}>Splash image with page title</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -269,7 +280,7 @@ class PageTemplate extends Component {
 const styles = {
 
     mainContainerStyle: {
-        marginBottom: 24,        
+        marginBottom: 24,
     },
     txtCenterStyle: {
         textAlign: 'center'
@@ -417,6 +428,25 @@ const styles = {
     splashContentContainerStyle: {
         height: 72,
     },
+    overlayContainerStyle: {
+        position: 'relative',
+        height: 120,
+        width: '100%',
+    },
+    overlayWrapperStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        display: 'block',
+        background: 'rgba(0, 0, 0, .4)',
+        zIndex: 99
+    },
+    overlayImgStyle: {
+        height: 120,
+        width: '100%',
+    }
 }
 
 export default DragSource('template', itemSource, collect)(PageTemplate);
