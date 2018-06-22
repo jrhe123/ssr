@@ -348,7 +348,7 @@ const styles = {
         flex: 1,
     },
     btnLabelStyle: {
-        fontSize: fonts.h4,
+        fontSize: fonts.h5,
         paddingLeft: 6,
         margin: 0,
     },
