@@ -5,8 +5,10 @@ import ExperiencePageData from '../../../../../data/ExperiencePageData';
 
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
+
 import PageTemplate from '../presentation/PageTemplate';
-import Board from './Board';
+import PhoneTarget from '../presentation/PhoneTarget';
+import PhoneElement from '../presentation/PhoneElement';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -25,10 +27,49 @@ import sizes from '../../../styles/sizes';
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
+const update = require('immutability-helper');
+
 class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
+        items: [
+            { id: 1, name: 'Item 1' },
+            { id: 2, name: 'Item 2' },
+            { id: 3, name: 'Item 3' },
+            { id: 4, name: 'Item 4' },
+        ],
+        cards: [
+            {
+                id: 1,
+                text: 'Write a cool JS library',
+            },
+            {
+                id: 2,
+                text: 'Make it generic enough',
+            },
+            {
+                id: 3,
+                text: 'Write README',
+            },
+            {
+                id: 4,
+                text: 'Create some examples',
+            },
+            {
+                id: 5,
+                text:
+                    'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
+            },
+            {
+                id: 6,
+                text: '???',
+            },
+            {
+                id: 7,
+                text: 'PROFIT',
+            },
+        ],
     }
 
     componentDidMount() {
@@ -39,6 +80,27 @@ class ExperiencePages extends Component {
         this.setState({
             activeTab
         })
+    }
+
+    deleteItem = (id) => {
+        this.setState(prevState => {
+            let cards = prevState.cards;
+            cards.push({ id: cards.length + 1, text: `Card ${cards.length + 1}` });
+            return { cards };
+        });
+    }
+
+    moveCard = (dragIndex, hoverIndex) => {
+        const { cards } = this.state
+        const dragCard = cards[dragIndex]
+
+        this.setState(
+            update(this.state, {
+                cards: {
+                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+                },
+            }),
+        )
     }
 
     render() {
@@ -129,13 +191,13 @@ class ExperiencePages extends Component {
                                     />
                                 </div>
                                 <div style={templateContainerStyle}>
-                                    {
+                                    {/* {
                                         this.props.pageTemplates.map((template, index) => (
                                             <PageTemplate 
                                                 template={template}
                                             />
                                         ))
-                                    }
+                                    } */}
                                 </div>
                             </div>
                         </div>
@@ -146,7 +208,32 @@ class ExperiencePages extends Component {
                     className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    <Board />
+                    {/* <Board /> */}
+                    <div className="app-container">
+                        <div className="item-container">
+                            {this.state.items.map((item, index) => (
+                                <PageTemplate
+                                    key={item.id}
+                                    item={item}
+                                    handleDrop={(id) => this.deleteItem(id)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="card-container">
+                        <PhoneTarget />
+                        {this.state.cards.map((card, i) => (
+                            <PhoneElement
+                                key={card.id}
+                                index={i}
+                                id={card.id}
+                                text={card.text}
+                                moveCard={this.moveCard}
+                            />
+                        ))}
+                    </div>
+
                 </div>
             </div>
         )

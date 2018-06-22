@@ -30,7 +30,7 @@ class Knight extends Component {
                     cursor: 'move'
                 }}
             >
-                ♘
+                <input type="text" value="123"/>
             </div>
         )
     }

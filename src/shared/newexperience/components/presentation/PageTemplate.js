@@ -1,73 +1,38 @@
 import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
 
-// constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+const itemSource = {
+    beginDrag(props) {
+        return props.item;
+    },
+    endDrag(props, monitor, component) {
+        if (!monitor.didDrop()) {
+            return;
+        }
+
+        return props.handleDrop(props.item.id);
+    }
+}
+
+function collect(connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
+        isDragging: monitor.isDragging(),
+    }
+}
 
 class PageTemplate extends Component {
-
-    renderPage = (template) => {
-        return (
-            <div>page here</div>
-        )
-    }
-
     render() {
+        const { isDragging, connectDragSource, item } = this.props;
+        const opacity = isDragging ? 0 : 1;
 
-        const {
-            template,
-        } = this.props;
-
-        const {
-            mainContainerStyle,
-            pageContainerStyle,
-        } = styles;
-
-        return (
-            <div style={mainContainerStyle}>
-                <div style={pageContainerStyle}>
-                    {
-                        this.renderPage(template)
-                    }
-                </div>
+        return connectDragSource(
+            <div className="item" style={{ opacity }}>
+                <span>{item.name}</span>
             </div>
-        )
+        );
     }
 }
 
-const styles = {
-
-    mainContainerStyle: {
-        marginBottom: 24
-    },
-    tableContainerStyle: {
-        position: 'relative',
-        display: 'table',
-        height: '100%',
-        width: '100%',
-    },
-    tableWrapperStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
-        textAlign: 'center',
-        paddingLeft: 6,
-        paddingRight: 6
-    },
-    titleContainerStyle: {
-        marginBottom: 6,
-        paddingLeft: 12,
-        paddingRight: 12,
-    },
-    titleStyle: {
-        fontSize: fonts.h4,
-        marginBottom: 0
-    },
-    pageContainerStyle: {
-        width: 'calc(100% - 24px)',
-        height: 90,
-        margin: '0 auto',
-        cursor: 'pointer'
-    },
-}
-
-export default PageTemplate;
+export default DragSource('item', itemSource, collect)(PageTemplate);
