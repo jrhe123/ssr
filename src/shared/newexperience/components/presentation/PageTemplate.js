@@ -39,6 +39,9 @@ class PageTemplate extends Component {
 
         const {
             pageContainerStyle,
+            txtCenterStyle,
+            marginLeftStyle,
+            marginRightStyle,
             tableContainerStyle,
             tableWrapperStyle,
             leftImageContainerStyle,
@@ -56,8 +59,11 @@ class PageTemplate extends Component {
             splashContainerStyle,
             statusbarContainerStyle,
             leftStatusContainerStyle,
+            leftStatusWrapperStyle,
             midStatusContainerStyle,
             rightStatusContainerStyle,
+            rightStatusWrapperStyle,
+            iconContainerStyle,
             statusbarIconStyle,
             statusbarLabelStyle,
             toolbarContainerStyle,
@@ -148,25 +154,46 @@ class PageTemplate extends Component {
                 <div style={splashContainerStyle}>
                     <div style={statusbarContainerStyle}>
                         <div style={leftStatusContainerStyle}>
-                            <SignalCellular0Bar 
-                                style={statusbarIconStyle}
-                            />
-                            <span style={statusbarLabelStyle}>Sketch</span>
-                            <Wifi 
-                                style={statusbarIconStyle}
-                            />
+                            <div style={leftStatusWrapperStyle}>
+                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                    <SignalCellular0Bar
+                                        style={statusbarIconStyle}
+                                    />
+                                </div>
+                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                    <span style={statusbarLabelStyle}>Sketch</span>
+                                </div>
+                                <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
+                                    <Wifi
+                                        style={statusbarIconStyle}
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div style={midStatusContainerStyle}>
-                            <span style={statusbarLabelStyle}>9:41 AM</span>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <p style={Object.assign({}, txtCenterStyle, statusbarLabelStyle, {width: '100%'})}>9:41 AM</p>
+                                </div>
+                            </div>
                         </div>
                         <div style={rightStatusContainerStyle}>
-                            <Bluetooth 
-                                style={statusbarIconStyle}
-                            />
-                            <span style={statusbarLabelStyle}>100%</span>
-                            <BatteryFull 
-                                style={statusbarIconStyle}
-                            />
+                            <div style={rightStatusWrapperStyle}>
+                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                    <Bluetooth
+                                        style={statusbarIconStyle}
+                                    />
+                                </div>
+                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                    <span style={statusbarLabelStyle}>100%</span>
+                                </div>
+                                <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
+                                    <BatteryFull
+                                        className="dx_battery_icon"
+                                        style={statusbarIconStyle}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div style={toolbarContainerStyle}>tool bar</div>
@@ -211,6 +238,15 @@ const styles = {
 
     mainContainerStyle: {
         marginBottom: 24
+    },
+    txtCenterStyle: {
+        textAlign: 'center'
+    },
+    marginLeftStyle: {
+        marginLeft: 3
+    },
+    marginRightStyle: {
+        marginRight: 3
     },
     tableContainerStyle: {
         position: 'relative',
@@ -292,12 +328,16 @@ const styles = {
     },
     statusbarContainerStyle: {
         height: 24,
-        backgroundColor: 'yellow',
         display: 'flex',
         flexDirection: 'row'
     },
     leftStatusContainerStyle: {
         flex: 1
+    },
+    leftStatusWrapperStyle: {
+        float: 'left',
+        height: 24,
+        display: 'flex',
     },
     midStatusContainerStyle: {
         flex: 1
@@ -305,12 +345,24 @@ const styles = {
     rightStatusContainerStyle: {
         flex: 1
     },
+    rightStatusWrapperStyle: {
+        float: 'right',
+        height: 24,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    iconContainerStyle: {
+        flex: 1,
+    },
     statusbarIconStyle: {
-        fontSize: 14
+        fontSize: 14,
+        display: 'inline-block',
+        marginTop: 6,
     },
     statusbarLabelStyle: {
         fontSize: fonts.h5,
-        margin: 0
+        display: 'inline-block',
+        margin: 0,
     },
     toolbarContainerStyle: {
         height: 24,
