@@ -3,6 +3,11 @@ import { DragSource } from 'react-dnd';
 
 // Libraries
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SignalCellular0Bar from '@material-ui/icons/SignalCellular0Bar';
+import Wifi from '@material-ui/icons/Wifi';
+import Bluetooth from '@material-ui/icons/Bluetooth';
+import BatteryFull from '@material-ui/icons/BatteryFull';
+
 
 // constants
 import colors from '../../../styles/colors';
@@ -50,6 +55,11 @@ class PageTemplate extends Component {
             bottomDescContainerStyle,
             splashContainerStyle,
             statusbarContainerStyle,
+            leftStatusContainerStyle,
+            midStatusContainerStyle,
+            rightStatusContainerStyle,
+            statusbarIconStyle,
+            statusbarLabelStyle,
             toolbarContainerStyle,
             splashContentContainerStyle,
         } = styles;
@@ -135,12 +145,32 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'SPLASH') {
             card = (
-                <div style={Object.assign({}, pageContainerStyle)}>
-                    <div style={splashContainerStyle}>
-                        <div style={statusbarContainerStyle}>status bar</div>
-                        <div style={toolbarContainerStyle}>tool bar</div>
-                        <div style={splashContentContainerStyle}>content</div>
+                <div style={splashContainerStyle}>
+                    <div style={statusbarContainerStyle}>
+                        <div style={leftStatusContainerStyle}>
+                            <SignalCellular0Bar 
+                                style={statusbarIconStyle}
+                            />
+                            <span style={statusbarLabelStyle}>Sketch</span>
+                            <Wifi 
+                                style={statusbarIconStyle}
+                            />
+                        </div>
+                        <div style={midStatusContainerStyle}>
+                            <span style={statusbarLabelStyle}>9:41 AM</span>
+                        </div>
+                        <div style={rightStatusContainerStyle}>
+                            <Bluetooth 
+                                style={statusbarIconStyle}
+                            />
+                            <span style={statusbarLabelStyle}>100%</span>
+                            <BatteryFull 
+                                style={statusbarIconStyle}
+                            />
+                        </div>
                     </div>
+                    <div style={toolbarContainerStyle}>tool bar</div>
+                    <div style={splashContentContainerStyle}>content</div>
                 </div>
             )
         } else if (template.Type == 'VIDEO') {
@@ -167,7 +197,7 @@ class PageTemplate extends Component {
 
         return connectDragSource(
             <div style={mainContainerStyle}>
-                <div style={Object.assign({}, {width: 'calc(100% - 24px)', margin: '0 auto'} ,{ opacity })}
+                <div style={Object.assign({}, { width: 'calc(100% - 24px)', margin: '0 auto' }, { opacity })}
                     className="dx_page"
                 >
                     {this.renderPage(template)}
@@ -257,20 +287,38 @@ const styles = {
         paddingRight: 12
     },
     splashContainerStyle: {
-        height: 90,
-        backgroundColor: 'red'
+        height: 120,
+        cursor: 'pointer',
     },
     statusbarContainerStyle: {
-        height: 18,
+        height: 24,
         backgroundColor: 'yellow',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    leftStatusContainerStyle: {
+        flex: 1
+    },
+    midStatusContainerStyle: {
+        flex: 1
+    },
+    rightStatusContainerStyle: {
+        flex: 1
+    },
+    statusbarIconStyle: {
+        fontSize: 14
+    },
+    statusbarLabelStyle: {
+        fontSize: fonts.h5,
+        margin: 0
     },
     toolbarContainerStyle: {
-        height: 18,
+        height: 24,
         backgroundColor: 'green',
     },
     splashContentContainerStyle: {
         backgroundColor: 'blue',
-        height: 54,
+        height: 72,
     },
 }
 
