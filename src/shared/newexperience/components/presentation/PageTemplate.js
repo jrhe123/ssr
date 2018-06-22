@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
 
+// Libraries
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -39,7 +42,10 @@ class PageTemplate extends Component {
             btnPageContainerStyle,
             topBtnContainerStyle,
             btnLabelContainerStyle,
+            btnLabelWrapperStyle,
             btnLabelStyle,
+            expandIconContainerStyle,
+            expandIconStyle,
             bottomDescContainerStyle,
         } = styles;
 
@@ -69,19 +75,32 @@ class PageTemplate extends Component {
         } else if (template.Type == 'BUTTON') {
             card = (
                 <div style={btnPageContainerStyle}>
-                    <div style={topBtnContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div style={topBtnContainerStyle}>
                                 <div style={btnLabelContainerStyle}>
-                                    <p style={btnLabelStyle}>Text for a button</p>
+                                    <div style={btnLabelWrapperStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={btnLabelStyle}>Text for a button</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={expandIconContainerStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <KeyboardArrowRight style={expandIconStyle} />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div style={bottomDescContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={txtStyle}>Connect another page with this button</p>
+                            <div style={bottomDescContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={txtStyle}>Connect another page with this button</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,8 +179,6 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        paddingLeft: 6,
-        paddingRight: 6
     },
     pageContainerStyle: {
         width: 'calc(100% - 24px)',
@@ -178,8 +195,9 @@ const styles = {
     rightTextContainerStyle: {
         display: 'inline-block',
         float: 'left',
-        width: 'calc(100% - 90px)',
+        width: 'calc(100% - 102px)',
         height: 90,
+        paddingRight: 12
     },
     imgStyle: {
         display: 'block',
@@ -188,30 +206,45 @@ const styles = {
         margin: '0 auto'
     },
     txtStyle: {
-        fontSize: fonts.h5
+        fontSize: fonts.h5,
+        margin: 0
     },
     btnPageContainerStyle: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: 90,
-    },
-    topBtnContainerStyle: {
-        flex: 2,
-    },
-    btnLabelContainerStyle: {
-        width: 'calc(100% - 24px)',
-        margin: '0 auto',
-        backgroundColor: colors.greyColor,
+        height: 78,
         paddingTop: 6,
         paddingBottom: 6
     },
+    topBtnContainerStyle: {
+        paddingLeft: 12,
+        paddingRight: 12
+    },
+    btnLabelContainerStyle: {
+        backgroundColor: colors.greyColor,
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 9,
+        paddingBottom: 9,
+    },
+    btnLabelWrapperStyle: {
+        flex: 1,
+    },
     btnLabelStyle: {
-
+        fontSize: fonts.h4,
+        paddingLeft: 6,
+        margin: 0,
+    },
+    expandIconContainerStyle: {
+        flex: 1
+    },
+    expandIconStyle: {
+        paddingRight: 6,
+        fontSize: 18,
+        float: 'right'
     },
     bottomDescContainerStyle: {
-        flex: 1,
-        paddingLeft: 6,
-        paddingRight: 6,
+        marginTop: 6,
+        paddingLeft: 12,
+        paddingRight: 12
     },
 }
 
