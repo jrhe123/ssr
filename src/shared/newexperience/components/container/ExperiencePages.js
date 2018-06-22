@@ -32,12 +32,6 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
-        items: [
-            { id: 1, name: 'Item 1' },
-            { id: 2, name: 'Item 2' },
-            { id: 3, name: 'Item 3' },
-            { id: 4, name: 'Item 4' },
-        ],
         cards: [
             {
                 id: 1,
@@ -81,7 +75,7 @@ class ExperiencePages extends Component {
         })
     }
 
-    deleteItem = (id) => {
+    deleteItem = () => {
         this.setState(prevState => {
             let cards = prevState.cards;
             cards.push({ id: cards.length + 1, text: `Card ${cards.length + 1}` });
@@ -190,13 +184,15 @@ class ExperiencePages extends Component {
                                     />
                                 </div>
                                 <div style={templateContainerStyle}>
-                                    {/* {
+                                    {
                                         this.props.pageTemplates.map((template, index) => (
-                                            <PageTemplate 
+                                            <PageTemplate
+                                                key={template.PageTemplateGUID}
                                                 template={template}
+                                                handleDrop={() => this.deleteItem()}
                                             />
                                         ))
-                                    } */}
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -206,18 +202,6 @@ class ExperiencePages extends Component {
                 <div
                     className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
-
-                    <div className="app-container">
-                        <div className="item-container">
-                            {this.state.items.map((item, index) => (
-                                <PageTemplate
-                                    key={item.id}
-                                    item={item}
-                                    handleDrop={(id) => this.deleteItem(id)}
-                                />
-                            ))}
-                        </div>
-                    </div>
 
                     <div className="card-container">
                         <PhoneTarget />
@@ -231,7 +215,6 @@ class ExperiencePages extends Component {
                             />
                         ))}
                     </div>
-
                 </div>
             </div>
         )

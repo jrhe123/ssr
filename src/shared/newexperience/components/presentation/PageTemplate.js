@@ -3,14 +3,14 @@ import { DragSource } from 'react-dnd';
 
 const itemSource = {
     beginDrag(props) {
-        return props.item;
+        return props.template;
     },
     endDrag(props, monitor, component) {
         if (!monitor.didDrop()) {
             return;
         }
 
-        return props.handleDrop(props.item.id);
+        return props.handleDrop(props.template.PageTemplateGUID);
     }
 }
 
@@ -24,15 +24,15 @@ function collect(connect, monitor) {
 
 class PageTemplate extends Component {
     render() {
-        const { isDragging, connectDragSource, item } = this.props;
+        const { isDragging, connectDragSource, template } = this.props;
         const opacity = isDragging ? 0 : 1;
 
         return connectDragSource(
-            <div className="item" style={{ opacity }}>
-                <span>{item.name}</span>
+            <div style={{ opacity }}>
+                <span>{template.Title}</span>
             </div>
         );
     }
 }
 
-export default DragSource('item', itemSource, collect)(PageTemplate);
+export default DragSource('template', itemSource, collect)(PageTemplate);

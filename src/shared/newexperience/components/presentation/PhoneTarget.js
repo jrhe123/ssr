@@ -22,4 +22,4 @@ class Target extends Component {
     }
 }
 
-export default DropTarget('item', {}, collect)(Target);
+export default DropTarget('template', {}, collect)(Target);
