@@ -11,6 +11,9 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 // data
 import ExperienceData from '../../../../../data/ExperienceData';
 
+// redux
+import { connect } from 'react-redux';
+
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
@@ -41,7 +44,7 @@ class Experience extends Component {
         })
     }
 
-    navigateToNewexperience = (val) => {
+    handleNavigateToNewexperience = (val) => {
         this.setState({
             newExperienceModalOpen: false
         });
@@ -117,13 +120,13 @@ class Experience extends Component {
                 <NewExperienceModal 
                     open={this.state.newExperienceModalOpen}
                     onCloseModal={() => this.handleCloseExperienceModal()}
-                    navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
+                    navigateToNewexperience={(val) => this.handleNavigateToNewexperience(val)}
                 />
             </div>
         )
     }
 }
-
+``
 const styles = {
     mainContainerStyle: {
         display: 'flex',
@@ -187,4 +190,14 @@ const styles = {
     },
 }
 
-export default Experience;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(Experience);

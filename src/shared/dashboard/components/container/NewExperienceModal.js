@@ -25,7 +25,7 @@ class NewExperienceModal extends Component {
         this.setState({ value: event.target.value });
     };
 
-    onCloseModal = () => {
+    handleCloseModal = () => {
         this.props.onCloseModal();
     };
 
@@ -52,7 +52,7 @@ class NewExperienceModal extends Component {
         return (
             <Modal
                 open={open}
-                onClose={() => this.onCloseModal()}
+                onClose={() => this.handleCloseModal()}
                 center
                 classNames={{
                     overlay: 'custom-overlay',

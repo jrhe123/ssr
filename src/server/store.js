@@ -10,6 +10,7 @@ import socketReducer from '../shared/socketReducer';
 import socketIoMiddleware from '../shared/socket';
 import loginReducer from '../shared/login/reducer';
 import dashboardReducer from '../shared/dashboard/reducer';
+import newexperienceReducer from '../shared/newexperience/reducer';
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +27,7 @@ export default (initialState) => {
             root: rootReducer,
             login: loginReducer,
             dashboard: dashboardReducer,
+            newexperience: newexperienceReducer,
         }),
         initialState,
         compose(applyMiddleware(...reduxMiddlewares, socketIoMiddleware)),

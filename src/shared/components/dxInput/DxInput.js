@@ -32,7 +32,7 @@ class DxInput extends Component{
                 placeholder={placeholder}
                 onChange={(e) => this.props.handleValChange(e)}
                 disabled={disabled ? true : false}
-                value={value}
+                value={value != null ? value : ''}
             />
         )
     }

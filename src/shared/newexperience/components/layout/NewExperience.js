@@ -2,28 +2,12 @@ import React, { Component } from 'react';
 
 // components
 import ExperienceNavigator from '../container/ExperienceNavigator';
-import ExperiencePanel from '../container/ExperiencePanel';
+import ExperienceControl from '../container/ExperienceControl';
 
 // constants
 import sizes from '../../../styles/sizes';
 
 class NewExperience extends Component {
-
-    state = {
-        experienceType: 0
-    }
-
-    componentDidMount(){
-        
-    }
-
-    handleGoback = () => {
-        this.props.history.push('/dashboard');
-    }
-
-    handleClickOption = () => {
-
-    }
 
     render() {
 
@@ -37,10 +21,7 @@ class NewExperience extends Component {
                     handleGoback={() => this.handleGoback()}
                 />
                 <div style={mainContainerStyle}>
-                    <ExperiencePanel 
-                        experienceType={this.props.experienceType}
-                        handleClickOption={(val) => this.handleClickOption(val)}
-                    />
+                    <ExperienceControl />
                 </div>
             </div>
         )
@@ -48,13 +29,11 @@ class NewExperience extends Component {
 }
 
 const styles = {
-
     mainContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
         minWidth: sizes.dxWidth,
     },
-
 }
 
 export default NewExperience;

@@ -13,12 +13,12 @@ class AlertBar extends Component {
             message,
         } = nextProps.alertBar;
 
-        if(!isDisplay){
+        if (!isDisplay) {
             return;
         }
-        if(isError){
+        if (isError) {
             Alert.error(`<p>${message}</p>`);
-        }else{
+        } else {
             Alert.success(`<p>${message}</p>`);
         }
     }
@@ -31,6 +31,7 @@ class AlertBar extends Component {
                 timeout={3000}
                 effect='jelly'
                 html={true}
+                onClose={() => this.props.handleAlertBarClose()}
             />
         )
     }
