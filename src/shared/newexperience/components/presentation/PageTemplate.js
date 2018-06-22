@@ -189,13 +189,13 @@ const styles = {
     leftImageContainerStyle: {
         display: 'inline-block',
         float: 'left',
-        width: 90,
+        width: 72,
         height: 90,
     },
     rightTextContainerStyle: {
         display: 'inline-block',
         float: 'left',
-        width: 'calc(100% - 102px)',
+        width: 'calc(100% - 84px)',
         height: 90,
         paddingRight: 12
     },
