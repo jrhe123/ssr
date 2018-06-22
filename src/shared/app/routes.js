@@ -4,3 +4,4 @@ import loadable from 'loadable-components';
 export const LoginPage = loadable(() => import('../login/LoginPage'));
 export const DashboardPage = loadable(() => import('../dashboard/DashboardPage'));
 export const NewExperiencePage = loadable(() => import('../newexperience/NewExperiencePage'));
+export const NewChannelPage = loadable(() => import('../newChannel/NewChannelPage'));

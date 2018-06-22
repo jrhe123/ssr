@@ -39,6 +39,13 @@ class Channel extends Component {
         })
     }
 
+    navigateToNewchannel = (val) => {
+        this.setState({
+            newChannelModalOpen: false
+        });
+        //this.props.history.push(`/new_channel/`+val)
+    }
+
     render() {
 
         const {
@@ -92,6 +99,7 @@ class Channel extends Component {
                 <NewChannelModal 
                     open={this.state.newChannelModalOpen}
                     onCloseModal={() => this.handleCloseChannelModal()}
+                    navigateToNewchannel={(val) => this.navigateToNewchannel(val)}
                 />
             </div>
         );
