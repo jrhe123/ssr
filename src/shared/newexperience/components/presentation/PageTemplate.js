@@ -70,7 +70,9 @@ class PageTemplate extends Component {
 
         return connectDragSource(
             <div style={mainContainerStyle}>
-                <div style={Object.assign({}, pageContainerStyle, { opacity })}>
+                <div style={Object.assign({}, pageContainerStyle, { opacity })}
+                    className="dx_card"
+                >
                     {this.renderPage(template)}
                 </div>
             </div>
