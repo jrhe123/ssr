@@ -58,7 +58,7 @@ class PageTemplate extends Component {
                             <div style={tableWrapperStyle}>
                                 <img
                                     style={imgStyle}
-                                    src={require('../../../../../assets/images/demo.jpg')}
+                                    src={require('../../../../../assets/images/edit_icon.png')}
                                 />
                             </div>
                         </div>
@@ -114,7 +114,7 @@ class PageTemplate extends Component {
                             <div style={tableWrapperStyle}>
                                 <img
                                     style={imgStyle}
-                                    src={require('../../../../../assets/images/demo.jpg')}
+                                    src={require('../../../../../assets/images/pdf_icon.png')}
                                 />
                             </div>
                         </div>
@@ -201,8 +201,8 @@ const styles = {
     },
     imgStyle: {
         display: 'block',
-        width: 60,
-        height: 60,
+        width: 42,
+        height: 48,
         margin: '0 auto'
     },
     txtStyle: {
