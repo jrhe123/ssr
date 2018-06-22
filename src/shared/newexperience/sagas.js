@@ -62,9 +62,6 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__FAILED,
 
-    MOVE_KNIGHT_REQUESTED,
-    MOVE_KNIGHT__SUCCEEDED,
-    MOVE_KNIGHT__FAILED,
 } from './constants';
 
 // Experience type request
@@ -378,25 +375,4 @@ export function* dxExperiencePageTemplateFetch(action) {
 
 export function* dxExperiencePageTemplateFetchSaga() {
     yield takeEvery(EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED, dxExperiencePageTemplateFetch);
-}
-
-// TEST
-export function* knightMove(action) {
-    try {
-        yield put({
-            type: MOVE_KNIGHT__SUCCEEDED,
-            payload: {
-                position: action.payload.position,
-            },
-        });
-    } catch (error) {
-        yield put({
-            type: MOVE_KNIGHT__FAILED,
-            payload: error,
-        });
-    }
-}
-
-export function* knightMoveSaga() {
-    yield takeEvery(MOVE_KNIGHT_REQUESTED, knightMove);
 }

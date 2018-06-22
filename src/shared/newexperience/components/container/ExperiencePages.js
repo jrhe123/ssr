@@ -5,7 +5,6 @@ import ExperiencePageData from '../../../../../data/ExperiencePageData';
 
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
-
 import PageTemplate from '../presentation/PageTemplate';
 import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
@@ -208,7 +207,6 @@ class ExperiencePages extends Component {
                     className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    {/* <Board /> */}
                     <div className="app-container">
                         <div className="item-container">
                             {this.state.items.map((item, index) => (

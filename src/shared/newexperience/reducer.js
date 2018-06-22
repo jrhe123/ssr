@@ -17,7 +17,6 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
 
-    MOVE_KNIGHT__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -139,10 +138,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED:
             updated.pageTemplates = payload.templates;
-            return updated;
-
-        case MOVE_KNIGHT__SUCCEEDED:
-            updated.position = payload.position;
             return updated;
 
         default:
