@@ -12,6 +12,7 @@ import ChannelData from '../../../../../data/ChannelData';
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
+import sizes from '../../../styles/sizes';
 
 class Channel extends Component {
 
@@ -38,14 +39,6 @@ class Channel extends Component {
         })
     }
 
-    // dhan added jun14
-    // navigateToNewexperience = (val) => {
-    //     this.setState({
-    //         newExperienceModalOpen: false
-    //     });
-    //     this.props.history.push(`/new_experience/`+val)
-    // }
-
     render() {
 
         const {
@@ -55,11 +48,12 @@ class Channel extends Component {
             tableContainerStyle,
             tableWrapperStyle,
 
-            buttonWrapperStyle,
+            btnWrapperStyle,
             fullBtnStyle,
-            header1Style,
-            header2Style,
-            header3Style,
+            topLabelStyle,
+            middleLabelStyle,
+            bottomLabelStyle,
+            imgWrapperStyle,
             imgStyle
         } = styles;
 
@@ -72,17 +66,17 @@ class Channel extends Component {
                 <div style={mainWrapperStyle}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <p style={header1Style}> Reach your audience via channel.
+                            <p style={topLabelStyle}> Reach your audience via channel.
                             </p>
-                            <div>
+                            <div style={imgWrapperStyle}>
                                 <img 
                                     style={imgStyle}
                                     src={require('../../../../../assets/images/channelPage.png')}
                                 />
                             </div>
-                            <p style={header2Style}> Let's create a channel to stream your experience(s)
+                            <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
                             </p>
-                            <div style={buttonWrapperStyle}>
+                            <div style={btnWrapperStyle}>
                                 <Button 
                                     variant="Add a new channel" 
                                     style={fullBtnStyle}
@@ -90,16 +84,15 @@ class Channel extends Component {
                                     Create a channel
                                 </Button>
                             </div>
-                            <p style={header3Style}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                            <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
                             </p>
-                            <NewChannelModal 
-                                open={this.state.newChannelModalOpen}
-                                onCloseModal={() => this.handleCloseChannelModal()}
-                                // navigateToNewexperience={(val) => this.navigateToNewexperience(val)}
-                            />
                         </div>
                     </div>
                 </div>
+                <NewChannelModal 
+                    open={this.state.newChannelModalOpen}
+                    onCloseModal={() => this.handleCloseChannelModal()}
+                />
             </div>
         );
     }
@@ -111,7 +104,7 @@ const styles = {
         flexDirection:'row'
     },
     mainWrapperStyle:{
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
         flex:1
     },
@@ -119,42 +112,44 @@ const styles = {
         position: 'relative',
         display: 'table',
         width: '100%',
-        height: 'calc(100vh - 84px)',
+        height: `calc(100vh - ${sizes.headerHeight})`,
     },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center',
     },
-    buttonWrapperStyle: {
-        marginTop: '38px',
-        marginBottom:'27px'
+    btnWrapperStyle: {
+        marginTop: '3px',
+        marginBottom:'30px'
     },
     fullBtnStyle: {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
         textTransform: 'none',
     },
-    header1Style: {
+    topLabelStyle: {
         fontSize: fonts.h1,
         color: colors.lightGreyColor,
     },
-    header2Style: {
+    middleLabelStyle: {
         fontSize: fonts.h1,
         color: colors.lightGreyColor,
     },
-    header3Style:{
+    bottomLabelStyle:{
         fontSize: fonts.h4,
         color: colors.lightGreyColor,
     },
     imgStyle:{
         display:'block',
-        height:'131px',
-        width:'142px',
-        marginTop:'47px',
-        marginBottom:'38px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        height:'132px',
+        width:'144px',
+        marginLeft:'auto',
+        marginRight:'auto',
+
+    },
+    imgWrapperStyle: {
+
     }
 };
 

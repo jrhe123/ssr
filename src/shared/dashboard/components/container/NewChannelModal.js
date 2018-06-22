@@ -30,10 +30,6 @@ class NewExperienceModal extends Component {
         this.props.onCloseModal();
     };
 
-    // handleCreateExperience = () => {
-    //     this.props.navigateToNewexperience(this.state.value);
-    // }
-
     render() {
         const {
             mainContainerStyle,
@@ -103,7 +99,6 @@ class NewExperienceModal extends Component {
                     </div>
                     <div style={btnContainerStyle}>
                         <Button
-                            // onClick={() => this.handleCreateExperience()}
                             style={btnStyle}
                             variant="Create new channel">
                             Continue

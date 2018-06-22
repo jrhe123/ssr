@@ -10,7 +10,7 @@ import sizes from '../../../styles/sizes';
 class NewChannel extends Component {
 
     state = {
-        // experienceType: 0
+        
     }
 
     componentDidMount(){
@@ -38,7 +38,6 @@ class NewChannel extends Component {
                 />
                 <div style={mainContainerStyle}>
                     <ChannelPanel 
-                        // experienceType={this.props.experienceType}
                         handleClickOption={(val) => this.handleClickOption(val)}
                     />
                 </div>
