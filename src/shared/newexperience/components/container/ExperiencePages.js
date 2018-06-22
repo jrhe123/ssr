@@ -6,6 +6,7 @@ import ExperiencePageData from '../../../../../data/ExperiencePageData';
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 import PageTemplate from '../presentation/PageTemplate';
+import PageTemplateTitle from '../presentation/PageTemplateTitle';
 import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
 
@@ -186,11 +187,16 @@ class ExperiencePages extends Component {
                                 <div style={templateContainerStyle}>
                                     {
                                         this.props.pageTemplates.map((template, index) => (
-                                            <PageTemplate
-                                                key={template.PageTemplateGUID}
-                                                template={template}
-                                                handleDrop={() => this.deleteItem()}
-                                            />
+                                            <div>
+                                                <PageTemplateTitle 
+                                                    title={template.Title}
+                                                />
+                                                <PageTemplate
+                                                    key={template.PageTemplateGUID}
+                                                    template={template}
+                                                    handleDrop={() => this.deleteItem()}
+                                                />
+                                            </div>
                                         ))
                                     }
                                 </div>
