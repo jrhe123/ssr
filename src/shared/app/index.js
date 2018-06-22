@@ -41,6 +41,12 @@ const ProtectedRouteWithParams
             ? <Route {...props} />
             : <Redirect to={"/"+route+'/'+props.computedMatch.params.experienceType} />;
 
+const ProtectedRouteWithParamsV2
+    = ({ isAuthenticated, route, ...props }) =>
+        isAuthenticated
+            ? <Route {...props} />
+            : <Redirect to={"/"+route+'/'+props.computedMatch.params.channelType} />;
+
 
 class App extends Component {
 
@@ -95,7 +101,7 @@ class App extends Component {
                         component={Routes.NewExperiencePage}
                     />
             
-                    <ProtectedRouteWithParams
+                    <ProtectedRouteWithParamsV2
                         isAuthenticated={isAuthenticated}
                         route="new_channel"
                         exact

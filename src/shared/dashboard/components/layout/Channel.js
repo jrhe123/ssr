@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 // data
 import ChannelData from '../../../../../data/ChannelData';
 
+// redux
+import { connect } from 'react-redux';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -43,7 +46,7 @@ class Channel extends Component {
         this.setState({
             newChannelModalOpen: false
         });
-        //this.props.history.push(`/new_channel/`+val)
+        this.props.history.push(`/new_channel/`+val)
     }
 
     render() {
@@ -161,4 +164,14 @@ const styles = {
     }
 };
 
-export default Channel;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(Channel);

@@ -33,9 +33,9 @@ class NewChannel extends Component {
 
         return (
             <div>
-                <ChannelNavigator 
+                {/* <ChannelNavigator 
                     handleGoback={() => this.handleGoback()}
-                />
+                /> */}
                 <div style={mainContainerStyle}>
                     <ChannelPanel 
                         handleClickOption={(val) => this.handleClickOption(val)}
