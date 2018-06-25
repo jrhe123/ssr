@@ -158,13 +158,11 @@ const styles = {
         display: 'table',
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
-        border: '1px solie blue'
     },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center',
-        border: '1px solie green'
     },
     contentContainerStyle: {
         flex: 4

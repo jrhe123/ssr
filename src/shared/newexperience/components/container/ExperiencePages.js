@@ -105,6 +105,8 @@ class ExperiencePages extends Component {
 
         const {
             mainContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
             hiddenLeftContainerStyle,
             leftContainerStyle,
             leftWrapperStyle,
@@ -116,6 +118,8 @@ class ExperiencePages extends Component {
             templateContainerStyle,
 
             rightContainerStyle,
+            editPhoneContainerStyle,
+            phoneContainerStyle,
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
@@ -188,7 +192,7 @@ class ExperiencePages extends Component {
                                     {
                                         this.props.pageTemplates.map((template, index) => (
                                             <div>
-                                                <PageTemplateTitle 
+                                                <PageTemplateTitle
                                                     title={template.Title}
                                                 />
                                                 <PageTemplate
@@ -205,21 +209,26 @@ class ExperiencePages extends Component {
                     </DropdownMenu>
                 </div>
 
-                <div
-                    className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                <div className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    <div className="card-container">
-                        <PhoneTarget />
-                        {this.state.cards.map((card, i) => (
-                            <PhoneElement
-                                key={card.id}
-                                index={i}
-                                id={card.id}
-                                text={card.text}
-                                moveCard={this.moveCard}
-                            />
-                        ))}
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div style={editPhoneContainerStyle}>
+                                <div style={phoneContainerStyle}>
+                                    {this.state.cards.map((card, i) => (
+                                        <PhoneElement
+                                            key={card.id}
+                                            index={i}
+                                            id={card.id}
+                                            text={card.text}
+                                            moveCard={this.moveCard}
+                                        />
+                                    ))}
+                                    <PhoneTarget />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -228,6 +237,7 @@ class ExperiencePages extends Component {
 }
 
 const styles = {
+
     mainContainerStyle: {
         width: sizes.dxWidth,
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -235,6 +245,17 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start'
+    },
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
     },
     hiddenLeftContainerStyle: {
         width: 0
@@ -273,10 +294,22 @@ const styles = {
         overflowY: 'auto',
         height: `calc(100vh - ${sizes.headerHeight} - 54px)`,
     },
-
     rightContainerStyle: {
         flex: 2,
     },
+    editPhoneContainerStyle: {
+        width: 360,
+        height: 540,
+        margin: '0 auto',
+        border: '1px solid yellow',
+    },
+    phoneContainerStyle: {
+        width: 320,
+        height: 500,
+        border: '1px solid red',
+        margin: '0 auto',
+        overflowY: 'auto',
+    }
 }
 
 const stateToProps = (state) => {
