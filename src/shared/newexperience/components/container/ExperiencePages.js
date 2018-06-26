@@ -235,15 +235,6 @@ class ExperiencePages extends Component {
                                         />
                                     ))}
                                     <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
-                                    <PhoneTarget />
                                 </div>
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
