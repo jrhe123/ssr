@@ -102,20 +102,43 @@ class PhoneElement extends React.Component {
             connectDragSource,
             connectDropTarget,
         } = this.props;
+
         const opacity = isDragging ? 0 : 1;
+        const {
+            mainContainerStyle,
+            dragControlContainerStyle,
+        } = styles;
 
         return (
             connectDragSource &&
             connectDropTarget &&
             connectDragSource(
                 connectDropTarget(
-                    <div style={{ ...style, opacity }}>
+                    <div style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
+                        <div style={dragControlContainerStyle}>
+                            
+                        </div>
                         <input defaultValue={text} />
                     </div>
                 ),
             )
         );
     }
+}
+
+const styles = {
+
+    mainContainerStyle: {
+        position: 'relative',
+        minHeight: 36,
+    },
+    dragControlContainerStyle: {
+        position: 'absolute',
+        left: -40,
+        width: 18,
+        height: 18,
+        border: '1px solid red'
+    },
 }
 
 export default flow(
