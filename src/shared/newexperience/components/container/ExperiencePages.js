@@ -235,6 +235,15 @@ class ExperiencePages extends Component {
                                         />
                                     ))}
                                     <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
+                                    <PhoneTarget />
                                 </div>
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
@@ -341,12 +350,13 @@ const styles = {
         width: 360,
         height: 600,
         margin: '0 auto',
-        border: '1px solid yellow',
     },
     phoneContainerStyle: {
-        width: 320,
+        width: 384,
         height: 500,
-        backgroundColor: colors.whiteColor,
+        paddingLeft: 24,
+        paddingRight: 24,
+        backgroundColor: 'transparent',
         margin: '0 auto',
         overflowY: 'auto',
     },
