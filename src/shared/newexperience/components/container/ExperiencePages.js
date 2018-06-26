@@ -120,6 +120,14 @@ class ExperiencePages extends Component {
             rightContainerStyle,
             editPhoneContainerStyle,
             phoneContainerStyle,
+            pageNumContainerStyle,
+            pageNumStyle,
+            controlContainerStyle,
+            leftControlContainerStyle,
+            leftBtnContainerStyle,
+            rightControlContainerStyle,
+            rightBtnContainerStyle,
+            controlIconStyle,
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
@@ -215,6 +223,7 @@ class ExperiencePages extends Component {
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={editPhoneContainerStyle}>
+
                                 <div style={phoneContainerStyle}>
                                     {this.state.cards.map((card, i) => (
                                         <PhoneElement
@@ -226,6 +235,37 @@ class ExperiencePages extends Component {
                                         />
                                     ))}
                                     <PhoneTarget />
+                                </div>
+                                <div style={pageNumContainerStyle}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <p style={pageNumStyle}>Page 1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={controlContainerStyle}>
+                                    <div style={leftControlContainerStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <a style={leftBtnContainerStyle}>
+                                                    <img 
+                                                        style={controlIconStyle}
+                                                        src={require('../../../../../assets/images/build_on_icon.png')}/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={rightControlContainerStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <a style={rightBtnContainerStyle}>
+                                                    <img 
+                                                        style={controlIconStyle}
+                                                        src={require('../../../../../assets/images/eye_off_icon.png')}/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -299,17 +339,60 @@ const styles = {
     },
     editPhoneContainerStyle: {
         width: 360,
-        height: 540,
+        height: 600,
         margin: '0 auto',
         border: '1px solid yellow',
     },
     phoneContainerStyle: {
         width: 320,
         height: 500,
-        border: '1px solid red',
+        backgroundColor: colors.whiteColor,
         margin: '0 auto',
         overflowY: 'auto',
-    }
+    },
+    pageNumContainerStyle: {
+        height: 24
+    },
+    pageNumStyle: {
+        textAlign: 'center',
+        fontSize: fonts.h4,
+        color: colors.lightGreyColor,
+        margin: 0
+    },
+    controlContainerStyle: {
+        height: 76,
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    leftControlContainerStyle: {
+        flex: 1,
+    },
+    leftBtnContainerStyle: {
+        height: 60,
+        width: 60,
+        margin: '0 auto',
+        borderRadius: 6,
+        display: 'block',
+        cursor: 'pointer'
+    },
+    rightControlContainerStyle: {
+        flex: 1,
+    },
+    rightBtnContainerStyle: {
+        height: 60,
+        width: 60,
+        margin: '0 auto',
+        borderRadius: 6,
+        display: 'block',
+        cursor: 'pointer'
+    },
+    controlIconStyle: {
+        display: 'block',
+        width: 60,
+        height: 60,
+        borderRadius: 6,
+    },
 }
 
 const stateToProps = (state) => {

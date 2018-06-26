@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
+
+// Libraries
 import {
     DragSource,
     DropTarget,
@@ -14,11 +16,14 @@ import {
 import { XYCoord } from 'dnd-core';
 import flow from 'lodash/flow';
 
+// constants
+import fonts from '../../../styles/fonts';
+import colors from '../../../styles/colors';
+
 const style = {
-    border: '1px dashed gray',
-    padding: '0.5rem 1rem',
-    marginBottom: '.5rem',
-    backgroundColor: 'white',
+    border: '1px dotted',
+    borderColor: colors.blueBorderColor,
+    backgroundColor: colors.whiteColor,
     cursor: 'move',
 };
 

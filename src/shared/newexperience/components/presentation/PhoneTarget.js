@@ -19,7 +19,7 @@ class Target extends Component {
 
     render() {
         const { connectDropTarget, hovered, item } = this.props;
-        const backgroundColor = hovered ? colors.blueBorderColor : 'transparent';
+        const backgroundColor = hovered ? colors.blueBorderColor : colors.lightBlueColor;
         const color = hovered ? colors.whiteColor : colors.blackColor;
         const {
             mainContainerStyle,
