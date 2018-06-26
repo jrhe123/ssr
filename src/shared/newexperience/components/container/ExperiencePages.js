@@ -118,6 +118,7 @@ class ExperiencePages extends Component {
             templateContainerStyle,
 
             rightContainerStyle,
+            toolbarContainerStyle,
             editPhoneContainerStyle,
             phoneContainerStyle,
             pageNumContainerStyle,
@@ -219,9 +220,11 @@ class ExperiencePages extends Component {
 
                 <div className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
-
+                    
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
+
+                            <div style={toolbarContainerStyle}>tool bar</div>
                             <div style={editPhoneContainerStyle}>
 
                                 <div style={pageNumContainerStyle}>
@@ -343,6 +346,12 @@ const styles = {
     },
     rightContainerStyle: {
         flex: 2,
+    },
+    toolbarContainerStyle: {
+        height: 60,
+        width: 360,
+        margin: '0 auto',
+        border: '1px solid red'
     },
     editPhoneContainerStyle: {
         width: 400,
