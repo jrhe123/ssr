@@ -15,6 +15,9 @@ import {
 } from 'react-dnd';
 import { XYCoord } from 'dnd-core';
 import flow from 'lodash/flow';
+import Delete from '@material-ui/icons/Delete';
+import ContentCopy from '@material-ui/icons/ContentCopy';
+import DragHandle from '@material-ui/icons/DragHandle';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -125,10 +128,10 @@ class PhoneElement extends React.Component {
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
                                 <div style={removeControlContainerStyle}>
-                                    1
+                                    <Delete />
                                 </div>
                                 <div style={copyControlContainerStyle}>
-                                    3
+                                    <ContentCopy />
                                 </div>
                             </div>
                         </div>
@@ -141,7 +144,7 @@ class PhoneElement extends React.Component {
                         connectDropTarget(
                             <div style={contentContainerStyle}>
                                 <div style={dragControlContainerStyle}>
-                                    2
+                                    <DragHandle />
                                 </div>
                                 <input defaultValue={text} />
                             </div>
@@ -153,7 +156,7 @@ class PhoneElement extends React.Component {
     }
 }
 
-const minHeight = 60;
+const minHeight = 120;
 
 const styles = {
 
@@ -191,6 +194,9 @@ const styles = {
         width: 18,
         height: 18,
         boxSizing: 'border-box'
+    },
+    removeStyle: {
+
     },
     copyControlContainerStyle: {
         width: 18,
