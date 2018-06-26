@@ -1,5 +1,6 @@
 export default {
     borderColor: '#D9DDE2',
+    blueBorderColor: '#77B2D7',
     whiteColor : '#FFFFFF',
     blackColor : '#000000',
     blueColor : '#2A75F6',
