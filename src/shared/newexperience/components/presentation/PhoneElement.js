@@ -153,7 +153,7 @@ class PhoneElement extends React.Component {
     }
 }
 
-const minHeight = 120;
+const minHeight = 60;
 
 const styles = {
 
@@ -178,24 +178,25 @@ const styles = {
         width: 18,
         height: '100%',
     },
+
     controlWrapperStyle: {
         width: 18,
-        height: 72,
-        border: '1px solid green'
+        height: 54,
+        boxSizing: 'border-box'
     },
-
     contentContainerStyle: {
         minHeight: minHeight,
     },
     removeControlContainerStyle: {
         width: 18,
         height: 18,
-        border: '1px solid purple'
+        boxSizing: 'border-box'
     },
     copyControlContainerStyle: {
         width: 18,
         height: 18,
-        border: '1px solid red'
+        boxSizing: 'border-box',
+        marginTop: 36
     },
     dragControlContainerStyle: {
         position: 'absolute',
@@ -203,7 +204,7 @@ const styles = {
         top: 'calc(50%)',
         width: 18,
         height: 18,
-        border: '1px solid yellow'
+        boxSizing: 'border-box'
     },
 }
 
