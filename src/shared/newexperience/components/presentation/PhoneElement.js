@@ -26,6 +26,7 @@ import colors from '../../../styles/colors';
 const style = {
     border: '1px dotted',
     borderColor: colors.blueBorderColor,
+    boxSize: 'border-box',
     backgroundColor: colors.whiteColor,
     cursor: 'move',
 };

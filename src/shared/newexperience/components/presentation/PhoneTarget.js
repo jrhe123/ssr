@@ -47,6 +47,7 @@ const styles = {
     mainContainerStyle: {
         border: '1px dotted',
         borderColor: colors.blueBorderColor,
+        boxSize: 'border-box',
         height: 60
     },
     tableContainerStyle: {

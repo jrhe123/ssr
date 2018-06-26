@@ -224,6 +224,13 @@ class ExperiencePages extends Component {
                         <div style={tableWrapperStyle}>
                             <div style={editPhoneContainerStyle}>
 
+                                <div style={pageNumContainerStyle}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <p style={pageNumStyle}>Page 1</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style={phoneContainerStyle}>
                                     {this.state.cards.map((card, i) => (
                                         <PhoneElement
@@ -248,9 +255,9 @@ class ExperiencePages extends Component {
                                         <div style={tableContainerStyle}>
                                             <div style={tableWrapperStyle}>
                                                 <a style={leftBtnContainerStyle}>
-                                                    <img 
+                                                    <img
                                                         style={controlIconStyle}
-                                                        src={require('../../../../../assets/images/build_on_icon.png')}/>
+                                                        src={require('../../../../../assets/images/build_on_icon.png')} />
                                                 </a>
                                             </div>
                                         </div>
@@ -259,9 +266,9 @@ class ExperiencePages extends Component {
                                         <div style={tableContainerStyle}>
                                             <div style={tableWrapperStyle}>
                                                 <a style={rightBtnContainerStyle}>
-                                                    <img 
+                                                    <img
                                                         style={controlIconStyle}
-                                                        src={require('../../../../../assets/images/eye_off_icon.png')}/>
+                                                        src={require('../../../../../assets/images/eye_off_icon.png')} />
                                                 </a>
                                             </div>
                                         </div>
@@ -339,8 +346,8 @@ const styles = {
     },
     editPhoneContainerStyle: {
         width: 400,
-        height: 600,
         margin: '0 auto',
+        border: '1px solid red'
     },
     phoneContainerStyle: {
         width: 320,
@@ -361,7 +368,7 @@ const styles = {
         margin: 0
     },
     controlContainerStyle: {
-        height: 76,
+        height: 48,
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'row'
@@ -370,8 +377,8 @@ const styles = {
         flex: 1,
     },
     leftBtnContainerStyle: {
-        height: 60,
-        width: 60,
+        height: 48,
+        width: 48,
         margin: '0 auto',
         borderRadius: 6,
         display: 'block',
@@ -381,8 +388,8 @@ const styles = {
         flex: 1,
     },
     rightBtnContainerStyle: {
-        height: 60,
-        width: 60,
+        height: 48,
+        width: 48,
         margin: '0 auto',
         borderRadius: 6,
         display: 'block',
@@ -390,8 +397,8 @@ const styles = {
     },
     controlIconStyle: {
         display: 'block',
-        width: 60,
-        height: 60,
+        width: 48,
+        height: 48,
         borderRadius: 6,
     },
 }
