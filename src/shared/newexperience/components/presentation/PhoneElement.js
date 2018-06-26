@@ -118,6 +118,7 @@ class PhoneElement extends React.Component {
             removeControlContainerStyle,
             copyControlContainerStyle,
             dragControlContainerStyle,
+            controlIconStyle,
         } = styles;
 
         return (
@@ -128,10 +129,10 @@ class PhoneElement extends React.Component {
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
                                 <div style={removeControlContainerStyle}>
-                                    <Delete />
+                                    <Delete style={controlIconStyle}/>
                                 </div>
                                 <div style={copyControlContainerStyle}>
-                                    <ContentCopy />
+                                    <ContentCopy style={controlIconStyle}/>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +145,7 @@ class PhoneElement extends React.Component {
                         connectDropTarget(
                             <div style={contentContainerStyle}>
                                 <div style={dragControlContainerStyle}>
-                                    <DragHandle />
+                                    <DragHandle style={controlIconStyle}/>
                                 </div>
                                 <input defaultValue={text} />
                             </div>
@@ -195,8 +196,9 @@ const styles = {
         height: 18,
         boxSizing: 'border-box'
     },
-    removeStyle: {
-
+    controlIconStyle: {
+        color: colors.lightGreyColor,
+        fontSize: fonts.h2
     },
     copyControlContainerStyle: {
         width: 18,
