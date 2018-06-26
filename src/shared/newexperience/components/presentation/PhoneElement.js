@@ -106,38 +106,104 @@ class PhoneElement extends React.Component {
         const opacity = isDragging ? 0 : 1;
         const {
             mainContainerStyle,
+            tableContainerStyle,
+            tableWrapperStyle,
+            controlContainerStyle,
+            controlWrapperStyle,
+
+            contentContainerStyle,
+            removeControlContainerStyle,
+            copyControlContainerStyle,
             dragControlContainerStyle,
         } = styles;
 
         return (
-            connectDragSource &&
-            connectDropTarget &&
-            connectDragSource(
-                connectDropTarget(
-                    <div style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
-                        <div style={dragControlContainerStyle}>
-                            
+            <div
+                style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
+                <div style={controlContainerStyle}>
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div style={controlWrapperStyle}>
+                                <div style={removeControlContainerStyle}>
+                                    1
+                                </div>
+                                <div style={copyControlContainerStyle}>
+                                    3
+                                </div>
+                            </div>
                         </div>
-                        <input defaultValue={text} />
                     </div>
-                ),
-            )
+                </div>
+                {
+                    connectDragSource &&
+                    connectDropTarget &&
+                    connectDragSource(
+                        connectDropTarget(
+                            <div style={contentContainerStyle}>
+                                <div style={dragControlContainerStyle}>
+                                    2
+                                </div>
+                                <input defaultValue={text} />
+                            </div>
+                        ),
+                    )
+                }
+            </div>
         );
     }
 }
+
+const minHeight = 120;
 
 const styles = {
 
     mainContainerStyle: {
         position: 'relative',
-        minHeight: 36,
+        minHeight: minHeight,
+    },
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
+    },
+    controlContainerStyle: {
+        position: 'absolute',
+        left: -40,
+        width: 18,
+        height: '100%',
+    },
+    controlWrapperStyle: {
+        width: 18,
+        height: 72,
+        border: '1px solid green'
+    },
+
+    contentContainerStyle: {
+        minHeight: minHeight,
+    },
+    removeControlContainerStyle: {
+        width: 18,
+        height: 18,
+        border: '1px solid purple'
+    },
+    copyControlContainerStyle: {
+        width: 18,
+        height: 18,
+        border: '1px solid red'
     },
     dragControlContainerStyle: {
         position: 'absolute',
         left: -40,
+        top: 'calc(50%)',
         width: 18,
         height: 18,
-        border: '1px solid red'
+        border: '1px solid yellow'
     },
 }
 
