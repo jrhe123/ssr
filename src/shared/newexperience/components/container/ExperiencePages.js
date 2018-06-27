@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 
 // redux
 import { connect } from 'react-redux';
@@ -105,6 +106,7 @@ class ExperiencePages extends Component {
 
         const {
             mainContainerStyle,
+            txtCenterStyle,
             tableContainerStyle,
             tableWrapperStyle,
             hiddenLeftContainerStyle,
@@ -129,6 +131,10 @@ class ExperiencePages extends Component {
             rightControlContainerStyle,
             rightBtnContainerStyle,
             controlIconStyle,
+            carouselContainerStyle,
+            carouselWrapperStyle,
+            carouselLabelStyle,
+            carouselIconStyle,
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
@@ -220,16 +226,16 @@ class ExperiencePages extends Component {
 
                 <div className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
-                    
+
                     <div style={tableContainerStyle}>
-                        <div style={tableWrapperStyle}>
+                        <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
 
                             <div style={toolbarContainerStyle}>tool bar</div>
                             <div style={editPhoneContainerStyle}>
 
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
-                                        <div style={tableWrapperStyle}>
+                                        <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                             <p style={pageNumStyle}>Page 1</p>
                                         </div>
                                     </div>
@@ -248,7 +254,7 @@ class ExperiencePages extends Component {
                                 </div>
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
-                                        <div style={tableWrapperStyle}>
+                                        <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                             <p style={pageNumStyle}>Page 1</p>
                                         </div>
                                     </div>
@@ -256,7 +262,7 @@ class ExperiencePages extends Component {
                                 <div style={controlContainerStyle}>
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>
-                                            <div style={tableWrapperStyle}>
+                                            <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                                 <a style={leftBtnContainerStyle}>
                                                     <img
                                                         style={controlIconStyle}
@@ -267,7 +273,7 @@ class ExperiencePages extends Component {
                                     </div>
                                     <div style={rightControlContainerStyle}>
                                         <div style={tableContainerStyle}>
-                                            <div style={tableWrapperStyle}>
+                                            <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                                 <a style={rightBtnContainerStyle}>
                                                     <img
                                                         style={controlIconStyle}
@@ -280,12 +286,29 @@ class ExperiencePages extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <div style={carouselContainerStyle}>
+                        <div style={carouselWrapperStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <span style={carouselLabelStyle}>Page 1
+                                        <KeyboardArrowDown
+                                            style={carouselIconStyle}
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         )
     }
 }
 
+const carouselHeight = 48;
+const phoneHeight = 470;
 const styles = {
 
     mainContainerStyle: {
@@ -296,6 +319,9 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'flex-start'
     },
+    txtCenterStyle: {
+        textAlign: 'center'
+    },
     tableContainerStyle: {
         position: 'relative',
         display: 'table',
@@ -305,7 +331,6 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        textAlign: 'center'
     },
     hiddenLeftContainerStyle: {
         width: 0
@@ -346,21 +371,22 @@ const styles = {
     },
     rightContainerStyle: {
         flex: 2,
+        paddingBottom: carouselHeight,
+        position: 'relative',
     },
     toolbarContainerStyle: {
-        height: 60,
-        width: 360,
+        height: 48,
+        width: 540,
         margin: '0 auto',
-        border: '1px solid red'
+        backgroundColor: 'green'
     },
     editPhoneContainerStyle: {
         width: 400,
         margin: '0 auto',
-        border: '1px solid red'
     },
     phoneContainerStyle: {
         width: 320,
-        height: 500,
+        height: phoneHeight,
         paddingLeft: 40,
         paddingRight: 40,
         backgroundColor: 'transparent',
@@ -410,6 +436,35 @@ const styles = {
         height: 48,
         borderRadius: 6,
     },
+    carouselContainerStyle: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        height: 48,
+        height: carouselHeight,
+        backgroundColor: colors.blackColor,
+        cursor: 'pointer'
+    },
+    carouselWrapperStyle: {
+        position: 'relative',
+        height: 48,
+    },
+    carouselLabelStyle: {
+        color: colors.whiteColor,
+        fontSize: fonts.h4,
+        position: 'relative',
+        paddingRight: 24,
+        paddingLeft: 18,
+    },
+    carouselIconStyle: {
+        color: colors.whiteColor,
+        fontSize: 24,
+        position: 'absolute',
+        right: 0,
+        top: -3
+    },
+
 }
 
 const stateToProps = (state) => {
