@@ -40,10 +40,15 @@ const initialState = {
 
         experienceTitle: null,
         cardTitle: 'Card 1',
-        pageTitle: 'Page 1'
-    },
+        pageTitle: 'Page 1',
 
-    position: { kx: 7, ky: 7 }
+        pages: [],
+        newPage: {
+            isSplash: false,
+            title: '',
+            sections: []
+        },
+    },
 };
 
 const newexperienceReducer = (previousState = initialState, { type, payload }) => {
