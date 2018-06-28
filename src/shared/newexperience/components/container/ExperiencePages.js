@@ -20,7 +20,8 @@ import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction
+    dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction,
+    dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
 } from '../../actions';
 
 // constants
@@ -98,11 +99,19 @@ class ExperiencePages extends Component {
         )
     }
 
+    handleCarouselClick = () => {
+        this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
+    }
+
     render() {
 
         const {
             activeTab,
         } = this.state;
+
+        const {
+            experience
+        } = this.props;
 
         const {
             mainContainerStyle,
@@ -133,8 +142,10 @@ class ExperiencePages extends Component {
             controlIconStyle,
             carouselContainerStyle,
             carouselWrapperStyle,
+            carouselLabelContainerStyle,
             carouselLabelStyle,
             carouselIconStyle,
+            carouselSlideContainerStyle,
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
@@ -287,17 +298,28 @@ class ExperiencePages extends Component {
                         </div>
                     </div>
 
-                    <div style={carouselContainerStyle}>
+                    <div style={Object.assign({}, carouselContainerStyle, { height: !experience.isPageCarouselMenuOpen ? carouselHeight : expandCarouselHeight })}
+                        className="dx_float_carousel_menu"
+                        onClick={() => this.handleCarouselClick()}>
                         <div style={carouselWrapperStyle}>
-                            <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
-                                    <span style={carouselLabelStyle}>Page 1
+                            <div style={carouselLabelContainerStyle}>
+                                <span style={carouselLabelStyle}>Page 1
                                         <KeyboardArrowDown
-                                            style={carouselIconStyle}
-                                        />
-                                    </span>
-                                </div>
+                                        className={!experience.isPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                        style={carouselIconStyle}
+                                    />
+                                </span>
                             </div>
+                            {
+                                experience.isPageCarouselMenuOpen ?
+                                    (
+                                        <div style={carouselSlideContainerStyle}>
+
+                                        </div>
+                                    )
+                                    :
+                                    null
+                            }
                         </div>
                     </div>
 
@@ -308,6 +330,7 @@ class ExperiencePages extends Component {
 }
 
 const carouselHeight = 48;
+const expandCarouselHeight = 240;
 const phoneHeight = 470;
 const styles = {
 
@@ -441,14 +464,16 @@ const styles = {
         left: 0,
         bottom: 0,
         width: '100%',
-        height: 48,
-        height: carouselHeight,
         backgroundColor: colors.blackColor,
         cursor: 'pointer'
     },
     carouselWrapperStyle: {
         position: 'relative',
-        height: 48,
+        height: '100%',
+    },
+    carouselLabelContainerStyle: {
+        paddingTop: 12,
+        paddingBottom: 12
     },
     carouselLabelStyle: {
         color: colors.whiteColor,
@@ -464,6 +489,10 @@ const styles = {
         right: 0,
         top: -3
     },
+    carouselSlideContainerStyle: {
+        height: 180,
+        border: '1px solid white'
+    },
 
 }
 
@@ -476,6 +505,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxExperiencePageTemplateFetchAction,
+    dxExperiencePageCarouselMenuUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));

@@ -16,7 +16,7 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
-
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -148,6 +148,15 @@ export const dxExperiencePageTemplateOptionSelect = (index) => {
         type: EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
         payload: {
             index,
+        },
+    }
+}
+
+export const dxExperiencePageCarouselMenuUpdate = (toggle) => {
+    return {
+        type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
+        payload: {
+            toggle,
         },
     }
 }

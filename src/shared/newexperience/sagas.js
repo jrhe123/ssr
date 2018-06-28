@@ -62,6 +62,10 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__FAILED,
 
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE__FAILED,
+
 } from './constants';
 
 // Experience type request
@@ -375,4 +379,25 @@ export function* dxExperiencePageTemplateFetch(action) {
 
 export function* dxExperiencePageTemplateFetchSaga() {
     yield takeEvery(EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED, dxExperiencePageTemplateFetch);
+}
+
+// Experience page carousel menu toggle
+export function* dxExperiencePageCarouselMenuToggle(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+            payload: {
+                toggle: action.payload.toggle,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageCarouselMenuToggleSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED, dxExperiencePageCarouselMenuToggle);
 }

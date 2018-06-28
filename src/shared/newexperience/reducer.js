@@ -16,7 +16,7 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
-
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -36,9 +36,11 @@ const initialState = {
         isPageTemplateMenuOpen: true,
         activePageTemplateOptionIndex: 0,
 
+        isPageCarouselMenuOpen: false,
+
         experienceTitle: null,
-        cardTitle: null,
-        pageTitle: null
+        cardTitle: 'Card 1',
+        pageTitle: 'Page 1'
     },
 
     position: { kx: 7, ky: 7 }
@@ -138,6 +140,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED:
             updated.pageTemplates = payload.templates;
+            return updated;
+
+        case EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED:
+            tmpExperience.isPageCarouselMenuOpen = payload.toggle;
+            updated.experience = tmpExperience;
             return updated;
 
         default:
