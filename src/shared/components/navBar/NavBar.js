@@ -136,7 +136,7 @@ class NavBar extends Component {
                 title = experience.cardTitle;
                 placeholder = 'untitle card';
             } else if (experience.index == 2) {
-                title = experience.pageTitle;
+                title = experience.newPage.title;
                 placeholder = 'untitle page';
             }
         }

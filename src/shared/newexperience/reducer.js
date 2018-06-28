@@ -40,7 +40,7 @@ const initialState = {
 
         experienceTitle: null,
         cardTitle: 'Card 1',
-        pageTitle: 'Page 1',
+        pageTitle: null,
 
         pages: [],
         newPage: {
