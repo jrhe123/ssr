@@ -22,8 +22,11 @@ import {
 
 // helpers
 import { search_object_index_by_value } from '../helpers'
+import { uuid } from '../helpers/tools'
+
 
 let templateNewPage = {
+    pageGUID: null,
     isSplash: false,
     title: '',
     sections: [],
@@ -79,6 +82,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             if (payload.experienceIndex == 2
                 && !updated.experience.pages.length) {
+                tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = 'Page 1';
                 tmpNewPage.isSaved = true;
                 tmpExperience.newPage = tmpNewPage;
@@ -167,7 +171,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
-            tmpNewPage = templateNewPage;
+            tmpNewPage = Object.assign({}, templateNewPage);
+            tmpNewPage.pageGUID = uuid();
             tmpNewPage.title = `Page ${tmpPages.length + 1}`;
             tmpNewPage.isSaved = true;
             tmpPages.push(tmpNewPage);

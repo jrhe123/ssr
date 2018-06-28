@@ -26,7 +26,7 @@ class PageCarousel extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: displayNumber,
-            slidesToScroll: 1
+            slidesToScroll: displayNumber
         };
 
         const {
@@ -42,7 +42,7 @@ class PageCarousel extends Component {
                                 <ThumbnailPage
                                     key={index}
                                     title={page.title}
-                                    active={page.title == newPage.title ? true : false}
+                                    active={page.pageGUID == newPage.pageGUID ? true : false}
                                 />
                             ))
                         }
@@ -56,7 +56,7 @@ class PageCarousel extends Component {
                                 <ThumbnailPage
                                     key={index}
                                     title={page.title}
-                                    active={page.title == newPage.title ? true : false}
+                                    active={page.pageGUID == newPage.pageGUID ? true : false}
                                 />
                             ))
                         }
