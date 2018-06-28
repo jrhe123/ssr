@@ -81,8 +81,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 && !updated.experience.pages.length) {
                 tmpNewPage.title = 'Page 1';
                 tmpExperience.newPage = tmpNewPage;
+                tmpPages.push(tmpNewPage);
             }
             tmpExperience.index = payload.experienceIndex;
+            tmpExperience.pages = tmpPages;
             updated.experience = tmpExperience;
             return updated;
 
@@ -167,14 +169,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             if(!tmpNewPage.isSaved) tmpPages.push(tmpNewPage);
 
             tmpNewPage = templateNewPage;
-            tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+            tmpNewPage.title = `Page ${tmpPages.length}`;
 
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
-
-            console.log('updated: ', updated);
-
             return updated;
 
         default:
