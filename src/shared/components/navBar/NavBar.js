@@ -360,7 +360,7 @@ class NavBar extends Component {
                                     null
                             }
                             <div style={Object.assign({}, experience.index == 2 ? (halfTableContainerStyle, { float: 'right', height: sizes.headerHeight }) : tableContainerStyle)}>
-                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle, experience.index == 2 ? { height: sizes.headerHeight } : null)}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle, experience.index == 2 ? { height: sizes.headerHeight, width: 420 } : null)}>
                                     <DxInput
                                         placeholder={placeholder}
                                         handleValChange={(e) => this.handleInputChange(e)}
@@ -409,8 +409,7 @@ const styles = {
     halfTableContainerStyle: {
         position: 'relative',
         display: 'table',
-        height: '100%',
-        width: '50%',
+        margin: '0 auto'
     },
     tableContainerStyle: {
         position: 'relative',
