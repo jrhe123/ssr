@@ -17,6 +17,7 @@ import {
 
     dxExperiencePageTemplateMenuUpdate as dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
+    dxExperiencePageAddPage as dxExperiencePageAddPageAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -117,6 +118,10 @@ class ExperienceNavigator extends Component {
         }
     }
 
+    handleAddNewPage = () => {
+        this.props.dxExperiencePageAddPageAction();
+    }
+
     render() {
         return (
             <NavBar
@@ -128,6 +133,7 @@ class ExperienceNavigator extends Component {
                 handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
                 handlePageTemplateMenu={() => this.handlePageTemplateMenuToggle()}
                 handleSelectPageElemOption={(val) => this.handleSelectPageElemOption(val)}
+                handleAddNewPage={() => this.handleAddNewPage()}
             />
         )
     }
@@ -147,7 +153,8 @@ const dispatchToProps = {
     dxExperienceCardTemplateSaveAction,
     dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
-
+    dxExperiencePageAddPageAction,
+    
     dxAlertAction,
 }
 

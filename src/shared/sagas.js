@@ -30,6 +30,7 @@ import {
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
     dxExperiencePageCarouselMenuToggleSaga,
+    dxExperiencePageAddPageSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -67,6 +68,7 @@ export default function* rootSaga() {
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),
         dxExperiencePageCarouselMenuToggleSaga(),
+        dxExperiencePageAddPageSaga(),
         
         // Global
         dxValidateTokenSaga(),

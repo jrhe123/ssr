@@ -349,6 +349,7 @@ class NavBar extends Component {
                                             <div style={tableContainerStyle}>
                                                 <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                                     <Button
+                                                        onClick={() => this.props.handleAddNewPage()}
                                                         variant="add new page"
                                                         style={btnStyle}
                                                     ><Add style={addPageIconStyle}/>ADD PAGE</Button>

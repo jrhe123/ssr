@@ -10,33 +10,65 @@ import Slider from "react-slick";
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
+const displayNumber = 5;
+
 class PageCarousel extends Component {
 
     render() {
+
+        const {
+            pages
+        } = this.props;
+
         const settings = {
             dots: false,
             infinite: true,
             speed: 500,
-            slidesToShow: 5,
+            slidesToShow: displayNumber,
             slidesToScroll: 1
         };
 
+        const {
+            mainContainerStyle
+        } = styles;
+
         return (
-            <Slider {...settings}>
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-                <ThumbnailPage />
-            </Slider>
+            (pages.length >= displayNumber) ?
+                (
+                    <Slider {...settings}>
+                        {
+                            pages.map((page, index) => (
+                                <ThumbnailPage
+                                    key={index}
+                                    page={page}
+                                />
+                            ))
+                        }
+                    </Slider>
+                )
+                :
+                (
+                    <div style={mainContainerStyle}>
+                        {
+                            pages.map((page, index) => (
+                                <ThumbnailPage
+                                    key={index}
+                                    page={page}
+                                />
+                            ))
+                        }
+                    </div>
+                )
         )
     }
+}
+
+const styles ={
+
+    mainContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
 }
 
 export default PageCarousel;

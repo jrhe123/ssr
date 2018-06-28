@@ -304,7 +304,9 @@ class ExperiencePages extends Component {
                                 experience.isPageCarouselMenuOpen ?
                                     (
                                         <div style={carouselSlideContainerStyle}>
-                                            <PageCarousel />
+                                            <PageCarousel 
+                                                pages={experience.pages}
+                                            />
                                         </div>
                                     )
                                     :

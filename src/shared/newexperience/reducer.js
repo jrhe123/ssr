@@ -17,11 +17,18 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
 } from './constants';
 
 // helpers
 import { search_object_index_by_value } from '../helpers'
 
+let templateNewPage = {
+    isSplash: false,
+    title: '',
+    sections: [],
+    isSaved: false
+};
 const initialState = {
     cardTemplates: [],
     pageTemplates: [],
@@ -43,11 +50,7 @@ const initialState = {
         pageTitle: null,
 
         pages: [],
-        newPage: {
-            isSplash: false,
-            title: '',
-            sections: []
-        },
+        newPage: templateNewPage,
     },
 };
 
@@ -56,6 +59,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let updated = Object.assign({}, previousState);
     let tmpExperience = Object.assign({}, updated.experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
+    let tmpPages = Object.assign([], tmpExperience.pages);
     let tmpNewPage = Object.assign({}, tmpExperience.newPage);
     let tmpSettingIndex;
 
@@ -76,9 +80,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             if (payload.experienceIndex == 2
                 && !updated.experience.pages.length) {
                 tmpNewPage.title = 'Page 1';
+                tmpExperience.newPage = tmpNewPage;
             }
             tmpExperience.index = payload.experienceIndex;
-            tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
 
@@ -157,6 +161,20 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED:
             tmpExperience.isPageCarouselMenuOpen = payload.toggle;
             updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
+            if(!tmpNewPage.isSaved) tmpPages.push(tmpNewPage);
+
+            tmpNewPage = templateNewPage;
+            tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+
+            tmpExperience.pages = tmpPages;
+            tmpExperience.newPage = tmpNewPage;
+            updated.experience = tmpExperience;
+
+            console.log('updated: ', updated);
+
             return updated;
 
         default:
