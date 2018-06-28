@@ -284,12 +284,16 @@ class PageTemplate extends Component {
             mainContainerStyle,
         } = styles;
 
-        return connectDragSource(
+        return (
             <div style={mainContainerStyle}>
                 <div style={Object.assign({}, { width: 'calc(100% - 24px)', margin: '0 auto' }, { opacity })}
                     className="dx_page"
                 >
-                    {this.renderPage(template)}
+                    {
+                        connectDragSource(
+                            this.renderPage(template)
+                        )
+                    }
                 </div>
             </div>
         );

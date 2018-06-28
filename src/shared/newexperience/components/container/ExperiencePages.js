@@ -49,18 +49,23 @@ class ExperiencePages extends Component {
         })
     }
 
-    deleteItem = () => {
-        this.setState(prevState => {
-            let cards = prevState.cards;
-            cards.push({ id: cards.length + 1, text: `Card ${cards.length + 1}` });
-            return { cards };
+    handleAddElem = () => {
+        let { cards } = this.state;
+        let newCard = {
+            id: cards.length + 1, 
+            text: `Card ${cards.length + 1}`
+        }
+        cards.push(newCard);
+
+        this.setState({
+            cards
         });
     }
 
     moveCard = (dragIndex, hoverIndex) => {
-        const { cards } = this.state
-        const dragCard = cards[dragIndex]
-
+        const { cards } = this.state;
+        const dragCard = cards[dragIndex];
+        console.log('update index here');
         this.setState(
             update(this.state, {
                 cards: {
@@ -196,7 +201,7 @@ class ExperiencePages extends Component {
                                                 <PageTemplate
                                                     key={template.PageTemplateGUID}
                                                     template={template}
-                                                    handleDrop={() => this.deleteItem()}
+                                                    handleDrop={() => this.handleAddElem()}
                                                 />
                                             </div>
                                         ))
@@ -225,16 +230,16 @@ class ExperiencePages extends Component {
                                 </div>
                                 <div style={phoneContainerStyle}>
                                     <div style={phoneWrapperStyle}>
-                                    {this.state.cards.map((card, i) => (
-                                        <PhoneElement
-                                            key={card.id}
-                                            index={i}
-                                            id={card.id}
-                                            text={card.text}
-                                            moveCard={this.moveCard}
-                                        />
-                                    ))}
-                                    <PhoneTarget />
+                                        {this.state.cards.map((card, i) => (
+                                            <PhoneElement
+                                                key={card.id}
+                                                index={i}
+                                                id={card.id}
+                                                text={card.text}
+                                                moveCard={this.moveCard}
+                                            />
+                                        ))}
+                                        <PhoneTarget />
                                     </div>
                                 </div>
                                 <div style={pageNumContainerStyle}>
@@ -277,7 +282,7 @@ class ExperiencePages extends Component {
                     >
                         <div style={carouselWrapperStyle}>
 
-                            <div 
+                            <div
                                 style={carouselLabelContainerStyle}
                                 onClick={() => this.handleCarouselClick()}
                             >
