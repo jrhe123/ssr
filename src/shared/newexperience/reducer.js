@@ -64,7 +64,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
     let tmpPages = Object.assign([], tmpExperience.pages);
     let tmpNewPage = Object.assign({}, tmpExperience.newPage);
+
     let tmpSettingIndex;
+    let tmpPageGUID;
+    let tmpUpdatePage;
 
     switch (type) {
 
@@ -99,7 +102,16 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             } else if (payload.type == 'CARD') {
                 tmpExperience.cardTitle = payload.title;
             } else if (payload.type == 'PAGE') {
-                tmpExperience.pageTitle = payload.title;
+                // update arr of pages
+                tmpPageGUID = updated.experience.newPage.pageGUID;
+                tmpUpdatePage = find_page_by_guid(tmpPageGUID, tmpPages);
+                tmpUpdatePage.page.title = payload.title;
+                tmpPages[tmpUpdatePage.index] = tmpUpdatePage.page;
+                tmpExperience.pages = tmpPages;
+
+                // update new page
+                tmpNewPage.title = payload.title;
+                tmpExperience.newPage = tmpNewPage;
             }
             updated.experience = tmpExperience;
             return updated;
@@ -186,5 +198,17 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return previousState;
     }
 };
+
+const find_page_by_guid = (guid, pages) => {
+    for(let i = 0; i < pages.length; i++){
+        if(guid == pages[i].pageGUID){
+            return {
+                index: i,
+                page: pages[i]
+            };
+        }
+    }
+    return {};
+}
 
 export default newexperienceReducer;
