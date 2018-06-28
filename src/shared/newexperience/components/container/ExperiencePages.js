@@ -49,23 +49,28 @@ class ExperiencePages extends Component {
         })
     }
 
-    handleAddElem = () => {
+    handleAddElem = (template) => {
+        console.log('add item here: ', template);
+
         let { cards } = this.state;
         let newCard = {
             id: cards.length + 1, 
             text: `Card ${cards.length + 1}`
         }
         cards.push(newCard);
-
         this.setState({
             cards
         });
+
+        let dxPhoneArea = this.refs.dx_phone_area;
+        dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
     }
 
     moveCard = (dragIndex, hoverIndex) => {
+        console.log('update index here');
+
         const { cards } = this.state;
         const dragCard = cards[dragIndex];
-        console.log('update index here');
         this.setState(
             update(this.state, {
                 cards: {
@@ -201,7 +206,7 @@ class ExperiencePages extends Component {
                                                 <PageTemplate
                                                     key={template.PageTemplateGUID}
                                                     template={template}
-                                                    handleDrop={() => this.handleAddElem()}
+                                                    handleDrop={(template) => this.handleAddElem(template)}
                                                 />
                                             </div>
                                         ))
@@ -228,7 +233,9 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div style={phoneContainerStyle}>
+                                <div style={phoneContainerStyle} 
+                                    ref="dx_phone_area"
+                                    >
                                     <div style={phoneWrapperStyle}>
                                         {this.state.cards.map((card, i) => (
                                             <PhoneElement
