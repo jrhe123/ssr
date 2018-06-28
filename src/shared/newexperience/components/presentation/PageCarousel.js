@@ -33,7 +33,7 @@ class PageCarousel extends Component {
         } = styles;
 
         return (
-            (pages.length >= displayNumber) ?
+            (pages.length > displayNumber) ?
                 (
                     <Slider {...settings}>
                         {

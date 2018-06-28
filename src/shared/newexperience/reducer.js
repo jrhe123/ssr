@@ -80,6 +80,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             if (payload.experienceIndex == 2
                 && !updated.experience.pages.length) {
                 tmpNewPage.title = 'Page 1';
+                tmpNewPage.isSaved = true;
                 tmpExperience.newPage = tmpNewPage;
                 tmpPages.push(tmpNewPage);
             }
@@ -166,11 +167,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
-            if(!tmpNewPage.isSaved) tmpPages.push(tmpNewPage);
-
             tmpNewPage = templateNewPage;
-            tmpNewPage.title = `Page ${tmpPages.length}`;
-
+            tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+            tmpNewPage.isSaved = true;
+            tmpPages.push(tmpNewPage);
+            
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
