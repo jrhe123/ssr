@@ -497,7 +497,8 @@ const styles = {
     carouselSlideContainerStyle: {
         position: 'relative',
         height: 180,
-        border: '1px solid white'
+        width: 'calc(100% - 60px)',
+        margin: '0 auto',
     },
 
 }

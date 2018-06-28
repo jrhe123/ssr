@@ -17,16 +17,23 @@ class PageCarousel extends Component {
             dots: false,
             infinite: true,
             speed: 500,
-            slidesToShow: 1,
+            slidesToShow: 5,
             slidesToScroll: 1
         };
 
         return (
             <Slider {...settings}>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
+                <ThumbnailPage />
             </Slider>
         )
     }
