@@ -80,8 +80,12 @@ class ExperiencePages extends Component {
         )
     }
 
-    handleCarouselClick = () => {
-        this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
+    handleCarouselClick = (open) => {
+        if(open){
+            this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
+        }else{
+            this.props.dxExperiencePageCarouselMenuUpdateAction(false);
+        }   
     }
 
     render() {
@@ -220,7 +224,8 @@ class ExperiencePages extends Component {
                 <div className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
-                    <div style={tableContainerStyle}>
+                    <div style={tableContainerStyle}
+                        onClick={() => this.handleCarouselClick(false)}>
                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
 
                             <div style={toolbarContainerStyle}>tool bar</div>
@@ -291,7 +296,7 @@ class ExperiencePages extends Component {
 
                             <div
                                 style={carouselLabelContainerStyle}
-                                onClick={() => this.handleCarouselClick()}
+                                onClick={() => this.handleCarouselClick(true)}
                             >
                                 <span style={carouselLabelStyle}>Page 1
                                         <KeyboardArrowDown
