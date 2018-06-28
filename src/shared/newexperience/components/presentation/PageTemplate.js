@@ -24,7 +24,7 @@ const itemSource = {
         if (!monitor.didDrop()) {
             return;
         }
-        return props.handleDrop(props.template.PageTemplateGUID);
+        return props.handleDrop(props.template);
     }
 }
 

@@ -204,9 +204,9 @@ class ExperiencePages extends Component {
                                                     title={template.Title}
                                                 />
                                                 <PageTemplate
+                                                    handleDrop={(template) => this.handleAddElem(template)}
                                                     key={template.PageTemplateGUID}
                                                     template={template}
-                                                    handleDrop={(template) => this.handleAddElem(template)}
                                                 />
                                             </div>
                                         ))
