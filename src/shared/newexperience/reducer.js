@@ -83,9 +83,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpNewPage.isSaved = true;
                 tmpExperience.newPage = tmpNewPage;
                 tmpPages.push(tmpNewPage);
+                tmpExperience.pages = tmpPages;
             }
             tmpExperience.index = payload.experienceIndex;
-            tmpExperience.pages = tmpPages;
             updated.experience = tmpExperience;
             return updated;
 

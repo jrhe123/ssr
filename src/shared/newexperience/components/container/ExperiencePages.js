@@ -298,7 +298,7 @@ class ExperiencePages extends Component {
                                 style={carouselLabelContainerStyle}
                                 onClick={() => this.handleCarouselClick(true)}
                             >
-                                <span style={carouselLabelStyle}>Page 1
+                                <span style={carouselLabelStyle}>{experience.newPage.title}
                                         <KeyboardArrowDown
                                         className={!experience.isPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                         style={carouselIconStyle}
@@ -311,6 +311,7 @@ class ExperiencePages extends Component {
                                         <div style={carouselSlideContainerStyle}>
                                             <PageCarousel 
                                                 pages={experience.pages}
+                                                newPage={experience.newPage}
                                             />
                                         </div>
                                     )

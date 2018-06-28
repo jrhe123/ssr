@@ -17,7 +17,8 @@ class PageCarousel extends Component {
     render() {
 
         const {
-            pages
+            pages,
+            newPage,
         } = this.props;
 
         const settings = {
@@ -40,7 +41,8 @@ class PageCarousel extends Component {
                             pages.map((page, index) => (
                                 <ThumbnailPage
                                     key={index}
-                                    page={page}
+                                    title={page.title}
+                                    active={page.title == newPage.title ? true : false}
                                 />
                             ))
                         }
@@ -53,7 +55,8 @@ class PageCarousel extends Component {
                             pages.map((page, index) => (
                                 <ThumbnailPage
                                     key={index}
-                                    page={page}
+                                    title={page.title}
+                                    active={page.title == newPage.title ? true : false}
                                 />
                             ))
                         }
