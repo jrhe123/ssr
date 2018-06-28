@@ -9,6 +9,7 @@ import PageTemplate from '../presentation/PageTemplate';
 import PageTemplateTitle from '../presentation/PageTemplateTitle';
 import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
+import PageCarousel from '../presentation/PageCarousel';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -300,9 +301,13 @@ class ExperiencePages extends Component {
 
                     <div style={Object.assign({}, carouselContainerStyle, { height: !experience.isPageCarouselMenuOpen ? carouselHeight : expandCarouselHeight })}
                         className="dx_float_carousel_menu"
-                        onClick={() => this.handleCarouselClick()}>
+                    >
                         <div style={carouselWrapperStyle}>
-                            <div style={carouselLabelContainerStyle}>
+
+                            <div 
+                                style={carouselLabelContainerStyle}
+                                onClick={() => this.handleCarouselClick()}
+                            >
                                 <span style={carouselLabelStyle}>Page 1
                                         <KeyboardArrowDown
                                         className={!experience.isPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
@@ -314,7 +319,7 @@ class ExperiencePages extends Component {
                                 experience.isPageCarouselMenuOpen ?
                                     (
                                         <div style={carouselSlideContainerStyle}>
-
+                                            <PageCarousel />
                                         </div>
                                     )
                                     :
@@ -490,6 +495,7 @@ const styles = {
         top: -3
     },
     carouselSlideContainerStyle: {
+        position: 'relative',
         height: 180,
         border: '1px solid white'
     },
