@@ -56,6 +56,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let updated = Object.assign({}, previousState);
     let tmpExperience = Object.assign({}, updated.experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
+    let tmpNewPage = Object.assign({}, tmpExperience.newPage);
     let tmpSettingIndex;
 
     switch (type) {
@@ -71,7 +72,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_INDEX_UPDATE__SUCCEEDED:
+
+            if (payload.experienceIndex == 2
+                && !updated.experience.pages.length) {
+                tmpNewPage.title = 'Page 1';
+            }
             tmpExperience.index = payload.experienceIndex;
+            tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
 
