@@ -134,7 +134,7 @@ const styles = {
     },
     newContentContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
-        width: '100%'
+        width: '100%',
     },
     imgStyle: {
         display: 'block',
