@@ -36,37 +36,7 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
-        cards: [
-            {
-                id: 1,
-                text: 'Write a cool JS library',
-            },
-            {
-                id: 2,
-                text: 'Make it generic enough',
-            },
-            {
-                id: 3,
-                text: 'Write README',
-            },
-            {
-                id: 4,
-                text: 'Create some examples',
-            },
-            {
-                id: 5,
-                text:
-                    'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
-            },
-            {
-                id: 6,
-                text: '???',
-            },
-            {
-                id: 7,
-                text: 'PROFIT',
-            },
-        ],
+        cards: [],
     }
 
     componentDidMount() {
@@ -133,6 +103,7 @@ class ExperiencePages extends Component {
             toolbarContainerStyle,
             editPhoneContainerStyle,
             phoneContainerStyle,
+            phoneWrapperStyle,
             pageNumContainerStyle,
             pageNumStyle,
             controlContainerStyle,
@@ -253,6 +224,7 @@ class ExperiencePages extends Component {
                                     </div>
                                 </div>
                                 <div style={phoneContainerStyle}>
+                                    <div style={phoneWrapperStyle}>
                                     {this.state.cards.map((card, i) => (
                                         <PhoneElement
                                             key={card.id}
@@ -263,6 +235,7 @@ class ExperiencePages extends Component {
                                         />
                                     ))}
                                     <PhoneTarget />
+                                    </div>
                                 </div>
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
@@ -420,6 +393,12 @@ const styles = {
         backgroundColor: 'transparent',
         margin: '0 auto',
         overflowY: 'auto',
+    },
+    phoneWrapperStyle: {
+        width: 320,
+        height: phoneHeight,
+        margin: '0 auto',
+        backgroundColor: colors.lightBlueColor
     },
     pageNumContainerStyle: {
         height: 24
