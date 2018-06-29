@@ -2,6 +2,33 @@ import React, { Component } from 'react';
 
 class PhoneToolbar extends Component {
 
+    renderOptions = () => {
+        let {
+            section
+        } = this.props;
+
+        if (!section) {
+            return;
+        }
+
+        let options;
+        switch (section.type) {
+            case 'EDITOR':
+                break;
+            case 'BUTTON':
+                break;
+            case 'EMBED_PDF':
+                break;
+            case 'SPLASH':
+                break;
+            case 'VIDEO':
+                break;
+            default:
+                break;
+        }
+        return options;
+    }
+
     render() {
 
         const {
@@ -11,7 +38,7 @@ class PhoneToolbar extends Component {
         return (
             <div style={mainContainerStyle}>
                 {
-
+                    this.renderOptions()
                 }
             </div>
         )
@@ -22,7 +49,9 @@ const styles = {
 
     mainContainerStyle: {
         border: '1px solid red',
-        height: 48
+        height: 48,
+        display: 'flex',
+        flexDirection: 'row'
     },
 }
 
