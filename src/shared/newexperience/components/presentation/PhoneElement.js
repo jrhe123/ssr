@@ -34,7 +34,6 @@ const style = {
 const cardSource = {
     beginDrag(props) {
         return {
-            id: props.id,
             index: props.index,
         }
     },
@@ -94,14 +93,11 @@ class PhoneElement extends React.Component {
         connectDropTarget: PropTypes.func.isRequired,
         index: PropTypes.number.isRequired,
         isDragging: PropTypes.bool.isRequired,
-        id: PropTypes.any.isRequired,
-        text: PropTypes.string.isRequired,
         moveCard: PropTypes.func.isRequired,
     }
 
     render() {
         const {
-            text,
             isDragging,
             connectDragSource,
             connectDropTarget,
@@ -148,7 +144,7 @@ class PhoneElement extends React.Component {
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle}/>
                                 </div>
-                                <input defaultValue={text} />
+                                <input type="text" />
                             </div>
                         ),
                     )

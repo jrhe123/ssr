@@ -68,7 +68,11 @@ import {
 
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
-    EXPERIENCE_PAGE_ADD_PAGE__FAILED
+    EXPERIENCE_PAGE_ADD_PAGE__FAILED,
+
+    EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_ADD_ELEM__FAILED,
 
 } from './constants';
 
@@ -423,4 +427,25 @@ export function* dxExperiencePageAddPage(action) {
 
 export function* dxExperiencePageAddPageSaga() {
     yield takeEvery(EXPERIENCE_PAGE_ADD_PAGE_REQUESTED, dxExperiencePageAddPage);
+}
+
+// Experience page add elem
+export function* dxExperiencePageAddElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+            payload: {
+                type: action.payload.type,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageAddElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_ADD_ELEM_REQUESTED, dxExperiencePageAddElem);
 }

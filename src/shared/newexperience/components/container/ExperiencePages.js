@@ -23,6 +23,8 @@ import { connect } from 'react-redux';
 import {
     dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction,
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
+
+    dxExperiencePageAddElem as dxExperiencePageAddElemAction,
 } from '../../actions';
 
 // constants
@@ -50,18 +52,19 @@ class ExperiencePages extends Component {
     }
 
     handleAddElem = (template) => {
-        console.log('add item here: ', template);
+        // let { cards } = this.state;
+        // let newCard = {
+        //     id: cards.length + 1, 
+        //     text: `Card ${cards.length + 1}`
+        // }
+        // cards.push(newCard);
+        // this.setState({
+        //     cards
+        // });
 
-        let { cards } = this.state;
-        let newCard = {
-            id: cards.length + 1, 
-            text: `Card ${cards.length + 1}`
-        }
-        cards.push(newCard);
-        this.setState({
-            cards
-        });
+        this.props.dxExperiencePageAddElemAction(template.Type);
 
+        // Auto scroll down
         let dxPhoneArea = this.refs.dx_phone_area;
         dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
     }
@@ -242,12 +245,10 @@ class ExperiencePages extends Component {
                                     ref="dx_phone_area"
                                     >
                                     <div style={phoneWrapperStyle}>
-                                        {this.state.cards.map((card, i) => (
+                                        {this.props.experience.newPage.sections.map((card, i) => (
                                             <PhoneElement
-                                                key={card.id}
+                                                key={card.sectionGUID}
                                                 index={i}
-                                                id={card.id}
-                                                text={card.text}
                                                 moveCard={this.moveCard}
                                             />
                                         ))}
@@ -512,6 +513,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxExperiencePageTemplateFetchAction,
     dxExperiencePageCarouselMenuUpdateAction,
+    dxExperiencePageAddElemAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));

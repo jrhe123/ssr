@@ -18,6 +18,7 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
+    EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -166,5 +167,14 @@ export const dxExperiencePageAddPage = () => {
     return {
         type: EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxExperiencePageAddElem = (type) => {
+    return {
+        type: EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
+        payload: {
+            type,
+        },
     }
 }

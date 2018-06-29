@@ -18,6 +18,7 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -67,6 +68,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpSettingIndex;
     let tmpPageGUID;
     let tmpUpdatePage;
+    let tmpNewSection;
 
     switch (type) {
 
@@ -189,6 +191,17 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages.push(tmpNewPage);
             
             tmpExperience.pages = tmpPages;
+            tmpExperience.newPage = tmpNewPage;
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
+            console.log('add item here');
+            tmpNewSection = {
+                sectionGUID: uuid(),
+                text: 'abc'
+            };
+            tmpNewPage.sections.push(tmpNewSection);
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
