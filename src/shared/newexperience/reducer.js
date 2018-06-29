@@ -37,6 +37,11 @@ let templateNewPage = {
     sections: [],
     isSaved: false
 };
+let templateNewSection = {
+    sectionGUID: null,
+    type: null,
+    isActive: false
+};
 const initialState = {
     cardTemplates: [],
     pageTemplates: [],
@@ -202,10 +207,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
-            tmpNewSection = {
-                sectionGUID: uuid(),
-                type: payload.type
-            };
+            tmpNewSection = Object.assign({}, templateNewSection);
+            tmpNewSection.sectionGUID = uuid();
+            tmpNewSection.type = payload.type;
+
             tmpNewPage.sections.push(tmpNewSection);
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;

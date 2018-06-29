@@ -193,7 +193,7 @@ class PhoneElement extends Component {
                         connectDropTarget(
                             <div 
                                 style={contentContainerStyle}
-                                onClick={() => this.porps.handleSectionClick(this.props.sectionGUID)}>
+                                onClick={() => this.props.handleSectionClick(this.props.sectionGUID)}>
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
