@@ -20,6 +20,7 @@ import {
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -186,6 +187,15 @@ export const dxExperiencePageShuffleElem = (dragIndex, hoverIndex) => {
         payload: {
             dragIndex,
             hoverIndex,
+        },
+    }
+}
+
+export const dxExperiencePageSelectElem = (sectionGUID) => {
+    return {
+        type: EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
+        payload: {
+            sectionGUID
         },
     }
 }

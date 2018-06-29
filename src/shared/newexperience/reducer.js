@@ -20,6 +20,7 @@ import {
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
 } from './constants';
 
 // Libraries
@@ -198,7 +199,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPage = Object.assign({}, templateNewPage);
             tmpNewPage.pageGUID = uuid();
             tmpNewPage.title = `Page ${tmpPages.length + 1}`;
-            tmpNewPage.isSaved = true;
             tmpPages.push(tmpNewPage);
 
             tmpExperience.pages = tmpPages;
@@ -211,7 +211,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewSection.sectionGUID = uuid();
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
-            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections)
+            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections);
 
             tmpNewPage.sections.push(tmpNewSection);
             tmpExperience.newPage = tmpNewPage;
@@ -228,6 +228,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
                 },
             });
+            tmpExperience.newPage = tmpNewPage;
+            updated.experience = tmpExperience;
+            return updated;
+        
+        case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
+            deactive_other_sections(payload.sectionGUID, tmpNewPage.sections);
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
@@ -252,6 +258,8 @@ const deactive_other_sections = (guid, sections) => {
     for(let i = 0; i < sections.length; i++){
         if(sections[i].sectionGUID != guid){
             sections[i].isActive = false;
+        }else{
+            sections[i].isActive = true;
         }
     }
 }

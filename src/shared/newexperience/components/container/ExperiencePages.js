@@ -26,6 +26,7 @@ import {
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
+    dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
 } from '../../actions';
 
 // constants
@@ -63,7 +64,7 @@ class ExperiencePages extends Component {
     }
 
     handleSectionClick = (sectionGUID) => {
-        console.log('sectionGUID: ', sectionGUID);
+        this.props.dxExperiencePageSelectElemAction(sectionGUID);
     }
 
     handleCarouselClick = (open) => {
@@ -503,6 +504,7 @@ const dispatchToProps = {
     dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElemAction,
+    dxExperiencePageSelectElemAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));

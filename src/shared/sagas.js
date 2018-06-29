@@ -33,6 +33,7 @@ import {
     dxExperiencePageAddPageSaga,
     dxExperiencePageAddElemSaga,
     dxExperiencePageShuffleElemSaga,
+    dxExperiencePageSelectElemSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -73,6 +74,7 @@ export default function* rootSaga() {
         dxExperiencePageAddPageSaga(),
         dxExperiencePageAddElemSaga(),
         dxExperiencePageShuffleElemSaga(),
+        dxExperiencePageSelectElemSaga(),
         
         // Global
         dxValidateTokenSaga(),
