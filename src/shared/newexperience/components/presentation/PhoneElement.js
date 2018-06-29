@@ -109,12 +109,32 @@ class PhoneElement extends Component {
                 )
                 break;
             case 'BUTTON':
+                section = (
+                    <div>
+                        button here
+                </div>
+                )
                 break;
             case 'EMBED_PDF':
+                section = (
+                    <div>
+                        pdf here
+                </div>
+                )
                 break;
             case 'SPLASH':
+                section = (
+                    <div>
+                        splash here
+                </div>
+                )
                 break;
             case 'VIDEO':
+                section = (
+                    <div>
+                        video here
+                </div>
+                )
                 break;
             default:
                 break;
