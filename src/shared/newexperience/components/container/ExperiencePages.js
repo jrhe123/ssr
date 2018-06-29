@@ -399,7 +399,8 @@ const styles = {
         width: 320,
         height: phoneHeight,
         margin: '0 auto',
-        backgroundColor: colors.lightBlueColor
+        backgroundColor: colors.lightBlueColor,
+        textAlign: 'left'
     },
     pageNumContainerStyle: {
         height: 24

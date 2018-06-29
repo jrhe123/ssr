@@ -19,6 +19,10 @@ import Delete from '@material-ui/icons/Delete';
 import ContentCopy from '@material-ui/icons/ContentCopy';
 import DragHandle from '@material-ui/icons/DragHandle';
 
+// Elem Libraries
+import { Editor } from 'slate-react';
+import { Value } from 'slate';
+
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
@@ -87,7 +91,33 @@ const cardTarget = {
     },
 }
 
+// Slate JS editor
+const initialValue = Value.fromJSON({
+    document: {
+        nodes: [
+            {
+                object: 'block',
+                type: 'paragraph',
+                nodes: [
+                    {
+                        object: 'text',
+                        leaves: [
+                            {
+                                text: '',
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+})
+
 class PhoneElement extends Component {
+
+    state = {
+        value: initialValue,
+    }
 
     static propTypes = {
         connectDragSource: PropTypes.func.isRequired,
@@ -97,6 +127,12 @@ class PhoneElement extends Component {
         moveCard: PropTypes.func.isRequired,
     }
 
+    handleEditorChange = (content) => {
+        this.setState({ 
+            value: content.value
+        })
+    }
+
     renderSection = (type) => {
 
         let section;
@@ -104,7 +140,10 @@ class PhoneElement extends Component {
             case 'EDITOR':
                 section = (
                     <div>
-                        editor here
+                        <Editor
+                            value={this.state.value}
+                            onChange={(content) => this.handleEditorChange(content)}
+                        />
                     </div>
                 )
                 break;

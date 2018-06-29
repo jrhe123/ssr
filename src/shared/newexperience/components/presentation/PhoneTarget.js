@@ -61,7 +61,9 @@ const styles = {
         verticalAlign: 'middle',
     },
     labelStyle: {
-        fontSize: fonts.h3
+        fontSize: fonts.h3,
+        margin: 0,
+        textAlign: 'center'
     }
 }
 
