@@ -62,12 +62,16 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageShuffleElemAction(dragIndex, hoverIndex);
     }
 
+    handleSectionClick = (sectionGUID) => {
+        console.log('sectionGUID: ', sectionGUID);
+    }
+
     handleCarouselClick = (open) => {
-        if(open){
+        if (open) {
             this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
-        }else{
+        } else {
             this.props.dxExperiencePageCarouselMenuUpdateAction(false);
-        }   
+        }
     }
 
     render() {
@@ -220,16 +224,18 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div style={phoneContainerStyle} 
+                                <div style={phoneContainerStyle}
                                     ref="dx_phone_area"
-                                    >
+                                >
                                     <div style={phoneWrapperStyle}>
                                         {this.props.experience.newPage.sections.map((section, i) => (
                                             <PhoneElement
                                                 key={section.sectionGUID}
                                                 type={section.type}
+                                                sectionGUID={section.sectionGUID}
                                                 index={i}
                                                 moveCard={this.handleMoveCard}
+                                                handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
                                             />
                                         ))}
                                         <PhoneTarget />
@@ -280,7 +286,7 @@ class ExperiencePages extends Component {
                                 onClick={() => this.handleCarouselClick(true)}
                             >
                                 <span style={carouselLabelStyle}>{experience.newPage.title}
-                                        <KeyboardArrowDown
+                                    <KeyboardArrowDown
                                         className={!experience.isPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                         style={carouselIconStyle}
                                     />
@@ -290,7 +296,7 @@ class ExperiencePages extends Component {
                                 experience.isPageCarouselMenuOpen ?
                                     (
                                         <div style={carouselSlideContainerStyle}>
-                                            <PageCarousel 
+                                            <PageCarousel
                                                 pages={experience.pages}
                                                 newPage={experience.newPage}
                                             />

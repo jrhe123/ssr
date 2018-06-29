@@ -191,14 +191,16 @@ class PhoneElement extends Component {
                     connectDropTarget &&
                     connectDragSource(
                         connectDropTarget(
-                            <div style={contentContainerStyle}>
+                            <div 
+                                style={contentContainerStyle}
+                                onClick={() => this.porps.handleSectionClick(this.props.sectionGUID)}>
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
                                 <div style={editorContainerStyle}>
-                                {
-                                    this.renderSection(type)
-                                }
+                                    {
+                                        this.renderSection(type)
+                                    }
                                 </div>
                             </div>
                         ),
