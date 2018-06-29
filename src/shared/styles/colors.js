@@ -11,4 +11,5 @@ export default {
     labelColor: '#64697C',
     backgroundColor: '#F2F3F6',
     blueCardColor: '#4397C9',
+    activeBlueColor: '#72A8D8',
 }

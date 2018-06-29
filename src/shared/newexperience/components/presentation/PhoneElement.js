@@ -151,6 +151,7 @@ class PhoneElement extends Component {
             connectDropTarget,
 
             type,
+            isActive,
         } = this.props;
 
         const opacity = isDragging ? 0 : 1;
@@ -172,7 +173,7 @@ class PhoneElement extends Component {
         return (
             <div
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
-                <div style={controlContainerStyle}>
+                <div style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
@@ -235,6 +236,8 @@ const styles = {
         left: -40,
         width: 18,
         height: '100%',
+        paddingRight: 9,
+        borderRight: '4px solid'
     },
 
     controlWrapperStyle: {

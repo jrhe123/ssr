@@ -233,6 +233,7 @@ class ExperiencePages extends Component {
                                                 key={section.sectionGUID}
                                                 type={section.type}
                                                 sectionGUID={section.sectionGUID}
+                                                isActive={section.isActive}
                                                 index={i}
                                                 moveCard={this.handleMoveCard}
                                                 handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}

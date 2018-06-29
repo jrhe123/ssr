@@ -210,6 +210,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewSection = Object.assign({}, templateNewSection);
             tmpNewSection.sectionGUID = uuid();
             tmpNewSection.type = payload.type;
+            tmpNewSection.isActive = true;
+            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections)
 
             tmpNewPage.sections.push(tmpNewSection);
             tmpExperience.newPage = tmpNewPage;
@@ -245,6 +247,13 @@ const find_page_by_guid = (guid, pages) => {
         }
     }
     return {};
+}
+const deactive_other_sections = (guid, sections) => {
+    for(let i = 0; i < sections.length; i++){
+        if(sections[i].sectionGUID != guid){
+            sections[i].isActive = false;
+        }
+    }
 }
 
 export default newexperienceReducer;
