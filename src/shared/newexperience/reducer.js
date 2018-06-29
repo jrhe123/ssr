@@ -19,11 +19,15 @@ import {
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
 } from './constants';
 
+// Libraries
+const update = require('immutability-helper');
+
 // helpers
-import { search_object_index_by_value } from '../helpers'
-import { uuid } from '../helpers/tools'
+import { search_object_index_by_value } from '../helpers';
+import { uuid } from '../helpers/tools';
 
 
 let templateNewPage = {
@@ -69,6 +73,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpPageGUID;
     let tmpUpdatePage;
     let tmpNewSection;
+    let tmpHoverIndex, tmpDragIndex;
+    let tmpDragSection;
 
     switch (type) {
 
@@ -189,19 +195,32 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPage.title = `Page ${tmpPages.length + 1}`;
             tmpNewPage.isSaved = true;
             tmpPages.push(tmpNewPage);
-            
+
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
-            console.log('add item here');
             tmpNewSection = {
                 sectionGUID: uuid(),
-                text: 'abc'
+                text: tmpNewPage.sections.length
             };
             tmpNewPage.sections.push(tmpNewSection);
+            tmpExperience.newPage = tmpNewPage;
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:
+            tmpHoverIndex = payload.hoverIndex;
+            tmpDragIndex = payload.dragIndex;
+
+            tmpDragSection = tmpNewPage.sections[tmpDragIndex];
+            tmpNewPage = update(tmpNewPage, {
+                sections: {
+                    $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
+                },
+            });
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
@@ -212,8 +231,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 };
 
 const find_page_by_guid = (guid, pages) => {
-    for(let i = 0; i < pages.length; i++){
-        if(guid == pages[i].pageGUID){
+    for (let i = 0; i < pages.length; i++) {
+        if (guid == pages[i].pageGUID) {
             return {
                 index: i,
                 page: pages[i]

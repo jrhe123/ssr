@@ -74,6 +74,10 @@ import {
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__FAILED,
 
+    EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_SHUFFLE_ELEM__FAILED,
+
 } from './constants';
 
 // Experience type request
@@ -448,4 +452,26 @@ export function* dxExperiencePageAddElem(action) {
 
 export function* dxExperiencePageAddElemSaga() {
     yield takeEvery(EXPERIENCE_PAGE_ADD_ELEM_REQUESTED, dxExperiencePageAddElem);
+}
+
+// Experience page shuffle elem
+export function* dxExperiencePageShuffleElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
+            payload: {
+                dragIndex: action.payload.dragIndex,
+                hoverIndex: action.payload.hoverIndex,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_SHUFFLE_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageShuffleElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED, dxExperiencePageShuffleElem);
 }

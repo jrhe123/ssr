@@ -32,6 +32,7 @@ import {
     dxExperiencePageCarouselMenuToggleSaga,
     dxExperiencePageAddPageSaga,
     dxExperiencePageAddElemSaga,
+    dxExperiencePageShuffleElemSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -71,6 +72,7 @@ export default function* rootSaga() {
         dxExperiencePageCarouselMenuToggleSaga(),
         dxExperiencePageAddPageSaga(),
         dxExperiencePageAddElemSaga(),
+        dxExperiencePageShuffleElemSaga(),
         
         // Global
         dxValidateTokenSaga(),

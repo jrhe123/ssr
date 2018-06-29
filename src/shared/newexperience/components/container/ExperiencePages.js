@@ -25,6 +25,7 @@ import {
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
+    dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
 } from '../../actions';
 
 // constants
@@ -32,13 +33,10 @@ import sizes from '../../../styles/sizes';
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
-const update = require('immutability-helper');
-
 class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
-        cards: [],
     }
 
     componentDidMount() {
@@ -52,35 +50,16 @@ class ExperiencePages extends Component {
     }
 
     handleAddElem = (template) => {
-        // let { cards } = this.state;
-        // let newCard = {
-        //     id: cards.length + 1, 
-        //     text: `Card ${cards.length + 1}`
-        // }
-        // cards.push(newCard);
-        // this.setState({
-        //     cards
-        // });
-
+        // Add section to new page
         this.props.dxExperiencePageAddElemAction(template.Type);
-
         // Auto scroll down
         let dxPhoneArea = this.refs.dx_phone_area;
         dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
     }
 
     moveCard = (dragIndex, hoverIndex) => {
-        console.log('update index here');
-
-        const { cards } = this.state;
-        const dragCard = cards[dragIndex];
-        this.setState(
-            update(this.state, {
-                cards: {
-                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
-                },
-            }),
-        )
+        // shuffle order of section
+        this.props.dxExperiencePageShuffleElemAction(dragIndex, hoverIndex);
     }
 
     handleCarouselClick = (open) => {
@@ -245,9 +224,9 @@ class ExperiencePages extends Component {
                                     ref="dx_phone_area"
                                     >
                                     <div style={phoneWrapperStyle}>
-                                        {this.props.experience.newPage.sections.map((card, i) => (
+                                        {this.props.experience.newPage.sections.map((section, i) => (
                                             <PhoneElement
-                                                key={card.sectionGUID}
+                                                key={section.sectionGUID}
                                                 index={i}
                                                 moveCard={this.moveCard}
                                             />
@@ -514,6 +493,7 @@ const dispatchToProps = {
     dxExperiencePageTemplateFetchAction,
     dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageAddElemAction,
+    dxExperiencePageShuffleElemAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));
