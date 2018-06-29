@@ -291,16 +291,14 @@ class PhoneElement extends Component {
         switch (type) {
             case 'EDITOR':
                 section = (
-                    <div>
-                        <Editor
-                            placeholder="Paste in some HTML..."
-                            value={this.state.value}
-                            onPaste={this.onPaste}
-                            onChange={this.onChange}
-                            renderNode={this.renderNode}
-                            renderMark={this.renderMark}
-                        />
-                    </div>
+                    <Editor
+                        placeholder="Paste in some HTML..."
+                        value={this.state.value}
+                        onPaste={this.onPaste}
+                        onChange={this.onChange}
+                        renderNode={this.renderNode}
+                        renderMark={this.renderMark}
+                    />
                 )
                 break;
             case 'BUTTON':
@@ -360,6 +358,7 @@ class PhoneElement extends Component {
             copyControlContainerStyle,
             dragControlContainerStyle,
             controlIconStyle,
+            editorContainerStyle,
         } = styles;
 
         return (
@@ -388,9 +387,11 @@ class PhoneElement extends Component {
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
+                                <div style={editorContainerStyle}>
                                 {
                                     this.renderSection(type)
                                 }
+                                </div>
                             </div>
                         ),
                     )
@@ -407,7 +408,6 @@ const styles = {
     mainContainerStyle: {
         position: 'relative',
         minHeight: minHeight,
-        overflowX: 'hidden'
     },
     tableContainerStyle: {
         position: 'relative',
@@ -458,6 +458,9 @@ const styles = {
         height: 18,
         boxSizing: 'border-box'
     },
+    editorContainerStyle: {
+        overflowX: 'hidden'
+    }
 }
 
 export default flow(
