@@ -204,7 +204,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpNewSection = {
                 sectionGUID: uuid(),
-                text: tmpNewPage.sections.length
+                type: payload.type
             };
             tmpNewPage.sections.push(tmpNewSection);
             tmpExperience.newPage = tmpNewPage;

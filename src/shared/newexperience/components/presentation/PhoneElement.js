@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 
@@ -87,7 +87,8 @@ const cardTarget = {
     },
 }
 
-class PhoneElement extends React.Component {
+class PhoneElement extends Component {
+
     static propTypes = {
         connectDragSource: PropTypes.func.isRequired,
         connectDropTarget: PropTypes.func.isRequired,
@@ -96,11 +97,22 @@ class PhoneElement extends React.Component {
         moveCard: PropTypes.func.isRequired,
     }
 
+    renderSection = (type) => {
+
+        console.log('type: ', type);
+
+        return (
+            <div>{type}</div>
+        )
+    }
+
     render() {
         const {
             isDragging,
             connectDragSource,
             connectDropTarget,
+
+            type,
         } = this.props;
 
         const opacity = isDragging ? 0 : 1;
@@ -126,10 +138,10 @@ class PhoneElement extends React.Component {
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
                                 <div style={removeControlContainerStyle}>
-                                    <Delete style={controlIconStyle}/>
+                                    <Delete style={controlIconStyle} />
                                 </div>
                                 <div style={copyControlContainerStyle}>
-                                    <ContentCopy style={controlIconStyle}/>
+                                    <ContentCopy style={controlIconStyle} />
                                 </div>
                             </div>
                         </div>
@@ -142,9 +154,11 @@ class PhoneElement extends React.Component {
                         connectDropTarget(
                             <div style={contentContainerStyle}>
                                 <div style={dragControlContainerStyle}>
-                                    <DragHandle style={controlIconStyle}/>
+                                    <DragHandle style={controlIconStyle} />
                                 </div>
-                                <input type="text" />
+                                {
+                                    this.renderSection(type)
+                                }
                             </div>
                         ),
                     )

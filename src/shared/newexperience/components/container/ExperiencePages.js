@@ -227,6 +227,7 @@ class ExperiencePages extends Component {
                                         {this.props.experience.newPage.sections.map((section, i) => (
                                             <PhoneElement
                                                 key={section.sectionGUID}
+                                                type={section.type}
                                                 index={i}
                                                 moveCard={this.moveCard}
                                             />
