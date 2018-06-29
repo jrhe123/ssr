@@ -64,6 +64,7 @@ const initialState = {
 
         pages: [],
         newPage: templateNewPage,
+        activePageSectionIndex: 0,
     },
 };
 
@@ -81,6 +82,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewSection;
     let tmpHoverIndex, tmpDragIndex;
     let tmpDragSection;
+    let tmpActiveSectionIndex;
 
     switch (type) {
 
@@ -211,10 +213,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewSection.sectionGUID = uuid();
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
-            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections);
 
+            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections);
             tmpNewPage.sections.push(tmpNewSection);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+
             tmpExperience.newPage = tmpNewPage;
+            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
             return updated;
 
@@ -234,7 +239,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         
         case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
             deactive_other_sections(payload.sectionGUID, tmpNewPage.sections);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
             tmpExperience.newPage = tmpNewPage;
+            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
             return updated;
 
@@ -262,6 +269,14 @@ const deactive_other_sections = (guid, sections) => {
             sections[i].isActive = true;
         }
     }
+}
+const find_active_section_index = (sections) => {
+    for(let i = 0; i < sections.length; i++){
+        if(sections[i].isActive){
+            return i;
+        }
+    }
+    return null;
 }
 
 export default newexperienceReducer;

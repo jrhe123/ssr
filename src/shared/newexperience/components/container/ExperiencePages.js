@@ -9,6 +9,7 @@ import PageTemplate from '../presentation/PageTemplate';
 import PageTemplateTitle from '../presentation/PageTemplateTitle';
 import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
+import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
 
 // Libraries
@@ -208,14 +209,18 @@ class ExperiencePages extends Component {
                     </DropdownMenu>
                 </div>
 
-                <div className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                <div className={experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
                     <div style={tableContainerStyle}
                         onClick={() => this.handleCarouselClick(false)}>
                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
 
-                            <div style={toolbarContainerStyle}>tool bar</div>
+                            <div style={toolbarContainerStyle}>
+                                <PhoneToolbar 
+                                    section={experience.newPage.sections[experience.activePageSectionIndex]}
+                                />
+                            </div>
                             <div style={editPhoneContainerStyle}>
 
                                 <div style={pageNumContainerStyle}>
@@ -388,7 +393,6 @@ const styles = {
         height: 48,
         width: 540,
         margin: '0 auto',
-        backgroundColor: 'green'
     },
     editPhoneContainerStyle: {
         width: 400,
