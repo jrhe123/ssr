@@ -56,3 +56,7 @@ body{
 .dx_float_carousel_menu {
     transition: height .2s linear;
 }
+
+.dx_float_active_side_tab{
+    transition: border-color .2s linear;
+}

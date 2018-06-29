@@ -173,7 +173,8 @@ class PhoneElement extends Component {
         return (
             <div
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
-                <div style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>
+                <div className="dx_float_active_side_tab" 
+                    style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
