@@ -400,7 +400,8 @@ const styles = {
         height: phoneHeight,
         margin: '0 auto',
         backgroundColor: colors.lightBlueColor,
-        textAlign: 'left'
+        textAlign: 'left',
+        overflowX: 'hidden'
     },
     pageNumContainerStyle: {
         height: 24
