@@ -407,6 +407,7 @@ const styles = {
     mainContainerStyle: {
         position: 'relative',
         minHeight: minHeight,
+        overflowX: 'hidden'
     },
     tableContainerStyle: {
         position: 'relative',
