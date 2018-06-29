@@ -99,11 +99,28 @@ class PhoneElement extends Component {
 
     renderSection = (type) => {
 
-        console.log('type: ', type);
+        let section;
+        switch (type) {
+            case 'EDITOR':
+                section = (
+                    <div>
+                        editor here
+                    </div>
+                )
+                break;
+            case 'BUTTON':
+                break;
+            case 'EMBED_PDF':
+                break;
+            case 'SPLASH':
+                break;
+            case 'VIDEO':
+                break;
+            default:
+                break;
+        }
 
-        return (
-            <div>{type}</div>
-        )
+        return section;
     }
 
     render() {
