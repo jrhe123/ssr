@@ -57,7 +57,7 @@ class ExperiencePages extends Component {
         dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
     }
 
-    moveCard = (dragIndex, hoverIndex) => {
+    handleMoveCard = (dragIndex, hoverIndex) => {
         // shuffle order of section
         this.props.dxExperiencePageShuffleElemAction(dragIndex, hoverIndex);
     }
@@ -229,7 +229,7 @@ class ExperiencePages extends Component {
                                                 key={section.sectionGUID}
                                                 type={section.type}
                                                 index={i}
-                                                moveCard={this.moveCard}
+                                                moveCard={this.handleMoveCard}
                                             />
                                         ))}
                                         <PhoneTarget />
