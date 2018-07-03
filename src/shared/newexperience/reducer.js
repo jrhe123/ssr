@@ -48,7 +48,8 @@ const initialState = {
     pageTemplates: [],
     experience: {
         type: '0',
-        index: '0',
+        // index: '0',
+        index: '2',
 
         isCardTemplateMenuOpen: true,
         isCardTemplateSaved: false,
