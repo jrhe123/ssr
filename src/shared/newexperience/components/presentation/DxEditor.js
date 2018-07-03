@@ -121,13 +121,13 @@ class DxEditor extends Component {
     }
 
     hasMark = type => {
-        const { value } = this.state
-        return value.activeMarks.some(mark => mark.type == type)
+        const { value } = this.state;
+        return value.activeMarks.some(mark => mark.type == type);
     }
 
     hasBlock = type => {
-        const { value } = this.state
-        return value.blocks.some(node => node.type == type)
+        const { value } = this.state;
+        return value.blocks.some(node => node.type == type);
     }
 
     onChange = ({ value }) => {
@@ -135,50 +135,50 @@ class DxEditor extends Component {
     }
 
     onPaste = (event, change) => {
-        const transfer = getEventTransfer(event)
-        if (transfer.type != 'html') return
-        const { document } = serializer.deserialize(transfer.html)
-        change.insertFragment(document)
-        return true
+        const transfer = getEventTransfer(event);
+        if (transfer.type != 'html') return;
+        const { document } = serializer.deserialize(transfer.html);
+        change.insertFragment(document);
+        return true;
     }
 
     onKeyDown = (event, change) => {
-        let mark
+        let mark;
 
         if (isBoldHotkey(event)) {
-            mark = 'bold'
+            mark = 'bold';
         } else if (isItalicHotkey(event)) {
-            mark = 'italic'
+            mark = 'italic';
         } else if (isUnderlinedHotkey(event)) {
-            mark = 'underlined'
+            mark = 'underlined';
         } else if (isCodeHotkey(event)) {
-            mark = 'code'
+            mark = 'code';
         } else {
-            return
+            return;
         }
 
-        event.preventDefault()
-        change.toggleMark(mark)
-        return true
+        event.preventDefault();
+        change.toggleMark(mark);
+        return true;
     }
 
     onClickMark = (event, type) => {
-        event.preventDefault()
-        const { value } = this.state
-        const change = value.change().toggleMark(type)
-        this.onChange(change)
+        event.preventDefault();
+        const { value } = this.state;
+        const change = value.change().toggleMark(type);
+        this.onChange(change);
     }
 
     onClickBlock = (event, type) => {
-        event.preventDefault()
-        const { value } = this.state
-        const change = value.change()
-        const { document } = value
+        event.preventDefault();
+        const { value } = this.state;
+        const change = value.change();
+        const { document } = value;
 
         // Handle everything but list buttons.
         if (type != 'bulleted-list' && type != 'numbered-list') {
-            const isActive = this.hasBlock(type)
-            const isList = this.hasBlock('list-item')
+            const isActive = this.hasBlock(type);
+            const isList = this.hasBlock('list-item');
 
             if (isList) {
                 change
@@ -190,7 +190,7 @@ class DxEditor extends Component {
             }
         } else {
             // Handle the extra wrapping required for list buttons.
-            const isList = this.hasBlock('list-item')
+            const isList = this.hasBlock('list-item');
             const isType = value.blocks.some(block => {
                 return !!document.getClosest(block.key, parent => parent.type == type)
             })
@@ -211,11 +211,11 @@ class DxEditor extends Component {
             }
         }
 
-        this.onChange(change)
+        this.onChange(change);
     }
 
     renderNode = props => {
-        const { attributes, children, node, isSelected } = props
+        const { attributes, children, node, isSelected } = props;
 
         switch (node.type) {
             case 'quote':
@@ -265,7 +265,7 @@ class DxEditor extends Component {
     }
 
     renderMark = props => {
-        const { children, mark, attributes } = props
+        const { children, mark, attributes } = props;
 
         switch (mark.type) {
             case 'bold':
@@ -280,7 +280,7 @@ class DxEditor extends Component {
     }
 
     renderMarkButton = (type, icon) => {
-        const isActive = this.hasMark(type)
+        const isActive = this.hasMark(type);
 
         return (
             <div
