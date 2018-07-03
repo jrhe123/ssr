@@ -113,7 +113,6 @@ const RULES = [
 ]
 const serializer = new Html({ rules: RULES })
 
-
 class DxEditor extends Component {
 
     state = {
@@ -131,7 +130,7 @@ class DxEditor extends Component {
     }
 
     onChange = ({ value }) => {
-        this.setState({ value })
+        this.setState({ value });
     }
 
     onPaste = (event, change) => {
@@ -261,6 +260,13 @@ class DxEditor extends Component {
                     <img src={src} className={className} style={style} {...attributes} />
                 )
             }
+            case 'paragraph': {
+                return (
+                    <p {...props.attributes} className={node.data.get('className')}>
+                        {props.children}
+                    </p>
+                )
+            }
         }
     }
 
@@ -314,6 +320,7 @@ class DxEditor extends Component {
     renderEditor = () => {
         return (
             <div>
+                <a onClick={() => this.handleExportHtml()}>click me</a>
                 <div>
                     {this.renderMarkButton('bold', 'format_bold')}
                     {this.renderMarkButton('italic', 'format_italic')}
@@ -340,13 +347,16 @@ class DxEditor extends Component {
         )
     }
 
+    handleExportHtml = () => {
+        
+    }
+
     render() {
 
         return (
             <div>
                 {this.renderEditor()}
             </div>
-
         )
     }
 }
