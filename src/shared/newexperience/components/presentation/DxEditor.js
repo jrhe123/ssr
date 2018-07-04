@@ -50,7 +50,6 @@ class DxEditor extends Component {
         this.quillRef = null;
         this.reactQuillRef = null;
         this.handleChange = this.handleChange.bind(this)
-        this.handleClick = this.handleClick.bind(this)
         this.attachQuillRefs = this.attachQuillRefs.bind(this);
     }
 
@@ -108,13 +107,19 @@ class DxEditor extends Component {
                             <option value="Monoton">Monoton</option>
                         </select>
                     </span>
-                    <button className="ql-bold" />
-                    <button className="ql-italic" />
-                    <button className="ql-underline" />
-                    <select className="ql-align"></select>
-                    <select className="ql-color"></select>
-                    <select className="ql-background"></select>
-                    <button className="ql-clean"></button>
+                    <span class="ql-formats">
+                        <button className="ql-bold" />
+                        <button className="ql-italic" />
+                        <button className="ql-underline" />
+                    </span>
+                    <span class="ql-formats">
+                        <select className="ql-align"></select>
+                        <select className="ql-color"></select>
+                        <select className="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button className="ql-clean"></button>
+                    </span>
                 </div>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
@@ -132,7 +137,7 @@ class DxEditor extends Component {
 const styles = {
 
     mainContainerStyle: {
-        
+
     }
 }
 
