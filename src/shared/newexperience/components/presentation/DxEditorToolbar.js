@@ -6,6 +6,10 @@ class DxEditorToolbar extends Component {
         console.log('did mount tool bar');
     }
 
+    componentWillUnmount() {
+        console.log('will unmount tool bar');
+    }
+
     render() {
 
         return (
