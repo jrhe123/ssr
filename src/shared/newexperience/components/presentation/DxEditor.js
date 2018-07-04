@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.core.css';
 import '../../../../../assets/css/quill/index.css';
 
+// Quill setup
 const Quill = ReactQuill.Quill
 var Font = Quill.import('formats/font');
 var Size = Quill.import('attributors/style/size');
@@ -18,14 +19,11 @@ Quill.register(Size, true);
 const modules = {
     toolbar: [
         ['bold', 'italic', 'underline'],                 // toggled buttons
-        [{ 'size': Size.whitelist }],                               // custom dropdown
+        [{ 'size': Size.whitelist }],                    // custom dropdown
         [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
-        [{ 'font': Font.whitelist }],                                // font family
+        [{ 'font': Font.whitelist }],                    // font family
         [{ 'align': [] }],                               // text align
     ]
-    // toolbar: {
-    //     container: `#toolbar`,
-    // }
 }
 const formats = [
     'header', 'font', 'background', 'color', 'code', 'size',
@@ -85,26 +83,6 @@ class DxEditor extends Component {
         return (
             <div>
                 <a onClick={() => this.handleExport()}>export here</a>
-
-                {/* <div id={"toolbar"}>
-                    <span class="ql-formats">
-                        <select class="ql-size">
-                            <option value="10px">Small4</option>
-                            <option selected>Normal3</option>
-                            <option value="18px">Large2</option>
-                            <option value="32px">Huge1</option>
-                        </select>
-                    </span>
-                    <button className="ql-bold" />
-                    <button className="ql-italic" />
-                    <button className="ql-underline" />
-                    <span class="ql-formats">
-                        <select className="ql-align"></select>
-                        <select className="ql-color"></select>
-                        <select className="ql-background"></select>
-                    </span>
-                </div> */}
-
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
