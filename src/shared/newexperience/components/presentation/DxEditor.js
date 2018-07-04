@@ -1,142 +1,89 @@
 import React, { Component } from 'react';
 
 // Libraries
-import { Editor, getEventTransfer } from 'slate-react';
-import { Value } from 'slate';
-import Html from 'slate-html-serializer';
-import { isKeyHotkey } from 'is-hotkey';
+import ReactQuill, { Quill } from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.core.css';
 
-// Slate JS setup
-const BLOCK_TAGS = {
-    blockquote: 'quote',
-    p: 'paragraph',
-    pre: 'code',
+const modules = {
+    toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],       // toggled buttons
+        ['blockquote', 'code-block'],                    // blocks
+        [{ 'header': 1 }, { 'header': 2 }],              // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],    // lists
+        [{ 'script': 'sub' }, { 'script': 'super' }],     // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent
+        [{ 'direction': 'rtl' }],                        // text direction
+        [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
+        [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
+        [{ 'font': [] }],                                // font family
+        [{ 'align': [] }],                               // text align
+        ['clean'],                                       // remove formatting
+    ]
 }
-
-// Add a dictionary of mark tags.
-const MARK_TAGS = {
-    em: 'italic',
-    strong: 'bold',
-    u: 'underline',
-}
-const rules = [
-    {
-        deserialize(el, next) {
-            const type = BLOCK_TAGS[el.tagName.toLowerCase()]
-            if (type) {
-                return {
-                    object: 'block',
-                    type: type,
-                    data: {
-                        className: el.getAttribute('class'),
-                    },
-                    nodes: next(el.childNodes),
-                }
-            }
-        },
-        serialize(obj, children) {
-            if (obj.object == 'block') {
-                switch (obj.type) {
-                    case 'code':
-                        return (
-                            <pre>
-                                <code>{children}</code>
-                            </pre>
-                        )
-                    case 'paragraph':
-                        return <p className={obj.data.get('className')}>{children}</p>
-                    case 'quote':
-                        return <blockquote>{children}</blockquote>
-                }
-            }
-        },
-    },
-    // Add a new rule that handles marks...
-    {
-        deserialize(el, next) {
-            const type = MARK_TAGS[el.tagName.toLowerCase()]
-            if (type) {
-                return {
-                    object: 'mark',
-                    type: type,
-                    nodes: next(el.childNodes),
-                }
-            }
-        },
-        serialize(obj, children) {
-            if (obj.object == 'mark') {
-                switch (obj.type) {
-                    case 'bold':
-                        return <strong>{children}</strong>
-                    case 'italic':
-                        return <em>{children}</em>
-                    case 'underline':
-                        return <u>{children}</u>
-                }
-            }
-        },
-    },
+const formats = [
+    'header', 'font', 'background', 'color', 'code', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent', 'script', 'align', 'direction',
+    'link', 'image', 'code-block', 'formula', 'video'
 ]
-const html = new Html({ rules })
-const initialValue = localStorage.getItem('content') || '<p></p>'
 
 class DxEditor extends Component {
 
-    state = {
-        value: html.deserialize(initialValue),
+    constructor(props) {
+        super(props)
+        this.state = {
+            editorHtml: '',
+            mountedEditor: false
+        }
+        this.quillRef = null;
+        this.reactQuillRef = null;
+        this.handleChange = this.handleChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.attachQuillRefs = this.attachQuillRefs.bind(this);
     }
 
-    onChange = ({ value }) => {
-        // When the document changes, save the serialized HTML to Local Storage.
-        if (value.document != this.state.value.document) {
-            const string = html.serialize(value)
-            localStorage.setItem('content', string)
-        }
-        this.setState({ value })
+    componentDidMount() {
+        this.attachQuillRefs();
     }
 
-    renderNode = props => {
-        switch (props.node.type) {
-            case 'code':
-                return (
-                    <pre {...props.attributes}>
-                        <code>{props.children}</code>
-                    </pre>
-                )
-            case 'paragraph':
-                return (
-                    <p {...props.attributes}>
-                        {props.children}
-                    </p>
-                )
-            case 'quote':
-                return <blockquote {...props.attributes}>{props.children}</blockquote>
-        }
+    componentDidUpdate() {
+        this.attachQuillRefs();
     }
 
-    // Add a `renderMark` method to render marks.
-    renderMark = props => {
-        const { mark, attributes } = props
-        switch (mark.type) {
-            case 'bold':
-                return <strong {...attributes}>{props.children}</strong>
-            case 'italic':
-                return <em {...attributes}>{props.children}</em>
-            case 'underline':
-                return <u {...attributes}>{props.children}</u>
-        }
+    attachQuillRefs() {
+        // Ensure React-Quill reference is available:
+        if (typeof this.reactQuillRef.getEditor !== 'function') return;
+        // Skip if Quill reference is defined:
+        if (this.quillRef != null) return;
+        const quillRef = this.reactQuillRef.getEditor();
+        if (quillRef != null) this.quillRef = quillRef;
+    }
+
+    handleClick() {
+        var range = this.quillRef.getSelection();
+        let position = range ? range.index : 0;
+        this.quillRef.insertText(position, 'Hello, World! ')
+    }
+
+    handleChange(html) {
+        this.setState({ editorHtml: html });
     }
 
     render() {
         return (
             <div>
-                <Editor
-                    value={this.state.value}
-                    onChange={this.onChange}
-                    // Add the ability to render our nodes and marks...
-                    renderNode={this.renderNode}
-                    renderMark={this.renderMark}
-                />
+                <ReactQuill
+                    ref={(el) => { this.reactQuillRef = el }}
+                    theme={'snow'}
+                    onChange={this.handleChange}
+                    modules={modules}
+                    formats={formats}
+                    defaultValue={this.state.editorHtml}
+                    placeholder={this.props.placeholder} />
+                <button onClick={this.handleClick}>Insert Text</button>
             </div>
         )
     }
