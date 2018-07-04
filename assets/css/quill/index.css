@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans|Roboto|Monoton|Raleway|Ubuntu');
+/* default */
+.ql-container{
+    font-size: 16px;
+}
+
 /* font size */
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
     content: '12px' !important;
@@ -53,6 +59,15 @@
 .ql-font-Lato{
     font-family: 'Lato', sans-serif;
 }
+.ql-font-Raleway{
+    font-family: 'Raleway', sans-serif;
+}
+.ql-font-Ubuntu{
+    font-family: 'Ubuntu', sans-serif;
+}
+.ql-font-Monoton{
+    font-family: 'Monoton', cursive;
+}
 
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Open_Sans"]::before{
     content: 'Open Sans' !important;
@@ -75,4 +90,25 @@
 }
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Lato"]::before {
     content: 'Lato' !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Raleway"]::before{
+    content: 'Raleway' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Raleway"]::before {
+    content: 'Raleway' !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Ubuntu"]::before{
+    content: 'Ubuntu' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Ubuntu"]::before {
+    content: 'Ubuntu' !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Monoton"]::before{
+    content: 'Monoton' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Monoton"]::before {
+    content: 'Monoton' !important;
 }
