@@ -3,43 +3,42 @@
     content: '12px' !important;
     font-size: 12px !important;
 }
-
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="12px"]::before {
     content: '12px' !important;
 }
+
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
     content: '16px' !important;
     font-size: 16px !important;
 }
-
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="16px"]::before {
     content: '16px' !important;
 }
+
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before {
     content: '20px' !important;
     font-size: 20px !important;
 }
-
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="20px"]::before {
     content: '20px' !important;
 }
+
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before {
     content: '24px' !important;
     font-size: 24px !important;
 }
-
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="24px"]::before {
     content: '24px' !important;
 }
+
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="28px"]::before {
     content: '28px' !important;
     font-size: 28px !important;
 }
-
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="28px"]::before {
     content: '28px' !important;
 }
@@ -53,4 +52,27 @@
 }
 .ql-font-Lato{
     font-family: 'Lato', sans-serif;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Open_Sans"]::before{
+    content: 'Open Sans' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Open_Sans"]::before {
+    content: 'Open Sans' !important;
+}
+
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Roboto"]::before{
+    content: 'Roboto' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Roboto"]::before {
+    content: 'Roboto' !important;
+}
+
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="Lato"]::before{
+    content: 'Lato' !important;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Lato"]::before {
+    content: 'Lato' !important;
 }
