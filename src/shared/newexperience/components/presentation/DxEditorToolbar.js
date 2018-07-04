@@ -5,7 +5,7 @@ class DxEditorToolbar extends Component {
     render() {
 
         return (
-            <div id="toolbar">
+            <div id={"toolbar"+this.props.sectionGUID}>
                 <span class="ql-formats">
                     <select class="ql-font">
                         <option value="Open_Sans" selected>Open Sans</option>

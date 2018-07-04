@@ -16,19 +16,7 @@ Size.whitelist = ['12px', '16px', '20px', '24px', '28px'];
 Quill.register(Font, true);
 Quill.register(Size, true);
 
-const modules = {
-    // toolbar: [
-    //     ['bold', 'italic', 'underline'],                 // toggled buttons
-    //     [{ 'size': Size.whitelist }],                    // custom dropdown
-    //     [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
-    //     [{ 'font': Font.whitelist }],                    // font family
-    //     [{ 'align': [] }],                               // text align
-    //     ['clean'],                                       // remove formatting
-    // ]
-    toolbar: {
-        container: '#toolbar'
-    }
-}
+
 const formats = [
     'header', 'font', 'background', 'color', 'code', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
@@ -43,6 +31,19 @@ class DxEditor extends Component {
         this.state = {
             editorHtml: '',
             mountedEditor: false
+        }
+        this.modules = {
+            // toolbar: [
+            //     ['bold', 'italic', 'underline'],                 // toggled buttons
+            //     [{ 'size': Size.whitelist }],                    // custom dropdown
+            //     [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
+            //     [{ 'font': Font.whitelist }],                    // font family
+            //     [{ 'align': [] }],                               // text align
+            //     ['clean'],                                       // remove formatting
+            // ]
+            toolbar: {
+                container: '#toolbar'+this.props.sectionGUID
+            }
         }
         this.quillRef = null;
         this.reactQuillRef = null;
@@ -88,7 +89,7 @@ class DxEditor extends Component {
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
                     onChange={this.handleChange}
-                    modules={modules}
+                    modules={this.modules}
                     formats={formats}
                     defaultValue={this.state.editorHtml}
                     placeholder={this.props.placeholder} />

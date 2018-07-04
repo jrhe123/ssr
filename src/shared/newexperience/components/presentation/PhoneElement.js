@@ -106,7 +106,9 @@ class PhoneElement extends Component {
         switch (type) {
             case 'EDITOR':
                 section = (
-                    <DxEditor />
+                    <DxEditor 
+                        sectionGUID={this.props.sectionGUID}
+                    />
                 )
                 break;
             case 'BUTTON':
