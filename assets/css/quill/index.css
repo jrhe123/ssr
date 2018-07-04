@@ -1,0 +1,44 @@
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+    content: '12px' !important;
+    font-size: 12px !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="12px"]::before {
+    content: '12px' !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+    content: '16px' !important;
+    font-size: 16px !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="16px"]::before {
+    content: '16px' !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before {
+    content: '20px' !important;
+    font-size: 20px !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="20px"]::before {
+    content: '20px' !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before {
+    content: '24px' !important;
+    font-size: 24px !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="24px"]::before {
+    content: '24px' !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="28px"]::before {
+    content: '28px' !important;
+    font-size: 28px !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="28px"]::before {
+    content: '28px' !important;
+}

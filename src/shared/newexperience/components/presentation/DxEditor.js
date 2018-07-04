@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 
 // Libraries
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.core.css';
+import '../../../../../assets/css/quill/index.css';
+
+const Quill = ReactQuill.Quill
+var Font = Quill.import('formats/font');
+var Size = Quill.import('attributors/style/size');
+Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto'];
+Size.whitelist = ['12px', '16px', '20px', '24px', '28px'];
+Quill.register(Font, true);
+Quill.register(Size, true);
 
 const modules = {
     toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],       // toggled buttons
-        ['blockquote', 'code-block'],                    // blocks
-        [{ 'header': 1 }, { 'header': 2 }],              // custom button values
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],    // lists
-        [{ 'script': 'sub' }, { 'script': 'super' }],     // superscript/subscript
-        [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent
-        [{ 'direction': 'rtl' }],                        // text direction
-        [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
+        ['bold', 'italic', 'underline'],                 // toggled buttons
+        [{ 'size': Size.whitelist }],                               // custom dropdown
         [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
-        [{ 'font': [] }],                                // font family
+        [{ 'font': Font.whitelist }],                                // font family
         [{ 'align': [] }],                               // text align
-        ['clean'],                                       // remove formatting
     ]
+    // toolbar: {
+    //     container: `#toolbar`,
+    // }
 }
 const formats = [
     'header', 'font', 'background', 'color', 'code', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent', 'script', 'align', 'direction',
     'link', 'image', 'code-block', 'formula', 'video'
-]
+];
+
 
 class DxEditor extends Component {
 
@@ -72,9 +77,34 @@ class DxEditor extends Component {
         this.setState({ editorHtml: html });
     }
 
+    handleExport = () => {
+        console.log('hit: ', this.state.editorHtml);
+    }
+
     render() {
         return (
             <div>
+                <a onClick={() => this.handleExport()}>export here</a>
+
+                {/* <div id={"toolbar"}>
+                    <span class="ql-formats">
+                        <select class="ql-size">
+                            <option value="10px">Small4</option>
+                            <option selected>Normal3</option>
+                            <option value="18px">Large2</option>
+                            <option value="32px">Huge1</option>
+                        </select>
+                    </span>
+                    <button className="ql-bold" />
+                    <button className="ql-italic" />
+                    <button className="ql-underline" />
+                    <span class="ql-formats">
+                        <select className="ql-align"></select>
+                        <select className="ql-color"></select>
+                        <select className="ql-background"></select>
+                    </span>
+                </div> */}
+
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
@@ -84,6 +114,7 @@ class DxEditor extends Component {
                     defaultValue={this.state.editorHtml}
                     placeholder={this.props.placeholder} />
                 <button onClick={this.handleClick}>Insert Text</button>
+
             </div>
         )
     }
