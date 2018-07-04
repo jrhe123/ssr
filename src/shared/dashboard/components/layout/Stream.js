@@ -4,9 +4,7 @@ import React, { Component } from 'react';
 import '../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
-import SearchBar from 'material-ui-search-bar'
-import IconButton from '@material-ui/core/IconButton';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import SearchBar from 'material-ui-search-bar';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Lock from '@material-ui/icons/Lock';
 import DropdownMenu from 'react-dd-menu';
@@ -19,6 +17,8 @@ import colors from '../../../styles/colors';
 
 // component
 import ReadyToStreamTemplate from '../presentation/ReadyToStreamTemplate';
+import LiveStreamTemplate from '../presentation/LiveStreamTemplate';
+import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate'
 
 
 class Stream extends Component{
@@ -27,13 +27,13 @@ class Stream extends Component{
         isMenuOpen: false,
     }
 
-    toggleMenu = () => {
+    handleToggleMenu = () => {
         this.setState({ 
             isMenuOpen: !this.state.isMenuOpen 
         });
     }
 
-    closeMenu = () => {
+    handleCloseMenu = () => {
         this.setState({ isMenuOpen: false });
     }
 
@@ -78,12 +78,6 @@ class Stream extends Component{
             channelInfoContainerStyle,
             searchBarWrapperStyle,
             searchBarStyle,
-            channelInfoStyle,
-            channelInfoLeftStyle,
-            channelTitleStyle,
-            streamLabelStyle,
-            channelInfoRightStyle,
-            channelInfoIconStyle,
             tipsContainerStyle,
             tipsHeaderStyle,
             tipsLabelStyle,
@@ -100,17 +94,9 @@ class Stream extends Component{
             
             readyToStreamLabelStyle,
             readyToStreamWrapperStyle,
-            redayToStreamWrapperStyle,
             readyToStreamContainerStyle,
             readyToStreamContentStyle,
-
-            expLabelStyle,
-            expTitleStyle,
-            goLiveBtnStyle,
-
-            liveInfoWrapperStyle,
-            liveInfoIconStyle
-
+            
         } = styles;
 
         return(
@@ -122,15 +108,10 @@ class Stream extends Component{
                         <div style={dropdownContainerStyle}>
                             <DropdownMenu
                                 isOpen={this.state.isMenuOpen}
-                                close={this.closeMenu}
+                                close={this.handleCloseMenu}
                                 toggle={
                                     <div>
-                                        <Button 
-                                            style={dropdownBtnStyle}
-                                            onClick={() => this.toggleMenu()}>
-                                            Mobile (iOS / Android)
-                                            <ExpandMore style={expandIconStyle} />
-                                        </Button>
+                                        <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle}/></Button>
                                     </div>
                                 }
                                 align={'right'}
@@ -159,9 +140,7 @@ class Stream extends Component{
                                         style={dropdownOptionBtnStyle}
                                     >
                                         <div style={comingSoonWrapperStyle}>
-                                            <div style={comingSoonStyle}>
-                                                Coming Soon
-                                            </div>
+                                            <p style={comingSoonStyle}>Coming Soon</p>
                                             <div style={dropdownWebBtnStyle}>
                                                 <div style={dropdownBtnImgStyle}>
                                                     <Lock/>
@@ -193,162 +172,26 @@ class Stream extends Component{
                             />
                         </div>
                         <div style={channelInfoContainerStyle}>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
-                            <div style={channelInfoStyle}>
-                                <div style={channelInfoLeftStyle}>
-                                    <p style={channelTitleStyle}>General</p>
-                                    <p style={streamLabelStyle}>0 live streams</p>
-                                </div>
-                                <div style={channelInfoRightStyle}>
-                                    <IconButton 
-                                        style={channelInfoIconStyle} 
-                                    >
-                                        <MoreHoriz/>
-                                    </IconButton>
-                                </div>
-                            </div>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>                       
                         </div>
                         <div style={tipsContainerStyle}>
                             <p style={tipsHeaderStyle}>Tips:</p>
@@ -368,46 +211,10 @@ class Stream extends Component{
                             <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
                             </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <div style={liveInfoWrapperStyle}>
-                                    <IconButton 
-                                        style={liveInfoIconStyle} 
-                                    >
-                                        <MoreHoriz />
-                                    </IconButton>
-                                </div>
-                            </div>
-                            {/* <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div> */}
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
+                            <LiveStreamTemplate/>
+                            <LiveStreamTemplate/>
+                            <LiveStreamTemplate/>
+                            <LiveStreamTemplate/>
                         </div>
                         <p style={readyToStreamLabelStyle}>READY TO STREAM (0)</p>
                         <div style={readyToStreamContainerStyle}>
@@ -430,162 +237,7 @@ class Stream extends Component{
                             <ReadyToStreamTemplate/>
                             <ReadyToStreamTemplate/>
                             <ReadyToStreamTemplate/>
-                            <ReadyToStreamTemplate/>
-                            {/* <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div>
-                            <div style={redayToStreamWrapperStyle}>
-                                <p style={expTitleStyle}>My experience 1</p>
-                                <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                                <Button 
-                                        variant="Add a new channel" 
-                                        style={goLiveBtnStyle}
-                                        // onClick={() => this.handleCreateChannel()}
-                                >
-                                Go Live
-                                </Button>
-                            </div> */}
-                        
+                            <ReadyToStreamTemplate/>                        
                         </div>
                     </div>
                 </div>
@@ -610,20 +262,15 @@ const styles = {
     targetContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
-        // paddingTop: 42,
         width:308,
         justifyContent:'space-between',
-        // marginBottom:0,
-        //
         alignItems:'center',
-        // background:'pink',
         marginLeft:100,
         flex:1
     },
     targetLabelStyle:{
         marginTop:0,
         marginBottom:0,
-        // paddingTop:6,
         paddingTop:0,
         fontSize:fonts.h1
     },
@@ -716,13 +363,8 @@ const styles = {
     channelContainerStyle:{
         display: 'flex',
         flexDirection: 'row',
-        // marginTop: 33,
-        // paddingTop:32,
-        // paddingBottom:18,
         width:308,
         justifyContent:'space-between',
-        // marginBottom:18,
-        // background:'green',
         marginLeft:100,
         alignItems:'center',
         flex:1
@@ -739,8 +381,7 @@ const styles = {
         color:colors.lightGreyColor
     },
     bodyContainerStyle:{
-        //height:'100%'
-        height:'80%',
+        height:'calc(100% - 152px)',
         display:'flex',
         flexDirection:'row',
         justifyContent:'center'
@@ -751,148 +392,76 @@ const styles = {
         width:308,
         background:'white',
         height:'100%',
-        // justifyContent:'space-between',
         justifyContent:'flex-start',
         marginBottom:0,
         boxShadow: '0 1px 1px 0 #CED5DB',
-        //background:'blue'
-
-        //
-        // overflowY:'scroll'
     },
     channelInfoContainerStyle:{
-        //display:'flex',
-
-        //
-        height:'80%',
-
+        height:'calc(100% - 166px)',
         flexDirection:'column',
         overflowY: 'scroll',
-        // minHeight: 0
-    },
-    channelInfoStyle:{
-        background:'#F1F7FE',
-        display:'flex',
-        flexDirection:'row',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0,
-        flex:1,
-        //
-        // flexBasis: 'auto',
-
-    },
-    channelInfoLeftStyle:{
-        //
-        display:'flex',
-        flexDirection:'column',
-
-        flex:6,
-        marginLeft:24,
-        fontSize:fonts.h4,
-        paddingTop:12,
-        paddingBottom:12
-    },
-    channelTitleStyle:{
-        //
-        flex:1,
-        fontSize:fonts.h3,
-        marginBottom:6,
-        marginTop:0
-    },
-    streamLabelStyle:{
-                //
-                flex:1,
-        fontSize:fonts.h4,
-        color:colors.lightGreyColor,
-        margin:0
-    },
-    channelInfoRightStyle:{
-        flex:1,
-        alignSelf:'center',
-        margin:0
-    },
-    channelInfoIconStyle:{
-        height:20, 
-        width:20
-    },
-    liveInfoIconStyle:{
-        height:20, 
-        width:20
     },
     searchBarWrapperStyle:{
         background:'#F1F7FE',
         display:'flex',
         flexDirection:'row',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0
-    },
-    tipsContainerStyle:{
-        //
-        height:'20%',
-        //background:'pink',
-
-        display:'flex',
-        flexDirection:'column',
-        fontSize:fonts.h4,
-        marginLeft:12,
-        marginRight:12,
-        marginBottom:24,
-        align:'center',
-        color:colors.lightGreyColor
-    },
-    tipsHeaderStyle:{
-        marginTop:18,
-        marginBottom:12
-    },
-    tipsLabelStyle:{
-        marginTop:0,
-        marginBottom:18
-    },
-    searchBarStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
+        borderWidth:1,
+        borderColor:colors.borderColor,
         borderStyle:'solid',
         borderLeft:0,
         borderRight:0,
         borderTop:0,
-        paddingLeft:6
+        height:48
+    },
+    tipsContainerStyle:{
+        height:118,
+        display:'flex',
+        flexDirection:'column',
+        fontSize:fonts.h4,
+        marginBottom:18,
+        marginTop:12,
+        align:'center',
+        color:colors.lightGreyColor
+    },
+    tipsHeaderStyle:{
+        marginBottom:0,
+        marginTop:0,
+        paddingBottom:18,
+        paddingLeft:12,
+        paddingRight:12
+    },
+    tipsLabelStyle:{
+        marginBottom:0,
+        marginTop:0,
+        paddingLeft:12,
+        paddingRight:12
+    },
+    searchBarStyle:{
+        width:'100%',
+        boxShadow:'none',
+        paddingLeft:6,
+        height:'100%'
     },
     streamContainerStyle:{
         height:'100%',
         width:692,
-        //
-        //background:'green'
     },
     liveStreamContainerStyle:{
         overflowY:'scroll',
         minHeight:'10%',
-        maxHeight:'38%',
-        // marginBottom:18,
-        // paddingTop:12
+        maxHeight: `calc((100% - 194px)/2)`,
     },
     liveStreamWrapperStyle:{
         textAlign: 'center',
         background:'white',
         marginLeft:48,
-        // marginTop:12,
         marginTop:0,
         marginBottom:6,
         padding:12,
         fontSize: fonts.h4,
         border: '1px dotted #4A90E2',
-        //
         display:'flex',
-        justifyContent:'space-between'
+        justifyContent:'center'
     },
     liveStreamContentStyle:{
         marginTop:0,
@@ -909,30 +478,23 @@ const styles = {
         background:'white',
         marginLeft:48,
         marginTop:0,
-        // marginBottom:18,
-        // paddingTop:12,
         paddingLeft:12,
         paddingRight:12,
-        // paddingBottom:12,
         fontSize: fonts.h4,
-        //
-        height:'12%',
+        height:102,
         display:'flex',
         flexDirection:'column',
         justifyContent:'center',
     },
     readyToStreamContainerStyle:{
-        //
         minHeight:'10%',
-        maxHeight:'38%',
+        maxHeight: `calc((100% - 194px)/2)`,
         overflowY:'scroll',
-        // paddingTop:12
     },
     readyToStreamWrapperStyle:{
         textAlign: 'center',
         background:'white',
         marginLeft:48,
-        // marginTop:12,
         marginTop:0,
         marginBottom:6,
         padding:12,
@@ -941,7 +503,8 @@ const styles = {
     },
     generalHeaderStyle:{
         margin:'0 0',
-        paddingBottom:12
+        paddingBottom:12,
+        fontSize:fonts.h2
     },
     generalContentStyle:{
         margin:'0 0',
@@ -950,80 +513,26 @@ const styles = {
 
     readyToStreamLabelStyle:{
         marginLeft:48,
-        marginTop:0,
-        marginBottom:0,
-        //
-        height:'6%',
+        marginTop:18,
+        marginBottom:6,
+        height:22,
         display:'flex',
         alignItems:'center',
-        // paddingTop:18
-        // color:colors.lightGreyColor,
-        // fontWeight:'bold',
-        // fontFamily: 'Avenir'
 
     },
     liveStreamLabelStyle:{
         marginLeft:48,
-        marginTop:0,
-        marginBottom:0,
-        // paddingTop:18,
-        //
-        height:'6%',
+        height:22,
         display:'flex',
-        alignItems:'center'
+        alignItems:'center',
+        marginTop:18,
+        marginBottom:6
     },
     expandIconStyle:{
         color:colors.lightGreyColor
     },
-    redayToStreamWrapperStyle:{
-        width:'auto',
-        background:'white',
-        marginTop:12,
-        fontSize: fonts.h4,
-        marginLeft:48,
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        paddingLeft:6,
-        paddingRight:6,
-        alignItems:'center',
-        border: '1px dotted #4A90E2'
-    },
-    expTitleStyle:{
-        // marginTop:12,
-        // marginLeft:12,
-        // marginBottom:12,
-        marginTop:6,
-        marginLeft:6,
-        marginBottom:6,
-        fontSize:fonts.h3
-    },
-    expLabelStyle:{
-        // marginTop:12,
-        // marginBottom:12,
-        marginTop:6,
-        marginBottom:6,
-        fontSize:fonts.h4
-    },
-    goLiveBtnStyle:{
-        marginTop:6,
-        marginBottom:6,
-        // marginRight:12,
-        marginRight:6,
-        padding:0,
-        background:'#F0F7FF',
-        color:'#2DD1AC',
-        fontSize:fonts.h4,
-        height:26
-    },
-    liveInfoWrapperStyle:{
-        alignSelf:'center',
-        margin:0
-    },
-
     topContainerStyle:{
-        //background:'red',
-        height:'16%',
+        height:134,
         display:'flex',
         flexDirection:'column'
     }

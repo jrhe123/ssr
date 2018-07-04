@@ -4,66 +4,72 @@ import React, { Component } from 'react';
 import '../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
+import SearchBar from 'material-ui-search-bar';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Lock from '@material-ui/icons/Lock';
-import PersonAdd from '@material-ui/icons/PersonAdd';
 import DropdownMenu from 'react-dd-menu';
 import Button from '@material-ui/core/Button';
-import SearchBar from 'material-ui-search-bar'
 import IconButton from '@material-ui/core/IconButton';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
-import Avatar from '@material-ui/core/Avatar';
-import Close from '@material-ui/icons/Close';
-import classNames from 'classnames';
 
 // constants
 import sizes from '../../../styles/sizes';
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
+// component
+import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate';
+import MemberTemplate from '../presentation/MemberTemplate';
+import InviteUserTemplate from '../presentation/InviteUserTemplate';
+
 
 class Audience extends Component{
-    
+
     state = {
         isMenuOpen: false,
-        isImportOpen: false
     }
 
-    toggleMenu = () => {
+    handleToggleMenu = () => {
         this.setState({ 
             isMenuOpen: !this.state.isMenuOpen 
         });
     }
 
-    closeMenu = () => {
+    handleCloseMenu = () => {
         this.setState({ isMenuOpen: false });
     }
 
-    toggleImport = () => {
+    handleSearch = (value) => {
+        console.log(value)
+    }
+
+    handleToggleImport = () => {
         this.setState({ 
             isImportOpen: !this.state.isImportOpen 
         });
     }
 
-    closeImport = () => {
+    handleCloseImport = () => {
         this.setState({ isImportOpen: false });
     }
 
     render(){
+
         const {
             mainContainerStyle,
             mainWrapperStyle,
-            targetBodyStyle,
+
+            topContainerStyle,
+            topLeftContainerStyle,
+            topRightContainerStyle,
+            inviteLabelStyle,
+
             targetContainerStyle,
-            targetTextContainerStyle,
-            targetTextContentStyle,
-            targetSelectWrapperStyle,
-            targetTextWrapperStyle,
             targetLabelStyle,
-            targetTextStyle,
 
             dropdownContainerStyle,
             dropdownBtnStyle,
+            expandIconStyle,
             dropdownOptionBtnStyle,
             dropdownMobileBtnStyle,
             dropdownWebBtnStyle,
@@ -77,32 +83,32 @@ class Audience extends Component{
             webOptionTopLabelStyle,
             webOptionBottomLabelStyle,
 
-            channelLabelContainerStyle,
+            channelContainerStyle,
             channelLabelStyle,
-            totalLabelStyle,
 
+            totalLabelstyle,
+
+            bodyContainerStyle,
             channelSearchContainerStyle,
             channelInfoContainerStyle,
             searchBarWrapperStyle,
             searchBarStyle,
-            channelInfoWrapperStyle,
-            channelInfoStyle,
-            channelInfoLeftStyle,
-            channelTitleStyle,
-            streamLabelStyle,
-            channelInfoRightStyle,
-            channelInfoIconStyle,
-
 
             streamContainerStyle,
-            inviteTextContainerStyle,
-
+            
             channelDetailsContainerStyle,
             channelDetailsWrapperStyle,
             channelNameWrapperStyle,
             channelRegisteredWrapperStyle,
             channelInvitedWrapperStyle,
+            channelNameStyle,
+            channelCreatedStyle,
+            channelRegisteredNumberStyle,
+            channelRegisteredLabelStyle,
+            channelInvitedNumberStyle,
+            channelInvitedLabelStyle,
             channeEditStyle,
+            channelInfoIconStyle,
 
             invitaionContainerStyle,
             invitationLabelStyle,
@@ -110,10 +116,7 @@ class Audience extends Component{
 
             memberListContainerStyle,
             memberListHeaderContainerStyle,
-            memberInfocontainerStyle,
-            memberInfoWrapperStyle,
             memberLabelStyle,
-            invitationUserBtnStyle,
             searchUserWrapperStyle,
             searchUserStyle,
             memberListInfoStyle,
@@ -121,855 +124,181 @@ class Audience extends Component{
             importHeaderStyle,
             importTextContentStyle,
             importBtnStyle,
-
-            userAvatarStyle,
-            userNameWrapperStyle,
-            userNameStyle,
-            userEmailStyle,
-            userRegisterWrapperStyle,
-            userRegisterDateStyle,
-            userRegisterStatusStyle,
-            resendBtnContainerStyle,
-            resendBtnStyle,
-            userCloseBtnContainerStyle,
-
-            channelNameStyle,
-            channelCreatedStyle,
-            channelRegisteredNumberStyle,
-            channelRegisteredLabelStyle,
-            channelInvitedNumberStyle,
-            channelInvitedLabelStyle,
-
-            channelIconStyle,
-            channelIconWrapperStyle,
-
-            bodyContainerStyle
+            
         } = styles;
 
         return(
             <div style={mainContainerStyle}>
-                <div style={mainWrapperStyle}>
-                    <div style={bodyContainerStyle}>
-                        <div style={channelSearchContainerStyle}>
-                            <div style={targetContainerStyle}>
-                                <p style={targetLabelStyle}>Target</p>
-                                <div style={dropdownContainerStyle}>
-                                    <DropdownMenu
-                                        isOpen={this.state.isMenuOpen}
-                                        close={this.closeMenu}
-                                        toggle={
-                                            <div>
-                                                <Button 
-                                                    style={dropdownBtnStyle}
-                                                    onClick={() => this.toggleMenu()}>
-                                                    Mobile (iOS / Android)
-                                                    <ExpandMore />
-                                                </Button>
-                                            </div>
-                                        }
-                                        align={'right'}
-                                        size={'md'}
-                                    >
+            <div style={mainWrapperStyle}>
+                <div style={topContainerStyle}>
+                    <div style={topLeftContainerStyle}>
+                        <div style={targetContainerStyle}>
+                            <p style={targetLabelStyle}>Target</p>
+                            <div style={dropdownContainerStyle}>
+                                <DropdownMenu
+                                    isOpen={this.state.isMenuOpen}
+                                    close={this.handleCloseMenu}
+                                    toggle={
                                         <div>
-                                            <Button 
-                                                style={dropdownOptionBtnStyle}
-                                            >
-                                                <div style={dropdownMobileBtnStyle}>
+                                            <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle}/></Button>
+                                        </div>
+                                    }
+                                    align={'right'}
+                                    size={'md'}
+                                >
+                                    <div>
+                                        <Button 
+                                            style={dropdownOptionBtnStyle}
+                                        >
+                                            <div style={dropdownMobileBtnStyle}>
+                                                <div style={dropdownBtnImgStyle}>
+                                                    <img 
+                                                        style={imgStyle}
+                                                        src={require('../../../../../assets/images/mob_icon.png')}
+                                                    />
+                                                </div>
+                                                <div style={dropdownBtnTextStyle}>
+                                                    <p style={mobileOptionTopLabelStyle}>Mobile (iOS / Android)</p>
+                                                    <p style={mobileOptionBottomLabelStyle}>Users viewing streams using native iOS and Android mobile apps</p>
+                                                </div>
+                                            </div>
+                                        </Button>
+                                    </div>
+                                    <div>
+                                        <Button 
+                                            style={dropdownOptionBtnStyle}
+                                        >
+                                            <div style={comingSoonWrapperStyle}>
+                                                <p style={comingSoonStyle}>Coming Soon</p>
+                                                <div style={dropdownWebBtnStyle}>
                                                     <div style={dropdownBtnImgStyle}>
-                                                        <img 
-                                                            style={imgStyle}
-                                                            src={require('../../../../../assets/images/mob_icon.png')}
-                                                        />
+                                                        <Lock/>
                                                     </div>
                                                     <div style={dropdownBtnTextStyle}>
-                                                        <p style={mobileOptionTopLabelStyle}>Mobile (iOS / Android)</p>
-                                                        <p style={mobileOptionBottomLabelStyle}>Users viewing streams using native iOS and Android mobile apps</p>
+                                                        <p style={webOptionTopLabelStyle}>Web application</p>
+                                                        <p style={webOptionBottomLabelStyle}>Users viewing streams using their web browsers</p>
                                                     </div>
                                                 </div>
-                                            </Button>
-                                        </div>
-                                        <div>
-                                            <Button 
-                                                style={dropdownOptionBtnStyle}
-                                            >
-                                                <div style={comingSoonWrapperStyle}>
-                                                    <div style={comingSoonStyle}>
-                                                        Coming Soon
-                                                    </div>
-                                                    <div style={dropdownWebBtnStyle}>
-                                                        <div style={dropdownBtnImgStyle}>
-                                                            <Lock/>
-                                                        </div>
-                                                        <div style={dropdownBtnTextStyle}>
-                                                            <p style={webOptionTopLabelStyle}>Web application</p>
-                                                            <p style={webOptionBottomLabelStyle}>Users viewing streams using their web browsers</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </Button>
-                                        </div>
-                                    </DropdownMenu>
-                                </div>
-                            </div>
-                            <div style={channelLabelContainerStyle}>
-                                <p style={channelLabelStyle}>Channel(s)</p>
-                                <p style={totalLabelStyle}>3 Total</p>
-                            </div>
-                            <div style={channelInfoContainerStyle}>
-                                <div style={searchBarWrapperStyle}>
-                                    <SearchBar
-                                        value={this.state.value}
-                                        onChange={() => handleSearch()}
-                                        style={searchBarStyle}
-                                        placeholder={'Type for search'}
-                                    />
-                                </div>
-                                <div style={channelInfoWrapperStyle}>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            {/* <Lock style={channelIconStyle}/> */}
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={channelInfoStyle}>
-                                        <div style={channelIconWrapperStyle}>
-                                            <Lock style={channelIconStyle}/>
-                                        </div>
-                                        <div style={channelInfoLeftStyle}>
-                                            <p style={channelTitleStyle}>General</p>
-                                            <p style={streamLabelStyle}>0 live streams</p>
-                                        </div>
-                                        <div style={channelInfoRightStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle} 
-                                            >
-                                                <MoreHoriz/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={streamContainerStyle}>
-                            <div style={inviteTextContainerStyle}>
-                                <p>Invite your users directly to this private channel. When the user accepts the invitation, this private channel’s content will be automatically visibile to them on their feed along with the Generic content  (latest posts will be shown first and follows reverse chronological order)</p>
-                            </div>
-                            <div style={channelDetailsContainerStyle}>
-                                <div style={channelDetailsWrapperStyle}>
-                                <div style={channelNameWrapperStyle}>
-                                    <p style={channelNameStyle}>Cardiology</p>
-                                    <p style={channelCreatedStyle}>Created 01.01.1972</p>
-                                </div>
-                                <div style={channelRegisteredWrapperStyle}>
-                                    <p style={channelRegisteredNumberStyle}>246</p>
-                                    <p style={channelRegisteredLabelStyle}>Registered</p>
-                                </div>
-                                <div style={channelInvitedWrapperStyle}>
-                                    <p style={channelInvitedNumberStyle}>257</p>
-                                    <p style={channelInvitedLabelStyle}>Invited</p>
-                                </div>
-                                </div>
-                                <div style={channeEditStyle}>
-                                        <IconButton 
-                                            style={channelInfoIconStyle} 
-                                        >
-                                            <MoreHoriz/>
-                                        </IconButton>
-                                </div>
-                            </div>
-                            <div style={invitaionContainerStyle}>
-                                <p style={invitationLabelStyle}>Invitation email Template</p>
-                                <Button style={invitationEditBtnStyle}>
-                                    Edit
-                                </Button>
-                            </div>
-                            <div style={memberListContainerStyle}>
-                                <div style={memberListHeaderContainerStyle}>
-                                    <p style={memberLabelStyle}>Members list</p>
-                                    <Button style={invitationUserBtnStyle}>
-                                        <PersonAdd /> Invite New Users
-                                    </Button>
-                                    <div style={searchUserWrapperStyle}>
-                                        <SearchBar
-                                            value={this.state.value}
-                                            onChange={() => handleSearch()}
-                                            style={searchUserStyle}
-                                            placeholder={'Search a user'}
-                                        />
-                                    </div>
-                                    <div style={memberListInfoStyle}>
-                                        <DropdownMenu 
-                                            isOpen={this.state.isImportOpen}
-                                            close={this.closeImport}
-                                            toggle={
-                                                <div>
-                                                    <IconButton 
-                                                        style={channelInfoIconStyle}
-                                                        onClick={() => this.toggleImport()}
-                                                    >
-                                                        <MoreHoriz/>
-                                                    </IconButton>
-                                                </div>
-                                            }
-                                            align={'right'}
-                                            size={'md'}                                   
-                                        >
-                                            <div style={importContainerStyle}>
-                                                <p style={importHeaderStyle}>Import CSV file</p>
-                                                <p style={importTextContentStyle}>Upload and send all your users using this feature. Save time</p>
-                                                <Button color="primary" style={importBtnStyle}>
-                                                    Download a sample CSV file
-                                                </Button>
                                             </div>
-                                        </DropdownMenu>
+                                        </Button>
                                     </div>
-                                </div>
-                                <div style={memberInfocontainerStyle}>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Dhaneswar pandian</p>
-                                            <p style={userEmailStyle}>dhan@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 September 2017</p>
-                                            <p style={userRegisterStatusStyle}>invited</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button>
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Roy He</p>
-                                            <p style={userEmailStyle}>roy@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>10 May 2017</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            {/* <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button> */}
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <div style={memberInfoWrapperStyle}>
-                                        <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
-                                        <div style={userNameWrapperStyle}>
-                                            <p style={userNameStyle}>Vejey Gandier</p>
-                                            <p style={userEmailStyle}>vejey@digitalxi.com</p>
-                                        </div>
-                                        <div style={userRegisterWrapperStyle}>
-                                            <p style={userRegisterDateStyle}>22 June 2018</p>
-                                            <p style={userRegisterStatusStyle}>Registered</p>
-                                        </div>
-                                        <div style={resendBtnContainerStyle}>                               
-                                            <Button
-                                                style={resendBtnStyle}
-                                                variant="outlined"
-                                            >
-                                                Resend Invite
-                                            </Button>
-                                        </div>
-                                        <div style={userCloseBtnContainerStyle}>
-                                            <IconButton 
-                                                style={channelInfoIconStyle}
-                                            >
-                                                <Close/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                </div>
+                                </DropdownMenu>
                             </div>
                         </div>
-                    </div>  
+                        <div style={channelContainerStyle}>
+                            <p style={channelLabelStyle}>Channel(s)</p>
+                            <p style={totalLabelstyle}>1 Total</p>
+                        </div>
+                    </div>
+                    <div style={topRightContainerStyle}>
+                        <p style={inviteLabelStyle}>Invite your users directly to this private channel. When the user accepts the invitation, this private channel’s content will be automatically visibile to them on their feed along with the Generic content (latest posts will be shown first and follows reverse chronological order)</p>
+                    </div>
                 </div>
+                <div style={bodyContainerStyle}>
+                    <div style={channelSearchContainerStyle}>
+                        <div style={searchBarWrapperStyle}>
+                            <SearchBar
+                                value={this.state.value}
+                                onChange={() => handleSearch()}
+                                style={searchBarStyle}
+                                placeholder={'Type for search'}
+                            />
+                        </div>
+                        <div style={channelInfoContainerStyle}>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>
+                            <ChannelInfoTemplate/>                       
+                        </div>
+                    </div>
+                    <div style={streamContainerStyle}>
+                        <div style={channelDetailsContainerStyle}>
+                            <div style={channelDetailsWrapperStyle}>
+                            <div style={channelNameWrapperStyle}>
+                                <p style={channelNameStyle}>Cardiology</p>
+                                <p style={channelCreatedStyle}>Created 01.01.1972</p>
+                            </div>
+                            <div style={channelRegisteredWrapperStyle}>
+                                <p style={channelRegisteredNumberStyle}>246</p>
+                                <p style={channelRegisteredLabelStyle}>Registered</p>
+                            </div>
+                            <div style={channelInvitedWrapperStyle}>
+                                <p style={channelInvitedNumberStyle}>257</p>
+                                <p style={channelInvitedLabelStyle}>Invited</p>
+                            </div>
+                            </div>
+                            <div style={channeEditStyle}>
+                                    <IconButton style={channelInfoIconStyle}><MoreHoriz/></IconButton>
+                            </div>
+                        </div>
+                        <div style={invitaionContainerStyle}>
+                            <p style={invitationLabelStyle}>Invitation email Template</p>
+                            <Button style={invitationEditBtnStyle}>Edit</Button>
+                        </div>
+                        <div style={memberListHeaderContainerStyle}>
+                            <p style={memberLabelStyle}>Members list</p>
+                            <InviteUserTemplate/>
+                            <div style={searchUserWrapperStyle}>
+                                <SearchBar
+                                    value={this.state.value}
+                                    onChange={() => handleSearch()}
+                                    style={searchUserStyle}
+                                    placeholder={'Search a user'}
+                                />
+                            </div>
+                            <div style={memberListInfoStyle}>
+                                <DropdownMenu 
+                                    isOpen={this.state.isImportOpen}
+                                    close={this.handleCloseImport}
+                                    toggle={
+                                        <div>
+                                            <IconButton style={channelInfoIconStyle} onClick={() => this.handleToggleImport()}><MoreHoriz/></IconButton>
+                                        </div>
+                                    }
+                                    align={'right'}
+                                    size={'md'}                                   
+                                >
+                                    <div style={importContainerStyle}>
+                                        <p style={importHeaderStyle}>Import CSV file</p>
+                                        <p style={importTextContentStyle}>Upload and send all your users using this feature. Save time</p>
+                                        <Button color="primary" style={importBtnStyle}>Download a sample CSV file</Button>
+                                    </div>
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                        <div style={memberListContainerStyle}>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                            <MemberTemplate/>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         )
     }
@@ -980,47 +309,26 @@ const styles = {
         width: sizes.dxWidth,
         margin: '0 auto',
         display:'flex',
-        justifyContent:'flex-start',
-        alignItems:'flex-start',
-        flexDirection:'row'
+        flexDirection:'row',
     },
     mainWrapperStyle:{
         height: `calc(100vh - ${sizes.headerHeight})`,
         flex:1,
         width: '100%',
-        //background:'yellow'
-    },
-    targetBodyStyle:{
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: 33
     },
     targetContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 32,
         width:308,
         justifyContent:'space-between',
-        marginBottom:24,
-        //background:'green'
-    },
-    targetTextContainerStyle:{
-        display: 'flex',
-        flexDirection: 'row',
-        // marginTop: 33,
-        width:692,
-        // marginLeft:48,
-        // justifyContent:'space-between',
-        marginBottom:0,
-        background:'blue'
-    },
-    targetTextContentStyle:{
-        margin:0
+        alignItems:'center',
+        marginLeft:100,
+        flex:1
     },
     targetLabelStyle:{
         marginTop:0,
         marginBottom:0,
-        paddingTop:6,
+        paddingTop:0,
         fontSize:fonts.h1
     },
     dropdownContainerStyle:{
@@ -1034,7 +342,8 @@ const styles = {
     },
     dropdownBtnStyle:{
         padding:0,
-        textTransform: 'none'
+        textTransform: 'none',
+        fontSize:fonts.h1
     },
     dropdownMobileBtnStyle:{
         display:'flex',
@@ -1105,147 +414,103 @@ const styles = {
         margin:0,
         fontSize: fonts.h4
     },
-    channelLabelStyle:{
-        margin:0
+    clickHereLinkStyle:{
+        color:colors.blueColor
     },
-    totalLabelStyle:{
-        margin:0,
+    channelContainerStyle:{
+        display: 'flex',
+        flexDirection: 'row',
+        width:308,
+        justifyContent:'space-between',
+        marginLeft:100,
+        alignItems:'center',
+        flex:1
+    },
+    channelLabelStyle:{
+        marginTop:0,
+        marginBottom:0,
+        fontSize:fonts.h1
+    },
+    totalLabelstyle:{
+        marginTop:0,
+        marginBottom:0,
         fontSize:fonts.h3,
         color:colors.lightGreyColor
     },
+    bodyContainerStyle:{
+        height:'calc(100% - 152px)',  
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center'
+    },
     channelSearchContainerStyle: {
-        // display: 'flex',
-        // flexDirection: 'column',
+        display: 'flex',
+        flexDirection: 'column',
         width:308,
-        //background:'white',
+        background:'white',
         height:'100%',
         justifyContent:'flex-start',
         marginBottom:0,
+        boxShadow: '0 1px 1px 0 #CED5DB',
     },
     channelInfoContainerStyle:{
-        background:'white',
-        boxShadow: '0 1px 1px 0 #CED5DB',
-        // height:'100%',
-        height:'80%'
-    },
-    channelInfoWrapperStyle:{
-        overflowY:'scroll',
-        height:'92%'
-
-    },
-    channelInfoStyle:{
-        background:'#F1F7FE',
-        display:'flex',
-        flexDirection:'row',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0,
-        paddingBottom:12,
-        paddingTop:12
-    },
-    channelInfoLeftStyle:{
-        flex:6,
-        // marginLeft:24,
-        marginLeft:6,
-        fontSize:fonts.h4
-    },
-    channelTitleStyle:{
-        fontSize:fonts.h3,
-        marginBottom:6,
-        marginTop:0
-    },
-    streamLabelStyle:{
-        fontSize:fonts.h4,
-        color:colors.lightGreyColor,
-        margin:0
-    },
-    channelInfoRightStyle:{
-        flex:1,
-        alignSelf:'center',
-        margin:0
-    },
-    channeEditStyle:{
-        marginTop:0,
-        marginBottom:0,
-        marginRight:30
-    },
-    channelInfoIconStyle:{
-        height:20, 
-        width:20
-    },
-    channelLabelContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        marginBottom:12,
-        justifyContent:'space-between'
-    },
-    channelLabelStyle:{
-        margin:0
+        height:'calc(100% - 48px)',
+        flexDirection:'column',
+        overflowY: 'scroll',
     },
     searchBarWrapperStyle:{
         background:'#F1F7FE',
         display:'flex',
         flexDirection:'row',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0
-    },
-    searchUserWrapperStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'center',
-        marginLeft:6,
-        // height:36,
-        width:240
-    },
-    searchBarStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
+        borderWidth:1,
+        borderColor:colors.borderColor,
         borderStyle:'solid',
         borderLeft:0,
         borderRight:0,
         borderTop:0,
-        paddingLeft:6,
+        height:48
     },
-    searchUserStyle:{
+    searchBarStyle:{
         width:'100%',
         boxShadow:'none',
-        borderWidth:1,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
         paddingLeft:6,
-        // height:36
+        height:'100%'
     },
-    memberListInfoStyle:{
-        alignSelf:'center',
-        marginLeft:24
-    },
-
     streamContainerStyle:{
         height:'100%',
         width:692,
-        // marginTop:32,
-        // paddingTop:32,
-        marginBottom:0,
-        marginLeft:48
-        //background:'blue'
     },
-    inviteTextContainerStyle:{
-        width:'auto',
-        // marginLeft:48,
-        marginTop:42,
-        marginBottom:24,
-        fontSize: fonts.h3,
+    expandIconStyle:{
         color:colors.lightGreyColor
     },
+    topContainerStyle:{
+        height:134,
+        display:'flex',
+        flexDirection:'row'
+    },
+    topLeftContainerStyle:{
+        height:'100%',
+        display:'flex',
+        flexDirection:'column'
+    },
+    topRightContainerStyle:{
+        height:'100%',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        marginLeft:48,
+        width:692
+    },
+    inviteLabelStyle:{
+        paddingLeft:0,
+        paddingRight:48,
+        paddingTop:0,
+        paddingBottom:0,
+        fontSize:fonts.h3,
+        color:colors.lightGreyColor,
+        height:66
+    },
+
     channelDetailsContainerStyle:{
         display:'flex',
         flexDirection:'row',
@@ -1253,101 +518,19 @@ const styles = {
         alignItems:'center',
         width:'auto',
         background:'white',
-        // marginLeft:48,
         marginTop:0,
         marginBottom:6,
         paddingTop:30,
         paddingLeft:12,
         paddingRight:12,
         paddingBottom:18,
-        fontSize: fonts.h4
+        fontSize: fonts.h4,
+        marginLeft:48,
+        height:36
     },
     channelDetailsWrapperStyle:{
         display:'flex',
         flexDirection:'row'
-    },
-    invitaionContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width:'auto',
-        background:'white',
-        // marginLeft:48,
-        marginTop:0,
-        marginBottom:6,
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        fontSize: fonts.h4
-    },
-    memberListContainerStyle:{
-        // display:'flex',
-        height:'60%',
-        // flexDirection:'row',
-        flexDirection:'column',
-        justifyContent:'flex-start',
-        alignItems:'space-between',
-        width:'auto',
-        background:'white',
-        // marginLeft:48,
-        marginTop:0,
-        marginBottom:12,
-        padding:0,
-        fontSize: fonts.h4    
-    },
-    memberListHeaderContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        width:'auto',
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0
-    },
-    memberInfocontainerStyle:{
-        overflowY:'scroll',
-        minHeight:'10%',
-        maxHeight:'82%',
-    },
-    memberInfoWrapperStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        width:'auto',
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        // paddingBottom:12,
-        paddingBottom:12,
-        borderWidth:0.25,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0
-    },
-    invitationLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h3,
-        marginTop:0,
-        marginBottom:0
-    },
-    memberLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h2,
-        marginTop:0,
-        marginBottom:0
     },
     channelNameWrapperStyle:{
         marginLeft:18,
@@ -1391,6 +574,39 @@ const styles = {
         fontSize: fonts.h4,
         color:colors.lightGreyColor
     },
+    channeEditStyle:{
+        marginTop:0,
+        marginBottom:0,
+        marginRight:30
+    },
+    channelInfoIconStyle:{
+        height:20, 
+        width:20
+    },
+
+    invitaionContainerStyle:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        width:'auto',
+        background:'white',
+        marginTop:0,
+        marginBottom:6,
+        paddingTop:12,
+        paddingLeft:12,
+        paddingRight:12,
+        paddingBottom:12,
+        fontSize: fonts.h4,
+        marginLeft:48,
+        height:36
+    },
+    invitationLabelStyle:{
+        marginLeft:18,
+        fontSize: fonts.h3,
+        marginTop:0,
+        marginBottom:0
+    },
     invitationEditBtnStyle:{
         background:colors.blueColor,
         color:colors.whiteColor,
@@ -1398,23 +614,74 @@ const styles = {
         width:120,
         marginLeft:66
     },
-    invitationUserBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:36,
-        // width:120,
-        marginLeft:36,
-        fontSize: fonts.h5,
-        marginRight:12
+
+    memberListContainerStyle:{
+        flexDirection:'column',
+        justifyContent:'flex-start',
+        alignItems:'space-between',
+        width:'auto',
+        background:'white',
+        marginLeft:48,
+        marginTop:0,
+        marginBottom:0,
+        padding:0,
+        fontSize: fonts.h4,
+        overflowY:'scroll',
+        minHeight:0,
+        maxHeight:'calc(100% - 232px)',  
     },
-    bodyContainerStyle:{
-        height:'100%',
+    memberListHeaderContainerStyle:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'center'
+        justifyContent:'flex-start',
+        alignItems:'center',
+        width:'auto',
+        paddingTop:12,
+        paddingLeft:12,
+        paddingRight:12,
+        paddingBottom:12,
+        borderWidth:0.25,
+        borderColor:'#d2d8de',
+        borderStyle:'solid',
+        borderLeft:0,
+        borderRight:0,
+        borderTop:0,
+        marginLeft:48,
+        background:colors.whiteColor,
+        height:48
+    },
+    memberLabelStyle:{
+        marginLeft:18,
+        fontSize: fonts.h2,
+        marginTop:0,
+        marginBottom:0
+    },
+    searchUserWrapperStyle:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        marginLeft:6,
+        width:240,
+        height:36
+    },
+    searchUserStyle:{
+        width:'100%',
+        boxShadow:'none',
+        borderWidth:1,
+        borderColor:'#d2d8de',
+        borderStyle:'solid',
+        paddingLeft:6,
+        height:'100%'
+    },
+    memberListInfoStyle:{
+        alignSelf:'center',
+        marginLeft:24
     },
     importContainerStyle:{
-        padding:'18px 18px 6px 12px'
+        paddingTop:18,
+        paddingRight:18,
+        paddingBottom:12,
+        paddingLeft:12
     },
     importHeaderStyle:{
         marginTop:0,
@@ -1429,68 +696,8 @@ const styles = {
     importBtnStyle:{
         margin:0,
         fontSize:fonts.h5,
-        paddingTop:0,
-        paddingBottom:0,
-        paddingLeft:0,
-        paddingRight:0
+        padding:0
     },
-    userAvatarStyle:{
-        marginLeft:18,
-        marginRight:12,
-        // flex:1
-        width:40
-    },
-    userNameWrapperStyle:{
-        // flex:5
-        width:180
-    },
-    userNameStyle:{
-        margin:0,
-        fontSize:fonts.h3
-    },
-    userEmailStyle:{
-        marginTop:3,
-        marginBottom:0,
-        color:colors.lightGreyColor,
-        fontSize: fonts.h4,
-    },
-    userRegisterWrapperStyle:{
-        marginLeft:6,
-        width:180
-        // flex:2
-    },
-    userRegisterDateStyle:{
-        margin:0,
-        fontSize:fonts.h3
-    },
-    userRegisterStatusStyle:{
-        marginTop:3,
-        marginBottom:0,
-        color:colors.lightGreyColor,
-        fontSize: fonts.h4,
-    },
-    resendBtnContainerStyle:{
-        width:126
-    },
-    resendBtnStyle:{
-        textTransform:'none',
-    },
-    userCloseBtnContainerStyle:{
-        // marginLeft:12
-        width: 60,
-        display:'flex',
-        justifyContent:'center',
-        marginLeft:18
-    },
-    channelIconStyle:{
-        height:16,
-        width:16
-    },
-    channelIconWrapperStyle:{
-        marginLeft:12,
-        width:16
-    }
-
 }
 
 export default Audience;
