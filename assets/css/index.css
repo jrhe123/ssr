@@ -8,6 +8,14 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+.dx_show_toolbar{
+    display: block;
+}
+
+.dx_hidden_toolbar{
+    display: none;
+}
+
 .dx_input:focus{
     outline: none;
 }

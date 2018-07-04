@@ -7,33 +7,30 @@ class PhoneToolbar extends Component {
 
     renderOptions = () => {
         let {
-            section
+            sections,
+            activePageSectionIndex,
         } = this.props;
 
-        if (!section) {
+        if (!sections) {
             return;
         }
 
-        let options;
-        switch (section.type) {
-            case 'EDITOR':
-                // options = (
-                //     <DxEditorToolbar 
-                //         sectionGUID={this.props.section.sectionGUID}
-                //     />
-                // );
-                break;
-            case 'BUTTON':
-                break;
-            case 'EMBED_PDF':
-                break;
-            case 'SPLASH':
-                break;
-            case 'VIDEO':
-                break;
-            default:
-                break;
-        }
+        let options = sections.map((section, i) => {
+            if (section.type == 'EDITOR') {
+                return (
+                    <DxEditorToolbar
+                        isActive={activePageSectionIndex == i ? true : false}
+                        sectionGUID={section.sectionGUID}
+                    />
+                )
+            } else {
+                return (
+                    <div
+                        className={activePageSectionIndex == i ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
+                    >other tools here</div>
+                )
+            }
+        })
         return options;
     }
 
@@ -58,8 +55,6 @@ const styles = {
     mainContainerStyle: {
         border: '1px solid red',
         height: 48,
-        display: 'flex',
-        flexDirection: 'row'
     },
 }
 
