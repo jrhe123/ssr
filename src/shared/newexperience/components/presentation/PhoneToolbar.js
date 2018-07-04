@@ -17,11 +17,11 @@ class PhoneToolbar extends Component {
         let options;
         switch (section.type) {
             case 'EDITOR':
-                options = (
-                    <DxEditorToolbar 
-                        sectionGUID={this.props.section.sectionGUID}
-                    />
-                );
+                // options = (
+                //     <DxEditorToolbar 
+                //         sectionGUID={this.props.section.sectionGUID}
+                //     />
+                // );
                 break;
             case 'BUTTON':
                 break;

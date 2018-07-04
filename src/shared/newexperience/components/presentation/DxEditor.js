@@ -7,6 +7,9 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.core.css';
 import '../../../../../assets/css/quill/index.css';
 
+// components
+import DxEditorToolbar from './DxEditorToolbar';
+
 // Quill setup
 const Quill = ReactQuill.Quill
 var Font = Quill.import('formats/font');
@@ -42,7 +45,7 @@ class DxEditor extends Component {
             //     ['clean'],                                       // remove formatting
             // ]
             toolbar: {
-                container: '#toolbar'+this.props.sectionGUID
+                container: '#toolbar-'+this.props.sectionGUID
             }
         }
         this.quillRef = null;
@@ -85,6 +88,11 @@ class DxEditor extends Component {
         return (
             <div style={mainContainerStyle}>
                 <a onClick={() => this.handleExport()}>export here</a>
+
+                <DxEditorToolbar 
+                    sectionGUID={this.props.sectionGUID}
+                />
+
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}

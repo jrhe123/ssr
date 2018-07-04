@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 class DxEditorToolbar extends Component {
 
+    componentDidMount(){
+        console.log('did mount tool bar');
+    }
+
     render() {
 
         return (
-            <div id={"toolbar"+this.props.sectionGUID}>
+            <div id={"toolbar-"+this.props.sectionGUID}>
                 <span class="ql-formats">
                     <select class="ql-font">
                         <option value="Open_Sans" selected>Open Sans</option>
