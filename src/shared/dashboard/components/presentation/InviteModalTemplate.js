@@ -14,7 +14,7 @@ import '../../../../../assets/css/modal/rrm.css';
 
 
 
-class InviteUserTemplate extends Component {
+class InviteModalTemplate extends Component {
 
             
     state = {
@@ -203,4 +203,4 @@ const styles = {
         width:120
     },
 }
-export default InviteUserTemplate;
+export default InviteModalTemplate;

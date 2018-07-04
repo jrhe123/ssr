@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-// Libraries
-import Button from '@material-ui/core/Button';
-
 // constants
 import fonts from '../../../styles/fonts';
+
+// component
+import StreamModalTemplate from './StreamModalTemplate';
 
 
 class ReadyToStreamTemplate extends Component {
@@ -12,8 +12,7 @@ class ReadyToStreamTemplate extends Component {
         const {
             redayToStreamWrapperStyle,
             expLabelStyle,
-            expTitleStyle,
-            goLiveBtnStyle,
+            expTitleStyle
         } = styles;
 
 
@@ -21,7 +20,7 @@ class ReadyToStreamTemplate extends Component {
             <div style={redayToStreamWrapperStyle}>
                 <p style={expTitleStyle}>My experience 1</p>
                 <p style={expLabelStyle}>Streamed in 0 other channel(s)</p>
-                <Button variant="Add a new channel" style={goLiveBtnStyle}>Go Live</Button>
+                <StreamModalTemplate/>
             </div>
         );
     }
@@ -62,6 +61,6 @@ const styles = {
         color:'#2DD1AC',
         fontSize:fonts.h4,
         height:26
-    },
+    }
 }
 export default ReadyToStreamTemplate;

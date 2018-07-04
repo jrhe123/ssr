@@ -20,7 +20,7 @@ import colors from '../../../styles/colors';
 // component
 import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate';
 import MemberTemplate from '../presentation/MemberTemplate';
-import InviteUserTemplate from '../presentation/InviteUserTemplate';
+import InviteModalTemplate from '../presentation/InviteModalTemplate';
 
 
 class Audience extends Component{
@@ -253,7 +253,7 @@ class Audience extends Component{
                         </div>
                         <div style={memberListHeaderContainerStyle}>
                             <p style={memberLabelStyle}>Members list</p>
-                            <InviteUserTemplate/>
+                            <InviteModalTemplate/>
                             <div style={searchUserWrapperStyle}>
                                 <SearchBar
                                     value={this.state.value}
