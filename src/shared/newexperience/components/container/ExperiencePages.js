@@ -12,8 +12,6 @@ import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
 
-import DxEditorToolbar from '../presentation/DxEditorToolbar';
-
 // Libraries
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
@@ -224,13 +222,6 @@ class ExperiencePages extends Component {
                                     activePageSectionIndex={experience.activePageSectionIndex}
                                     sections={experience.newPage.sections}
                                 />
-
-                                {/* {this.props.experience.newPage.sections.map((section, i) => (
-                                    <DxEditorToolbar 
-                                        isActive={experience.activePageSectionIndex == i ? true : false}
-                                        sectionGUID={section.sectionGUID}
-                                    />
-                                ))} */}
                             </div>
                             <div style={editPhoneContainerStyle}>
 

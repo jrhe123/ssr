@@ -53,7 +53,6 @@ class PhoneToolbar extends Component {
 const styles = {
 
     mainContainerStyle: {
-        border: '1px solid red',
         height: 48,
     },
 }
