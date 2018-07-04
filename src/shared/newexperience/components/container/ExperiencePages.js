@@ -226,7 +226,7 @@ class ExperiencePages extends Component {
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>Page 1</p>
+                                            <p style={pageNumStyle}>{experience.newPage.title}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +251,7 @@ class ExperiencePages extends Component {
                                 <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>Page 1</p>
+                                            <p style={pageNumStyle}>{experience.newPage.title}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans|Roboto|Monoton|Raleway|Ubuntu');
 /* default */
+.ql-editor{
+    min-height: 120px;
+}
+.ql-toolbar.ql-snow{
+    border: none;
+    margin:  0 auto;
+}
 .ql-container{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;

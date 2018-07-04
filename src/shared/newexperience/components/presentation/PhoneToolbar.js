@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// components
+import DxEditorToolbar from './DxEditorToolbar';
+
 class PhoneToolbar extends Component {
 
     renderOptions = () => {
@@ -14,6 +17,9 @@ class PhoneToolbar extends Component {
         let options;
         switch (section.type) {
             case 'EDITOR':
+                options = (
+                    <DxEditorToolbar />
+                );
                 break;
             case 'BUTTON':
                 break;
