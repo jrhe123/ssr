@@ -11,7 +11,7 @@ import '../../../../../assets/css/quill/index.css';
 const Quill = ReactQuill.Quill
 var Font = Quill.import('formats/font');
 var Size = Quill.import('attributors/style/size');
-Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto'];
+Font.whitelist = ['Open_Sans', 'Roboto', 'Lato'];
 Size.whitelist = ['12px', '16px', '20px', '24px', '28px'];
 Quill.register(Font, true);
 Quill.register(Size, true);
@@ -23,6 +23,7 @@ const modules = {
         [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
         [{ 'font': Font.whitelist }],                    // font family
         [{ 'align': [] }],                               // text align
+        ['clean'],                                       // remove formatting
     ]
 }
 const formats = [
