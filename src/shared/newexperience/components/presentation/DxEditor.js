@@ -71,12 +71,6 @@ class DxEditor extends Component {
         if (quillRef != null) this.quillRef = quillRef;
     }
 
-    handleClick() {
-        var range = this.quillRef.getSelection();
-        let position = range ? range.index : 0;
-        this.quillRef.insertText(position, 'Hello, World! ')
-    }
-
     handleChange(html) {
         this.setState({ editorHtml: html });
     }
@@ -130,7 +124,6 @@ class DxEditor extends Component {
                     formats={formats}
                     defaultValue={this.state.editorHtml}
                     placeholder={this.props.placeholder} />
-                <button onClick={this.handleClick}>Insert Text</button>
             </div>
         )
     }
