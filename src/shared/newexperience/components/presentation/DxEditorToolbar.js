@@ -43,7 +43,7 @@ class DxEditorToolbar extends Component {
                     <span class="ql-formats">
                         <span style={toolDivisionStyle}></span>
                     </span>
-                    <span class="ql-formats dx_tool_bar">
+                    <span class="ql-formats dx_tool_bar_font">
                         <button className="ql-bold" />
                         <button className="ql-italic" />
                         <button className="ql-underline" />

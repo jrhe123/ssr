@@ -11,10 +11,10 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
-.ql-snow .dx_tool_bar .ql-stroke{
+.ql-snow .dx_tool_bar_font .ql-stroke{
     stroke: #A8B7C5;
 }
-.ql-snow .dx_tool_bar .ql-fill{
+.ql-snow .dx_tool_bar_font .ql-fill{
     fill: #A8B7C5;
 }
 
@@ -70,6 +70,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 36px;
 }
 .ql-color.ql-picker.ql-color-picker polyline,
 .ql-color.ql-picker.ql-color-picker line:nth-child(3){
