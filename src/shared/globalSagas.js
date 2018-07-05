@@ -19,7 +19,7 @@ import {
 export const dxValidateTokenUrl = (params) => {
 
     return (
-        fetch('https://jsonplaceholder.typicode.com/posts', {
+        fetch('https://www.google.ca', {
             method: 'get',
             headers: {
                 Accept: 'application/json',
