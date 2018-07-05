@@ -15,11 +15,13 @@ class PhoneToolbar extends Component {
             return;
         }
 
-        let options = sections.map((section, i) => {
+        let tmpSections = Object.assign([], sections);
+        tmpSections = tmpSections.sort(sort_section_by_index);
+        let options = tmpSections.map((section, i) => {
             if (section.type == 'EDITOR') {
                 return (
                     <DxEditorToolbar
-                        isActive={activePageSectionIndex == i ? true : false}
+                        isActive={section.isActive}
                         sectionGUID={section.sectionGUID}
                     />
                 )
@@ -55,6 +57,14 @@ const styles = {
     mainContainerStyle: {
         height: 48,
     },
+}
+
+const sort_section_by_index = (a, b) => {
+    if (a.index < b.index)
+        return -1;
+    if (a.index > b.index)
+        return 1;
+    return 0;
 }
 
 export default PhoneToolbar;

@@ -268,9 +268,6 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
-
-                                <a onClick={() => console.log(this.props.experience)}>click me</a>
-                                
                                 <div style={controlContainerStyle}>
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>

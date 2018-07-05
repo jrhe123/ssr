@@ -41,6 +41,7 @@ let templateNewPage = {
 };
 let templateNewSection = {
     sectionGUID: null,
+    index: null,
     type: null,
     isActive: false,
     htmlContent: '',
@@ -215,9 +216,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpNewSection = Object.assign({}, templateNewSection);
             tmpNewSection.sectionGUID = uuid();
+            tmpNewSection.index = tmpNewPage.sections.length;
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
-
+            
             deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections);
             tmpNewPage.sections.push(tmpNewSection);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
