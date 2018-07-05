@@ -110,7 +110,20 @@
 }
 
 /* clean svg btn */
-
+.ql-snow.ql-toolbar button.ql-clean{
+    position: relative;
+}
+.ql-snow.ql-toolbar button.ql-clean svg{
+    display: none;
+}
+.ql-snow.ql-toolbar button.ql-clean::after{
+    position: absolute;
+    top: -1px;
+    left: 6px;
+    font-size: 24px;
+    font-weight: bold;
+    content: "⟲";
+}
 
 
 /* font size */
