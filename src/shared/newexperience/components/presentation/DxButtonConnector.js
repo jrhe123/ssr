@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 // Libraries
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
+// constants
+import colors from '../../../styles/colors';
+import fonts from '../../../styles/fonts';
+
 class DxButtonConnector extends Component {
 
     render() {
@@ -26,7 +30,7 @@ class DxButtonConnector extends Component {
                         <div style={leftContentContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <p style={btnLabelStyle}>123</p>
+                                    <p style={btnLabelStyle}>{this.props.btnContent}</p>
                                 </div>
                             </div>
                         </div>
@@ -51,6 +55,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        backgroundColor: colors.greyColor,
     },
     mainWrapperStyle: {
         flex: 1,
@@ -75,7 +80,8 @@ const styles = {
         padding: '6px 12px'
     },
     btnLabelStyle: {
-        margin: 0
+        margin: 0,
+        fontSize: fonts.h4
     },
     rightIconContainerStyle: {
         flex: '18px 0 0',
