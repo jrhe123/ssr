@@ -72,10 +72,6 @@ class DxEditor extends Component {
         this.setState({ editorHtml: html });
     }
 
-    handleExport = () => {
-        console.log('hit: ', this.state.editorHtml);
-    }
-
     render() {
 
         const {
@@ -84,8 +80,6 @@ class DxEditor extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => this.handleExport()}>export here</a>
-
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}

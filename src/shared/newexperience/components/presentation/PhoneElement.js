@@ -21,6 +21,7 @@ import DragHandle from '@material-ui/icons/DragHandle';
 
 // components
 import DxEditor from './DxEditor';
+import DxButtonConnector from './DxButtonConnector';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -113,9 +114,7 @@ class PhoneElement extends Component {
                 break;
             case 'BUTTON':
                 section = (
-                    <div>
-                        button here
-                </div>
+                    <DxButtonConnector />
                 )
                 break;
             case 'EMBED_PDF':
