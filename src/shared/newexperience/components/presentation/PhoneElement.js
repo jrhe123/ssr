@@ -116,7 +116,10 @@ class PhoneElement extends Component {
                 break;
             case 'BUTTON':
                 section = (
-                    <DxButtonConnector />
+                    <DxButtonConnector 
+                        sectionGUID={this.props.sectionGUID}
+                        btnContent={this.props.btnContent}
+                    />
                 )
                 break;
             case 'EMBED_PDF':
@@ -216,7 +219,7 @@ class PhoneElement extends Component {
     }
 }
 
-const minHeight = 120;
+const minHeight = 60;
 
 const styles = {
 

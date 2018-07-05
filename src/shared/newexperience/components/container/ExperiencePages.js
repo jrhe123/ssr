@@ -247,6 +247,7 @@ class ExperiencePages extends Component {
                                                 type={section.type}
                                                 isActive={section.isActive}
                                                 htmlContent={section.htmlContent}
+                                                btnContent={section.btnContent}
 
                                                 key={section.sectionGUID}
                                                 index={i}

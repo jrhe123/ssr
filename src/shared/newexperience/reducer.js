@@ -43,7 +43,8 @@ let templateNewSection = {
     sectionGUID: null,
     type: null,
     isActive: false,
-    htmlContent: ''
+    htmlContent: '',
+    btnContent: 'text for button',
 };
 const initialState = {
     cardTemplates: [],
