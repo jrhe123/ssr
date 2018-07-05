@@ -11,50 +11,117 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
+.ql-snow .dx_tool_bar .ql-stroke{
+    stroke: #A8B7C5;
+}
+.ql-snow .dx_tool_bar .ql-fill{
+    fill: #A8B7C5;
+}
+
+/* font setting */
+.ql-snow .ql-picker.ql-font{
+    width: 140px;
+    height: 36px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    text-align: left;
+    padding-left: 12px;
+    padding-right: 9px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 18px;
+}
+.ql-toolbar.ql-snow .ql-picker-label{
+    border: none;
+}
+.ql-snow.ql-toolbar .ql-picker-label:hover{
+    color: #000000;
+}
+.ql-snow.ql-toolbar .ql-picker-label:focus{
+    outline: none;
+}
+
+/* size setting */
+.ql-snow .ql-picker.ql-size{
+    width: 66px;
+    height: 36px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    text-align: left;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 18px;
+}
+.ql-snow .ql-color-picker{
+    margin-right: 12px
+}
+.ql-align.ql-picker.ql-icon-picker,
+.ql-color.ql-picker.ql-color-picker{
+    height: 36px;
+    width: 36px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* svg btn */
+.ql-snow .ql-color-picker .ql-picker-label svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.ql-color.ql-picker.ql-color-picker polyline,
+.ql-color.ql-picker.ql-color-picker line:nth-child(3){
+    display: none;
+}
+.ql-color.ql-picker.ql-color-picker line:nth-child(1){
+    stroke-width: 30px;
+}
 
 /* font size */
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
-    content: '12px' !important;
+    content: '12' !important;
     font-size: 12px !important;
 }
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="12px"]::before {
-    content: '12px' !important;
+    content: '12' !important;
 }
 
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
-    content: '16px' !important;
+    content: '16' !important;
     font-size: 16px !important;
 }
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="16px"]::before {
-    content: '16px' !important;
+    content: '16' !important;
 }
 
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before {
-    content: '20px' !important;
+    content: '20' !important;
     font-size: 20px !important;
 }
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="20px"]::before {
-    content: '20px' !important;
+    content: '20' !important;
 }
 
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before {
-    content: '24px' !important;
+    content: '24' !important;
     font-size: 24px !important;
 }
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="24px"]::before {
-    content: '24px' !important;
+    content: '24' !important;
 }
 
 
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="28px"]::before {
-    content: '28px' !important;
+    content: '28' !important;
     font-size: 28px !important;
 }
 .ql-snow.ql-toolbar .ql-picker-label.ql-active[data-value="28px"]::before {
-    content: '28px' !important;
+    content: '28' !important;
 }
 
 /* font family */
