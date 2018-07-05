@@ -237,6 +237,7 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div style={phoneContainerStyle}
                                     ref="dx_phone_area"
                                 >
@@ -267,6 +268,9 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
+
+                                <a onClick={() => console.log(this.props.experience)}>click me</a>
+                                
                                 <div style={controlContainerStyle}>
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>

@@ -115,12 +115,12 @@ class PhoneElement extends Component {
                 )
                 break;
             case 'BUTTON':
-                section = (
-                    <DxButtonConnector 
-                        sectionGUID={this.props.sectionGUID}
-                        btnContent={this.props.btnContent}
-                    />
-                )
+                // section = (
+                //     <DxButtonConnector 
+                //         sectionGUID={this.props.sectionGUID}
+                //         btnContent={this.props.btnContent}
+                //     />
+                // )
                 break;
             case 'EMBED_PDF':
                 section = (
