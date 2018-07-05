@@ -11,6 +11,7 @@ class DxInput extends Component{
         const {
             placeholder,
             isDark,
+            isTransparent,
             width,
             disabled,
             value,
@@ -22,6 +23,9 @@ class DxInput extends Component{
             extra.backgroundColor = colors.lightBlueColor;
         }else{
             extra.backgroundColor = colors.whiteColor;
+        }
+        if(isTransparent){
+            extra.backgroundColor = 'transparent';
         }
 
         return(

@@ -45,7 +45,7 @@ let templateNewSection = {
     type: null,
     isActive: false,
     htmlContent: '',
-    btnContent: 'text for button',
+    btnContent: 'Text for a button',
 };
 const initialState = {
     cardTemplates: [],
@@ -259,6 +259,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.htmlContent = payload.content;
+                        break;
+                    case 'BUTTON':
+                        tmpUpdateSection.btnContent = payload.content;
                         break;
                     default:
                         break;

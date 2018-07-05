@@ -73,6 +73,11 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EDITOR', html);
     }
 
+    handleUpdateBtnContent = (sectionGUID, e) => {
+        let value = e.target.value;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'BUTTON', value);
+    }
+
     handleCarouselClick = (open) => {
         if (open) {
             this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
@@ -256,6 +261,7 @@ class ExperiencePages extends Component {
                                                 handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
                                                 handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
+                                                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
                                             />
                                         ))}
                                         <PhoneTarget />

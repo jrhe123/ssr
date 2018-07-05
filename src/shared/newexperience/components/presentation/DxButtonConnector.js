@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 // Libraries
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -30,7 +33,15 @@ class DxButtonConnector extends Component {
                         <div style={leftContentContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <p style={btnLabelStyle}>{this.props.btnContent}</p>
+                                    <DxInput
+                                        style={btnLabelStyle}
+                                        placeholder="Text for a button"
+                                        handleValChange={(e) => this.props.handleBtnInputChange(e)}
+                                        isTransparent={true}
+                                        width="264px"
+                                        disabled={false}
+                                        value={this.props.btnContent}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -56,6 +67,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: colors.greyColor,
+        cursor: 'pointer'
     },
     mainWrapperStyle: {
         flex: 1,
@@ -77,10 +89,8 @@ const styles = {
     },
     leftContentContainerStyle: {
         flex: 1,
-        padding: '6px 12px'
     },
     btnLabelStyle: {
-        margin: 0,
         fontSize: fonts.h4
     },
     rightIconContainerStyle: {
@@ -89,7 +99,7 @@ const styles = {
     expandIconStyle: {
         paddingRight: 6,
         fontSize: 24,
-        float: 'right'
+        float: 'right',
     },
 }
 
