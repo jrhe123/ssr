@@ -237,16 +237,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
                 },
             });
-
-
-            // console.log('2: ', tmpExperience.activePageSectionIndex);
-            // console.log('2: ', tmpHoverIndex);
-            // console.log('2: ', tmpDragIndex);
-            // console.log('2: ', tmpDragSection);
-            // console.log('2: ', tmpNewPage);
-
-            
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
             tmpExperience.newPage = tmpNewPage;
+            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
             return updated;
 
