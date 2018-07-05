@@ -10,7 +10,7 @@ import {
 // Logout
 export const dxLogoutUrl = () => {
     return (
-        fetch('https://jsonplaceholder.typicode.com/posts', {
+        fetch('https://www.google.ca', {
             method: 'get',
             headers: {
                 Accept: 'application/json',
