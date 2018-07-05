@@ -28,7 +28,7 @@ class PhoneToolbar extends Component {
             } else {
                 return (
                     <div
-                        className={activePageSectionIndex == i ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
+                        className={section.isActive ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
                     >other tools here</div>
                 )
             }
