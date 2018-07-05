@@ -8,6 +8,38 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+.dx_tool_tip{
+    position: relative;
+}
+.dx_tool_tip_text{
+    visibility: hidden;
+    position: absolute;
+    top: -27px;
+    z-index: 1;
+    font-size: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 12px;
+    color: #ffffff;
+    background-color: #ffffff;
+}
+.dx_tool_tip_text.dx_color_tip{
+    width: 60px;
+    left: -12px;
+}
+.dx_tool_tip_text.dx_bg_color_tip{
+    width: 120px;
+    left: -42px;
+}
+.dx_tool_bar_color:hover .dx_tool_tip_text,
+.dx_tool_bar_bgcolor:hover .dx_tool_tip_text{
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.15s linear;
+}
+
 .dx_show_toolbar{
     display: block;
 }

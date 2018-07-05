@@ -3,6 +3,9 @@
 .ql-editor{
     min-height: 120px;
 }
+.ql-snow .ql-transparent{
+    opacity: 1;
+}
 .ql-toolbar.ql-snow{
     border: none;
     margin:  0 auto;
@@ -59,7 +62,8 @@
 }
 .ql-align.ql-picker.ql-icon-picker,
 .ql-color.ql-picker.ql-color-picker,
-.ql-background.ql-picker.ql-color-picker{
+.ql-background.ql-picker.ql-color-picker,
+.ql-snow.ql-toolbar button.ql-clean{
     height: 36px;
     width: 36px;
     background-color: #FFFFFF;
@@ -96,9 +100,6 @@
     width: 36px;
     height: 36px;
 }
-.ql-snow .dx_tool_bar_bgcolor .ql-color-picker .ql-picker-label svg rect:nth-child(1){
-    fill: transparent;
-}
 .ql-snow .dx_tool_bar_bgcolor .ql-color-picker .ql-picker-label svg rect{
     width: 24px;
     height: 24px;
@@ -107,6 +108,8 @@
 .ql-snow .dx_tool_bar_bgcolor .ql-color-picker .ql-picker-label svg line{
     display: none;
 }
+
+/* clean svg btn */
 
 
 

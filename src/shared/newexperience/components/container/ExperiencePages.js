@@ -393,7 +393,7 @@ const styles = {
     },
     toolbarContainerStyle: {
         height: 48,
-        width: 720,
+        width: 722,
         margin: '0 auto',
     },
     editPhoneContainerStyle: {

@@ -36,8 +36,11 @@ class DxEditorToolbar extends Component {
                     <span class="ql-formats">
                         <span style={toolDivisionStyle}></span>
                     </span>
-                    <span class="ql-formats dx_tool_bar_color">
+                    <span class="ql-formats dx_tool_bar_color dx_tool_tip">
                         <select className="ql-color"></select>
+                        <span class="dx_tool_tip_text dx_color_tip">Text</span>
+                    </span>
+                    <span class="ql-formats">
                         <select className="ql-align"></select>
                     </span>
                     <span class="ql-formats">
@@ -51,8 +54,9 @@ class DxEditorToolbar extends Component {
                     <span class="ql-formats">
                         <span style={toolDivisionStyle}></span>
                     </span>
-                    <span class="ql-formats dx_tool_bar_bgcolor">
+                    <span class="ql-formats dx_tool_bar_bgcolor dx_tool_tip">
                         <select className="ql-background"></select>
+                        <span class="dx_tool_tip_text dx_bg_color_tip">Background</span>
                     </span>
                     <span class="ql-formats">
                         <button className="ql-clean"></button>
