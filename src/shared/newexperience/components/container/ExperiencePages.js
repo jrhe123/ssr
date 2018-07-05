@@ -28,6 +28,7 @@ import {
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
+    dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
 } from '../../actions';
 
 // constants
@@ -66,6 +67,10 @@ class ExperiencePages extends Component {
 
     handleSectionClick = (sectionGUID) => {
         this.props.dxExperiencePageSelectElemAction(sectionGUID);
+    }
+
+    handleUpdateHtmlContent = (sectionGUID, html) => {
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EDITOR', html);
     }
 
     handleCarouselClick = (open) => {
@@ -238,13 +243,17 @@ class ExperiencePages extends Component {
                                     <div style={phoneWrapperStyle}>
                                         {this.props.experience.newPage.sections.map((section, i) => (
                                             <PhoneElement
-                                                key={section.sectionGUID}
-                                                type={section.type}
                                                 sectionGUID={section.sectionGUID}
+                                                type={section.type}
                                                 isActive={section.isActive}
+                                                htmlContent={section.htmlContent}
+
+                                                key={section.sectionGUID}
                                                 index={i}
                                                 moveCard={this.handleMoveCard}
                                                 handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
+
+                                                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
                                             />
                                         ))}
                                         <PhoneTarget />
@@ -395,6 +404,7 @@ const styles = {
         height: 48,
         width: 722,
         margin: '0 auto',
+        marginBottom: 12
     },
     editPhoneContainerStyle: {
         width: 400,
@@ -511,6 +521,7 @@ const dispatchToProps = {
     dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
+    dxExperiencePageUpdateElemAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));

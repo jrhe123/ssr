@@ -21,6 +21,7 @@ import {
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
 } from './constants';
 
 // Libraries
@@ -41,7 +42,8 @@ let templateNewPage = {
 let templateNewSection = {
     sectionGUID: null,
     type: null,
-    isActive: false
+    isActive: false,
+    htmlContent: ''
 };
 const initialState = {
     cardTemplates: [],
@@ -83,6 +85,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpHoverIndex, tmpDragIndex;
     let tmpDragSection;
     let tmpActiveSectionIndex;
+    let tmpUpdateSection;
 
     switch (type) {
 
@@ -236,13 +239,28 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
             return updated;
-        
+
         case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
             deactive_other_sections(payload.sectionGUID, tmpNewPage.sections);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
+            tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            if (tmpUpdateSection.type == payload.type) {
+                switch (payload.type) {
+                    case 'EDITOR':
+                        tmpUpdateSection.htmlContent = payload.content;
+                        break;
+                    default:
+                        break;
+                }
+                tmpExperience.newPage = tmpNewPage;
+                updated.experience = tmpExperience;
+            }
             return updated;
 
         default:
@@ -262,18 +280,26 @@ const find_page_by_guid = (guid, pages) => {
     return {};
 }
 const deactive_other_sections = (guid, sections) => {
-    for(let i = 0; i < sections.length; i++){
-        if(sections[i].sectionGUID != guid){
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].sectionGUID != guid) {
             sections[i].isActive = false;
-        }else{
+        } else {
             sections[i].isActive = true;
         }
     }
 }
 const find_active_section_index = (sections) => {
-    for(let i = 0; i < sections.length; i++){
-        if(sections[i].isActive){
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].isActive) {
             return i;
+        }
+    }
+    return null;
+}
+const find_section_by_guid = (sections, targetSectionGUID) => {
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].sectionGUID == targetSectionGUID) {
+            return sections[i];
         }
     }
     return null;

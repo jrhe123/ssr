@@ -29,7 +29,6 @@ class DxEditor extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            editorHtml: '',
             mountedEditor: false
         }
         this.modules = {
@@ -69,7 +68,7 @@ class DxEditor extends Component {
     }
 
     handleChange(html) {
-        this.setState({ editorHtml: html });
+        this.props.handleUpdateHtmlContent(html);
     }
 
     render() {
@@ -79,14 +78,15 @@ class DxEditor extends Component {
         } = styles;
 
         return (
-            <div style={mainContainerStyle}>
+            <div 
+                style={mainContainerStyle}>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
                     onChange={this.handleChange}
                     modules={this.modules}
                     formats={formats}
-                    defaultValue={this.state.editorHtml}
+                    defaultValue={this.props.htmlContent}
                     placeholder={this.props.placeholder} />
             </div>
         )

@@ -21,6 +21,7 @@ import {
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
 } from './constants';
 
 export const dxExperienceType = (experienceType) => {
@@ -196,6 +197,17 @@ export const dxExperiencePageSelectElem = (sectionGUID) => {
         type: EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
         payload: {
             sectionGUID
+        },
+    }
+}
+
+export const dxExperiencePageUpdateElem = (sectionGUID, type, content) => {
+    return {
+        type: EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
+        payload: {
+            sectionGUID,
+            type,
+            content,
         },
     }
 }
