@@ -16,7 +16,10 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
+
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED,
+
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
@@ -162,6 +165,15 @@ export const dxExperiencePageCarouselMenuUpdate = (toggle) => {
         type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
         payload: {
             toggle,
+        },
+    }
+}
+
+export const dxExperiencePageCarouselActivePage = (pageGUID) => {
+    return {
+        type: EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED,
+        payload: {
+            pageGUID,
         },
     }
 }

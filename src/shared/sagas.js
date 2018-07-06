@@ -29,7 +29,10 @@ import {
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
+
     dxExperiencePageCarouselMenuToggleSaga,
+    dxExperiencePageCarouselPageActiveSaga,
+
     dxExperiencePageAddPageSaga,
     dxExperiencePageAddElemSaga,
     dxExperiencePageShuffleElemSaga,
@@ -59,6 +62,7 @@ export default function* rootSaga() {
         dxExperienceIndexUpdateSaga(),
         dxExperienceTitleUpdateSaga(),
         
+        // Card
         dxExperienceCardTemplateMenuToggleSaga(),
         dxExperienceCardTemplateFetchSaga(),
         dxExperienceCardTemplateSelectSaga(),
@@ -68,10 +72,14 @@ export default function* rootSaga() {
         dxExperienceCardTemplateSaveSaga(),
         dxExperienceCardTemplateRemoveSaga(),
 
+        // Page
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),
+
         dxExperiencePageCarouselMenuToggleSaga(),
+        dxExperiencePageCarouselPageActiveSaga(),
+
         dxExperiencePageAddPageSaga(),
         dxExperiencePageAddElemSaga(),
         dxExperiencePageShuffleElemSaga(),

@@ -16,7 +16,10 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
+
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
+
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
@@ -201,6 +204,16 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED:
             tmpExperience.isPageCarouselMenuOpen = payload.toggle;
             updated.experience = tmpExperience;
+            return updated;
+        
+        case EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED:            
+            tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
+
+            tmpExperience.newPage = Object.assign({}, tmpNewPage.page);
+            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
+            updated.experience = tmpExperience;
+            console.log('updated: ', updated);
             return updated;
 
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:

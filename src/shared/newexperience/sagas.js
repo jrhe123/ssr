@@ -66,6 +66,10 @@ import {
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_CAROUSEL_TOGGLE__FAILED,
 
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE__FAILED,
+
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_PAGE__FAILED,
@@ -420,6 +424,27 @@ export function* dxExperiencePageCarouselMenuToggle(action) {
 
 export function* dxExperiencePageCarouselMenuToggleSaga() {
     yield takeEvery(EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED, dxExperiencePageCarouselMenuToggle);
+}
+
+// Experience page carousel active page
+export function* dxExperiencePageCarouselPageActive(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
+            payload: {
+                pageGUID: action.payload.pageGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_ACTIVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageCarouselPageActiveSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED, dxExperiencePageCarouselPageActive);
 }
 
 // Experience page add page

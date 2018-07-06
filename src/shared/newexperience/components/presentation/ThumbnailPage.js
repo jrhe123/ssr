@@ -21,7 +21,10 @@ class ThumbnailPage extends Component{
         } = this.props;
 
         return(
-            <div style={mainContainerStyle}>
+            <div 
+                style={mainContainerStyle}
+                onClick={() => this.props.handleClickActivePage()}
+            >
                 <div style={contentContainerStyle}></div>
                 <div style={titleContainerStyle}>
                     <p style={Object.assign({}, titleStyle, {color: active ? colors.greenColor : colors.whiteColor})}>

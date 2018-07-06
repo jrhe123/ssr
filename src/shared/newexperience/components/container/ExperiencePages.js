@@ -23,7 +23,9 @@ import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { connect } from 'react-redux';
 import {
     dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction,
+
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
+    dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
@@ -95,6 +97,10 @@ class ExperiencePages extends Component {
         } else {
             this.props.dxExperiencePageCarouselMenuUpdateAction(false);
         }
+    }
+
+    handleClickActiveCarouselPage = (pageGUID) => {
+        this.props.dxExperiencePageCarouselActivePageAction(pageGUID);
     }
 
     render() {
@@ -338,6 +344,7 @@ class ExperiencePages extends Component {
                                             <PageCarousel
                                                 pages={experience.pages}
                                                 newPage={experience.newPage}
+                                                handleClickActivePage={(pageGUID) => this.handleClickActiveCarouselPage(pageGUID)}
                                             />
                                         </div>
                                     )
@@ -537,7 +544,10 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxExperiencePageTemplateFetchAction,
+
     dxExperiencePageCarouselMenuUpdateAction,
+    dxExperiencePageCarouselActivePageAction,
+
     dxExperiencePageAddElemAction,
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
