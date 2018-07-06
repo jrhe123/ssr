@@ -221,11 +221,17 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
 
+            // update new page
             deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
             tmpNewPageSections.push(tmpNewSection);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
-
             tmpNewPage.sections = tmpNewPageSections;
+
+            // update arr of pages
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+            
+            tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
