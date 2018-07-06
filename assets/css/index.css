@@ -12,6 +12,14 @@ body{
     outline: none;
 }
 
+.dx_show{
+    display: block;
+}
+
+.dx_hidden{
+    display: none;
+}
+
 .dx_tool_tip{
     position: relative;
 }

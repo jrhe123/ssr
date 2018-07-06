@@ -107,7 +107,7 @@ class PhoneElement extends Component {
         switch (type) {
             case 'EDITOR':
                 section = (
-                    <DxEditor 
+                    <DxEditor
                         sectionGUID={this.props.sectionGUID}
                         htmlContent={this.props.htmlContent}
                         handleUpdateHtmlContent={(html) => this.props.handleUpdateHtmlContent(html)}
@@ -116,7 +116,7 @@ class PhoneElement extends Component {
                 break;
             case 'BUTTON':
                 section = (
-                    <DxButtonConnector 
+                    <DxButtonConnector
                         sectionGUID={this.props.sectionGUID}
                         btnContent={this.props.btnContent}
                         dropdownOptionArr={this.props.dropdownOptionArr}
@@ -158,6 +158,7 @@ class PhoneElement extends Component {
             connectDragSource,
             connectDropTarget,
 
+            activePage,
             type,
             isActive,
         } = this.props;
@@ -180,8 +181,9 @@ class PhoneElement extends Component {
 
         return (
             <div
+                className={activePage ? 'dx_show' : 'dx_hidden'}
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
-                <div className="dx_float_active_side_tab" 
+                <div className="dx_float_active_side_tab"
                     style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
@@ -201,7 +203,7 @@ class PhoneElement extends Component {
                     connectDropTarget &&
                     connectDragSource(
                         connectDropTarget(
-                            <div 
+                            <div
                                 style={contentContainerStyle}
                                 onClick={() => this.props.handleSectionClick(this.props.sectionGUID)}>
                                 <div style={dragControlContainerStyle}>

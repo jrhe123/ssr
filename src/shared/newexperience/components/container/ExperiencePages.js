@@ -54,6 +54,46 @@ class ExperiencePages extends Component {
         })
     }
 
+    renderPhoneElement = () => {
+        const {
+            newPage,
+            pages,
+        } = this.props.experience;
+        let phone = pages.map((page, index) => (
+            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false)
+        ))
+        return phone;
+    }
+
+    renderPhoneElementSection = (sections, activePage) => {
+
+        const {
+            experience,
+        } = this.props;
+
+        let section;
+        section = sections.map((section, i) => (
+            <PhoneElement
+                activePage={activePage}
+                sectionGUID={section.sectionGUID}
+                type={section.type}
+                isActive={section.isActive}
+                htmlContent={section.htmlContent}
+                btnContent={section.btnContent}
+                dropdownOptionArr={this.availablePageList(experience.pages, experience.newPage.pageGUID)}
+
+                key={section.sectionGUID}
+                index={i}
+                moveCard={this.handleMoveCard}
+                handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
+
+                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
+                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
+            />
+        ))
+        return section
+    }
+
     handleAddElem = (template) => {
         // Add section to new page
         this.props.dxExperiencePageAddElemAction(template.Type);
@@ -82,9 +122,9 @@ class ExperiencePages extends Component {
 
     availablePageList = (pages, pageGUID) => {
         let res = [];
-        for(let i = 0; i < pages.length; i++){
-            if(pages[i].pageGUID != pageGUID
-                && !pages[i].isConnected){
+        for (let i = 0; i < pages.length; i++) {
+            if (pages[i].pageGUID != pageGUID
+                && !pages[i].isConnected) {
                 res.push(pages[i])
             }
         }
@@ -246,9 +286,9 @@ class ExperiencePages extends Component {
 
                             <div style={toolbarContainerStyle}>
 
-                                <PhoneToolbar 
-                                    activePageSectionIndex={experience.activePageSectionIndex}
-                                    sections={experience.newPage.sections}
+                                <PhoneToolbar
+                                    newPage={experience.newPage}
+                                    pages={experience.pages}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>
@@ -260,29 +300,12 @@ class ExperiencePages extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div style={phoneContainerStyle}
                                     ref="dx_phone_area"
                                 >
                                     <div style={phoneWrapperStyle}>
-                                        {experience.newPage.sections.map((section, i) => (
-                                            <PhoneElement
-                                                sectionGUID={section.sectionGUID}
-                                                type={section.type}
-                                                isActive={section.isActive}
-                                                htmlContent={section.htmlContent}
-                                                btnContent={section.btnContent}
-                                                dropdownOptionArr={this.availablePageList(experience.pages, experience.newPage.pageGUID)}
-
-                                                key={section.sectionGUID}
-                                                index={i}
-                                                moveCard={this.handleMoveCard}
-                                                handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
-
-                                                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
-                                                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
-                                            />
-                                        ))}
+                                        {this.renderPhoneElement()}
                                         <PhoneTarget />
                                     </div>
                                 </div>

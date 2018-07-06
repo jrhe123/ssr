@@ -230,7 +230,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpNewSection = Object.assign({}, templateNewSection);
             tmpNewSection.sectionGUID = uuid();
-            tmpNewSection.index = tmpNewPageSections.length;
+            tmpNewSection.index =  Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
 
@@ -255,12 +255,20 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpDragIndex = payload.dragIndex;
 
             tmpDragSection = tmpNewPage.sections[tmpDragIndex];
+
+            // update new page
             tmpNewPage = update(tmpNewPage, {
                 sections: {
                     $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
                 },
             });
             tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+
+            // update arr of pages
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+            
+            tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
