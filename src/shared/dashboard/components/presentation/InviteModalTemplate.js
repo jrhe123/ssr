@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import PersonAdd from '@material-ui/icons/PersonAdd';
+// import PersonAdd from '@material-ui/icons/PersonAdd';
 import Modal from 'react-responsive-modal';
 
 // constants
@@ -35,8 +35,7 @@ class InviteModalTemplate extends Component {
         const { handleOpenModal } = this.state;
 
         const {
-            invitationUserBtnStyle,
-            addIconStyle,
+            invitationEditBtnStyle,
 
             modalContainerStyle,
             headerStyle,
@@ -57,7 +56,7 @@ class InviteModalTemplate extends Component {
 
         return (
             <div>
-                <Button style={invitationUserBtnStyle} onClick={this.onOpenModal}><PersonAdd style={addIconStyle}/>Invite New Users</Button>
+                <Button style={invitationEditBtnStyle} onClick={this.onOpenModal}>Edit</Button>
                 <Modal 
                     open={handleOpenModal} 
                     onClose={this.handleCloseModal} 
@@ -80,7 +79,7 @@ class InviteModalTemplate extends Component {
                             <p style={inviteTextStyle}>Princess Margeret Hospital has invited you to join their live content stream on ContentXi</p>
                             <Button style={acceptBtnStyle}>Accept invite</Button>
                             <div style={contentContainerStyle}>
-                                <p style={contentStyle}>ContentXi keeps you up-to-date with all the relevant content, and discover relevant content:</p>
+                                <p style={contentStyle}><b>ContentXi keeps you up-to-date with all the relevant content, and discover relevant content:</b></p>
                                 <p style={contentStyle}>Discover new relevant content of your choice</p>
                                 <p style={contentStyle}>Get updated information and content in your busy schedule - Never miss it again!</p>
                                 <p style={contentStyle}>Experience the content by downloading them to your mobile phone</p>
@@ -99,18 +98,6 @@ class InviteModalTemplate extends Component {
 }
 
 const styles = {
-    invitationUserBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        marginLeft:36,
-        fontSize: fonts.h5,
-        marginRight:12,
-    },
-    addIconStyle:{
-        paddingRight:6,
-    },
-
     modalContainerStyle:{
         width:'100%',
         height:'100%',
@@ -174,7 +161,6 @@ const styles = {
     contentStyle:{
         marginTop:0,
         marginBottom:18,
-        fontWeight:'normal'
     },
     bottomBarStyle:{
         height:42,
@@ -201,6 +187,13 @@ const styles = {
         marginTop:54,
         marginBottom:48,
         width:120
+    },
+    invitationEditBtnStyle:{
+        background:colors.blueColor,
+        color:colors.whiteColor,
+        height:40,
+        width:120,
+        marginLeft:66
     },
 }
 export default InviteModalTemplate;

@@ -11,6 +11,8 @@ import DropdownMenu from 'react-dd-menu';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import { withStyles } from '@material-ui/core/styles';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -19,9 +21,14 @@ import colors from '../../../styles/colors';
 
 // component
 import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate';
-import MemberTemplate from '../presentation/MemberTemplate';
+import UserTemplate from '../presentation/UserTemplate';
 import InviteModalTemplate from '../presentation/InviteModalTemplate';
 
+const themeStyles = () => ({
+    yourIconButtonStyle: {
+        height: 36
+    }
+});
 
 class Audience extends Component{
 
@@ -54,6 +61,10 @@ class Audience extends Component{
     }
 
     render(){
+
+        const {
+            classes
+        } = this.props;
 
         const {
             mainContainerStyle,
@@ -112,7 +123,6 @@ class Audience extends Component{
 
             invitaionContainerStyle,
             invitationLabelStyle,
-            invitationEditBtnStyle,
 
             memberListContainerStyle,
             memberListHeaderContainerStyle,
@@ -124,6 +134,9 @@ class Audience extends Component{
             importHeaderStyle,
             importTextContentStyle,
             importBtnStyle,
+
+            invitationUserBtnStyle,
+            addIconStyle
             
         } = styles;
 
@@ -249,17 +262,18 @@ class Audience extends Component{
                         </div>
                         <div style={invitaionContainerStyle}>
                             <p style={invitationLabelStyle}>Invitation email Template</p>
-                            <Button style={invitationEditBtnStyle}>Edit</Button>
+                            <InviteModalTemplate/>
                         </div>
                         <div style={memberListHeaderContainerStyle}>
                             <p style={memberLabelStyle}>Members list</p>
-                            <InviteModalTemplate/>
+                            <Button style={invitationUserBtnStyle}><PersonAdd style={addIconStyle}/>Invite New Users</Button>
                             <div style={searchUserWrapperStyle}>
                                 <SearchBar
                                     value={this.state.value}
                                     onChange={() => handleSearch()}
                                     style={searchUserStyle}
                                     placeholder={'Search a user'}
+                                    classes={{ iconButton: classes.yourIconButtonStyle }}
                                 />
                             </div>
                             <div style={memberListInfoStyle}>
@@ -283,18 +297,18 @@ class Audience extends Component{
                             </div>
                         </div>
                         <div style={memberListContainerStyle}>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
-                            <MemberTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
+                            <UserTemplate/>
                         </div>
                     </div>
                 </div>
@@ -546,32 +560,32 @@ const styles = {
     },
     channelNameStyle:{
         margin:0,
-        fontSize: fonts.h3
+        fontSize: fonts.h2
     },
     channelCreatedStyle:{
         marginTop:3,
         marginBottom:0,
         color:colors.lightGreyColor,
-        fontSize: fonts.h4,
+        fontSize: fonts.h3,
     },
     channelRegisteredNumberStyle:{
         margin:0,
-        fontSize: fonts.h3
+        fontSize: fonts.h2
     },
     channelRegisteredLabelStyle:{
         marginTop:3,
         marginBottom:0,
-        fontSize: fonts.h4,
+        fontSize: fonts.h3,
         color:colors.lightGreyColor
     },
     channelInvitedNumberStyle:{
         margin:0,
-        fontSize: fonts.h3
+        fontSize: fonts.h2
     },
     channelInvitedLabelStyle:{
         marginTop:3,
         marginBottom:0,
-        fontSize: fonts.h4,
+        fontSize: fonts.h3,
         color:colors.lightGreyColor
     },
     channeEditStyle:{
@@ -603,16 +617,9 @@ const styles = {
     },
     invitationLabelStyle:{
         marginLeft:18,
-        fontSize: fonts.h3,
+        fontSize: fonts.h2,
         marginTop:0,
         marginBottom:0
-    },
-    invitationEditBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        width:120,
-        marginLeft:66
     },
 
     memberListContainerStyle:{
@@ -698,6 +705,19 @@ const styles = {
         fontSize:fonts.h5,
         padding:0
     },
+
+    invitationUserBtnStyle:{
+        background:colors.blueColor,
+        color:colors.whiteColor,
+        height:40,
+        marginLeft:36,
+        fontSize: fonts.h5,
+        marginRight:12,
+    },
+    addIconStyle:{
+        paddingRight:6,
+    },
+
 }
 
-export default Audience;
+export default withStyles(themeStyles)(Audience);

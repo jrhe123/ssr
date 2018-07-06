@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 // Libraries
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Close from '@material-ui/icons/Close';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -12,7 +10,8 @@ import colors from '../../../styles/colors';
 
 
 
-class MemberTemplate extends Component {
+class RestrictUserTemplate extends Component {
+
     render() {
         const {
             memberInfoWrapperStyle,
@@ -22,11 +21,9 @@ class MemberTemplate extends Component {
             userEmailStyle,
             userRegisterWrapperStyle,
             userRegisterDateStyle,
-            userRegisterStatusStyle,
-            resendBtnContainerStyle,
-            resendBtnStyle,
-            userCloseBtnContainerStyle,
-            channelInfoIconStyle
+            sessionNumberStyle,
+            allowBtnContainerStyle,
+            allowBtnStyle
         } = styles;
 
 
@@ -39,13 +36,10 @@ class MemberTemplate extends Component {
                 </div>
                 <div style={userRegisterWrapperStyle}>
                     <p style={userRegisterDateStyle}>10 September 2017</p>
-                    <p style={userRegisterStatusStyle}>invited</p>
+                    <p style={sessionNumberStyle}>6th session</p>
                 </div>
-                <div style={resendBtnContainerStyle}>                               
-                    <Button style={resendBtnStyle} variant="outlined">Resend Invite</Button>
-                </div>
-                <div style={userCloseBtnContainerStyle}>
-                    <IconButton style={channelInfoIconStyle}><Close/></IconButton>
+                <div style={allowBtnContainerStyle}>                               
+                    <Button style={allowBtnStyle} variant="outlined">Allow</Button>
                 </div>
             </div> 
         );
@@ -93,29 +87,21 @@ const styles = {
         margin:0,
         fontSize:fonts.h3
     },
-    userRegisterStatusStyle:{
+    sessionNumberStyle:{
         marginTop:3,
         marginBottom:0,
         color:colors.lightGreyColor,
         fontSize: fonts.h4,
     },
-    resendBtnContainerStyle:{
-        width:126
-    },
-    resendBtnStyle:{
-        textTransform:'none',
-    },
-    userCloseBtnContainerStyle:{
-        width: 60,
+    allowBtnContainerStyle:{
+        width:168,
+        marginRight:20,
         display:'flex',
-        justifyContent:'center',
-        marginLeft:18
+        justifyContent:'flex-end',
     },
-    channelInfoIconStyle:{
-        height:20, 
-        width:20
-    },
-    
-
+    allowBtnStyle:{
+        textTransform:'none',
+        width:126
+    }
 }
-export default MemberTemplate;
+export default RestrictUserTemplate;
