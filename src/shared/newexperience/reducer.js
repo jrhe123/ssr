@@ -67,7 +67,7 @@ const initialState = {
         cardTitle: 'Card 1',
 
         pages: [],
-        newPage: templateNewPage,
+        newPage: Object.assign({}, templateNewPage),
         activePageSectionIndex: 0,
     },
 };
@@ -79,6 +79,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
     let tmpPages = Object.assign([], tmpExperience.pages);
     let tmpNewPage = Object.assign({}, tmpExperience.newPage);
+    let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
 
     let tmpSettingIndex;
     let tmpPageGUID;
@@ -216,14 +217,15 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpNewSection = Object.assign({}, templateNewSection);
             tmpNewSection.sectionGUID = uuid();
-            tmpNewSection.index = tmpNewPage.sections.length;
+            tmpNewSection.index = tmpNewPageSections.length;
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
             
-            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPage.sections);
-            tmpNewPage.sections.push(tmpNewSection);
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
+            tmpNewPageSections.push(tmpNewSection);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
 
+            tmpNewPage.sections = tmpNewPageSections;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
@@ -246,8 +248,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
-            deactive_other_sections(payload.sectionGUID, tmpNewPage.sections);
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+            deactive_other_sections(payload.sectionGUID, tmpNewPageSections);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
+            
+            tmpNewPage.sections = tmpNewPageSections;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
