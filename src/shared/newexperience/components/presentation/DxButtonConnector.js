@@ -71,6 +71,7 @@ class DxButtonConnector extends Component {
                     </div>
                     <div style={connectorDropdownContainerStyle}>
                         <DropdownList
+                            placeholder="select a page"
                             style={connectorDropdownStyle}
                             data={['orange', 'red', 'blue', 'purple']}
                         />
@@ -134,15 +135,15 @@ const styles = {
     },
     connectorLabelContainerStyle: {
         padding: 12,
-        paddingBottom: 6,
+        paddingBottom: 9,
     },
     connectorLabelStyle: {
         margin: 0,
         fontSize: fonts.h3
     },
     connectorDropdownContainerStyle: {
-        paddingLeft: 12,
-        paddingRight: 12,
+        paddingLeft: 9,
+        paddingRight: 18,
     },
     connectorDropdownStyle: {
         height: 18
