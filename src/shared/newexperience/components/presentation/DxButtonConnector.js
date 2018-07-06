@@ -24,10 +24,13 @@ class DxButtonConnector extends Component {
             btnLabelStyle,
             rightIconContainerStyle,
             expandIconStyle,
+
+            connectorListContainerStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
+
                 <div style={mainWrapperStyle}>
                     <div style={contentContainerStyle}>
                         <div style={leftContentContainerStyle}>
@@ -54,6 +57,8 @@ class DxButtonConnector extends Component {
                         </div>
                     </div>
                 </div>
+
+                <div style={connectorListContainerStyle}></div>
             </div>
         )
     }
@@ -62,12 +67,13 @@ class DxButtonConnector extends Component {
 const styles = {
 
     mainContainerStyle: {
-        height: 60,
+        position: 'relative',
+        height: 72,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: colors.greyColor,
-        cursor: 'pointer'
+        cursor: 'pointer',
     },
     mainWrapperStyle: {
         flex: 1,
@@ -91,7 +97,7 @@ const styles = {
         flex: 1,
     },
     btnLabelStyle: {
-        fontSize: fonts.h4
+        fontSize: fonts.h3
     },
     rightIconContainerStyle: {
         flex: '18px 0 0',
@@ -100,6 +106,13 @@ const styles = {
         paddingRight: 6,
         fontSize: 24,
         float: 'right',
+    },
+    connectorListContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        right: -144,
+        height: 72,
+        width: 120,
     },
 }
 

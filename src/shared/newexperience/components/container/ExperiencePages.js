@@ -415,14 +415,12 @@ const styles = {
         marginBottom: 12
     },
     editPhoneContainerStyle: {
-        width: 400,
+        width: 630,
         margin: '0 auto',
     },
     phoneContainerStyle: {
-        width: 320,
+        width: 630,
         height: phoneHeight,
-        paddingLeft: 40,
-        paddingRight: 40,
         backgroundColor: 'transparent',
         margin: '0 auto',
         overflowY: 'auto',
@@ -445,6 +443,7 @@ const styles = {
     },
     controlContainerStyle: {
         height: 48,
+        width: 400,
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'row'

@@ -174,7 +174,7 @@ class PhoneElement extends Component {
             copyControlContainerStyle,
             dragControlContainerStyle,
             controlIconStyle,
-            editorContainerStyle,
+            elemContainerStyle,
         } = styles;
 
         return (
@@ -206,7 +206,7 @@ class PhoneElement extends Component {
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
-                                <div style={editorContainerStyle}>
+                                <div style={elemContainerStyle}>
                                     {
                                         this.renderSection(type)
                                     }
@@ -220,7 +220,7 @@ class PhoneElement extends Component {
     }
 }
 
-const minHeight = 60;
+const minHeight = 72;
 
 const styles = {
 
@@ -279,8 +279,8 @@ const styles = {
         height: 18,
         boxSizing: 'border-box'
     },
-    editorContainerStyle: {
-        overflowX: 'hidden'
+    elemContainerStyle: {
+        // overflowX: 'hidden'
     }
 }
 

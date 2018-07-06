@@ -8,6 +8,10 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+.dx_no_outline:focus{
+    outline: none;
+}
+
 .dx_tool_tip{
     position: relative;
 }
