@@ -220,7 +220,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewSection.index = tmpNewPageSections.length;
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
-            
+
             deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
             tmpNewPageSections.push(tmpNewSection);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
@@ -235,7 +235,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpHoverIndex = payload.hoverIndex;
             tmpDragIndex = payload.dragIndex;
 
-            tmpDragSection =  tmpNewPage.sections[tmpDragIndex];
+            tmpDragSection = tmpNewPage.sections[tmpDragIndex];
             tmpNewPage = update(tmpNewPage, {
                 sections: {
                     $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
@@ -250,7 +250,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
             deactive_other_sections(payload.sectionGUID, tmpNewPageSections);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
-            
+
             tmpNewPage.sections = tmpNewPageSections;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
