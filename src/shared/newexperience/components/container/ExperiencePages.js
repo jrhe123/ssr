@@ -415,11 +415,11 @@ const styles = {
         marginBottom: 12
     },
     editPhoneContainerStyle: {
-        width: 630,
+        width: 750,
         margin: '0 auto',
     },
     phoneContainerStyle: {
-        width: 630,
+        width: 750,
         height: phoneHeight,
         backgroundColor: 'transparent',
         margin: '0 auto',

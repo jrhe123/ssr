@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 // Libraries
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import DropdownList from 'react-widgets/lib/DropdownList';
+import 'react-widgets/dist/css/react-widgets.css';
+import '../../../../../assets/css/react-widget/index.css';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
@@ -26,6 +29,10 @@ class DxButtonConnector extends Component {
             expandIconStyle,
 
             connectorListContainerStyle,
+            connectorLabelContainerStyle,
+            connectorLabelStyle,
+            connectorDropdownContainerStyle,
+            connectorDropdownStyle,
         } = styles;
 
         return (
@@ -58,7 +65,17 @@ class DxButtonConnector extends Component {
                     </div>
                 </div>
 
-                <div style={connectorListContainerStyle}></div>
+                <div style={connectorListContainerStyle}>
+                    <div style={connectorLabelContainerStyle}>
+                        <p style={connectorLabelStyle}>Connect another page</p>
+                    </div>
+                    <div style={connectorDropdownContainerStyle}>
+                        <DropdownList
+                            style={connectorDropdownStyle}
+                            data={['orange', 'red', 'blue', 'purple']}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }
@@ -110,9 +127,25 @@ const styles = {
     connectorListContainerStyle: {
         position: 'absolute',
         top: 0,
-        right: -144,
+        right: -204,
         height: 72,
-        width: 120,
+        width: 180,
+        backgroundColor: colors.lightBlueColor
+    },
+    connectorLabelContainerStyle: {
+        padding: 12,
+        paddingBottom: 6,
+    },
+    connectorLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h3
+    },
+    connectorDropdownContainerStyle: {
+        paddingLeft: 12,
+        paddingRight: 12,
+    },
+    connectorDropdownStyle: {
+        height: 18
     },
 }
 
