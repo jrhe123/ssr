@@ -119,6 +119,7 @@ class PhoneElement extends Component {
                     <DxButtonConnector 
                         sectionGUID={this.props.sectionGUID}
                         btnContent={this.props.btnContent}
+                        dropdownOptionArr={this.props.dropdownOptionArr}
                         handleBtnInputChange={(e) => this.props.handleBtnInputChange(e)}
                     />
                 )

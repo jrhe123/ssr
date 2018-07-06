@@ -78,6 +78,17 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'BUTTON', value);
     }
 
+    availablePageList = (pages, pageGUID) => {
+        let res = [];
+        for(let i = 0; i < pages.length; i++){
+            if(pages[i].pageGUID != pageGUID
+                && !pages[i].isConnected){
+                res.push(pages[i])
+            }
+        }
+        return res;
+    }
+
     handleCarouselClick = (open) => {
         if (open) {
             this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
@@ -137,11 +148,11 @@ class ExperiencePages extends Component {
         return (
             <div style={mainContainerStyle}>
                 <div
-                    className={this.props.experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
-                    style={this.props.experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                    className={experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
+                    style={experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
                 >
                     <DropdownMenu
-                        isOpen={this.props.experience.isPageTemplateMenuOpen}
+                        isOpen={experience.isPageTemplateMenuOpen}
                         close={() => { }}
                         align="center"
                         className="dx-layout-menu"
@@ -247,13 +258,14 @@ class ExperiencePages extends Component {
                                     ref="dx_phone_area"
                                 >
                                     <div style={phoneWrapperStyle}>
-                                        {this.props.experience.newPage.sections.map((section, i) => (
+                                        {experience.newPage.sections.map((section, i) => (
                                             <PhoneElement
                                                 sectionGUID={section.sectionGUID}
                                                 type={section.type}
                                                 isActive={section.isActive}
                                                 htmlContent={section.htmlContent}
                                                 btnContent={section.btnContent}
+                                                dropdownOptionArr={this.availablePageList(experience.pages, experience.newPage.pageGUID)}
 
                                                 key={section.sectionGUID}
                                                 index={i}

@@ -18,6 +18,10 @@ class DxButtonConnector extends Component {
     render() {
 
         const {
+            dropdownOptionArr,
+        } = this.props;
+
+        const {
             mainContainerStyle,
             mainWrapperStyle,
             tableContainerStyle,
@@ -73,7 +77,8 @@ class DxButtonConnector extends Component {
                         <DropdownList
                             placeholder="select a page"
                             style={connectorDropdownStyle}
-                            data={['orange', 'red', 'blue', 'purple']}
+                            data={dropdownOptionArr}
+                            textField='title'
                         />
                     </div>
                 </div>
@@ -146,7 +151,7 @@ const styles = {
         paddingRight: 18,
     },
     connectorDropdownStyle: {
-        height: 18
+        height: 24
     },
 }
 

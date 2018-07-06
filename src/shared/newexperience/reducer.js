@@ -31,13 +31,13 @@ const update = require('immutability-helper');
 import { search_object_index_by_value } from '../helpers';
 import { uuid } from '../helpers/tools';
 
-
 let templateNewPage = {
     pageGUID: null,
     isSplash: false,
     title: '',
     sections: [],
-    isSaved: false
+    isSaved: false,
+    isConnected: false,
 };
 let templateNewSection = {
     sectionGUID: null,
