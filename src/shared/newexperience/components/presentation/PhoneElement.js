@@ -18,11 +18,11 @@ import flow from 'lodash/flow';
 import Delete from '@material-ui/icons/Delete';
 import ContentCopy from '@material-ui/icons/ContentCopy';
 import DragHandle from '@material-ui/icons/DragHandle';
-import { Document, Page } from 'react-pdf';
 
 // components
 import DxEditor from './DxEditor';
 import DxButtonConnector from './DxButtonConnector';
+import DxPdfViewer from './DxPdfViewer';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -102,19 +102,7 @@ class PhoneElement extends Component {
         moveCard: PropTypes.func.isRequired,
     }
 
-    state = {
-        filePath: "http://www.intosaicommunity.net/document/exposure_draft/dummy2Version-1.pdf",
-        numPages: null,
-        pageNumber: 1,
-    }
-
-    onDocumentLoadSuccess = ({ numPages }) => {
-        this.setState({ numPages });
-    }
-
     renderSection = (type) => {
-
-        const { filePath, pageNumber, numPages } = this.state;
 
         let section;
         switch (type) {
@@ -140,15 +128,7 @@ class PhoneElement extends Component {
                 break;
             case 'EMBED_PDF':
                 section = (
-                    <div>
-                        <Document
-                            file={filePath}
-                            onLoadSuccess={this.onDocumentLoadSuccess}
-                        >
-                            <Page pageNumber={pageNumber} />
-                        </Document>
-                        <p>Page {pageNumber} of {numPages}</p>
-                    </div>
+                    <DxPdfViewer />
                 )
                 break;
             case 'SPLASH':
