@@ -92,7 +92,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpHoverIndex, tmpDragIndex;
-    let tmpDragSection;
+    let tmpDragSection, tmpHoverSection;
     let tmpActiveSectionIndex;
     let tmpUpdateSection;
 
@@ -232,7 +232,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
             if (!tmpUpdatePage.page.isSplash
-               || payload.type != 'SPLASH'
+                || payload.type != 'SPLASH'
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, templateNewSection);
                 tmpNewSection.sectionGUID = uuid();
@@ -264,27 +264,30 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:
-            tmpHoverIndex = payload.hoverIndex;
             tmpDragIndex = payload.dragIndex;
+            tmpHoverIndex = payload.hoverIndex;
 
             tmpDragSection = tmpNewPage.sections[tmpDragIndex];
+            tmpHoverSection = tmpNewPage.sections[tmpHoverIndex];
+            if (tmpDragSection.type != 'SPLASH'
+                && tmpHoverSection.type != 'SPLASH') {
+                // update new page
+                tmpNewPage = update(tmpNewPage, {
+                    sections: {
+                        $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
+                    },
+                });
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
 
-            // update new page
-            tmpNewPage = update(tmpNewPage, {
-                sections: {
-                    $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
-                },
-            });
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+                // update arr of pages
+                tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+                tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
-            // update arr of pages
-            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
-            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
-
-            tmpExperience.pages = tmpPages;
-            tmpExperience.newPage = tmpNewPage;
-            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-            updated.experience = tmpExperience;
+                tmpExperience.pages = tmpPages;
+                tmpExperience.newPage = tmpNewPage;
+                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
+                updated.experience = tmpExperience;
+            }
             return updated;
 
         case EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED:
