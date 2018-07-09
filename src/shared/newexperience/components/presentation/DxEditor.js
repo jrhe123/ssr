@@ -96,7 +96,7 @@ class DxEditor extends Component {
 const styles = {
 
     mainContainerStyle: {
-        width: 318,
+        width: 320,
         boxSizing: 'border-box',
         margin: '0 auto'
     }

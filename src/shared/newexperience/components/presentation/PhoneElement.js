@@ -29,7 +29,10 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 const style = {
-    border: '1px dotted',
+    borderTop: '1px dotted',
+    borderBottom: '0.5px dotted',
+    borderLeft: '1px dotted',
+    borderRight: '1px dotted',
     borderColor: colors.blueBorderColor,
     boxSize: 'border-box',
     backgroundColor: colors.whiteColor,
@@ -128,7 +131,9 @@ class PhoneElement extends Component {
                 break;
             case 'EMBED_PDF':
                 section = (
-                    <DxPdfViewer />
+                    <DxPdfViewer 
+                        pdfPath={this.props.pdfPath}
+                    />
                 )
                 break;
             case 'SPLASH':

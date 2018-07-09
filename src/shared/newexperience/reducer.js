@@ -50,7 +50,8 @@ let templateNewSection = {
     isActive: false,    // section active
     htmlContent: '',    // html content
     btnContent: '',     // btn label
-    connectedPageGUID: null     // btn connect page guid
+    connectedPageGUID: null,     // btn connect page guid
+    pdfPath: null,        // pdf file path
 };
 const initialState = {
     cardTemplates: [],      // card templates

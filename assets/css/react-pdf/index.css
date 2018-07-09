@@ -1,0 +1,11 @@
+.react-pdf__Document{
+    background-color: #E6E6E6;
+}
+.react-pdf__Page{
+    margin-bottom: 6px;
+}
+.react-pdf__message.react-pdf__message--no-data{
+    height: 72px;
+    padding-left: 12px;
+    line-height: 72px;
+}

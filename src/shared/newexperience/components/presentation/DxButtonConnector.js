@@ -102,7 +102,7 @@ const styles = {
         justifyContent: 'center',
         backgroundColor: colors.greyColor,
         cursor: 'pointer',
-        width: 318,
+        width: 320,
         boxSizing: 'border-box',
         margin: '0 auto'
     },

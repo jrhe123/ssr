@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Libraries
 import { Document, Page } from 'react-pdf';
+import '../../../../../assets/css/react-pdf/index.css';
 
 class DxPdfViewer extends Component {
 
@@ -21,21 +22,28 @@ class DxPdfViewer extends Component {
             mainContainerStyle,
         } = styles;
 
-        const { filePath, pageNumber, numPages } = this.state;
+        const { pageNumber, numPages } = this.state;
         return (
             <div style={mainContainerStyle}>
                 <Document
                     loading="Loading PDF.."
-                    file={filePath}
+                    file={this.props.pdfPath}
                     onLoadSuccess={this.handleDocumentLoadSuccess}
                     noData="Please select a file.."
                 >
-                    <Page 
-                        pageNumber={pageNumber} 
-                        width={318}
-                    />
+                    {
+                        Array.from(
+                            new Array(numPages),
+                            (el, index) => (
+                                <Page
+                                    key={`page_${index + 1}`}
+                                    pageNumber={index + 1}
+                                    width={320}
+                                />
+                            ),
+                        )
+                    }
                 </Document>
-                <p>Page {pageNumber} of {numPages}</p>
             </div>
         )
     }
@@ -44,8 +52,7 @@ class DxPdfViewer extends Component {
 const styles = {
 
     mainContainerStyle: {
-        width: 318,
-        boxSizing: 'border-box',
+        width: 320,
         margin: '0 auto'
     }
 }
