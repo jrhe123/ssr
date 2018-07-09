@@ -11,7 +11,12 @@ class CardOption extends Component {
     }
 
     handleImageChange = (event) => {
-        this.props.handleImageChange(event.target.files[0]);
+        let file = event.target.files[0];
+        if(!file.type.match('image.*')){
+            this.props.handleImageError('The supported file types are .jpg , .jpeg , .png , .bmp');
+            return;
+        }
+        this.props.handleImageChange(file);
         let img_input = this.refs.img_input;
         img_input.value = "";
     }

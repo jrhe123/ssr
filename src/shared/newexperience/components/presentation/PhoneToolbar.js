@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // components
 import DxEditorToolbar from './DxEditorToolbar';
+import DxPdfViewerToolbar from './DxPdfViewerToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -27,6 +28,12 @@ class PhoneToolbar extends Component {
                 )
             } else if (section.type == 'BUTTON') {
                 return null;
+            } else if (section.type == 'EMBED_PDF') {
+                return (
+                    <DxPdfViewerToolbar 
+                        
+                    />
+                )
             } else {
                 return (
                     <div
