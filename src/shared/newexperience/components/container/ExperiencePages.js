@@ -301,7 +301,6 @@ class ExperiencePages extends Component {
                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
 
                             <div style={toolbarContainerStyle}>
-
                                 <PhoneToolbar
                                     newPage={experience.newPage}
                                     pages={experience.pages}
