@@ -230,26 +230,37 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
-            tmpNewSection = Object.assign({}, templateNewSection);
-            tmpNewSection.sectionGUID = uuid();
-            tmpNewSection.index = Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
-            tmpNewSection.type = payload.type;
-            tmpNewSection.isActive = true;
-
-            // update new page
-            deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
-            tmpNewPageSections.push(tmpNewSection);
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
-            tmpNewPage.sections = tmpNewPageSections;
-
-            // update arr of pages
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
-            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+            if (!tmpUpdatePage.page.isSplash
+               || payload.type != 'SPLASH'
+            ) {     // only one splash per page
+                tmpNewSection = Object.assign({}, templateNewSection);
+                tmpNewSection.sectionGUID = uuid();
+                tmpNewSection.index = Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
+                tmpNewSection.type = payload.type;
+                tmpNewSection.isActive = true;
 
-            tmpExperience.pages = tmpPages;
-            tmpExperience.newPage = tmpNewPage;
-            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-            updated.experience = tmpExperience;
+                // update new page
+                deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
+                if (payload.type == 'SPLASH') {   // first elem of arr
+                    tmpNewPageSections.unshift(tmpNewSection);
+                } else {
+                    tmpNewPageSections.push(tmpNewSection);
+                }
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
+                tmpNewPage.sections = tmpNewPageSections;
+                if (payload.type == 'SPLASH') {
+                    tmpNewPage.isSplash = true;
+                }
+
+                // update arr of pages
+                tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+
+                tmpExperience.pages = tmpPages;
+                tmpExperience.newPage = tmpNewPage;
+                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
+                updated.experience = tmpExperience;
+            }
             return updated;
 
         case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:
@@ -330,7 +341,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpUpdatePage.page.isConnected = false;
                 // disconnect section
                 tmpUpdateSection.connectedPageGUID = null;
-                
+
                 // update arr of pages
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
                 tmpExperience.pages = tmpPages;

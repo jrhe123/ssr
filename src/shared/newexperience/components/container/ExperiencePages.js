@@ -103,9 +103,13 @@ class ExperiencePages extends Component {
     handleAddElem = (template) => {
         // Add section to new page
         this.props.dxExperiencePageAddElemAction(template.Type);
-        // Auto scroll down
+        // Auto scroll
         let dxPhoneArea = this.refs.dx_phone_area;
-        dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+        if (template.Type == 'SPLASH') {
+            dxPhoneArea.scrollTop = 0;
+        } else {
+            dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+        }
     }
 
     handleMoveCard = (dragIndex, hoverIndex) => {
