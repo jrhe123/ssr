@@ -10,8 +10,10 @@ class DxInput extends Component{
 
         const {
             placeholder,
+            invertPlaceholder,
             isDark,
             isTransparent,
+            textCenter,
             width,
             disabled,
             value,
@@ -27,10 +29,16 @@ class DxInput extends Component{
         if(isTransparent){
             extra.backgroundColor = 'transparent';
         }
+        if(textCenter){
+            extra.textAlign = 'center';
+        }else{
+            extra.paddingLeft = 12;
+            extra.paddingRight = 12;
+        }
 
         return(
             <input 
-                className="dx_input"
+                className={invertPlaceholder ? 'dx_input dx_invert_input' : 'dx_input'}
                 style={Object.assign({}, styles.inputStyle, extra)}
                 type="text"
                 placeholder={placeholder}
@@ -45,8 +53,6 @@ class DxInput extends Component{
 const styles = {
     inputStyle: {
         height: 28,
-        paddingLeft: 12,
-        paddingRight: 12,
         borderRadius: '18px',
         border: 'none',
         fontSize: fonts.h2

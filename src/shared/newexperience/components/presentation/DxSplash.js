@@ -9,6 +9,9 @@ import BatteryFull from '@material-ui/icons/BatteryFull';
 import MoreVert from '@material-ui/icons/MoreVert';
 import Search from '@material-ui/icons/Search';
 
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -43,6 +46,7 @@ class DxSplash extends Component {
             overlayContainerStyle,
             overlayWrapperStyle,
             overlayImgStyle,
+            descContainerStyle,
         } = styles;
 
         return (
@@ -121,7 +125,19 @@ class DxSplash extends Component {
                         <div style={splashContentContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <p style={Object.assign({}, txtStyle, txtCenterStyle)}>Splash image with page title</p>
+                                    <div style={descContainerStyle}>
+                                        <DxInput
+                                            style={Object.assign({}, txtStyle, txtCenterStyle)}
+                                            placeholder="Splash image with page title"
+                                            handleValChange={(e) => this.props.handleBtnInputChange(e)}
+                                            width={descContainerWidth}
+                                            isTransparent={true}
+                                            invertPlaceholder={true}
+                                            textCenter={true}
+                                            disabled={false}
+                                            value={this.props.btnContent}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +148,7 @@ class DxSplash extends Component {
     }
 }
 
+const descContainerWidth =  264;
 
 const styles = {
 
@@ -162,7 +179,7 @@ const styles = {
     },
     txtStyle: {
         fontSize: fonts.h5,
-        margin: 0
+        color: colors.whiteColor
     },
     splashContainerStyle: {
         height: 120,
@@ -245,6 +262,10 @@ const styles = {
     overlayImgStyle: {
         height: 120,
         width: '100%',
+    },
+    descContainerStyle: {
+        width: descContainerWidth,
+        margin: '0 auto'
     },
 }
 
