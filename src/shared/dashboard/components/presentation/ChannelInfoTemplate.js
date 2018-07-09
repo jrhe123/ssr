@@ -11,6 +11,7 @@ import colors from '../../../styles/colors';
 
 
 class ChannelInfoTemplate extends Component {
+
     render() {
         const {
             channelInfoStyle,
@@ -25,7 +26,7 @@ class ChannelInfoTemplate extends Component {
         return (
             <div style={channelInfoStyle}>
                 <div style={channelInfoLeftStyle}>
-                    <p style={channelTitleStyle}>General</p>
+                    <p style={channelTitleStyle}>{this.props.headerText}</p>
                     <p style={streamLabelStyle}>0 live streams</p>
                 </div>
                 <div style={channelInfoRightStyle}>

@@ -39,7 +39,7 @@ class RestrictUserTemplate extends Component {
                     <p style={sessionNumberStyle}>6th session</p>
                 </div>
                 <div style={allowBtnContainerStyle}>                               
-                    <Button style={allowBtnStyle} variant="outlined">Allow</Button>
+                    <Button style={allowBtnStyle} variant="outlined">{this.props.label}</Button>
                 </div>
             </div> 
         );
@@ -97,7 +97,7 @@ const styles = {
         width:168,
         marginRight:20,
         display:'flex',
-        justifyContent:'flex-end',
+        justifyContent:'flex-end'
     },
     allowBtnStyle:{
         textTransform:'none',

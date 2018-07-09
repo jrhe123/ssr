@@ -30,7 +30,8 @@ const styles = {
     redayToStreamWrapperStyle:{
         width:'auto',
         background:'white',
-        marginTop:12,
+        marginTop:0,
+        marginBottom:6,
         fontSize: fonts.h4,
         marginLeft:48,
         display:'flex',

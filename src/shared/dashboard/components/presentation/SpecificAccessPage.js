@@ -112,19 +112,19 @@ class SpecificAccessPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Unlock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate label={'Lock'}/>
                 </div>
             </div>
         )

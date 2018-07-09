@@ -56,10 +56,7 @@ class RestrictDomainPage extends Component{
 
             inviteCodeContainerStyle,
             inviteCodeLabelStyle,
-            channelCodeStyle,
-            channelNameStyle
-
-            
+            channelCodeStyle          
         } = styles;
 
         return(
@@ -96,16 +93,16 @@ class RestrictDomainPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
                 </div>
             </div>
         )

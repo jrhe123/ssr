@@ -71,16 +71,16 @@ class RestrictSessionPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
-                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'}/>
+                    <RestrictUserTemplate label={'Allow'} />
                 </div>
             </div>
         )

@@ -172,26 +172,20 @@ class Stream extends Component{
                             />
                         </div>
                         <div style={channelInfoContainerStyle}>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>                       
+                            <ChannelInfoTemplate headerText={'General'}/>
+                            <ChannelInfoTemplate headerText={'Renaissance'}/>
+                            <ChannelInfoTemplate headerText={'Reading'}/>
+                            <ChannelInfoTemplate headerText={'Latin literature'}/>
+                            <ChannelInfoTemplate headerText={'Lorem Ipsum'}/>
+                            <ChannelInfoTemplate headerText={'Bonorum'}/>
+                            <ChannelInfoTemplate headerText={'Rackham'}/>
+                            <ChannelInfoTemplate headerText={'Malorum'}/>
+                            <ChannelInfoTemplate headerText={'Injected'}/>
+                            <ChannelInfoTemplate headerText={'Tutorials'}/>
+                            <ChannelInfoTemplate headerText={'Content'}/>
+                            <ChannelInfoTemplate headerText={'Specimen'}/>
+                            <ChannelInfoTemplate headerText={'Internet'}/>
+                            <ChannelInfoTemplate headerText={'Channel 2'}/>         
                         </div>
                         <div style={tipsContainerStyle}>
                             <p style={tipsHeaderStyle}>Tips:</p>
@@ -449,7 +443,8 @@ const styles = {
     liveStreamContainerStyle:{
         overflowY:'scroll',
         minHeight:'10%',
-        maxHeight: `calc((100% - 194px)/2)`,
+        // maxHeight: `calc((100% - 194px)/2)`,
+        maxHeight:168
     },
     liveStreamWrapperStyle:{
         textAlign: 'center',
@@ -490,7 +485,8 @@ const styles = {
     },
     readyToStreamContainerStyle:{
         minHeight:'10%',
-        maxHeight: `calc((100% - 194px)/2)`,
+        // maxHeight: `calc((100% - 194px)/2)`,
+        maxHeight:168,
         overflowY:'scroll',
     },
     readyToStreamWrapperStyle:{

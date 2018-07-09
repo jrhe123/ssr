@@ -218,26 +218,20 @@ class Audience extends Component{
                             />
                         </div>
                         <div style={channelInfoContainerStyle}>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>
-                            <ChannelInfoTemplate/>                       
+                            <ChannelInfoTemplate headerText={'General'}/>
+                            <ChannelInfoTemplate headerText={'Renaissance'}/>
+                            <ChannelInfoTemplate headerText={'Reading'}/>
+                            <ChannelInfoTemplate headerText={'Latin literature'}/>
+                            <ChannelInfoTemplate headerText={'Lorem Ipsum'}/>
+                            <ChannelInfoTemplate headerText={'Bonorum'}/>
+                            <ChannelInfoTemplate headerText={'Rackham'}/>
+                            <ChannelInfoTemplate headerText={'Malorum'}/>
+                            <ChannelInfoTemplate headerText={'Injected'}/>
+                            <ChannelInfoTemplate headerText={'Tutorials'}/>
+                            <ChannelInfoTemplate headerText={'Content'}/>
+                            <ChannelInfoTemplate headerText={'Specimen'}/>
+                            <ChannelInfoTemplate headerText={'Internet'}/>
+                            <ChannelInfoTemplate headerText={'Channel 2'}/>                                
                         </div>
                     </div>
                     <div style={streamContainerStyle}>

@@ -63,19 +63,13 @@ class RemoveUserPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
-                    <RestrictUserTemplate />
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate label={'remove'}/>
                 </div>
             </div>
         )
