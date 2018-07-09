@@ -296,6 +296,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     case 'BUTTON':
                         tmpUpdateSection.btnContent = payload.content;
                         break;
+                    case 'EMBED_PDF':
+                        tmpUpdateSection.pdfPath = 'http://localhost:2999/sample.pdf';
+                        break;
                     default:
                         break;
                 }

@@ -33,6 +33,9 @@ import {
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPage as dxExperiencePageSectionConnectPageAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -149,11 +152,14 @@ class ExperiencePages extends Component {
     }
 
     handlePdfChange = (file) => {
-        console.log('upload pdf: ', file);
+        let sections = this.props.experience.newPage.sections;
+        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
+        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EMBED_PDF', file);
     }
 
     handlePdfError = (msg) => {
-        console.log('out here: ', msg);
+        this.props.dxAlertAction(true, true, msg);
     }
 
     handleCarouselClick = (open) => {
@@ -606,6 +612,8 @@ const dispatchToProps = {
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPageAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));
