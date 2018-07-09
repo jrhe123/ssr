@@ -90,6 +90,10 @@ import {
     EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
 
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED,
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
+
 } from './constants';
 
 // Experience type request
@@ -551,4 +555,26 @@ export function* dxExperiencePageUpdateElem(action) {
 
 export function* dxExperiencePageUpdateElemSaga() {
     yield takeEvery(EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED, dxExperiencePageUpdateElem);
+}
+
+// Experience page elem connect page
+export function* dxExperiencePageElemConnectPage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+                pageGUID: action.payload.pageGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageElemConnectPageSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED, dxExperiencePageElemConnectPage);
 }

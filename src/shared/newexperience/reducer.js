@@ -25,6 +25,7 @@ import {
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
 } from './constants';
 
 // Libraries
@@ -297,6 +298,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpExperience.newPage = tmpNewPage;
                 updated.experience = tmpExperience;
             }
+            return updated;
+
+        case EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED:
+
+            console.log('receive reducer: ', payload.sectionGUID);
+            console.log('receive reducer: ', payload.pageGUID);
             return updated;
 
         default:

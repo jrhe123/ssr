@@ -31,6 +31,7 @@ import {
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
+    dxExperiencePageSectionConnectPage as dxExperiencePageSectionConnectPageAction,
 } from '../../actions';
 
 // constants
@@ -89,6 +90,7 @@ class ExperiencePages extends Component {
 
                 handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
+                handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
             />
         ))
         return section
@@ -118,6 +120,10 @@ class ExperiencePages extends Component {
     handleUpdateBtnContent = (sectionGUID, e) => {
         let value = e.target.value;
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'BUTTON', value);
+    }
+
+    handleBtnConnectPageChange = (sectionGUID, pageGUID) => {
+        this.props.dxExperiencePageSectionConnectPageAction(sectionGUID, pageGUID);
     }
 
     availablePageList = (pages, pageGUID) => {
@@ -575,6 +581,7 @@ const dispatchToProps = {
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,
+    dxExperiencePageSectionConnectPageAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));
