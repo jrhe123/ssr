@@ -123,8 +123,6 @@ class ExperiencePages extends Component {
     }
 
     handleBtnConnectPageChange = (sectionGUID, pageGUID) => {
-        console.log('sectionGUID: ', sectionGUID);
-        console.log('pageGUID: ', pageGUID);
         this.props.dxExperiencePageSectionConnectPageAction(sectionGUID, pageGUID);
     }
 
@@ -134,7 +132,7 @@ class ExperiencePages extends Component {
         if (pages.length && targetPageGUID) {
             let cancelOption = {
                 sectionGUID: '',
-                title: 'clear',
+                title: 'no connect',
             };
             res.push(cancelOption);
         }

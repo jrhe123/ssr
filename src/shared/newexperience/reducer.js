@@ -309,7 +309,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
                 if (!tmpUpdatePage.page.isRoot
                     && !tmpUpdatePage.page.isConnected) {
+                    // connect section
                     tmpUpdateSection.connectedPageGUID = payload.pageGUID;
+                    // connect page
                     tmpUpdatePage.page.isConnected = true;
 
                     // update arr of pages
@@ -319,7 +321,17 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     updated.experience = tmpExperience;
                 }
             } else {
-                console.log('disconnect here');
+                // disconnect page
+                tmpUpdatePage = find_page_by_guid(tmpUpdateSection.connectedPageGUID, tmpPages);
+                tmpUpdatePage.page.isConnected = false;
+                // disconnect section
+                tmpUpdateSection.connectedPageGUID = null;
+                
+                // update arr of pages
+                tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
+                tmpExperience.pages = tmpPages;
+                tmpExperience.newPage = tmpNewPage;
+                updated.experience = tmpExperience;
             }
             return updated;
 
