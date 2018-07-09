@@ -7,9 +7,7 @@ import '../../../../../assets/css/react-pdf/index.css';
 class DxPdfViewer extends Component {
 
     state = {
-        filePath: "http://localhost:2999/sample.pdf",
         numPages: null,
-        pageNumber: 1,
     }
 
     handleDocumentLoadSuccess = ({ numPages }) => {
@@ -22,7 +20,7 @@ class DxPdfViewer extends Component {
             mainContainerStyle,
         } = styles;
 
-        const { pageNumber, numPages } = this.state;
+        const { numPages } = this.state;
         return (
             <div style={mainContainerStyle}>
                 <Document
