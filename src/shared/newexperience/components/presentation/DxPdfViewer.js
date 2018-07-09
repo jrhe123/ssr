@@ -27,7 +27,7 @@ class DxPdfViewer extends Component {
                     loading="Loading PDF.."
                     file={this.props.pdfPath}
                     onLoadSuccess={this.handleDocumentLoadSuccess}
-                    noData="Please select a file.."
+                    noData="Please select a PDF.."
                 >
                     {
                         Array.from(
