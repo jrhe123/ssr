@@ -102,6 +102,9 @@ const styles = {
         justifyContent: 'center',
         backgroundColor: colors.greyColor,
         cursor: 'pointer',
+        width: 318,
+        boxSizing: 'border-box',
+        margin: '0 auto'
     },
     mainWrapperStyle: {
         flex: 1,

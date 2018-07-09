@@ -16,9 +16,14 @@ class DxPdfViewer extends Component {
     }
 
     render() {
+
+        const {
+            mainContainerStyle,
+        } = styles;
+
         const { filePath, pageNumber, numPages } = this.state;
         return (
-            <div>
+            <div style={mainContainerStyle}>
                 <Document
                     loading="Loading PDF.."
                     file={filePath}
@@ -33,6 +38,15 @@ class DxPdfViewer extends Component {
                 <p>Page {pageNumber} of {numPages}</p>
             </div>
         )
+    }
+}
+
+const styles = {
+
+    mainContainerStyle: {
+        width: 318,
+        boxSizing: 'border-box',
+        margin: '0 auto'
     }
 }
 

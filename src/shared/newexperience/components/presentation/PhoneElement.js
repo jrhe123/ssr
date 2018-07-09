@@ -176,7 +176,6 @@ class PhoneElement extends Component {
             copyControlContainerStyle,
             dragControlContainerStyle,
             controlIconStyle,
-            elemContainerStyle,
         } = styles;
 
         return (
@@ -209,11 +208,9 @@ class PhoneElement extends Component {
                                 <div style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
-                                <div style={elemContainerStyle}>
-                                    {
-                                        this.renderSection(type)
-                                    }
-                                </div>
+                                {
+                                    this.renderSection(type)
+                                }
                             </div>
                         ),
                     )
@@ -282,9 +279,6 @@ const styles = {
         width: 18,
         height: 18,
         boxSizing: 'border-box'
-    },
-    elemContainerStyle: {
-        // overflowX: 'hidden'
     }
 }
 
