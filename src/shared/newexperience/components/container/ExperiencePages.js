@@ -81,7 +81,7 @@ class ExperiencePages extends Component {
                 isActive={section.isActive}
                 htmlContent={section.htmlContent}
                 btnContent={section.btnContent}
-                dropdownOptionArr={this.availablePageList(experience.pages, experience.newPage.pageGUID)}
+                dropdownOptionArr={this.availablePageOptionList(experience.pages, experience.newPage.pageGUID, section.connectedPageGUID)}
 
                 key={section.sectionGUID}
                 index={i}
@@ -123,13 +123,25 @@ class ExperiencePages extends Component {
     }
 
     handleBtnConnectPageChange = (sectionGUID, pageGUID) => {
+        console.log('sectionGUID: ', sectionGUID);
+        console.log('pageGUID: ', pageGUID);
         this.props.dxExperiencePageSectionConnectPageAction(sectionGUID, pageGUID);
     }
 
-    availablePageList = (pages, pageGUID) => {
+    availablePageOptionList = (pages, currentpageGUID, targetPageGUID) => {
         let res = [];
+
+        if (pages.length && targetPageGUID) {
+            let cancelOption = {
+                sectionGUID: '',
+                title: 'clear',
+            };
+            res.push(cancelOption);
+        }
+
         for (let i = 0; i < pages.length; i++) {
-            if (pages[i].pageGUID != pageGUID
+            if (pages[i].pageGUID != currentpageGUID
+                && !pages[i].isRoot
                 && !pages[i].isConnected) {
                 res.push(pages[i])
             }

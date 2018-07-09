@@ -37,6 +37,7 @@ import { uuid } from '../helpers/tools';
 
 let templateNewPage = {
     pageGUID: null,
+    isRoot: false,      // root page
     isSplash: false,    // splash
     title: '',      // page title
     sections: [],   // page sections
@@ -49,6 +50,7 @@ let templateNewSection = {
     isActive: false,    // section active
     htmlContent: '',    // html content
     btnContent: '',     // btn label
+    connectedPageGUID: null     // btn connect page guid
 };
 const initialState = {
     cardTemplates: [],      // card templates
@@ -110,6 +112,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             if (payload.experienceIndex == 2
                 && !updated.experience.pages.length) {
                 tmpNewPage.pageGUID = uuid();
+                tmpNewPage.isRoot = true;
                 tmpNewPage.title = 'Page 1';
                 tmpExperience.newPage = tmpNewPage;
                 tmpPages.push(tmpNewPage);
@@ -204,8 +207,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.isPageCarouselMenuOpen = payload.toggle;
             updated.experience = tmpExperience;
             return updated;
-        
-        case EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED:            
+
+        case EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
 
@@ -228,7 +231,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
             tmpNewSection = Object.assign({}, templateNewSection);
             tmpNewSection.sectionGUID = uuid();
-            tmpNewSection.index =  Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
+            tmpNewSection.index = Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
             tmpNewSection.type = payload.type;
             tmpNewSection.isActive = true;
 
@@ -241,7 +244,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update arr of pages
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
-            
+
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
@@ -265,7 +268,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update arr of pages
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
-            
+
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
@@ -301,9 +304,23 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED:
+            tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            if (payload.pageGUID) {
+                tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
+                if (!tmpUpdatePage.page.isRoot
+                    && !tmpUpdatePage.page.isConnected) {
+                    tmpUpdateSection.connectedPageGUID = payload.pageGUID;
+                    tmpUpdatePage.page.isConnected = true;
 
-            console.log('receive reducer: ', payload.sectionGUID);
-            console.log('receive reducer: ', payload.pageGUID);
+                    // update arr of pages
+                    tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
+                    tmpExperience.pages = tmpPages;
+                    tmpExperience.newPage = tmpNewPage;
+                    updated.experience = tmpExperience;
+                }
+            } else {
+                console.log('disconnect here');
+            }
             return updated;
 
         default:
