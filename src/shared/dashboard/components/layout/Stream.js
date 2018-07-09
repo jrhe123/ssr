@@ -461,7 +461,9 @@ const styles = {
         fontSize: fonts.h4,
         border: '1px dotted #4A90E2',
         display:'flex',
-        justifyContent:'center'
+        justifyContent:'center',
+        height:24,
+        alignItems:'center'
     },
     liveStreamContentStyle:{
         marginTop:0,
@@ -494,12 +496,16 @@ const styles = {
     readyToStreamWrapperStyle:{
         textAlign: 'center',
         background:'white',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
         marginLeft:48,
         marginTop:0,
         marginBottom:6,
         padding:12,
         fontSize: fonts.h4,
-        border: '1px dotted #4A90E2'
+        border: '1px dotted #4A90E2',
+        height:24
     },
     generalHeaderStyle:{
         margin:'0 0',

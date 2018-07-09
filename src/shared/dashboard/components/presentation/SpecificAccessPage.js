@@ -116,6 +116,15 @@ class SpecificAccessPage extends Component{
                     <RestrictUserTemplate/>
                     <RestrictUserTemplate/>
                     <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
+                    <RestrictUserTemplate/>
                 </div>
             </div>
         )
@@ -136,14 +145,15 @@ const styles = {
         width:'auto',
         background:'white',
         marginTop:0,
-        marginBottom:12,
+        marginBottom:24,
         paddingTop:18,
         paddingLeft:30,
         paddingRight:30,
         paddingBottom:6,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:72
+        height:72,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     channelDetailsWrapperStyle:{
         display:'flex',
@@ -152,7 +162,6 @@ const styles = {
         marginBottom:12,
         fontSize:fonts.h2,
         fontWeight:'500',
-        color:colors.blackColor,
         fontFamily:'avenir'
     },
     invitaionContainerStyle:{
@@ -163,23 +172,23 @@ const styles = {
         width:'auto',
         background:'white',
         marginTop:0,
-        marginBottom:12,
+        marginBottom:30,
         paddingTop:12,
         paddingLeft:12,
         paddingRight:12,
         paddingBottom:12,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:36
+        height:36,
+        boxShadow: '0 1px 1px 0 #CED5DB' 
     },
     invitationLabelStyle:{
         marginLeft:18,
         fontSize: fonts.h2,
         fontWeight:'500',
-        color:colors.blackColor,
         marginTop:0,
         marginBottom:0,
-        fontFamily:'avenir',
+        fontFamily: 'avenir',
         width:'calc(100% - 152px)',
         paddingRight:12
     },
@@ -210,7 +219,8 @@ const styles = {
         fontSize: fonts.h4,
         overflowY:'scroll',
         minHeight:0,
-        maxHeight:'calc(100% - 250px)',  
+        maxHeight:'calc(100% - 292px)',
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     memberListHeaderContainerStyle:{
         display:'flex',
@@ -230,7 +240,8 @@ const styles = {
         borderTop:0,
         marginLeft:48,
         background:colors.whiteColor,
-        height:48
+        height:48,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     memberLabelStyle:{
         marginLeft:18,
@@ -239,15 +250,11 @@ const styles = {
         fontWeight:'500',
         marginTop:0,
         marginBottom:0,
-        color:colors.blackColor,
         width:106
     },
     dropdownContainerStyle:{
-        // marginTop:0,
-        // marginBottom:0,
         height:30,
         width:138,
-        // marginLeft:54
     },
     safeguardLabelStyle:{
         margin:0,
@@ -292,7 +299,6 @@ const styles = {
     },
     expandIconStyle:{
         color:colors.lightGreyColor,
-        // paddingLeft:36,
         width:32
 
     }

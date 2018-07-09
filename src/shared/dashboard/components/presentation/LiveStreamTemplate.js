@@ -41,7 +41,8 @@ const styles = {
         fontSize: fonts.h4,
         border: '1px dotted #4A90E2',
         display:'flex',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        height:24
     },
     expTitleStyle:{
         marginTop:0,

@@ -126,14 +126,15 @@ const styles = {
         width:'auto',
         background:'white',
         marginTop:0,
-        marginBottom:12,
+        marginBottom:18,
         paddingTop:18,
         paddingLeft:30,
         paddingRight:30,
         paddingBottom:6,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:72
+        height:72,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     channelDetailsWrapperStyle:{
         display:'flex',
@@ -142,7 +143,6 @@ const styles = {
         marginBottom:12,
         fontSize:fonts.h2,
         fontWeight:'500',
-        color:colors.blackColor,
         fontFamily:'avenir'
     },
     domainContainerStyle:{
@@ -153,14 +153,15 @@ const styles = {
         width:'auto',
         background:'white',
         marginTop:0,
-        marginBottom:12,
+        marginBottom:30,
         paddingTop:18,
         paddingLeft:12,
         paddingRight:12,
         paddingBottom:18,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:96
+        height:96,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     domainWrapperStyle:{
         marginLeft:18,
@@ -173,14 +174,17 @@ const styles = {
     emailLabelStyle:{
         marginTop:0,
         marginBottom:12,
-        fontSize:fonts.h2
+        fontSize:fonts.h2,
+        fontWeight:'500',
+        fontFamily:'avenir'
     },
     emailContentStyle:{
         marginTop:0,
         marginBottom:12,
         color:colors.lightGreyColor,
         fontSize:fonts.h3,
-        fontFamily:'avenir'
+        fontFamily:'avenir',
+        fontWeight:'500'
     },
     invitaionContainerStyle:{
         display:'flex',
@@ -190,20 +194,20 @@ const styles = {
         width:'auto',
         background:'white',
         marginTop:0,
-        marginBottom:12,
+        marginBottom:24,
         paddingTop:12,
         paddingLeft:12,
         paddingRight:12,
         paddingBottom:12,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:36
+        height:36,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     invitationLabelStyle:{
         marginLeft:18,
         fontSize: fonts.h2,
         fontWeight:'500',
-        color:colors.blackColor,
         marginTop:0,
         marginBottom:0,
         fontFamily:'avenir',
@@ -233,7 +237,8 @@ const styles = {
         fontSize: fonts.h4,
         overflowY:'scroll',
         minHeight:0,
-        maxHeight:'calc(100% - 408px)',  
+        maxHeight:'calc(100% - 444px)',
+        boxShadow: '0 1px 1px 0 #CED5DB' 
     },
     memberListHeaderContainerStyle:{
         display:'flex',
@@ -253,7 +258,8 @@ const styles = {
         borderTop:0,
         marginLeft:48,
         background:colors.whiteColor,
-        height:48
+        height:48,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     memberLabelStyle:{
         marginLeft:18,
@@ -261,8 +267,7 @@ const styles = {
         fontFamily:'avenir',
         fontWeight:'500',
         marginTop:0,
-        marginBottom:0,
-        color:colors.blackColor
+        marginBottom:0
     },
     searchUserWrapperStyle:{
         display:'flex',

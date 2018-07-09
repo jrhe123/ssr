@@ -540,7 +540,8 @@ const styles = {
         paddingBottom:18,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:36
+        height:36,
+        boxShadow: '0 1px 1px 0 #CED5DB'
     },
     channelDetailsWrapperStyle:{
         display:'flex',
@@ -613,7 +614,7 @@ const styles = {
         paddingBottom:12,
         fontSize: fonts.h4,
         marginLeft:48,
-        height:36
+        boxShadow: '0 1px 1px 0 #CED5DB',
     },
     invitationLabelStyle:{
         marginLeft:18,
@@ -635,7 +636,8 @@ const styles = {
         fontSize: fonts.h4,
         overflowY:'scroll',
         minHeight:0,
-        maxHeight:'calc(100% - 232px)',  
+        maxHeight:'calc(100% - 232px)',
+        boxShadow: '0 1px 1px 0 #CED5DB' 
     },
     memberListHeaderContainerStyle:{
         display:'flex',
@@ -655,7 +657,8 @@ const styles = {
         borderTop:0,
         marginLeft:48,
         background:colors.whiteColor,
-        height:48
+        height:48,
+        boxShadow: '0 1px 1px 0 #CED5DB',
     },
     memberLabelStyle:{
         marginLeft:18,
