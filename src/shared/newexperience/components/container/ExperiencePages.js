@@ -309,14 +309,14 @@ class ExperiencePages extends Component {
                             </div>
                             <div style={editPhoneContainerStyle}>
 
-                                <div style={pageNumContainerStyle}>
+                                <div className={experience.isPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                    style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                             <p style={pageNumStyle}>{experience.newPage.title}</p>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div style={phoneContainerStyle}
                                     ref="dx_phone_area"
                                 >
@@ -325,13 +325,15 @@ class ExperiencePages extends Component {
                                         <PhoneTarget />
                                     </div>
                                 </div>
-                                <div style={pageNumContainerStyle}>
+                                <div className={!experience.isPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                    style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                             <p style={pageNumStyle}>{experience.newPage.title}</p>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div style={controlContainerStyle}>
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>

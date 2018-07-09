@@ -12,12 +12,24 @@ body{
     outline: none;
 }
 
+.dx_flow{
+    transition: opacity .2s linear;
+}
+
 .dx_show{
     display: block;
 }
 
 .dx_hidden{
     display: none;
+}
+
+.dx_opacity_visible{
+    opacity: 1;
+}
+
+.dx_opacity_hidden{
+    opacity: 0;
 }
 
 .dx_tool_tip{

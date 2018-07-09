@@ -25,6 +25,8 @@ class PhoneToolbar extends Component {
                         sectionGUID={section.sectionGUID}
                     />
                 )
+            } else if (section.type == 'BUTTON') {
+                return null;
             } else {
                 return (
                     <div
