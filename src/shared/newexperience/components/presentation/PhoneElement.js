@@ -244,11 +244,12 @@ const styles = {
     },
     controlContainerStyle: {
         position: 'absolute',
-        left: -40,
+        left: -42,
         width: 18,
         height: '100%',
-        paddingRight: 9,
-        borderRight: '4px solid'
+        paddingRight: 30,
+        borderRight: '4px solid',
+        boxSizing: 'border-box'
     },
 
     controlWrapperStyle: {

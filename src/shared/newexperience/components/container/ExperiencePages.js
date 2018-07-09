@@ -490,7 +490,8 @@ const styles = {
         height: phoneHeight,
         margin: '0 auto',
         backgroundColor: colors.lightBlueColor,
-        textAlign: 'left'
+        textAlign: 'left',
+        boxSizing: 'border-box'
     },
     pageNumContainerStyle: {
         height: 24

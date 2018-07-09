@@ -6,7 +6,7 @@ import { Document, Page } from 'react-pdf';
 class DxPdfViewer extends Component {
 
     state = {
-        filePath: "http://www.intosaicommunity.net/document/exposure_draft/dummy2Version-1.pdf",
+        filePath: "http://localhost:2999/sample.pdf",
         numPages: null,
         pageNumber: 1,
     }
@@ -20,10 +20,15 @@ class DxPdfViewer extends Component {
         return (
             <div>
                 <Document
+                    loading="Loading PDF.."
                     file={filePath}
                     onLoadSuccess={this.handleDocumentLoadSuccess}
+                    noData="Please select a file.."
                 >
-                    <Page pageNumber={pageNumber} />
+                    <Page 
+                        pageNumber={pageNumber} 
+                        width={318}
+                    />
                 </Document>
                 <p>Page {pageNumber} of {numPages}</p>
             </div>
