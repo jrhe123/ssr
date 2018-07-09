@@ -32,6 +32,9 @@ class PhoneToolbar extends Component {
                 return (
                     <DxPdfViewerToolbar 
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
+
+                        handlePdfChange={(file) => this.props.handlePdfChange(file)}
+                        handlePdfError={(msg) => this.props.handlePdfError(msg)}
                     />
                 )
             } else {

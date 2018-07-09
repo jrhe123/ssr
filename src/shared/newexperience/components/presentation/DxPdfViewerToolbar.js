@@ -4,7 +4,11 @@ class DxPdfViewerToolbar extends Component {
 
     handlePdfChange = (event) => {
         let file = event.target.files[0];
-        console.log('file: ', file);
+        if(!file.type.match('pdf.*')){
+            this.props.handlePdfError('The supported file type is .pdf');
+            return;
+        }
+        this.props.handlePdfChange(file);
     }
 
     render() {

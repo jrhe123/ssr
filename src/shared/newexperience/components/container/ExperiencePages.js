@@ -148,6 +148,14 @@ class ExperiencePages extends Component {
         return res;
     }
 
+    handlePdfChange = (file) => {
+        console.log('upload pdf: ', file);
+    }
+
+    handlePdfError = (msg) => {
+        console.log('out here: ', msg);
+    }
+
     handleCarouselClick = (open) => {
         if (open) {
             this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
@@ -305,6 +313,9 @@ class ExperiencePages extends Component {
                                 <PhoneToolbar
                                     newPage={experience.newPage}
                                     pages={experience.pages}
+
+                                    handlePdfChange={(file) => this.handlePdfChange(file)}
+                                    handlePdfError={(msg) => this.handlePdfError(msg)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>
