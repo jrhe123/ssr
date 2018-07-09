@@ -213,7 +213,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.newPage = Object.assign({}, tmpNewPage.page);
             tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
             updated.experience = tmpExperience;
-            console.log('updated: ', updated);
             return updated;
 
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
