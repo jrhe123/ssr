@@ -23,6 +23,7 @@ import DragHandle from '@material-ui/icons/DragHandle';
 import DxEditor from './DxEditor';
 import DxButtonConnector from './DxButtonConnector';
 import DxPdfViewer from './DxPdfViewer';
+import DxSplash from './DxSplash';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -138,9 +139,7 @@ class PhoneElement extends Component {
                 break;
             case 'SPLASH':
                 section = (
-                    <div>
-                        splash here
-                </div>
+                    <DxSplash />
                 )
                 break;
             case 'VIDEO':
