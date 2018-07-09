@@ -36,42 +36,41 @@ import { uuid } from '../helpers/tools';
 
 let templateNewPage = {
     pageGUID: null,
-    isSplash: false,
-    title: '',
-    sections: [],
-    isSaved: false,
-    isConnected: false,
+    isSplash: false,    // splash
+    title: '',      // page title
+    sections: [],   // page sections
+    isConnected: false,     // page connected
 };
 let templateNewSection = {
     sectionGUID: null,
-    index: null,
-    type: null,
-    isActive: false,
-    htmlContent: '',
-    btnContent: '',
+    index: null,    // quill editor tool bar render order
+    type: null,     // section type
+    isActive: false,    // section active
+    htmlContent: '',    // html content
+    btnContent: '',     // btn label
 };
 const initialState = {
-    cardTemplates: [],
-    pageTemplates: [],
+    cardTemplates: [],      // card templates
+    pageTemplates: [],      // page templates
     experience: {
-        type: '0',
-        index: '0',
+        type: '0',      // with OR without page(s)
+        index: '0',     // step
 
-        isCardTemplateMenuOpen: true,
-        isCardTemplateSaved: false,
-        cardTemplate: null,
+        isCardTemplateMenuOpen: true,   // card template menu
+        isCardTemplateSaved: false,     // card saved
+        cardTemplate: null,     // card template
 
-        isPageTemplateMenuOpen: true,
-        activePageTemplateOptionIndex: 0,
+        isPageTemplateMenuOpen: true,       // page template menu
+        activePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
 
-        isPageCarouselMenuOpen: false,
+        isPageCarouselMenuOpen: false,      // page carousel menu
 
-        experienceTitle: null,
-        cardTitle: 'Card 1',
+        experienceTitle: null,      // experience title
+        cardTitle: 'Card 1',        // experience card title
 
-        pages: [],
-        newPage: Object.assign({}, templateNewPage),
-        activePageSectionIndex: 0,
+        pages: [],      // pages
+        newPage: Object.assign({}, templateNewPage),        // current working page
+        activePageSectionIndex: 0,      // active section on a page
     },
 };
 
@@ -111,7 +110,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 && !updated.experience.pages.length) {
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = 'Page 1';
-                tmpNewPage.isSaved = true;
                 tmpExperience.newPage = tmpNewPage;
                 tmpPages.push(tmpNewPage);
                 tmpExperience.pages = tmpPages;
