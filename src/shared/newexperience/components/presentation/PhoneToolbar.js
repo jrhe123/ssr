@@ -31,7 +31,7 @@ class PhoneToolbar extends Component {
             } else if (section.type == 'EMBED_PDF') {
                 return (
                     <DxPdfViewerToolbar 
-                        
+                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                     />
                 )
             } else {

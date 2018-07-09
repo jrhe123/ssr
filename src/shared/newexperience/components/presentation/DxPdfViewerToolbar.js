@@ -18,24 +18,28 @@ class DxPdfViewerToolbar extends Component {
         } = styles;
 
         return (
-            <div style={mainContainerStyle}>
-                <div 
-                    className=""
-                    style={pdfInputContainerStyle}
+            <div 
+                className={this.props.isActive ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
                 >
-                    <input
-                        style={pdfInputStyle}
-                        type="file"
-                        onChange={(event) => this.handlePdfChange(event)}
-                    />
-                    <label
-                        style={displayPdfContainerStyle}
+                <div style={mainContainerStyle}>
+                    <div
+                        className=""
+                        style={pdfInputContainerStyle}
                     >
-                        <img
-                            style={displayPdfStyle}
-                            src={require('../../../../../assets/images/pdf_icon.png')}
+                        <input
+                            style={pdfInputStyle}
+                            type="file"
+                            onChange={(event) => this.handlePdfChange(event)}
                         />
-                    </label>
+                        <label
+                            style={displayPdfContainerStyle}
+                        >
+                            <img
+                                style={displayPdfStyle}
+                                src={require('../../../../../assets/images/pdf_icon.png')}
+                            />
+                        </label>
+                    </div>
                 </div>
             </div>
         )
@@ -45,13 +49,12 @@ class DxPdfViewerToolbar extends Component {
 const styles = {
 
     mainContainerStyle: {
-        height: 48,
         display: 'flex',
         justifyContent: 'center'
     },
     pdfInputContainerStyle: {
         position: 'relative',
-        width: 48,
+        width: 40,
         height: 48,
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
     },
@@ -71,9 +74,8 @@ const styles = {
     },
     displayPdfStyle: {
         display: 'block',
-        width: 40,
-        height: 48,
-        marginLeft: 5
+        width: 41,
+        height: 49
     },
 }
 
