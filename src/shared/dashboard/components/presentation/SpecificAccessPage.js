@@ -85,7 +85,7 @@ class SpecificAccessPage extends Component{
                     <Button style={invitationEditBtnStyle}>Edit message</Button>
                 </div>
                 <div style={memberListHeaderContainerStyle}>
-                    <p style={memberLabelStyle}>User list (2)</p>
+                    <p style={memberLabelStyle}>User list (4)</p>
                     <div style={dropdownContainerStyle}>
                         <DropdownMenu
                             isOpen={this.state.isMenuOpen}
@@ -112,19 +112,46 @@ class SpecificAccessPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Unlock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
-                    <RestrictUserTemplate label={'Lock'}/>
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/dhan.png')} 
+                        userName={'Dhaneswar Pandian'}
+                        userEmail={'dhan@digitalxi.com'}
+                        userRegistrationDate={'10 May 2018'}
+                        userRegistrationInfo={'joined'}
+                        btnLabel={'Lock'} 
+                        btnBackground={'#EE2E24'} 
+                        btnTextColor={colors.whiteColor} 
+                        btnBorder={'none'}/>
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/roy.png')}
+                        userName={'Roy'}
+                        userEmail={'roy@digitalxi.com'}
+                        userRegistrationDate={'10 September 2011'}
+                        userRegistrationInfo={'locked'}
+                        btnLabel={'Unlock'} 
+                        btnBackground={'#1AA98B'} 
+                        btnTextColor={colors.whiteColor} 
+                        btnBorder={'none'}/>
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                        userName={'Vejey'}
+                        userEmail={'vejey@digitalxi.com'}
+                        userRegistrationDate={'29 June 2018'}
+                        userRegistrationInfo={'locked'}
+                        btnLabel={'Unlock'} 
+                        btnBackground={'#1AA98B'} 
+                        btnTextColor={colors.whiteColor} 
+                        btnBorder={'none'}/>
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/paul.jpeg')}
+                        userName={'Paul'}
+                        userEmail={'paul@digitalxi.com'}
+                        userRegistrationDate={'09 November 2017'}
+                        userRegistrationInfo={'joined'}
+                        btnLabel={'Lock'} 
+                        btnBackground={'#EE2E24'} 
+                        btnTextColor={colors.whiteColor} 
+                        btnBorder={'none'}/>
                 </div>
             </div>
         )

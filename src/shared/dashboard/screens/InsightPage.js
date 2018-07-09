@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+// components
+import Insight from '../components/layout/Insight';
+
 class InsightPage extends Component{
 
     render(){
         return(
-            <div>Insight page</div>
+            <Insight/>
         )
     }
 }

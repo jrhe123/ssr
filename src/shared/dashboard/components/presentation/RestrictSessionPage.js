@@ -47,7 +47,6 @@ class RestrictSessionPage extends Component{
             searchUserWrapperStyle,
             searchUserStyle,
 
-            
         } = styles;
 
         return(
@@ -61,7 +60,7 @@ class RestrictSessionPage extends Component{
                     <Button style={invitationEditBtnStyle}>Edit</Button>
                 </div>
                 <div style={memberListHeaderContainerStyle}>
-                    <p style={memberLabelStyle}>Restricted user list (10)</p>
+                    <p style={memberLabelStyle}>Restricted user list (5)</p>
                     <div style={searchUserWrapperStyle}>
                         <SearchBar
                             style={searchUserStyle}
@@ -71,16 +70,56 @@ class RestrictSessionPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'} />
+                    <RestrictUserTemplate 
+                        userPicture={require('../../../../../assets/images/dhan.png')}
+                        userName={'Dhaneswar Pandian'}
+                        userEmail={'dhan@digitalxi.com'}
+                        userRegistrationDate={'10 May 2018'}
+                        userRegistrationInfo={'3rd session'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
+                    <RestrictUserTemplate 
+                        userPicture={require('../../../../../assets/images/roy.png')}
+                        userName={'Roy He'}
+                        userEmail={'roy@digitalxi.com'}
+                        userRegistrationDate={'10 September 2011'}
+                        userRegistrationInfo={'4th session'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                        userName={'Vejey Gandier'}
+                        userEmail={'vejey@digitalxi.com'}
+                        userRegistrationDate={'29 June 2018'}
+                        userRegistrationInfo={'5th session'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/paul.jpeg')}
+                        userName={'Paul Aiello'}
+                        userEmail={'paul@digitalxi.com'}
+                        userRegistrationDate={'09 November 2017'}
+                        userRegistrationInfo={'10th session'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/roy.png')}
+                        userName={'Roy'}
+                        userEmail={'roy@digitalxi.com'}
+                        userRegistrationDate={'10 September 2011'}
+                        userRegistrationInfo={'11th session'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
                 </div>
             </div>
         )
@@ -224,6 +263,13 @@ const styles = {
         fontWeight:'500',
         color:colors.lightGreyColor,
         fontFamily:'avenir'
+    },
+
+    removeBtnStyle:{
+        textTransform:'none',
+        width:126,
+        background:'red',
+        color:'white'
     }
 }
 

@@ -33,14 +33,14 @@ class UserTemplate extends Component {
 
         return (
             <div style={memberInfoWrapperStyle}>
-                <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
+                <Avatar alt='Roy He' style={userAvatarStyle} src={this.props.userPicture}/>
                 <div style={userNameWrapperStyle}>
-                    <p style={userNameStyle}>Dhaneswar pandian</p>
-                    <p style={userEmailStyle}>dhan@digitalxi.com</p>
+                    <p style={userNameStyle}>{this.props.userName}</p>
+                    <p style={userEmailStyle}>{this.props.userEmail}</p>
                 </div>
                 <div style={userRegisterWrapperStyle}>
-                    <p style={userRegisterDateStyle}>10 September 2017</p>
-                    <p style={userRegisterStatusStyle}>invited</p>
+                    <p style={userRegisterDateStyle}>{this.props.userRegistrationDate}</p>
+                    <p style={userRegisterStatusStyle}>{this.props.invitationInfo}</p>
                 </div>
                 <div style={resendBtnContainerStyle}>                               
                     <Button style={resendBtnStyle} variant="outlined">Resend Invite</Button>

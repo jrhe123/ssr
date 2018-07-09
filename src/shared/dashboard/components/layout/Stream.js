@@ -197,24 +197,26 @@ class Stream extends Component{
                             <p style={generalHeaderStyle}>General</p>
                             <p style={generalContentStyle}>General channel is a default channel created by us, so you can stream first-time welcome messages, important notes and other content directly to all of your audience to be readily available in their feed automatically.</p>
                         </div>
-                        <p style={liveStreamLabelStyle}>LIVE STREAMS (0)</p>
+                        <p style={liveStreamLabelStyle}>LIVE STREAMS (6)</p>
                         <div style={liveStreamContainerStyle}>
-                            <div style={liveStreamWrapperStyle}>
+                            {/* <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
                             </div>
                             <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
-                            </div>
+                            </div> */}
+                            <LiveStreamTemplate/>
+                            <LiveStreamTemplate/>
                             <LiveStreamTemplate/>
                             <LiveStreamTemplate/>
                             <LiveStreamTemplate/>
                             <LiveStreamTemplate/>
                         </div>
-                        <p style={readyToStreamLabelStyle}>READY TO STREAM (0)</p>
+                        <p style={readyToStreamLabelStyle}>READY TO STREAM (18)</p>
                         <div style={readyToStreamContainerStyle}>
-                            <div style={readyToStreamWrapperStyle}>
+                            {/* <div style={readyToStreamWrapperStyle}>
                                 <p style={readyToStreamContentStyle}>There are no experience(s) found to be streamed. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new experience</p>
-                            </div>
+                            </div> */}
                             <ReadyToStreamTemplate/>
                             <ReadyToStreamTemplate/>
                             <ReadyToStreamTemplate/>

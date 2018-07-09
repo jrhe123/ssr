@@ -291,18 +291,83 @@ class Audience extends Component{
                             </div>
                         </div>
                         <div style={memberListContainerStyle}>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
-                            <UserTemplate/>
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/roy.png')}
+                                userName={'Roy He'}
+                                userEmail={'roy@digitalxi.com'}
+                                userRegistrationDate={'10 September 2011'}
+                                invitationInfo={'Invited'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                                userName={'Vejey Gandier'}
+                                userEmail={'vejey@digitalxi.com'}
+                                userRegistrationDate={'29 June 2018'}
+                                invitationInfo={'Registered'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/paul.jpeg')}
+                                userName={'Paul Aiello'}
+                                userEmail={'paul@digitalxi.com'}
+                                userRegistrationDate={'09 November 2017'}
+                                invitationInfo={'Invited'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/dhan.png')}
+                                userName={'Dhaneswar Pandian'}
+                                userEmail={'dhan@digitalxi.com'}
+                                userRegistrationDate={'07 January 2018'}
+                                invitationInfo={'Registered'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/roy.png')}
+                                userName={'Roy He'}
+                                userEmail={'roy@digitalxi.com'}
+                                userRegistrationDate={'10 November 2011'}
+                                invitationInfo={'Registered'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/paul.jpeg')}
+                                userName={'Paul Aiello'}
+                                userEmail={'paul@digitalxi.com'}
+                                userRegistrationDate={'18 March 2017'}
+                                invitationInfo={'Invited'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/dhan.png')}
+                                userName={'Dhaneswar Pandian'}
+                                userEmail={'dhan@digitalxi.com'}
+                                userRegistrationDate={'10 May 2018'}
+                                invitationInfo={'Registered'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                                userName={'Vejey Gandier'}
+                                userEmail={'vejey@digitalxi.com'}
+                                userRegistrationDate={'29 June 2018'}
+                                invitationInfo={'Invited'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/roy.png')}
+                                userName={'Roy He'}
+                                userEmail={'roy@digitalxi.com'}
+                                userRegistrationDate={'16 July 2018'}
+                                invitationInfo={'Invited'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/dhan.png')}
+                                userName={'Dhaneswar Pandian'}
+                                userEmail={'dhan@digitalxi.com'}
+                                userRegistrationDate={'07 April 2017'}
+                                invitationInfo={'Registered'}
+                            />
+                            <UserTemplate 
+                                userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                                userName={'Vejey Gandier'}
+                                userEmail={'vejey@digitalxi.com'}
+                                userRegistrationDate={'29 June 2018'}
+                                invitationInfo={'Invited'}
+                            />
                         </div>
                     </div>
                 </div>

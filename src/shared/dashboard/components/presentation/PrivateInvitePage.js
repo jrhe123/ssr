@@ -136,10 +136,26 @@ class PrivateInvitePage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/>
-                    <RestrictUserTemplate label={'Allow'}/> 
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/dhan.png')} 
+                        userName={'Dhaneswar Pandian'}
+                        userEmail={'dhan@digitalxi.com'}
+                        userRegistrationDate={'10 May 2018'}
+                        userRegistrationInfo={'Error invite code: errr'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/roy.png')} 
+                        userName={'Roy'}
+                        userEmail={'roy@digitalxi.com'}
+                        userRegistrationDate={'10 September 2011'}
+                        userRegistrationInfo={'Success'}
+                        btnLabel={'Allow'} 
+                        btnBackground={colors.whiteColor} 
+                        btnTextColor={'#1B2A36'}
+                    />
                 </div>
             </div>
         )

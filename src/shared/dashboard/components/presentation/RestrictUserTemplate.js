@@ -22,24 +22,34 @@ class RestrictUserTemplate extends Component {
             userRegisterWrapperStyle,
             userRegisterDateStyle,
             sessionNumberStyle,
-            allowBtnContainerStyle,
-            allowBtnStyle
+            btnContainerStyle
         } = styles;
 
 
         return (
             <div style={memberInfoWrapperStyle}>
-                <Avatar alt='Roy He' style={userAvatarStyle} src={require('../../../../../assets/images/ava.png')}/>
+                <Avatar alt='Roy He' style={userAvatarStyle} src={this.props.userPicture}/>
                 <div style={userNameWrapperStyle}>
-                    <p style={userNameStyle}>Dhaneswar pandian</p>
-                    <p style={userEmailStyle}>dhan@digitalxi.com</p>
+                    <p style={userNameStyle}>{this.props.userName}</p>
+                    <p style={userEmailStyle}>{this.props.userEmail}</p>
                 </div>
                 <div style={userRegisterWrapperStyle}>
-                    <p style={userRegisterDateStyle}>10 September 2017</p>
-                    <p style={sessionNumberStyle}>6th session</p>
+                    <p style={userRegisterDateStyle}>{this.props.userRegistrationDate}</p>
+                    <p style={sessionNumberStyle}>{this.props.userRegistrationInfo}</p>
                 </div>
-                <div style={allowBtnContainerStyle}>                               
-                    <Button style={allowBtnStyle} variant="outlined">{this.props.label}</Button>
+                <div style={btnContainerStyle}>                               
+                    <Button style={{
+                                backgroundColor:this.props.btnBackground, 
+                                color:this.props.btnTextColor, 
+                                textTransform:'none', 
+                                width:126, 
+                                border:this.props.btnBorder,
+                                fontSize:fonts.h3,
+                                fontFamily:"avenir",
+                                fontWeight: 500
+                            }} 
+                            variant="outlined"
+                    >{this.props.btnLabel}</Button>
                 </div>
             </div> 
         );
@@ -93,15 +103,11 @@ const styles = {
         color:colors.lightGreyColor,
         fontSize: fonts.h4,
     },
-    allowBtnContainerStyle:{
+    btnContainerStyle:{
         width:168,
         marginRight:20,
         display:'flex',
         justifyContent:'flex-end'
-    },
-    allowBtnStyle:{
-        textTransform:'none',
-        width:126
     }
 }
 export default RestrictUserTemplate;

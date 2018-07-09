@@ -63,13 +63,27 @@ class RemoveUserPage extends Component{
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
-                    <RestrictUserTemplate label={'remove'}/>
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                        userName={'Vejey'}
+                        userEmail={'vejey@digitalxi.com'}
+                        userRegistrationDate={'29 June 2018'}
+                        userRegistrationInfo={'locked'}
+                        btnLabel={'remove'} 
+                        btnBackground={'#EE2E24'} 
+                        btnTextColor={colors.whiteColor} btnBorder={'none'}
+                    />
+                    <RestrictUserTemplate
+                        userPicture={require('../../../../../assets/images/paul.jpeg')} 
+                        userName={'Paul'}
+                        userEmail={'paul@digitalxi.com'}
+                        userRegistrationDate={'09 November 2017'}
+                        userRegistrationInfo={'joined'}
+                        btnLabel={'remove'} 
+                        btnBackground={'#EE2E24'} 
+                        btnTextColor={colors.whiteColor} 
+                        btnBorder={'none'}
+                    />
                 </div>
             </div>
         )
