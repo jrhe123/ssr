@@ -19,7 +19,7 @@ import fonts from '../../../styles/fonts';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
-import CardTemplate from '../presentation/CardTemplate';
+import DxCard from '../presentation/DxCard';
 
 class ExperiencePanel extends Component {
 
@@ -135,7 +135,7 @@ class ExperiencePanel extends Component {
                             >Create a card</a>
                             :
                             <div style={demoCardContainerStyle}>
-                                <CardTemplate
+                                <DxCard
                                     isWithTitle={false}
                                     isWithBottomBar={true}
                                     isCenterCard={false}
@@ -143,7 +143,7 @@ class ExperiencePanel extends Component {
                                     isClickable={false}
                                     isVideoInsertClickable={false}
                                     cardTitle={this.props.experience.cardTitle}
-                                    template={this.props.experience.cardTemplate}
+                                    template={this.props.experience.card}
                                     handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
                                     handleRemoveCardTemplateClick={() => this.props.handleRemoveCardTemplateClick()}
                                 />

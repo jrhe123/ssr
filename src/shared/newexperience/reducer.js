@@ -194,7 +194,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED:
             tmpExperience.index = 0;
             tmpExperience.isCardTemplateSaved = true;
-            tmpExperience.card = Object.assign({}, tmpExperience.cardTemplate);
+            tmpExperience.card = Object.assign({}, tmpCardTemplate);
             updated.experience = tmpExperience;
             return updated;
 

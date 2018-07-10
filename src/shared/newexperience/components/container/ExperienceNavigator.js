@@ -71,9 +71,9 @@ class ExperienceNavigator extends Component {
             return res;
         }
 
-        let imageIdx = search_object_index_by_value(cardTemplate.Settings, 'IMAGE');
+        let imageIdx = search_object_index_by_value(cardTemplate.settings, 'IMAGE');
         if (imageIdx != null
-            && !cardTemplate.Settings[imageIdx].Default) {
+            && !cardTemplate.settings[imageIdx].Default) {
             res.Message = 'Please select a image';
             return res;
         }
