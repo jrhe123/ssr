@@ -43,7 +43,9 @@ class PhoneToolbar extends Component {
                     <DxSplashToolbar 
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                         imgFile={newPage.sections ? newPage.sections[activePageSectionIndex].splashImg : null}
+                        color={newPage.sections ? newPage.sections[activePageSectionIndex].splashColor : '#ffffff'}
                         handleImgChange={(file) => this.props.handleSplashImgChange(file)}
+                        handleColorChange={(color) => this.props.handleSplashColorChange(color)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )

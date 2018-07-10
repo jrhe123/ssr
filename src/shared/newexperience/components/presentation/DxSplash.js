@@ -50,7 +50,7 @@ class DxSplash extends Component {
         } = styles;
 
         return (
-            <div style={overlayContainerStyle}>
+            <div style={Object.assign({}, overlayContainerStyle, { color: this.props.splashColor })}>
                 <img
                     style={overlayImgStyle}
                     src={this.props.splashImg ? URL.createObjectURL(this.props.splashImg) : require('../../../../../assets/images/demo.jpg')}
@@ -129,12 +129,13 @@ class DxSplash extends Component {
                                         <DxInput
                                             multiLine={true}
                                             placeholder="Splash image with page title"
-                                            handleValChange={(e) => this.props.handleDescInputChange(e)}
+                                            color={this.props.splashColor}
                                             width={descContainerWidth}
                                             maxHeight={118}
                                             isTransparent={true}
                                             textCenter={true}
                                             value={this.props.splashContent}
+                                            handleValChange={(e) => this.props.handleDescInputChange(e)}
                                         />
                                     </div>
                                 </div>
@@ -148,7 +149,7 @@ class DxSplash extends Component {
 }
 
 const splashHeight = 180;
-const descContainerWidth =  264;
+const descContainerWidth = 264;
 
 const styles = {
 

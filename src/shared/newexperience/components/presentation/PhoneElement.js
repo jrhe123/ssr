@@ -142,6 +142,7 @@ class PhoneElement extends Component {
                     <DxSplash 
                         splashContent={this.props.splashContent}
                         splashImg={this.props.splashImg}
+                        splashColor={this.props.splashColor}
                         handleDescInputChange={(e) => this.props.handleDescInputChange(e)}
                     />
                 )

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+// Libraries
+import ColorPicker from 'rc-color-picker';
+import '../../../../../assets/css/rc-color-picker/rc-color-picker.css';
+
 class DxSplashToolbar extends Component {
 
     handleImgChange = (event) => {
@@ -15,6 +19,7 @@ class DxSplashToolbar extends Component {
 
         const {
             mainContainerStyle,
+            optionContainerStyle,
             imgInputContainerStyle,
             imgInputStyle,
             displayImgContainerStyle,
@@ -24,7 +29,7 @@ class DxSplashToolbar extends Component {
         return (
             <div className={this.props.isActive ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}>
                 <div style={mainContainerStyle}>
-                    <div style={imgInputContainerStyle}>
+                    <div style={Object.assign({}, optionContainerStyle, imgInputContainerStyle)}>
                         <input
                             style={imgInputStyle}
                             type="file"
@@ -36,6 +41,13 @@ class DxSplashToolbar extends Component {
                                 src={this.props.imgFile ? URL.createObjectURL(this.props.imgFile) : require('../../../../../assets/images/demo.jpg')}
                             />
                         </label>
+                    </div>
+                    <div style={optionContainerStyle}>
+                        <ColorPicker
+                            animation="slide-up"
+                            color={this.props.color}
+                            onChange={(colors) => this.props.handleColorChange(colors)}
+                        />
                     </div>
                 </div>
             </div>
@@ -49,11 +61,15 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
     },
-    imgInputContainerStyle: {
-        position: 'relative',
+    optionContainerStyle: {
         width: 48,
         height: 48,
+        marginLeft: 6,
+        marginRight: 6,
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+    },
+    imgInputContainerStyle: {
+        position: 'relative',
     },
     imgInputStyle: {
         position: 'absolute',

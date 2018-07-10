@@ -16,6 +16,7 @@ class DxInput extends Component {
             placeholder,
             isDark,
             isTransparent,
+            color,
             textCenter,
             width,
             maxHeight,
@@ -49,7 +50,7 @@ class DxInput extends Component {
             return (
                 <Textarea 
                     className='dx_input'
-                    style={Object.assign({}, styles.textareaStyle, extra)}
+                    style={Object.assign({}, styles.textareaStyle, {color}, extra)}
                     placeholder={placeholder}
                     value={value != null ? value : ''}
                     onChange={(e) => this.props.handleValChange(e)}

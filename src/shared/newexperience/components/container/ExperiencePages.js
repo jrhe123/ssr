@@ -92,6 +92,7 @@ class ExperiencePages extends Component {
                 pdfPath={section.pdfPath}
                 splashContent={section.splashContent}
                 splashImg={section.splashImg}
+                splashColor={section.splashColor}
 
                 key={section.sectionGUID}
                 index={i}
@@ -179,6 +180,13 @@ class ExperiencePages extends Component {
         let activePageSectionIndex = this.props.experience.activePageSectionIndex;
         let sectionGUID = sections[activePageSectionIndex].sectionGUID;
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_IMG', file);
+    }
+
+    handleSplashColorChange = (color) => {
+        let sections = this.props.experience.newPage.sections;
+        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
+        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_COLOR', color.color);
     }
 
     handleCarouselClick = (open) => {
@@ -343,6 +351,7 @@ class ExperiencePages extends Component {
                                     handleErrorMsg={(msg) => this.handleErrorMsg(msg)}
                                     handlePdfChange={(file) => this.handlePdfChange(file)}
                                     handleSplashImgChange={(file) => this.handleSplashImgChange(file)}
+                                    handleSplashColorChange={(color) => this.handleSplashColorChange(color)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>
