@@ -37,6 +37,7 @@ class DxButtonConnector extends Component {
             expandIconStyle,
 
             connectorListContainerStyle,
+            connectorListWrapperStyle,
             connectorLabelContainerStyle,
             connectorLabelStyle,
             connectorDropdownContainerStyle,
@@ -52,11 +53,11 @@ class DxButtonConnector extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <DxInput
-                                        style={btnLabelStyle}
+                                        multiLine={true}
                                         placeholder="Text for a button"
                                         handleValChange={(e) => this.props.handleBtnInputChange(e)}
-                                        isTransparent={true}
                                         width="264px"
+                                        isTransparent={true}
                                         disabled={false}
                                         value={this.props.btnContent}
                                     />
@@ -74,17 +75,23 @@ class DxButtonConnector extends Component {
                 </div>
 
                 <div style={connectorListContainerStyle}>
-                    <div style={connectorLabelContainerStyle}>
-                        <p style={connectorLabelStyle}>Connect another page</p>
-                    </div>
-                    <div style={connectorDropdownContainerStyle}>
-                        <DropdownList
-                            placeholder="select a page"
-                            style={connectorDropdownStyle}
-                            data={dropdownOptionArr}
-                            textField='title'
-                            onChange={page => this.handleBtnConnectPageChange(page)}
-                        />
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div style={connectorListWrapperStyle}>
+                                <div style={connectorLabelContainerStyle}>
+                                    <p style={connectorLabelStyle}>Connect another page</p>
+                                </div>
+                                <div style={connectorDropdownContainerStyle}>
+                                    <DropdownList
+                                        placeholder="select a page"
+                                        style={connectorDropdownStyle}
+                                        data={dropdownOptionArr}
+                                        textField='title'
+                                        onChange={page => this.handleBtnConnectPageChange(page)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +103,8 @@ const styles = {
 
     mainContainerStyle: {
         position: 'relative',
-        height: 72,
+        minHeight: 72,
+        maxHeight: 360,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -142,9 +150,12 @@ const styles = {
         position: 'absolute',
         top: 0,
         right: -204,
-        height: 72,
         width: 180,
-        backgroundColor: colors.lightBlueColor
+        height: '100%',
+    },
+    connectorListWrapperStyle: {
+        height: 72,
+        backgroundColor: colors.lightBlueColor,
     },
     connectorLabelContainerStyle: {
         padding: 12,

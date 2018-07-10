@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 
+// Libraries
+import Textarea from "react-textarea-autosize";
+
 // constants
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
-class DxInput extends Component{
+class DxInput extends Component {
 
-    render(){
+    render() {
 
         const {
+            multiLine,
             placeholder,
-            invertPlaceholder,
             isDark,
             isTransparent,
             textCenter,
@@ -21,30 +24,42 @@ class DxInput extends Component{
 
         const extra = {};
         extra.width = width ? width : '120px';
-        if(isDark){
+        if (isDark) {
             extra.backgroundColor = colors.lightBlueColor;
-        }else{
+        } else {
             extra.backgroundColor = colors.whiteColor;
         }
-        if(isTransparent){
+        if (isTransparent) {
             extra.backgroundColor = 'transparent';
         }
-        if(textCenter){
+        if (textCenter) {
             extra.textAlign = 'center';
-        }else{
+        } else {
             extra.paddingLeft = 12;
             extra.paddingRight = 12;
         }
 
-        return(
-            <input 
-                className={invertPlaceholder ? 'dx_invert_input' : 'dx_input'}
+        if (multiLine) {
+            return (
+                <Textarea 
+                    className='dx_input'
+                    style={Object.assign({}, styles.textareaStyle, extra)}
+                    placeholder={placeholder}
+                    value={value != null ? value : ''}
+                    onChange={(e) => this.props.handleValChange(e)}
+                />
+            )
+        }
+
+        return (
+            <input
+                className='dx_input'
                 style={Object.assign({}, styles.inputStyle, extra)}
                 type="text"
                 placeholder={placeholder}
-                onChange={(e) => this.props.handleValChange(e)}
                 disabled={disabled ? true : false}
                 value={value != null ? value : ''}
+                onChange={(e) => this.props.handleValChange(e)}
             />
         )
     }
@@ -56,6 +71,17 @@ const styles = {
         borderRadius: '18px',
         border: 'none',
         fontSize: fonts.h2
+    },
+    
+    textareaStyle: {
+        minHeight: 36,
+        maxHeight: 360,
+        width: 264,
+        marginTop: 18,
+        paddingBottom: 12,
+        border: 'none',
+        backgroundColor: 'transparent',
+        fontSize: fonts.h3
     }
 }
 
