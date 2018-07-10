@@ -6,6 +6,7 @@ import ExperienceCardData from '../../../../../data/ExperienceCardData';
 // components
 import SearchBar from '../../../components/searchBar/SearchBar';
 import CardTemplate from '../presentation/CardTemplate';
+import DxCard from '../presentation/DxCard';
 import CardOption from '../presentation/CardOption';
 
 // Libraries
@@ -206,16 +207,13 @@ class ExperienceCard extends Component {
                         <div style={optionBarWrapperStyle}>
                             {
                                 this.props.experience.cardTemplate ?
-                                    this.props.experience.cardTemplate.Settings.map((setting, index) => (
-                                        <CardOption
-                                            key={index}
-                                            setting={setting}
-                                            imgFile={this.props.experience.cardTemplate.Settings[0].Default}
-                                            handleImageChange={(file) => this.handleImageChange(file)}
-                                            handleImageError={(msg) => this.handleImageError(msg)}
-                                            handleColorChange={(colors, type) => this.handleColorChange(colors, type)}
-                                        />
-                                    ))
+                                    <CardOption
+                                        settings={this.props.experience.cardTemplate.settings}
+                                        imgFile={this.props.experience.cardTemplate.settings[0].Default}
+                                        handleImageChange={(file) => this.handleImageChange(file)}
+                                        handleImageError={(msg) => this.handleImageError(msg)}
+                                        handleColorChange={(colors, type) => this.handleColorChange(colors, type)}
+                                    />
                                     :
                                     null
                             }
@@ -226,8 +224,7 @@ class ExperienceCard extends Component {
                             <div style={demoCardContainerStyle}>
                                 {
                                     this.props.experience.cardTemplate ?
-                                        <CardTemplate
-                                            isWithTitle={false}
+                                        <DxCard
                                             isCenterCard={true}
                                             isEditable={true}
                                             isClickable={false}
@@ -308,8 +305,6 @@ const styles = {
     optionBarWrapperStyle: {
         width: 360,
         margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'center',
     },
     tableContainerStyle: {
         position: 'relative',

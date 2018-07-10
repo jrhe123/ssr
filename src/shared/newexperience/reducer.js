@@ -36,7 +36,7 @@ import { search_object_index_by_value } from '../helpers';
 import { uuid } from '../helpers/tools';
 
 let templateCard = {
-    cardTemplateGUID: null,
+    cardGUID: null,
     content: null,      // card content
     settings: [],       // card settings
     title: null,        // display card title desc
@@ -162,7 +162,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED:
-            tmpCardTemplate = JSON.parse(JSON.stringify(payload.template));
+            tmpCardTemplate = Object.assign({}, templateCard);
+            tmpCardTemplate.cardGUID = uuid();
+            tmpCardTemplate.content = payload.template.Content;
+            tmpCardTemplate.settings = payload.template.Settings;
+            tmpCardTemplate.title = payload.template.Title;
+            tmpCardTemplate.type = payload.template.Type;
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
