@@ -59,7 +59,8 @@ let templateNewSection = {
     btnContent: '',     // btn label
     connectedPageGUID: null,     // btn connect page guid
     pdfPath: null,        // pdf file path
-    splashContent: ''      // splash content
+    splashContent: '',      // splash content
+    splashImg: null,        // splash img
 };
 const initialState = {
     cardTemplates: [],      // card templates
@@ -318,7 +319,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
             tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
-            if (tmpUpdateSection.type == payload.type) {
+            if (tmpUpdateSection.type == payload.type
+                || ['SPLASH_CONTENT', 'SPLASH_IMG'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.htmlContent = payload.content;
@@ -329,8 +331,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     case 'EMBED_PDF':
                         tmpUpdateSection.pdfPath = 'http://localhost:2999/sample.pdf';
                         break;
-                    case 'SPLASH':
+                    case 'SPLASH_CONTENT':
                         tmpUpdateSection.splashContent = payload.content;
+                        break;
+                    case 'SPLASH_IMG':
+                        tmpUpdateSection.splashImg = payload.content;
                         break;
                     default:
                         break;

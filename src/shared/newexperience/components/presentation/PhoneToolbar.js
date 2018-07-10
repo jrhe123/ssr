@@ -9,6 +9,7 @@ class PhoneToolbar extends Component {
 
     renderOptions = () => {
         let {
+            activePageSectionIndex,
             newPage,
             pages,
         } = this.props;
@@ -34,13 +35,16 @@ class PhoneToolbar extends Component {
                     <DxPdfViewerToolbar
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                         handlePdfChange={(file) => this.props.handlePdfChange(file)}
-                        handlePdfError={(msg) => this.props.handlePdfError(msg)}
+                        handlePdfError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )
             } else if (section.type == 'SPLASH') {
                 return (
                     <DxSplashToolbar 
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
+                        imgFile={newPage.sections ? newPage.sections[activePageSectionIndex].splashImg : null}
+                        handleImgChange={(file) => this.props.handleSplashImgChange(file)}
+                        handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )
             } else {

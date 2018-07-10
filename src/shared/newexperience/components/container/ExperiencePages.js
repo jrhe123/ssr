@@ -52,6 +52,10 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageTemplateFetchAction(ExperiencePageData.PageTemplates);
     }
 
+    handleErrorMsg = (msg) => {
+        this.props.dxAlertAction(true, true, msg);
+    }
+
     handleClickCate = (activeTab) => {
         this.setState({
             activeTab
@@ -87,6 +91,7 @@ class ExperiencePages extends Component {
                 dropdownOptionArr={this.availablePageOptionList(experience.pages, experience.newPage.pageGUID, section.connectedPageGUID)}
                 pdfPath={section.pdfPath}
                 splashContent={section.splashContent}
+                splashImg={section.splashImg}
 
                 key={section.sectionGUID}
                 index={i}
@@ -164,13 +169,16 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EMBED_PDF', file);
     }
 
-    handlePdfError = (msg) => {
-        this.props.dxAlertAction(true, true, msg);
-    }
-
     handleUpdateDescContent = (sectionGUID, e) => {
         let value = e.target.value;
-        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH', value);
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_CONTENT', value);
+    }
+
+    handleSplashImgChange = (file) => {
+        let sections = this.props.experience.newPage.sections;
+        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
+        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_IMG', file);
     }
 
     handleCarouselClick = (open) => {
@@ -328,11 +336,13 @@ class ExperiencePages extends Component {
 
                             <div style={toolbarContainerStyle}>
                                 <PhoneToolbar
+                                    activePageSectionIndex={experience.activePageSectionIndex}
                                     newPage={experience.newPage}
                                     pages={experience.pages}
 
+                                    handleErrorMsg={(msg) => this.handleErrorMsg(msg)}
                                     handlePdfChange={(file) => this.handlePdfChange(file)}
-                                    handlePdfError={(msg) => this.handlePdfError(msg)}
+                                    handleSplashImgChange={(file) => this.handleSplashImgChange(file)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>

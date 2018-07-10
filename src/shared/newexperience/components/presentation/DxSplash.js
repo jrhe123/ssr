@@ -53,7 +53,7 @@ class DxSplash extends Component {
             <div style={overlayContainerStyle}>
                 <img
                     style={overlayImgStyle}
-                    src={require('../../../../../assets/images/demo.jpg')}
+                    src={this.props.splashImg ? URL.createObjectURL(this.props.splashImg) : require('../../../../../assets/images/demo.jpg')}
                 />
                 <div style={overlayWrapperStyle}>
                     <div style={splashContainerStyle}>

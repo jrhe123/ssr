@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 class DxSplashToolbar extends Component {
 
+    handleImgChange = (event) => {
+        let file = event.target.files[0];
+        if (!file.type.match('image.*')) {
+            this.props.handleImgError('The supported file types are .jpg , .jpeg , .png , .bmp');
+            return;
+        }
+        this.props.handleImgChange(file);
+    }
+
     render() {
 
         const {
@@ -19,7 +28,7 @@ class DxSplashToolbar extends Component {
                         <input
                             style={imgInputStyle}
                             type="file"
-                            onChange={(event) => this.handlePdfChange(event)}
+                            onChange={(event) => this.handleImgChange(event)}
                         />
                         <label style={displayImgContainerStyle}>
                             <img
@@ -39,7 +48,6 @@ const styles = {
     mainContainerStyle: {
         display: 'flex',
         justifyContent: 'center',
-        border: '1px solid red',
     },
     imgInputContainerStyle: {
         position: 'relative',
