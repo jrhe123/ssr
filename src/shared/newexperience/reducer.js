@@ -52,6 +52,7 @@ let templateNewSection = {
     btnContent: '',     // btn label
     connectedPageGUID: null,     // btn connect page guid
     pdfPath: null,        // pdf file path
+    splashContent: ''      // splash content
 };
 const initialState = {
     cardTemplates: [],      // card templates
@@ -312,6 +313,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'EMBED_PDF':
                         tmpUpdateSection.pdfPath = 'http://localhost:2999/sample.pdf';
+                        break;
+                    case 'SPLASH':
+                        tmpUpdateSection.splashContent = payload.content;
                         break;
                     default:
                         break;

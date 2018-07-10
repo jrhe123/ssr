@@ -139,7 +139,10 @@ class PhoneElement extends Component {
                 break;
             case 'SPLASH':
                 section = (
-                    <DxSplash />
+                    <DxSplash 
+                        splashContent={this.props.splashContent}
+                        handleDescInputChange={(e) => this.props.handleDescInputChange(e)}
+                    />
                 )
                 break;
             case 'VIDEO':

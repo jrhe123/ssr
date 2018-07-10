@@ -38,7 +38,7 @@ class DxInput extends Component{
 
         return(
             <input 
-                className={invertPlaceholder ? 'dx_input dx_invert_input' : 'dx_input'}
+                className={invertPlaceholder ? 'dx_invert_input' : 'dx_input'}
                 style={Object.assign({}, styles.inputStyle, extra)}
                 type="text"
                 placeholder={placeholder}

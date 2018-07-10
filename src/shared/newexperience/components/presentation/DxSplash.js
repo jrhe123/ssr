@@ -129,13 +129,13 @@ class DxSplash extends Component {
                                         <DxInput
                                             style={Object.assign({}, txtStyle, txtCenterStyle)}
                                             placeholder="Splash image with page title"
-                                            handleValChange={(e) => this.props.handleBtnInputChange(e)}
+                                            handleValChange={(e) => this.props.handleDescInputChange(e)}
                                             width={descContainerWidth}
                                             isTransparent={true}
                                             invertPlaceholder={true}
                                             textCenter={true}
                                             disabled={false}
-                                            value={this.props.btnContent}
+                                            value={this.props.splashContent}
                                         />
                                     </div>
                                 </div>

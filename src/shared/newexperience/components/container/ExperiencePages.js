@@ -86,6 +86,7 @@ class ExperiencePages extends Component {
                 btnContent={section.btnContent}
                 dropdownOptionArr={this.availablePageOptionList(experience.pages, experience.newPage.pageGUID, section.connectedPageGUID)}
                 pdfPath={section.pdfPath}
+                splashContent={section.splashContent}
 
                 key={section.sectionGUID}
                 index={i}
@@ -95,6 +96,7 @@ class ExperiencePages extends Component {
                 handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
+                handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
             />
         ))
         return section
@@ -164,6 +166,11 @@ class ExperiencePages extends Component {
 
     handlePdfError = (msg) => {
         this.props.dxAlertAction(true, true, msg);
+    }
+
+    handleUpdateDescContent = (sectionGUID, e) => {
+        let value = e.target.value;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH', value);
     }
 
     handleCarouselClick = (open) => {
