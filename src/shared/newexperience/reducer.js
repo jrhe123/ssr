@@ -165,7 +165,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpCardTemplate = Object.assign({}, templateCard);
             tmpCardTemplate.cardGUID = uuid();
             tmpCardTemplate.content = payload.template.Content;
-            tmpCardTemplate.settings = payload.template.Settings;
+            tmpCardTemplate.settings = JSON.parse(JSON.stringify(payload.template.Settings));
             tmpCardTemplate.title = payload.template.Title;
             tmpCardTemplate.type = payload.template.Type;
             tmpExperience.cardTemplate = tmpCardTemplate;
@@ -173,20 +173,20 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED:
-            tmpCardTemplate.Settings[0].Default = payload.imgFile;
+            tmpCardTemplate.settings[0].Default = payload.imgFile;
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED:
-            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.Settings, payload.type);
-            tmpCardTemplate.Settings[tmpSettingIndex].Default = payload.color;
+            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.settings, payload.type);
+            tmpCardTemplate.settings[tmpSettingIndex].Default = payload.color;
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED:
-            tmpCardTemplate.Content = payload.content;
+            tmpCardTemplate.content = payload.content;
             tmpExperience.cardTemplate = tmpCardTemplate;
             updated.experience = tmpExperience;
             return updated;
