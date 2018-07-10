@@ -35,6 +35,13 @@ const update = require('immutability-helper');
 import { search_object_index_by_value } from '../helpers';
 import { uuid } from '../helpers/tools';
 
+let templateCard = {
+    cardTemplateGUID: null,
+    content: null,      // card content
+    settings: [],       // card settings
+    title: null,        // display card title desc
+    type: null          // card type
+};
 let templateNewPage = {
     pageGUID: null,
     isRoot: false,      // root page
@@ -64,6 +71,7 @@ const initialState = {
         isCardTemplateMenuOpen: true,   // card template menu
         isCardTemplateSaved: false,     // card saved
         cardTemplate: null,     // card template
+        card: null,             // card storage
 
         isPageTemplateMenuOpen: true,       // page template menu
         activePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
@@ -181,6 +189,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED:
             tmpExperience.index = 0;
             tmpExperience.isCardTemplateSaved = true;
+            tmpExperience.card = Object.assign({}, tmpExperience.cardTemplate);
             updated.experience = tmpExperience;
             return updated;
 
@@ -188,6 +197,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.isCardTemplateSaved = false;
             tmpExperience.cardTemplate = null;
             tmpExperience.cardTitle = '';
+            tmpExperience.card = null;
             updated.experience = tmpExperience;
             return updated;
 
