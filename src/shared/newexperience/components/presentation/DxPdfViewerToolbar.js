@@ -27,7 +27,6 @@ class DxPdfViewerToolbar extends Component {
                 >
                 <div style={mainContainerStyle}>
                     <div
-                        className=""
                         style={pdfInputContainerStyle}
                     >
                         <input

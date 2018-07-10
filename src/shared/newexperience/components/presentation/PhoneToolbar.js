@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // components
 import DxEditorToolbar from './DxEditorToolbar';
 import DxPdfViewerToolbar from './DxPdfViewerToolbar';
+import DxSplashToolbar from './DxSplashToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -30,11 +31,16 @@ class PhoneToolbar extends Component {
                 return null;
             } else if (section.type == 'EMBED_PDF') {
                 return (
-                    <DxPdfViewerToolbar 
+                    <DxPdfViewerToolbar
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
-
                         handlePdfChange={(file) => this.props.handlePdfChange(file)}
                         handlePdfError={(msg) => this.props.handlePdfError(msg)}
+                    />
+                )
+            } else if (section.type == 'SPLASH') {
+                return (
+                    <DxSplashToolbar 
+                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                     />
                 )
             } else {
