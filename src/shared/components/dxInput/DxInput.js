@@ -18,12 +18,15 @@ class DxInput extends Component {
             isTransparent,
             textCenter,
             width,
+            maxHeight,
+            marginTop,
             disabled,
             value,
         } = this.props;
 
         const extra = {};
         extra.width = width ? width : '120px';
+        extra.maxHeight = maxHeight ? maxHeight : '360px';
         if (isDark) {
             extra.backgroundColor = colors.lightBlueColor;
         } else {
@@ -37,6 +40,9 @@ class DxInput extends Component {
         } else {
             extra.paddingLeft = 12;
             extra.paddingRight = 12;
+        }
+        if(marginTop){
+            extra.marginTop = marginTop;
         }
 
         if (multiLine) {
@@ -75,9 +81,7 @@ const styles = {
     
     textareaStyle: {
         minHeight: 36,
-        maxHeight: 360,
         width: 264,
-        marginTop: 18,
         paddingBottom: 12,
         border: 'none',
         backgroundColor: 'transparent',

@@ -131,9 +131,9 @@ class DxSplash extends Component {
                                             placeholder="Splash image with page title"
                                             handleValChange={(e) => this.props.handleDescInputChange(e)}
                                             width={descContainerWidth}
+                                            maxHeight={118}
                                             isTransparent={true}
                                             textCenter={true}
-                                            disabled={false}
                                             value={this.props.splashContent}
                                         />
                                     </div>
@@ -147,6 +147,7 @@ class DxSplash extends Component {
     }
 }
 
+const splashHeight = 180;
 const descContainerWidth =  264;
 
 const styles = {
@@ -178,12 +179,10 @@ const styles = {
     },
     txtStyle: {
         fontSize: fonts.h5,
-        color: colors.whiteColor
     },
     splashContainerStyle: {
-        height: 120,
+        height: splashHeight,
         cursor: 'pointer',
-        color: colors.whiteColor,
     },
     statusbarContainerStyle: {
         height: 24,
@@ -241,11 +240,11 @@ const styles = {
         float: 'right'
     },
     splashContentContainerStyle: {
-        height: 72,
+
     },
     overlayContainerStyle: {
         position: 'relative',
-        height: 120,
+        height: splashHeight,
         width: '100%',
     },
     overlayWrapperStyle: {
@@ -259,7 +258,7 @@ const styles = {
         zIndex: 99
     },
     overlayImgStyle: {
-        height: 120,
+        height: splashHeight,
         width: '100%',
     },
     descContainerStyle: {

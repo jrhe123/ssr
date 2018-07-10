@@ -57,6 +57,8 @@ class DxButtonConnector extends Component {
                                         placeholder="Text for a button"
                                         handleValChange={(e) => this.props.handleBtnInputChange(e)}
                                         width="264px"
+                                        maxHeight="360px"
+                                        marginTop="18px"
                                         isTransparent={true}
                                         disabled={false}
                                         value={this.props.btnContent}
