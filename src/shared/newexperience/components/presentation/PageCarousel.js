@@ -6,10 +6,6 @@ import ThumbnailPage from './ThumbnailPage';
 // Libraries
 import Slider from "react-slick";
 
-// constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
-
 const displayNumber = 5;
 
 class PageCarousel extends Component {
@@ -17,9 +13,12 @@ class PageCarousel extends Component {
     render() {
 
         const {
+            experience,
+        } = this.props;
+        const {
             pages,
             newPage,
-        } = this.props;
+        } = experience;
 
         const settings = {
             dots: false,
@@ -43,6 +42,7 @@ class PageCarousel extends Component {
                                     key={index}
                                     title={page.title}
                                     active={page.pageGUID == newPage.pageGUID ? true : false}
+                                    experience={experience}
                                     handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
                                 />
                             ))
@@ -58,6 +58,7 @@ class PageCarousel extends Component {
                                     key={index}
                                     title={page.title}
                                     active={page.pageGUID == newPage.pageGUID ? true : false}
+                                    experience={experience}
                                     handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
                                 />
                             ))

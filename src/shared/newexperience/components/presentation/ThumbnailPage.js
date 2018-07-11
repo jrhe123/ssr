@@ -1,12 +1,51 @@
 import React, { Component } from 'react';
 
+// components
+import ThumbnailPhoneElement from './ThumbnailPhoneElement';
+
 // constants
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
-class ThumbnailPage extends Component{
+class ThumbnailPage extends Component {
 
-    render(){
+    renderPhoneElement = () => {
+        const {
+            newPage,
+            pages,
+        } = this.props.experience;
+
+        let phone = pages.map((page, index) => (
+            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false)
+        ))
+        return phone;
+    }
+
+    renderPhoneElementSection = (sections, activePage) => {
+
+        const {
+            elemContainerStyle,
+        } = styles;
+
+        const {
+            experience,
+        } = this.props;
+
+        let section;
+        section = sections.map((section, i) => {
+            return (
+                <div style={elemContainerStyle}>
+                    <ThumbnailPhoneElement
+                        key={i}
+                        section={section}
+                    />
+                </div>
+            )
+        })
+        return section
+    }
+
+    render() {
 
         const {
             mainContainerStyle,
@@ -20,14 +59,16 @@ class ThumbnailPage extends Component{
             title,
         } = this.props;
 
-        return(
-            <div 
+        return (
+            <div
                 style={mainContainerStyle}
                 onClick={() => this.props.handleClickActivePage()}
             >
-                <div style={contentContainerStyle}></div>
+                <div style={contentContainerStyle}>
+                    {this.renderPhoneElement()}
+                </div>
                 <div style={titleContainerStyle}>
-                    <p style={Object.assign({}, titleStyle, {color: active ? colors.greenColor : colors.whiteColor})}>
+                    <p style={Object.assign({}, titleStyle, { color: active ? colors.greenColor : colors.whiteColor })}>
                         {title}
                     </p>
                 </div>
@@ -47,7 +88,11 @@ const styles = {
     contentContainerStyle: {
         backgroundColor: colors.whiteColor,
         height: 156,
+        width: 120
+    },
+    elemContainerStyle: {
         width: 120,
+        overFlow: 'hidden'
     },
     titleContainerStyle: {
         height: 24,

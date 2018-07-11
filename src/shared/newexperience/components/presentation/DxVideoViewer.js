@@ -89,6 +89,7 @@ const styles = {
         margin: 0,
         paddingLeft: 12,
         paddingRight: 12,
+        fontSize: fonts.h3
     },
 }
 

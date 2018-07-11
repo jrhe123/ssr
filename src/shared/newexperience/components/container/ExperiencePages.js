@@ -445,8 +445,7 @@ class ExperiencePages extends Component {
                                     (
                                         <div style={carouselSlideContainerStyle}>
                                             <PageCarousel
-                                                pages={experience.pages}
-                                                newPage={experience.newPage}
+                                                experience={experience}
                                                 handleClickActivePage={(pageGUID) => this.handleClickActiveCarouselPage(pageGUID)}
                                             />
                                         </div>
