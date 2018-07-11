@@ -3,6 +3,9 @@
 .ql-editor{
     min-height: 120px;
 }
+.ql-snow .ql-picker.ql-expanded .ql-picker-options{
+    z-index: 99;
+}
 .ql-snow .ql-transparent{
     opacity: 1;
 }

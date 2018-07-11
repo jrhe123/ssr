@@ -255,7 +255,7 @@ const styles = {
         width: '100%',
         display: 'block',
         background: 'rgba(0, 0, 0, .4)',
-        zIndex: 99
+        zIndex: 1
     },
     overlayImgStyle: {
         height: splashHeight,
