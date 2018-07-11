@@ -183,7 +183,6 @@ const styles = {
     },
     splashContainerStyle: {
         height: splashHeight,
-        cursor: 'pointer',
     },
     statusbarContainerStyle: {
         height: 24,
@@ -247,6 +246,7 @@ const styles = {
         position: 'relative',
         height: splashHeight,
         width: '100%',
+        cursor: 'default'
     },
     overlayWrapperStyle: {
         position: 'absolute',

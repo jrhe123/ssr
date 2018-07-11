@@ -51,7 +51,8 @@ const styles = {
 
     mainContainerStyle: {
         width: 320,
-        margin: '0 auto'
+        margin: '0 auto',
+        cursor: 'default'
     }
 }
 

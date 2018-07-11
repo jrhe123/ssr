@@ -111,7 +111,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: colors.greyColor,
-        cursor: 'pointer',
+        cursor: 'default',
         width: 320,
         boxSizing: 'border-box',
         margin: '0 auto'

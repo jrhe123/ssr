@@ -98,7 +98,8 @@ const styles = {
     mainContainerStyle: {
         width: 320,
         boxSizing: 'border-box',
-        margin: '0 auto'
+        margin: '0 auto',
+        cursor: 'default'
     }
 }
 
