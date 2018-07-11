@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
+import ReactPlayer from 'react-player';
 
 class DxCard extends Component {
 
@@ -41,6 +42,10 @@ class DxCard extends Component {
         this.props.handleContentChange(e.target.value);
     }
 
+    handleVideoError = (e) => {
+        console.log('error: ', e);
+    }
+
     handleToggleBurger = () => {
         this.setState({ isMenuOpen: !this.state.isMenuOpen });
     }
@@ -64,6 +69,7 @@ class DxCard extends Component {
             overlayWrapperStyle,
             overlayImgStyle,
             iconStyle,
+            videoContainerStyle,
             videoInputContainerStyle,
             videoInputWrapperStyle,
             videoInputBtnStyle,
@@ -147,6 +153,7 @@ class DxCard extends Component {
                 </div>
             );
         } else if (template.type == 'VIDEO') {
+            console.log('template: ', template);
             card = (
                 <div style={overlayContainerStyle}>
                     <img
@@ -158,10 +165,32 @@ class DxCard extends Component {
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
                                 {
                                     !this.state.videoInsert ?
-                                        <PlayCircleOutline
-                                            style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
-                                            onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
-                                        />
+                                        <div style={videoContainerStyle}>
+                                                    <PlayCircleOutline
+                                                        style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
+                                                        onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
+                                                    />
+                                                    {
+                                                        template.content ?
+                                                            <ReactPlayer
+                                                                config={{
+                                                                    youtube: {
+                                                                        playerVars: { showinfo: 1 }
+                                                                    },
+                                                                    facebook: {
+                                                                        appId: '868742783317382'
+                                                                    }
+                                                                }}
+                                                                width={275}
+                                                                height={90}
+                                                                url={template.content}
+                                                                controls={true}
+                                                                onError={(e) => this.handleVideoError(e)}
+                                                            />
+                                                            :
+                                                            null
+                                                    }
+                                                </div>
                                         :
                                         <div style={videoInputContainerStyle}>
                                             <div style={videoInputWrapperStyle}>
@@ -183,6 +212,7 @@ class DxCard extends Component {
                                                 Confirm
                                             </Button>
                                         </div>
+
                                 }
                             </div>
                         </div>
@@ -258,7 +288,7 @@ class DxCard extends Component {
                                         isOpen={this.state.isMenuOpen}
                                         close={() => this.handleMenuClose()}
                                         toggle={
-                                            <MoreHoriz 
+                                            <MoreHoriz
                                                 onClick={() => this.handleToggleBurger()}
                                                 style={editBurgerStyle} />
                                         }
@@ -292,8 +322,6 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        paddingLeft: 6,
-        paddingRight: 6
     },
     cardContainerStyle: {
         width: 'calc(100% - 24px)',
@@ -352,11 +380,21 @@ const styles = {
         width: '100%',
     },
     iconStyle: {
-        fontSize: '42px'
+        fontSize: '42px',
+        position: 'absolute',
+        zIndex: 99,
+        top: 24,
+        left: '50%',
+        transform: 'translateX(-50%)'
+    },
+    videoContainerStyle: {
+        position: 'relative',
+        height: 90,
+        width: '100%',
     },
     videoInputContainerStyle: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     videoInputWrapperStyle: {
         flex: 4,
@@ -367,7 +405,8 @@ const styles = {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
         textTransform: 'capitalize',
-        marginLeft: 6
+        marginLeft: 6,
+        marginRight: 6,
     },
     bottomEditContainerStyle: {
         width: 'calc(100% - 24px)',
