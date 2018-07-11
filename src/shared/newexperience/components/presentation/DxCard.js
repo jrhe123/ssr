@@ -166,6 +166,7 @@ class DxCard extends Component {
                                         <div style={videoInputContainerStyle}>
                                             <div style={videoInputWrapperStyle}>
                                                 <DxInput
+                                                    enableEnter={true}
                                                     placeholder="Embed video url"
                                                     handleValChange={(e) => this.handleVideoInputChange(e)}
                                                     isDark={true}

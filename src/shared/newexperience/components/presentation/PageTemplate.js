@@ -260,7 +260,6 @@ class PageTemplate extends Component {
                                 <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <PlayCircleOutline
                                         style={Object.assign({}, playIconStyle, { color: colors.whiteColor })}
-                                        onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
                                     />
                                 </div>
                             </div>

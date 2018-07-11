@@ -9,10 +9,18 @@ import fonts from '../../styles/fonts';
 
 class DxInput extends Component {
 
+    handleKeyPress = (e, enableEnter) => {
+        if (enableEnter
+            && e.key == 'Enter') {
+            console.log('enter press here! ')
+        }
+    }
+
     render() {
 
         const {
             multiLine,
+            enableEnter,
             placeholder,
             isDark,
             isTransparent,
@@ -42,15 +50,15 @@ class DxInput extends Component {
             extra.paddingLeft = 12;
             extra.paddingRight = 12;
         }
-        if(marginTop){
+        if (marginTop) {
             extra.marginTop = marginTop;
         }
 
         if (multiLine) {
             return (
-                <Textarea 
+                <Textarea
                     className='dx_input'
-                    style={Object.assign({}, styles.textareaStyle, {color}, extra)}
+                    style={Object.assign({}, styles.textareaStyle, { color }, extra)}
                     placeholder={placeholder}
                     value={value != null ? value : ''}
                     onChange={(e) => this.props.handleValChange(e)}
@@ -67,6 +75,7 @@ class DxInput extends Component {
                 disabled={disabled ? true : false}
                 value={value != null ? value : ''}
                 onChange={(e) => this.props.handleValChange(e)}
+                onKeyPress={(e) => this.handleKeyPress(e, enableEnter)}
             />
         )
     }
@@ -79,7 +88,7 @@ const styles = {
         border: 'none',
         fontSize: fonts.h2
     },
-    
+
     textareaStyle: {
         minHeight: 36,
         width: 264,
