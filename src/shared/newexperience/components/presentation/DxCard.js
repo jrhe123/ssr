@@ -68,6 +68,7 @@ class DxCard extends Component {
             overlayContainerStyle,
             overlayWrapperStyle,
             overlayImgStyle,
+            videoOverlayImgStyle,
             iconStyle,
             videoContainerStyle,
             videoInputContainerStyle,
@@ -153,11 +154,10 @@ class DxCard extends Component {
                 </div>
             );
         } else if (template.type == 'VIDEO') {
-            console.log('template: ', template);
             card = (
                 <div style={overlayContainerStyle}>
                     <img
-                        style={overlayImgStyle}
+                        style={this.state.videoInsert ? videoOverlayImgStyle : overlayImgStyle}
                         src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
@@ -166,31 +166,36 @@ class DxCard extends Component {
                                 {
                                     !this.state.videoInsert ?
                                         <div style={videoContainerStyle}>
-                                                    <PlayCircleOutline
-                                                        style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
-                                                        onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
+                                            <PlayCircleOutline
+                                                style={Object.assign({}, iconStyle, { color: colors.whiteColor })}
+                                                onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
+                                            />
+                                            {
+                                                template.content ?
+                                                    <ReactPlayer
+                                                        config={{
+                                                            youtube: {
+                                                                playerVars: { showinfo: 1 }
+                                                            },
+                                                            facebook: {
+                                                                appId: '868742783317382'
+                                                            },
+                                                            file: { 
+                                                                attributes: { 
+                                                                    poster: template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')
+                                                                } 
+                                                            } 
+                                                        }}
+                                                        width={275}
+                                                        height={90}
+                                                        url={template.content}
+                                                        controls={true}
+                                                        onError={(e) => this.handleVideoError(e)}
                                                     />
-                                                    {
-                                                        template.content ?
-                                                            <ReactPlayer
-                                                                config={{
-                                                                    youtube: {
-                                                                        playerVars: { showinfo: 1 }
-                                                                    },
-                                                                    facebook: {
-                                                                        appId: '868742783317382'
-                                                                    }
-                                                                }}
-                                                                width={275}
-                                                                height={90}
-                                                                url={template.content}
-                                                                controls={true}
-                                                                onError={(e) => this.handleVideoError(e)}
-                                                            />
-                                                            :
-                                                            null
-                                                    }
-                                                </div>
+                                                    :
+                                                    null
+                                            }
+                                        </div>
                                         :
                                         <div style={videoInputContainerStyle}>
                                             <div style={videoInputWrapperStyle}>
@@ -378,6 +383,12 @@ const styles = {
     overlayImgStyle: {
         height: 90,
         width: '100%',
+    },
+    videoOverlayImgStyle: {
+        height: 90,
+        width: 90,
+        margin: '0 auto',
+        display: 'block'
     },
     iconStyle: {
         fontSize: '42px',
