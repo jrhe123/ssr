@@ -62,7 +62,8 @@ let templateNewSection = {
     splashContent: 'Splash image with page title',      // splash content
     splashImg: null,        // splash img
     splashColor: '#ffffff',  // splash color
-    videoUrl: null      // video url
+    videoInput: null,    // video input
+    videoUrl: null,      // video url
 };
 const initialState = {
     cardTemplates: [],      // card templates
@@ -322,7 +323,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
             tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
             if (tmpUpdateSection.type == payload.type
-                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR'].indexOf(payload.type) != -1) {
+                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.htmlContent = payload.content;
@@ -341,6 +342,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'SPLASH_COLOR':
                         tmpUpdateSection.splashColor = payload.content;
+                        break;
+                    case 'VIDEO_URL':
+                        tmpUpdateSection.videoInput = payload.content;
+                        break;
+                    case 'VIDEO_CONFIRM':
+                        tmpUpdateSection.videoUrl = tmpUpdateSection.videoInput;
                         break;
                     default:
                         break;

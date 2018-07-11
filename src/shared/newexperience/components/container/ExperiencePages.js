@@ -164,10 +164,15 @@ class ExperiencePages extends Component {
         return res;
     }
 
-    handlePdfChange = (file) => {
+    findActiveSectionGUID = () => {
         let sections = this.props.experience.newPage.sections;
         let activePageSectionIndex = this.props.experience.activePageSectionIndex;
         let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        return sectionGUID;
+    }
+
+    handlePdfChange = (file) => {
+        let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EMBED_PDF', file);
     }
 
@@ -177,17 +182,24 @@ class ExperiencePages extends Component {
     }
 
     handleSplashImgChange = (file) => {
-        let sections = this.props.experience.newPage.sections;
-        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
-        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_IMG', file);
     }
 
     handleSplashColorChange = (color) => {
-        let sections = this.props.experience.newPage.sections;
-        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
-        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'SPLASH_COLOR', color.color);
+    }
+
+    handleVideoInputChange = (e) => {
+        let value = e.target.value;
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'VIDEO_URL', value);
+    }
+
+    handleVideoInsertClick = () => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'VIDEO_CONFIRM');
     }
 
     handleCarouselClick = (open) => {
@@ -353,6 +365,8 @@ class ExperiencePages extends Component {
                                     handlePdfChange={(file) => this.handlePdfChange(file)}
                                     handleSplashImgChange={(file) => this.handleSplashImgChange(file)}
                                     handleSplashColorChange={(color) => this.handleSplashColorChange(color)}
+                                    handleVideoInputChange={(e) => this.handleVideoInputChange(e)}
+                                    handleVideoInsertClick={() => this.handleVideoInsertClick()}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>

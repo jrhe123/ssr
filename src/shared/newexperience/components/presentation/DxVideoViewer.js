@@ -48,7 +48,7 @@ class DxVideoViewer extends Component {
                         :
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <p style={infoLabelStyle}>Please embed a video..</p>
+                                <p style={infoLabelStyle}>Please select a VIDEO..</p>
                             </div>
                         </div>
                 }

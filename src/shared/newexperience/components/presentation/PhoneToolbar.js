@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import DxEditorToolbar from './DxEditorToolbar';
 import DxPdfViewerToolbar from './DxPdfViewerToolbar';
 import DxSplashToolbar from './DxSplashToolbar';
+import DxVideoViewerToolbar from './DxVideoViewerToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -40,13 +41,22 @@ class PhoneToolbar extends Component {
                 )
             } else if (section.type == 'SPLASH') {
                 return (
-                    <DxSplashToolbar 
+                    <DxSplashToolbar
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                         imgFile={newPage.sections ? newPage.sections[activePageSectionIndex].splashImg : null}
                         color={newPage.sections ? newPage.sections[activePageSectionIndex].splashColor : '#ffffff'}
                         handleImgChange={(file) => this.props.handleSplashImgChange(file)}
                         handleColorChange={(color) => this.props.handleSplashColorChange(color)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
+                    />
+                )
+            } else if (section.type == 'VIDEO') {
+                return (
+                    <DxVideoViewerToolbar
+                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
+                        videoInput={newPage.sections ? newPage.sections[activePageSectionIndex].videoInput : null}
+                        handleVideoInputChange={(e) => this.props.handleVideoInputChange(e)}
+                        handleVideoInsertClick={() => this.props.handleVideoInsertClick()}
                     />
                 )
             } else {
