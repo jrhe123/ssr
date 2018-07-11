@@ -13,7 +13,6 @@ import Search from '@material-ui/icons/Search';
 import DxInput from '../../../components/dxInput/DxInput';
 
 // constants
-import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
 class DxSplash extends Component {

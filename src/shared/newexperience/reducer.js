@@ -61,7 +61,8 @@ let templateNewSection = {
     pdfPath: null,        // pdf file path
     splashContent: 'Splash image with page title',      // splash content
     splashImg: null,        // splash img
-    splashColor: '#ffffff'  // splash color
+    splashColor: '#ffffff',  // splash color
+    videoUrl: null      // video url
 };
 const initialState = {
     cardTemplates: [],      // card templates

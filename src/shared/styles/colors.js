@@ -8,6 +8,7 @@ export default {
     lightBlueColor : '#F0F7FF',
     greyColor : '#E6E6E6',
     lightGreyColor : '#9B9B9B',
+    greyLabelColor: '#777777',
     greenColor: '#6FB8A4',
     labelColor: '#64697C',
     backgroundColor: '#F2F3F6',

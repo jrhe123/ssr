@@ -93,6 +93,7 @@ class ExperiencePages extends Component {
                 splashContent={section.splashContent}
                 splashImg={section.splashImg}
                 splashColor={section.splashColor}
+                videoUrl={section.videoUrl}
 
                 key={section.sectionGUID}
                 index={i}

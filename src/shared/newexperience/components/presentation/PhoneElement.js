@@ -24,6 +24,7 @@ import DxEditor from './DxEditor';
 import DxButtonConnector from './DxButtonConnector';
 import DxPdfViewer from './DxPdfViewer';
 import DxSplash from './DxSplash';
+import DxVideoViewer from './DxVideoViewer';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -149,9 +150,9 @@ class PhoneElement extends Component {
                 break;
             case 'VIDEO':
                 section = (
-                    <div>
-                        video here
-                </div>
+                    <DxVideoViewer 
+                        videoUrl={this.props.videoUrl}
+                    />
                 )
                 break;
             default:
