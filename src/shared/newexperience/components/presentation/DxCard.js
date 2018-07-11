@@ -174,9 +174,6 @@ class DxCard extends Component {
                                                 template.content ?
                                                     <ReactPlayer
                                                         config={{
-                                                            youtube: {
-                                                                playerVars: { showinfo: 1 }
-                                                            },
                                                             facebook: {
                                                                 appId: '868742783317382'
                                                             },

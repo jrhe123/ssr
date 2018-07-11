@@ -40,11 +40,13 @@ class DxVideoViewerToolbar extends Component {
                             <div style={videoInputContainerStyle}>
                                 <div style={videoInputWrapperStyle}>
                                     <DxInput
+                                        enableEnter={true}
                                         placeholder="Embed video url"
                                         handleValChange={(e) => this.props.handleVideoInputChange(e)}
                                         width="200px"
                                         disabled={false}
                                         value={this.props.videoInput}
+                                        handleKeyPress={() => this.handleVideoInsertClick()}
                                     />
                                 </div>
                                 <Button
