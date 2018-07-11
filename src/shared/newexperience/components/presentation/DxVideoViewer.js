@@ -17,6 +17,8 @@ class DxVideoViewer extends Component {
 
         const {
             mainContainerStyle,
+            mainWrapperStyle,
+            descContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
             infoLabelStyle,
@@ -30,25 +32,31 @@ class DxVideoViewer extends Component {
             <div style={mainContainerStyle}>
                 {
                     videoUrl ?
-                        (<ReactPlayer
-                            config={{
-                                youtube: {
-                                    playerVars: { showinfo: 1 }
-                                },
-                                facebook: {
-                                    appId: '868742783317382'
-                                }
-                            }}
-                            width={320}
-                            height={180}
-                            url={videoUrl}
-                            controls={true}
-                            onError={(e) => this.handleVideoError(e)}
-                        />)
+                        (
+                            <div style={mainWrapperStyle}>
+                                <ReactPlayer
+                                    config={{
+                                        youtube: {
+                                            playerVars: { showinfo: 1 }
+                                        },
+                                        facebook: {
+                                            appId: '868742783317382'
+                                        }
+                                    }}
+                                    width={320}
+                                    height={180}
+                                    url={videoUrl}
+                                    controls={true}
+                                    onError={(e) => this.handleVideoError(e)}
+                                />
+                            </div>
+                        )
                         :
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={infoLabelStyle}>Please select a VIDEO..</p>
+                        <div style={descContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <p style={infoLabelStyle}>Please select a VIDEO..</p>
+                                </div>
                             </div>
                         </div>
                 }
@@ -60,8 +68,13 @@ class DxVideoViewer extends Component {
 const styles = {
 
     mainContainerStyle: {
-        height: 72,
         backgroundColor: colors.greyColor
+    },
+    mainWrapperStyle: {
+        height: 180,
+    },
+    descContainerStyle: {
+        height: 72
     },
     tableContainerStyle: {
         position: 'relative',
