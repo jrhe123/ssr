@@ -12,7 +12,7 @@ class DxInput extends Component {
     handleKeyPress = (e, enableEnter) => {
         if (enableEnter
             && e.key == 'Enter') {
-            console.log('enter press here! ')
+            this.props.handleKeyPress();
         }
     }
 
