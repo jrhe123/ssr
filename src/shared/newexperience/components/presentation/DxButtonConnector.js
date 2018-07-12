@@ -32,7 +32,6 @@ class DxButtonConnector extends Component {
             tableWrapperStyle,
             contentContainerStyle,
             leftContentContainerStyle,
-            btnLabelStyle,
             rightIconContainerStyle,
             expandIconStyle,
 
@@ -136,9 +135,6 @@ const styles = {
     },
     leftContentContainerStyle: {
         flex: 1,
-    },
-    btnLabelStyle: {
-        fontSize: fonts.h3
     },
     rightIconContainerStyle: {
         flex: '18px 0 0',

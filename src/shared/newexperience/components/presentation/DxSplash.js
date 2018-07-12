@@ -25,7 +25,6 @@ class DxSplash extends Component {
             marginRightStyle,
             tableContainerStyle,
             tableWrapperStyle,
-            txtStyle,
             splashContainerStyle,
             statusbarContainerStyle,
             leftStatusContainerStyle,
@@ -176,9 +175,6 @@ const styles = {
         width: 42,
         height: 48,
         margin: '0 auto'
-    },
-    txtStyle: {
-        fontSize: fonts.h5,
     },
     splashContainerStyle: {
         height: splashHeight,
