@@ -94,6 +94,7 @@ class ExperiencePages extends Component {
                 splashImg={section.splashImg}
                 splashColor={section.splashColor}
                 videoUrl={section.videoUrl}
+                img={section.img}
 
                 key={section.sectionGUID}
                 index={i}
@@ -202,6 +203,11 @@ class ExperiencePages extends Component {
     handleVideoInsertClick = () => {
         let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'VIDEO_CONFIRM');
+    }
+
+    handleImageChange = (file) => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'IMAGE', file);
     }
 
     handleCarouselClick = (open) => {
@@ -369,6 +375,7 @@ class ExperiencePages extends Component {
                                     handleSplashColorChange={(color) => this.handleSplashColorChange(color)}
                                     handleVideoInputChange={(e) => this.handleVideoInputChange(e)}
                                     handleVideoInsertClick={() => this.handleVideoInsertClick()}
+                                    handleImageChange={(file) => this.handleImageChange(file)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>

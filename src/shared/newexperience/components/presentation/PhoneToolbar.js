@@ -64,6 +64,9 @@ class PhoneToolbar extends Component {
                 return (
                     <DxImageViewerToolbar
                         isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
+                        imgFile={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].img : null}
+                        handleImgChange={(file) => this.props.handleImageChange(file)}
+                        handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )
             } else {

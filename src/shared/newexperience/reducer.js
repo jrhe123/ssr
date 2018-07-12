@@ -64,6 +64,7 @@ let templateNewSection = {
     splashColor: '#ffffff',  // splash color
     videoInput: null,    // video input
     videoUrl: null,      // video url
+    img: null,        // img
 };
 const initialState = {
     cardTemplates: [],      // card templates
@@ -348,6 +349,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'VIDEO_CONFIRM':
                         tmpUpdateSection.videoUrl = tmpUpdateSection.videoInput;
+                        break;
+                    case 'IMAGE':
+                        tmpUpdateSection.img = payload.content;
                         break;
                     default:
                         break;

@@ -13,12 +13,14 @@ class DxImageViewer extends Component {
             <div style={mainContainerStyle}>
                 <img
                     style={imgStyle}
-                    src={require('../../../../../assets/images/demo.jpg')}
+                    src={this.props.img ? URL.createObjectURL(this.props.img) : require('../../../../../assets/images/demo.jpg')}
                 />
             </div>
         )
     }
 }
+
+const padding = 12;
 
 const styles = {
 
@@ -29,8 +31,9 @@ const styles = {
     },
     imgStyle: {
         display: 'block',
-        width: 320,
-        height: 180,
+        width: 320 - 2 * padding,
+        height: 180 - 2 * padding,
+        padding: padding,
     },
 }
 

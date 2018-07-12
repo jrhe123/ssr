@@ -5,12 +5,10 @@ class DxImageViewerToolbar extends Component {
     handleImgChange = (event) => {
         let file = event.target.files[0];
         if (!file.type.match('image.*')) {
-            console.log('err');
-            // this.props.handleImageError('The supported file types are .jpg , .jpeg , .png , .bmp');
+            this.props.handleImgError('The supported file types are .jpg , .jpeg , .png , .bmp');
             return;
         }
-        console.log('ok redux');
-        // this.props.handleImgChange(file);
+        this.props.handleImgChange(file);
     }
 
     render() {
@@ -41,7 +39,7 @@ class DxImageViewerToolbar extends Component {
                         >
                             <img
                                 style={displayImgStyle}
-                                src={require('../../../../../assets/images/demo.png')}
+                                src={this.props.imgFile ? URL.createObjectURL(this.props.imgFile) : require('../../../../../assets/images/demo.jpg')}
                             />
                         </label>
                     </div>
@@ -59,7 +57,7 @@ const styles = {
     },
     imgInputContainerStyle: {
         position: 'relative',
-        width: 40,
+        width: 48,
         height: 48,
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
     },
@@ -67,20 +65,20 @@ const styles = {
         position: 'absolute',
         top: 0,
         left: 0,
-        width: 40,
+        width: 48,
         height: 48,
         opacity: 0,
         overflow: 'hidden',
         cursor: 'pointer',
     },
     displayImgContainerStyle: {
-        width: 40,
+        width: 48,
         height: 48,
     },
     displayImgStyle: {
         display: 'block',
-        width: 41,
-        height: 49
+        width: 48,
+        height: 48
     },
 }
 

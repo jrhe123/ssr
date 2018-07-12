@@ -159,7 +159,9 @@ class PhoneElement extends Component {
                 break;
             case 'IMAGE':
                 section = (
-                    <DxImageViewer />
+                    <DxImageViewer 
+                        img={this.props.img}
+                    />
                 )
                 break;
             default:
