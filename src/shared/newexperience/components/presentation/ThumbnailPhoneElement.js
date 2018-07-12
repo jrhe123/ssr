@@ -80,7 +80,7 @@ class ThumbnailPhoneElement extends Component {
             imgContainerStyle,
             imgStyle,
         } = styles;
-        
+
         let elem;
         switch (section.type) {
             case 'EDITOR':
@@ -309,6 +309,9 @@ const styles = {
         margin: '0 auto',
         backgroundColor: colors.greyColor,
         minHeight: 18,
+        borderTop: '1px solid',
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
     contentContainerStyle: {
         display: 'flex',
