@@ -10,7 +10,7 @@ import fonts from '../../../styles/fonts';
 class DxVideoViewer extends Component {
 
     handleVideoError = (e) => {
-        console.log('error: ', e);
+        this.props.handleVideoError('The supported link: youtube, facebook, soundcloud, vimeo');
     }
 
     render() {

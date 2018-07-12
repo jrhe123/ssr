@@ -152,6 +152,7 @@ class PhoneElement extends Component {
                 section = (
                     <DxVideoViewer 
                         videoUrl={this.props.videoUrl}
+                        handleVideoError={(msg) => this.props.handleVideoError(msg)}
                     />
                 )
                 break;

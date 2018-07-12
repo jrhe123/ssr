@@ -43,7 +43,7 @@ class DxCard extends Component {
     }
 
     handleVideoError = (e) => {
-        console.log('error: ', e);
+        this.props.handleVideoError('The supported link: youtube, facebook, soundcloud, vimeo');
     }
 
     handleToggleBurger = () => {

@@ -104,6 +104,8 @@ class ExperiencePages extends Component {
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
                 handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
+
+                handleVideoError={(msg) => this.handleErrorMsg(msg)}
             />
         ))
         return section

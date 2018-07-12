@@ -41,6 +41,10 @@ class ExperienceCard extends Component {
         this.props.dxExperienceCardTemplateFetchAction(ExperienceCardData.CardTemplates);
     }
 
+    handleErrorMsg = (msg) => {
+        this.props.dxAlertAction(true, true, msg);
+    }
+
     handleClickCate = (activeTab) => {
         this.setState({
             activeTab
@@ -53,10 +57,6 @@ class ExperienceCard extends Component {
 
     handleImageChange = (imgFile) => {
         this.props.dxExperienceCardTemplateUpdateImageAction(imgFile);
-    }
-
-    handleImageError = (msg) => {
-        this.props.dxAlertAction(true, true, msg);
     }
 
     handleColorChange = (colors, type) => {
@@ -211,7 +211,7 @@ class ExperienceCard extends Component {
                                         settings={this.props.experience.cardTemplate.settings}
                                         imgFile={this.props.experience.cardTemplate.settings[0].Default}
                                         handleImageChange={(file) => this.handleImageChange(file)}
-                                        handleImageError={(msg) => this.handleImageError(msg)}
+                                        handleImageError={(msg) => this.handleErrorMsg(msg)}
                                         handleColorChange={(colors, type) => this.handleColorChange(colors, type)}
                                     />
                                     :
@@ -231,6 +231,7 @@ class ExperienceCard extends Component {
                                             isVideoInsertClickable={true}
                                             template={this.props.experience.cardTemplate}
                                             handleContentChange={(val) => this.handleCardTemplateContentChange(val)}
+                                            handleVideoError={(msg) => this.handleErrorMsg(msg)}
                                         />
                                         :
                                         null
