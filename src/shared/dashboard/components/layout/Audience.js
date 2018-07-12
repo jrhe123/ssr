@@ -387,7 +387,7 @@ const styles = {
     mainWrapperStyle:{
         height: `calc(100vh - ${sizes.headerHeight})`,
         flex:1,
-        width: '100%',
+        width: '100%'
     },
     targetContainerStyle: {
         display: 'flex',
