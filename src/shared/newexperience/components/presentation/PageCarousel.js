@@ -42,7 +42,7 @@ class PageCarousel extends Component {
                                     key={index}
                                     title={page.title}
                                     active={page.pageGUID == newPage.pageGUID ? true : false}
-                                    experience={experience}
+                                    page={page}
                                     handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
                                 />
                             ))
@@ -58,7 +58,7 @@ class PageCarousel extends Component {
                                     key={index}
                                     title={page.title}
                                     active={page.pageGUID == newPage.pageGUID ? true : false}
-                                    experience={experience}
+                                    page={page}
                                     handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
                                 />
                             ))

@@ -9,30 +9,15 @@ import colors from '../../../styles/colors';
 
 class ThumbnailPage extends Component {
 
-    renderPhoneElement = () => {
+    renderPhoneElementSection = () => {
         const {
-            newPage,
-            pages,
-        } = this.props.experience;
-
-        let phone = pages.map((page, index) => (
-            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false)
-        ))
-        return phone;
-    }
-
-    renderPhoneElementSection = (sections, activePage) => {
-
+            sections,
+        } = this.props.page;
         const {
             elemContainerStyle,
         } = styles;
 
-        const {
-            experience,
-        } = this.props;
-
-        let section;
-        section = sections.map((section, i) => {
+        let section = sections.map((section, i) => {
             return (
                 <div style={elemContainerStyle}>
                     <ThumbnailPhoneElement
@@ -42,7 +27,7 @@ class ThumbnailPage extends Component {
                 </div>
             )
         })
-        return section
+        return section;
     }
 
     render() {
@@ -65,7 +50,7 @@ class ThumbnailPage extends Component {
                 onClick={() => this.props.handleClickActivePage()}
             >
                 <div style={contentContainerStyle}>
-                    {this.renderPhoneElement()}
+                    {this.renderPhoneElementSection()}
                 </div>
                 <div style={titleContainerStyle}>
                     <p style={Object.assign({}, titleStyle, { color: active ? colors.greenColor : colors.whiteColor })}>
