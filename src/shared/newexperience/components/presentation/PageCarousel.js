@@ -73,7 +73,8 @@ const styles ={
 
     mainContainerStyle: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        cursor: 'default'
     },
 }
 

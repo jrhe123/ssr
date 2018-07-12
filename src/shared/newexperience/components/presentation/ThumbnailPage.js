@@ -51,7 +51,9 @@ class ThumbnailPage extends Component {
                 style={mainContainerStyle}
                 onClick={() => this.props.handleClickActivePage()}
             >
-                <div style={closeContainerStyle}>
+                <div 
+                    className="dx_hover_btn"
+                    style={closeContainerStyle}>
                     <img 
                         style={closeIconStyle}
                         src={require('../../../../../assets/images/close_button.png')}/>
@@ -77,6 +79,7 @@ const styles = {
         width: 120,
         marginLeft: 12,
         marginRight: 12,
+        cursor: 'pointer'
     },
     closeContainerStyle: {
         position: 'absolute',
@@ -85,6 +88,8 @@ const styles = {
         width: 18,
         height: 18,
         zIndex: 99,
+        borderRadius: '50%',
+        cursor: 'pointer'
     },
     closeIconStyle: {
         display: 'block',
