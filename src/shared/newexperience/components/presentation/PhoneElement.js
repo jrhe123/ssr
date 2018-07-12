@@ -25,6 +25,7 @@ import DxButtonConnector from './DxButtonConnector';
 import DxPdfViewer from './DxPdfViewer';
 import DxSplash from './DxSplash';
 import DxVideoViewer from './DxVideoViewer';
+import DxImageViewer from './DxImageViewer';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -154,6 +155,11 @@ class PhoneElement extends Component {
                         videoUrl={this.props.videoUrl}
                         handleVideoError={(msg) => this.props.handleVideoError(msg)}
                     />
+                )
+                break;
+            case 'IMAGE':
+                section = (
+                    <DxImageViewer />
                 )
                 break;
             default:

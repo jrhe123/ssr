@@ -5,6 +5,7 @@ import DxEditorToolbar from './DxEditorToolbar';
 import DxPdfViewerToolbar from './DxPdfViewerToolbar';
 import DxSplashToolbar from './DxSplashToolbar';
 import DxVideoViewerToolbar from './DxVideoViewerToolbar';
+import DxImageViewerToolbar from './DxImageViewerToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -57,6 +58,12 @@ class PhoneToolbar extends Component {
                         videoInput={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].videoInput : null}
                         handleVideoInputChange={(e) => this.props.handleVideoInputChange(e)}
                         handleVideoInsertClick={() => this.props.handleVideoInsertClick()}
+                    />
+                )
+            } else if (section.type == 'IMAGE') {
+                return (
+                    <DxImageViewerToolbar
+                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
                     />
                 )
             } else {

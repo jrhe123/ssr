@@ -267,6 +267,15 @@ class PageTemplate extends Component {
                     </div>
                 </div>
             )
+        } else if (template.Type == 'IMAGE') {
+            card = (
+                <div style={videoOverlayContainerStyle}>
+                    <img
+                        style={videoOverlayImgStyle}
+                        src={require('../../../../../assets/images/demo.jpg')}
+                    />
+                </div>
+            )
         }
         return card;
     }
@@ -480,6 +489,7 @@ const styles = {
     videoOverlayImgStyle: {
         height: 90,
         width: '100%',
+        cursor: 'pointer'
     }
 }
 
