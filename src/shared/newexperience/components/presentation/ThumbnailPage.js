@@ -88,11 +88,13 @@ const styles = {
     contentContainerStyle: {
         backgroundColor: colors.whiteColor,
         height: 156,
-        width: 120
+        width: 120,
+        overflow: 'hidden'
     },
     elemContainerStyle: {
-        width: 120,
-        overFlow: 'hidden'
+        maxHeight: 156,  
+        width: 120, 
+        overflow: 'hidden'
     },
     titleContainerStyle: {
         height: 24,
