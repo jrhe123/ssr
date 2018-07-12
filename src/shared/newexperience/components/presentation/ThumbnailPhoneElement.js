@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 // Libraries
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SignalCellular0Bar from '@material-ui/icons/SignalCellular0Bar';
@@ -71,13 +72,15 @@ class ThumbnailPhoneElement extends Component {
             overlayImgStyle,
             descContainerStyle,
             splashLableStyle,
+            // video
+            playIconStyle,
+            videoOverlayContainerStyle,
+            videoOverlayImgStyle,
             // img
             imgContainerStyle,
             imgStyle,
         } = styles;
-
-        console.log('check: ', section);
-
+        
         let elem;
         switch (section.type) {
             case 'EDITOR':
@@ -137,11 +140,11 @@ class ThumbnailPhoneElement extends Component {
                 break;
             case 'SPLASH':
                 elem = (
-                    <div className="dx_thumbnail_elem_splash" 
-                        style={Object.assign({}, overlayContainerStyle, { color: this.props.splashColor })}>
+                    <div className="dx_thumbnail_elem_splash"
+                        style={Object.assign({}, overlayContainerStyle, { color: section.splashColor })}>
                         <img
                             style={overlayImgStyle}
-                            src={this.props.splashImg ? URL.createObjectURL(this.props.splashImg) : require('../../../../../assets/images/demo.jpg')}
+                            src={section.splashImg ? URL.createObjectURL(section.splashImg) : require('../../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={splashContainerStyle}>
@@ -194,7 +197,7 @@ class ThumbnailPhoneElement extends Component {
                                         <div style={leftToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <KeyboardArrowLeft style={statusbarSubIconStyle}/>
+                                                    <KeyboardArrowLeft style={statusbarSubIconStyle} />
                                                 </div>
                                             </div>
                                         </div>
@@ -203,8 +206,8 @@ class ThumbnailPhoneElement extends Component {
                                         <div style={rightToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <Search style={statusbarSubIconStyle}/>
-                                                    <MoreVert style={statusbarSubIconStyle}/>
+                                                    <Search style={statusbarSubIconStyle} />
+                                                    <MoreVert style={statusbarSubIconStyle} />
                                                 </div>
                                             </div>
                                         </div>
@@ -226,7 +229,20 @@ class ThumbnailPhoneElement extends Component {
                 break;
             case 'VIDEO':
                 elem = (
-                    <div>VIDEO here</div>
+                    <div style={videoOverlayContainerStyle}>
+                        <div
+                            style={videoOverlayImgStyle}
+                        />
+                        <div style={overlayWrapperStyle}>
+                            <div style={Object.assign({}, tableContainerStyle)}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
+                                    <PlayCircleOutline
+                                        style={Object.assign({}, playIconStyle, { color: colors.whiteColor })}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 );
                 break;
             case 'IMAGE':
@@ -305,6 +321,8 @@ const styles = {
     btnLabelStyle: {
         margin: 0,
         padding: 3,
+        paddingLeft: 6,
+        paddingRight: 6,
         fontSize: fonts.thumbnail,
     },
     rightIconContainerStyle: {
@@ -322,7 +340,6 @@ const styles = {
     // splash
     splashContainerStyle: {
         height: splashHeight,
-        color: colors.whiteColor
     },
     statusbarContainerStyle: {
         height: 12,
@@ -411,11 +428,30 @@ const styles = {
     splashLableStyle: {
         margin: 0,
     },
+    // video
+    playIconStyle: {
+        fontSize: 24
+    },
+    videoOverlayContainerStyle: {
+        position: 'relative',
+        height: 54,
+        width: '100%',
+        border: '1px solid',
+        borderColor: colors.whiteColor,
+        boxSizing: 'border-box',
+        marginTop: 1
+    },
+    videoOverlayImgStyle: {
+        height: 54,
+        width: '100%',
+        cursor: 'pointer',
+        backgroundColor: colors.blackColor
+    },
     // img
     imgContainerStyle: {
         padding: 4,
-        paddingLeft: 5,
-        paddingRight: 5,
+        paddingLeft: 6,
+        paddingRight: 6,
     },
     imgStyle: {
         display: 'block',
