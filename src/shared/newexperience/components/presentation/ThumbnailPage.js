@@ -34,6 +34,8 @@ class ThumbnailPage extends Component {
 
         const {
             mainContainerStyle,
+            closeContainerStyle,
+            closeIconStyle,
             contentContainerStyle,
             titleContainerStyle,
             titleStyle,
@@ -49,6 +51,11 @@ class ThumbnailPage extends Component {
                 style={mainContainerStyle}
                 onClick={() => this.props.handleClickActivePage()}
             >
+                <div style={closeContainerStyle}>
+                    <img 
+                        style={closeIconStyle}
+                        src={require('../../../../../assets/images/close_button.png')}/>
+                </div>
                 <div style={contentContainerStyle}>
                     {this.renderPhoneElementSection()}
                 </div>
@@ -65,10 +72,24 @@ class ThumbnailPage extends Component {
 const styles = {
 
     mainContainerStyle: {
+        position: 'relative',
         height: 180,
         width: 120,
         marginLeft: 12,
         marginRight: 12,
+    },
+    closeContainerStyle: {
+        position: 'absolute',
+        right: -9,
+        top: -9,
+        width: 18,
+        height: 18,
+        zIndex: 99,
+    },
+    closeIconStyle: {
+        display: 'block',
+        height: 18,
+        width: 18
     },
     contentContainerStyle: {
         backgroundColor: colors.whiteColor,
