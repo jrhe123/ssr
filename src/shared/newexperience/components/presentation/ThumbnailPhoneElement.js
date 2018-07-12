@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
 
+// styles
 import '../../../../../assets/css/quill/thumbnail.css';
 
 class ThumbnailPhoneElement extends Component {
 
     renderSection = (section) => {
 
-        console.log('check: ', section.htmlContent);
+        console.log('check: ', section);
 
         let elem;
         switch (section.type) {
             case 'EDITOR':
                 elem = (
                     <div dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
+                );
+                break;
+            case 'BUTTON':
+                elem = (
+                    <div>button here</div>
+                );
+                break;
+            case 'EMBED_PDF':
+                elem = (
+                    <div>pdf here</div>
+                );
+                break;
+            case 'SPLASH':
+                elem = (
+                    <div>SPLASH here</div>
+                );
+                break;
+            case 'VIDEO':
+                elem = (
+                    <div>VIDEO here</div>
                 );
                 break;
             default:
