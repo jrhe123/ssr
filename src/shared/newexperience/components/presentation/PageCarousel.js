@@ -32,6 +32,7 @@ class PageCarousel extends Component {
             pageGUID
         } = this.state;
         this.props.handleConfirmDeleteCarouselPage(pageGUID);
+        this.handleCloseModal();
     }
 
     render() {

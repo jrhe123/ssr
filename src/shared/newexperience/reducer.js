@@ -68,6 +68,7 @@ let templateNewSection = {
     img: null,        // img
 };
 const initialState = {
+    index: 0,               // section index
     cardTemplates: [],      // card templates
     pageTemplates: [],      // page templates
     experience: {
@@ -96,6 +97,7 @@ const initialState = {
 const newexperienceReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
+    let tmpIndex = updated.index;
     let tmpExperience = Object.assign({}, updated.experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
     let tmpPages = Object.assign([], tmpExperience.pages);
@@ -261,18 +263,21 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = `Page ${tmpPages.length + 1}`;
                 tmpPages.push(tmpNewPage);
-            } else {
-                
-                tmpPageIndex = tmpNewPage.index - 1 > 0 ? tmpNewPage.index - 1 : 0;
-                console.log('tmpPageIndex: ', tmpPageIndex);
 
-                // tmpPageGUID = tmpPages[0].pageGUID;
-                // tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
-                // tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections); 
+                tmpExperience.newPage = tmpNewPage;
+            } else {
+                tmpPageIndex = tmpNewPage.index - 1 > 0 ? tmpNewPage.index - 1 : 0;
+                tmpPageGUID = tmpPages[tmpPageIndex].pageGUID;
+                tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
+                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
+                tmpExperience.newPage = tmpNewPage.page;
             }
-            // tmpExperience.pages = tmpPages;
-            // tmpExperience.newPage = tmpNewPage;
-            // updated.experience = tmpExperience;
+            tmpExperience.pages = tmpPages;
+            updated.experience = tmpExperience;
+
+            console.log('updated: ', updated);
+
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
@@ -282,7 +287,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, templateNewSection);
                 tmpNewSection.sectionGUID = uuid();
-                tmpNewSection.index = Number(tmpPages.length.toString() + tmpNewPageSections.length.toString());
+                tmpNewSection.index = Number(tmpIndex);
                 tmpNewSection.type = payload.type;
                 tmpNewSection.isActive = true;
 
@@ -306,6 +311,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpExperience.newPage = tmpNewPage;
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
                 updated.experience = tmpExperience;
+                updated.index = tmpIndex + 1;
             }
             return updated;
 
