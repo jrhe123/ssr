@@ -34,6 +34,7 @@ import {
     dxExperiencePageCarouselPageActiveSaga,
 
     dxExperiencePageAddPageSaga,
+    dxExperiencePageDeletePageSaga,
     dxExperiencePageAddElemSaga,
     dxExperiencePageShuffleElemSaga,
     dxExperiencePageSelectElemSaga,
@@ -82,6 +83,7 @@ export default function* rootSaga() {
         dxExperiencePageCarouselPageActiveSaga(),
 
         dxExperiencePageAddPageSaga(),
+        dxExperiencePageDeletePageSaga(),
         dxExperiencePageAddElemSaga(),
         dxExperiencePageShuffleElemSaga(),
         dxExperiencePageSelectElemSaga(),

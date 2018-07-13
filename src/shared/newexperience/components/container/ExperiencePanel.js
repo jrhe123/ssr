@@ -145,7 +145,7 @@ class ExperiencePanel extends Component {
                                     cardTitle={this.props.experience.cardTitle}
                                     template={this.props.experience.card}
                                     handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
-                                    handleRemoveCardTemplateClick={() => this.props.handleRemoveCardTemplateClick()}
+                                    handleConfirmDeleteCard={() => this.props.handleRemoveCardTemplateClick()}
                                 />
                             </div>
                     }

@@ -32,6 +32,7 @@ import {
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPage as dxExperiencePageSectionConnectPageAction,
+    dxExperiencePageDeletePage as dxExperiencePageDeletePageAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -223,7 +224,7 @@ class ExperiencePages extends Component {
     }
 
     handleConfirmDeleteCarouselPage = (pageGUID) => {
-        console.log('out here: ', pageGUID);
+        this.props.dxExperiencePageDeletePageAction(pageGUID);
     }
 
     render() {
@@ -670,6 +671,7 @@ const dispatchToProps = {
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPageAction,
+    dxExperiencePageDeletePageAction,
 
     dxAlertAction,
 }

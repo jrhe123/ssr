@@ -21,6 +21,7 @@ import {
     EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
 
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
@@ -248,6 +249,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
+            console.log('reducer received: ', payload.pageGUID);
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:

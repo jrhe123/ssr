@@ -64,10 +64,6 @@ class DxCard extends Component {
         this.setState({ isModalOpen: false });
     }
 
-    handleConfirmDeleteCard = () => {
-        this.props.handleRemoveCardTemplateClick();
-    }
-
     renderCard = (template, isEditable) => {
 
         const {
@@ -326,7 +322,7 @@ class DxCard extends Component {
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
-                    handleConfirm={() => this.handleConfirmDeleteCard()}
+                    handleConfirm={() => this.props.handleConfirmDeleteCard()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
