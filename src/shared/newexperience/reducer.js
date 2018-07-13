@@ -104,6 +104,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     let tmpSettingIndex;
     let tmpPageGUID;
+    let tmpPageIndex;
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpHoverIndex, tmpDragIndex;
@@ -252,7 +253,26 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
-            console.log('reducer received: ', payload.pageGUID);
+            tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
+            tmpPages.splice(tmpNewPage.index, 1);
+
+            if (!tmpPages.length) {
+                tmpNewPage = Object.assign({}, templateNewPage);
+                tmpNewPage.pageGUID = uuid();
+                tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+                tmpPages.push(tmpNewPage);
+            } else {
+                
+                tmpPageIndex = tmpNewPage.index - 1 > 0 ? tmpNewPage.index - 1 : 0;
+                console.log('tmpPageIndex: ', tmpPageIndex);
+
+                // tmpPageGUID = tmpPages[0].pageGUID;
+                // tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
+                // tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections); 
+            }
+            // tmpExperience.pages = tmpPages;
+            // tmpExperience.newPage = tmpNewPage;
+            // updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
