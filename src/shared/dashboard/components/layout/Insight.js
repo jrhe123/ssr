@@ -207,7 +207,6 @@ class Insight extends Component {
                         <div style={arrangeWrapperStyle}>
                             <Apps style={arrangeIconStyle}/>
                             <p style={arrangeLabelStyle}>Arrange</p>
-                            {/* <Button onClick={() => this.handleAdd()}>Delete</Button> */}
                         </div>
                     </div>
                     <div style={widgetContainerStyle}>

@@ -93,9 +93,7 @@ class DRM extends Component{
             safeguardInfoStyle,
             safeguardInfoLabelStyle,
 
-            streamContainerStyle,
-
-            
+            streamContainerStyle          
         } = styles;
 
         return(
