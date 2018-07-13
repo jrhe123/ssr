@@ -74,8 +74,7 @@ body{
 }
 
 .dx_hidden_toolbar{
-    /* display: none; */
-    opacity: 0.5;
+    display: none;
 }
 
 .dx_input:focus{

@@ -13,7 +13,6 @@ class DxEditorToolbar extends Component {
 
         return (
             <div className={this.props.isActive ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}>
-                {this.props.sectionGUID}
                 <div id={"toolbar-" + this.props.sectionGUID}>
                     <span class="ql-formats">
                         <select class="ql-font">

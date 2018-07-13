@@ -67,6 +67,7 @@ let templateNewSection = {
     videoInput: null,    // video input
     videoUrl: null,      // video url
     img: null,        // img
+    pageGUID: null
 };
 const initialState = {
     index: 0,               // section index
@@ -287,6 +288,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, templateNewSection);
                 tmpNewSection.sectionGUID = uuid();
+                tmpNewSection.pageGUID = tmpNewPage.pageGUID;
                 tmpNewSection.index = Number(tmpIndex);
                 tmpNewSection.type = payload.type;
                 tmpNewSection.isActive = true;
@@ -308,7 +310,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
                 // add to tools
-                tmpTools.push(Object.assign({}, tmpNewSection));
+                tmpTools.push(tmpNewSection);
 
                 tmpExperience.tools = tmpTools;
                 tmpExperience.pages = tmpPages;
@@ -329,6 +331,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
+            // update tools
+            deactive_tools(payload.sectionGUID, tmpTools);
+
+            tmpExperience.tools = tmpTools;
             tmpExperience.pages = tmpPages;
             tmpExperience.newPage = tmpNewPage;
             updated.experience = tmpExperience;
@@ -491,6 +497,13 @@ const find_section_index_by_guid = (sections, targetSectionGUID) => {
         }
     }
     return null;
+}
+const deactive_tools = (guid, sections) => {
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].sectionGUID == guid) {
+            sections[i].isActive = false;
+        }
+    }
 }
 
 export default newexperienceReducer;
