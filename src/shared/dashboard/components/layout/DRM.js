@@ -24,36 +24,36 @@ import RemoveUserPage from '../presentation/RemoveUserPage';
 class DRM extends Component{
 
     state = {
-        view: 0,
+        viewSafeguard: 0,
     }
 
     handleSessionOption = () => {
         this.setState({ 
-            view: 0
+            viewSafeguard: 0
         });
     }
 
     handleDomainSignup = () => {
         this.setState({ 
-            view: 1
+            viewSafeguard: 1
         });
     }
 
     handlePrivateChannel = () => {
         this.setState({ 
-            view: 2
+            viewSafeguard: 2
         });
     }
 
     handleSpecificAccess = () => {
         this.setState({ 
-            view: 3
+            viewSafeguard: 3
         });
     }
 
     handleRemoveUser = () => {
         this.setState({ 
-            view: 4
+            viewSafeguard: 4
         });
     }
 
@@ -61,13 +61,13 @@ class DRM extends Component{
 
         var renderSection;
 
-        if (this.state.view == 0){
+        if (this.state.viewSafeguard == 0){
             renderSection = <RestrictSessionPage/>;
-        } else if (this.state.view == 1) {
+        } else if (this.state.viewSafeguard == 1) {
             renderSection = <RestrictDomainPage/>;
-        } else if (this.state.view == 2) {
+        } else if (this.state.viewSafeguard == 2) {
             renderSection = <PrivateInvitePage/>;
-        } else if (this.state.view == 3){
+        } else if (this.state.viewSafeguard == 3){
             renderSection = <SpecificAccessPage/>;
         } else {
             renderSection = <RemoveUserPage/>;
@@ -192,7 +192,6 @@ const styles = {
         flexDirection: 'column',
         width:308,
         background:'white',
-        // height:'100%',
         height:'calc(100% - 60px)',  
         justifyContent:'flex-start',
         marginBottom:0,

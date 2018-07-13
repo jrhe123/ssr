@@ -5,8 +5,7 @@ import Button from '@material-ui/core/Button';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Add from '@material-ui/icons/Add';
 import Apps from '@material-ui/icons/Apps'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -14,169 +13,157 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 //component
-import Spring from '../presentation/Spring';
 import WidgetTemplate from '../presentation/WidgetTemplate';
-import GridLay from '../presentation/GridLay';
 
 class Insight extends Component {
 
     state = {
-         elements: [
+         widgetElements: [
             {
-                src:'ENGAGEMENT',
-                // number:'13',
+                header:'ENGAGEMENT',
                 width:460,
-                height:300,
+                height:250,
                 background:'#FFFFFF',
-                marginBottom: 20,
-                textMarginTop:21,
-                textMarginLeft:27,
-                srcSize:14,
-                numMarginTop:0
+                marginBottom: 12,
+                headerMarginTop:21,
+                headerMarginLeft:27,
+                headerFontSize:14,
+                contentMarginTop:0
             },
             {
-                src:'DIABETES',
-                // number:'201',
+                header:'DIABETES',
                 width:220,
-                height:140,
+                height:119,
                 background:'#FFFFFF',
-                marginBottom: 20,
-                srcSize:14,
-                textMarginTop:20,
-                textMarginLeft:12,
-                numMarginTop:0
+                marginBottom: 12,
+                headerFontSize:14,
+                headerMarginTop:20,
+                headerMarginLeft:12,
+                contentMarginTop:0,
             },
             {
-                src:'TOP PERFORMING CHANNELS',
-                // number:'201',
+                header:'TOP PERFORMING CHANNELS',
                 width:220,
-                height:300,
-                background:'#FFFFFF',
-                key:'2',
-                marginBottom: 20,
-                srcSize:18,
-                textMarginTop:18,
-                textMarginLeft:21,
-                numMarginTop:0
+                height:250,
+                background:'linear-gradient(90deg, #fe8c00 0%, #f83600 100%)',
+                color:'white',
+                marginBottom: 12,
+                headerFontSize:18,
+                headerMarginTop:18,
+                headerMarginLeft:21,
+                contentMarginTop:0
             },
             {
-                src:'HYPERTENSION',
-                // number:'201',
+                header:'HYPERTENSION',
                 width:220,
-                height:140,
+                height:119,
                 background:'#FFFFFF',
-                marginBottom: 20,
-                srcSize:14,
-                textMarginTop:20,
-                textMarginLeft:12,
-                numMarginTop:0
+                marginBottom: 12,
+                headerFontSize:14,
+                headerMarginTop:20,
+                headerMarginLeft:12,
+                contentMarginTop:0
             },
-
-    //second row
             {
-                src:'LEADERBOARD',
-                // number:'13',
+                header:'LEADERBOARD',
                 width:300,
-                height:300,
+                height:250,
                 background:'#FFFFFF',
-                srcSize:18,
-                textMarginTop:21,
-                textMarginLeft:18,
-                numMarginTop:0,
-                marginBottom: 20,
+                headerFontSize:18,
+                headerMarginTop:21,
+                headerMarginLeft:18,
+                contentMarginTop:0,
+                marginBottom: 12,
             },
             {
-                src:'ENGAGEMENT',
+                header:'ENGAGEMENT',
                 number:'110,145',
                 width:220,
-                height:140,
+                height:115,
                 background:'#FFFFFF',
-                marginBottom: 20,
-                srcSize:12,
-                numberSize:32,
-                textMarginTop:21,
-                textMarginLeft:15,
-                numMarginTop:27
+                marginBottom: 12,
+                headerFontSize:12,
+                numberSize:24,
+                headerMarginTop:21,
+                headerMarginLeft:15,
+                contentMarginTop:27
             },
             {
-                src:'TRENDING CHANNELS',
+                header:'TRENDING CHANNELS',
                 number:'AUDIENCE',
                 width:220,
-                height:300,
+                height:250,
                 background:'#FFFFFF',
-                key:'2',
-                srcSize:18,
-                textMarginTop:18,
-                textMarginLeft:21,
-                numMarginTop:22,
-                marginBottom: 20,
+                headerFontSize:18,
+                headerMarginTop:18,
+                headerMarginLeft:21,
+                contentMarginTop:22,
+                marginBottom: 12,
             },
             {
-                src:'CHANNELS',
+                header:'CHANNELS',
                 number:'13',
                 width:140,
-                height:75,
+                height:58,
                 background:'#FFFFFF',
-                marginBottom:5,
-                srcSize:14,
-                numberSize:32,
-                textAlign:'left',
-                textMarginTop:6,
-                textMarginLeft:6,
-                numMarginTop:3,
+                marginBottom:12,
+                headerFontSize:12,
+                numberSize:24,
+                headerAlign:'left',
+                headerMarginTop:6,
+                headerMarginLeft:6,
+                contentMarginTop:0
                 
             },
             {
-                src:'DISCOVERY',
+                header:'DISCOVERY',
                 number:'201',
                 width:220,
-                height:140,
+                height:115,
                 background:'#FFFFFF',
-                srcSize:12,
-                numberSize:32,
-                textMarginTop:21,
-                textMarginLeft:15,
-                numMarginTop:27,
-                marginBottom: 20,
+                headerFontSize:12,
+                numberSize:24,
+                headerMarginTop:21,
+                headerMarginLeft:15,
+                contentMarginTop:27,
+                marginBottom: 12,
             },
             {
-                src:'LIVE EXPERIENCES',
+                header:'LIVE EXPERIENCES',
                 number:'201',
                 width:140,
-                height:75,
+                height:58,
                 background:'#FFFFFF',
-                marginBottom:5,
-                srcSize:14,
-                numberSize:32,
+                marginBottom:12,
+                headerFontSize:12,
+                numberSize:24,
                 textAlign:'left',
-                textMarginTop:6,
-                textMarginLeft:6,
-                numMarginTop:6
+                headerMarginTop:6,
+                headerMarginLeft:6,
+                contentMarginTop:0
             },
             {
-                src:'Real Time',
+                header:'Real Time',
                 number:'21',
                 width:140,
-                height:140,
+                height:110,
                 background:'linear-gradient(90deg, #FF4D43 0%, #FF1E71 100%)',
                 color:'white',
-                srcSize:14,
-                numberSize:32,
-                textAlign:'center',
-                textMarginTop:18,
-                numMarginTop:18,
-                marginBottom: 20
-            }
-        ]
+                headerFontSize:14,
+                numberSize:24,
+                headerAlign:'center',
+                headerMarginTop:18,
+                contentMarginTop:12,
+                marginBottom: 12
+            }      
+        ],
     };
 
-    handleRemove = () => {
 
+    handleRemoveWidget = () => {
         this.setState({
-            elements: this.state.elements.splice(1,8)
+            widgetElements: this.state.widgetElements.splice(1,10)
         });
-        console.log(this.state.elements);
-
     }
 
 
@@ -186,26 +173,22 @@ class Insight extends Component {
         const {
             mainContainerStyle,
             mainWrapperStyle,
+
             topContainerStyle,
-            addWidgetContainerStyle,
+            imgStyle,
             headerStyle,
+            headerLabelStyle,
             dateBtnStyle,
+            dateIconStyle,
+
+            addWidgetContainerStyle,
             addBtnStyle,
-            iconStyle,
             addIconStyle,
             arrangeLabelStyle,
             arrangeWrapperStyle,
             arrangeIconStyle,
-            imgStyle,
-            headerLabelStyle,
-            widgetContainerStyle,
-            engagementCardStyle,
-            performanceCardStyle,
-            diabetesCardStyle,
-            hypertensionCardStyle,
-            middleCardStyle,
-            masonContainerStyle,
-            springStyle
+            
+            widgetContainerStyle
         } = styles;
 
         return (
@@ -217,44 +200,18 @@ class Insight extends Component {
                             src={require('../../../../../assets/images/analysisLogo.png')} 
                         />
                         <p style={headerStyle}>Reports<p style={headerLabelStyle}>for</p></p>
-                        <Button style={dateBtnStyle} variant="extendedFab">12.12 - 19.12<ExpandMore style={iconStyle} onClick={() => this.handleRemoveElement()}/></Button>
+                        <Button style={dateBtnStyle} variant="extendedFab">12.12 - 19.12<ExpandMore style={dateIconStyle} onClick={() => this.handleRemoveElement()}/></Button>
                     </div>
                     <div style={addWidgetContainerStyle}>
-                        <Button style={addBtnStyle} variant="extendedFab" onClick={() => this.handleRemove()}><Add style={addIconStyle}/>Add widget</Button>
+                        <Button style={addBtnStyle} variant="extendedFab" onClick={() => this.handleRemoveWidget()}><Add style={addIconStyle}/>Add widget</Button>
                         <div style={arrangeWrapperStyle}>
                             <Apps style={arrangeIconStyle}/>
                             <p style={arrangeLabelStyle}>Arrange</p>
-                            {/* <Button>Delete</Button> */}
+                            {/* <Button onClick={() => this.handleAdd()}>Delete</Button> */}
                         </div>
                     </div>
-                    {/* <div style={widgetContainerStyle}>
-                        <Card style={engagementCardStyle}>
-                            <CardContent>
-                                <p>HELLO!</p>
-                            </CardContent>
-                        </Card>
-                        <div style={middleCardStyle}>
-                            <Card style={diabetesCardStyle}>
-                                <CardContent>
-                                    <p>HELLO!</p>
-                                </CardContent>
-                            </Card>
-                            <Card style={hypertensionCardStyle}>
-                                <CardContent>
-                                    <p>HELLO!</p>
-                                </CardContent>
-                            </Card>
-                        </div>
-                        <Card style={performanceCardStyle}>
-                            <CardContent>
-                                <p>HELLO!</p>
-                            </CardContent>
-                        </Card>
-                    </div> */}
-                    {/* <Spring elements={ this.state.elements }/> */}
-                    <div style={springStyle}>
-                        <WidgetTemplate elements={this.state.elements} />
-                        {/* <GridLay elements={this.state.elements}/> */}
+                    <div style={widgetContainerStyle}>
+                        <WidgetTemplate widgetElements={this.state.widgetElements} />
                     </div>
                 </div>
             </div>
@@ -274,21 +231,20 @@ const styles = {
         height: `calc(100vh - ${sizes.headerHeight})`,
         flex:1,
         width: '100%',
-        //background:'yellow'
     },
     topContainerStyle:{
         height:32,
         display:'flex',
         flexDirection:'row',
         marginTop:30,
-        marginLeft:210,
+        marginLeft:120,
+        marginRight:120,
         alignItems:'center',
         justifyContent:'flex-start'
     },
     addWidgetContainerStyle:{
-        marginLeft:210,
-        marginRight:36,
-        // background:'yellow',
+        marginLeft:120,
+        marginRight:120,
         alignItems:'center',
         justifyContent:'space-between',
         marginTop:30,
@@ -311,7 +267,7 @@ const styles = {
         fontWeight: 300,
         textAlign:'center'
     },
-    iconStyle:{
+    dateIconStyle:{
         marginLeft:6,
         color:colors.lightGreyColor
     },
@@ -325,9 +281,7 @@ const styles = {
     },
     headerStyle:{
         margin:0,
-        // height:32,
         textAlign:'center',
-        // fontSize:fonts.h1,
         fontSize:24,
         fontWeight:300,
         fontFamily:'avenir',
@@ -359,7 +313,8 @@ const styles = {
         fontSize:fonts.h3,
         fontWeight:500,
         color:'#CED5DB',
-        margin:0
+        margin:0,
+        paddingRight:20
     },
     arrangeWrapperStyle:{
         display:'flex',
@@ -384,45 +339,15 @@ const styles = {
         fontFamily:'avenir',
         marginLeft:12
     },
-    widgetContainerStyle:{
-        marginLeft:210,
-        //background:'yellow',
-        height:270,
-        display:'flex',
-        alignItems:'center'
-    },
-    engagementCardStyle:{
-        width:460,
-        height:'100%'
-    },
-    performanceCardStyle:{
-        width:200,
-        height:'100%' 
-    },
-    diabetesCardStyle:{
-        width:220,
-        height:125,
-        marginLeft:21,
-        marginRight:21,
-        marginBottom:21
-    },
-    hypertensionCardStyle:{
-        width:220,
-        height:125,
-        marginLeft:21,
-        marginRight:21
-    },
-    middleCardStyle:{
-        display:'flex',
-        flexDirection:'column'
-    },
     masonContainerStyle:{
         height:560
     },
-    springStyle:{
-        marginLeft:210,
-        // width:960,
-        // background:'red'
+    widgetContainerStyle:{
+        marginLeft:120,
+        // width:'100%',
+        maxHeight:`calc(100% - 154px)`,
+        overflowX: 'hidden',
+        marginRight:120
     }
 }
 

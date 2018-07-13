@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-// import PersonAdd from '@material-ui/icons/PersonAdd';
 import Modal from 'react-responsive-modal';
 
 // constants
