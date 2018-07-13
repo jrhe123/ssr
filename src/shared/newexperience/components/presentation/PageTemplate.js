@@ -24,7 +24,7 @@ const itemSource = {
         if (!monitor.didDrop()) {
             return;
         }
-        return props.handleDrop(props.template.PageTemplateGUID);
+        return props.handleDrop(props.template);
     }
 }
 
@@ -260,12 +260,20 @@ class PageTemplate extends Component {
                                 <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
                                     <PlayCircleOutline
                                         style={Object.assign({}, playIconStyle, { color: colors.whiteColor })}
-                                        onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            )
+        } else if (template.Type == 'IMAGE') {
+            card = (
+                <div style={videoOverlayContainerStyle}>
+                    <img
+                        style={videoOverlayImgStyle}
+                        src={require('../../../../../assets/images/demo.jpg')}
+                    />
                 </div>
             )
         }
@@ -284,12 +292,16 @@ class PageTemplate extends Component {
             mainContainerStyle,
         } = styles;
 
-        return connectDragSource(
+        return (
             <div style={mainContainerStyle}>
                 <div style={Object.assign({}, { width: 'calc(100% - 24px)', margin: '0 auto' }, { opacity })}
                     className="dx_page"
                 >
-                    {this.renderPage(template)}
+                    {
+                        connectDragSource(
+                            this.renderPage(template)
+                        )
+                    }
                 </div>
             </div>
         );
@@ -477,6 +489,7 @@ const styles = {
     videoOverlayImgStyle: {
         height: 90,
         width: '100%',
+        cursor: 'pointer'
     }
 }
 

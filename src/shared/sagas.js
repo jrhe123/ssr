@@ -30,6 +30,16 @@ import {
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
 
+    dxExperiencePageCarouselMenuToggleSaga,
+    dxExperiencePageCarouselPageActiveSaga,
+
+    dxExperiencePageAddPageSaga,
+    dxExperiencePageDeletePageSaga,
+    dxExperiencePageAddElemSaga,
+    dxExperiencePageShuffleElemSaga,
+    dxExperiencePageSelectElemSaga,
+    dxExperiencePageUpdateElemSaga,
+    dxExperiencePageElemConnectPageSaga,
 } from './newexperience/sagas';
 
 // Global
@@ -54,6 +64,7 @@ export default function* rootSaga() {
         dxExperienceIndexUpdateSaga(),
         dxExperienceTitleUpdateSaga(),
         
+        // Card
         dxExperienceCardTemplateMenuToggleSaga(),
         dxExperienceCardTemplateFetchSaga(),
         dxExperienceCardTemplateSelectSaga(),
@@ -63,9 +74,21 @@ export default function* rootSaga() {
         dxExperienceCardTemplateSaveSaga(),
         dxExperienceCardTemplateRemoveSaga(),
 
+        // Page
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),
+
+        dxExperiencePageCarouselMenuToggleSaga(),
+        dxExperiencePageCarouselPageActiveSaga(),
+
+        dxExperiencePageAddPageSaga(),
+        dxExperiencePageDeletePageSaga(),
+        dxExperiencePageAddElemSaga(),
+        dxExperiencePageShuffleElemSaga(),
+        dxExperiencePageSelectElemSaga(),
+        dxExperiencePageUpdateElemSaga(),
+        dxExperiencePageElemConnectPageSaga(),
         
         // Global
         dxValidateTokenSaga(),

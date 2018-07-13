@@ -4,4 +4,6 @@ export default {
     h3: '14px',
     h4: '12px',
     h5: '10px',
+
+    thumbnail: '9px',
 }

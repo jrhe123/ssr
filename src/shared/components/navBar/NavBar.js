@@ -14,6 +14,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import NavigateBefore from '@material-ui/icons/NavigateBefore';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import Add from '@material-ui/icons/Add';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
@@ -78,6 +79,7 @@ class NavBar extends Component {
         const {
             mainContainerStyle,
             mainWrapperStyle,
+            halfTableContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
             txtCenterStyle,
@@ -121,22 +123,24 @@ class NavBar extends Component {
             pageElemSubtitleStyle,
             rightElemContainerStyle,
             flowMenuDownStyle,
+            addPageBtnContainerStyle,
+            addPageIconStyle,
         } = styles;
 
         let title, placeholder;
-        if(experience){
-            if(experience.index == 0){
+        if (experience) {
+            if (experience.index == 0) {
                 title = experience.experienceTitle;
                 placeholder = 'untitle experience';
-            }else if(experience.index == 1){
+            } else if (experience.index == 1) {
                 title = experience.cardTitle;
                 placeholder = 'untitle card';
-            }else if(experience.index == 2){
-                title = experience.pageTitle;
+            } else if (experience.index == 2) {
+                title = experience.newPage.title;
                 placeholder = 'untitle page';
             }
         }
-        
+
         return (
 
             isRoute ?
@@ -264,82 +268,100 @@ class NavBar extends Component {
                         <div style={midContextContainerStyle}>
                             {
                                 experience.index == 1 ?
-                                (
-                                    <div style={cardLayoutContainerStyle}>
-                                        <div style={layoutLabelContainerStyle}>
-                                            <p style={layoutLabelStyle}>Card Layout</p>
-                                        </div>
-                                        <div 
-                                            style={layoutOptionContainerStyle}
-                                            onClick={() => this.props.handleCardTemplateMenu()}>
-                                            <div style={layoutOptionWrapperStyle}>
-                                                {
-                                                    experience.cardTemplate ?
-                                                    <div>
-                                                        <span style={layoutSubLabelStyle}>{experience.cardTemplate.Title}</span>
-                                                        <KeyboardArrowDown 
-                                                            className={experience.isCardTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
-                                                            style={menuDownStyle}/>
-                                                    </div>
-                                                    :
-                                                    <span style={layoutSubLabelStyle}>choose a card below</span>
-                                                }
+                                    (
+                                        <div style={cardLayoutContainerStyle}>
+                                            <div style={layoutLabelContainerStyle}>
+                                                <p style={layoutLabelStyle}>Card Layout</p>
+                                            </div>
+                                            <div
+                                                style={layoutOptionContainerStyle}
+                                                onClick={() => this.props.handleCardTemplateMenu()}>
+                                                <div style={layoutOptionWrapperStyle}>
+                                                    {
+                                                        experience.cardTemplate ?
+                                                            <div>
+                                                                <span style={layoutSubLabelStyle}>{experience.cardTemplate.title}</span>
+                                                                <KeyboardArrowDown
+                                                                    className={experience.isCardTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                    style={menuDownStyle} />
+                                                            </div>
+                                                            :
+                                                            <span style={layoutSubLabelStyle}>choose a card below</span>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                                :
-                                null
+                                    )
+                                    :
+                                    null
                             }
                             {
                                 experience.index == 2 ?
-                                (
-                                    <div style={pageElementContainerStyle}>
-                                        <div className="dx_flow_tab"
-                                            style={Object.assign({}, leftElemContainerStyle, experience.activePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
+                                    (
+                                        <div style={pageElementContainerStyle}>
+                                            <div className="dx_flow_tab"
+                                                style={Object.assign({}, leftElemContainerStyle, experience.activePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
                                             >
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <div style={pageElemTitleContainerStyle}
-                                                        onClick={() => this.props.handleSelectPageElemOption(0)}>
-                                                        <p style={pageElemTitleStyle}>Page Elements</p>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <div style={pageElemTitleContainerStyle}
+                                                            onClick={() => this.props.handleSelectPageElemOption(0)}>
+                                                            <p style={pageElemTitleStyle}>Page Elements</p>
+                                                        </div>
+                                                        <div style={pageElemSubtitleContainerStyle}>
+                                                            <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
+                                                            <KeyboardArrowDown
+                                                                onClick={() => this.props.handlePageTemplateMenu()}
+                                                                className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                style={flowMenuDownStyle} />
+                                                        </div>
                                                     </div>
-                                                    <div style={pageElemSubtitleContainerStyle}>
-                                                        <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
-                                                        <KeyboardArrowDown 
-                                                            onClick={() => this.props.handlePageTemplateMenu()}
-                                                            className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
-                                                            style={flowMenuDownStyle}/>
+                                                </div>
+                                            </div>
+                                            <div className="dx_flow_tab"
+                                                style={Object.assign({}, rightElemContainerStyle, experience.activePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
+                                            >
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <div style={pageElemTitleContainerStyle}
+                                                            onClick={() => this.props.handleSelectPageElemOption(1)}>
+                                                            <p style={pageElemTitleStyle}>Reference documents</p>
+                                                        </div>
+                                                        <div style={pageElemSubtitleContainerStyle}>
+                                                            <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
+                                                            <KeyboardArrowDown
+                                                                onClick={() => this.props.handlePageTemplateMenu()}
+                                                                className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                style={flowMenuDownStyle} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="dx_flow_tab" 
-                                            style={Object.assign({}, rightElemContainerStyle, experience.activePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
-                                            >
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <div style={pageElemTitleContainerStyle}
-                                                        onClick={() => this.props.handleSelectPageElemOption(1)}>
-                                                        <p style={pageElemTitleStyle}>Reference documents</p>
-                                                    </div>
-                                                    <div style={pageElemSubtitleContainerStyle}>
-                                                        <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
-                                                        <KeyboardArrowDown 
-                                                            onClick={() => this.props.handlePageTemplateMenu()}
-                                                            className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
-                                                            style={flowMenuDownStyle}/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                                :
-                                null
+                                    )
+                                    :
+                                    null
                             }
-                            <div style={tableContainerStyle}>
-                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
+                            {
+                                experience.index == 2 ?
+                                    (
+                                        <div style={addPageBtnContainerStyle}>
+                                            <div style={tableContainerStyle}>
+                                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle)}>
+                                                    <Button
+                                                        onClick={() => this.props.handleAddNewPage()}
+                                                        variant="add new page"
+                                                        style={btnStyle}
+                                                    ><Add style={addPageIconStyle}/>ADD PAGE</Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                    :
+                                    null
+                            }
+                            <div style={Object.assign({}, experience.index == 2 ? (halfTableContainerStyle, { float: 'right', height: sizes.headerHeight }) : tableContainerStyle)}>
+                                <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle, experience.index == 2 ? { height: sizes.headerHeight, width: 420 } : null)}>
                                     <DxInput
                                         placeholder={placeholder}
                                         handleValChange={(e) => this.handleInputChange(e)}
@@ -383,6 +405,11 @@ const styles = {
         maxWidth: sizes.dxWidth,
         display: 'flex',
         flexDirection: 'row',
+        margin: '0 auto'
+    },
+    halfTableContainerStyle: {
+        position: 'relative',
+        display: 'table',
         margin: '0 auto'
     },
     tableContainerStyle: {
@@ -598,6 +625,17 @@ const styles = {
         right: 0,
         cursor: 'pointer',
     },
+    addPageBtnContainerStyle: {
+        position: 'absolute',
+        left: 300,
+        top: 0,
+        width: 180,
+        height: '100%',
+        zIndex: 99,
+    },
+    addPageIconStyle: {
+        fontSize: 17
+    }
 }
 
 export default withStyles(themeStyles)(NavBar);

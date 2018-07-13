@@ -11,7 +11,7 @@ import {
 export const dxLoginUrl = (params) => {
 
     return (
-        fetch('https://jsonplaceholder.typicode.com/posts', {
+        fetch('https://www.google.ca', {
             method: 'get',
             headers: {
                 Accept: 'application/json',

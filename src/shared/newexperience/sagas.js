@@ -62,6 +62,42 @@ import {
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__FAILED,
 
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_CAROUSEL_TOGGLE__FAILED,
+
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
+    EXPERIENCE_PAGE_CAROUSEL_ACTIVE__FAILED,
+
+    EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
+    EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_ADD_PAGE__FAILED,
+
+    EXPERIENCE_PAGE_DELETE_PAGE_REQUESTED,
+    EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_DELETE_PAGE__FAILED,
+
+    EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_ADD_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_SHUFFLE_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_SELECT_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED,
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
+    EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
+
 } from './constants';
 
 // Experience type request
@@ -375,4 +411,195 @@ export function* dxExperiencePageTemplateFetch(action) {
 
 export function* dxExperiencePageTemplateFetchSaga() {
     yield takeEvery(EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED, dxExperiencePageTemplateFetch);
+}
+
+// Experience page carousel menu toggle
+export function* dxExperiencePageCarouselMenuToggle(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED,
+            payload: {
+                toggle: action.payload.toggle,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_TOGGLE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageCarouselMenuToggleSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_CAROUSEL_TOGGLE_REQUESTED, dxExperiencePageCarouselMenuToggle);
+}
+
+// Experience page carousel active page
+export function* dxExperiencePageCarouselPageActive(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED,
+            payload: {
+                pageGUID: action.payload.pageGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_CAROUSEL_ACTIVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageCarouselPageActiveSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_CAROUSEL_ACTIVE_REQUESTED, dxExperiencePageCarouselPageActive);
+}
+
+// Experience page add page
+export function* dxExperiencePageAddPage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_PAGE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageAddPageSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_ADD_PAGE_REQUESTED, dxExperiencePageAddPage);
+}
+
+// Experience page delete page
+export function* dxExperiencePageDeletePage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED,
+            payload: {
+                pageGUID: action.payload.pageGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_PAGE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageDeletePageSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_DELETE_PAGE_REQUESTED, dxExperiencePageDeletePage);
+}
+
+// Experience page add elem
+export function* dxExperiencePageAddElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+            payload: {
+                type: action.payload.type,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_ADD_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageAddElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_ADD_ELEM_REQUESTED, dxExperiencePageAddElem);
+}
+
+// Experience page shuffle elem
+export function* dxExperiencePageShuffleElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
+            payload: {
+                dragIndex: action.payload.dragIndex,
+                hoverIndex: action.payload.hoverIndex,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_SHUFFLE_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageShuffleElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED, dxExperiencePageShuffleElem);
+}
+
+// Experience page select elem
+export function* dxExperiencePageSelectElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_SELECT_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageSelectElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED, dxExperiencePageSelectElem);
+}
+
+// Experience page update elem
+export function* dxExperiencePageUpdateElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+                type: action.payload.type,
+                content: action.payload.content,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageUpdateElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED, dxExperiencePageUpdateElem);
+}
+
+// Experience page elem connect page
+export function* dxExperiencePageElemConnectPage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+                pageGUID: action.payload.pageGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageElemConnectPageSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED, dxExperiencePageElemConnectPage);
 }

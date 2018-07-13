@@ -17,7 +17,7 @@ export class NewExperiencePage extends Component {
 
     componentDidMount(){
         const history = this.props.history;
-        const experienceType = this.props.match.params.experienceType;
+        const experienceType = this.props.match.params.param;
         this.props.dxNavigateHistoryAction(history);
         this.props.dxExperienceTypeAction(experienceType);
     }
