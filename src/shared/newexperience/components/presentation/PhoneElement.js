@@ -206,10 +206,16 @@ class PhoneElement extends Component {
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
-                                <div style={removeControlContainerStyle}>
+                                <div 
+                                    className="dx_control_btn"
+                                    style={removeControlContainerStyle}
+                                    onClick={() => this.props.handleDeleteElem(this.props.sectionGUID)}
+                                >
                                     <Delete style={controlIconStyle} />
                                 </div>
-                                <div style={copyControlContainerStyle}>
+                                <div 
+                                    className="dx_control_btn"
+                                    style={copyControlContainerStyle}>
                                     <ContentCopy style={controlIconStyle} />
                                 </div>
                             </div>
@@ -224,7 +230,9 @@ class PhoneElement extends Component {
                             <div
                                 style={contentContainerStyle}
                                 onClick={() => this.props.handleSectionClick(this.props.sectionGUID)}>
-                                <div style={dragControlContainerStyle}>
+                                <div
+                                    className="dx_control_btn" 
+                                    style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
                                 {
@@ -279,7 +287,8 @@ const styles = {
     removeControlContainerStyle: {
         width: 18,
         height: 18,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        cursor: 'pointer',
     },
     controlIconStyle: {
         color: colors.lightGreyColor,
@@ -289,7 +298,8 @@ const styles = {
         width: 18,
         height: 18,
         boxSizing: 'border-box',
-        marginTop: 36
+        marginTop: 36,
+        cursor: 'pointer',
     },
     dragControlContainerStyle: {
         position: 'absolute',

@@ -130,3 +130,7 @@ body{
 .dx_float_active_side_tab{
     transition: border-color .2s linear;
 }
+
+.dx_control_btn:hover svg{
+    color: #000000 !important;
+}

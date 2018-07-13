@@ -11,6 +11,7 @@ import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
+import DxModal from '../presentation/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -47,6 +48,8 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
+        isModalOpen: false,
+        targetSectionGUID: null,
     }
 
     componentDidMount() {
@@ -106,6 +109,7 @@ class ExperiencePages extends Component {
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
                 handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
+                handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
 
                 handleVideoError={(msg) => this.handleErrorMsg(msg)}
             />
@@ -209,6 +213,26 @@ class ExperiencePages extends Component {
     handleImageChange = (file) => {
         let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'IMAGE', file);
+    }
+
+    handleDeleteElem = (sectionGUID) => {
+        this.setState({ 
+            isModalOpen: true,
+            targetSectionGUID: sectionGUID
+        });
+    }
+
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleConfirmDeleteElem = () => {
+        const {
+            targetSectionGUID
+        } = this.state;
+        this.handleCloseModal();
+
+        console.log('delete section: ', targetSectionGUID);
     }
 
     handleCarouselClick = (open) => {
@@ -472,6 +496,15 @@ class ExperiencePages extends Component {
                     </div>
 
                 </div>
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title="Confirm Delete Element"
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    handleConfirm={() => this.handleConfirmDeleteElem()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         )
     }
