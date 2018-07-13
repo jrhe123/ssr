@@ -222,6 +222,10 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageCarouselActivePageAction(pageGUID);
     }
 
+    handleConfirmDeleteCarouselPage = (pageGUID) => {
+        console.log('out here: ', pageGUID);
+    }
+
     render() {
 
         const {
@@ -456,6 +460,7 @@ class ExperiencePages extends Component {
                                             <PageCarousel
                                                 experience={experience}
                                                 handleClickActivePage={(pageGUID) => this.handleClickActiveCarouselPage(pageGUID)}
+                                                handleConfirmDeleteCarouselPage={(pageGUID) => this.handleConfirmDeleteCarouselPage(pageGUID)}
                                             />
                                         </div>
                                     )

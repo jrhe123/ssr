@@ -53,7 +53,9 @@ class ThumbnailPage extends Component {
             >
                 <div 
                     className="dx_hover_btn"
-                    style={closeContainerStyle}>
+                    style={closeContainerStyle}
+                    onClick={() => this.props.handleDeletePage()}
+                >
                     <img 
                         style={closeIconStyle}
                         src={require('../../../../../assets/images/close_button.png')}/>

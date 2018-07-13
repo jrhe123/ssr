@@ -59,6 +59,7 @@ class DxCard extends Component {
     handleRemoveCardTemplateClick = () => {
         this.setState({ isModalOpen: true });
     }
+    
     handleCloseModal = () => {
         this.setState({ isModalOpen: false });
     }
@@ -321,7 +322,7 @@ class DxCard extends Component {
                 }
                 <DxModal
                     open={this.state.isModalOpen}
-                    title="Confirm Delete"
+                    title="Confirm Delete Card"
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
