@@ -178,6 +178,7 @@ class PhoneElement extends Component {
             connectDropTarget,
 
             activePage,
+            isDeleted,
             type,
             isActive,
         } = this.props;
@@ -199,7 +200,7 @@ class PhoneElement extends Component {
 
         return (
             <div
-                className={activePage ? 'dx_show' : 'dx_hidden'}
+                className={activePage && !isDeleted ? 'dx_show' : 'dx_hidden'}
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
                 <div className="dx_float_active_side_tab"
                     style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>

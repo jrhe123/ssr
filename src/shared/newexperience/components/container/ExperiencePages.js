@@ -88,6 +88,7 @@ class ExperiencePages extends Component {
         section = sections.map((section, i) => (
             <PhoneElement
                 activePage={activePage}
+                isDeleted={section.isDeleted}
                 sectionGUID={section.sectionGUID}
                 type={section.type}
                 isActive={section.isActive}

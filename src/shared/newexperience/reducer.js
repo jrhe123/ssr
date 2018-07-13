@@ -113,6 +113,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpSettingIndex;
     let tmpPageGUID;
     let tmpPageIndex;
+    let tmpPagesLength;
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpHoverIndex, tmpDragIndex;
@@ -263,12 +264,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
-            tmpPages.splice(tmpNewPage.index, 1);
+            tmpPages[tmpNewPage.index].isDeleted = true;
 
-            if (!tmpPages.length) {
+            tmpPagesLength = find_number_of_display_page(tmpPages);
+            if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
                 tmpNewPage.pageGUID = uuid();
-                tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+                tmpNewPage.title = `Page ${tmpPagesLength + 1}`;
                 tmpPages.push(tmpNewPage);
                 tmpExperience.newPage = tmpNewPage;
             } else {
@@ -330,9 +332,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED:
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
             tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
-            
+
             // update new page
-            tmpNewPageSections.splice(tmpSectionIndex, 1)
+            tmpNewPageSections[tmpSectionIndex].isDeleted = true;
             tmpNewPage.sections = tmpNewPageSections;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
@@ -517,6 +519,15 @@ const deactive_tools_by_page_guid = (guid, sections) => {
             sections[i].isActive = false;
         }
     }
+}
+const find_number_of_display_page = (pages) => {
+    let count = 0;
+    for (let i = 0; i < pages.length; i++) {
+        if(!pages[i].isDeleted){
+            count++;
+        }
+    }
+    return count;
 }
 
 export default newexperienceReducer;
