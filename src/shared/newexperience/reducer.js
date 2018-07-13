@@ -263,7 +263,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = `Page ${tmpPages.length + 1}`;
                 tmpPages.push(tmpNewPage);
-
                 tmpExperience.newPage = tmpNewPage;
             } else {
                 tmpPageIndex = tmpNewPage.index - 1 > 0 ? tmpNewPage.index - 1 : 0;
@@ -275,9 +274,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             }
             tmpExperience.pages = tmpPages;
             updated.experience = tmpExperience;
-
-            console.log('updated: ', updated);
-
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
