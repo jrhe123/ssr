@@ -51,6 +51,7 @@ let templateNewPage = {
     title: '',      // page title
     sections: [],   // page sections
     isConnected: false,     // page connected
+    isDeleted: false,       // page deleted
 };
 let templateNewSection = {
     sectionGUID: null,
@@ -67,6 +68,7 @@ let templateNewSection = {
     videoInput: null,    // video input
     videoUrl: null,      // video url
     img: null,        // img
+    isDeleted: false,       // section deleted
     pageGUID: null
 };
 const initialState = {
@@ -280,9 +282,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             // update tools
             deactive_tools_by_page_guid(payload.pageGUID, tmpTools);
-
-            console.log('tmpTools: ', tmpTools);
-
             tmpExperience.tools = tmpTools;
             tmpExperience.pages = tmpPages;
             updated.experience = tmpExperience;
