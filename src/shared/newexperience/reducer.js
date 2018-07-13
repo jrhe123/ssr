@@ -113,6 +113,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpHoverIndex, tmpDragIndex;
     let tmpDragSection, tmpHoverSection;
     let tmpActiveSectionIndex;
+    let tmpSectionIndex;
     let tmpUpdateSection;
 
     switch (type) {
@@ -313,9 +314,18 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED:
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
             
-            console.log('check: ', payload.sectionGUID);
+            // update new page
+            tmpNewPageSections.splice(tmpSectionIndex, 1)
+            tmpNewPage.sections = tmpNewPageSections;
+            // update arr of pages
+            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
+            tmpExperience.pages = tmpPages;
+            tmpExperience.newPage = tmpNewPage;
+            updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:
@@ -464,6 +474,14 @@ const find_section_by_guid = (sections, targetSectionGUID) => {
     for (let i = 0; i < sections.length; i++) {
         if (sections[i].sectionGUID == targetSectionGUID) {
             return sections[i];
+        }
+    }
+    return null;
+}
+const find_section_index_by_guid = (sections, targetSectionGUID) => {
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].sectionGUID == targetSectionGUID) {
+            return i;
         }
     }
     return null;
