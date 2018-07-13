@@ -69,7 +69,7 @@ class RemoveUserPage extends Component{
                         userEmail={'vejey@digitalxi.com'}
                         userRegistrationDate={'29 June 2018'}
                         userRegistrationInfo={'locked'}
-                        btnLabel={'remove'} 
+                        btnLabel={'Remove'} 
                         btnBackground={'#EE2E24'} 
                         btnTextColor={colors.whiteColor} btnBorder={'none'}
                     />
@@ -79,7 +79,7 @@ class RemoveUserPage extends Component{
                         userEmail={'paul@digitalxi.com'}
                         userRegistrationDate={'09 November 2017'}
                         userRegistrationInfo={'joined'}
-                        btnLabel={'remove'} 
+                        btnLabel={'Remove'} 
                         btnBackground={'#EE2E24'} 
                         btnTextColor={colors.whiteColor} 
                         btnBorder={'none'}

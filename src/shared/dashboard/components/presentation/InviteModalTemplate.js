@@ -12,7 +12,6 @@ import colors from '../../../styles/colors';
 import '../../../../../assets/css/modal/rrm.css';
 
 
-
 class InviteModalTemplate extends Component {
 
             
@@ -192,7 +191,9 @@ const styles = {
         color:colors.whiteColor,
         height:40,
         width:120,
-        marginLeft:66
+        marginLeft:66,
+        textTransform:'none',
+        fontSize:fonts.h3
     },
 }
 export default InviteModalTemplate;

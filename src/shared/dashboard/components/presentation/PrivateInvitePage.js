@@ -66,6 +66,7 @@ class PrivateInvitePage extends Component{
             invitaionContainerStyle,
             invitationLabelStyle,
             invitationEditBtnStyle,
+            addInviteCodeBtnStyle,
 
             memberListContainerStyle,
             memberListHeaderContainerStyle,
@@ -102,7 +103,7 @@ class PrivateInvitePage extends Component{
                             </div>
                         </div>
                     </div>
-                    <Button style={invitationEditBtnStyle}>+ add invite code</Button>
+                    <Button style={addInviteCodeBtnStyle}>+ Add Invite Code</Button>
                 </div>
                 <div style={invitaionContainerStyle}>
                     <p style={invitationLabelStyle}>Show this error message when the user tries to enter a wrong invite code</p>
@@ -271,6 +272,19 @@ const styles = {
         width:120,
         marginLeft:0,
         fontSize:fonts.h3,
+        textTransform: 'none',
+        fontFamily:'avenir',
+        paddingLeft:3,
+        paddingRight:3,
+        fontWeight: 300
+    },
+    addInviteCodeBtnStyle:{
+        background:colors.blueColor,
+        color:colors.whiteColor,
+        height:40,
+        width:120,
+        marginLeft:0,
+        fontSize:fonts.h4,
         textTransform: 'none',
         fontFamily:'avenir',
         paddingLeft:3,

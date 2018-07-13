@@ -91,7 +91,7 @@ class Channel extends Component {
                                     variant="Add a new channel" 
                                     style={fullBtnStyle}
                                     onClick={() => this.handleCreateChannel()}>
-                                    Create a channel
+                                    Create A Channel
                                 </Button>
                             </div>
                             <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.

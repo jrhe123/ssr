@@ -192,7 +192,9 @@ const styles = {
         color:colors.whiteColor,
         height:40,
         width:120,
-        marginLeft:0
+        marginLeft:0,
+        textTransform:'none',
+        fontSize:fonts.h3
     },
 
     memberListContainerStyle:{

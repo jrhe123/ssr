@@ -103,7 +103,8 @@ const styles = {
         background:'#F0F7FF',
         color:'#2DD1AC',
         fontSize:fonts.h4,
-        height:26
+        height:26,
+        textTransform:'none'
     },
 
     modalContainerStyle:{
@@ -172,7 +173,7 @@ const styles = {
         height:42,
         width:300,
         boxShadow: '0 2px 4px 0 rgba(0,0,0,0.5)',
-        marginBottom:3,
+        marginBottom:3
     },
     channelLabelStyle:{
         margin:0,
@@ -180,7 +181,7 @@ const styles = {
         paddingTop:12,
         paddingBottom:12,
         fontSize:fonts.h3,
-        fontWeight:'300',
+        fontWeight:'300'
     },
     saveBtnContainerStyle:{
         height:84,
@@ -194,8 +195,9 @@ const styles = {
         background:colors.blueColor,
         color:colors.whiteColor,
         height:40,
-        fontSize: fonts.h5,
-        width:120
+        fontSize: fonts.h3,
+        width:120,
+        textTransform:'none'
     }
 
 }

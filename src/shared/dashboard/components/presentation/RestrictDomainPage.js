@@ -47,6 +47,7 @@ class RestrictDomainPage extends Component{
             invitaionContainerStyle,
             invitationLabelStyle,
             invitationEditBtnStyle,
+            addDomainBtnStyle,
 
             memberListContainerStyle,
             memberListHeaderContainerStyle,
@@ -76,7 +77,7 @@ class RestrictDomainPage extends Component{
                             </div>
                         </div>
                     </div>
-                    <Button style={invitationEditBtnStyle}>+ add domain</Button>
+                    <Button style={addDomainBtnStyle}>+ Add Domain</Button>
                 </div>
                 <div style={invitaionContainerStyle}>
                     <p style={invitationLabelStyle}>Show this error message when the user tries to signup using a different email</p>
@@ -308,6 +309,15 @@ const styles = {
         width:120,
         marginLeft:0,
         fontSize:fonts.h3,
+        textTransform: 'none'
+    },
+    addDomainBtnStyle:{
+        background:colors.blueColor,
+        color:colors.whiteColor,
+        height:40,
+        width:120,
+        marginLeft:0,
+        fontSize:fonts.h4,
         textTransform: 'none'
     },
 
