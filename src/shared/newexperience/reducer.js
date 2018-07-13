@@ -277,6 +277,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
                 tmpExperience.newPage = tmpNewPage.page;
             }
+
+            // update tools
+            deactive_tools_by_page_guid(payload.pageGUID, tmpTools);
+
+            console.log('tmpTools: ', tmpTools);
+
+            tmpExperience.tools = tmpTools;
             tmpExperience.pages = tmpPages;
             updated.experience = tmpExperience;
             return updated;
@@ -332,7 +339,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
             // update tools
-            deactive_tools(payload.sectionGUID, tmpTools);
+            deactive_tools_by_section_guid(payload.sectionGUID, tmpTools);
 
             tmpExperience.tools = tmpTools;
             tmpExperience.pages = tmpPages;
@@ -498,9 +505,16 @@ const find_section_index_by_guid = (sections, targetSectionGUID) => {
     }
     return null;
 }
-const deactive_tools = (guid, sections) => {
+const deactive_tools_by_section_guid = (guid, sections) => {
     for (let i = 0; i < sections.length; i++) {
         if (sections[i].sectionGUID == guid) {
+            sections[i].isActive = false;
+        }
+    }
+}
+const deactive_tools_by_page_guid = (guid, sections) => {
+    for (let i = 0; i < sections.length; i++) {
+        if (sections[i].pageGUID == guid) {
             sections[i].isActive = false;
         }
     }
