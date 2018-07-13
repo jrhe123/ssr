@@ -82,6 +82,10 @@ import {
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__FAILED,
 
+    EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_DELETE_ELEM__FAILED,
+
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__FAILED,
@@ -514,6 +518,27 @@ export function* dxExperiencePageAddElem(action) {
 
 export function* dxExperiencePageAddElemSaga() {
     yield takeEvery(EXPERIENCE_PAGE_ADD_ELEM_REQUESTED, dxExperiencePageAddElem);
+}
+
+// Experience page delete elem
+export function* dxExperiencePageDeleteElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageDeleteElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED, dxExperiencePageDeleteElem);
 }
 
 // Experience page shuffle elem

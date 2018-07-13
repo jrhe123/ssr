@@ -23,6 +23,7 @@ import {
     EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
@@ -309,6 +310,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 updated.experience = tmpExperience;
                 updated.index = tmpIndex + 1;
             }
+            return updated;
+
+        case EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED:
+            
+            console.log('check: ', payload.sectionGUID);
+
             return updated;
 
         case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:

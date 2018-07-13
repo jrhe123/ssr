@@ -29,6 +29,7 @@ import {
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
+    dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
@@ -231,8 +232,7 @@ class ExperiencePages extends Component {
             targetSectionGUID
         } = this.state;
         this.handleCloseModal();
-
-        console.log('delete section: ', targetSectionGUID);
+        this.props.dxExperiencePageDeleteElemAction(targetSectionGUID)
     }
 
     handleCarouselClick = (open) => {
@@ -700,6 +700,7 @@ const dispatchToProps = {
     dxExperiencePageCarouselActivePageAction,
 
     dxExperiencePageAddElemAction,
+    dxExperiencePageDeleteElemAction,
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,
