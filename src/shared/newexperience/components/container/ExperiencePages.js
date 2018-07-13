@@ -587,6 +587,7 @@ const styles = {
     editPhoneContainerStyle: {
         width: 750,
         margin: '0 auto',
+        marginTop: 360
     },
     phoneContainerStyle: {
         width: 750,
@@ -601,7 +602,7 @@ const styles = {
         margin: '0 auto',
         backgroundColor: colors.lightBlueColor,
         textAlign: 'left',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
     },
     pageNumContainerStyle: {
         height: 24
