@@ -10,6 +10,7 @@ export default {
     lightGreyColor : '#9B9B9B',
     greyLabelColor: '#777777',
     greenColor: '#6FB8A4',
+    redColor: '#DD5B55',
     labelColor: '#64697C',
     backgroundColor: '#F2F3F6',
     blueCardColor: '#4397C9',

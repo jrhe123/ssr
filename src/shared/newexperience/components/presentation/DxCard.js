@@ -6,6 +6,7 @@ import fonts from '../../../styles/fonts';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
+import DxModal from './DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -19,6 +20,7 @@ class DxCard extends Component {
     state = {
         videoInsert: false,
         isMenuOpen: false,
+        isModalOpen: false,
     }
 
     handleSelectCardTemplate = (template) => {
@@ -52,6 +54,17 @@ class DxCard extends Component {
 
     handleMenuClose = () => {
         this.setState({ isMenuOpen: false });
+    }
+
+    handleRemoveCardTemplateClick = () => {
+        this.setState({ isModalOpen: true });
+    }
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleConfirmDeleteCard = () => {
+        this.props.handleRemoveCardTemplateClick();
     }
 
     renderCard = (template, isEditable) => {
@@ -177,11 +190,11 @@ class DxCard extends Component {
                                                             facebook: {
                                                                 appId: '868742783317382'
                                                             },
-                                                            file: { 
-                                                                attributes: { 
+                                                            file: {
+                                                                attributes: {
                                                                     poster: template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')
-                                                                } 
-                                                            } 
+                                                                }
+                                                            }
                                                         }}
                                                         width={275}
                                                         height={90}
@@ -298,7 +311,7 @@ class DxCard extends Component {
                                         closeOnInsideClick={false}
                                     >
                                         <Button onClick={() => this.props.handleEditCardTemplateClick()}>Edit</Button>
-                                        <Button onClick={() => this.props.handleRemoveCardTemplateClick()}>Remove</Button>
+                                        <Button onClick={() => this.handleRemoveCardTemplateClick()}>Remove</Button>
                                     </DropdownMenu>
                                 </div>
                             </div>
@@ -306,6 +319,15 @@ class DxCard extends Component {
                         :
                         null
                 }
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title="Confirm Delete"
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    handleConfirm={() => this.handleConfirmDeleteCard()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         )
     }
