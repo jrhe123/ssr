@@ -227,10 +227,9 @@ const styles = {
         marginLeft:0,
         fontSize:fonts.h3,
         textTransform: 'none',
-        fontFamily:'avenir',
         paddingLeft:3,
         paddingRight:3,
-        fontWeight: 300
+        // fontWeight: 300
     },
 
     memberListContainerStyle:{

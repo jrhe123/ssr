@@ -114,8 +114,8 @@ const styles = {
         marginLeft:18
     },
     channelInfoIconStyle:{
-        height:20, 
-        width:20
+        height:24, 
+        width:24
     },
     
 

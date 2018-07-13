@@ -773,12 +773,14 @@ const styles = {
         color:colors.whiteColor,
         height:40,
         marginLeft:36,
-        fontSize: fonts.h4,
+        fontSize: fonts.h3,
         marginRight:12,
         textTransform:'none'
     },
     addIconStyle:{
         paddingRight:6,
+        height: 14,
+        width: 20
     },
 
 }

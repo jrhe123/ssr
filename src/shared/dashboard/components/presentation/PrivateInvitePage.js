@@ -273,23 +273,21 @@ const styles = {
         marginLeft:0,
         fontSize:fonts.h3,
         textTransform: 'none',
-        fontFamily:'avenir',
         paddingLeft:3,
         paddingRight:3,
-        fontWeight: 300
+        // fontWeight: 300
     },
     addInviteCodeBtnStyle:{
         background:colors.blueColor,
         color:colors.whiteColor,
         height:40,
-        width:120,
+        width:132,
         marginLeft:0,
-        fontSize:fonts.h4,
+        fontSize:fonts.h3,
         textTransform: 'none',
-        fontFamily:'avenir',
         paddingLeft:3,
         paddingRight:3,
-        fontWeight: 300
+        // fontWeight: 300
     },
 
     memberListContainerStyle:{

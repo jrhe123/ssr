@@ -315,9 +315,9 @@ const styles = {
         background:colors.blueColor,
         color:colors.whiteColor,
         height:40,
-        width:120,
+        width:126,
         marginLeft:0,
-        fontSize:fonts.h4,
+        fontSize:fonts.h3,
         textTransform: 'none'
     },
 

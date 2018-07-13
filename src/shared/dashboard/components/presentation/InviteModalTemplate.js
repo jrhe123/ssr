@@ -75,7 +75,7 @@ class InviteModalTemplate extends Component {
                                 />
                             </div>
                             <p style={inviteTextStyle}>Princess Margeret Hospital has invited you to join their live content stream on ContentXi</p>
-                            <Button style={acceptBtnStyle}>Accept invite</Button>
+                            <Button style={acceptBtnStyle}>Accept Invite</Button>
                             <div style={contentContainerStyle}>
                                 <p style={contentStyle}><b>ContentXi keeps you up-to-date with all the relevant content, and discover relevant content:</b></p>
                                 <p style={contentStyle}>Discover new relevant content of your choice</p>
@@ -140,9 +140,10 @@ const styles = {
     acceptBtnStyle:{
         background:colors.blueColor,
         color:colors.whiteColor,
-        fontSize: fonts.h5,
+        fontSize: fonts.h2,
         width: 180,
-        height: 36
+        height: 36,
+        textTransform:'none'
     },
     contentContainerStyle:{
         display:'flex',
@@ -181,10 +182,11 @@ const styles = {
         background:colors.blueColor,
         color:colors.whiteColor,
         height:40,
-        fontSize: fonts.h5,
         marginTop:54,
         marginBottom:48,
-        width:120
+        width:120,
+        textTransform:'none',
+        fontSize:fonts.h3
     },
     invitationEditBtnStyle:{
         background:colors.blueColor,
