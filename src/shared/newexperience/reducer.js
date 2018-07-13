@@ -89,6 +89,7 @@ const initialState = {
         experienceTitle: null,      // experience title
         cardTitle: 'Card 1',        // experience card title
 
+        tools: [],      // toolbars
         pages: [],      // pages
         newPage: Object.assign({}, templateNewPage),        // current working page
         activePageSectionIndex: 0,      // active section on a page
@@ -101,6 +102,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpIndex = updated.index;
     let tmpExperience = Object.assign({}, updated.experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
+    let tmpTools = Object.assign([], tmpExperience.tools);
     let tmpPages = Object.assign([], tmpExperience.pages);
     let tmpNewPage = Object.assign({}, tmpExperience.newPage);
     let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
@@ -305,6 +307,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 // update arr of pages
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
+                // add to tools
+                tmpTools.push(Object.assign({}, tmpNewSection));
+
+                tmpExperience.tools = tmpTools;
                 tmpExperience.pages = tmpPages;
                 tmpExperience.newPage = tmpNewPage;
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;

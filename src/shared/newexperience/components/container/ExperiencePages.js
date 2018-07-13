@@ -395,6 +395,7 @@ class ExperiencePages extends Component {
                             <div style={toolbarContainerStyle}>
                                 <PhoneToolbar
                                     activePageSectionIndex={experience.activePageSectionIndex}
+                                    tools={experience.tools}
                                     newPage={experience.newPage}
                                     pages={experience.pages}
 
@@ -587,7 +588,6 @@ const styles = {
     editPhoneContainerStyle: {
         width: 750,
         margin: '0 auto',
-        marginTop: 360
     },
     phoneContainerStyle: {
         width: 750,
