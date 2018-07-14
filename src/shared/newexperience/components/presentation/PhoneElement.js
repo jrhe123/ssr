@@ -177,6 +177,7 @@ class PhoneElement extends Component {
             connectDragSource,
             connectDropTarget,
 
+            deletedPage,
             activePage,
             isDeleted,
             type,
@@ -200,7 +201,7 @@ class PhoneElement extends Component {
 
         return (
             <div
-                className={activePage && !isDeleted ? 'dx_show' : 'dx_hidden'}
+                className={!deletedPage && activePage && !isDeleted ? 'dx_show' : 'dx_hidden'}
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
                 <div className="dx_float_active_side_tab"
                     style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>

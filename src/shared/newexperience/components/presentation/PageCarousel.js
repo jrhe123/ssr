@@ -40,10 +40,12 @@ class PageCarousel extends Component {
         const {
             experience,
         } = this.props;
-        const {
+        let {
             pages,
             newPage,
         } = experience;
+
+        pages = find_display_pages(pages);
 
         const settings = {
             dots: false,
@@ -107,6 +109,17 @@ class PageCarousel extends Component {
             </div>
         )
     }
+}
+
+const find_display_pages = (pages) => {
+    let output = [];
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i]
+        if (!page.isDeleted) {
+            output.push(page);
+        }
+    }
+    return output;
 }
 
 const styles = {

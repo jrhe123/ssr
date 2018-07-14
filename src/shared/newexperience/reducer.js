@@ -274,8 +274,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpPages.push(tmpNewPage);
                 tmpExperience.newPage = tmpNewPage;
             } else {
-                tmpPageIndex = tmpNewPage.index - 1 > 0 ? tmpNewPage.index - 1 : 0;
-                tmpPageGUID = tmpPages[tmpPageIndex].pageGUID;
+                tmpPageIndex = tmpPagesLength - 1 > 0 ? tmpPagesLength - 1 : 0;
+                tmpPageGUID = find_previous_display_page_guid(tmpPages, tmpPageIndex);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
@@ -528,6 +528,17 @@ const find_number_of_display_page = (pages) => {
         }
     }
     return count;
+}
+const find_previous_display_page_guid = (pages, start) => {
+    let count = 0;
+    for (let i = 0; i < pages.length; i++) {
+        if(!pages[i].isDeleted){
+            count++;
+        }
+        if(count > start){
+            return pages[i].pageGUID;
+        }
+    }
 }
 
 export default newexperienceReducer;

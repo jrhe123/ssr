@@ -73,12 +73,12 @@ class ExperiencePages extends Component {
             pages,
         } = this.props.experience;
         let phone = pages.map((page, index) => (
-            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false)
+            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false, page.isDeleted)
         ))
         return phone;
     }
 
-    renderPhoneElementSection = (sections, activePage) => {
+    renderPhoneElementSection = (sections, activePage, deletedPage) => {
 
         const {
             experience,
@@ -87,6 +87,7 @@ class ExperiencePages extends Component {
         let section;
         section = sections.map((section, i) => (
             <PhoneElement
+                deletedPage={deletedPage}
                 activePage={activePage}
                 isDeleted={section.isDeleted}
                 sectionGUID={section.sectionGUID}
