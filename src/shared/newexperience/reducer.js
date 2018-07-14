@@ -110,6 +110,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPage = Object.assign({}, tmpExperience.newPage);
     let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
 
+    let tmpIsRootPage;
     let tmpSettingIndex;
     let tmpPageGUID;
     let tmpPageIndex;
@@ -267,8 +268,14 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages[tmpNewPage.index].isDeleted = true;
 
             tmpPagesLength = find_number_of_display_page(tmpPages);
+            tmpIsRootPage = tmpPages[tmpNewPage.index].isRoot;
+
             if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
+                // delete root page
+                if(tmpIsRootPage){
+                    tmpNewPage.isRoot = true;
+                }
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = `Page ${tmpPagesLength + 1}`;
                 tmpPages.push(tmpNewPage);
@@ -277,6 +284,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpPageIndex = tmpPagesLength - 1 > 0 ? tmpPagesLength - 1 : 0;
                 tmpPageGUID = find_previous_display_page_guid(tmpPages, tmpPageIndex);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
+                // delete root page
+                if(tmpIsRootPage){
+                    tmpNewPage.isRoot = true;
+                }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
                 tmpExperience.newPage = tmpNewPage.page;
