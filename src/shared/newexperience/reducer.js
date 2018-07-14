@@ -255,7 +255,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
             tmpNewPage = Object.assign({}, templateNewPage);
             tmpNewPage.pageGUID = uuid();
-            tmpNewPage.title = `Page ${tmpPages.length + 1}`;
+            tmpNewPage.title = `Page ${find_number_of_display_page(tmpPages) + 1}`;
             tmpPages.push(tmpNewPage);
 
             tmpExperience.pages = tmpPages;
@@ -286,7 +286,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 // delete root page
                 if(tmpIsRootPage){
-                    tmpNewPage.isRoot = true;
+                    tmpNewPage.page.isRoot = true;
                 }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
