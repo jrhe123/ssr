@@ -303,7 +303,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => console.log(experience)}>click me</a>
+                {/* <a onClick={() => console.log(experience)}>click me</a> */}
                 <div
                     className={experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
