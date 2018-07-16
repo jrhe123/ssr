@@ -13,6 +13,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
 
+    EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
@@ -230,6 +231,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.cardTitle = '';
             tmpExperience.card = null;
             updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED:
+            console.log('received here');
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:

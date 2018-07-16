@@ -16,6 +16,7 @@ import {
     dxExperienceCardTemplateMenuUpdate as dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSave as dxExperienceCardTemplateSaveAction,
 
+    dxExperiencePagePagesSave as dxExperiencePagePagesSaveAction,
     dxExperiencePageTemplateMenuUpdate as dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPage as dxExperiencePageAddPageAction,
@@ -67,13 +68,16 @@ class ExperienceNavigator extends Component {
                 });
             } else {
                 this.props.dxAlertAction(true, IsError, Message);
-                if (!IsError) console.log('call action');
+                if (!IsError) this.props.dxExperiencePagePagesSaveAction();
             }
         }
     }
 
     handleConfirmModal = () => {
-        console.log('call action');
+        this.setState({
+            isModalOpen: false,
+        });
+        this.props.dxExperiencePagePagesSaveAction();
     }
 
     validateExperienceCard = (experience) => {
@@ -325,7 +329,7 @@ class ExperienceNavigator extends Component {
             }
         }
         for (let i = 0; i < output.length; i++) {
-            if(output[i].sectionGUID == sectionGUID){
+            if (output[i].sectionGUID == sectionGUID) {
                 return i + 1;
             }
         }
@@ -373,6 +377,8 @@ const dispatchToProps = {
     dxExperienceTitleUpdateAction,
     dxExperienceCardTemplateMenuUpdateAction,
     dxExperienceCardTemplateSaveAction,
+
+    dxExperiencePagePagesSaveAction,
     dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPageAction,
