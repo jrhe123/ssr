@@ -30,6 +30,7 @@ import {
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
+    dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
@@ -248,11 +249,12 @@ class ExperiencePages extends Component {
             modalType,
             targetSectionGUID
         } = this.state;
+
+        this.handleCloseModal();
         if (modalType == 'DELETE') {
-            this.handleCloseModal();
             this.props.dxExperiencePageDeleteElemAction(targetSectionGUID);
         } else if (modalType == 'COPY') {
-            console.log('copy: ', targetSectionGUID);
+            this.props.dxExperiencePageCopyElemAction(targetSectionGUID);
         }
     }
 
@@ -724,6 +726,7 @@ const dispatchToProps = {
 
     dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElemAction,
+    dxExperiencePageCopyElemAction,
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,

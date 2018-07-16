@@ -24,6 +24,7 @@ import {
     EXPERIENCE_PAGE_DELETE_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
     EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_COPY_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
     EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
@@ -209,6 +210,15 @@ export const dxExperiencePageAddElem = (type) => {
 export const dxExperiencePageDeleteElem = (sectionGUID) => {
     return {
         type: EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+        payload: {
+            sectionGUID,
+        },
+    }
+}
+
+export const dxExperiencePageCopyElem = (sectionGUID) => {
+    return {
+        type: EXPERIENCE_PAGE_COPY_ELEM_REQUESTED,
         payload: {
             sectionGUID,
         },
