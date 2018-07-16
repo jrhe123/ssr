@@ -20,6 +20,7 @@ import fonts from '../../../styles/fonts';
 // components
 import DxInput from '../../../components/dxInput/DxInput';
 import DxCard from '../presentation/DxCard';
+import DxPage from '../presentation/DxPage';
 
 class ExperiencePanel extends Component {
 
@@ -58,6 +59,7 @@ class ExperiencePanel extends Component {
             outlineBtnStyle,
             optionBtnStyle,
             demoCardContainerStyle,
+            demoPagesContainerStyle,
         } = styles;
 
         const {
@@ -172,7 +174,6 @@ class ExperiencePanel extends Component {
                                 </div>
                                 {
                                     !experience.isPagesSaved ?
-
                                         <div style={editContainerStyle}>
                                             <a style={btnStyle}
                                                 onClick={() => this.props.handleCreatePages()}
@@ -180,7 +181,12 @@ class ExperiencePanel extends Component {
                                             >Create page(s)</a>
                                         </div>
                                         :
-                                        <div>display here</div>
+                                        <div style={demoPagesContainerStyle}>
+                                            <DxPage 
+                                                pageNumber={this.props.experience.pages.length}
+                                                page={this.props.experience.newPage}
+                                            />
+                                        </div>
                                 }
                             </div>
                         )
@@ -256,8 +262,14 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 210,
+        height: 120,
         width: 300,
+    },
+    demoPagesContainerStyle: {
+        height: 360,
+        width: 276,
+        marginTop: 12,
+        marginLeft: 120,
     },
 }
 

@@ -24,6 +24,10 @@ class ThumbnailPage extends Component {
                     <ThumbnailPhoneElement
                         key={i}
                         section={section}
+                        pdfWidth={120}
+                        splashSize="SMALL"
+                        videoSize="SMALL"
+                        imgSize="SMALL"
                     />
                 </div>
             )
