@@ -51,7 +51,8 @@ class ExperienceNavigator extends Component {
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
-            console.log('save pages');
+            this.validateExperiencePages(experience);
+
         }
     }
 
@@ -108,7 +109,6 @@ class ExperienceNavigator extends Component {
             experience,
         } = this.props;
         let content = e.target.value;
-
         if (experience.index == 0) {
             this.props.dxExperienceTitleUpdateAction('EXPERIENCE', content);
         } else if (experience.index == 1) {
@@ -120,6 +120,72 @@ class ExperienceNavigator extends Component {
 
     handleAddNewPage = () => {
         this.props.dxExperiencePageAddPageAction();
+    }
+
+    validateExperiencePages = (experience) => {
+        let res = {
+            IsError: true,
+            Message: '',
+        }
+        let pages = experience.pages;
+        let displayPages = this.findDisplayPages(pages);
+        let rootPage = this.findRootPageOrChildrenPages(displayPages, 'ROOT');
+        let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
+
+        console.log('displayPages: ', displayPages);
+        console.log('rootPage: ', rootPage);
+        console.log('childrenPages: ', childrenPages);
+
+        // if (!displayPages.length) {
+        //     res.Message = 'Please create your page(s)';
+        //     return res;
+        // }
+        // if (!rootPage) {
+        //     res.Message = 'Please create your root page';
+        //     return res;
+        // }
+        // console.log('rootPage: ', rootPage);
+
+
+    }
+
+    findDisplayPages = (pages) => {
+        let output = [];
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            if (!page.isDeleted) {
+                output.push(page);
+            }
+        }
+        return output;
+    }
+
+    findRootPageOrChildrenPages = (pages, type) => {
+        let output = [];
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            if (type == 'ROOT') {
+                if (page.isRoot) {
+                    output.push(page);
+                }
+            } else if (type == 'CHILDREN') {
+                if (!page.isRoot) {
+                    output.push(page);
+                }
+            }
+        }
+        return output;
+    }
+
+    findUnconnectedPage = (pages) => {
+        let output = [];
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            if (!page.isConnected) {
+                return page;
+            }
+        }
+        return null;
     }
 
     render() {
@@ -154,7 +220,7 @@ const dispatchToProps = {
     dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPageAction,
-    
+
     dxAlertAction,
 }
 

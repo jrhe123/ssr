@@ -103,6 +103,7 @@ class PageCarousel extends Component {
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
+                    isDanger={true}
                     handleConfirm={() => this.handleConfirmDeleteCarouselPage()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
