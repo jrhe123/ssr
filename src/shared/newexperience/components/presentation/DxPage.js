@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
+// components
+import DxModal from './DxModal';
+
 // Libraries
 import Button from '@material-ui/core/Button';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
@@ -23,6 +26,19 @@ class DxPage extends Component {
 
     handleMenuClose = () => {
         this.setState({ isMenuOpen: false });
+    }
+
+    handleRemovePagePagesClick = () => {
+        this.setState({ isModalOpen: true });
+    }
+    
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleRemovePagePages = () => {
+        this.handleCloseModal();
+        this.props.handleRemovePagePages();
     }
 
     renderPhoneElementSection = () => {
@@ -118,11 +134,21 @@ class DxPage extends Component {
                                 closeOnInsideClick={false}
                             >
                                 <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
-                                <Button onClick={() => this.props.handleRemovePagePagesClick()}>Remove</Button>
+                                <Button onClick={() => this.handleRemovePagePagesClick()}>Remove</Button>
                             </DropdownMenu>
                         </div>
                     </div>
                 </div>
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title="Confirm Delete Pages"
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    isDanger={true}
+                    handleConfirm={() => this.handleRemovePagePages()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         )
     }

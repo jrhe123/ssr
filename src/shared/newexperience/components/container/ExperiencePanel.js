@@ -47,10 +47,6 @@ class ExperiencePanel extends Component {
         this.props.dxExperienceTypeUpdateAction(val);
     }
 
-    handleEditPagePages = () => {
-        console.log('edit pages');
-    }
-
     handleRemovePagePages = () => {
         console.log('delete pages');
     }
@@ -199,7 +195,7 @@ class ExperiencePanel extends Component {
                                                 pageNumber={this.props.experience.pages.length}
                                                 page={this.props.experience.newPage}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
-                                                handleRemovePagePagesClick={() => this.handleRemovePagePages()}
+                                                handleRemovePagePages={() => this.handleRemovePagePages()}
                                             />
                                         </div>
                                 }
