@@ -10,6 +10,7 @@ import DropdownMenu from 'react-dd-menu';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
 } from '../../actions';
 
@@ -38,6 +39,10 @@ class ExperiencePanel extends Component {
         this.setState({ isMenuOpen: false });
     }
 
+    handleChangeProgressIndex = (index) => {
+        this.props.dxExperienceIndexUpdateAction(index);
+    };
+
     handleClickOption = (val) => {
         this.props.dxExperienceTypeUpdateAction(val);
     }
@@ -46,7 +51,7 @@ class ExperiencePanel extends Component {
         console.log('edit pages');
     }
 
-    handleRemovePagePagesClick = () => {
+    handleRemovePagePages = () => {
         console.log('delete pages');
     }
 
@@ -193,7 +198,7 @@ class ExperiencePanel extends Component {
                                             <DxPage 
                                                 pageNumber={this.props.experience.pages.length}
                                                 page={this.props.experience.newPage}
-                                                handleEditPagePagesClick={() => this.handleEditPagePages()}
+                                                handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePagesClick={() => this.handleRemovePagePages()}
                                             />
                                         </div>
@@ -276,7 +281,6 @@ const styles = {
         width: 300,
     },
     demoPagesContainerStyle: {
-        // height: 360,
         height: 420,
         width: 276,
         marginTop: 12,
@@ -291,6 +295,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
 }
 

@@ -21,6 +21,10 @@ class DxPage extends Component {
         this.setState({ isMenuOpen: !this.state.isMenuOpen });
     }
 
+    handleMenuClose = () => {
+        this.setState({ isMenuOpen: false });
+    }
+
     renderPhoneElementSection = () => {
         const {
             sections,
@@ -57,6 +61,7 @@ class DxPage extends Component {
             pageNumberContainerStyle,
             pageNumberTitleStyle,
             contentContainerStyle,
+            contentWrapperStyle,
             controlContainerStyle,
             pageNameContainerStyle,
             pageTitleContainerStyle,
@@ -83,7 +88,9 @@ class DxPage extends Component {
                     </div>
                 </div>
                 <div style={contentContainerStyle}>
+                    <div style={contentWrapperStyle}>
                     {this.renderPhoneElementSection()}
+                    </div>
                 </div>
                 <div style={controlContainerStyle}
                     className="dx_card_bottom_bar">
@@ -157,11 +164,14 @@ const styles = {
     },
     contentContainerStyle: {
         height: 'calc(100% - 30px)',
-        padding: 9,
-        backgroundColor: colors.lightBlueColor
+        backgroundColor: colors.lightBlueColor,
+        padding: 9
+    },
+    contentWrapperStyle: {
+        height: '100%',
+        overflow: 'hidden'
     },
     elemContainerStyle: {
-        height: 300,  
         width: '100%', 
         backgroundColor: colors.whiteColor,
         overflow: 'hidden'
