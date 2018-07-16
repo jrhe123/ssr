@@ -31,6 +31,11 @@ import {
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
 } from './constants';
 
+// Function
+Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+};
+
 // Libraries
 const update = require('immutability-helper');
 
@@ -365,7 +370,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
             tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
             tmpCopySection = tmpUpdatePage.page.sections[tmpSectionIndex];
-            
+
             if (tmpCopySection.type != 'SPLASH'
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, tmpCopySection);
@@ -373,10 +378,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpNewSection.index = Number(tmpIndex);
                 tmpNewSection.connectedPageGUID = null;
                 tmpNewSection.isActive = true;
-                
+
                 // update new page
                 deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
-                tmpNewPageSections.push(tmpNewSection);
+                tmpNewPageSections.insert(tmpSectionIndex + 1, tmpNewSection);  // insert after clone target
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
                 tmpNewPage.sections = tmpNewPageSections;
 
