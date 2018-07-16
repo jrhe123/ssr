@@ -31,7 +31,7 @@ class DxPage extends Component {
     handleRemovePagePagesClick = () => {
         this.setState({ isModalOpen: true });
     }
-    
+
     handleCloseModal = () => {
         this.setState({ isModalOpen: false });
     }
@@ -42,16 +42,23 @@ class DxPage extends Component {
     }
 
     renderPhoneElementSection = () => {
+
         const {
-            sections,
-        } = this.props.page;
+            pages
+        } = this.props;
+
+        let page = this.findRootPage(pages);
+        let sections = page.sections;
+
+        
+
         const {
             elemContainerStyle,
         } = styles;
 
         let section = sections.map((section, i) => {
             return (
-                <div className={!section.isDeleted ? 'dx_show' : 'dx_hidden'} 
+                <div className={!section.isDeleted ? 'dx_show' : 'dx_hidden'}
                     style={elemContainerStyle}>
                     <ThumbnailPhoneElement
                         key={i}
@@ -65,6 +72,16 @@ class DxPage extends Component {
             )
         })
         return section;
+    }
+
+    findRootPage = (pages) => {
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            if (page.isRoot && !page.isDeleted) {
+                return page;
+            }
+        }
+        return null; l
     }
 
     render() {
@@ -88,8 +105,10 @@ class DxPage extends Component {
         } = styles;
         const {
             pageNumber,
-            page,
+            pages,
         } = this.props;
+
+        let page = this.findRootPage(pages);
 
         return (
             <div style={mainContainerStyle}>
@@ -105,7 +124,7 @@ class DxPage extends Component {
                 </div>
                 <div style={contentContainerStyle}>
                     <div style={contentWrapperStyle}>
-                    {this.renderPhoneElementSection()}
+                        {this.renderPhoneElementSection()}
                     </div>
                 </div>
                 <div style={controlContainerStyle}
@@ -198,7 +217,7 @@ const styles = {
         overflow: 'hidden'
     },
     elemContainerStyle: {
-        width: '100%', 
+        width: '100%',
         backgroundColor: colors.whiteColor,
         overflow: 'hidden'
     },
