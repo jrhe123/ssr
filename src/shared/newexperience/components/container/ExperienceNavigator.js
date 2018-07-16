@@ -51,7 +51,8 @@ class ExperienceNavigator extends Component {
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
-            this.validateExperiencePages(experience);
+            let { IsWarning, IsError, Message } = this.validateExperiencePages(experience);
+            this.props.dxAlertAction(true, IsError, Message);
 
         }
     }
@@ -124,6 +125,7 @@ class ExperienceNavigator extends Component {
 
     validateExperiencePages = (experience) => {
         let res = {
+            IsWarning: false,
             IsError: true,
             Message: '',
         }
@@ -131,22 +133,25 @@ class ExperienceNavigator extends Component {
         let displayPages = this.findDisplayPages(pages);
         let rootPage = this.findRootPageOrChildrenPages(displayPages, 'ROOT');
         let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
+        let unconnectedPages = this.findUnconnectedPages(childrenPages);
+        if (!rootPage.length
+            || !rootPage[0].sections.length) {
+            res.Message = 'Please create your page(s)';
+            return res;
+        }
+        if (unconnectedPages.length > 0) {
+            res.IsWarning = true;
+            res.Message = `Page(s) ${this.printUnconnectedPages(unconnectedPages)} is not connected`;
+            return res;
+        }
 
-        console.log('displayPages: ', displayPages);
         console.log('rootPage: ', rootPage);
         console.log('childrenPages: ', childrenPages);
+        console.log('unconnectedPages: ', unconnectedPages);
 
-        // if (!displayPages.length) {
-        //     res.Message = 'Please create your page(s)';
-        //     return res;
-        // }
-        // if (!rootPage) {
-        //     res.Message = 'Please create your root page';
-        //     return res;
-        // }
-        // console.log('rootPage: ', rootPage);
-
-
+        res.IsError = false;
+        res.Message = 'Pages have been saved';
+        return res;
     }
 
     findDisplayPages = (pages) => {
@@ -177,15 +182,25 @@ class ExperienceNavigator extends Component {
         return output;
     }
 
-    findUnconnectedPage = (pages) => {
+    findUnconnectedPages = (pages) => {
         let output = [];
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
             if (!page.isConnected) {
-                return page;
+                output.push(page);
             }
         }
-        return null;
+        return output;
+    }
+
+    printUnconnectedPages = (pages) => {
+        let output = '';
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            output += page.title + ',';
+        }
+        output.rtrim(',');
+        return output;
     }
 
     render() {
