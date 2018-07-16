@@ -147,21 +147,39 @@ class ExperienceNavigator extends Component {
         let displayPages = this.findDisplayPages(pages);
         let rootPage = this.findRootPageOrChildrenPages(displayPages, 'ROOT');
         let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
-        let unconnectedPages = this.findUnconnectedPages(childrenPages);
+        // Check root page
         if (!rootPage.length
             || !rootPage[0].sections.length) {
             res.Message = 'Please create your page(s)';
             return res;
         }
+        // Check unconnected pages
+        let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
             res.IsWarning = true;
             res.Message = `Page(s): ${this.printUnconnectedPages(unconnectedPages)} not connected`;
             return res;
         }
+        // Check sections
+        // 1. EDITOR
+        // 2. BUTTON
+        let unconnectedBtns = this.findUnconnectedElems(displayPages, 'BUTTON');
+        // 3. EMBED_PDF
+        let unconnectedPDFs = this.findUnconnectedElems(displayPages, 'EMBED_PDF');
+        // 4. SPLASH
+        let unconnectedSplashes = this.findUnconnectedElems(displayPages, 'SPLASH');
+        // 5. VIDEO
+        let unconnectedVideos = this.findUnconnectedElems(displayPages, 'VIDEO');
+        // 6. IMAGE
+        let unconnectedImages = this.findUnconnectedElems(displayPages, 'IMAGE');
 
-        console.log('rootPage: ', rootPage);
-        console.log('childrenPages: ', childrenPages);
-        console.log('unconnectedPages: ', unconnectedPages);
+
+        console.log('unconnectedBtns: ', unconnectedBtns);
+        console.log('unconnectedPDFs: ', unconnectedPDFs);
+        console.log('unconnectedSplashes: ', unconnectedSplashes);
+        console.log('unconnectedVideos: ', unconnectedVideos);
+        console.log('unconnectedImages: ', unconnectedImages);
+
 
         res.IsError = false;
         res.Message = 'Pages have been saved';
@@ -214,6 +232,59 @@ class ExperienceNavigator extends Component {
             output += page.title + ',';
         }
         output = output.replace(/,\s*$/, '');
+        return output;
+    }
+
+    findUnconnectedElems = (pages, type) => {
+        let output = [];
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            for (let j = 0; j < page.sections.length; j++) {
+                let section = page.sections[j];
+                if (type == 'BUTTON') {
+                    if (section.type == 'BUTTON'
+                        && !section.connectedPageGUID) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                }
+                else if (type == 'EMBED_PDF') {
+                    if (section.type == 'EMBED_PDF'
+                        && !section.pdfPath) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                } else if (type == 'SPLASH') {
+                    if (section.type == 'SPLASH'
+                        && !section.splashImg) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                } else if (type == 'VIDEO') {
+                    if (section.type == 'VIDEO'
+                        && !section.videoUrl) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                } else if (type == 'IMAGE') {
+                    if (section.type == 'IMAGE'
+                        && !section.img) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                }
+            }
+        }
         return output;
     }
 
