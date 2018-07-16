@@ -91,6 +91,7 @@ const initialState = {
         card: null,             // card storage
 
         isPageTemplateMenuOpen: true,       // page template menu
+        isPagesSaved: false,                // page saved
         activePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
 
         isPageCarouselMenuOpen: false,      // page carousel menu

@@ -67,8 +67,13 @@ class ExperienceNavigator extends Component {
                 });
             } else {
                 this.props.dxAlertAction(true, IsError, Message);
+                if (!IsError) console.log('call action');
             }
         }
+    }
+
+    handleConfirmModal = () => {
+        console.log('call action');
     }
 
     validateExperienceCard = (experience) => {
@@ -147,41 +152,52 @@ class ExperienceNavigator extends Component {
         let displayPages = this.findDisplayPages(pages);
         let rootPage = this.findRootPageOrChildrenPages(displayPages, 'ROOT');
         let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
-        // Check root page
+        // Check Root page
         if (!rootPage.length
             || !rootPage[0].sections.length) {
-            res.Message = 'Please create your page(s)';
+            res.Message = 'Root page cannot be empty';
             return res;
         }
         // Check sections
         // 1. EDITOR
-        // 2. BUTTON
-        let unconnectedBtns = this.findUnconnectedElems(displayPages, 'BUTTON');
-        // 3. EMBED_PDF
+        // 2. EMBED_PDF
         let unconnectedPDFs = this.findUnconnectedElems(displayPages, 'EMBED_PDF');
-        // 4. SPLASH
+        if (unconnectedPDFs.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedPDFs, 'PDF')}`;
+            return res;
+        }
+        // 3. SPLASH
         let unconnectedSplashes = this.findUnconnectedElems(displayPages, 'SPLASH');
-        // 5. VIDEO
+        if (unconnectedSplashes.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedSplashes, 'SPLASH')}`;
+            return res;
+        }
+        // 4. VIDEO
         let unconnectedVideos = this.findUnconnectedElems(displayPages, 'VIDEO');
-        // 6. IMAGE
+        if (unconnectedVideos.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedVideos, 'VIDEO')}`;
+            return res;
+        }
+        // 5. IMAGE
         let unconnectedImages = this.findUnconnectedElems(displayPages, 'IMAGE');
-
-
-        console.log('unconnectedBtns: ', unconnectedBtns);
-        console.log('unconnectedPDFs: ', unconnectedPDFs);
-        console.log('unconnectedSplashes: ', unconnectedSplashes);
-        console.log('unconnectedVideos: ', unconnectedVideos);
-        console.log('unconnectedImages: ', unconnectedImages);
-
+        if (unconnectedImages.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedImages, 'IMAGE')}`;
+            return res;
+        }
+        // 6. BUTTON
+        let unconnectedBtns = this.findUnconnectedElems(displayPages, 'BUTTON');
+        if (unconnectedBtns.length > 0) {
+            res.IsWarning = true;
+            res.Message = `${this.printUnconnectedElems(unconnectedBtns, 'BUTTON')}`;
+            return res;
+        }
         // Check unconnected pages
         let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
             res.IsWarning = true;
-            res.Message = `Page(s): ${this.printUnconnectedPages(unconnectedPages)} not connected`;
+            res.Message = `${this.printUnconnectedPages(unconnectedPages)}`;
             return res;
         }
-
-
         res.IsError = false;
         res.Message = 'Pages have been saved';
         return res;
@@ -286,6 +302,34 @@ class ExperienceNavigator extends Component {
             }
         }
         return output;
+    }
+
+    printUnconnectedElems = (arr, type) => {
+        let output = '';
+        for (let i = 0; i < arr.length; i++) {
+            let item = arr[i];
+            let { page, section } = item;
+            let { sectionGUID } = section;
+            output += `"${page.title}" #${this.findSectionIndex(page.sections, sectionGUID)}: ${type} is not connected, `
+        }
+        output = output.replace(/,\s*$/, '');
+        return output;
+    }
+
+    findSectionIndex = (sections, sectionGUID) => {
+        let output = [];
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            if (!section.isDeleted) {
+                output.push(section);
+            }
+        }
+        for (let i = 0; i < output.length; i++) {
+            if(output[i].sectionGUID == sectionGUID){
+                return i + 1;
+            }
+        }
+        return null;
     }
 
     render() {
