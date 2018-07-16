@@ -234,7 +234,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED:
-            console.log('received here');
+            tmpExperience.index = 0;
+            tmpExperience.isPagesSaved = true;
+            updated.experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:

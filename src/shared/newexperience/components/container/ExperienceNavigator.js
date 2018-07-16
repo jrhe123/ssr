@@ -29,6 +29,7 @@ class ExperienceNavigator extends Component {
 
     state = {
         isModalOpen: false,
+        modalTitle: null,
     }
 
     handleCloseModal = () => {
@@ -65,6 +66,7 @@ class ExperienceNavigator extends Component {
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
+                    modalTitle: Message
                 });
             } else {
                 this.props.dxAlertAction(true, IsError, Message);
@@ -192,18 +194,18 @@ class ExperienceNavigator extends Component {
         let unconnectedBtns = this.findUnconnectedElems(displayPages, 'BUTTON');
         if (unconnectedBtns.length > 0) {
             res.IsWarning = true;
-            res.Message = `${this.printUnconnectedElems(unconnectedBtns, 'BUTTON')}`;
+            res.Message = `Confirm unconnected button(s)`;
             return res;
         }
         // Check unconnected pages
         let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
             res.IsWarning = true;
-            res.Message = `${this.printUnconnectedPages(unconnectedPages)}`;
+            res.Message = `Confirm unconnected page(s)`;
             return res;
         }
         res.IsError = false;
-        res.Message = 'Pages have been saved';
+        res.Message = 'Page(s) has been saved';
         return res;
     }
 
@@ -246,22 +248,13 @@ class ExperienceNavigator extends Component {
         return output;
     }
 
-    printUnconnectedPages = (pages) => {
-        let output = '';
-        for (let i = 0; i < pages.length; i++) {
-            let page = pages[i];
-            output += page.title + ',';
-        }
-        output = output.replace(/,\s*$/, '');
-        return output;
-    }
-
     findUnconnectedElems = (pages, type) => {
         let output = [];
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
             for (let j = 0; j < page.sections.length; j++) {
                 let section = page.sections[j];
+                if(section.isDeleted) continue;
                 if (type == 'BUTTON') {
                     if (section.type == 'BUTTON'
                         && !section.connectedPageGUID) {
@@ -314,7 +307,7 @@ class ExperienceNavigator extends Component {
             let item = arr[i];
             let { page, section } = item;
             let { sectionGUID } = section;
-            output += `"${page.title}" #${this.findSectionIndex(page.sections, sectionGUID)}: ${type} is not connected, `
+            output += `${page.title} - #${this.findSectionIndex(page.sections, sectionGUID)}: ${type} is not connected, `
         }
         output = output.replace(/,\s*$/, '');
         return output;
@@ -352,7 +345,7 @@ class ExperienceNavigator extends Component {
                 />
                 <DxModal
                     open={this.state.isModalOpen}
-                    title={"Confirm save unconnected page(s)"}
+                    title={this.state.modalTitle}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
