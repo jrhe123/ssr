@@ -170,12 +170,18 @@ class ExperiencePanel extends Component {
                                         <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
                                     </div>
                                 </div>
-                                <div style={editContainerStyle}>
-                                    <a style={btnStyle}
-                                        onClick={() => this.props.handleCreatePages()}
-                                        variant="Create card"
-                                    >Create page(s)</a>
-                                </div>
+                                {
+                                    !experience.isPagesSaved ?
+
+                                        <div style={editContainerStyle}>
+                                            <a style={btnStyle}
+                                                onClick={() => this.props.handleCreatePages()}
+                                                variant="Create card"
+                                            >Create page(s)</a>
+                                        </div>
+                                        :
+                                        <div>display here</div>
+                                }
                             </div>
                         )
                         :
