@@ -134,14 +134,14 @@ class PhoneElement extends Component {
                 break;
             case 'EMBED_PDF':
                 section = (
-                    <DxPdfViewer 
+                    <DxPdfViewer
                         pdfPath={this.props.pdfPath}
                     />
                 )
                 break;
             case 'SPLASH':
                 section = (
-                    <DxSplash 
+                    <DxSplash
                         splashContent={this.props.splashContent}
                         splashImg={this.props.splashImg}
                         splashColor={this.props.splashColor}
@@ -151,7 +151,7 @@ class PhoneElement extends Component {
                 break;
             case 'VIDEO':
                 section = (
-                    <DxVideoViewer 
+                    <DxVideoViewer
                         videoUrl={this.props.videoUrl}
                         handleVideoError={(msg) => this.props.handleVideoError(msg)}
                     />
@@ -159,7 +159,7 @@ class PhoneElement extends Component {
                 break;
             case 'IMAGE':
                 section = (
-                    <DxImageViewer 
+                    <DxImageViewer
                         img={this.props.img}
                     />
                 )
@@ -208,18 +208,25 @@ class PhoneElement extends Component {
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
-                                <div 
+                                <div
                                     className="dx_control_btn"
                                     style={removeControlContainerStyle}
                                     onClick={() => this.props.handleDeleteElem(this.props.sectionGUID)}
                                 >
                                     <Delete style={controlIconStyle} />
                                 </div>
-                                <div 
-                                    className="dx_control_btn"
-                                    style={copyControlContainerStyle}>
-                                    <ContentCopy style={controlIconStyle} />
-                                </div>
+                                {
+                                    type != 'SPLASH' ?
+                                        <div
+                                            className="dx_control_btn"
+                                            style={copyControlContainerStyle}
+                                            onClick={() => this.props.handleCloneElem(this.props.sectionGUID)}
+                                        >
+                                            <ContentCopy style={controlIconStyle} />
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                         </div>
                     </div>
@@ -233,7 +240,7 @@ class PhoneElement extends Component {
                                 style={contentContainerStyle}
                                 onClick={() => this.props.handleSectionClick(this.props.sectionGUID)}>
                                 <div
-                                    className="dx_control_btn" 
+                                    className="dx_control_btn"
                                     style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>

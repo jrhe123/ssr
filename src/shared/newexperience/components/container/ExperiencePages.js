@@ -49,7 +49,9 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
+        modalType: null,
         isModalOpen: false,
+        modalTitle: '',
         targetSectionGUID: null,
     }
 
@@ -113,6 +115,7 @@ class ExperiencePages extends Component {
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
                 handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
                 handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
+                handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
 
                 handleVideoError={(msg) => this.handleErrorMsg(msg)}
             />
@@ -219,8 +222,19 @@ class ExperiencePages extends Component {
     }
 
     handleDeleteElem = (sectionGUID) => {
-        this.setState({ 
+        this.setState({
+            modalType: 'DELETE',
             isModalOpen: true,
+            modalTitle: 'Confirm Delete Element',
+            targetSectionGUID: sectionGUID
+        });
+    }
+
+    handleCloneElem = (sectionGUID) => {
+        this.setState({
+            modalType: 'COPY',
+            isModalOpen: true,
+            modalTitle: 'Confirm Copy Element',
             targetSectionGUID: sectionGUID
         });
     }
@@ -229,12 +243,17 @@ class ExperiencePages extends Component {
         this.setState({ isModalOpen: false });
     }
 
-    handleConfirmDeleteElem = () => {
+    handleConfirmModal = () => {
         const {
+            modalType,
             targetSectionGUID
         } = this.state;
-        this.handleCloseModal();
-        this.props.dxExperiencePageDeleteElemAction(targetSectionGUID)
+        if (modalType == 'DELETE') {
+            this.handleCloseModal();
+            this.props.dxExperiencePageDeleteElemAction(targetSectionGUID);
+        } else if (modalType == 'COPY') {
+            console.log('copy: ', targetSectionGUID);
+        }
     }
 
     handleCarouselClick = (open) => {
@@ -303,7 +322,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                {/* <a onClick={() => console.log(experience)}>click me</a> */}
+                <a onClick={() => console.log(experience)}>click me</a>
                 <div
                     className={experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
@@ -501,11 +520,12 @@ class ExperiencePages extends Component {
                 </div>
                 <DxModal
                     open={this.state.isModalOpen}
-                    title="Confirm Delete Element"
+                    title={this.state.modalTitle}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
-                    handleConfirm={() => this.handleConfirmDeleteElem()}
+                    isDanger={this.state.modalType == 'DELETE' ? true : false}
+                    handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
