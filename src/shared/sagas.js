@@ -27,6 +27,7 @@ import {
     dxExperienceCardTemplateRemoveSaga,
 
     dxExperiencePagePagesSaveSaga,
+    dxExperiencePagePagesRemoveSaga,
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
@@ -79,6 +80,7 @@ export default function* rootSaga() {
 
         // Page
         dxExperiencePagePagesSaveSaga(),
+        dxExperiencePagePagesRemoveSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),

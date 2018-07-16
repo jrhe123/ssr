@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import {
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
+    dxExperiencePagePagesRemove as dxExperiencePagePagesRemoveAction,
 } from '../../actions';
 
 // constants
@@ -48,7 +49,7 @@ class ExperiencePanel extends Component {
     }
 
     handleRemovePagePages = () => {
-        console.log('delete pages');
+        this.props.dxExperiencePagePagesRemoveAction();
     }
 
     render() {
@@ -293,6 +294,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
+    dxExperiencePagePagesRemoveAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

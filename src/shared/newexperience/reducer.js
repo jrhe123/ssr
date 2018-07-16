@@ -14,6 +14,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
 
     EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
+    EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
@@ -236,6 +237,18 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED:
             tmpExperience.index = 0;
             tmpExperience.isPagesSaved = true;
+            updated.experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED:
+            tmpExperience.isPageTemplateMenuOpen = true;
+            tmpExperience.isPagesSaved = false;
+            tmpExperience.activePageTemplateOptionIndex = 0;
+            tmpExperience.isPageCarouselMenuOpen = false;
+            tmpExperience.tools = [];
+            tmpExperience.pages = [];
+            tmpExperience.newPage = Object.assign({}, templateNewPage);
+            tmpExperience.activePageSectionIndex = 0;
             updated.experience = tmpExperience;
             return updated;
 

@@ -14,6 +14,7 @@ import {
     EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
 
     EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
+    EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
@@ -141,6 +142,13 @@ export const dxExperienceCardTemplateRemove = () => {
 export const dxExperiencePagePagesSave = () => {
     return {
         type: EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
+        payload: {},
+    }
+}
+
+export const dxExperiencePagePagesRemove = () => {
+    return {
+        type: EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
         payload: {},
     }
 }
