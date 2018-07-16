@@ -42,6 +42,14 @@ class ExperiencePanel extends Component {
         this.props.dxExperienceTypeUpdateAction(val);
     }
 
+    handleEditPagePages = () => {
+        console.log('edit pages');
+    }
+
+    handleRemovePagePagesClick = () => {
+        console.log('delete pages');
+    }
+
     render() {
 
         const {
@@ -185,6 +193,8 @@ class ExperiencePanel extends Component {
                                             <DxPage 
                                                 pageNumber={this.props.experience.pages.length}
                                                 page={this.props.experience.newPage}
+                                                handleEditPagePagesClick={() => this.handleEditPagePages()}
+                                                handleRemovePagePagesClick={() => this.handleRemovePagePages()}
                                             />
                                         </div>
                                 }
@@ -266,7 +276,8 @@ const styles = {
         width: 300,
     },
     demoPagesContainerStyle: {
-        height: 360,
+        // height: 360,
+        height: 420,
         width: 276,
         marginTop: 12,
         marginLeft: 120,

@@ -110,8 +110,8 @@ class DxPage extends Component {
                                 align='right'
                                 closeOnInsideClick={false}
                             >
-                                <Button onClick={() => this.props.handleEditCardTemplateClick()}>Edit</Button>
-                                <Button onClick={() => this.handleRemoveCardTemplateClick()}>Remove</Button>
+                                <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
+                                <Button onClick={() => this.props.handleRemovePagePagesClick()}>Remove</Button>
                             </DropdownMenu>
                         </div>
                     </div>
