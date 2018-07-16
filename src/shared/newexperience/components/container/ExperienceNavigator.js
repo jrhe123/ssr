@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // components
 import NavBar from '../../../components/navBar/NavBar';
+import DxModal from '../presentation/DxModal';
 
 // helpers
 import { search_object_index_by_value } from '../../../helpers';
@@ -24,6 +25,14 @@ import {
 } from '../../../actions';
 
 class ExperienceNavigator extends Component {
+
+    state = {
+        isModalOpen: false,
+    }
+
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
 
     handleGoback = () => {
         const {
@@ -52,8 +61,13 @@ class ExperienceNavigator extends Component {
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
             let { IsWarning, IsError, Message } = this.validateExperiencePages(experience);
-            this.props.dxAlertAction(true, IsError, Message);
-
+            if (IsWarning) {
+                this.setState({
+                    isModalOpen: true,
+                });
+            } else {
+                this.props.dxAlertAction(true, IsError, Message);
+            }
         }
     }
 
@@ -141,7 +155,7 @@ class ExperienceNavigator extends Component {
         }
         if (unconnectedPages.length > 0) {
             res.IsWarning = true;
-            res.Message = `Page(s) ${this.printUnconnectedPages(unconnectedPages)} is not connected`;
+            res.Message = `Page(s): ${this.printUnconnectedPages(unconnectedPages)} not connected`;
             return res;
         }
 
@@ -199,23 +213,35 @@ class ExperienceNavigator extends Component {
             let page = pages[i];
             output += page.title + ',';
         }
-        output.rtrim(',');
+        output = output.replace(/,\s*$/, '');
         return output;
     }
 
     render() {
         return (
-            <NavBar
-                isRoute={false}
-                experience={this.props.experience}
-                handleGoback={() => this.handleGoback()}
-                handleSaveBtnClick={() => this.handleSaveBtnClick()}
-                handleInputChange={(e) => this.handleTitleChange(e)}
-                handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
-                handlePageTemplateMenu={() => this.handlePageTemplateMenuToggle()}
-                handleSelectPageElemOption={(val) => this.handleSelectPageElemOption(val)}
-                handleAddNewPage={() => this.handleAddNewPage()}
-            />
+            <div>
+                <NavBar
+                    isRoute={false}
+                    experience={this.props.experience}
+                    handleGoback={() => this.handleGoback()}
+                    handleSaveBtnClick={() => this.handleSaveBtnClick()}
+                    handleInputChange={(e) => this.handleTitleChange(e)}
+                    handleCardTemplateMenu={() => this.handleCardTemplateMenuToggle()}
+                    handlePageTemplateMenu={() => this.handlePageTemplateMenuToggle()}
+                    handleSelectPageElemOption={(val) => this.handleSelectPageElemOption(val)}
+                    handleAddNewPage={() => this.handleAddNewPage()}
+                />
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title={"Confirm save unconnected page(s)"}
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    isDanger={false}
+                    handleConfirm={() => this.handleConfirmModal()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
+            </div>
         )
     }
 }

@@ -160,7 +160,6 @@ class ExperiencePages extends Component {
 
     availablePageOptionList = (pages, currentpageGUID, targetPageGUID) => {
         let res = [];
-
         if (pages.length && targetPageGUID) {
             let cancelOption = {
                 sectionGUID: '',
