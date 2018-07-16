@@ -153,13 +153,6 @@ class ExperienceNavigator extends Component {
             res.Message = 'Please create your page(s)';
             return res;
         }
-        // Check unconnected pages
-        let unconnectedPages = this.findUnconnectedPages(childrenPages);
-        if (unconnectedPages.length > 0) {
-            res.IsWarning = true;
-            res.Message = `Page(s): ${this.printUnconnectedPages(unconnectedPages)} not connected`;
-            return res;
-        }
         // Check sections
         // 1. EDITOR
         // 2. BUTTON
@@ -179,6 +172,14 @@ class ExperienceNavigator extends Component {
         console.log('unconnectedSplashes: ', unconnectedSplashes);
         console.log('unconnectedVideos: ', unconnectedVideos);
         console.log('unconnectedImages: ', unconnectedImages);
+
+        // Check unconnected pages
+        let unconnectedPages = this.findUnconnectedPages(childrenPages);
+        if (unconnectedPages.length > 0) {
+            res.IsWarning = true;
+            res.Message = `Page(s): ${this.printUnconnectedPages(unconnectedPages)} not connected`;
+            return res;
+        }
 
 
         res.IsError = false;
@@ -249,8 +250,7 @@ class ExperienceNavigator extends Component {
                             section,
                         });
                     }
-                }
-                else if (type == 'EMBED_PDF') {
+                } else if (type == 'EMBED_PDF') {
                     if (section.type == 'EMBED_PDF'
                         && !section.pdfPath) {
                         output.push({
