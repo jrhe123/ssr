@@ -118,6 +118,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpPagesLength;
     let tmpUpdatePage;
     let tmpNewSection;
+    let tmpCopySection;
     let tmpHoverIndex, tmpDragIndex;
     let tmpDragSection, tmpHoverSection;
     let tmpActiveSectionIndex;
@@ -274,7 +275,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
                 // delete root page
-                if(tmpIsRootPage){
+                if (tmpIsRootPage) {
                     tmpNewPage.isRoot = true;
                 }
                 tmpNewPage.pageGUID = uuid();
@@ -286,7 +287,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpPageGUID = find_previous_display_page_guid(tmpPages, tmpPageIndex);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 // delete root page
-                if(tmpIsRootPage){
+                if (tmpIsRootPage) {
                     tmpNewPage.page.isRoot = true;
                 }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
@@ -361,7 +362,37 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_COPY_ELEM__SUCCEEDED:
-            console.log('reducer received');
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            tmpCopySection = tmpUpdatePage.page.sections[tmpSectionIndex];
+            
+            if (tmpCopySection.type != 'SPLASH'
+            ) {     // only one splash per page
+                tmpNewSection = Object.assign({}, tmpCopySection);
+                tmpNewSection.sectionGUID = uuid();
+                tmpNewSection.index = Number(tmpIndex);
+                tmpNewSection.connectedPageGUID = null;
+                tmpNewSection.isActive = true;
+                
+                // update new page
+                deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
+                tmpNewPageSections.push(tmpNewSection);
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
+                tmpNewPage.sections = tmpNewPageSections;
+
+                // update arr of pages
+                tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+
+                // add to tools
+                tmpTools.push(tmpNewSection);
+
+                tmpExperience.tools = tmpTools;
+                tmpExperience.pages = tmpPages;
+                tmpExperience.newPage = tmpNewPage;
+                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
+                updated.experience = tmpExperience;
+                updated.index = tmpIndex + 1;
+            }
             return updated;
 
         case EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED:
@@ -539,7 +570,7 @@ const deactive_tools_by_page_guid = (guid, sections) => {
 const find_number_of_display_page = (pages) => {
     let count = 0;
     for (let i = 0; i < pages.length; i++) {
-        if(!pages[i].isDeleted){
+        if (!pages[i].isDeleted) {
             count++;
         }
     }
@@ -548,10 +579,10 @@ const find_number_of_display_page = (pages) => {
 const find_previous_display_page_guid = (pages, start) => {
     let count = 0;
     for (let i = 0; i < pages.length; i++) {
-        if(!pages[i].isDeleted){
+        if (!pages[i].isDeleted) {
             count++;
         }
-        if(count > start){
+        if (count > start) {
             return pages[i].pageGUID;
         }
     }

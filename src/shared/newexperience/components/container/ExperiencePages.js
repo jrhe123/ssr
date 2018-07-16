@@ -255,6 +255,11 @@ class ExperiencePages extends Component {
             this.props.dxExperiencePageDeleteElemAction(targetSectionGUID);
         } else if (modalType == 'COPY') {
             this.props.dxExperiencePageCopyElemAction(targetSectionGUID);
+            // Auto scroll
+            setTimeout(() => {
+                let dxPhoneArea = this.refs.dx_phone_area;
+                dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+            }, 0.1);
         }
     }
 
