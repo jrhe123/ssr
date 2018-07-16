@@ -166,16 +166,16 @@ class ExperienceNavigator extends Component {
         }
         // Check sections
         // 1. EDITOR
-        // 2. EMBED_PDF
-        let unconnectedPDFs = this.findUnconnectedElems(displayPages, 'EMBED_PDF');
-        if (unconnectedPDFs.length > 0) {
-            res.Message = `${this.printUnconnectedElems(unconnectedPDFs, 'PDF')}`;
-            return res;
-        }
-        // 3. SPLASH
+        // 2. SPLASH
         let unconnectedSplashes = this.findUnconnectedElems(displayPages, 'SPLASH');
         if (unconnectedSplashes.length > 0) {
             res.Message = `${this.printUnconnectedElems(unconnectedSplashes, 'SPLASH')}`;
+            return res;
+        }
+        // 3. EMBED_PDF
+        let unconnectedPDFs = this.findUnconnectedElems(displayPages, 'EMBED_PDF');
+        if (unconnectedPDFs.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedPDFs, 'PDF')}`;
             return res;
         }
         // 4. VIDEO
