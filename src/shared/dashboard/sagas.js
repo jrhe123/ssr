@@ -1,6 +1,8 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
+import config from '../config';
+
 import {
     LOGOUT_REQUESTED,
     LOGOUT__SUCCEEDED,
@@ -10,7 +12,7 @@ import {
 // Logout
 export const dxLogoutUrl = () => {
     return (
-        fetch('http://localhost:3000/root', {
+        fetch(`${config.apiHost}/root`, {
             method: 'post',
             headers: {
                 Accept: 'application/json',
