@@ -15,6 +15,8 @@ import colors from '../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
+import ErrorMessageTemplate from './ErrorMessageTemplate';
+import { relative } from 'path';
 
 const themeStyles = () => ({
     yourIconButtonStyle: {
@@ -44,9 +46,6 @@ class RestrictDomainPage extends Component{
             domainIconContainerStyle,
             domainIconStyle,
 
-            invitaionContainerStyle,
-            invitationLabelStyle,
-            invitationEditBtnStyle,
             addDomainBtnStyle,
 
             memberListContainerStyle,
@@ -57,7 +56,8 @@ class RestrictDomainPage extends Component{
 
             inviteCodeContainerStyle,
             inviteCodeLabelStyle,
-            channelCodeStyle          
+            channelCodeStyle,
+            imgStyle         
         } = styles;
 
         return(
@@ -73,16 +73,23 @@ class RestrictDomainPage extends Component{
                         <div style={inviteCodeContainerStyle}>
                             <div style={inviteCodeLabelStyle}>
                                 <p style={domainIconContainerStyle}><Schedule style={domainIconStyle}/></p>
-                                <p style={channelCodeStyle}>demo-1</p>
+                                <p style={channelCodeStyle}>pmh.org</p>
+                                <img style={imgStyle}
+                                    src={require('../../../../../assets/images/close_button.png')}
+                                /> 
+                            </div>
+                            <div style={inviteCodeLabelStyle}>
+                                <p style={domainIconContainerStyle}><Schedule style={domainIconStyle}/></p>
+                                <p style={channelCodeStyle}>digitalxi.org</p>
+                                <img style={imgStyle}
+                                    src={require('../../../../../assets/images/close_button.png')}
+                                /> 
                             </div>
                         </div>
                     </div>
                     <Button style={addDomainBtnStyle}>+ Add Domain</Button>
                 </div>
-                <div style={invitaionContainerStyle}>
-                    <p style={invitationLabelStyle}>Show this error message when the user tries to signup using a different email</p>
-                    <Button style={invitationEditBtnStyle}>Edit Message</Button>
-                </div>
+                <ErrorMessageTemplate messagePlaceholder="Show this error message when the user tries to signup using a different email"/>
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>Audit trail (10)</p>
                     <div style={searchUserWrapperStyle}>
@@ -268,48 +275,11 @@ const styles = {
     },
     emailContentStyle:{
         marginTop:0,
-        marginBottom:12,
+        marginBottom:6,
         color:colors.lightGreyColor,
         fontSize:fonts.h3,
         fontFamily:'avenir',
         fontWeight:'500'
-    },
-    invitaionContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        width:'auto',
-        background:'white',
-        marginTop:0,
-        marginBottom:24,
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        fontSize: fonts.h4,
-        marginLeft:48,
-        height:36,
-        boxShadow: '0 1px 1px 0 #CED5DB'
-    },
-    invitationLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h2,
-        fontWeight:'500',
-        marginTop:0,
-        marginBottom:0,
-        fontFamily:'avenir',
-        width:'calc(100% - 152px)',
-        paddingRight:12
-    },
-    invitationEditBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        width:120,
-        marginLeft:0,
-        fontSize:fonts.h3,
-        textTransform: 'none'
     },
     addDomainBtnStyle:{
         background:colors.blueColor,
@@ -354,6 +324,7 @@ const styles = {
         borderRight:0,
         borderTop:0,
         marginLeft:48,
+        marginTop:24,
         background:colors.whiteColor,
         height:48,
         boxShadow: '0 1px 1px 0 #CED5DB'
@@ -399,28 +370,43 @@ const styles = {
         alignItems:'center',
         color:colors.blackColor,
         margin:0
-        // border:0
     },
     domainIconStyle:{
         height:18,
-        width:12,
-        // border:0
+        width:12
     },
     inviteCodeContainerStyle:{
         display:'flex',
-        flexDirection:'row'
+        flexDirection:'row',
+        width:'100%',
+        overflowX:'scroll',
+        height:36,
+        paddingTop:12
     },
     inviteCodeLabelStyle:{
         height:28,
         display:'flex',
-        marginRight:18
+        marginRight:12,
+        //position:'absolute'
     },
     channelCodeStyle:{
         background:colors.lightBlueColor,
         color:colors.blackColor,
+        height:28,
+        display:'flex',
+        fontSize:fonts.h3,
+        alignSelf:'center',
+        textAlign:'center',
         margin:0,
-        padding:'6px 6px 12px 6px',
-        // height:30
+        padding:'0px 12px',
+        lineHeight:2
+    },
+    imgStyle:{
+        position:'relative',
+        right:9,
+        top:-9,
+        height:18,
+        width:18
     }
 
 }

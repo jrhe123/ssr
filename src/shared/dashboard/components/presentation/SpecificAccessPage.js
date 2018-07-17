@@ -17,6 +17,7 @@ import colors from '../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
+import ErrorMessageTemplate from './ErrorMessageTemplate';
 
 const themeStyles = () => ({
     yourIconButtonStyle: {
@@ -55,10 +56,6 @@ class SpecificAccessPage extends Component{
             channelDetailsWrapperStyle,
             safeguardLabelStyle,
 
-            invitaionContainerStyle,
-            invitationLabelStyle,
-            invitationEditBtnStyle,
-
             memberListContainerStyle,
             memberListHeaderContainerStyle,
             memberLabelStyle,
@@ -68,9 +65,7 @@ class SpecificAccessPage extends Component{
             dropdownBtnStyle,
             searchUserWrapperStyle,
             dropdownLabelStyle,
-            expandIconStyle
-            
-
+            expandIconStyle            
             
         } = styles;
 
@@ -80,10 +75,7 @@ class SpecificAccessPage extends Component{
                     <p style={channelDetailsWrapperStyle}>Manage users from accessing specific channel’s content</p>
                     <p style={safeguardLabelStyle}>Use this safeguard to manage content access for each user in specific channels by locking and unlocking them</p>
                 </div>
-                <div style={invitaionContainerStyle}>
-                    <p style={invitationLabelStyle}>Show this error message message if the user tries to access a channel where he/she is locked</p>
-                    <Button style={invitationEditBtnStyle}>Edit message</Button>
-                </div>
+                <ErrorMessageTemplate messagePlaceholder="Show this error message message if the user tries to access a channel where he/she is locked"/>
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>User list (4)</p>
                     <div style={dropdownContainerStyle}>
@@ -191,47 +183,6 @@ const styles = {
         fontWeight:'500',
         fontFamily:'avenir'
     },
-    invitaionContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width:'auto',
-        background:'white',
-        marginTop:0,
-        marginBottom:30,
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        fontSize: fonts.h4,
-        marginLeft:48,
-        height:36,
-        boxShadow: '0 1px 1px 0 #CED5DB' 
-    },
-    invitationLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h2,
-        fontWeight:'500',
-        marginTop:0,
-        marginBottom:0,
-        fontFamily: 'avenir',
-        width:'calc(100% - 152px)',
-        paddingRight:12
-    },
-    invitationEditBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        width:120,
-        marginLeft:0,
-        fontSize:fonts.h3,
-        textTransform: 'none',
-        paddingLeft:3,
-        paddingRight:3,
-        // fontWeight: 300
-    },
-
     memberListContainerStyle:{
         flexDirection:'column',
         justifyContent:'flex-start',
@@ -265,6 +216,7 @@ const styles = {
         borderRight:0,
         borderTop:0,
         marginLeft:48,
+        marginTop:30,
         background:colors.whiteColor,
         height:48,
         boxShadow: '0 1px 1px 0 #CED5DB'

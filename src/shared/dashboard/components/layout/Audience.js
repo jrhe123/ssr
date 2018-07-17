@@ -33,7 +33,7 @@ const themeStyles = () => ({
 class Audience extends Component{
 
     state = {
-        isMenuOpen: false,
+        isMenuOpen: false
     }
 
     handleToggleMenu = () => {

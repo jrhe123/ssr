@@ -17,7 +17,7 @@ import colors from '../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
-
+import ErrorMessageTemplate from './ErrorMessageTemplate';
 const themeStyles = () => ({
     yourIconButtonStyle: {
         height: 36
@@ -62,10 +62,8 @@ class PrivateInvitePage extends Component{
             inviteCodeLabelStyle,
             channelNameStyle,
             channelCodeStyle,
-
-            invitaionContainerStyle,
-            invitationLabelStyle,
-            invitationEditBtnStyle,
+            imgStyle,
+            
             addInviteCodeBtnStyle,
 
             memberListContainerStyle,
@@ -95,20 +93,23 @@ class PrivateInvitePage extends Component{
                         <div style={inviteCodeContainerStyle}>
                             <div style={inviteCodeLabelStyle}>
                                 <p style={channelNameStyle}>#generic</p>
-                                <p style={channelCodeStyle}>demo-1</p>
+                                <p style={channelCodeStyle}>demo_1</p>
+                                <img style={imgStyle}
+                                    src={require('../../../../../assets/images/close_button.png')}
+                                /> 
                             </div>
                             <div style={inviteCodeLabelStyle}>
-                                <p style={channelNameStyle}>#diabetes-channel</p>
+                                <p style={channelNameStyle}>#diabetes_channel</p>
                                 <p style={channelCodeStyle}>diabetes101</p>
+                                <img style={imgStyle}
+                                    src={require('../../../../../assets/images/close_button.png')}
+                                /> 
                             </div>
                         </div>
                     </div>
                     <Button style={addInviteCodeBtnStyle}>+ Add Invite Code</Button>
                 </div>
-                <div style={invitaionContainerStyle}>
-                    <p style={invitationLabelStyle}>Show this error message when the user tries to enter a wrong invite code</p>
-                    <Button style={invitationEditBtnStyle}>Edit Message</Button>
-                </div>
+                <ErrorMessageTemplate messagePlaceholder="Show this error message when the user tries to enter a wrong invite code"/>
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>Audit trail (2)</p>
                     <div style={dropdownContainerStyle}>
@@ -231,51 +232,11 @@ const styles = {
     },
     emailContentStyle:{
         marginTop:0,
-        marginBottom:12,
+        marginBottom:6,
         color:colors.lightGreyColor,
         fontSize:fonts.h3,
         fontFamily:'avenir',
         fontWeight:'500'
-    },
-    invitaionContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        width:'auto',
-        background:'white',
-        marginTop:0,
-        marginBottom:24,
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        fontSize: fonts.h4,
-        marginLeft:48,
-        height:36,
-        boxShadow: '0 1px 1px 0 #CED5DB'
-    },
-    invitationLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h2,
-        fontWeight:'500',
-        marginTop:0,
-        marginBottom:0,
-        fontFamily:'avenir',
-        width:'calc(100% - 152px)',
-        paddingRight:12
-    },
-    invitationEditBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        width:120,
-        marginLeft:0,
-        fontSize:fonts.h3,
-        textTransform: 'none',
-        paddingLeft:3,
-        paddingRight:3,
-        // fontWeight: 300
     },
     addInviteCodeBtnStyle:{
         background:colors.blueColor,
@@ -323,6 +284,7 @@ const styles = {
         borderRight:0,
         borderTop:0,
         marginLeft:48,
+        marginTop:24,
         background:colors.whiteColor,
         height:48,
         boxShadow: '0 1px 1px 0 #CED5DB'
@@ -362,24 +324,32 @@ const styles = {
     },
     inviteCodeContainerStyle:{
         display:'flex',
-        flexDirection:'row'
+        flexDirection:'row',
+        overflowX:'scroll',
+        //background:'yellow',
+        height:36,
+        paddingTop:12
     },
     inviteCodeLabelStyle:{
         height:28,
         display:'flex',
-        marginRight:18
+        marginRight:12
     },
     channelNameStyle:{
         background:colors.blackColor,
         color:colors.whiteColor,
         margin:0,
-        padding:'6px 6px 6px 6px'
+        padding:'0px 12px 0px 12px',
+        lineHeight:2,
+        fontSize:fonts.h3
     },
     channelCodeStyle:{
         background:colors.lightBlueColor,
         color:colors.blackColor,
         margin:0,
-        padding:'6px 6px 12px 6px'
+        lineHeight:2,
+        padding:'0px 12px 0px 12px',
+        fontSize:fonts.h3
     },
     dropdownLabelStyle:{
         color:colors.whiteColor,
@@ -405,7 +375,14 @@ const styles = {
         color:colors.whiteColor,
         height:30,
         width:138
-    },
+    },    
+    imgStyle:{
+        position:'relative',
+        right:9,
+        top:-9,
+        height:18,
+        width:18
+    }
 }
 
 export default withStyles(themeStyles)(PrivateInvitePage);

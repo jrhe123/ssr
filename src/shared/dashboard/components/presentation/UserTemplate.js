@@ -10,9 +10,31 @@ import Close from '@material-ui/icons/Close';
 import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
+//components
+import ModalTemplate from './ModalTemplate';
 
 
 class UserTemplate extends Component {
+
+    state = {
+        isModalOpen: false
+    }
+
+    onOpenModal = () => {
+        this.setState({ isModalOpen: true });
+    };
+    
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+
+    handleConfirm = (data) => {
+        this.setState({ 
+            isModalOpen: false
+        });
+    }
+
 
     render() {
         const {
@@ -43,7 +65,16 @@ class UserTemplate extends Component {
                     <p style={userRegisterStatusStyle}>{this.props.invitationInfo}</p>
                 </div>
                 <div style={resendBtnContainerStyle}>                               
-                    <Button style={resendBtnStyle} variant="outlined">Resend Invite</Button>
+                    <Button style={resendBtnStyle} onClick={this.onOpenModal} variant="outlined">Resend Invite</Button>
+                    <ModalTemplate 
+                        open={this.state.isModalOpen}
+                        title="Click confirm to allow this user"
+                        cancel={true}
+                        confirm={true}
+                        handleConfirm={this.handleConfirm}
+                        onCloseModal={() => this.handleCloseModal()}
+                        inputText={false}
+                    />
                 </div>
                 <div style={userCloseBtnContainerStyle}>
                     <IconButton style={channelInfoIconStyle}><Close/></IconButton>

@@ -205,12 +205,12 @@ class Stream extends Component{
                             <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
                             </div> */}
-                            <LiveStreamTemplate/>
-                            <LiveStreamTemplate/>
-                            <LiveStreamTemplate/>
-                            <LiveStreamTemplate/>
-                            <LiveStreamTemplate/>
-                            <LiveStreamTemplate/>
+                            <LiveStreamTemplate streamTitle="My Experience 1"/>
+                            <LiveStreamTemplate streamTitle="Readings"/>
+                            <LiveStreamTemplate streamTitle="Examination"/>
+                            <LiveStreamTemplate streamTitle="Test Materials"/>
+                            <LiveStreamTemplate streamTitle="Cardiology"/>
+                            <LiveStreamTemplate streamTitle="Therapy"/>
                         </div>
                         <p style={readyToStreamLabelStyle}>READY TO STREAM (18)</p>
                         <div style={readyToStreamContainerStyle}>

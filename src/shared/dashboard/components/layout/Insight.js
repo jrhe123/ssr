@@ -23,12 +23,13 @@ class Insight extends Component {
                 header:'ENGAGEMENT',
                 width:460,
                 height:250,
-                background:'#FFFFFF',
+                background:'linear-gradient(90deg, #DA4453 0%, #89216B 100%)',
                 marginBottom: 12,
                 headerMarginTop:21,
                 headerMarginLeft:27,
                 headerFontSize:14,
-                contentMarginTop:0
+                contentMarginTop:0,
+                color:'white'
             },
             {
                 header:'DIABETES',
@@ -68,25 +69,27 @@ class Insight extends Component {
                 header:'LEADERBOARD',
                 width:300,
                 height:250,
-                background:'#FFFFFF',
+                background:'linear-gradient(90deg, #302b63 0%, #24243e 100%)',
                 headerFontSize:18,
                 headerMarginTop:21,
                 headerMarginLeft:18,
                 contentMarginTop:0,
                 marginBottom: 12,
+                color:'white'
             },
             {
                 header:'ENGAGEMENT',
                 number:'110,145',
                 width:220,
                 height:115,
-                background:'#FFFFFF',
+                background:'linear-gradient(90deg, #56CCF2 0%, #2F80ED 100%)',
                 marginBottom: 12,
                 headerFontSize:12,
                 numberSize:24,
                 headerMarginTop:21,
                 headerMarginLeft:15,
-                contentMarginTop:27
+                contentMarginTop:27,
+                color:'white'
             },
             {
                 header:'TRENDING CHANNELS',
@@ -105,7 +108,7 @@ class Insight extends Component {
                 number:'13',
                 width:140,
                 height:58,
-                background:'#FFFFFF',
+                background:'#ffffff',
                 marginBottom:12,
                 headerFontSize:12,
                 numberSize:24,
@@ -133,14 +136,15 @@ class Insight extends Component {
                 number:'201',
                 width:140,
                 height:58,
-                background:'#FFFFFF',
+                background:'linear-gradient(90deg, #FFE000 0%, #799F0C 100%)',
                 marginBottom:12,
                 headerFontSize:12,
                 numberSize:24,
                 textAlign:'left',
                 headerMarginTop:6,
                 headerMarginLeft:6,
-                contentMarginTop:0
+                contentMarginTop:0,
+                color:'#ffffff'
             },
             {
                 header:'Real Time',

@@ -6,8 +6,6 @@ import '../../../../../assets/css/dd-menu/dd_menu.css';
 // libraries
 import { withStyles } from '@material-ui/core/styles';
 import SearchBar from 'material-ui-search-bar';
-import Button from '@material-ui/core/Button';
-
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -15,6 +13,8 @@ import colors from '../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
+import ModalTemplate from './ModalTemplate';
+import ErrorMessageTemplate from './ErrorMessageTemplate';
 
 const themeStyles = () => ({
     yourIconButtonStyle: {
@@ -37,10 +37,6 @@ class RestrictSessionPage extends Component{
             channelDetailsWrapperStyle,
             safeguardLabelStyle,
 
-            invitaionContainerStyle,
-            invitationLabelStyle,
-            invitationEditBtnStyle,
-
             memberListContainerStyle,
             memberListHeaderContainerStyle,
             memberLabelStyle,
@@ -55,10 +51,7 @@ class RestrictSessionPage extends Component{
                     <p style={channelDetailsWrapperStyle}>Restrict users to have a maximum number of sessions</p>
                     <p style={safeguardLabelStyle}>Enable this safeguard to protect your digital assest against user ID and password sharing between your members</p>
                 </div>
-                <div style={invitaionContainerStyle}>
-                    <p style={invitationLabelStyle}>Show this error message when the user exceeds maximum number of sessions</p>
-                    <Button style={invitationEditBtnStyle}>Edit</Button>
-                </div>
+                <ErrorMessageTemplate messagePlaceholder="Show this error message when the user exceeds maximum number of sessions"/>
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>Restricted user list (5)</p>
                     <div style={searchUserWrapperStyle}>
@@ -159,44 +152,6 @@ const styles = {
         fontWeight:'500',
         fontFamily:'avenir'
     },
-    invitaionContainerStyle:{
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width:'auto',
-        background:'white',
-        marginTop:0,
-        marginBottom:15,
-        paddingTop:12,
-        paddingLeft:12,
-        paddingRight:12,
-        paddingBottom:12,
-        fontSize: fonts.h4,
-        marginLeft:48,
-        height:36,
-        boxShadow: '0 1px 1px 0 #CED5DB'
-    },
-    invitationLabelStyle:{
-        marginLeft:18,
-        fontSize: fonts.h2,
-        fontWeight:'500',
-        marginTop:0,
-        marginBottom:0,
-        fontFamily:'avenir',
-        width:'calc(100% - 152px)',
-        paddingRight:12
-    },
-    invitationEditBtnStyle:{
-        background:colors.blueColor,
-        color:colors.whiteColor,
-        height:40,
-        width:120,
-        marginLeft:0,
-        textTransform:'none',
-        fontSize:fonts.h3
-    },
-
     memberListContainerStyle:{
         flexDirection:'column',
         justifyContent:'flex-start',
@@ -219,6 +174,7 @@ const styles = {
         justifyContent:'space-between',
         alignItems:'center',
         width:'auto',
+        marginTop:15,
         paddingTop:12,
         paddingLeft:12,
         paddingRight:12,

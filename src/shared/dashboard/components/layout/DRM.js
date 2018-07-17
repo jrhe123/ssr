@@ -247,8 +247,10 @@ const styles = {
         paddingTop:12,
         paddingBottom:12,
         paddingLeft:18,
-        paddingRight:42,
-        cursor:'pointer'
+        paddingRight:27,
+        cursor:'pointer',
+        height:36,
+        alignItems:'center'
     },
     safeguardInfoLabelStyle:{
         margin:0,
