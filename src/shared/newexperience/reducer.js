@@ -470,7 +470,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         tmpUpdateSection.btnContent = payload.content;
                         break;
                     case 'EMBED_PDF':
-                        tmpUpdateSection.pdfPath = 'http://localhost:2999/sample.pdf';
+                        tmpUpdateSection.pdfPath = 'http://localhost:3000/uploads/sample.pdf';
                         break;
                     case 'SPLASH_CONTENT':
                         tmpUpdateSection.splashContent = payload.content;
