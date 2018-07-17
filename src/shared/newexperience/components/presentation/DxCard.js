@@ -380,7 +380,9 @@ const styles = {
         height: 90
     },
     txtStyle: {
-        fontSize: fonts.h5
+        fontSize: fonts.h5,
+        paddingLeft: 6,
+        paddingRight: 6,
     },
     overlayContainerStyle: {
         position: 'relative',
