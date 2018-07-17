@@ -11,8 +11,8 @@ import {
 export const dxLoginUrl = (params) => {
 
     return (
-        fetch('https://www.google.ca', {
-            method: 'get',
+        fetch('http://localhost:3000/root', {
+            method: 'post',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
