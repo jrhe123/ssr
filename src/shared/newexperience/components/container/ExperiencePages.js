@@ -11,6 +11,7 @@ import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
+import DxModal from '../presentation/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -28,6 +29,8 @@ import {
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
+    dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
+    dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
     dxExperiencePageShuffleElem as dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElem as dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
@@ -47,6 +50,10 @@ class ExperiencePages extends Component {
 
     state = {
         activeTab: 0,
+        modalType: null,
+        isModalOpen: false,
+        modalTitle: '',
+        targetSectionGUID: null,
     }
 
     componentDidMount() {
@@ -69,12 +76,12 @@ class ExperiencePages extends Component {
             pages,
         } = this.props.experience;
         let phone = pages.map((page, index) => (
-            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false)
+            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false, page.isDeleted)
         ))
         return phone;
     }
 
-    renderPhoneElementSection = (sections, activePage) => {
+    renderPhoneElementSection = (sections, activePage, deletedPage) => {
 
         const {
             experience,
@@ -83,7 +90,9 @@ class ExperiencePages extends Component {
         let section;
         section = sections.map((section, i) => (
             <PhoneElement
+                deletedPage={deletedPage}
                 activePage={activePage}
+                isDeleted={section.isDeleted}
                 sectionGUID={section.sectionGUID}
                 type={section.type}
                 isActive={section.isActive}
@@ -106,6 +115,8 @@ class ExperiencePages extends Component {
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
                 handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
+                handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
+                handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
 
                 handleVideoError={(msg) => this.handleErrorMsg(msg)}
             />
@@ -149,7 +160,6 @@ class ExperiencePages extends Component {
 
     availablePageOptionList = (pages, currentpageGUID, targetPageGUID) => {
         let res = [];
-
         if (pages.length && targetPageGUID) {
             let cancelOption = {
                 sectionGUID: '',
@@ -209,6 +219,47 @@ class ExperiencePages extends Component {
     handleImageChange = (file) => {
         let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'IMAGE', file);
+    }
+
+    handleDeleteElem = (sectionGUID) => {
+        this.setState({
+            modalType: 'DELETE',
+            isModalOpen: true,
+            modalTitle: 'Confirm Delete Element',
+            targetSectionGUID: sectionGUID
+        });
+    }
+
+    handleCloneElem = (sectionGUID) => {
+        this.setState({
+            modalType: 'COPY',
+            isModalOpen: true,
+            modalTitle: 'Confirm Copy Element',
+            targetSectionGUID: sectionGUID
+        });
+    }
+
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleConfirmModal = () => {
+        const {
+            modalType,
+            targetSectionGUID
+        } = this.state;
+
+        this.handleCloseModal();
+        if (modalType == 'DELETE') {
+            this.props.dxExperiencePageDeleteElemAction(targetSectionGUID);
+        } else if (modalType == 'COPY') {
+            this.props.dxExperiencePageCopyElemAction(targetSectionGUID);
+            // Auto scroll
+            setTimeout(() => {
+                let dxPhoneArea = this.refs.dx_phone_area;
+                dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+            }, 0.1);
+        }
     }
 
     handleCarouselClick = (open) => {
@@ -277,7 +328,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => console.log(experience)}>click me</a>
+                {/* <a onClick={() => console.log(experience)}>click me</a> */}
                 <div
                     className={experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
@@ -371,6 +422,7 @@ class ExperiencePages extends Component {
                             <div style={toolbarContainerStyle}>
                                 <PhoneToolbar
                                     activePageSectionIndex={experience.activePageSectionIndex}
+                                    tools={experience.tools}
                                     newPage={experience.newPage}
                                     pages={experience.pages}
 
@@ -472,6 +524,16 @@ class ExperiencePages extends Component {
                     </div>
 
                 </div>
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title={this.state.modalTitle}
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    isDanger={this.state.modalType == 'DELETE' ? true : false}
+                    handleConfirm={() => this.handleConfirmModal()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         )
     }
@@ -568,7 +630,7 @@ const styles = {
         margin: '0 auto',
         backgroundColor: colors.lightBlueColor,
         textAlign: 'left',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
     },
     pageNumContainerStyle: {
         height: 24
@@ -667,6 +729,8 @@ const dispatchToProps = {
     dxExperiencePageCarouselActivePageAction,
 
     dxExperiencePageAddElemAction,
+    dxExperiencePageDeleteElemAction,
+    dxExperiencePageCopyElemAction,
     dxExperiencePageShuffleElemAction,
     dxExperiencePageSelectElemAction,
     dxExperiencePageUpdateElemAction,

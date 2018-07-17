@@ -129,7 +129,7 @@ class ThumbnailPhoneElement extends Component {
                                         <Page
                                             key={`page_${index + 1}`}
                                             pageNumber={index + 1}
-                                            width={120}
+                                            width={this.props.pdfWidth}
                                         />
                                     ),
                                 )
@@ -139,29 +139,38 @@ class ThumbnailPhoneElement extends Component {
                 );
                 break;
             case 'SPLASH':
+
+                const iconSize = this.props.splashSize == 'SMALL' ? 7 : 12;
+                const marginTop = this.props.splashSize == 'SMALL' ? 2 : 4;
+                const height = this.props.splashSize == 'SMALL' ? 60 : 90;
+                const line = this.props.splashSize == 'SMALL' ? 12 : 24;
+
                 elem = (
                     <div className="dx_thumbnail_elem_splash"
-                        style={Object.assign({}, overlayContainerStyle, { color: section.splashColor })}>
+                        style={Object.assign({}, overlayContainerStyle, { color: section.splashColor, height })}>
                         <img
-                            style={overlayImgStyle}
+                            style={Object.assign({}, overlayImgStyle, {height})}
                             src={section.splashImg ? URL.createObjectURL(section.splashImg) : require('../../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
-                            <div style={splashContainerStyle}>
-                                <div style={statusbarContainerStyle}>
+                            <div style={Object.assign({}, splashContainerStyle, {height})}>
+                                <div style={Object.assign({}, statusbarContainerStyle, {height: line})}>
                                     <div style={leftStatusContainerStyle}>
-                                        <div style={leftStatusWrapperStyle}>
+                                        <div style={Object.assign({}, leftStatusWrapperStyle, {height: line})}>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
                                                 <SignalCellular0Bar
-                                                    style={statusbarIconStyle}
+                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
                                                 />
                                             </div>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
-                                                <span style={statusbarLabelStyle}>Sketch</span>
+                                                <span 
+                                                    style={Object.assign({}, statusbarLabelStyle, {marginTop: this.props.splashSize == 'SMALL' ? 0 : 5})}>
+                                                    Sketch
+                                                </span>
                                             </div>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
                                                 <Wifi
-                                                    style={statusbarIconStyle}
+                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
                                                 />
                                             </div>
                                         </div>
@@ -174,30 +183,32 @@ class ThumbnailPhoneElement extends Component {
                                         </div>
                                     </div>
                                     <div style={rightStatusContainerStyle}>
-                                        <div style={rightStatusWrapperStyle}>
+                                        <div style={Object.assign({}, rightStatusWrapperStyle, {height: line})}>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
                                                 <Bluetooth
-                                                    style={statusbarIconStyle}
+                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
                                                 />
                                             </div>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
-                                                <span style={statusbarLabelStyle}>100%</span>
+                                                <span 
+                                                    style={Object.assign({}, statusbarLabelStyle, {marginTop: this.props.splashSize == 'SMALL' ? 0 : 5})}
+                                                >100%</span>
                                             </div>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
                                                 <BatteryFull
                                                     className="dx_battery_icon"
-                                                    style={statusbarIconStyle}
+                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style={toolbarContainerStyle}>
+                                <div style={Object.assign({}, toolbarContainerStyle, {height: line})}>
                                     <div style={leftToolbarContainerStyle}>
                                         <div style={leftToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <KeyboardArrowLeft style={statusbarSubIconStyle} />
+                                                    <KeyboardArrowLeft style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
                                                 </div>
                                             </div>
                                         </div>
@@ -206,8 +217,8 @@ class ThumbnailPhoneElement extends Component {
                                         <div style={rightToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <Search style={statusbarSubIconStyle} />
-                                                    <MoreVert style={statusbarSubIconStyle} />
+                                                    <Search style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
+                                                    <MoreVert style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
                                                 </div>
                                             </div>
                                         </div>
@@ -228,10 +239,13 @@ class ThumbnailPhoneElement extends Component {
                 );
                 break;
             case 'VIDEO':
+
+                const videoHeight = this.props.videoSize == 'SMALL' ? 54 : 120;
+
                 elem = (
-                    <div style={videoOverlayContainerStyle}>
+                    <div style={Object.assign({}, videoOverlayContainerStyle, {height: videoHeight})}>
                         <div
-                            style={videoOverlayImgStyle}
+                            style={Object.assign({}, videoOverlayImgStyle, {height: videoHeight})}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={Object.assign({}, tableContainerStyle)}>
@@ -246,10 +260,13 @@ class ThumbnailPhoneElement extends Component {
                 );
                 break;
             case 'IMAGE':
+
+                const imgHeight = this.props.imgSize == 'SMALL' ? 48 : 90;
+
                 elem = (
                     <div style={imgContainerStyle}>
                         <img
-                            style={imgStyle}
+                            style={Object.assign({}, imgStyle, {height: imgHeight})}
                             src={section.img ? URL.createObjectURL(section.img) : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
@@ -277,7 +294,6 @@ class ThumbnailPhoneElement extends Component {
     }
 }
 
-const splashHeight = 60;
 const descContainerWidth = 100;
 
 const styles = {
@@ -342,10 +358,9 @@ const styles = {
     },
     // splash
     splashContainerStyle: {
-        height: splashHeight,
+
     },
     statusbarContainerStyle: {
-        height: 12,
         display: 'flex',
         flexDirection: 'row'
     },
@@ -354,7 +369,6 @@ const styles = {
     },
     leftStatusWrapperStyle: {
         float: 'left',
-        height: 12,
         display: 'flex',
     },
     midStatusContainerStyle: {
@@ -365,7 +379,6 @@ const styles = {
     },
     rightStatusWrapperStyle: {
         float: 'right',
-        height: 12,
         display: 'flex',
         flexDirection: 'row'
     },
@@ -373,19 +386,16 @@ const styles = {
         flex: 1,
     },
     statusbarIconStyle: {
-        fontSize: 7,
         display: 'inline-block',
-        marginTop: 2,
     },
     statusbarSubIconStyle: {
-        fontSize: 7,
+
     },
     statusbarLabelStyle: {
         display: 'inline-block',
         margin: 0,
     },
     toolbarContainerStyle: {
-        height: 12,
         display: 'flex',
         flexDirection: 'row',
     },
@@ -406,7 +416,6 @@ const styles = {
     },
     overlayContainerStyle: {
         position: 'relative',
-        height: splashHeight,
         width: '100%',
         cursor: 'default'
     },
@@ -421,7 +430,6 @@ const styles = {
         zIndex: 1
     },
     overlayImgStyle: {
-        height: splashHeight,
         width: '100%',
     },
     descContainerStyle: {
@@ -437,7 +445,7 @@ const styles = {
     },
     videoOverlayContainerStyle: {
         position: 'relative',
-        height: 54,
+        // height: 54,
         width: '100%',
         border: '1px solid',
         borderColor: colors.whiteColor,
@@ -445,7 +453,7 @@ const styles = {
         marginTop: 1
     },
     videoOverlayImgStyle: {
-        height: 54,
+        // height: 54,
         width: '100%',
         cursor: 'pointer',
         backgroundColor: colors.blackColor
@@ -459,7 +467,6 @@ const styles = {
     imgStyle: {
         display: 'block',
         width: '100%',
-        height: 48
     },
 }
 

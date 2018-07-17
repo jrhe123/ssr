@@ -134,14 +134,14 @@ class PhoneElement extends Component {
                 break;
             case 'EMBED_PDF':
                 section = (
-                    <DxPdfViewer 
+                    <DxPdfViewer
                         pdfPath={this.props.pdfPath}
                     />
                 )
                 break;
             case 'SPLASH':
                 section = (
-                    <DxSplash 
+                    <DxSplash
                         splashContent={this.props.splashContent}
                         splashImg={this.props.splashImg}
                         splashColor={this.props.splashColor}
@@ -151,7 +151,7 @@ class PhoneElement extends Component {
                 break;
             case 'VIDEO':
                 section = (
-                    <DxVideoViewer 
+                    <DxVideoViewer
                         videoUrl={this.props.videoUrl}
                         handleVideoError={(msg) => this.props.handleVideoError(msg)}
                     />
@@ -159,7 +159,7 @@ class PhoneElement extends Component {
                 break;
             case 'IMAGE':
                 section = (
-                    <DxImageViewer 
+                    <DxImageViewer
                         img={this.props.img}
                     />
                 )
@@ -177,7 +177,9 @@ class PhoneElement extends Component {
             connectDragSource,
             connectDropTarget,
 
+            deletedPage,
             activePage,
+            isDeleted,
             type,
             isActive,
         } = this.props;
@@ -199,19 +201,32 @@ class PhoneElement extends Component {
 
         return (
             <div
-                className={activePage ? 'dx_show' : 'dx_hidden'}
+                className={!deletedPage && activePage && !isDeleted ? 'dx_show' : 'dx_hidden'}
                 style={Object.assign({}, mainContainerStyle, { ...style, opacity })}>
                 <div className="dx_float_active_side_tab"
                     style={Object.assign({}, controlContainerStyle, { borderColor: isActive ? colors.activeBlueColor : 'transparent' })}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={controlWrapperStyle}>
-                                <div style={removeControlContainerStyle}>
+                                <div
+                                    className="dx_control_btn"
+                                    style={removeControlContainerStyle}
+                                    onClick={() => this.props.handleDeleteElem(this.props.sectionGUID)}
+                                >
                                     <Delete style={controlIconStyle} />
                                 </div>
-                                <div style={copyControlContainerStyle}>
-                                    <ContentCopy style={controlIconStyle} />
-                                </div>
+                                {
+                                    type != 'SPLASH' ?
+                                        <div
+                                            className="dx_control_btn"
+                                            style={copyControlContainerStyle}
+                                            onClick={() => this.props.handleCloneElem(this.props.sectionGUID)}
+                                        >
+                                            <ContentCopy style={controlIconStyle} />
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                         </div>
                     </div>
@@ -224,7 +239,9 @@ class PhoneElement extends Component {
                             <div
                                 style={contentContainerStyle}
                                 onClick={() => this.props.handleSectionClick(this.props.sectionGUID)}>
-                                <div style={dragControlContainerStyle}>
+                                <div
+                                    className="dx_control_btn"
+                                    style={dragControlContainerStyle}>
                                     <DragHandle style={controlIconStyle} />
                                 </div>
                                 {
@@ -279,7 +296,8 @@ const styles = {
     removeControlContainerStyle: {
         width: 18,
         height: 18,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        cursor: 'pointer',
     },
     controlIconStyle: {
         color: colors.lightGreyColor,
@@ -289,7 +307,8 @@ const styles = {
         width: 18,
         height: 18,
         boxSizing: 'border-box',
-        marginTop: 36
+        marginTop: 36,
+        cursor: 'pointer',
     },
     dragControlContainerStyle: {
         position: 'absolute',

@@ -25,6 +25,7 @@ class DxModal extends Component {
             description,
             cancel,
             confirm,
+            isDanger,
         } = this.props;
 
         const {
@@ -83,7 +84,7 @@ class DxModal extends Component {
                                         <div style={tableContainerStyle}>
                                             <div style={tableWrapperStyle}>
                                                 <Button
-                                                    style={confirmBtnStyle}
+                                                    style={Object.assign({}, { backgroundColor: isDanger ? colors.redColor : colors.blueColor }, confirmBtnStyle)}
                                                     variant="confirm modal"
                                                     onClick={() => this.props.handleConfirm()}
                                                 >Confirm</Button>
@@ -162,7 +163,6 @@ const styles = {
         textTransform: 'capitalize',
     },
     confirmBtnStyle: {
-        backgroundColor: colors.redColor,
         color: colors.whiteColor,
         textTransform: 'capitalize',
     },

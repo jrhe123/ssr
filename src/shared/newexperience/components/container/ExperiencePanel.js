@@ -10,7 +10,9 @@ import DropdownMenu from 'react-dd-menu';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
+    dxExperiencePagePagesRemove as dxExperiencePagePagesRemoveAction,
 } from '../../actions';
 
 // constants
@@ -20,6 +22,7 @@ import fonts from '../../../styles/fonts';
 // components
 import DxInput from '../../../components/dxInput/DxInput';
 import DxCard from '../presentation/DxCard';
+import DxPage from '../presentation/DxPage';
 
 class ExperiencePanel extends Component {
 
@@ -37,8 +40,16 @@ class ExperiencePanel extends Component {
         this.setState({ isMenuOpen: false });
     }
 
+    handleChangeProgressIndex = (index) => {
+        this.props.dxExperienceIndexUpdateAction(index);
+    };
+
     handleClickOption = (val) => {
         this.props.dxExperienceTypeUpdateAction(val);
+    }
+
+    handleRemovePagePages = () => {
+        this.props.dxExperiencePagePagesRemoveAction();
     }
 
     render() {
@@ -58,6 +69,7 @@ class ExperiencePanel extends Component {
             outlineBtnStyle,
             optionBtnStyle,
             demoCardContainerStyle,
+            demoPagesContainerStyle,
         } = styles;
 
         const {
@@ -66,6 +78,7 @@ class ExperiencePanel extends Component {
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log(experience)}>click me</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>
@@ -170,12 +183,24 @@ class ExperiencePanel extends Component {
                                         <p>Page(s) are the follow-up screens after the end user clicked the above card.<br />Multiple page(s) are linked via sections.</p>
                                     </div>
                                 </div>
-                                <div style={editContainerStyle}>
-                                    <a style={btnStyle}
-                                        onClick={() => this.props.handleCreatePages()}
-                                        variant="Create card"
-                                    >Create page(s)</a>
-                                </div>
+                                {
+                                    !experience.isPagesSaved ?
+                                        <div style={editContainerStyle}>
+                                            <a style={btnStyle}
+                                                onClick={() => this.props.handleCreatePages()}
+                                                variant="Create card"
+                                            >Create page(s)</a>
+                                        </div>
+                                        :
+                                        <div style={demoPagesContainerStyle}>
+                                            <DxPage 
+                                                pageNumber={this.props.experience.pages.length}
+                                                pages={this.props.experience.pages}
+                                                handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
+                                                handleRemovePagePages={() => this.handleRemovePagePages()}
+                                            />
+                                        </div>
+                                }
                             </div>
                         )
                         :
@@ -250,8 +275,14 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 210,
+        height: 120,
         width: 300,
+    },
+    demoPagesContainerStyle: {
+        height: 420,
+        width: 276,
+        marginTop: 12,
+        marginLeft: 120,
     },
 }
 
@@ -262,7 +293,9 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
+    dxExperiencePagePagesRemoveAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

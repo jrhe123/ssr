@@ -50,6 +50,14 @@ import {
     EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE__FAILED,
 
+    EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
+    EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
+    EXPERIENCE_PAGE_PAGES_SAVE__FAILED,
+
+    EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
+    EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
+    EXPERIENCE_PAGE_PAGES_REMOVE__FAILED,
+
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__FAILED,
@@ -81,6 +89,14 @@ import {
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
     EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_ADD_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_DELETE_ELEM__FAILED,
+
+    EXPERIENCE_PAGE_COPY_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_COPY_ELEM__SUCCEEDED,
+    EXPERIENCE_PAGE_COPY_ELEM__FAILED,
 
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM__SUCCEEDED,
@@ -350,6 +366,44 @@ export function* dxExperienceCardTemplateRemoveSaga() {
     yield takeEvery(EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED, dxExperienceCardTemplateRemove);
 }
 
+// Experience pages save
+export function* dxExperiencePagePagesSave(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_PAGES_SAVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePagePagesSaveSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED, dxExperiencePagePagesSave);
+}
+
+// Experience pages remove
+export function* dxExperiencePagePagesRemove(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_PAGES_REMOVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePagePagesRemoveSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED, dxExperiencePagePagesRemove);
+}
+
 // Experience page template toggle
 export function* dxExperiencePageTemplateMenuToggle(action) {
     try {
@@ -514,6 +568,48 @@ export function* dxExperiencePageAddElem(action) {
 
 export function* dxExperiencePageAddElemSaga() {
     yield takeEvery(EXPERIENCE_PAGE_ADD_ELEM_REQUESTED, dxExperiencePageAddElem);
+}
+
+// Experience page delete elem
+export function* dxExperiencePageDeleteElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_DELETE_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageDeleteElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED, dxExperiencePageDeleteElem);
+}
+
+// Experience page copy elem
+export function* dxExperiencePageCopyElem(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_COPY_ELEM__SUCCEEDED,
+            payload: {
+                sectionGUID: action.payload.sectionGUID,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_COPY_ELEM__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageCopyElemSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_COPY_ELEM_REQUESTED, dxExperiencePageCopyElem);
 }
 
 // Experience page shuffle elem

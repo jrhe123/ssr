@@ -13,6 +13,8 @@ import {
     EXPERIENCE_CARD_TEMPLATE_SAVE_REQUESTED,
     EXPERIENCE_CARD_TEMPLATE_REMOVE_REQUESTED,
 
+    EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
+    EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
@@ -23,6 +25,8 @@ import {
     EXPERIENCE_PAGE_ADD_PAGE_REQUESTED,
     EXPERIENCE_PAGE_DELETE_PAGE_REQUESTED,
     EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+    EXPERIENCE_PAGE_COPY_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SHUFFLE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
     EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
@@ -135,6 +139,20 @@ export const dxExperienceCardTemplateRemove = () => {
     }
 }
 
+export const dxExperiencePagePagesSave = () => {
+    return {
+        type: EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
+        payload: {},
+    }
+}
+
+export const dxExperiencePagePagesRemove = () => {
+    return {
+        type: EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
+        payload: {},
+    }
+}
+
 export const dxExperiencePageTemplateMenuUpdate = (toggle) => {
     return {
         type: EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
@@ -201,6 +219,24 @@ export const dxExperiencePageAddElem = (type) => {
         type: EXPERIENCE_PAGE_ADD_ELEM_REQUESTED,
         payload: {
             type,
+        },
+    }
+}
+
+export const dxExperiencePageDeleteElem = (sectionGUID) => {
+    return {
+        type: EXPERIENCE_PAGE_DELETE_ELEM_REQUESTED,
+        payload: {
+            sectionGUID,
+        },
+    }
+}
+
+export const dxExperiencePageCopyElem = (sectionGUID) => {
+    return {
+        type: EXPERIENCE_PAGE_COPY_ELEM_REQUESTED,
+        payload: {
+            sectionGUID,
         },
     }
 }

@@ -26,6 +26,8 @@ import {
     dxExperienceCardTemplateSaveSaga,
     dxExperienceCardTemplateRemoveSaga,
 
+    dxExperiencePagePagesSaveSaga,
+    dxExperiencePagePagesRemoveSaga,
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
@@ -36,6 +38,8 @@ import {
     dxExperiencePageAddPageSaga,
     dxExperiencePageDeletePageSaga,
     dxExperiencePageAddElemSaga,
+    dxExperiencePageDeleteElemSaga,
+    dxExperiencePageCopyElemSaga,
     dxExperiencePageShuffleElemSaga,
     dxExperiencePageSelectElemSaga,
     dxExperiencePageUpdateElemSaga,
@@ -75,6 +79,8 @@ export default function* rootSaga() {
         dxExperienceCardTemplateRemoveSaga(),
 
         // Page
+        dxExperiencePagePagesSaveSaga(),
+        dxExperiencePagePagesRemoveSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),
@@ -85,6 +91,8 @@ export default function* rootSaga() {
         dxExperiencePageAddPageSaga(),
         dxExperiencePageDeletePageSaga(),
         dxExperiencePageAddElemSaga(),
+        dxExperiencePageDeleteElemSaga(),
+        dxExperiencePageCopyElemSaga(),
         dxExperiencePageShuffleElemSaga(),
         dxExperiencePageSelectElemSaga(),
         dxExperiencePageUpdateElemSaga(),
