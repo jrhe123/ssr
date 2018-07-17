@@ -32,6 +32,7 @@ class PageCarousel extends Component {
             pageGUID
         } = this.state;
         this.props.handleConfirmDeleteCarouselPage(pageGUID);
+        this.handleCloseModal();
     }
 
     render() {
@@ -39,10 +40,12 @@ class PageCarousel extends Component {
         const {
             experience,
         } = this.props;
-        const {
+        let {
             pages,
             newPage,
         } = experience;
+
+        pages = find_display_pages(pages);
 
         const settings = {
             dots: false,
@@ -100,12 +103,24 @@ class PageCarousel extends Component {
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
+                    isDanger={true}
                     handleConfirm={() => this.handleConfirmDeleteCarouselPage()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
         )
     }
+}
+
+const find_display_pages = (pages) => {
+    let output = [];
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i]
+        if (!page.isDeleted) {
+            output.push(page);
+        }
+    }
+    return output;
 }
 
 const styles = {
