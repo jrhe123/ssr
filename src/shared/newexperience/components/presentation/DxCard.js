@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -59,7 +62,7 @@ class DxCard extends Component {
     handleRemoveCardTemplateClick = () => {
         this.setState({ isModalOpen: true });
     }
-    
+
     handleCloseModal = () => {
         this.setState({ isModalOpen: false });
     }
@@ -93,7 +96,7 @@ class DxCard extends Component {
                     <div style={leftImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
+                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                     <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.settings[1].Default })}>
@@ -126,7 +129,7 @@ class DxCard extends Component {
                     <div style={rightImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
+                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 </div>
@@ -148,7 +151,7 @@ class DxCard extends Component {
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -168,7 +171,7 @@ class DxCard extends Component {
                 <div style={overlayContainerStyle}>
                     <img
                         style={this.state.videoInsert ? videoOverlayImgStyle : overlayImgStyle}
-                        src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -236,7 +239,7 @@ class DxCard extends Component {
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
                     />
                 </div>
             );

@@ -278,17 +278,21 @@ export const dxExperienceCardTemplateUpdateImageUrl = (params) => {
 export function* dxExperienceCardTemplateUpdateImage(action) {
     try {
         const response = yield call(dxExperienceCardTemplateUpdateImageUrl, action.payload);
-        let { Confirmation, Response } = response;
+        let { Confirmation, Response, Message } = response;
 
-        if(Confirmation == 'SUCCESS'){
-            
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+                payload: {
+                    imgFile: Response.Image.ImageGUID,
+                },
+            });
         }
-        yield put({
-            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
-            payload: {
-                imgFile: action.payload.imgFile,
-            },
-        });
     } catch (error) {
         yield put({
             type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
