@@ -121,7 +121,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={pdfContainerStyle}>
                         <Document
                             loading="Loading PDF.."
-                            file={section.pdfPath}
+                            file={section.pdfPath ? config.fileHost + '/' + section.pdfPath : null}
                             noData="Please select a PDF.."
                             onLoadSuccess={this.handleDocumentLoadSuccess}
                         >
