@@ -278,7 +278,11 @@ export const dxExperienceCardTemplateUpdateImageUrl = (params) => {
 export function* dxExperienceCardTemplateUpdateImage(action) {
     try {
         const response = yield call(dxExperienceCardTemplateUpdateImageUrl, action.payload);
-        console.log('response: ', response);
+        let { Confirmation, Response } = response;
+
+        if(Confirmation == 'SUCCESS'){
+            
+        }
         yield put({
             type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
             payload: {
