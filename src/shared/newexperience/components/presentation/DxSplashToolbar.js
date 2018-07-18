@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 // Libraries
 import ColorPicker from 'rc-color-picker';
 import '../../../../../assets/css/rc-color-picker/rc-color-picker.css';
@@ -38,7 +41,7 @@ class DxSplashToolbar extends Component {
                         <label style={displayImgContainerStyle}>
                             <img
                                 style={displayImgStyle}
-                                src={this.props.imgFile ? URL.createObjectURL(this.props.imgFile) : require('../../../../../assets/images/demo.jpg')}
+                                src={this.props.imgFile ? `${config.picHost}${this.props.imgFile}` : require('../../../../../assets/images/demo.jpg')}
                             />
                         </label>
                     </div>

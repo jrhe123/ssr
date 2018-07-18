@@ -684,6 +684,15 @@ export const dxExperiencePageUpdatePDFUrl = (params) => {
     )
 }
 
+export const dxExperiencePageUpdateImageUrl = (params) => {
+
+    let formData = new FormData();
+    formData.append('File', params.content);
+    return (
+        apiManager.dxFileApi(`/upload/image`, formData, true)
+    )
+}
+
 export function* dxExperiencePageUpdateElem(action) {
     try {
         let type = action.payload.type;
@@ -705,6 +714,26 @@ export function* dxExperiencePageUpdateElem(action) {
                         sectionGUID: action.payload.sectionGUID,
                         type: type,
                         content: Response.File.FileGUID + '.' + Response.File.FileType,
+                    },
+                });
+            }
+        } else if (type == 'SPLASH_IMG' || type == 'IMAGE') {
+
+            const response = yield call(dxExperiencePageUpdateImageUrl, action.payload);
+            let { Confirmation, Response, Message } = response;
+
+            if (Confirmation !== 'SUCCESS') {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+                    payload: Message,
+                });
+            } else {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                    payload: {
+                        sectionGUID: action.payload.sectionGUID,
+                        type: type,
+                        content: Response.Image.ImageGUID,
                     },
                 });
             }
