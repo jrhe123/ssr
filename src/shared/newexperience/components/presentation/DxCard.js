@@ -192,7 +192,7 @@ class DxCard extends Component {
                                                             },
                                                             file: {
                                                                 attributes: {
-                                                                    poster: template.settings[0].Default ? URL.createObjectURL(template.settings[0].Default) : require('../../../../../assets/images/demo.jpg')
+                                                                    poster: template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../assets/images/demo.jpg')
                                                                 }
                                                             }
                                                         }}
