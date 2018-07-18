@@ -676,16 +676,48 @@ export function* dxExperiencePageSelectElemSaga() {
 }
 
 // Experience page update elem
+export const dxExperiencePageUpdatePDFUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.content);
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
 export function* dxExperiencePageUpdateElem(action) {
     try {
-        yield put({
-            type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
-            payload: {
-                sectionGUID: action.payload.sectionGUID,
-                type: action.payload.type,
-                content: action.payload.content,
-            },
-        });
+        let type = action.payload.type;
+
+        if (type == 'EMBED_PDF') {
+
+            const response = yield call(dxExperiencePageUpdatePDFUrl, action.payload);
+            let { Confirmation, Response, Message } = response;
+
+            if (Confirmation !== 'SUCCESS') {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+                    payload: Message,
+                });
+            } else {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                    payload: {
+                        sectionGUID: action.payload.sectionGUID,
+                        type: type,
+                        content: Response.File.FileGUID + '.' + Response.File.FileType,
+                    },
+                });
+            }
+        } else {
+            yield put({
+                type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                payload: {
+                    sectionGUID: action.payload.sectionGUID,
+                    type: type,
+                    content: action.payload.content,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,

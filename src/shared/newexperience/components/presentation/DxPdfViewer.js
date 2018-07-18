@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 // Libraries
 import { Document, Page } from 'react-pdf';
 import '../../../../../assets/css/react-pdf/index.css';
@@ -25,7 +28,7 @@ class DxPdfViewer extends Component {
             <div style={mainContainerStyle}>
                 <Document
                     loading="Loading PDF.."
-                    file={this.props.pdfPath}
+                    file={this.props.pdfPath ? config.fileHost + '/' + this.props.pdfPath : null}
                     onLoadSuccess={this.handleDocumentLoadSuccess}
                     noData="Please select a PDF.."
                 >
