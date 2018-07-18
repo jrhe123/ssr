@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import fetch from 'isomorphic-fetch';
-import config from '../config';
+import FormData from 'form-data';
+import * as apiManager from '../helpers/apiManager';
 
 import {
     EXPERIENCE_TYPE_REQUESTED,
@@ -270,45 +270,21 @@ export const dxExperienceCardTemplateUpdateImageUrl = (params) => {
 
     let formData = new FormData();
     formData.append('File', params.imgFile);
-    let url = `${config.apiHost}/upload/image`;
     return (
-
-        fetch(url, {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
-                'api-key': '80ac2e02-7bfc-4e56-bcfc-0d94a6b4f6eb'
-            },
-            body: formData
-        })
-            .then((response) => {
-
-                console.log('response: ', response);
-
-                // if (!response.ok) {
-                //     throw new Error();
-                // }
-                // return response.json();
-            })
-            .catch((error) => {
-
-                console.log('error: ', error);
-
-                return error;
-            })
+        apiManager.dxFileApi(`/upload/image`, formData, true)
     )
 }
 
 export function* dxExperienceCardTemplateUpdateImage(action) {
     try {
         const response = yield call(dxExperienceCardTemplateUpdateImageUrl, action.payload);
-        // yield put({
-        //     type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
-        //     payload: {
-        //         imgFile: action.payload.imgFile,
-        //     },
-        // });
+        console.log('response: ', response);
+        yield put({
+            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+            payload: {
+                imgFile: action.payload.imgFile,
+            },
+        });
     } catch (error) {
         yield put({
             type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
