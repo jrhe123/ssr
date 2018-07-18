@@ -1,3 +1,3 @@
 export default {
-    apiHost: process.env.NODE_ENV == 'production' ? 'http://localhost:3000' : 'https://www.google.ca',
+    apiHost: 'http://localhost:3000',
 }
