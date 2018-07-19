@@ -1,6 +1,8 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
+import config from './config';
+
 import {
     VALIDATE_TOKEN_REQUESTED,
     VALIDATE_TOKEN__SUCCEEDED,
@@ -19,8 +21,8 @@ import {
 export const dxValidateTokenUrl = (params) => {
 
     return (
-        fetch('https://www.google.ca', {
-            method: 'get',
+        fetch(`${config.apiHost}/root`, {
+            method: 'post',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

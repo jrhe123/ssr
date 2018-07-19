@@ -1,5 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import fetch from 'isomorphic-fetch';
+import FormData from 'form-data';
+import * as apiManager from '../helpers/apiManager';
 
 import {
     EXPERIENCE_TYPE_REQUESTED,
@@ -265,14 +266,33 @@ export function* dxExperienceCardTemplateSelectSaga() {
 }
 
 // Experience card template update image
+export const dxExperienceCardTemplateUpdateImageUrl = (params) => {
+
+    let formData = new FormData();
+    formData.append('File', params.imgFile);
+    return (
+        apiManager.dxFileApi(`/upload/image`, formData, true)
+    )
+}
+
 export function* dxExperienceCardTemplateUpdateImage(action) {
     try {
-        yield put({
-            type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
-            payload: {
-                imgFile: action.payload.imgFile,
-            },
-        });
+        const response = yield call(dxExperienceCardTemplateUpdateImageUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED,
+                payload: {
+                    imgFile: Response.Image.ImageGUID,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__FAILED,
@@ -656,16 +676,77 @@ export function* dxExperiencePageSelectElemSaga() {
 }
 
 // Experience page update elem
+export const dxExperiencePageUpdatePDFUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.content);
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
+export const dxExperiencePageUpdateImageUrl = (params) => {
+
+    let formData = new FormData();
+    formData.append('File', params.content);
+    return (
+        apiManager.dxFileApi(`/upload/image`, formData, true)
+    )
+}
+
 export function* dxExperiencePageUpdateElem(action) {
     try {
-        yield put({
-            type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
-            payload: {
-                sectionGUID: action.payload.sectionGUID,
-                type: action.payload.type,
-                content: action.payload.content,
-            },
-        });
+        let type = action.payload.type;
+
+        if (type == 'EMBED_PDF') {
+
+            const response = yield call(dxExperiencePageUpdatePDFUrl, action.payload);
+            let { Confirmation, Response, Message } = response;
+
+            if (Confirmation !== 'SUCCESS') {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+                    payload: Message,
+                });
+            } else {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                    payload: {
+                        sectionGUID: action.payload.sectionGUID,
+                        type: type,
+                        content: Response.File.FileGUID + '.' + Response.File.FileType,
+                    },
+                });
+            }
+        } else if (type == 'SPLASH_IMG' || type == 'IMAGE') {
+
+            const response = yield call(dxExperiencePageUpdateImageUrl, action.payload);
+            let { Confirmation, Response, Message } = response;
+
+            if (Confirmation !== 'SUCCESS') {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+                    payload: Message,
+                });
+            } else {
+                yield put({
+                    type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                    payload: {
+                        sectionGUID: action.payload.sectionGUID,
+                        type: type,
+                        content: Response.Image.ImageGUID,
+                    },
+                });
+            }
+        } else {
+            yield put({
+                type: EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
+                payload: {
+                    sectionGUID: action.payload.sectionGUID,
+                    type: type,
+                    content: action.payload.content,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,

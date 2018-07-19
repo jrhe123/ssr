@@ -1,6 +1,8 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
+import config from '../config';
+
 import {
     LOGIN_REQUESTED,
     LOGIN__SUCCEEDED,
@@ -11,8 +13,8 @@ import {
 export const dxLoginUrl = (params) => {
 
     return (
-        fetch('https://www.google.ca', {
-            method: 'get',
+        fetch(`${config.apiHost}/root`, {
+            method: 'post',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

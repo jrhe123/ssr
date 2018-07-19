@@ -16,6 +16,9 @@ import '../../../../../assets/css/react-pdf/index.css';
 // styles
 import '../../../../../assets/css/quill/thumbnail.css';
 
+// config
+import config from '../../../config';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -118,7 +121,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={pdfContainerStyle}>
                         <Document
                             loading="Loading PDF.."
-                            file={section.pdfPath}
+                            file={section.pdfPath ? config.fileHost + '/' + section.pdfPath : null}
                             noData="Please select a PDF.."
                             onLoadSuccess={this.handleDocumentLoadSuccess}
                         >
@@ -150,7 +153,7 @@ class ThumbnailPhoneElement extends Component {
                         style={Object.assign({}, overlayContainerStyle, { color: section.splashColor, height })}>
                         <img
                             style={Object.assign({}, overlayImgStyle, {height})}
-                            src={section.splashImg ? URL.createObjectURL(section.splashImg) : require('../../../../../assets/images/demo.jpg')}
+                            src={section.splashImg ? `${config.picHost}${section.splashImg}` : require('../../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={Object.assign({}, splashContainerStyle, {height})}>
@@ -267,7 +270,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={imgContainerStyle}>
                         <img
                             style={Object.assign({}, imgStyle, {height: imgHeight})}
-                            src={section.img ? URL.createObjectURL(section.img) : require('../../../../../assets/images/demo.jpg')}
+                            src={section.img ? `${config.picHost}${section.img}` : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 );
