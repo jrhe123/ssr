@@ -375,11 +375,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             // update new page
             tmpNewPageSections[tmpSectionIndex].isDeleted = true;
-            // case: BUTTON connector
+            // case: BUTTON
             if(tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
                 && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null){
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
                 tmpConnectedPage.page.isConnected = false;
+                tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
             }
             // case: SPLASH
             if(tmpNewPageSections[tmpSectionIndex].type == 'SPLASH'){
