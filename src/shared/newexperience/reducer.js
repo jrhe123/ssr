@@ -381,10 +381,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
                 tmpConnectedPage.page.isConnected = false;
             }
+            // case: SPLASH
+            if(tmpNewPageSections[tmpSectionIndex].type == 'SPLASH'){
+                tmpNewPage.isSplash = false;
+            }
             tmpNewPage.sections = tmpNewPageSections;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
-            tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
 
             // update tools
             deactive_tools_by_section_guid(payload.sectionGUID, tmpTools);
