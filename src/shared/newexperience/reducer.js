@@ -124,7 +124,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpConnectedPage;
     let tmpSettingIndex;
     let tmpPageGUID;
-    let tmpPageIndex;
     let tmpPagesLength;
     let tmpSections;
     let tmpUpdatePage;
@@ -305,17 +304,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
-                // delete root page
-                if (tmpIsRootPage) {
-                    tmpNewPage.isRoot = true;
-                }
+                tmpNewPage.isRoot = true;
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = `Page ${tmpPagesLength + 1}`;
                 tmpPages.push(tmpNewPage);
                 tmpExperience.newPage = tmpNewPage;
             } else {
-                tmpPageIndex = tmpPagesLength - 1 > 0 ? tmpPagesLength - 1 : 0;
-                tmpPageGUID = find_previous_display_page_guid(tmpPages, tmpPageIndex);
+                tmpPageGUID = find_previous_display_page_guid(tmpPages);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 // delete root page
                 if (tmpIsRootPage) {
@@ -626,13 +621,9 @@ const find_number_of_display_page = (pages) => {
     }
     return count;
 }
-const find_previous_display_page_guid = (pages, start) => {
-    let count = 0;
+const find_previous_display_page_guid = (pages) => {
     for (let i = 0; i < pages.length; i++) {
         if (!pages[i].isDeleted) {
-            count++;
-        }
-        if (count > start) {
             return pages[i].pageGUID;
         }
     }
