@@ -120,6 +120,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
 
     let tmpIsRootPage;
+    let tmpConnectedPageGUID;
     let tmpConnectedPage;
     let tmpSettingIndex;
     let tmpPageGUID;
@@ -512,6 +513,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED:
             tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            tmpConnectedPageGUID = tmpUpdateSection.connectedPageGUID;
             if (payload.pageGUID) {
                 tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
                 if (!tmpUpdatePage.page.isRoot
@@ -520,6 +522,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     tmpUpdateSection.connectedPageGUID = payload.pageGUID;
                     // connect page
                     tmpUpdatePage.page.isConnected = true;
+
+                    // disconnect page
+                    if(tmpConnectedPageGUID){
+                        tmpConnectedPage = find_page_by_guid(tmpConnectedPageGUID, tmpPages);
+                        tmpConnectedPage.page.isConnected = false;
+                        tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
+                    }
 
                     // update arr of pages
                     tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
