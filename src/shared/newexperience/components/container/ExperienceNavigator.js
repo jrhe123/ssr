@@ -105,8 +105,8 @@ class ExperienceNavigator extends Component {
             return res;
         }
 
-        if (cardTemplate.Type == 'VIDEO'
-            && !cardTemplate.Content) {
+        if (cardTemplate.type == 'VIDEO'
+            && cardTemplate.content == '') {
             res.Message = 'Please enter video url';
             return res;
         }
