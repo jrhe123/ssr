@@ -122,8 +122,18 @@ import {
 } from './constants';
 
 // Experience type request
+export const dxExperienceSaveHtmlUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.experience, 'blob.html');
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
 export function* dxExperienceSave(action) {
     try {
+        const response = yield call(dxExperienceSaveHtmlUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
         yield put({
             type: EXPERIENCE_SAVE__SUCCEEDED,
             payload: {
