@@ -171,6 +171,7 @@ class ExperiencePages extends Component {
         for (let i = 0; i < pages.length; i++) {
             if (pages[i].pageGUID != currentpageGUID
                 && !pages[i].isRoot
+                && !pages[i].isDeleted
                 && !pages[i].isConnected) {
                 res.push(pages[i])
             }
