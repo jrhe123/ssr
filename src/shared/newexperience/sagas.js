@@ -3,6 +3,10 @@ import FormData from 'form-data';
 import * as apiManager from '../helpers/apiManager';
 
 import {
+    EXPERIENCE_SAVE_REQUESTED,
+    EXPERIENCE_SAVE__SUCCEEDED,
+    EXPERIENCE_SAVE__FAILED,
+
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE__FAILED,
@@ -116,6 +120,27 @@ import {
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
 
 } from './constants';
+
+// Experience type request
+export function* dxExperienceSave(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_SAVE__SUCCEEDED,
+            payload: {
+                experience: action.payload.experience
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_SAVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceSaveSaga() {
+    yield takeEvery(EXPERIENCE_SAVE_REQUESTED, dxExperienceSave);
+}
 
 // Experience type request
 export function* experienceType(action) {

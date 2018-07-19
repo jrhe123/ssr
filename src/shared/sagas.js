@@ -12,6 +12,7 @@ import {
 
 // NewExperience
 import { 
+    dxExperienceSaveSaga,
     dxExperienceTypeSaga,
     dxExperienceTypeUpdateSaga,
     dxExperienceIndexUpdateSaga,
@@ -63,6 +64,7 @@ export default function* rootSaga() {
         dxLogoutSaga(),
 
         // NewExperience
+        dxExperienceSaveSaga(),
         dxExperienceTypeSaga(),
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),
