@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 class DxImageViewerToolbar extends Component {
 
     handleImgChange = (event) => {
@@ -39,7 +42,7 @@ class DxImageViewerToolbar extends Component {
                         >
                             <img
                                 style={displayImgStyle}
-                                src={this.props.imgFile ? URL.createObjectURL(this.props.imgFile) : require('../../../../../assets/images/demo.jpg')}
+                                src={this.props.imgFile ? `${config.picHost}${this.props.imgFile}` : require('../../../../../assets/images/demo.jpg')}
                             />
                         </label>
                     </div>

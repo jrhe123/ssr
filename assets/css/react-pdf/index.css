@@ -17,3 +17,9 @@
     line-height: 36px;
     font-size: 9px;
 }
+
+.react-pdf__message{
+    min-height: 72px;
+    line-height: 72px;
+    padding-left: 12px;
+}

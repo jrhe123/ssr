@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 // Libraries
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import SignalCellular0Bar from '@material-ui/icons/SignalCellular0Bar';
@@ -51,7 +54,7 @@ class DxSplash extends Component {
             <div style={Object.assign({}, overlayContainerStyle, { color: this.props.splashColor })}>
                 <img
                     style={overlayImgStyle}
-                    src={this.props.splashImg ? URL.createObjectURL(this.props.splashImg) : require('../../../../../assets/images/demo.jpg')}
+                    src={this.props.splashImg ? `${config.picHost}${this.props.splashImg}` : require('../../../../../assets/images/demo.jpg')}
                 />
                 <div style={overlayWrapperStyle}>
                     <div style={splashContainerStyle}>

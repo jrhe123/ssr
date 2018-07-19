@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// config
+import config from '../../../config';
+
 class DxImageViewer extends Component {
 
     render() {
@@ -13,7 +16,7 @@ class DxImageViewer extends Component {
             <div style={mainContainerStyle}>
                 <img
                     style={imgStyle}
-                    src={this.props.img ? URL.createObjectURL(this.props.img) : require('../../../../../assets/images/demo.jpg')}
+                    src={this.props.img ? `${config.picHost}${this.props.img}` : require('../../../../../assets/images/demo.jpg')}
                 />
             </div>
         )
