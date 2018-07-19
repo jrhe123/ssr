@@ -126,6 +126,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpPageGUID;
     let tmpPageIndex;
     let tmpPagesLength;
+    let tmpSections;
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpCopySection;
@@ -296,6 +297,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpPages[tmpNewPage.index].isDeleted = true;
+            tmpSections = tmpPages[tmpNewPage.index].sections;
+            disconnect_pages_by_sections(tmpSections, tmpPages);
 
             tmpPagesLength = find_number_of_display_page(tmpPages);
             tmpIsRootPage = tmpPages[tmpNewPage.index].isRoot;
@@ -631,6 +634,17 @@ const find_previous_display_page_guid = (pages, start) => {
         }
         if (count > start) {
             return pages[i].pageGUID;
+        }
+    }
+}
+const disconnect_pages_by_sections = (sections, pages) => {
+    for(let i = 0; i < sections.length; i++){
+        let section = sections[i];
+        if(section.type == 'BUTTON'
+            && section.connectedPageGUID){
+            let item = find_page_by_guid(section.connectedPageGUID, pages);
+            item.page.isConnected = false;
+            pages[item.index] = item.page;
         }
     }
 }
