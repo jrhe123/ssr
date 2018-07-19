@@ -120,6 +120,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
 
     let tmpIsRootPage;
+    let tmpConnectedPage;
     let tmpSettingIndex;
     let tmpPageGUID;
     let tmpPageIndex;
@@ -374,9 +375,16 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             // update new page
             tmpNewPageSections[tmpSectionIndex].isDeleted = true;
+            // case: BUTTON connector
+            if(tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
+                && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null){
+                tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
+                tmpConnectedPage.page.isConnected = false;
+            }
             tmpNewPage.sections = tmpNewPageSections;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
+            tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
 
             // update tools
             deactive_tools_by_section_guid(payload.sectionGUID, tmpTools);
