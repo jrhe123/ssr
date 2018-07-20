@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../../assets/css/dd-menu/dd_menu1.css';
+import '../../../../../assets/css/dd-menu/dd_StreamMenu.css';
 
 // Libraries
 import IconButton from '@material-ui/core/IconButton';

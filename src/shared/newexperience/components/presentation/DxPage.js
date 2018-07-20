@@ -84,6 +84,20 @@ class DxPage extends Component {
         return null; l
     }
 
+    findPageNumber = (pages) => {
+        
+        let pageNo = 0;
+        for (let i =0; i < pages.length; i++) {
+            let page = pages[i];
+            if (page.isDeleted == false)
+            {
+                pageNo++;
+            }
+        }
+        return pageNo;
+
+    }
+
     render() {
 
         const {
@@ -104,11 +118,11 @@ class DxPage extends Component {
             editBurgerStyle,
         } = styles;
         const {
-            pageNumber,
             pages,
         } = this.props;
 
         let page = this.findRootPage(pages);
+        let pageNumber = this.findPageNumber(pages);
 
         return (
             <div style={mainContainerStyle}>

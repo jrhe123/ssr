@@ -121,10 +121,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
 
     let tmpIsRootPage;
+    let tmpConnectedPageGUID;
+    let tmpConnectedPage;
     let tmpSettingIndex;
     let tmpPageGUID;
-    let tmpPageIndex;
     let tmpPagesLength;
+    let tmpSections;
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpCopySection;
@@ -299,23 +301,21 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpPages[tmpNewPage.index].isDeleted = true;
+            tmpSections = tmpPages[tmpNewPage.index].sections;
+            disconnect_pages_by_sections(tmpSections, tmpPages);
 
             tmpPagesLength = find_number_of_display_page(tmpPages);
             tmpIsRootPage = tmpPages[tmpNewPage.index].isRoot;
 
             if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
-                // delete root page
-                if (tmpIsRootPage) {
-                    tmpNewPage.isRoot = true;
-                }
+                tmpNewPage.isRoot = true;
                 tmpNewPage.pageGUID = uuid();
                 tmpNewPage.title = `Page ${tmpPagesLength + 1}`;
                 tmpPages.push(tmpNewPage);
                 tmpExperience.newPage = tmpNewPage;
             } else {
-                tmpPageIndex = tmpPagesLength - 1 > 0 ? tmpPagesLength - 1 : 0;
-                tmpPageGUID = find_previous_display_page_guid(tmpPages, tmpPageIndex);
+                tmpPageGUID = find_previous_display_page_guid(tmpPages);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 // delete root page
                 if (tmpIsRootPage) {
@@ -379,6 +379,17 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
             // update new page
             tmpNewPageSections[tmpSectionIndex].isDeleted = true;
+            // case: BUTTON
+            if(tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
+                && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null){
+                tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
+                tmpConnectedPage.page.isConnected = false;
+                tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
+            }
+            // case: SPLASH
+            if(tmpNewPageSections[tmpSectionIndex].type == 'SPLASH'){
+                tmpNewPage.isSplash = false;
+            }
             tmpNewPage.sections = tmpNewPageSections;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
@@ -505,6 +516,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED:
             tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            tmpConnectedPageGUID = tmpUpdateSection.connectedPageGUID;
             if (payload.pageGUID) {
                 tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
                 if (!tmpUpdatePage.page.isRoot
@@ -513,6 +525,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     tmpUpdateSection.connectedPageGUID = payload.pageGUID;
                     // connect page
                     tmpUpdatePage.page.isConnected = true;
+
+                    // disconnect page
+                    if(tmpConnectedPageGUID){
+                        tmpConnectedPage = find_page_by_guid(tmpConnectedPageGUID, tmpPages);
+                        tmpConnectedPage.page.isConnected = false;
+                        tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
+                    }
 
                     // update arr of pages
                     tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
@@ -607,14 +626,21 @@ const find_number_of_display_page = (pages) => {
     }
     return count;
 }
-const find_previous_display_page_guid = (pages, start) => {
-    let count = 0;
+const find_previous_display_page_guid = (pages) => {
     for (let i = 0; i < pages.length; i++) {
         if (!pages[i].isDeleted) {
-            count++;
-        }
-        if (count > start) {
             return pages[i].pageGUID;
+        }
+    }
+}
+const disconnect_pages_by_sections = (sections, pages) => {
+    for(let i = 0; i < sections.length; i++){
+        let section = sections[i];
+        if(section.type == 'BUTTON'
+            && section.connectedPageGUID){
+            let item = find_page_by_guid(section.connectedPageGUID, pages);
+            item.page.isConnected = false;
+            pages[item.index] = item.page;
         }
     }
 }
