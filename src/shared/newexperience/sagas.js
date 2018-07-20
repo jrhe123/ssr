@@ -748,7 +748,7 @@ export function* dxExperiencePageUpdateElem(action) {
                     payload: {
                         sectionGUID: action.payload.sectionGUID,
                         type: type,
-                        content: Response.File.FileGUID + '.' + Response.File.FileType,
+                        content: Response.File.FileGUID,
                     },
                 });
             }
