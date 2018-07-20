@@ -271,7 +271,7 @@ class ExperienceNavigator extends Component {
                     }
                 } else if (type == 'EMBED_PDF') {
                     if (section.type == 'EMBED_PDF'
-                        && !section.pdfPath) {
+                        && !section.pdf) {
                         output.push({
                             page,
                             section,

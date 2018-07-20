@@ -70,7 +70,7 @@ let templateNewSection = {
     htmlContent: '',    // html content
     btnContent: '',     // btn label
     connectedPageGUID: null,     // btn connect page guid
-    pdfPath: null,        // pdf file path
+    pdf: null,        // pdf file path
     splashContent: 'Splash image with page title',      // splash content
     splashImg: null,        // splash img
     splashColor: '#ffffff',  // splash color
@@ -486,7 +486,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         tmpUpdateSection.btnContent = payload.content;
                         break;
                     case 'EMBED_PDF':
-                        tmpUpdateSection.pdfPath = payload.content;
+                        tmpUpdateSection.pdf = payload.content;
                         break;
                     case 'SPLASH_CONTENT':
                         tmpUpdateSection.splashContent = payload.content;
