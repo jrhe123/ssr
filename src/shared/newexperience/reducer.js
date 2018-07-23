@@ -55,6 +55,7 @@ let templateCard = {
 };
 let templateNewPage = {
     pageGUID: null,
+    parentPageGUID: null,
     isRoot: false,      // root page
     isSplash: false,    // splash
     title: '',      // page title
@@ -320,6 +321,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 // delete root page
                 if (tmpIsRootPage) {
                     tmpNewPage.page.isRoot = true;
+                    tmpNewPage.page.parentPageGUID = null;
                 }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
@@ -524,6 +526,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     // connect section
                     tmpUpdateSection.connectedPageGUID = payload.pageGUID;
                     // connect page
+                    tmpUpdatePage.page.parentPageGUID = tmpUpdateSection.pageGUID;
                     tmpUpdatePage.page.isConnected = true;
 
                     // disconnect page
@@ -542,6 +545,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             } else {
                 // disconnect page
                 tmpUpdatePage = find_page_by_guid(tmpUpdateSection.connectedPageGUID, tmpPages);
+                tmpUpdatePage.page.parentPageGUID = null;
                 tmpUpdatePage.page.isConnected = false;
                 // disconnect section
                 tmpUpdateSection.connectedPageGUID = null;
