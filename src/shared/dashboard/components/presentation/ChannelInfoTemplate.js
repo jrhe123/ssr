@@ -10,7 +10,6 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 
-
 class ChannelInfoTemplate extends Component {
 
     state = {
