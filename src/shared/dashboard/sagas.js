@@ -1,12 +1,20 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
+// config
 import config from '../config';
+
+// helpers
+import * as apiManager from '../helpers/apiManager';
 
 import {
     LOGOUT_REQUESTED,
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+    
+    EXPERIENCE_FETCH_REQUESTED,
+    EXPERIENCE_FETCH__SUCCEEDED,
+    EXPERIENCE_FETCH__FAILED,
 } from './constants';
 
 // Logout
@@ -50,4 +58,45 @@ export function* dxLogout() {
 
 export function* dxLogoutSaga() {
     yield takeEvery(LOGOUT_REQUESTED, dxLogout);
+}
+
+// Fetch experience
+export const dxFetchExperienceUrl = () => {
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: "5",
+            Offset: "0",
+            Extra: {},
+        }, true)
+    )
+}
+
+export function* dxFetchExperience() {
+    try {
+        const response = yield call(dxFetchExperienceUrl);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_FETCH__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_FETCH__SUCCEEDED,
+                payload: {
+                    totalRecord: Response.TotalRecord,
+                    experiences: Response.Experiences,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxFetchExperienceSaga() {
+    yield takeEvery(EXPERIENCE_FETCH_REQUESTED, dxFetchExperience);
 }

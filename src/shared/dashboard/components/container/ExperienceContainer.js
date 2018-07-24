@@ -10,6 +10,9 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxFetchExperience as dxFetchExperienceAction,
+} from '../../actions';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -20,6 +23,10 @@ class ExperienceContainer extends Component {
 
     state = {
         newExperienceModalOpen: false,
+    }
+
+    componentDidMount(){
+        this.props.dxFetchExperienceAction();
     }
 
     handleCreateExperience = () => {
@@ -183,7 +190,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-
+    dxFetchExperienceAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceContainer);
