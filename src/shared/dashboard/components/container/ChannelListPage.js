@@ -11,6 +11,9 @@ import ChannelData from '../../../../../data/ChannelData';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxChannelFetch as dxChannelFetchAction,
+} from '../../actions';
 
 // constants
 import colors from '../../../styles/colors';
@@ -24,13 +27,10 @@ class ChannelListPage extends Component {
 
     state = {
         newChannelModalOpen: false,
-        channelData:{}
     }
 
     componentDidMount() {
-        this.setState({
-            channelData: ChannelData
-        })
+        this.props.dxChannelFetchAction(ChannelData);
     }
 
     handleCreateChannel = () => {
@@ -70,14 +70,10 @@ class ChannelListPage extends Component {
             imgStyle
         } = styles;
 
-        const {
-            channelData
-        } = this.state;
-
         return (
             <div style={mainContainerStyle}>
                 {
-                    channelData.length ?
+                    this.props.channels.length ?
                     (
                         <ChannelList onClick={() => this.handleCreateChannel()}/>
                     )
@@ -178,12 +174,13 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        history: state.root.history
+        history: state.root.history,
+        channels: state.dashboard.channels,
     }
 }
 
 const dispatchToProps = {
-
+    dxChannelFetchAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelListPage);

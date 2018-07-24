@@ -7,6 +7,10 @@ import {
     LOGOUT_REQUESTED,
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+
+    CHANNEL_FETCH_REQUESTED,
+    CHANNEL_FETCH__SUCCEEDED,
+    CHANNEL_FETCH__FAILED
 } from './constants';
 
 // Logout
@@ -50,4 +54,26 @@ export function* dxLogout() {
 
 export function* dxLogoutSaga() {
     yield takeEvery(LOGOUT_REQUESTED, dxLogout);
+}
+
+
+// Channel fetch
+export function* dxChannelFetch(action) {
+    try {
+        yield put({
+            type: CHANNEL_FETCH__SUCCEEDED,
+            payload: {
+                channels: action.payload.channels
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: CHANNEL_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxChannelFetchSaga() {
+    yield takeEvery(CHANNEL_FETCH_REQUESTED, dxChannelFetch);
 }
