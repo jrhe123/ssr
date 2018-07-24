@@ -6,9 +6,6 @@ import NewChannelModal from '../container/NewChannelModal.js';
 // libraries
 import Button from '@material-ui/core/Button';
 
-// data
-import ChannelData from '../../../../../data/ChannelData';
-
 // redux
 import { connect } from 'react-redux';
 
@@ -17,17 +14,14 @@ import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
+// components
+import ChannelList from '../container/ChannelList';
+
 class Channel extends Component {
 
     state = {
         newChannelModalOpen: false,
-        channelData: {}
-    }
-
-    componentDidMount() {
-        this.setState({
-            channelData: ChannelData
-        })
+        channels:[{}]
     }
 
     handleCreateChannel = () => {
@@ -68,42 +62,51 @@ class Channel extends Component {
         } = styles;
 
         const {
-            channelData,
+            channels
         } = this.state;
 
         return (
             <div style={mainContainerStyle}>
-                <div style={mainWrapperStyle}>
-                    <div style={tableContainerStyle}>
-                        <div style={tableWrapperStyle}>
-                            <p style={topLabelStyle}> Reach your audience via channel.
-                            </p>
-                            <div style={imgWrapperStyle}>
-                                <img 
-                                    style={imgStyle}
-                                    src={require('../../../../../assets/images/channelPage.png')}
-                                />
+                {
+                    channels.length ?
+                    (
+                        <ChannelList onClick={() => this.handleCreateChannel()}/>
+                    )
+                    :
+                    <div style={mainWrapperStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <p style={topLabelStyle}> Reach your audience via channel.
+                                </p>
+                                <div style={imgWrapperStyle}>
+                                    <img 
+                                        style={imgStyle}
+                                        src={require('../../../../../assets/images/channelPage.png')}
+                                    />
+                                </div>
+                                <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
+                                </p>
+                                <div style={btnWrapperStyle}>
+                                    <Button 
+                                        variant="Add a new channel" 
+                                        style={fullBtnStyle}
+                                        onClick={() => this.handleCreateChannel()}>
+                                        Create A Channel
+                                    </Button>
+                                </div>
+                                <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                                </p>
                             </div>
-                            <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
-                            </p>
-                            <div style={btnWrapperStyle}>
-                                <Button 
-                                    variant="Add a new channel" 
-                                    style={fullBtnStyle}
-                                    onClick={() => this.handleCreateChannel()}>
-                                    Create A Channel
-                                </Button>
-                            </div>
-                            <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
-                            </p>
                         </div>
+
                     </div>
-                </div>
+                }
                 <NewChannelModal 
                     open={this.state.newChannelModalOpen}
                     onCloseModal={() => this.handleCloseChannelModal()}
                     navigateToNewchannel={(val) => this.navigateToNewchannel(val)}
                 />
+
             </div>
         );
     }

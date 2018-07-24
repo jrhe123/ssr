@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 
 // Libraries
-import SearchBar from 'material-ui-search-bar';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
-import Grid from '@material-ui/core/Grid';
 
 // constants
 import colors from '../../../styles/colors';
@@ -16,7 +14,7 @@ import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
 // components
-import ChannelListInfo from './ChannelListInfo';
+import ChannelListInfo from '../presentation/ChannelListInfo';
 
 
 const themeStyles = () => ({
@@ -26,7 +24,7 @@ const themeStyles = () => ({
     }
 });
 
-class ChannelListTemplate extends Component {
+class ChannelList extends Component {
 
     state = {
         isMenuOpen: false
@@ -51,6 +49,7 @@ class ChannelListTemplate extends Component {
     handleCloseImport = () => {
         this.setState({ isImportOpen: false });
     }
+
 
 
     render() {
@@ -85,29 +84,16 @@ class ChannelListTemplate extends Component {
                 <div style={mainWrapperStyle}>
                     <div style={topContainerStyle}>
                         <div style={searchBarWrapperSrtyle}>
-                            {/* <SearchBar
-                                value={this.state.value}
-                                onChange={() => handleSearch()}
-                                style={searchUserStyle}
-                                placeholder={'search channel(s)'}
-                                classes={{ iconButton: classes.yourIconButtonStyle }}
-                            /> */}
-                            {/* <Grid container spacing={8} alignItems="flex-end"> */}
-                                <div style={serachIconStyle}>
-                                    <Search/>
-                                </div>
-                                <div>
-                                    <TextField
-                                        id="input-with-icon-textfield"
-                                        // label="search channel(s)"
-                                        placeholder="search channel(s)"
-                                        // InputProps={{
-                                        //     disableUnderline: true,
-                                        // }}
-                                        style={textFieldStyle}
-                                    />
-                                </div>
-                            {/* </Grid> */}
+                            <div style={serachIconStyle}>
+                                <Search/>
+                            </div>
+                            <div>
+                                <TextField
+                                    id="input-with-icon-textfield"
+                                    placeholder="search channel(s)"
+                                    style={textFieldStyle}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div style={channelListInfoContainerStyle}>
@@ -136,7 +122,8 @@ class ChannelListTemplate extends Component {
                             <Button 
                                 variant="Add a new channel" 
                                 style={fullBtnStyle}
-                                onClick={() => this.handleCreateChannel()}>
+                                onClick={this.props.onClick}
+                            >
                                 Add channel
                             </Button>
                             <p style={questionMarkLabelStyle}>?</p>
@@ -157,14 +144,12 @@ const styles = {
         width: sizes.dxWidth,
         margin: '0 auto',
         display:'flex',
-        flexDirection:'row',
-        //background: 'green'
+        flexDirection:'row'
     },
     mainWrapperStyle:{
         height: `calc(100vh - ${sizes.headerHeight})`,
         flex:1,
-        width: '100%',
-        //background:'yellow'
+        width: '100%'
     },
     topContainerStyle:{
         height:32,
@@ -178,7 +163,6 @@ const styles = {
         justifyContent:'flex-start'
     },
     searchBarWrapperSrtyle:{
-         //width:180,
          display:'flex',
          flexDirection:'flex-start',
          alignItems:'center'
@@ -199,13 +183,11 @@ const styles = {
         flexDirection:'row',
         display:'flex',
         justifyContent:'space-between',
-        //justifyContent:'flex-start',
         alignItems:'center',
         marginLeft:120,
         marginRight:120,
         borderBottom:'1px solid #FFFFFF',
-        paddingBottom:9,
-        //background:'red'
+        paddingBottom:9
     },
     channelListInfoWrapperStyle:{
         flexDirection:'row',
@@ -252,7 +234,6 @@ const styles = {
         marginRight:120,
         minHeight:72,
         maxHeight:'calc(100% - 190px)',
-        //background:'yellow',
         overflowY: 'scroll',
         display:'flex',
         flexWrap:'wrap'
@@ -278,4 +259,4 @@ const styles = {
     }
 }
 
-export default withStyles(themeStyles)(ChannelListTemplate);
+export default withStyles(themeStyles)(ChannelList);
