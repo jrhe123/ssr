@@ -3,7 +3,7 @@ import {
 } from './constants';
 
 const initialState = {
-
+    experiences: [],
 };
 
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
