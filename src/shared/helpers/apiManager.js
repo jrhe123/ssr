@@ -52,3 +52,17 @@ export const dxFileApi = (url, formData, isAuth) => {
             })
     )
 }
+
+export const dxHtmlApi = (url) => {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = process;
+    xhr.open("GET", url, true);
+    xhr.send();
+    function process() {
+        if (xhr.readyState == 4) {
+            return xhr.responseText;
+        }else{
+            return '';
+        }
+    }
+}

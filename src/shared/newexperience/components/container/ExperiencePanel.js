@@ -52,10 +52,6 @@ class ExperiencePanel extends Component {
         this.props.dxExperiencePagePagesRemoveAction();
     }
 
-    handleFetchHtml = () => {
-        console.log('hit here');
-    }
-
     render() {
 
         const {
@@ -83,8 +79,6 @@ class ExperiencePanel extends Component {
         return (
             <div style={mainContainerStyle}>
                 <a onClick={() => console.log(JSON.stringify(experience))}>click me</a>
-                <br/><br/>
-                <a onClick={() => this.handleFetchHtml()}>fetch html</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>
@@ -199,7 +193,7 @@ class ExperiencePanel extends Component {
                                         </div>
                                         :
                                         <div style={demoPagesContainerStyle}>
-                                            <DxPage 
+                                            <DxPage
                                                 pages={this.props.experience.pages}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}
