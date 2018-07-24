@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 // components
-import ChannelListPage from '../container/ChannelListPage';
+import ChannelContainer from '../container/ChannelContainer';
 
 class Channel extends Component {
 
     render() {
 
         return (
-            <ChannelListPage />
+            <ChannelContainer />
         );
     }
 }

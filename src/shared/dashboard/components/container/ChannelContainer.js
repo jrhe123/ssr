@@ -23,14 +23,14 @@ import sizes from '../../../styles/sizes';
 // components
 import ChannelList from '../presentation/ChannelList';
 
-class ChannelListPage extends Component {
+class ChannelContainer extends Component {
 
     state = {
         newChannelModalOpen: false,
     }
 
     componentDidMount() {
-        this.props.dxChannelFetchAction([]);
+        this.props.dxChannelFetchAction([])
     }
 
     handleCreateChannel = () => {
@@ -183,4 +183,4 @@ const dispatchToProps = {
     dxChannelFetchAction,
 }
 
-export default connect(stateToProps, dispatchToProps)(ChannelListPage);
+export default connect(stateToProps, dispatchToProps)(ChannelContainer);
