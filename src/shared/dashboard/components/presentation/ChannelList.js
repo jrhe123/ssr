@@ -14,7 +14,7 @@ import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
 // components
-import ChannelListInfo from '../presentation/ChannelListInfo';
+import ChannelListInfo from './ChannelListInfo';
 
 
 const themeStyles = () => ({
