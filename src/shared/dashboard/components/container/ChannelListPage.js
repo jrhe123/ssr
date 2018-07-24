@@ -30,7 +30,7 @@ class ChannelListPage extends Component {
     }
 
     componentDidMount() {
-        this.props.dxChannelFetchAction(ChannelData);
+        this.props.dxChannelFetchAction([]);
     }
 
     handleCreateChannel = () => {
