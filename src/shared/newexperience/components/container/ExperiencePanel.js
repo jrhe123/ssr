@@ -52,6 +52,10 @@ class ExperiencePanel extends Component {
         this.props.dxExperiencePagePagesRemoveAction();
     }
 
+    handleFetchHtml = () => {
+        console.log('hit here');
+    }
+
     render() {
 
         const {
@@ -79,6 +83,8 @@ class ExperiencePanel extends Component {
         return (
             <div style={mainContainerStyle}>
                 <a onClick={() => console.log(JSON.stringify(experience))}>click me</a>
+                <br/><br/>
+                <a onClick={() => this.handleFetchHtml()}>fetch html</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>
