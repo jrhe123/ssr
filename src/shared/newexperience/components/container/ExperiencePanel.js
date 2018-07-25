@@ -18,6 +18,7 @@ import {
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
+import sizes from '../../../styles/sizes';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
@@ -213,6 +214,7 @@ const styles = {
 
     mainContainerStyle: {
         width: 600,
+        height: `calc(100vh - ${sizes.headerHeight} - 60px)`,
         margin: '0 auto',
     },
     optionContainerStyle: {
