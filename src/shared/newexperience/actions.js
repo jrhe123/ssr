@@ -1,4 +1,5 @@
 import {
+    EXPERIENCE_INITIAL_REQUESTED,
     EXPERIENCE_CREATE_REQUESTED,
     EXPERIENCE_UPLOAD_FILE_REQUESTED,
     EXPERIENCE_TYPE_REQUESTED,
@@ -34,6 +35,13 @@ import {
     EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED,
 } from './constants';
+
+export const dxExperienceInitial = () => {
+    return {
+        type: EXPERIENCE_INITIAL_REQUESTED,
+        payload: {},
+    }
+}
 
 export const dxExperienceCreate = (experience) => {
     return {

@@ -1,4 +1,5 @@
 import {
+    EXPERIENCE_INITIAL__SUCCEEDED,
     EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
@@ -142,32 +143,33 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     switch (type) {
 
+        case EXPERIENCE_INITIAL__SUCCEEDED:
+            console.log('init');
+            tmpExperience = {
+                type: '0',
+                index: '0',
+                isCardTemplateMenuOpen: true, 
+                isCardTemplateSaved: false, 
+                cardTemplate: null, 
+                card: null, 
+                isPageTemplateMenuOpen: true, 
+                isPagesSaved: false,        
+                activePageTemplateOptionIndex: 0, 
+                isPageCarouselMenuOpen: false,   
+                experienceTitle: 'New Experience',
+                cardTitle: 'Card 1',
+                tools: [],  
+                pages: [],  
+                newPage: Object.assign({}, templateNewPage),   
+                activePageSectionIndex: 0,  
+            }
+            updated.experience = tmpExperience;
+            updated.isCompleted = false;
+            updated.isFilesUploaded = false;
+            updated.index = 0;
+            return updated;
+
         case EXPERIENCE_CREATE__SUCCEEDED:
-
-            // tmpExperience = {
-            //     type: '0',
-            //     index: '0',
-
-            //     isCardTemplateMenuOpen: true, 
-            //     isCardTemplateSaved: false, 
-            //     cardTemplate: null, 
-            //     card: null, 
-
-            //     isPageTemplateMenuOpen: true, 
-            //     isPagesSaved: false,        
-            //     activePageTemplateOptionIndex: 0, 
-
-            //     isPageCarouselMenuOpen: false,   
-
-            //     experienceTitle: 'New Experience',
-            //     cardTitle: 'Card 1',  
-
-            //     tools: [],  
-            //     pages: [],  
-            //     newPage: Object.assign({}, templateNewPage),   
-            //     activePageSectionIndex: 0,  
-            // }
-
             updated.isCompleted = true;
             return updated;
 
@@ -179,9 +181,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_TYPE__SUCCEEDED:
             tmpExperience.type = payload.experienceType;
             updated.experience = tmpExperience;
-            updated.isCompleted = false;
-            updated.isFilesUploaded = false;
-            updated.index = 0;
             return updated;
 
         case EXPERIENCE_TYPE_UPDATE__SUCCEEDED:

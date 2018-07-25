@@ -4,6 +4,10 @@ import * as apiManager from '../helpers/apiManager';
 import * as helpers from '../helpers';
 
 import {
+    EXPERIENCE_INITIAL_REQUESTED,
+    EXPERIENCE_INITIAL__SUCCEEDED,
+    EXPERIENCE_INITIAL__FAILED,
+
     EXPERIENCE_CREATE_REQUESTED,
     EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_CREATE__FAILED,
@@ -125,6 +129,25 @@ import {
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
 
 } from './constants';
+
+// Experience init request
+export function* dxExperienceInital(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_INITIAL__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_INITIAL__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceInitalSaga() {
+    yield takeEvery(EXPERIENCE_INITIAL_REQUESTED, dxExperienceInital);
+}
 
 // Experience create request
 export const dxExperienceCreateUrl = (params) => {
