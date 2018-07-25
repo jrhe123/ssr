@@ -28,7 +28,7 @@ class DxPdfViewer extends Component {
             <div style={mainContainerStyle}>
                 <Document
                     loading="Loading PDF.."
-                    file={this.props.pdfPath ? config.fileHost + '/' + this.props.pdfPath : null}
+                    file={this.props.pdf ? config.fileHost + '/' + this.props.pdf + '.pdf' : null}
                     onLoadSuccess={this.handleDocumentLoadSuccess}
                     noData="Please select a PDF.."
                 >

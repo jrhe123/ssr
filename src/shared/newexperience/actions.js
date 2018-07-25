@@ -1,4 +1,5 @@
 import {
+    EXPERIENCE_SAVE_REQUESTED,
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
@@ -32,6 +33,15 @@ import {
     EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED,
 } from './constants';
+
+export const dxExperienceSave = (experience) => {
+    return {
+        type: EXPERIENCE_SAVE_REQUESTED,
+        payload: {
+            experience
+        },
+    }
+}
 
 export const dxExperienceType = (experienceType) => {
     return {

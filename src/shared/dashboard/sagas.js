@@ -1,7 +1,11 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
+// config
 import config from '../config';
+
+// helpers
+import * as apiManager from '../helpers/apiManager';
 
 import {
     LOGOUT_REQUESTED,
@@ -10,7 +14,12 @@ import {
 
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
-    CHANNEL_FETCH__FAILED
+    CHANNEL_FETCH__FAILED,
+    
+    EXPERIENCE_FETCH_REQUESTED,
+    EXPERIENCE_FETCH__SUCCEEDED,
+    EXPERIENCE_FETCH__FAILED,
+
 } from './constants';
 
 // Logout
@@ -57,7 +66,7 @@ export function* dxLogoutSaga() {
 }
 
 
-// Channel fetch
+// Fetch Channel
 export function* dxChannelFetch(action) {
     try {
         yield put({
@@ -69,11 +78,51 @@ export function* dxChannelFetch(action) {
     } catch (error) {
         yield put({
             type: CHANNEL_FETCH__FAILED,
-            payload: error,
-        });
+        })
     }
 }
 
 export function* dxChannelFetchSaga() {
     yield takeEvery(CHANNEL_FETCH_REQUESTED, dxChannelFetch);
+}
+
+// Fetch experience
+export const dxFetchExperienceUrl = () => {
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: "5",
+            Offset: "0",
+            Extra: {},
+        }, true)
+    )
+}
+
+export function* dxFetchExperience() {
+    try {
+        const response = yield call(dxFetchExperienceUrl);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_FETCH__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_FETCH__SUCCEEDED,
+                payload: {
+                    totalRecord: Response.TotalRecord,
+                    experiences: Response.Experiences,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxFetchExperienceSaga() {
+    yield takeEvery(EXPERIENCE_FETCH_REQUESTED, dxFetchExperience);
 }

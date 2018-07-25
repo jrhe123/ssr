@@ -1,4 +1,5 @@
 import {
+    EXPERIENCE_SAVE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
@@ -54,6 +55,7 @@ let templateCard = {
 };
 let templateNewPage = {
     pageGUID: null,
+    parentPageGUID: null,
     isRoot: false,      // root page
     isSplash: false,    // splash
     title: '',      // page title
@@ -69,7 +71,7 @@ let templateNewSection = {
     htmlContent: '',    // html content
     btnContent: '',     // btn label
     connectedPageGUID: null,     // btn connect page guid
-    pdfPath: null,        // pdf file path
+    pdf: null,        // pdf file path
     splashContent: 'Splash image with page title',      // splash content
     splashImg: null,        // splash img
     splashColor: '#ffffff',  // splash color
@@ -136,6 +138,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpUpdateSection;
 
     switch (type) {
+
+        case EXPERIENCE_SAVE__SUCCEEDED:
+            console.log('payload.experience: ', payload.experience);
+            return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
             tmpExperience.type = payload.experienceType;
@@ -315,6 +321,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 // delete root page
                 if (tmpIsRootPage) {
                     tmpNewPage.page.isRoot = true;
+                    tmpNewPage.page.parentPageGUID = null;
                 }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
                 tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
@@ -481,7 +488,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         tmpUpdateSection.btnContent = payload.content;
                         break;
                     case 'EMBED_PDF':
-                        tmpUpdateSection.pdfPath = payload.content;
+                        tmpUpdateSection.pdf = payload.content;
                         break;
                     case 'SPLASH_CONTENT':
                         tmpUpdateSection.splashContent = payload.content;
@@ -519,6 +526,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     // connect section
                     tmpUpdateSection.connectedPageGUID = payload.pageGUID;
                     // connect page
+                    tmpUpdatePage.page.parentPageGUID = tmpUpdateSection.pageGUID;
                     tmpUpdatePage.page.isConnected = true;
 
                     // disconnect page
@@ -537,6 +545,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             } else {
                 // disconnect page
                 tmpUpdatePage = find_page_by_guid(tmpUpdateSection.connectedPageGUID, tmpPages);
+                tmpUpdatePage.page.parentPageGUID = null;
                 tmpUpdatePage.page.isConnected = false;
                 // disconnect section
                 tmpUpdateSection.connectedPageGUID = null;

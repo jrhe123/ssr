@@ -99,7 +99,7 @@ class ExperiencePages extends Component {
                 htmlContent={section.htmlContent}
                 btnContent={section.btnContent}
                 dropdownOptionArr={this.availablePageOptionList(experience.pages, experience.newPage.pageGUID, section.connectedPageGUID)}
-                pdfPath={section.pdfPath}
+                pdf={section.pdf}
                 splashContent={section.splashContent}
                 splashImg={section.splashImg}
                 splashColor={section.splashColor}

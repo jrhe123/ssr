@@ -3,6 +3,10 @@ import FormData from 'form-data';
 import * as apiManager from '../helpers/apiManager';
 
 import {
+    EXPERIENCE_SAVE_REQUESTED,
+    EXPERIENCE_SAVE__SUCCEEDED,
+    EXPERIENCE_SAVE__FAILED,
+
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE__FAILED,
@@ -116,6 +120,37 @@ import {
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
 
 } from './constants';
+
+// Experience type request
+export const dxExperienceSaveHtmlUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.experience, 'blob.html');
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
+export function* dxExperienceSave(action) {
+    try {
+        const response = yield call(dxExperienceSaveHtmlUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        yield put({
+            type: EXPERIENCE_SAVE__SUCCEEDED,
+            payload: {
+                experience: action.payload.experience
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_SAVE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceSaveSaga() {
+    yield takeEvery(EXPERIENCE_SAVE_REQUESTED, dxExperienceSave);
+}
 
 // Experience type request
 export function* experienceType(action) {
@@ -713,7 +748,7 @@ export function* dxExperiencePageUpdateElem(action) {
                     payload: {
                         sectionGUID: action.payload.sectionGUID,
                         type: type,
-                        content: Response.File.FileGUID + '.' + Response.File.FileType,
+                        content: Response.File.FileGUID,
                     },
                 });
             }

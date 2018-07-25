@@ -8,11 +8,13 @@ import {
 // Dashboard
 import { 
     dxLogoutSaga,
-    dxChannelFetchSaga
+    dxChannelFetchSaga,
+    dxFetchExperienceSaga,
 } from './dashboard/sagas';
 
 // NewExperience
 import { 
+    dxExperienceSaveSaga,
     dxExperienceTypeSaga,
     dxExperienceTypeUpdateSaga,
     dxExperienceIndexUpdateSaga,
@@ -63,8 +65,10 @@ export default function* rootSaga() {
         // Dashboard
         dxLogoutSaga(),
         dxChannelFetchSaga(),
+        dxFetchExperienceSaga(),
 
         // NewExperience
+        dxExperienceSaveSaga(),
         dxExperienceTypeSaga(),
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),

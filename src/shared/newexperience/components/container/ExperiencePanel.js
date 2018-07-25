@@ -193,7 +193,7 @@ class ExperiencePanel extends Component {
                                         </div>
                                         :
                                         <div style={demoPagesContainerStyle}>
-                                            <DxPage 
+                                            <DxPage
                                                 pages={this.props.experience.pages}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}

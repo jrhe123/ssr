@@ -135,7 +135,7 @@ class PhoneElement extends Component {
             case 'EMBED_PDF':
                 section = (
                     <DxPdfViewer
-                        pdfPath={this.props.pdfPath}
+                        pdf={this.props.pdf}
                     />
                 )
                 break;
