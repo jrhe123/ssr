@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import NavBar from '../../../components/navBar/NavBar';
 import DxInput from '../../../components/dxInput/DxInput';
 
+// redux
+import { connect } from 'react-redux';
+
 class ChannelNavigator extends Component {
 
     handleTitleChange = (e) => {
@@ -11,7 +14,7 @@ class ChannelNavigator extends Component {
     }
 
     handleGoback = () => {
-
+        this.props.history.push('/dashboard');
     }
 
     render() {
@@ -21,10 +24,20 @@ class ChannelNavigator extends Component {
                 isRoute={false}
                 navType="CHANNEL"
                 handleInputChange={(e) => this.handleTitleChange(e)}
-                handleGoback={() => this.props.handleGoback()}
+                handleGoback={() => this.handleGoback()}
                 />
         )
     }
 }
 
-export default ChannelNavigator;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history,
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(ChannelNavigator);
