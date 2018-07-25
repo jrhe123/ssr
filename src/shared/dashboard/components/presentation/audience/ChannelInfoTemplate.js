@@ -6,8 +6,8 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 
 class ChannelInfoTemplate extends Component {

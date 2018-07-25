@@ -322,7 +322,8 @@ const styles = {
     optionContainerStyle:{
         display:'flex',
         flexDirection: 'row',
-        marginTop: 36, 
+        // marginTop: 36,
+        paddingTop:36,
     },
     leftContainerStyle: {
         flex:1,

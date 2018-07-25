@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../../assets/css/dd-menu/dd_menu.css';
+import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
 import SearchBar from 'material-ui-search-bar';
@@ -9,12 +9,12 @@ import Button from '@material-ui/core/Button';
 
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
-import ModalTemplate from './ModalTemplate';
+import ModalTemplate from '../ModalTemplate';
 
 
 class ErrorMessageTemplate extends Component{

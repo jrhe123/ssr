@@ -13,7 +13,7 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 //component
-import WidgetTemplate from '../presentation/WidgetTemplate';
+import WidgetTemplate from '../presentation/insights/WidgetTemplate';
 
 class Insight extends Component {
 

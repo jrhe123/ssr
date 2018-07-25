@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../../assets/css/dd-menu/dd_menu.css';
+import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
 import SearchBar from 'material-ui-search-bar';
@@ -9,8 +9,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
@@ -64,7 +64,7 @@ class RemoveUserPage extends Component{
                 </div>
                 <div style={memberListContainerStyle}>
                     <RestrictUserTemplate
-                        userPicture={require('../../../../../assets/images/vejey.jpeg')}
+                        userPicture={require('../../../../../../assets/images/vejey.jpeg')}
                         userName={'Vejey'}
                         userEmail={'vejey@digitalxi.com'}
                         userRegistrationDate={'29 June 2018'}
@@ -74,7 +74,7 @@ class RemoveUserPage extends Component{
                         btnTextColor={colors.whiteColor} btnBorder={'none'}
                     />
                     <RestrictUserTemplate
-                        userPicture={require('../../../../../assets/images/paul.jpeg')} 
+                        userPicture={require('../../../../../../assets/images/paul.jpeg')} 
                         userName={'Paul'}
                         userEmail={'paul@digitalxi.com'}
                         userRegistrationDate={'09 November 2017'}

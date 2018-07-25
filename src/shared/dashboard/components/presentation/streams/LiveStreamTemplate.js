@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../../assets/css/dd-menu/dd_StreamMenu.css';
+import '../../../../../../assets/css/dd-menu/dd_StreamMenu.css';
 
 // Libraries
 import IconButton from '@material-ui/core/IconButton';
@@ -9,7 +9,7 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
-import fonts from '../../../styles/fonts';
+import fonts from '../../../../styles/fonts';
 
 
 class LiveStreamTemplate extends Component {

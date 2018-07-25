@@ -9,9 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
-import sizes from '../../../styles/sizes';
+import colors from '../../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import sizes from '../../../../styles/sizes';
 
 // components
 import ChannelListInfo from './ChannelListInfo';

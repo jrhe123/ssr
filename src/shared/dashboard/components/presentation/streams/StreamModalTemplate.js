@@ -6,11 +6,11 @@ import Modal from 'react-responsive-modal';
 import SearchBar from 'material-ui-search-bar';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 //style
-import '../../../../../assets/css/modal/rrm.css';
+import '../../../../../../assets/css/modal/rrm.css';
 
 
 

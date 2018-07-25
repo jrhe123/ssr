@@ -14,11 +14,11 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 // component
-import RestrictSessionPage from '../presentation/RestrictSessionPage';
-import RestrictDomainPage from '../presentation/RestrictDomainPage';
-import PrivateInvitePage from '../presentation/PrivateInvitePage';
-import SpecificAccessPage from '../presentation/SpecificAccessPage';
-import RemoveUserPage from '../presentation/RemoveUserPage';
+import RestrictSessionPage from '../presentation/drm/RestrictSessionPage';
+import RestrictDomainPage from '../presentation/drm/RestrictDomainPage';
+import PrivateInvitePage from '../presentation/drm/PrivateInvitePage';
+import SpecificAccessPage from '../presentation/drm/SpecificAccessPage';
+import RemoveUserPage from '../presentation/drm/RemoveUserPage';
 
 
 class DRM extends Component{

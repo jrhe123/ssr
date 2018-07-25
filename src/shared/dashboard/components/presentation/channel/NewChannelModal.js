@@ -10,13 +10,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Lock from '@material-ui/icons/Lock';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../../../styles/colors';
+import fonts from '../../../../styles/fonts';
 
 // styles
-import '../../../../../assets/css/modal/rrm.css';
+import '../../../../../../assets/css/modal/rrm.css';
 
-class NewExperienceModal extends Component {
+class NewChannelModal extends Component {
 
     state = {
         value: '0',
@@ -178,4 +178,4 @@ const styles = {
     },
 }
 
-export default NewExperienceModal;
+export default NewChannelModal;

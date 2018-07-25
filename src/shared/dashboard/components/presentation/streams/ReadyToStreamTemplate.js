@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // constants
-import fonts from '../../../styles/fonts';
+import fonts from '../../../../styles/fonts';
 
 // component
 import StreamModalTemplate from './StreamModalTemplate';

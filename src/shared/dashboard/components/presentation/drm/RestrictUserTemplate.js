@@ -5,8 +5,8 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 
 

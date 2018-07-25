@@ -5,11 +5,11 @@ import Button from '@material-ui/core/Button';
 import Modal from 'react-responsive-modal';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 //style
-import '../../../../../assets/css/modal/rrm.css';
+import '../../../../../../assets/css/modal/rrm.css';
 
 
 class InviteModalTemplate extends Component {
@@ -71,7 +71,7 @@ class InviteModalTemplate extends Component {
                             <div style={imgContainerStyle}>
                                 <img
                                     style={imgStyle}
-                                    src={require('../../../../../assets/images/uhn_logo.png')}
+                                    src={require('../../../../../../assets/images/uhn_logo.png')}
                                 />
                             </div>
                             <p style={inviteTextStyle}>Princess Margeret Hospital has invited you to join their live content stream on ContentXi</p>

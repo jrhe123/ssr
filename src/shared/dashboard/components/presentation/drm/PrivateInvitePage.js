@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // styles
-import '../../../../../assets/css/dd-menu/dd_menu.css';
+import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
 import SearchBar from 'material-ui-search-bar';
@@ -12,8 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
@@ -95,14 +95,14 @@ class PrivateInvitePage extends Component{
                                 <p style={channelNameStyle}>#generic</p>
                                 <p style={channelCodeStyle}>demo_1</p>
                                 <img style={imgStyle}
-                                    src={require('../../../../../assets/images/close_button.png')}
+                                    src={require('../../../../../../assets/images/close_button.png')}
                                 /> 
                             </div>
                             <div style={inviteCodeLabelStyle}>
                                 <p style={channelNameStyle}>#diabetes_channel</p>
                                 <p style={channelCodeStyle}>diabetes101</p>
                                 <img style={imgStyle}
-                                    src={require('../../../../../assets/images/close_button.png')}
+                                    src={require('../../../../../../assets/images/close_button.png')}
                                 /> 
                             </div>
                         </div>
@@ -139,7 +139,7 @@ class PrivateInvitePage extends Component{
                 </div>
                 <div style={memberListContainerStyle}>
                     <RestrictUserTemplate
-                        userPicture={require('../../../../../assets/images/dhan.png')} 
+                        userPicture={require('../../../../../../assets/images/dhan.png')} 
                         userName={'Dhaneswar Pandian'}
                         userEmail={'dhan@digitalxi.com'}
                         userRegistrationDate={'10 May 2018'}
@@ -149,7 +149,7 @@ class PrivateInvitePage extends Component{
                         btnTextColor={'#1B2A36'}
                     />
                     <RestrictUserTemplate
-                        userPicture={require('../../../../../assets/images/roy.png')} 
+                        userPicture={require('../../../../../../assets/images/roy.png')} 
                         userName={'Roy'}
                         userEmail={'roy@digitalxi.com'}
                         userRegistrationDate={'10 September 2011'}

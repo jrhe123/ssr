@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 
 

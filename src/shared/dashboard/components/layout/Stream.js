@@ -16,9 +16,9 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 // component
-import ReadyToStreamTemplate from '../presentation/ReadyToStreamTemplate';
-import LiveStreamTemplate from '../presentation/LiveStreamTemplate';
-import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate'
+import ReadyToStreamTemplate from '../presentation/streams/ReadyToStreamTemplate';
+import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
+import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
 
 
 class Stream extends Component{
@@ -172,20 +172,20 @@ class Stream extends Component{
                             />
                         </div>
                         <div style={channelInfoContainerStyle}>
-                            <ChannelInfoTemplate headerText={'General'}/>
-                            <ChannelInfoTemplate headerText={'Renaissance'}/>
-                            <ChannelInfoTemplate headerText={'Reading'}/>
-                            <ChannelInfoTemplate headerText={'Latin literature'}/>
-                            <ChannelInfoTemplate headerText={'Lorem Ipsum'}/>
-                            <ChannelInfoTemplate headerText={'Bonorum'}/>
-                            <ChannelInfoTemplate headerText={'Rackham'}/>
-                            <ChannelInfoTemplate headerText={'Malorum'}/>
-                            <ChannelInfoTemplate headerText={'Injected'}/>
-                            <ChannelInfoTemplate headerText={'Tutorials'}/>
-                            <ChannelInfoTemplate headerText={'Content'}/>
-                            <ChannelInfoTemplate headerText={'Specimen'}/>
-                            <ChannelInfoTemplate headerText={'Internet'}/>
-                            <ChannelInfoTemplate headerText={'Channel 2'}/>         
+                            <ChannelStreamsTemplate headerText={'General'}/>
+                            <ChannelStreamsTemplate headerText={'Renaissance'}/>
+                            <ChannelStreamsTemplate headerText={'Reading'}/>
+                            <ChannelStreamsTemplate headerText={'Latin literature'}/>
+                            <ChannelStreamsTemplate headerText={'Lorem Ipsum'}/>
+                            <ChannelStreamsTemplate headerText={'Bonorum'}/>
+                            <ChannelStreamsTemplate headerText={'Rackham'}/>
+                            <ChannelStreamsTemplate headerText={'Malorum'}/>
+                            <ChannelStreamsTemplate headerText={'Injected'}/>
+                            <ChannelStreamsTemplate headerText={'Tutorials'}/>
+                            <ChannelStreamsTemplate headerText={'Content'}/>
+                            <ChannelStreamsTemplate headerText={'Specimen'}/>
+                            <ChannelStreamsTemplate headerText={'Internet'}/>
+                            <ChannelStreamsTemplate headerText={'Channel 2'}/>         
                         </div>
                         <div style={tipsContainerStyle}>
                             <p style={tipsHeaderStyle}>Tips:</p>

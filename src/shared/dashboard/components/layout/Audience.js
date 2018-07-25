@@ -20,9 +20,9 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 // component
-import ChannelInfoTemplate from '../presentation/ChannelInfoTemplate';
-import UserTemplate from '../presentation/UserTemplate';
-import InviteModalTemplate from '../presentation/InviteModalTemplate';
+import ChannelInfoTemplate from '../presentation/audience/ChannelInfoTemplate';
+import UserTemplate from '../presentation/audience/UserTemplate';
+import InviteModalTemplate from '../presentation/audience/InviteModalTemplate';
 
 const themeStyles = () => ({
     yourIconButtonStyle: {

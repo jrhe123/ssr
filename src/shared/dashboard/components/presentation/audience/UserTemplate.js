@@ -7,11 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 
 // constants
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 //components
-import ModalTemplate from './ModalTemplate';
+import ModalTemplate from '../ModalTemplate';
 
 
 class UserTemplate extends Component {

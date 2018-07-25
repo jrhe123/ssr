@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 //component
-import NewChannelModal from '../container/NewChannelModal.js';
+import NewChannelModal from '../presentation/channel/NewChannelModal.js';
 
 // libraries
 import Button from '@material-ui/core/Button';
@@ -21,7 +21,7 @@ import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
 // components
-import ChannelList from '../presentation/ChannelList';
+import ChannelList from '../presentation/channel/ChannelList';
 
 class ChannelContainer extends Component {
 
