@@ -63,11 +63,10 @@ class ExperienceNavigator extends Component {
             // let blob = new Blob([demoHtml], {type: 'text/html'});
             // this.props.dxExperienceSaveAction(blob);
 
-            console.log('validate here');
-            console.log('loading start');
+            let { IsWarning, IsError, Message } = this.validateExperience(experience);
 
         } else if (experience.index == 1) {
-            let { IsError, Message } = this.validateExperienceCard(experience);
+            let { IsError, Message } = this.validateExperienceCard(experience.cardTemplate, experience.cardTitle);
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
@@ -84,6 +83,10 @@ class ExperienceNavigator extends Component {
         }
     }
 
+    validateExperience = (experience) => {
+        console.log('exp validate here');
+    }
+
     handleConfirmModal = () => {
         this.setState({
             isModalOpen: false,
@@ -91,31 +94,30 @@ class ExperienceNavigator extends Component {
         this.props.dxExperiencePagePagesSaveAction();
     }
 
-    validateExperienceCard = (experience) => {
+    validateExperienceCard = (card, title) => {
         let res = {
             IsError: true,
             Message: '',
         }
-        let cardTemplate = experience.cardTemplate;
 
-        if (!cardTemplate) {
+        if (!card) {
             res.Message = 'Please select a card template';
             return res;
         }
-        if (!experience.cardTitle) {
+        if (!title) {
             res.Message = 'Please enter card title';
             return res;
         }
 
-        let imageIdx = search_object_index_by_value(cardTemplate.settings, 'IMAGE');
+        let imageIdx = search_object_index_by_value(card.settings, 'IMAGE');
         if (imageIdx != null
-            && !cardTemplate.settings[imageIdx].Default) {
+            && !card.settings[imageIdx].Default) {
             res.Message = 'Please select a image';
             return res;
         }
 
-        if (cardTemplate.type == 'VIDEO'
-            && cardTemplate.content == '') {
+        if (card.type == 'VIDEO'
+            && card.content == '') {
             res.Message = 'Please enter video url';
             return res;
         }
