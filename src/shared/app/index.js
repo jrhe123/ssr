@@ -116,7 +116,7 @@ class App extends Component {
                 
                 {/* global loading spin */}
                 <Loading 
-                    loading={loading}
+                    isLoading={isLoading}
                 />
                 {/* global alert bar */}
                 <AlertBar
@@ -133,7 +133,7 @@ const stateToProps = (state) => {
         isAuthenticated: state.root.isAuthenticated,
         user: state.root.user,
         alertBar: state.root.alertBar,
-        loading: state.root.loading,
+        isLoading: state.root.isLoading,
     }
 }
 

@@ -11,7 +11,7 @@ class Loading extends Component {
     render() {
 
         const {
-            loading
+            isLoading
         } = this.props;
 
         const {
@@ -22,7 +22,7 @@ class Loading extends Component {
         } = styles;
 
         return (
-            loading.isLoading ?
+            isLoading ?
                 <div style={mainContainerStyle}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>

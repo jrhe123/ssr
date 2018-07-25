@@ -54,6 +54,7 @@ import {
     dxValidateTokenSaga,
     dxNavigateHistorySaga,
     dxAlertSaga,
+    dxLoadingSaga,
 } from './globalSagas';
 
 
@@ -108,5 +109,6 @@ export default function* rootSaga() {
         dxValidateTokenSaga(),
         dxNavigateHistorySaga(),
         dxAlertSaga(),
+        dxLoadingSaga(),
     ]);
 }

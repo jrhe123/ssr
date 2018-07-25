@@ -15,7 +15,12 @@ import {
     ALERT_REQUESTED,
     ALERT__SUCCEEDED,
     ALERT__FAILED,
+
+    LOADING_REQUESTED,
+    LOADING__SUCCEEDED,
+    LOADING__FAILED,
 } from './constants';
+import { dxLoading } from './actions';
 
 // Validate token
 export const dxValidateTokenUrl = (params) => {
@@ -110,4 +115,25 @@ export function* dxAlert(action) {
 
 export function* dxAlertSaga() {
     yield takeEvery(ALERT_REQUESTED, dxAlert);
+}
+
+// Loading
+export function* dxLoading(action) {
+    try {
+        yield put({
+            type: LOADING__SUCCEEDED,
+            payload: {
+                isLoading: action.payload.isLoading,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: LOADING__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxLoadingSaga() {
+    yield takeEvery(LOADING_REQUESTED, dxLoading);
 }
