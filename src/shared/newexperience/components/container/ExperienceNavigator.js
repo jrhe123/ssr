@@ -39,8 +39,11 @@ class ExperienceNavigator extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.isFilesUploaded && !this.props.isFilesUploaded){
-            this.props.dxLoadingAction(false);
             this.props.dxExperienceCreateAction(this.props.experience);
+        }
+        if(nextProps.isCompleted && !this.props.isCompleted){
+            this.props.dxLoadingAction(false);
+            this.props.history.push('/dashboard');
         }
     }
 

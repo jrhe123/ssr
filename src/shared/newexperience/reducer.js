@@ -83,10 +83,11 @@ let templateNewSection = {
     pageGUID: null
 };
 const initialState = {
+    isCompleted: false,     // complete experience
+    isFilesUploaded: false, // upload html files
     index: 0,               // section index
     cardTemplates: [],      // card templates
     pageTemplates: [],      // page templates
-    isFilesUploaded: false, // upload html files
     experience: {
         type: '0',      // with OR without page(s)
         index: '0',     // step
@@ -142,9 +143,39 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     switch (type) {
 
         case EXPERIENCE_CREATE__SUCCEEDED:
-            console.log('reducer received');
+
+            // tmpExperience = {
+            //     type: '0',
+            //     index: '0',
+
+            //     isCardTemplateMenuOpen: true, 
+            //     isCardTemplateSaved: false, 
+            //     cardTemplate: null, 
+            //     card: null, 
+
+            //     isPageTemplateMenuOpen: true, 
+            //     isPagesSaved: false,        
+            //     activePageTemplateOptionIndex: 0, 
+
+            //     isPageCarouselMenuOpen: false,   
+
+            //     experienceTitle: 'New Experience',
+            //     cardTitle: 'Card 1',  
+
+            //     tools: [],  
+            //     pages: [],  
+            //     newPage: Object.assign({}, templateNewPage),   
+            //     activePageSectionIndex: 0,  
+            // }
+
+            updated.isCompleted = true;
+            
+            // updated.isFilesUploaded = false;
+            // updated.index = 0;
+            // updated.cardTemplates = [];
+            // updated.pageTemplates = [];
             return updated;
-        
+
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
             updated.isFilesUploaded = true;
             updated.experience = payload.experience;
@@ -389,14 +420,14 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update new page
             tmpNewPageSections[tmpSectionIndex].isDeleted = true;
             // case: BUTTON
-            if(tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
-                && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null){
+            if (tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
+                && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null) {
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
                 tmpConnectedPage.page.isConnected = false;
                 tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
             }
             // case: SPLASH
-            if(tmpNewPageSections[tmpSectionIndex].type == 'SPLASH'){
+            if (tmpNewPageSections[tmpSectionIndex].type == 'SPLASH') {
                 tmpNewPage.isSplash = false;
             }
             tmpNewPage.sections = tmpNewPageSections;
@@ -537,7 +568,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     tmpUpdatePage.page.isConnected = true;
 
                     // disconnect page
-                    if(tmpConnectedPageGUID){
+                    if (tmpConnectedPageGUID) {
                         tmpConnectedPage = find_page_by_guid(tmpConnectedPageGUID, tmpPages);
                         tmpConnectedPage.page.isConnected = false;
                         tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
@@ -645,10 +676,10 @@ const find_previous_display_page_guid = (pages) => {
     }
 }
 const disconnect_pages_by_sections = (sections, pages) => {
-    for(let i = 0; i < sections.length; i++){
+    for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
-        if(section.type == 'BUTTON'
-            && section.connectedPageGUID){
+        if (section.type == 'BUTTON'
+            && section.connectedPageGUID) {
             let item = find_page_by_guid(section.connectedPageGUID, pages);
             item.page.isConnected = false;
             pages[item.index] = item.page;
