@@ -1,6 +1,7 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import FormData from 'form-data';
 import * as apiManager from '../helpers/apiManager';
+import * as helpers from '../helpers';
 
 import {
     EXPERIENCE_SAVE_REQUESTED,
@@ -126,18 +127,94 @@ import {
 } from './constants';
 
 // Experience type request
-export const dxExperienceSaveHtmlUrl = (params) => {
-    let formData = new FormData();
-    formData.append('File', params.experience, 'blob.html');
-    return (
-        apiManager.dxFileApi(`/upload/file`, formData, true)
-    )
+export const dxExperienceCreateUrl = (params) => {
+
+    let experience = params.experience;
+    let {
+        type,
+        experienceTitle,
+        card,
+        pages,
+    } = experience;
+    const formattedParams = {
+        ExperienceType: type,
+        ExperienceTitle: experienceTitle,
+        ExperienceCard: {
+            CardGUID: card.cardGUID,
+            Type: card.type,
+            Title: card.title,
+            Content: card.content,
+            Settings: helpers.capitalize_array_object_key(card.settings),
+        },
+        ExperiencePages: __format_experience_params(pages)
+    };
+    apiManager.dxApi(`/experience/create`, formattedParams, true)
+}
+
+const __format_experience_params = (pages) => {
+    let output = [];
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (!page.isDeleted) {
+            let sections = helpers.remove_is_deleted_item(page.sections);
+            sections = __extract_section_values(sections);
+            let item = {
+                PageGUID: page.pageGUID,
+                ParentPageGUID: page.parentPageGUID,
+                IsRoot: page.isRoot,
+                IsSplash: page.isSplash,
+                Title: page.title,
+                Sections: sections,
+            }
+            output.push(item);
+        }
+    }
+    return output;
+}
+
+const __extract_section_values = (sections) => {
+    let output = [];
+    for (let i = 0; i < sections.length; i++) {
+        let section = sections[i];
+        let item = {
+            SectionGUID: section.sectionGUID,
+            Type: section.type,
+        }
+        switch (section.type) {
+            case 'EDITOR':
+                item.Html = section.html;
+                break;
+            case 'BUTTON':
+                item.BtnContent = section.btnContent;
+                item.ConnectedPageGUID = section.connectedPageGUID;
+                break;
+            case 'EMBED_PDF':
+                item.Pdf = section.pdf;
+                break;
+            case 'SPLASH':
+                item.SplashContent = section.splashContent;
+                item.SplashImg = section.splashImg;
+                item.SplashColor = section.splashColor;
+                break;
+            case 'VIDEO':
+                item.VideoUrl = section.videoUrl;
+                break;
+            case 'IMAGE':
+                item.Img = section.img;
+                break;
+        }
+        output.push(item);
+    }
+    return output;
 }
 
 export function* dxExperienceSave(action) {
     try {
-        const response = yield call(dxExperienceSaveHtmlUrl, action.payload);
+        const response = yield call(dxExperienceCreateUrl, action.payload);
         let { Confirmation, Response, Message } = response;
+
+        console.log('response: ', response);
+
         yield put({
             type: EXPERIENCE_SAVE__SUCCEEDED,
             payload: {
@@ -159,7 +236,7 @@ export function* dxExperienceSaveSaga() {
 // Experience upload file request
 export const dxExperienceUploadFileUrl = (params) => {
     let formData = new FormData();
-    let blob = new Blob([params.htmlContent], {type: 'text/html'});
+    let blob = new Blob([params.htmlContent], { type: 'text/html' });
     formData.append('File', blob, 'blob.html');
     return (
         apiManager.dxFileApi(`/upload/file`, formData, true)
@@ -195,12 +272,12 @@ export function* dxExperienceUploadFiles(action) {
 
             for (let i = 0; i < pages.length; i++) {
                 let page = pages[i];
-                if(!page.isDeleted){
+                if (!page.isDeleted) {
                     for (let j = 0; j < page.sections.length; j++) {
                         let section = page.sections[j];
                         if (!section.isDeleted && section.type == 'EDITOR') {
                             let response = yield call(dxExperienceUploadSingleFile, section);
-                            if(response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                            if (response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
                         }
                     }
                 }
