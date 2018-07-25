@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 // component
-import ExperienceList from './ExperienceList';
-import NewExperienceModal from './NewExperienceModal';
+import ExperienceList from '../presentation/experience/ExperienceList';
+import NewExperienceModal from '../presentation/experience/NewExperienceModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';

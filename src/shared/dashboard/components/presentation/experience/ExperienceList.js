@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 // components
-import SearchBar from '../../../components/searchBar/SearchBar';
+import SearchBar from '../../../../components/searchBar/SearchBar';
 
 // constatnt
-import fonts from '../../../styles/fonts';
-import colors from '../../../styles/colors';
+import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
 class ExperienceList extends Component {
 
