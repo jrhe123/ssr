@@ -195,11 +195,13 @@ export function* dxExperienceUploadFiles(action) {
 
             for (let i = 0; i < pages.length; i++) {
                 let page = pages[i];
-                for (let j = 0; j < page.sections.length; j++) {
-                    let section = page.sections[j];
-                    if (section.type == 'EDITOR') {
-                        let response = yield call(dxExperienceUploadSingleFile, section);
-                        if(response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                if(!page.isDeleted){
+                    for (let j = 0; j < page.sections.length; j++) {
+                        let section = page.sections[j];
+                        if (!section.isDeleted && section.type == 'EDITOR') {
+                            let response = yield call(dxExperienceUploadSingleFile, section);
+                            if(response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                        }
                     }
                 }
             }

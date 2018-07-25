@@ -37,6 +37,13 @@ class ExperienceNavigator extends Component {
         modalType: 'EXPERIENCE'
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.isFilesUploaded && !this.props.isFilesUploaded){
+            this.props.dxLoadingAction(false);
+            this.props.dxExperienceSaveAction(this.props.experience);
+        }
+    }
+
     handleCloseModal = () => {
         this.setState({ isModalOpen: false });
     }
@@ -56,15 +63,12 @@ class ExperienceNavigator extends Component {
     }
 
     saveExperience = () => {
-
-        // this.props.dxLoadingAction(true);
-
+        // 1. loading
+        this.props.dxLoadingAction(true);
         const {
             experience,
         } = this.props;        
-        this.props.dxExperienceUploadFileAction(experience);
-        
-        // this.props.dxExperienceSaveAction(blob);
+        this.props.dxExperienceUploadFileAction(experience);        
     }
 
     handleSaveBtnClick = () => {
@@ -454,6 +458,7 @@ class ExperienceNavigator extends Component {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        isFilesUploaded: state.newexperience.isFilesUploaded,
         experience: state.newexperience.experience,
     }
 }

@@ -86,6 +86,7 @@ const initialState = {
     index: 0,               // section index
     cardTemplates: [],      // card templates
     pageTemplates: [],      // page templates
+    isFilesUploaded: false, // upload html files
     experience: {
         type: '0',      // with OR without page(s)
         index: '0',     // step
@@ -145,7 +146,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
         
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
-            console.log('received in reducer: ', payload.experience);
+            updated.isFilesUploaded = true;
+            updated.experience = payload.experience;
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
