@@ -31,7 +31,11 @@ const initialState = {
         isDisplay: false,
         isError: false,
         message: ''
-    }
+    },
+
+    loading: {
+        isLoading: false,
+    },
 };
 
 const rootReducer = (previousState = initialState, { type, payload }) => {
