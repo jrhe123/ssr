@@ -461,6 +461,7 @@ class ExperienceNavigator extends Component {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        isCompleted: state.newexperience.isCompleted,
         isFilesUploaded: state.newexperience.isFilesUploaded,
         experience: state.newexperience.experience,
     }

@@ -169,11 +169,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // }
 
             updated.isCompleted = true;
-            
-            // updated.isFilesUploaded = false;
-            // updated.index = 0;
-            // updated.cardTemplates = [];
-            // updated.pageTemplates = [];
             return updated;
 
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
@@ -184,6 +179,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_TYPE__SUCCEEDED:
             tmpExperience.type = payload.experienceType;
             updated.experience = tmpExperience;
+            updated.isCompleted = false;
+            updated.isFilesUploaded = false;
+            updated.index = 0;
             return updated;
 
         case EXPERIENCE_TYPE_UPDATE__SUCCEEDED:
