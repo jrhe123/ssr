@@ -7,6 +7,10 @@ import {
     EXPERIENCE_SAVE__SUCCEEDED,
     EXPERIENCE_SAVE__FAILED,
 
+    EXPERIENCE_UPLOAD_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_FILE__FAILED,
+
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE__FAILED,
@@ -150,6 +154,37 @@ export function* dxExperienceSave(action) {
 
 export function* dxExperienceSaveSaga() {
     yield takeEvery(EXPERIENCE_SAVE_REQUESTED, dxExperienceSave);
+}
+
+// Experience upload file request
+export const dxExperienceUploadFileUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.experience, 'blob.html');
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
+export function* dxExperienceUploadFile(action) {
+    try {
+        const response = yield call(dxExperienceUploadFileUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        yield put({
+            type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+            payload: {
+                experience: action.payload.experience
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPLOAD_FILE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUploadFileSaga() {
+    yield takeEvery(EXPERIENCE_UPLOAD_FILE_REQUESTED, dxExperienceUploadFile);
 }
 
 // Experience type request

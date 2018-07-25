@@ -1,5 +1,6 @@
 import {
     EXPERIENCE_SAVE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
@@ -141,6 +142,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_SAVE__SUCCEEDED:
             console.log('payload.experience: ', payload.experience);
+            return updated;
+        
+        case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
+            console.log('received in reducer');
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:

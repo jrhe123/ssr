@@ -15,6 +15,7 @@ import {
 // NewExperience
 import { 
     dxExperienceSaveSaga,
+    dxExperienceUploadFileSaga,
     dxExperienceTypeSaga,
     dxExperienceTypeUpdateSaga,
     dxExperienceIndexUpdateSaga,
@@ -70,6 +71,7 @@ export default function* rootSaga() {
 
         // NewExperience
         dxExperienceSaveSaga(),
+        dxExperienceUploadFileSaga(),
         dxExperienceTypeSaga(),
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),

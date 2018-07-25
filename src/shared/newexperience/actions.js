@@ -1,5 +1,6 @@
 import {
     EXPERIENCE_SAVE_REQUESTED,
+    EXPERIENCE_UPLOAD_FILE_REQUESTED,
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
@@ -37,6 +38,15 @@ import {
 export const dxExperienceSave = (experience) => {
     return {
         type: EXPERIENCE_SAVE_REQUESTED,
+        payload: {
+            experience
+        },
+    }
+}
+
+export const dxExperienceUploadFile = (experience) => {
+    return {
+        type: EXPERIENCE_UPLOAD_FILE_REQUESTED,
         payload: {
             experience
         },
