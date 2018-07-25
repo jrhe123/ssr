@@ -32,6 +32,7 @@ class ExperienceNavigator extends Component {
     state = {
         isModalOpen: false,
         modalTitle: null,
+        modalType: 'EXPERIENCE'
     }
 
     handleCloseModal = () => {
@@ -52,6 +53,10 @@ class ExperienceNavigator extends Component {
         }
     }
 
+    saveExperience = () => {
+        console.log('here');
+    }
+
     handleSaveBtnClick = () => {
         let {
             experience,
@@ -65,12 +70,15 @@ class ExperienceNavigator extends Component {
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
-                    modalTitle: Message
+                    modalTitle: Message,
+                    modalType: 'EXPERIENCE'
                 });
             } else {
-                this.props.dxAlertAction(true, IsError, Message);
-                if (!IsError)
-                    console.log('continue to saga');
+                if (IsError) {
+                    this.props.dxAlertAction(true, IsError, Message);
+                    return;
+                }
+                this.saveExperience();
             }
         } else if (experience.index == 1) {
             let { IsError, Message } = this.validateExperienceCard(experience.cardTemplate, experience.cardTitle);
@@ -81,7 +89,8 @@ class ExperienceNavigator extends Component {
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
-                    modalTitle: Message
+                    modalTitle: Message,
+                    modalType: 'EXPERIENCE_PAGE'
                 });
             } else {
                 this.props.dxAlertAction(true, IsError, Message);
@@ -111,16 +120,16 @@ class ExperienceNavigator extends Component {
 
         // 1. experience
         if (type != 0 && type != 1) {
-            res.Message = 'Invalid experience type';
+            res.Message = 'Invalid type';
             return res;
         }
         if (!experienceTitle) {
-            res.Message = 'Please enter experience title';
+            res.Message = 'Please enter title';
             return res;
         }
         // 2. card
         if (!isCardTemplateSaved) {
-            res.Message = 'Please create & save your experience card';
+            res.Message = 'Please create & save your card';
             return res;
         }
         let validateCardResponse = this.validateExperienceCard(card, cardTitle);
@@ -134,7 +143,7 @@ class ExperienceNavigator extends Component {
         // 3. pages
         if (type == 1) {
             if (!isPagesSaved) {
-                res.Message = 'Please create & save your experience page(s)';
+                res.Message = 'Please create & save your page(s)';
                 return res;
             }
             let validatePagesResponse = this.validateExperiencePages(pages);
@@ -146,7 +155,6 @@ class ExperienceNavigator extends Component {
             }
         }
         res.IsError = false;
-        res.Message = 'Continue to save';
         return res;
     }
 
@@ -154,7 +162,11 @@ class ExperienceNavigator extends Component {
         this.setState({
             isModalOpen: false,
         });
-        this.props.dxExperiencePagePagesSaveAction();
+        if (this.state.modalType == 'EXPERIENCE') {
+            this.saveExperience();
+        } else {
+            this.props.dxExperiencePagePagesSaveAction();
+        }
     }
 
     validateExperienceCard = (card, title) => {
