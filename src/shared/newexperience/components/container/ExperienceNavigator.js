@@ -59,12 +59,14 @@ class ExperienceNavigator extends Component {
 
         if (experience.index == 0) {
             
-            let demoHtml = '<p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/u4VfsH2USMXr1G9k6_O5W9VhDRr6FZn8xPhGD-nNzvX--irflUsdUV-tzM9Y2o9FE57D1dySQ0e-9eu-MImaUY0xUPWtP0R16eEVpw8JdvidiakzSFQ0l6jIgJhAzv7Chu0A3AvV\"></span></p><p><strong style=\"background-color: transparent; color: rgb(255, 0, 0);\">asdasdsadsds</strong></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/ni7GfNYhlcW89Cn2e1eIFN5c2QajdoG7WUgVK5Bc67TXmfXkwvX0WW_N0TxyFShk_Q28rsPdt7gltWc3mAq3XO00SzYYJIk0yxSG4PH3Rf1AMkNKFPHxs4HXEzY-X4zSm2xaMF4y\"></span></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh6.googleusercontent.com/gDXBr8ZGJ4JVx9C2YktN0GlihP7aQOw-ww2XSO8U0qAOw_J31PvFAKaKFuZzTqZ0WimBduEV31v3Dn0s0E_yRPuheE1YAsNASwW8CfoVmBxSlQJWnSdoHxsWDJl7kBd2QhCDHqTu\"></span></p><p><br></p><p><br></p><p><br></p><ul><li><span style=\"background-color: transparent;\">1232</span></li><li><span style=\"background-color: transparent;\">12312</span></li><li><span style=\"background-color: transparent;\">123</span></li><li><span style=\"background-color: transparent;\">123</span></li></ul><p><br></p>';
-            let blob = new Blob([demoHtml], {type: 'text/html'});
-            this.props.dxExperienceSaveAction(blob);
+            // let demoHtml = '<p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/u4VfsH2USMXr1G9k6_O5W9VhDRr6FZn8xPhGD-nNzvX--irflUsdUV-tzM9Y2o9FE57D1dySQ0e-9eu-MImaUY0xUPWtP0R16eEVpw8JdvidiakzSFQ0l6jIgJhAzv7Chu0A3AvV\"></span></p><p><strong style=\"background-color: transparent; color: rgb(255, 0, 0);\">asdasdsadsds</strong></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/ni7GfNYhlcW89Cn2e1eIFN5c2QajdoG7WUgVK5Bc67TXmfXkwvX0WW_N0TxyFShk_Q28rsPdt7gltWc3mAq3XO00SzYYJIk0yxSG4PH3Rf1AMkNKFPHxs4HXEzY-X4zSm2xaMF4y\"></span></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh6.googleusercontent.com/gDXBr8ZGJ4JVx9C2YktN0GlihP7aQOw-ww2XSO8U0qAOw_J31PvFAKaKFuZzTqZ0WimBduEV31v3Dn0s0E_yRPuheE1YAsNASwW8CfoVmBxSlQJWnSdoHxsWDJl7kBd2QhCDHqTu\"></span></p><p><br></p><p><br></p><p><br></p><ul><li><span style=\"background-color: transparent;\">1232</span></li><li><span style=\"background-color: transparent;\">12312</span></li><li><span style=\"background-color: transparent;\">123</span></li><li><span style=\"background-color: transparent;\">123</span></li></ul><p><br></p>';
+            // let blob = new Blob([demoHtml], {type: 'text/html'});
+            // this.props.dxExperienceSaveAction(blob);
+
+            let { IsWarning, IsError, Message } = this.validateExperience(experience);
 
         } else if (experience.index == 1) {
-            let { IsError, Message } = this.validateExperienceCard(experience);
+            let { IsError, Message } = this.validateExperienceCard(experience.cardTemplate, experience.cardTitle);
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
@@ -81,6 +83,10 @@ class ExperienceNavigator extends Component {
         }
     }
 
+    validateExperience = (experience) => {
+        console.log('exp validate here');
+    }
+
     handleConfirmModal = () => {
         this.setState({
             isModalOpen: false,
@@ -88,31 +94,30 @@ class ExperienceNavigator extends Component {
         this.props.dxExperiencePagePagesSaveAction();
     }
 
-    validateExperienceCard = (experience) => {
+    validateExperienceCard = (card, title) => {
         let res = {
             IsError: true,
             Message: '',
         }
-        let cardTemplate = experience.cardTemplate;
 
-        if (!cardTemplate) {
+        if (!card) {
             res.Message = 'Please select a card template';
             return res;
         }
-        if (!experience.cardTitle) {
+        if (!title) {
             res.Message = 'Please enter card title';
             return res;
         }
 
-        let imageIdx = search_object_index_by_value(cardTemplate.settings, 'IMAGE');
+        let imageIdx = search_object_index_by_value(card.settings, 'IMAGE');
         if (imageIdx != null
-            && !cardTemplate.settings[imageIdx].Default) {
+            && !card.settings[imageIdx].Default) {
             res.Message = 'Please select a image';
             return res;
         }
 
-        if (cardTemplate.type == 'VIDEO'
-            && cardTemplate.content == '') {
+        if (card.type == 'VIDEO'
+            && card.content == '') {
             res.Message = 'Please enter video url';
             return res;
         }

@@ -9,11 +9,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../../../styles/colors';
+import fonts from '../../../../styles/fonts';
 
 // styles
-import '../../../../../assets/css/modal/rrm.css';
+import '../../../../../../assets/css/modal/rrm.css';
 
 class NewExperienceModal extends Component {
 
@@ -80,7 +80,7 @@ class NewExperienceModal extends Component {
                                 />
                                 <div style={descContainerStyle}>
                                     <img
-                                        src={require('../../../../../assets/images/card_only.png')}
+                                        src={require('../../../../../../assets/images/card_only.png')}
                                         style={imgStyle}
                                     />
                                     <div style={tableContainerStyle}>
@@ -96,7 +96,7 @@ class NewExperienceModal extends Component {
                                 />
                                 <div style={descContainerStyle}>
                                     <img
-                                        src={require('../../../../../assets/images/card_exp.png')}
+                                        src={require('../../../../../../assets/images/card_exp.png')}
                                         style={imgStyle}
                                     />
                                     <div style={tableContainerStyle}>

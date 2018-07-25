@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 
 // components
 import NavBar from '../../../components/navBar/NavBar';
-import {
-    AudiencePage,
-    ChannelPage,
-    DRMPage,
-    ExperiencePage,
-    InsightPage,
-    StreamPage,
-    OnboardPage,
-} from '../../screens'
+import Experience from '../layout/Experience';
+import Channel from '../layout/Channel';
+import Stream from '../layout/Stream';
+import Audience from '../layout/Audience';
+import DRM from '../layout/DRM';
+import Insight from '../layout/Insight';
+import Onboard from '../layout/Onboard';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -97,43 +95,43 @@ class DashboardNavigator extends Component {
                 >
                     {
                         index == 0 ? 
-                        (<ExperiencePage />)
+                        (<Experience />)
                         :
                         null
                     }
                     {
                         index == 1 ? 
-                        (<ChannelPage />)
+                        (<Channel />)
                         :
                         null
                     }
                     {
                         index == 2 ? 
-                        (<StreamPage />)
+                        (<Stream />)
                         :
                         null
                     }
                     {
                         index == 3 ? 
-                        (<AudiencePage />)
+                        (<Audience />)
                         :
                         null
                     }
                     {
                         index == 4 ? 
-                        (<DRMPage />)
+                        (<DRM />)
                         :
                         null
                     }
                     {
                         index == 5 ? 
-                        (<InsightPage />)
+                        (<Insight />)
                         :
                         null
                     }
                     {
                         index == 6 ? 
-                        (<OnboardPage />)
+                        (<Onboard />)
                         :
                         null
                     }
