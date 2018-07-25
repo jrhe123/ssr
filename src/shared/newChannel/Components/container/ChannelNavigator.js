@@ -7,7 +7,11 @@ import DxInput from '../../../components/dxInput/DxInput';
 class ChannelNavigator extends Component {
 
     handleTitleChange = (e) => {
-        console.log('getting val from: ', e.target.value);
+
+    }
+
+    handleGoback = () => {
+
     }
 
     render() {
@@ -15,6 +19,7 @@ class ChannelNavigator extends Component {
         return (
             <NavBar
                 isRoute={false}
+                navType="CHANNEL"
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleGoback={() => this.props.handleGoback()}
                 />

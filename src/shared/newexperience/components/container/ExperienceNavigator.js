@@ -334,6 +334,7 @@ class ExperienceNavigator extends Component {
             <div>
                 <NavBar
                     isRoute={false}
+                    navType="EXPERIENCE"
                     experience={this.props.experience}
                     handleGoback={() => this.handleGoback()}
                     handleSaveBtnClick={() => this.handleSaveBtnClick()}

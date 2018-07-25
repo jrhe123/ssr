@@ -9,22 +9,6 @@ import sizes from '../../../styles/sizes';
 
 class NewChannel extends Component {
 
-    state = {
-        
-    }
-
-    componentDidMount(){
-        
-    }
-
-    handleGoback = () => {
-        this.props.history.push('/dashboard');
-    }
-
-    handleClickOption = () => {
-
-    }
-
     render() {
 
         const {
@@ -33,9 +17,9 @@ class NewChannel extends Component {
 
         return (
             <div>
-                {/* <ChannelNavigator 
+                <ChannelNavigator 
                     handleGoback={() => this.handleGoback()}
-                /> */}
+                />
                 <div style={mainContainerStyle}>
                     <ChannelPanel 
                         handleClickOption={(val) => this.handleClickOption(val)}
