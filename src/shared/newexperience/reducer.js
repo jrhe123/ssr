@@ -1,5 +1,5 @@
 import {
-    EXPERIENCE_SAVE__SUCCEEDED,
+    EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
@@ -141,8 +141,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     switch (type) {
 
-        case EXPERIENCE_SAVE__SUCCEEDED:
-            console.log('payload.experience: ', payload.experience);
+        case EXPERIENCE_CREATE__SUCCEEDED:
+            console.log('reducer received');
             return updated;
         
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:

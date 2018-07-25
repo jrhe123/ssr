@@ -10,7 +10,7 @@ import { search_object_index_by_value } from '../../../helpers';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxExperienceSave as dxExperienceSaveAction,
+    dxExperienceCreate as dxExperienceCreateAction,
     dxExperienceUploadFile as dxExperienceUploadFileAction,
 
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
@@ -40,7 +40,7 @@ class ExperienceNavigator extends Component {
     componentWillReceiveProps(nextProps) {
         if(nextProps.isFilesUploaded && !this.props.isFilesUploaded){
             this.props.dxLoadingAction(false);
-            this.props.dxExperienceSaveAction(this.props.experience);
+            this.props.dxExperienceCreateAction(this.props.experience);
         }
     }
 
@@ -464,7 +464,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-    dxExperienceSaveAction,
+    dxExperienceCreateAction,
     dxExperienceUploadFileAction,
 
     dxExperienceIndexUpdateAction,

@@ -4,9 +4,9 @@ import * as apiManager from '../helpers/apiManager';
 import * as helpers from '../helpers';
 
 import {
-    EXPERIENCE_SAVE_REQUESTED,
-    EXPERIENCE_SAVE__SUCCEEDED,
-    EXPERIENCE_SAVE__FAILED,
+    EXPERIENCE_CREATE_REQUESTED,
+    EXPERIENCE_CREATE__SUCCEEDED,
+    EXPERIENCE_CREATE__FAILED,
 
     EXPERIENCE_UPLOAD_FILE_REQUESTED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
@@ -126,7 +126,7 @@ import {
 
 } from './constants';
 
-// Experience type request
+// Experience create request
 export const dxExperienceCreateUrl = (params) => {
 
     let experience = params.experience;
@@ -208,29 +208,31 @@ const __extract_section_values = (sections) => {
     return output;
 }
 
-export function* dxExperienceSave(action) {
+export function* dxExperienceCreate(action) {
     try {
         const response = yield call(dxExperienceCreateUrl, action.payload);
         let { Confirmation, Response, Message } = response;
-
-        console.log('response: ', response);
-
-        yield put({
-            type: EXPERIENCE_SAVE__SUCCEEDED,
-            payload: {
-                experience: action.payload.experience
-            },
-        });
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_CREATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_CREATE__SUCCEEDED,
+                payload: {},
+            });
+        }
     } catch (error) {
         yield put({
-            type: EXPERIENCE_SAVE__FAILED,
+            type: EXPERIENCE_CREATE__FAILED,
             payload: error,
         });
     }
 }
 
-export function* dxExperienceSaveSaga() {
-    yield takeEvery(EXPERIENCE_SAVE_REQUESTED, dxExperienceSave);
+export function* dxExperienceCreateSaga() {
+    yield takeEvery(EXPERIENCE_CREATE_REQUESTED, dxExperienceCreate);
 }
 
 // Experience upload file request
