@@ -159,22 +159,59 @@ export function* dxExperienceSaveSaga() {
 // Experience upload file request
 export const dxExperienceUploadFileUrl = (params) => {
     let formData = new FormData();
-    formData.append('File', params.experience, 'blob.html');
+    let blob = new Blob([params.htmlContent], {type: 'text/html'});
+    formData.append('File', blob, 'blob.html');
     return (
         apiManager.dxFileApi(`/upload/file`, formData, true)
     )
 }
 
-export function* dxExperienceUploadFile(action) {
+export function* dxExperienceUploadSingleFile(section) {
     try {
-        const response = yield call(dxExperienceUploadFileUrl, action.payload);
-        let { Confirmation, Response, Message } = response;
+        const response = yield call(dxExperienceUploadFileUrl, section)
+        return response;
+    } catch (err) {
+        return err;
+    }
+}
+
+export function* dxExperienceUploadFiles(action) {
+    try {
+
+        let experience = action.payload.experience;
+        let {
+            type,
+            pages,
+        } = experience;
+
+        if (type == 0) {
+            yield put({
+                type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+                payload: {
+                    experience: action.payload.experience
+                },
+            });
+        } else {
+
+            for (let i = 0; i < pages.length; i++) {
+                let page = pages[i];
+                for (let j = 0; j < page.sections.length; j++) {
+                    let section = page.sections[j];
+                    if (section.type == 'EDITOR') {
+                        let response = yield call(dxExperienceUploadSingleFile, section);
+                        if(response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                    }
+                }
+            }
+        }
+
         yield put({
             type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
             payload: {
-                experience: action.payload.experience
+                experience
             },
         });
+
     } catch (error) {
         yield put({
             type: EXPERIENCE_UPLOAD_FILE__FAILED,
@@ -184,7 +221,7 @@ export function* dxExperienceUploadFile(action) {
 }
 
 export function* dxExperienceUploadFileSaga() {
-    yield takeEvery(EXPERIENCE_UPLOAD_FILE_REQUESTED, dxExperienceUploadFile);
+    yield takeEvery(EXPERIENCE_UPLOAD_FILE_REQUESTED, dxExperienceUploadFiles);
 }
 
 // Experience type request

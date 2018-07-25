@@ -101,7 +101,7 @@ const initialState = {
 
         isPageCarouselMenuOpen: false,      // page carousel menu
 
-        experienceTitle: null,      // experience title
+        experienceTitle: 'New Experience',      // experience title
         cardTitle: 'Card 1',        // experience card title
 
         tools: [],      // toolbars
@@ -145,7 +145,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
         
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
-            console.log('received in reducer');
+            console.log('received in reducer: ', payload.experience);
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
