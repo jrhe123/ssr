@@ -273,7 +273,7 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 120,
+        height: 132,
         width: 300,
     },
     demoPagesContainerStyle: {

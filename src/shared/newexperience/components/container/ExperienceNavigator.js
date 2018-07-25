@@ -58,19 +58,26 @@ class ExperienceNavigator extends Component {
         } = this.props;
 
         if (experience.index == 0) {
-            
             // let demoHtml = '<p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/u4VfsH2USMXr1G9k6_O5W9VhDRr6FZn8xPhGD-nNzvX--irflUsdUV-tzM9Y2o9FE57D1dySQ0e-9eu-MImaUY0xUPWtP0R16eEVpw8JdvidiakzSFQ0l6jIgJhAzv7Chu0A3AvV\"></span></p><p><strong style=\"background-color: transparent; color: rgb(255, 0, 0);\">asdasdsadsds</strong></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/ni7GfNYhlcW89Cn2e1eIFN5c2QajdoG7WUgVK5Bc67TXmfXkwvX0WW_N0TxyFShk_Q28rsPdt7gltWc3mAq3XO00SzYYJIk0yxSG4PH3Rf1AMkNKFPHxs4HXEzY-X4zSm2xaMF4y\"></span></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh6.googleusercontent.com/gDXBr8ZGJ4JVx9C2YktN0GlihP7aQOw-ww2XSO8U0qAOw_J31PvFAKaKFuZzTqZ0WimBduEV31v3Dn0s0E_yRPuheE1YAsNASwW8CfoVmBxSlQJWnSdoHxsWDJl7kBd2QhCDHqTu\"></span></p><p><br></p><p><br></p><p><br></p><ul><li><span style=\"background-color: transparent;\">1232</span></li><li><span style=\"background-color: transparent;\">12312</span></li><li><span style=\"background-color: transparent;\">123</span></li><li><span style=\"background-color: transparent;\">123</span></li></ul><p><br></p>';
             // let blob = new Blob([demoHtml], {type: 'text/html'});
             // this.props.dxExperienceSaveAction(blob);
-
             let { IsWarning, IsError, Message } = this.validateExperience(experience);
-
+            if (IsWarning) {
+                this.setState({
+                    isModalOpen: true,
+                    modalTitle: Message
+                });
+            } else {
+                this.props.dxAlertAction(true, IsError, Message);
+                if (!IsError)
+                    console.log('continue to saga');
+            }
         } else if (experience.index == 1) {
             let { IsError, Message } = this.validateExperienceCard(experience.cardTemplate, experience.cardTitle);
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
         } else if (experience.index == 2) {
-            let { IsWarning, IsError, Message } = this.validateExperiencePages(experience);
+            let { IsWarning, IsError, Message } = this.validateExperiencePages(experience.pages);
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
@@ -84,7 +91,63 @@ class ExperienceNavigator extends Component {
     }
 
     validateExperience = (experience) => {
-        console.log('exp validate here');
+        let res = {
+            IsWarning: false,
+            IsError: true,
+            Message: '',
+        };
+        const {
+            // 1. experience
+            type,
+            experienceTitle,
+            // 2. card
+            isCardTemplateSaved,
+            card,
+            cardTitle,
+            // 3. pages
+            isPagesSaved,
+            pages,
+        } = experience;
+
+        // 1. experience
+        if (type != 0 && type != 1) {
+            res.Message = 'Invalid experience type';
+            return res;
+        }
+        if (!experienceTitle) {
+            res.Message = 'Please enter experience title';
+            return res;
+        }
+        // 2. card
+        if (!isCardTemplateSaved) {
+            res.Message = 'Please create & save your experience card';
+            return res;
+        }
+        let validateCardResponse = this.validateExperienceCard(card, cardTitle);
+        res.IsError = validateCardResponse.IsError;
+        res.Message = validateCardResponse.Message;
+        if (res.IsError) {
+            return res;
+        } else {
+            res.IsError = true;
+        }
+        // 3. pages
+        if (type == 1) {
+            if (!isPagesSaved) {
+                res.Message = 'Please create & save your experience page(s)';
+                return res;
+            }
+            let validatePagesResponse = this.validateExperiencePages(pages);
+            res.IsWarning = validatePagesResponse.IsWarning;
+            res.IsError = validatePagesResponse.IsError;
+            res.Message = validatePagesResponse.Message;
+            if (res.IsError) {
+                return res;
+            }
+        }
+        res.IsError = false;
+        res.Message = 'Continue to save';
+        return res;
     }
 
     handleConfirmModal = () => {
@@ -159,13 +222,12 @@ class ExperienceNavigator extends Component {
         this.props.dxExperiencePageAddPageAction();
     }
 
-    validateExperiencePages = (experience) => {
+    validateExperiencePages = (pages) => {
         let res = {
             IsWarning: false,
             IsError: true,
             Message: '',
         }
-        let pages = experience.pages;
         let displayPages = this.findDisplayPages(pages);
         let rootPage = this.findRootPageOrChildrenPages(displayPages, 'ROOT');
         let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
@@ -265,7 +327,7 @@ class ExperienceNavigator extends Component {
             let page = pages[i];
             for (let j = 0; j < page.sections.length; j++) {
                 let section = page.sections[j];
-                if(section.isDeleted) continue;
+                if (section.isDeleted) continue;
                 if (type == 'BUTTON') {
                     if (section.type == 'BUTTON'
                         && !section.connectedPageGUID) {
