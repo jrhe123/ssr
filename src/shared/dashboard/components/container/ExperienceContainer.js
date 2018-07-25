@@ -25,7 +25,7 @@ class ExperienceContainer extends Component {
         newExperienceModalOpen: false,
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.dxFetchExperienceAction();
     }
 
@@ -60,6 +60,7 @@ class ExperienceContainer extends Component {
             tableWrapperStyle,
             fullBtnStyle,
 
+            experienceContainerStyle,
             contentContainerStyle,
             newContainerStyle,
             newBtnContainerStyle,
@@ -67,55 +68,55 @@ class ExperienceContainer extends Component {
             iconStyle,
         } = styles;
 
-        return(
-        <div style={mainContainerStyle}>
-            {
-                this.props.experiences.length ?
-                    (
-                        <div>
-                            <div style={contentContainerStyle}>
-                                <ExperienceList />
-                            </div>
-                            <div style={newContainerStyle}>
-                                <div style={newBtnContainerStyle}>
-                                    <Button
-                                        style={btnStyle}
-                                        variant="Add new experience">
-                                        Add Experience
+        return (
+            <div style={mainContainerStyle}>
+                {
+                    this.props.experiences.length ?
+                        (
+                            <div style={experienceContainerStyle}>
+                                <div style={contentContainerStyle}>
+                                    <ExperienceList />
+                                </div>
+                                <div style={newContainerStyle}>
+                                    <div style={newBtnContainerStyle}>
+                                        <Button
+                                            style={btnStyle}
+                                            variant="Add new experience">
+                                            Add Experience
                                         </Button>
-                                    <HelpOutline style={iconStyle} />
+                                        <HelpOutline style={iconStyle} />
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
+                        <div style={newContentContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <img
+                                        style={imgStyle}
+                                        src={require('../../../../../assets/images/experience.png')}
+                                    />
+                                    <p style={labelStyle}>
+                                        Let's create an amzing experiences for your audience!
+                                    </p>
+                                    <Button
+                                        onClick={() => this.handleCreateExperience()}
+                                        style={fullBtnStyle}
+                                        variant="Add new experience">
+                                        Create an experience
+                                    </Button>
                                 </div>
                             </div>
                         </div>
-                    )
-                    :
-                    <div style={newContentContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <img
-                                    style={imgStyle}
-                                    src={require('../../../../../assets/images/experience.png')}
-                                />
-                                <p style={labelStyle}>
-                                    Let's create an amzing experiences for your audience!
-                                    </p>
-                                <Button
-                                    onClick={() => this.handleCreateExperience()}
-                                    style={fullBtnStyle}
-                                    variant="Add new experience">
-                                    Create an experience
-                                    </Button>
-                            </div>
-                        </div>
-                    </div>
-            }
+                }
 
-            <NewExperienceModal
-                open={this.state.newExperienceModalOpen}
-                onCloseModal={() => this.handleCloseExperienceModal()}
-                navigateToNewexperience={(val) => this.handleNavigateToNewexperience(val)}
-            />
-        </div>
+                <NewExperienceModal
+                    open={this.state.newExperienceModalOpen}
+                    onCloseModal={() => this.handleCloseExperienceModal()}
+                    navigateToNewexperience={(val) => this.handleNavigateToNewexperience(val)}
+                />
+            </div>
         )
     }
 }
@@ -157,6 +158,13 @@ const styles = {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center',
+    },
+    experienceContainerStyle: {
+        height: `calc(100vh - ${sizes.headerHeight})`,
+        width: '100%',
+        paddingLeft: 60,
+        paddingRight: 60,
+        border: '1px solid red'
     },
     contentContainerStyle: {
         flex: 4

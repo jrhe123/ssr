@@ -3,7 +3,7 @@ import {
 } from './constants';
 
 const initialState = {
-    totalRecord: 0,
+    totalExperienceRecord: 0,
     experiences: [],
 };
 
@@ -13,7 +13,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     switch (type) {
 
         case EXPERIENCE_FETCH__SUCCEEDED:
-            updated.totalRecord = payload.totalRecord;
+            updated.totalExperienceRecord = payload.totalRecord;
             updated.experiences = payload.experiences;
             return updated;
 
