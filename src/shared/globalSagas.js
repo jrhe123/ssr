@@ -20,7 +20,6 @@ import {
     LOADING__SUCCEEDED,
     LOADING__FAILED,
 } from './constants';
-import { dxLoading } from './actions';
 
 // Validate token
 export const dxValidateTokenUrl = (params) => {

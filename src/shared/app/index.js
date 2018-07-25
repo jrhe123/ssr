@@ -64,7 +64,7 @@ class App extends Component {
         const {
             isAuthenticated,
             alertBar,
-            loading,
+            isLoading,
         } = this.props;
 
         return (

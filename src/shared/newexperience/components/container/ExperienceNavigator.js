@@ -25,6 +25,7 @@ import {
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
+    dxLoading as dxLoadingAction,
 } from '../../../actions';
 
 class ExperienceNavigator extends Component {
@@ -54,7 +55,10 @@ class ExperienceNavigator extends Component {
     }
 
     saveExperience = () => {
-        console.log('here');
+        this.props.dxLoadingAction(true);
+        // let demoHtml = '<p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/u4VfsH2USMXr1G9k6_O5W9VhDRr6FZn8xPhGD-nNzvX--irflUsdUV-tzM9Y2o9FE57D1dySQ0e-9eu-MImaUY0xUPWtP0R16eEVpw8JdvidiakzSFQ0l6jIgJhAzv7Chu0A3AvV\"></span></p><p><strong style=\"background-color: transparent; color: rgb(255, 0, 0);\">asdasdsadsds</strong></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/ni7GfNYhlcW89Cn2e1eIFN5c2QajdoG7WUgVK5Bc67TXmfXkwvX0WW_N0TxyFShk_Q28rsPdt7gltWc3mAq3XO00SzYYJIk0yxSG4PH3Rf1AMkNKFPHxs4HXEzY-X4zSm2xaMF4y\"></span></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh6.googleusercontent.com/gDXBr8ZGJ4JVx9C2YktN0GlihP7aQOw-ww2XSO8U0qAOw_J31PvFAKaKFuZzTqZ0WimBduEV31v3Dn0s0E_yRPuheE1YAsNASwW8CfoVmBxSlQJWnSdoHxsWDJl7kBd2QhCDHqTu\"></span></p><p><br></p><p><br></p><p><br></p><ul><li><span style=\"background-color: transparent;\">1232</span></li><li><span style=\"background-color: transparent;\">12312</span></li><li><span style=\"background-color: transparent;\">123</span></li><li><span style=\"background-color: transparent;\">123</span></li></ul><p><br></p>';
+        // let blob = new Blob([demoHtml], {type: 'text/html'});
+        // this.props.dxExperienceSaveAction(blob);
     }
 
     handleSaveBtnClick = () => {
@@ -63,9 +67,6 @@ class ExperienceNavigator extends Component {
         } = this.props;
 
         if (experience.index == 0) {
-            // let demoHtml = '<p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/u4VfsH2USMXr1G9k6_O5W9VhDRr6FZn8xPhGD-nNzvX--irflUsdUV-tzM9Y2o9FE57D1dySQ0e-9eu-MImaUY0xUPWtP0R16eEVpw8JdvidiakzSFQ0l6jIgJhAzv7Chu0A3AvV\"></span></p><p><strong style=\"background-color: transparent; color: rgb(255, 0, 0);\">asdasdsadsds</strong></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh3.googleusercontent.com/ni7GfNYhlcW89Cn2e1eIFN5c2QajdoG7WUgVK5Bc67TXmfXkwvX0WW_N0TxyFShk_Q28rsPdt7gltWc3mAq3XO00SzYYJIk0yxSG4PH3Rf1AMkNKFPHxs4HXEzY-X4zSm2xaMF4y\"></span></p><p><span style=\"background-color: transparent;\"><img src=\"https://lh6.googleusercontent.com/gDXBr8ZGJ4JVx9C2YktN0GlihP7aQOw-ww2XSO8U0qAOw_J31PvFAKaKFuZzTqZ0WimBduEV31v3Dn0s0E_yRPuheE1YAsNASwW8CfoVmBxSlQJWnSdoHxsWDJl7kBd2QhCDHqTu\"></span></p><p><br></p><p><br></p><p><br></p><ul><li><span style=\"background-color: transparent;\">1232</span></li><li><span style=\"background-color: transparent;\">12312</span></li><li><span style=\"background-color: transparent;\">123</span></li><li><span style=\"background-color: transparent;\">123</span></li></ul><p><br></p>';
-            // let blob = new Blob([demoHtml], {type: 'text/html'});
-            // this.props.dxExperienceSaveAction(blob);
             let { IsWarning, IsError, Message } = this.validateExperience(experience);
             if (IsWarning) {
                 this.setState({
@@ -465,6 +466,7 @@ const dispatchToProps = {
     dxExperiencePageAddPageAction,
 
     dxAlertAction,
+    dxLoadingAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceNavigator);
