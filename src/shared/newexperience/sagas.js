@@ -148,7 +148,9 @@ export const dxExperienceCreateUrl = (params) => {
         },
         ExperiencePages: __format_experience_params(pages)
     };
-    apiManager.dxApi(`/experience/create`, formattedParams, true)
+    return (
+        apiManager.dxApi(`/experience/create`, formattedParams, true)
+    )
 }
 
 const __format_experience_params = (pages) => {
