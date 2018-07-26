@@ -21,6 +21,9 @@ class PhoneToolbar extends Component {
         }
 
         let tmpSections = tools.sort(sort_section_by_index);
+
+        console.log('tmpSections: ', tmpSections);
+
         let options = tmpSections.map((section, i) => {
             if (section.Type == 'EDITOR') {
                 return (

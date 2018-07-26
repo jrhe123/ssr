@@ -376,7 +376,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, templateNewSection);
                 tmpNewSection.SectionGUID = uuid();
-                tmpNewSection.PageGUID = tmpNewPage.pageGUID;
+                tmpNewSection.PageGUID = tmpNewPage.PageGUID;
                 tmpNewSection.Index = Number(tmpIndex);
                 tmpNewSection.Type = payload.type;
                 tmpNewSection.IsActive = true;
