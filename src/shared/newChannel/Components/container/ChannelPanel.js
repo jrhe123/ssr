@@ -33,7 +33,6 @@ class ChannelPanel extends Component{
         isTypeMenuOpen: false,
         isColorMenuOpen: false,
         btnPickerColor: '#EE2E24',
-        hexPickerColor:'#hex',
         titleCharacterCount: 0,
         descriptionCharacterCount: 0
     }
@@ -95,9 +94,8 @@ class ChannelPanel extends Component{
 
     handleColorPicker = (obj) => {
         this.setState({ btnPickerColor: obj.color});
-        this.setState({ hexPickerColor: obj.color});
         console.log('btnPickerColor', this.state.btnPickerColor);
-        this.props.dxChannelColorAction(this.state.btnPickerColor)
+        this.props.dxChannelColorAction(obj.color)
     }
 
     handleTitleCharacterChange = () => {
@@ -265,7 +263,7 @@ class ChannelPanel extends Component{
                                         color={'#F0F7FF'}
                                         onChange={this.handleColorPicker}
                                     >
-                                        <span className="react-custom-trigger" fullWidth>{this.state.hexPickerColor}</span>
+                                        <span className="react-custom-trigger" fullWidth>{channel.COLOR}</span>
                                     </ColorPicker>
                                 </div>                               
                             </div>
@@ -287,7 +285,6 @@ class ChannelPanel extends Component{
                                 padding:'12px 12px 12px 12px', 
                                 height:'36px', 
                                 fontSize:14, 
-                                // color:this.state.btnPickerColor,
                                 color:channel.COLOR,
                                 border:'none',
                                 outlineStyle:'none',
