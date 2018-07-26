@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 // components
-import DxModal from '../../../components/dxModal/DxModal';
+import DxModal from '../dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';

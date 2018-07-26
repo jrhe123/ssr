@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // components
-import ThumbnailPhoneElement from './ThumbnailPhoneElement';
+import ThumbnailPhoneElement from '../../../components/dxPage/ThumbnailPhoneElement';
 
 // constants
 import fonts from '../../../styles/fonts';

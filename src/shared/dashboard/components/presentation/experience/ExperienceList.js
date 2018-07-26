@@ -9,6 +9,7 @@ import colors from '../../../../styles/colors';
 
 // components
 import DxCard from '../../../../components/dxCard/DxCard';
+import DxPage from '../../../../components/dxPage/DxPage';
 
 class ExperienceList extends Component {
 
@@ -48,6 +49,11 @@ class ExperienceList extends Component {
                                 isVideoInsertClickable={false}
                                 cardTitle={experience.ExperienceTitle}
                                 template={experience.ExperienceCard}
+                            />
+                            <DxPage
+                                pages={this.props.Experience.Pages}
+                                handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
+                                handleRemovePagePages={() => this.handleRemovePagePages()}
                             />
                         </div>
                     ))

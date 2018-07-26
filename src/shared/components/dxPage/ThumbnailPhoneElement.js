@@ -11,17 +11,17 @@ import BatteryFull from '@material-ui/icons/BatteryFull';
 import MoreVert from '@material-ui/icons/MoreVert';
 import Search from '@material-ui/icons/Search';
 import { Document, Page } from 'react-pdf';
-import '../../../../../assets/css/react-pdf/index.css';
+import '../../../../assets/css/react-pdf/index.css';
 
 // styles
-import '../../../../../assets/css/quill/thumbnail.css';
+import '../../../../assets/css/quill/thumbnail.css';
 
 // config
-import config from '../../../config';
+import config from '../../config';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 class ThumbnailPhoneElement extends Component {
 
