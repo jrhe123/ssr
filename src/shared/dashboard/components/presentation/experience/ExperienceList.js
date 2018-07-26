@@ -20,6 +20,7 @@ class ExperienceList extends Component {
         } = this.props;
 
         const {
+            expTableContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
             mainContainerStyle,
@@ -41,46 +42,50 @@ class ExperienceList extends Component {
                     experiences.map((experience, index) => (
                         <div style={experienceContainerStyle}>
                             <div style={experienceWrapperStyle}>
-                            <DxCard
-                                isWithTitle={false}
-                                isWithBottomBar={false}
-                                isCenterCard={false}
-                                isEditable={false}
-                                isClickable={false}
-                                isVideoInsertClickable={false}
-                                cardTitle={experience.ExperienceTitle}
-                                template={experience.ExperienceCard}
-                            />
-                            {
-                                experience.ExperienceType == 1 ?
-                                    <DxPage
-                                        pages={experience.ExperiencePages}
-                                        isWithBottomBar={false}
-                                    />
-                                    :
-                                    null
-                            }
+                                <DxCard
+                                    isWithTitle={false}
+                                    isWithBottomBar={false}
+                                    isCenterCard={false}
+                                    isEditable={false}
+                                    isClickable={false}
+                                    isVideoInsertClickable={false}
+                                    cardTitle={experience.ExperienceTitle}
+                                    template={experience.ExperienceCard}
+                                />
+                                {
+                                    experience.ExperienceType == 1 ?
+                                        <DxPage
+                                            pages={experience.ExperiencePages}
+                                            isWithBottomBar={false}
+                                        />
+                                        :
+                                        null
+                                }
                             </div>
                         </div>
                     ))
                 }
                 <div style={newExperienceContainerStyle}>
-                    <div
-                        style={newExperienceWrapperStyle}
-                        onClick={() => this.props.handleCreateExpClick()}
-                    >
-                        <div style={Object.assign({}, tableContainerStyle, { height: newExpSize })}>
-                            <div style={tableWrapperStyle}>
-                                <img
-                                    style={imgStyle}
-                                    src={require('../../../../../../assets/images/card_exp.png')} />
+                    <div style={expTableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div
+                                style={newExperienceWrapperStyle}
+                                onClick={() => this.props.handleCreateExpClick()}
+                            >
+                                <div style={Object.assign({}, tableContainerStyle, { height: newExpSize })}>
+                                    <div style={tableWrapperStyle}>
+                                        <img
+                                            style={imgStyle}
+                                            src={require('../../../../../../assets/images/card_exp.png')} />
+                                    </div>
+                                </div>
+                                <div style={iconContainerStyle}>
+                                    <Add style={addIconStyle} />
+                                </div>
+                                <div style={newExperienceLabelContainerStyle}>
+                                    <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
+                                </div>
                             </div>
-                        </div>
-                        <div style={iconContainerStyle}>
-                            <Add style={addIconStyle} />
-                        </div>
-                        <div style={newExperienceLabelContainerStyle}>
-                            <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +96,12 @@ class ExperienceList extends Component {
 
 const newExpSize = 72;
 const styles = {
-
+    expTableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: 470
+    },
     tableContainerStyle: {
         position: 'relative',
         display: 'table',
@@ -112,7 +122,6 @@ const styles = {
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
-        border: '1px solid green'
     },
     experienceWrapperStyle: {
         width: 276,
@@ -127,6 +136,7 @@ const styles = {
         marginBottom: 24,
     },
     newExperienceWrapperStyle: {
+        margin: '0 auto',
         position: 'relative',
         width: 120,
         height: newExpSize,
