@@ -299,10 +299,10 @@ export function* dxExperienceUploadFiles(action) {
 
             for (let i = 0; i < pages.length; i++) {
                 let page = pages[i];
-                if (!page.isDeleted) {
-                    for (let j = 0; j < page.sections.length; j++) {
-                        let section = page.sections[j];
-                        if (!section.isDeleted && section.type == 'EDITOR') {
+                if (!page.IsDeleted) {
+                    for (let j = 0; j < page.Sections.length; j++) {
+                        let section = page.Sections[j];
+                        if (!section.IsDeleted && section.Type == 'EDITOR') {
                             let response = yield call(dxExperienceUploadSingleFile, section);
                             if (response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
                         }
