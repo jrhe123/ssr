@@ -11,13 +11,13 @@ class ThumbnailPage extends Component {
 
     renderPhoneElementSection = () => {
         const {
-            sections,
+            Sections,
         } = this.props.page;
         const {
             elemContainerStyle,
         } = styles;
 
-        let section = sections.map((section, i) => {
+        let section = Sections.map((section, i) => {
             return (
                 <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'} 
                     style={elemContainerStyle}>

@@ -315,7 +315,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         case EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.Page.Sections);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.Sections);
 
             tmpExperience.NewPage = Object.assign({}, tmpNewPage.Page);
             tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
