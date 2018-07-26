@@ -4,11 +4,9 @@ import React, { Component } from 'react';
 import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
-import SearchBar from 'material-ui-search-bar';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { withStyles } from '@material-ui/core/styles';
 
 
 // constants
@@ -18,11 +16,7 @@ import colors from '../../../../styles/colors';
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
 import ErrorMessageTemplate from './ErrorMessageTemplate';
-const themeStyles = () => ({
-    yourIconButtonStyle: {
-        height: 36
-    }
-});
+import SearchBarTemplate from './SearchBarTemplate';
 
 
 class PrivateInvitePage extends Component{
@@ -42,10 +36,6 @@ class PrivateInvitePage extends Component{
     }
 
     render(){
-
-        const {
-            classes
-        } = this.props;
 
         const {
             mainContainerStyle,
@@ -130,11 +120,7 @@ class PrivateInvitePage extends Component{
                         </DropdownMenu>
                     </div>
                     <div style={searchUserWrapperStyle}>
-                        <SearchBar
-                            style={searchUserStyle}
-                            placeholder={'Search a user'}
-                            classes={{ iconButton: classes.yourIconButtonStyle }}
-                        />
+                        <SearchBarTemplate/>
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
@@ -306,15 +292,6 @@ const styles = {
         height:36,
         marginRight:36
     },
-    searchUserStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:1,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        paddingLeft:6,
-        height:'100%'
-    },
     safeguardLabelStyle:{
         margin:0,
         fontSize:fonts.h3,
@@ -385,4 +362,4 @@ const styles = {
     }
 }
 
-export default withStyles(themeStyles)(PrivateInvitePage);
+export default PrivateInvitePage;

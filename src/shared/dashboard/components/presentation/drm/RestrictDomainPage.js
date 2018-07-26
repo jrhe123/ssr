@@ -4,9 +4,7 @@ import React, { Component } from 'react';
 import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
 // libraries
-import SearchBar from 'material-ui-search-bar';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import Schedule from '@material-ui/icons/Schedule';
 
 // constants
@@ -17,20 +15,12 @@ import colors from '../../../../styles/colors';
 import RestrictUserTemplate from './RestrictUserTemplate';
 import ErrorMessageTemplate from './ErrorMessageTemplate';
 import { relative } from 'path';
+import SearchBarTemplate from './SearchBarTemplate';
 
-const themeStyles = () => ({
-    yourIconButtonStyle: {
-        height: 36
-    }
-});
 
 class RestrictDomainPage extends Component{
 
     render(){
-
-        const {
-            classes
-        } = this.props;
 
         const {
             mainContainerStyle,
@@ -93,11 +83,7 @@ class RestrictDomainPage extends Component{
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>Audit trail (10)</p>
                     <div style={searchUserWrapperStyle}>
-                        <SearchBar
-                            style={searchUserStyle}
-                            placeholder={'Search a user'}
-                            classes={{ iconButton: classes.yourIconButtonStyle }}
-                        />
+                        <SearchBarTemplate/>
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
@@ -345,15 +331,6 @@ const styles = {
         height:36,
         marginRight:36
     },
-    searchUserStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:1,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        paddingLeft:6,
-        height:'100%'
-    },
     safeguardLabelStyle:{
         margin:0,
         fontSize:fonts.h3,
@@ -411,4 +388,4 @@ const styles = {
 
 }
 
-export default withStyles(themeStyles)(RestrictDomainPage);
+export default RestrictDomainPage;

@@ -3,32 +3,18 @@ import React, { Component } from 'react';
 // styles
 import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
-// libraries
-import SearchBar from 'material-ui-search-bar';
-import { withStyles } from '@material-ui/core/styles';
-
-
 // constants
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
 // component
 import RestrictUserTemplate from './RestrictUserTemplate';
-
-const themeStyles = () => ({
-    yourIconButtonStyle: {
-        height: 36
-    }
-});
+import SearchBarTemplate from './SearchBarTemplate';
 
 
 class RemoveUserPage extends Component{
 
     render(){
-
-        const {
-            classes
-        } = this.props;
 
         const {
             mainContainerStyle,
@@ -55,11 +41,7 @@ class RemoveUserPage extends Component{
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>User list (2)</p>
                     <div style={searchUserWrapperStyle}>
-                        <SearchBar
-                            style={searchUserStyle}
-                            placeholder={'Search a user'}
-                            classes={{ iconButton: classes.yourIconButtonStyle }}
-                        />
+                        <SearchBarTemplate/>
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
@@ -176,15 +158,6 @@ const styles = {
         height:36,
         marginRight:36
     },
-    searchUserStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:1,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        paddingLeft:6,
-        height:'100%'
-    },
     safeguardLabelStyle:{
         margin:0,
         fontSize:fonts.h3,
@@ -194,4 +167,4 @@ const styles = {
     }
 }
 
-export default withStyles(themeStyles)(RemoveUserPage);
+export default RemoveUserPage;

@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 // styles
 import '../../../../../../assets/css/dd-menu/dd_menu.css';
 
-// libraries
-import { withStyles } from '@material-ui/core/styles';
-import SearchBar from 'material-ui-search-bar';
-
 // constants
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
@@ -15,21 +11,12 @@ import colors from '../../../../styles/colors';
 import RestrictUserTemplate from './RestrictUserTemplate';
 import ModalTemplate from '../ModalTemplate';
 import ErrorMessageTemplate from './ErrorMessageTemplate';
-
-const themeStyles = () => ({
-    yourIconButtonStyle: {
-        height: 36
-    }
-});
+import SearchBarTemplate from './SearchBarTemplate';
 
 
 class RestrictSessionPage extends Component{
 
     render(){
-        const {
-            classes
-        } = this.props;     
-
         const {
             mainContainerStyle,
             
@@ -41,7 +28,6 @@ class RestrictSessionPage extends Component{
             memberListHeaderContainerStyle,
             memberLabelStyle,
             searchUserWrapperStyle,
-            searchUserStyle,
 
         } = styles;
 
@@ -55,11 +41,7 @@ class RestrictSessionPage extends Component{
                 <div style={memberListHeaderContainerStyle}>
                     <p style={memberLabelStyle}>Restricted user list (5)</p>
                     <div style={searchUserWrapperStyle}>
-                        <SearchBar
-                            style={searchUserStyle}
-                            placeholder={'Search a user'}
-                            classes={{ iconButton: classes.yourIconButtonStyle }}
-                        />
+                        <SearchBarTemplate/>
                     </div>
                 </div>
                 <div style={memberListContainerStyle}>
@@ -206,15 +188,6 @@ const styles = {
         height:36,
         marginRight:36
     },
-    searchUserStyle:{
-        width:'100%',
-        boxShadow:'none',
-        borderWidth:1,
-        borderColor:'#d2d8de',
-        borderStyle:'solid',
-        paddingLeft:6,
-        height:'100%'
-    },
     safeguardLabelStyle:{
         margin:0,
         fontSize:fonts.h3,
@@ -231,4 +204,4 @@ const styles = {
     }
 }
 
-export default withStyles(themeStyles)(RestrictSessionPage);
+export default RestrictSessionPage;
