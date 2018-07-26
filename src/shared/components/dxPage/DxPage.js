@@ -50,8 +50,6 @@ class DxPage extends Component {
         let page = this.findRootPage(pages);
         let sections = page.Sections;
 
-        
-
         const {
             elemContainerStyle,
         } = styles;

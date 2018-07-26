@@ -50,11 +50,14 @@ class ExperienceList extends Component {
                                 cardTitle={experience.ExperienceTitle}
                                 template={experience.ExperienceCard}
                             />
-                            <DxPage
-                                pages={this.props.Experience.Pages}
-                                handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
-                                handleRemovePagePages={() => this.handleRemovePagePages()}
-                            />
+                            {
+                                experience.ExperienceType == 1 ?
+                                    <DxPage
+                                        pages={experience.ExperiencePages}
+                                    />
+                                    :
+                                    null
+                            }
                         </div>
                     ))
                 }
