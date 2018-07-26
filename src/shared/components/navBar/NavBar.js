@@ -133,14 +133,14 @@ class NavBar extends Component {
 
         let title, placeholder;
         if (experience) {
-            if (experience.index == 0) {
-                title = experience.experienceTitle;
+            if (experience.Index == 0) {
+                title = experience.ExperienceTitle;
                 placeholder = 'untitle experience';
-            } else if (experience.index == 1) {
-                title = experience.cardTitle;
+            } else if (experience.Index == 1) {
+                title = experience.CardTitle;
                 placeholder = 'untitle card';
-            } else if (experience.index == 2) {
-                title = experience.newPage.title;
+            } else if (experience.Index == 2) {
+                title = experience.NewPage.Title;
                 placeholder = 'untitle page';
             }
         }
@@ -273,7 +273,7 @@ class NavBar extends Component {
                             navType == 'EXPERIENCE' ? 
                                 <div style={midContextContainerStyle}>
                                 {
-                                    experience.index == 1 ?
+                                    experience.Index == 1 ?
                                         (
                                             <div style={cardLayoutContainerStyle}>
                                                 <div style={layoutLabelContainerStyle}>
@@ -284,11 +284,11 @@ class NavBar extends Component {
                                                     onClick={() => this.props.handleCardTemplateMenu()}>
                                                     <div style={layoutOptionWrapperStyle}>
                                                         {
-                                                            experience.cardTemplate ?
+                                                            experience.CardTemplate ?
                                                                 <div>
-                                                                    <span style={layoutSubLabelStyle}>{experience.cardTemplate.title}</span>
+                                                                    <span style={layoutSubLabelStyle}>{experience.CardTemplate.Title}</span>
                                                                     <KeyboardArrowDown
-                                                                        className={experience.isCardTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                        className={experience.IsCardTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                                                         style={menuDownStyle} />
                                                                 </div>
                                                                 :
@@ -302,11 +302,11 @@ class NavBar extends Component {
                                         null
                                 }
                                 {
-                                    experience.index == 2 ?
+                                    experience.Index == 2 ?
                                         (
                                             <div style={pageElementContainerStyle}>
                                                 <div className="dx_flow_tab"
-                                                    style={Object.assign({}, leftElemContainerStyle, experience.activePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
+                                                    style={Object.assign({}, leftElemContainerStyle, experience.ActivePageTemplateOptionIndex == 0 ? activePageElemContainerStyle : {})}
                                                 >
                                                     <div style={tableContainerStyle}>
                                                         <div style={tableWrapperStyle}>
@@ -318,14 +318,14 @@ class NavBar extends Component {
                                                                 <p style={pageElemSubtitleStyle}>Click or Drag & Drop elements to the screen</p>
                                                                 <KeyboardArrowDown
                                                                     onClick={() => this.props.handlePageTemplateMenu()}
-                                                                    className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                    className={experience.IsPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                                                     style={flowMenuDownStyle} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="dx_flow_tab"
-                                                    style={Object.assign({}, rightElemContainerStyle, experience.activePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
+                                                    style={Object.assign({}, rightElemContainerStyle, experience.ActivePageTemplateOptionIndex == 1 ? activePageElemContainerStyle : {})}
                                                 >
                                                     <div style={tableContainerStyle}>
                                                         <div style={tableWrapperStyle}>
@@ -337,7 +337,7 @@ class NavBar extends Component {
                                                                 <p style={pageElemSubtitleStyle}>Drag & Drop existing documents for reference</p>
                                                                 <KeyboardArrowDown
                                                                     onClick={() => this.props.handlePageTemplateMenu()}
-                                                                    className={experience.isPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                                                    className={experience.IsPageTemplateMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                                                     style={flowMenuDownStyle} />
                                                             </div>
                                                         </div>
@@ -349,7 +349,7 @@ class NavBar extends Component {
                                         null
                                 }
                                 {
-                                    experience.index == 2 ?
+                                    experience.Index == 2 ?
                                         (
                                             <div style={addPageBtnContainerStyle}>
                                                 <div style={tableContainerStyle}>
@@ -366,8 +366,8 @@ class NavBar extends Component {
                                         :
                                         null
                                 }
-                                <div style={Object.assign({}, experience.index == 2 ? (halfTableContainerStyle, { float: 'right', height: sizes.headerHeight }) : tableContainerStyle)}>
-                                    <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle, experience.index == 2 ? { height: sizes.headerHeight, width: 420 } : null)}>
+                                <div style={Object.assign({}, experience.Index == 2 ? (halfTableContainerStyle, { float: 'right', height: sizes.headerHeight }) : tableContainerStyle)}>
+                                    <div style={Object.assign({}, tableWrapperStyle, txtCenterStyle, experience.Index == 2 ? { height: sizes.headerHeight, width: 420 } : null)}>
                                         <DxInput
                                             placeholder={placeholder}
                                             handleValChange={(e) => this.handleInputChange(e)}
