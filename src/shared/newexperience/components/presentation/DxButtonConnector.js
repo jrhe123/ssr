@@ -16,7 +16,7 @@ import fonts from '../../../styles/fonts';
 class DxButtonConnector extends Component {
 
     handleBtnConnectPageChange = (page) => {
-        this.props.handleBtnConnectPageChange(page.pageGUID);
+        this.props.handleBtnConnectPageChange(page.PageGUID);
     }
 
     render() {
