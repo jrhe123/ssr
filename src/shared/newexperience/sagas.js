@@ -151,7 +151,6 @@ export function* dxExperienceInitalSaga() {
 
 // Experience create request
 export const dxExperienceCreateUrl = (params) => {
-
     let experience = params.experience;
     let {
         Type,
@@ -189,7 +188,7 @@ const __format_experience_params = (pages) => {
                 IsRoot: page.IsRoot,
                 IsSplash: page.IsSplash,
                 Title: page.Title,
-                Sections: Sections,
+                Sections: sections,
             }
             output.push(item);
         }
