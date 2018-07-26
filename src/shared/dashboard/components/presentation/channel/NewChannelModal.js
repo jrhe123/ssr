@@ -32,7 +32,6 @@ class NewChannelModal extends Component {
 
     handleCreateChannel = () => {
         this.props.navigateToNewchannel(this.state.value);
-        console.log(this.state.value)
     }
 
     render() {

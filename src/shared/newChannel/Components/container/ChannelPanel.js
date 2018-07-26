@@ -15,6 +15,9 @@ import Lock from '@material-ui/icons/Lock';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    dxChannelTypeUpdate as dxChannelTypeUpdateAction,
+} from '../../actions';
 
 // constants
 import colors from '../../../styles/colors';
@@ -114,7 +117,7 @@ class ChannelPanel extends Component{
     }
 
     handleClickOption = (val) => {
-        console.log(val);
+        this.props.dxChannelTypeUpdateAction(val);
     }
 
     render(){
@@ -332,7 +335,6 @@ const styles = {
     optionContainerStyle:{
         display:'flex',
         flexDirection: 'row',
-        // marginTop: 36,
         paddingTop:36,
     },
     leftContainerStyle: {
@@ -407,7 +409,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-
+    dxChannelTypeUpdateAction
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelPanel);

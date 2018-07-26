@@ -1,5 +1,6 @@
 import {
     CHANNEL_TYPE_REQUESTED,
+    CHANNEL_TYPE_UPDATE_REQUESTED,
 } from './constants';
 
 export const dxChannelType = (channelType) => {
@@ -10,5 +11,13 @@ export const dxChannelType = (channelType) => {
         },
         
     }
-    console.log('inside action');
+}
+
+export const dxChannelTypeUpdate = (channelType) => {
+    return {
+        type: CHANNEL_TYPE_UPDATE_REQUESTED,
+        payload: {
+            channelType
+        },
+    }
 }

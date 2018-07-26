@@ -1,5 +1,6 @@
 import {
     CHANNEL_TYPE__SUCCEEDED,
+    CHANNEL_TYPE_UPDATE__SUCCEEDED,
 } from './constants';
 import update from '../../../node_modules/immutability-helper';
 
@@ -17,7 +18,11 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
     switch (type) {
 
         case CHANNEL_TYPE__SUCCEEDED:
+            tmpChannel.type = payload.channelType;
+            updated.channel = tmpChannel;
+            return updated;
 
+        case CHANNEL_TYPE_UPDATE__SUCCEEDED:
             tmpChannel.type = payload.channelType;
             updated.channel = tmpChannel;
             return updated;
