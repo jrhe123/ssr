@@ -8,8 +8,7 @@ import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
 // components
-import DxCard from '../../../../components/dxCard/DxCard';
-import DxPage from '../../../../components/dxPage/DxPage';
+import ExperienceCase from './ExperienceCase';
 
 class ExperienceList extends Component {
 
@@ -41,28 +40,13 @@ class ExperienceList extends Component {
                 {
                     experiences.map((experience, index) => (
                         <div style={experienceContainerStyle}>
-                            <div style={experienceWrapperStyle}>
-                                <DxCard
-                                    enableShadow={false}
-                                    isWithTitle={false}
-                                    isWithBottomBar={false}
-                                    isCenterCard={false}
-                                    isEditable={false}
-                                    isClickable={false}
-                                    isVideoInsertClickable={false}
-                                    cardTitle={experience.ExperienceTitle}
-                                    template={experience.ExperienceCard}
+                            <div
+                                className="dx_card"
+                                style={experienceWrapperStyle}
+                            >
+                                <ExperienceCase
+                                    experience={experience}
                                 />
-                                {
-                                    experience.ExperienceType == 1 ?
-                                        <DxPage
-                                            pages={experience.ExperiencePages}
-                                            displayPageNumber={false}
-                                            isWithBottomBar={false}
-                                        />
-                                        :
-                                        null
-                                }
                             </div>
                         </div>
                     ))
@@ -108,11 +92,11 @@ const styles = {
         position: 'relative',
         display: 'table',
         width: '100%',
+        height: '100%',
     },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        textAlign: 'center',
     },
     mainContainerStyle: {
         width: '100%',
@@ -130,6 +114,7 @@ const styles = {
         margin: '0 auto',
         marginTop: 24,
         marginBottom: 24,
+        cursor: 'pointer',
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
