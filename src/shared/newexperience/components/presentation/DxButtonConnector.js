@@ -87,7 +87,7 @@ class DxButtonConnector extends Component {
                                         placeholder="select a page"
                                         style={connectorDropdownStyle}
                                         data={dropdownOptionArr}
-                                        textField='title'
+                                        textField='Title'
                                         onChange={page => this.handleBtnConnectPageChange(page)}
                                     />
                                 </div>

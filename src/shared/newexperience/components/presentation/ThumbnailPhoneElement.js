@@ -85,12 +85,12 @@ class ThumbnailPhoneElement extends Component {
         } = styles;
 
         let elem;
-        switch (section.type) {
+        switch (section.Type) {
             case 'EDITOR':
                 elem = (
                     <div
                         style={editorContainerStyle}
-                        dangerouslySetInnerHTML={{ __html: section.htmlContent }} />
+                        dangerouslySetInnerHTML={{ __html: section.HtmlContent }} />
                 );
                 break;
             case 'BUTTON':
@@ -100,7 +100,7 @@ class ThumbnailPhoneElement extends Component {
                             <div style={leftContentContainerStyle}>
                                 <div style={tableContainerStyle}>
                                     <div style={tableWrapperStyle}>
-                                        <p style={btnLabelStyle}>{section.btnContent}</p>
+                                        <p style={btnLabelStyle}>{section.BtnContent}</p>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={pdfContainerStyle}>
                         <Document
                             loading="Loading PDF.."
-                            file={section.pdf ? config.fileHost + '/' + section.pdf + '.pdf' : null}
+                            file={section.Pdf ? config.fileHost + '/' + section.Pdf + '.pdf' : null}
                             noData="Please select a PDF.."
                             onLoadSuccess={this.handleDocumentLoadSuccess}
                         >
@@ -150,10 +150,10 @@ class ThumbnailPhoneElement extends Component {
 
                 elem = (
                     <div className="dx_thumbnail_elem_splash"
-                        style={Object.assign({}, overlayContainerStyle, { color: section.splashColor, height })}>
+                        style={Object.assign({}, overlayContainerStyle, { color: section.SplashColor, height })}>
                         <img
                             style={Object.assign({}, overlayImgStyle, {height})}
-                            src={section.splashImg ? `${config.picHost}${section.splashImg}` : require('../../../../../assets/images/demo.jpg')}
+                            src={section.SplashImg ? `${config.picHost}${section.SplashImg}` : require('../../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={Object.assign({}, splashContainerStyle, {height})}>
@@ -231,7 +231,7 @@ class ThumbnailPhoneElement extends Component {
                                     <div style={tableContainerStyle}>
                                         <div style={tableWrapperStyle}>
                                             <div style={descContainerStyle}>
-                                                <p style={Object.assign({}, splashLableStyle, txtCenterStyle)}>{section.splashContent}</p>
+                                                <p style={Object.assign({}, splashLableStyle, txtCenterStyle)}>{section.SplashContent}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={imgContainerStyle}>
                         <img
                             style={Object.assign({}, imgStyle, {height: imgHeight})}
-                            src={section.img ? `${config.picHost}${section.img}` : require('../../../../../assets/images/demo.jpg')}
+                            src={section.Img ? `${config.picHost}${section.Img}` : require('../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 );

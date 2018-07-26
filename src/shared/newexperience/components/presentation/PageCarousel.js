@@ -70,10 +70,10 @@ class PageCarousel extends Component {
                                         <ThumbnailPage
                                             key={index}
                                             title={page.title}
-                                            active={page.pageGUID == newPage.pageGUID ? true : false}
+                                            active={page.PageGUID == newPage.PageGUID ? true : false}
                                             page={page}
-                                            handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
-                                            handleDeletePage={() => this.handleDeletePage(page.pageGUID)}
+                                            handleClickActivePage={() => this.props.handleClickActivePage(page.PageGUID)}
+                                            handleDeletePage={() => this.handleDeletePage(page.PageGUID)}
                                         />
                                     ))
                                 }
@@ -116,7 +116,7 @@ const find_display_pages = (pages) => {
     let output = [];
     for (let i = 0; i < pages.length; i++) {
         let page = pages[i]
-        if (!page.isDeleted) {
+        if (!page.IsDeleted) {
             output.push(page);
         }
     }

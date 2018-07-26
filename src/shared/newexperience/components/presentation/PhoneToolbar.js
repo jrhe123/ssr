@@ -22,48 +22,48 @@ class PhoneToolbar extends Component {
 
         let tmpSections = tools.sort(sort_section_by_index);
         let options = tmpSections.map((section, i) => {
-            if (section.type == 'EDITOR') {
+            if (section.Type == 'EDITOR') {
                 return (
                     <DxEditorToolbar
-                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
-                        sectionGUID={section.sectionGUID}
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        sectionGUID={section.SectionGUID}
                     />
                 )
-            } else if (section.type == 'BUTTON') {
+            } else if (section.Type == 'BUTTON') {
                 return null;
-            } else if (section.type == 'EMBED_PDF') {
+            } else if (section.Type == 'EMBED_PDF') {
                 return (
                     <DxPdfViewerToolbar
-                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
                         handlePdfChange={(file) => this.props.handlePdfChange(file)}
                         handlePdfError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )
-            } else if (section.type == 'SPLASH') {
+            } else if (section.Type == 'SPLASH') {
                 return (
                     <DxSplashToolbar
-                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
-                        imgFile={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].splashImg : null}
-                        color={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].splashColor : '#ffffff'}
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        imgFile={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].SplashImg : null}
+                        color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].SplashColor : '#ffffff'}
                         handleImgChange={(file) => this.props.handleSplashImgChange(file)}
                         handleColorChange={(color) => this.props.handleSplashColorChange(color)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 )
-            } else if (section.type == 'VIDEO') {
+            } else if (section.Type == 'VIDEO') {
                 return (
                     <DxVideoViewerToolbar
-                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
-                        videoInput={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].videoInput : null}
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        videoInput={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].VideoInput : null}
                         handleVideoInputChange={(e) => this.props.handleVideoInputChange(e)}
                         handleVideoInsertClick={() => this.props.handleVideoInsertClick()}
                     />
                 )
-            } else if (section.type == 'IMAGE') {
+            } else if (section.Type == 'IMAGE') {
                 return (
                     <DxImageViewerToolbar
-                        isActive={(newPage.pageGUID == section.pageGUID && section.isActive) ? true : false}
-                        imgFile={newPage.sections[activePageSectionIndex] ? newPage.sections[activePageSectionIndex].img : null}
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        imgFile={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].Img : null}
                         handleImgChange={(file) => this.props.handleImageChange(file)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
@@ -71,7 +71,7 @@ class PhoneToolbar extends Component {
             } else {
                 return (
                     <div
-                        className={(newPage.pageGUID == section.pageGUID && section.isActive) ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
+                        className={(newPage.PageGUID == section.PageGUID && section.IsActive) ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
                     >other tools here</div>
                 )
             }
@@ -103,9 +103,9 @@ const styles = {
 }
 
 const sort_section_by_index = (a, b) => {
-    if (a.index < b.index)
+    if (a.Index < b.Index)
         return -1;
-    if (a.index > b.index)
+    if (a.Index > b.Index)
         return 1;
     return 0;
 }

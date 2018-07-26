@@ -19,7 +19,7 @@ class ThumbnailPage extends Component {
 
         let section = sections.map((section, i) => {
             return (
-                <div className={!section.isDeleted ? 'dx_show' : 'dx_hidden'} 
+                <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'} 
                     style={elemContainerStyle}>
                     <ThumbnailPhoneElement
                         key={i}
