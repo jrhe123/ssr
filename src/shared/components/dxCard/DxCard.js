@@ -336,7 +336,7 @@ class DxCard extends Component {
 
 const styles = {
     mainContainerStyle: {
-        marginBottom: 24
+
     },
     tableContainerStyle: {
         position: 'relative',
@@ -349,7 +349,6 @@ const styles = {
         verticalAlign: 'middle',
     },
     cardContainerStyle: {
-        width: 'calc(100% - 24px)',
         height: 90,
         cursor: 'pointer'
     },
@@ -442,7 +441,6 @@ const styles = {
         marginRight: 6,
     },
     bottomEditContainerStyle: {
-        width: 'calc(100% - 24px)',
         height: 30,
         display: 'flex',
         flexDirection: 'row',

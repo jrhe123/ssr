@@ -24,6 +24,8 @@ class ExperienceList extends Component {
             tableWrapperStyle,
             mainContainerStyle,
             experienceContainerStyle,
+            experienceWrapperStyle,
+
             newExperienceContainerStyle,
             newExperienceWrapperStyle,
             imgStyle,
@@ -33,13 +35,12 @@ class ExperienceList extends Component {
             newExperienceLabelStyle,
         } = styles;
 
-        console.log('experiences: ', experiences);
-
         return (
             <div style={mainContainerStyle}>
                 {
                     experiences.map((experience, index) => (
                         <div style={experienceContainerStyle}>
+                            <div style={experienceWrapperStyle}>
                             <DxCard
                                 isWithTitle={false}
                                 isWithBottomBar={false}
@@ -58,6 +59,7 @@ class ExperienceList extends Component {
                                     :
                                     null
                             }
+                            </div>
                         </div>
                     ))
                 }
@@ -109,6 +111,10 @@ const styles = {
     experienceContainerStyle: {
         flex: '300px 0 0',
         border: '1px solid green'
+    },
+    experienceWrapperStyle: {
+        width: 276,
+        margin: '0 auto'
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
