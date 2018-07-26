@@ -7,7 +7,6 @@ import '../../../../../assets/css/dd-menu/dd_menu.css';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ColorPicker from 'rc-color-picker';
 import 'rc-color-picker/assets/index.css';
@@ -25,13 +24,6 @@ import fonts from '../../../styles/fonts';
 
 // // components
 import DxInput from '../../../components/dxInput/DxInput';
-
-
-const themeStyles = () => ({
-    textField: {
-        color: 'red'
-    }
-});
 
 
 class ChannelPanel extends Component{
@@ -282,23 +274,6 @@ class ChannelPanel extends Component{
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                        {/* <TextField
-                            id="multiline-static"
-                            multiline
-                            rows="1"
-                            margin="normal"
-                            InputProps={{
-                                disableUnderline: true,
-                                classes:{
-                                    input: classes.textField
-                                },
-                            }}
-                            inputProps={{maxLength: 50}}
-                            style = {textAreaStyle}
-                            fullWidth
-                            placeholder={'Hypertension'}
-                            onChange={this.handleTitleCharacterChange.bind(this)}
-                        /> */}
                         <input 
                             type="text" 
                             maxlength="50" 
@@ -311,7 +286,8 @@ class ChannelPanel extends Component{
                                 color:this.state.btnPickerColor,
                                 border:'none',
                                 outlineStyle:'none',
-                                marginBottom:6
+                                marginBottom:6,
+                                boxShadow: '0 2px 4px 0 rgba(0,0,0,0.5)'
                             }} 
                             onChange={this.handleTitleCharacterChange.bind(this)}/>
                         <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
@@ -431,5 +407,4 @@ const dispatchToProps = {
     dxChannelTypeUpdateAction
 }
 
-export default connect(stateToProps, dispatchToProps)(withStyles(themeStyles)(ChannelPanel));
-// export default withStyles(themeStyles)(ChannelPanel);
+export default connect(stateToProps, dispatchToProps)(ChannelPanel);
