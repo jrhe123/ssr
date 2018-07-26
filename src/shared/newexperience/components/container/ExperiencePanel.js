@@ -21,8 +21,8 @@ import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
 // components
+import DxCard from '../../../components/dxCard/DxCard';
 import DxInput from '../../../components/dxInput/DxInput';
-import DxCard from '../presentation/DxCard';
 import DxPage from '../presentation/DxPage';
 
 class ExperiencePanel extends Component {

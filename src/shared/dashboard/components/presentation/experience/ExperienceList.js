@@ -8,7 +8,7 @@ import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
 // components
-import DxCard from './DxCard';
+import DxCard from '../../../../components/dxCard/DxCard';
 
 class ExperienceList extends Component {
 

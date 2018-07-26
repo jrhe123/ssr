@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import ExperienceCardData from '../../../../../data/ExperienceCardData';
 
 // components
+import DxCard from '../../../components/dxCard/DxCard';
 import SearchBar from '../../../components/searchBar/SearchBar';
 import CardTemplate from '../presentation/CardTemplate';
-import DxCard from '../presentation/DxCard';
 import CardOption from '../presentation/CardOption';
 
 // Libraries
