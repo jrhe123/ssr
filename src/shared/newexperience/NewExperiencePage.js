@@ -21,7 +21,7 @@ export class NewExperiencePage extends Component {
         const experienceType = this.props.match.params.param;
         this.props.dxNavigateHistoryAction(history);
         this.props.dxExperienceInitialAction();
-        this.props.dxExperienceTypeAction(experienceType.toString());
+        this.props.dxExperienceTypeAction(experienceType);
     }
 
     render() {

@@ -159,7 +159,7 @@ export const dxExperienceCreateUrl = (params) => {
         Pages,
     } = experience;
     const formattedParams = {
-        ExperienceType: Type,
+        ExperienceType: Type.toString(),
         ExperienceTitle: ExperienceTitle,
         ExperienceCard: {
             CardGUID: Card.CardGUID,
