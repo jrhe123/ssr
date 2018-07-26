@@ -95,6 +95,7 @@ const styles = {
         height: '100%',
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
