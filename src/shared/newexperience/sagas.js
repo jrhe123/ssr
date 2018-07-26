@@ -262,7 +262,7 @@ export function* dxExperienceCreateSaga() {
 // Experience upload file request
 export const dxExperienceUploadFileUrl = (params) => {
     let formData = new FormData();
-    let blob = new Blob([params.HtmlContent], { type: 'text/html' });
+    let blob = new Blob([params.HtmlContent == '' ? ' ' : params.HtmlContent], { type: 'text/html' });
     formData.append('File', blob, 'blob.html');
     return (
         apiManager.dxFileApi(`/upload/file`, formData, true)

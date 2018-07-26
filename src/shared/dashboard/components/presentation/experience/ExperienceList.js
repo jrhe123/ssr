@@ -56,6 +56,7 @@ class ExperienceList extends Component {
                                     experience.ExperienceType == 1 ?
                                         <DxPage
                                             pages={experience.ExperiencePages}
+                                            displayPageNumber={false}
                                             isWithBottomBar={false}
                                         />
                                         :

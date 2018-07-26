@@ -92,7 +92,6 @@ class DxPage extends Component {
             }
         }
         return pageNo;
-
     }
 
     render() {
@@ -116,6 +115,7 @@ class DxPage extends Component {
         } = styles;
         const {
             pages,
+            displayPageNumber,
             isWithBottomBar,
         } = this.props;
 
@@ -124,16 +124,20 @@ class DxPage extends Component {
 
         return (
             <div style={mainContainerStyle}>
-
-                <div style={topControlContainerStyle}>
-                    <div style={tableContainerStyle}>
-                        <div style={tableWrapperStyle}>
-                            <div style={pageNumberContainerStyle}>
-                                <p style={pageNumberTitleStyle}>{pageNumber}</p>
+                {
+                    displayPageNumber ?
+                        <div style={topControlContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <div style={pageNumberContainerStyle}>
+                                        <p style={pageNumberTitleStyle}>{pageNumber}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        :
+                        null
+                }
                 <div style={contentContainerStyle}>
                     <div style={contentWrapperStyle}>
                         {this.renderPhoneElementSection()}
