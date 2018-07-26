@@ -56,13 +56,22 @@ class ExperienceContainer extends Component {
         } = this.props;
 
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             newContentContainerStyle,
             imgStyle,
             labelStyle,
-            tableContainerStyle,
-            tableWrapperStyle,
-            fullBtnStyle,
-            
+            addBtnStyle,
+
+            mainContainerStyle,
+            topBarContainerStyle,
+            topBarWrapperStyle,
+            searchContainerStyle,
+            addBtnContainerStyle,
+            experienceListContainerStyle,
+            experienceSortContainerStyle,
+            experienceNumberContainerStyle,
+            experienceNumberStyle,
         } = styles;
 
         return (
@@ -70,8 +79,32 @@ class ExperienceContainer extends Component {
                 {
                     experiences.length ?
                         (
-                            <div>                                
-                                list here
+                            <div style={mainContainerStyle}>
+                                <div style={topBarContainerStyle}>
+                                    <div style={topBarWrapperStyle}>
+                                        <div style={searchContainerStyle}>
+                                            <SearchBar
+                                                isShort={false}
+                                                placeholder="search for card(s) and page(s)"
+                                            />
+                                        </div>
+                                        <div style={addBtnContainerStyle}>
+                                            <Button
+                                                onClick={() => this.handleCreateExperience()}
+                                                style={addBtnStyle}
+                                                variant="Add new experience">
+                                                Add Experience
+                                        </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={experienceListContainerStyle}>
+                                    <div style={experienceSortContainerStyle}>
+                                        <div style={experienceNumberContainerStyle}>
+                                            <p style={experienceNumberStyle}>{totalExperienceRecord} Experience(s)</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         )
                         :
@@ -87,7 +120,7 @@ class ExperienceContainer extends Component {
                                     </p>
                                     <Button
                                         onClick={() => this.handleCreateExperience()}
-                                        style={fullBtnStyle}
+                                        style={addBtnStyle}
                                         variant="Add new experience">
                                         Create an experience
                                     </Button>
@@ -108,6 +141,17 @@ class ExperienceContainer extends Component {
 
 
 const styles = {
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: `calc(100vh - ${sizes.headerHeight})`,
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center',
+    },
     newContentContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
@@ -124,23 +168,50 @@ const styles = {
         color: colors.lightGreyColor,
         marginBottom: 36
     },
-    fullBtnStyle: {
+
+    mainContainerStyle: {
+        width: 'calc(100% - 192px - 48px)',
+        minHeight: `calc(100vh - ${sizes.headerHeight})`,
+        marginLeft: 192,
+        marginRight: 48,
+    },
+    topBarContainerStyle: {
+        paddingTop: 36,
+        paddingBottom: 48,
+        width: '100%',
+    },
+    topBarWrapperStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    searchContainerStyle: {
+        flex: 1,
+    },
+    addBtnContainerStyle: {
+        flex: '132px 0 0'
+    },
+    addBtnStyle: {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
         textTransform: 'capitalize',
     },
-    tableContainerStyle: {
-        position: 'relative',
-        display: 'table',
-        width: '100%',
-        height: `calc(100vh - ${sizes.headerHeight})`,
+    experienceListContainerStyle: {
+
     },
-    tableWrapperStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
-        textAlign: 'center',
+    experienceSortContainerStyle: {
+        width: 240,
+        paddingBottom: 12,
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
-    
+    experienceNumberContainerStyle: {
+
+    },
+    experienceNumberStyle: {
+        color: colors.labelColor,
+        fontSize: fonts.h2,
+        margin: 0,
+    },
 }
 
 const stateToProps = (state) => {
