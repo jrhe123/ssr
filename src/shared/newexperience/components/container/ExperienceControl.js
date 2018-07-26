@@ -39,17 +39,17 @@ class ExperienceControl extends Component {
         } = styles;
 
         const {
-            experienceIndex
+            ExperienceIndex
         } = this.props;
 
         return (
             <SwipeableViews
                 axis='x'
-                index={this.props.experienceIndex}
+                index={ExperienceIndex}
                 style={conentWrapperStyle}
             >
                 {
-                    experienceIndex == 0 ?
+                    ExperienceIndex == 0 ?
                         (
                             <ExperiencePanel
                                 handleCreateCard={() => this.handleChangeProgressIndex(1)}
@@ -62,7 +62,7 @@ class ExperienceControl extends Component {
                         null
                 }
                 {
-                    experienceIndex == 1 ?
+                    ExperienceIndex == 1 ?
                         (
                             <ExperienceCard />
                         )
@@ -70,7 +70,7 @@ class ExperienceControl extends Component {
                         null
                 }
                 {
-                    experienceIndex == 2 ?
+                    ExperienceIndex == 2 ?
                         (
                             <ExperiencePages />
                         )
@@ -91,7 +91,7 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        experienceIndex: state.newexperience.experience.index
+        ExperienceIndex: state.newexperience.Experience.Index
     }
 }
 
