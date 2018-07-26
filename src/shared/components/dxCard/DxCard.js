@@ -251,6 +251,7 @@ class DxCard extends Component {
     render() {
 
         const {
+            enableShadow,
             isWithBottomBar,
             isEditable,
             isCenterCard,
@@ -275,7 +276,7 @@ class DxCard extends Component {
         return (
             <div style={mainContainerStyle}>
                 <div style={Object.assign({}, cardContainerStyle, isCenterCard ? { margin: '0 auto' } : {})}
-                    className={!isWithBottomBar ? "dx_card" : "dx_card_bottom_bar"}
+                    className={enableShadow ? "dx_card" : "" }
                     onClick={() => this.handleSelectCardTemplate(template)}
                 >
                     {

@@ -43,6 +43,7 @@ class ExperienceList extends Component {
                         <div style={experienceContainerStyle}>
                             <div style={experienceWrapperStyle}>
                                 <DxCard
+                                    enableShadow={false}
                                     isWithTitle={false}
                                     isWithBottomBar={false}
                                     isCenterCard={false}

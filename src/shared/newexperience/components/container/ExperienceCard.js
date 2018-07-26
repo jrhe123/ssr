@@ -225,6 +225,7 @@ class ExperienceCard extends Component {
                                 {
                                     this.props.Experience.CardTemplate ?
                                         <DxCard
+                                            enableShadow={true}
                                             isCenterCard={true}
                                             isEditable={true}
                                             isClickable={false}

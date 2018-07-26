@@ -149,6 +149,7 @@ class ExperiencePanel extends Component {
                             :
                             <div style={demoCardContainerStyle}>
                                 <DxCard
+                                    enableShadow={true}
                                     isWithTitle={false}
                                     isWithBottomBar={true}
                                     isCenterCard={false}
