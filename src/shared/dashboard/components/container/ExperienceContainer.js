@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // component
 import ExperienceList from '../presentation/experience/ExperienceList';
 import NewExperienceModal from '../presentation/experience/NewExperienceModal';
+import SearchBar from '../../../components/searchBar/SearchBar';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -51,6 +52,11 @@ class ExperienceContainer extends Component {
     render() {
 
         const {
+            totalExperienceRecord,
+            experiences,
+        } = this.props;
+
+        const {
             mainContainerStyle,
 
             newContentContainerStyle,
@@ -62,6 +68,12 @@ class ExperienceContainer extends Component {
 
             experienceContainerStyle,
             contentContainerStyle,
+            searchBarContainerStyle,
+            experiencelistContainerStyle,
+            experienceSortContainerStyle,
+            experienceSortTitleStyle,
+            titleSpanStyle,
+
             newContainerStyle,
             newBtnContainerStyle,
             btnStyle,
@@ -71,11 +83,27 @@ class ExperienceContainer extends Component {
         return (
             <div style={mainContainerStyle}>
                 {
-                    this.props.experiences.length ?
+                    experiences.length ?
                         (
                             <div style={experienceContainerStyle}>
                                 <div style={contentContainerStyle}>
-                                    <ExperienceList />
+
+                                    <div style={searchBarContainerStyle}>
+                                        <SearchBar
+                                            isShort={false}
+                                            placeholder="search for card(s) and page(s)"
+                                        />
+                                    </div>
+                                    <div style={experiencelistContainerStyle}>
+                                        <div style={experienceSortContainerStyle}>
+                                            <p style={experienceSortTitleStyle}>{totalExperienceRecord} Experience(s)</p>
+                                            <span style={titleSpanStyle} />
+                                        </div>
+                                        <ExperienceList
+                                            experiences={experiences}
+                                        />
+                                    </div>
+
                                 </div>
                                 <div style={newContainerStyle}>
                                     <div style={newBtnContainerStyle}>
@@ -84,7 +112,7 @@ class ExperienceContainer extends Component {
                                             variant="Add new experience">
                                             Add Experience
                                         </Button>
-                                        <HelpOutline style={iconStyle} />
+                                        {/* <HelpOutline style={iconStyle} /> */}
                                     </div>
                                 </div>
                             </div>
@@ -162,15 +190,38 @@ const styles = {
     experienceContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
-        paddingLeft: 60,
-        paddingRight: 60,
-        border: '1px solid red'
+        paddingLeft: 72,
+        paddingRight: 72,
+        display: 'flex',
     },
     contentContainerStyle: {
-        flex: 4
+        flex: 1
+    },
+    searchBarContainerStyle: {
+        marginTop: 48,
+        marginBottom: 48,
+    },
+    experiencelistContainerStyle: {
+
+    },
+    experienceSortContainerStyle: {
+        position: 'relative',
+        height: 36
+    },
+    experienceSortTitleStyle: {
+        fontSize: fonts.h2,
+        marginBottom: 6,
+    },
+    titleSpanStyle: {
+        height: 1,
+        width: 360,
+        backgroundColor: colors.lightGreyColor,
+        position: 'absolute',
+        left: 0,
+        bottom: 9
     },
     newContainerStyle: {
-        flex: 1
+        flex: '132px 0 0'
     },
     newBtnContainerStyle: {
         marginTop: 48,
@@ -193,6 +244,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        totalExperienceRecord: state.dashboard.totalExperienceRecord,
         experiences: state.dashboard.experiences,
     }
 }

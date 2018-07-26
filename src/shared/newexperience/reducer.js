@@ -144,7 +144,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     switch (type) {
 
         case EXPERIENCE_INITIAL__SUCCEEDED:
-            console.log('init');
             tmpExperience = {
                 type: '0',
                 index: '0',
