@@ -72,6 +72,7 @@ class ExperienceContainer extends Component {
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
             experienceNumberStyle,
+            experienceListWrapperStyle,
         } = styles;
 
         return (
@@ -103,6 +104,12 @@ class ExperienceContainer extends Component {
                                         <div style={experienceNumberContainerStyle}>
                                             <p style={experienceNumberStyle}>{totalExperienceRecord} Experience(s)</p>
                                         </div>
+                                    </div>
+                                    <div style={experienceListWrapperStyle}>
+                                        <ExperienceList 
+                                            experiences={experiences}
+                                            handleCreateExpClick={() => this.handleCreateExperience()}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -211,6 +218,9 @@ const styles = {
         color: colors.labelColor,
         fontSize: fonts.h2,
         margin: 0,
+    },
+    experienceListWrapperStyle: {
+        marginTop: 24,
     },
 }
 
