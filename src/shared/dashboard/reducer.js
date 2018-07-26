@@ -4,10 +4,10 @@ import {
 } from './constants';
 
 const initialState = {
-    totalExperienceRecord: 0,
-    experiences: [],
+    TotalExperienceRecord: 0,
+    Experiences: [],
 
-    channels:[]
+    Channels:[]
 };
 
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
@@ -16,12 +16,12 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     switch (type) {
 
         case CHANNEL_FETCH__SUCCEEDED:
-            updated.channels = payload.channels;
+            updated.Channels = payload.channels;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:
-            updated.totalExperienceRecord = payload.totalRecord;
-            updated.experiences = payload.experiences;
+            updated.TotalExperienceRecord = payload.totalRecord;
+            updated.Experiences = payload.experiences;
             return updated;
 
         default:

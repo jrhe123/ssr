@@ -51,8 +51,8 @@ class ExperienceContainer extends Component {
     render() {
 
         const {
-            totalExperienceRecord,
-            experiences,
+            TotalExperienceRecord,
+            Experiences,
         } = this.props;
 
         const {
@@ -78,7 +78,7 @@ class ExperienceContainer extends Component {
         return (
             <div>
                 {
-                    experiences.length ?
+                    Experiences.length ?
                         (
                             <div style={mainContainerStyle}>
                                 <div style={topBarContainerStyle}>
@@ -102,12 +102,12 @@ class ExperienceContainer extends Component {
                                 <div style={experienceListContainerStyle}>
                                     <div style={experienceSortContainerStyle}>
                                         <div style={experienceNumberContainerStyle}>
-                                            <p style={experienceNumberStyle}>{totalExperienceRecord} Experience(s)</p>
+                                            <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList 
-                                            experiences={experiences}
+                                            experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                         />
                                     </div>
@@ -227,8 +227,8 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        totalExperienceRecord: state.dashboard.totalExperienceRecord,
-        experiences: state.dashboard.experiences,
+        TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
+        Experiences: state.dashboard.Experiences,
     }
 }
 
