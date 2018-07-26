@@ -153,7 +153,7 @@ class ThumbnailPhoneElement extends Component {
                         style={Object.assign({}, overlayContainerStyle, { color: section.SplashColor, height })}>
                         <img
                             style={Object.assign({}, overlayImgStyle, {height})}
-                            src={section.SplashImg ? `${config.picHost}${section.SplashImg}` : require('../../../../../assets/images/demo.jpg')}
+                            src={section.SplashImg ? `${config.picHost}${section.SplashImg}` : require('../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={Object.assign({}, splashContainerStyle, {height})}>
@@ -270,7 +270,7 @@ class ThumbnailPhoneElement extends Component {
                     <div style={imgContainerStyle}>
                         <img
                             style={Object.assign({}, imgStyle, {height: imgHeight})}
-                            src={section.Img ? `${config.picHost}${section.Img}` : require('../../../../../assets/images/demo.jpg')}
+                            src={section.Img ? `${config.picHost}${section.Img}` : require('../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 );
