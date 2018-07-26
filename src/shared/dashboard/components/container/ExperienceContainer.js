@@ -7,7 +7,6 @@ import SearchBar from '../../../components/searchBar/SearchBar';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import HelpOutline from '@material-ui/icons/HelpOutline';
 
 // redux
 import { connect } from 'react-redux';
@@ -57,64 +56,22 @@ class ExperienceContainer extends Component {
         } = this.props;
 
         const {
-            mainContainerStyle,
-
             newContentContainerStyle,
             imgStyle,
             labelStyle,
             tableContainerStyle,
             tableWrapperStyle,
             fullBtnStyle,
-
-            experienceContainerStyle,
-            contentContainerStyle,
-            searchBarContainerStyle,
-            experiencelistContainerStyle,
-            experienceSortContainerStyle,
-            experienceSortTitleStyle,
-            titleSpanStyle,
-
-            newContainerStyle,
-            newBtnContainerStyle,
-            btnStyle,
-            iconStyle,
+            
         } = styles;
 
         return (
-            <div style={mainContainerStyle}>
+            <div>
                 {
                     experiences.length ?
                         (
-                            <div style={experienceContainerStyle}>
-                                <div style={contentContainerStyle}>
-
-                                    <div style={searchBarContainerStyle}>
-                                        <SearchBar
-                                            isShort={false}
-                                            placeholder="search for card(s) and page(s)"
-                                        />
-                                    </div>
-                                    <div style={experiencelistContainerStyle}>
-                                        <div style={experienceSortContainerStyle}>
-                                            <p style={experienceSortTitleStyle}>{totalExperienceRecord} Experience(s)</p>
-                                            <span style={titleSpanStyle} />
-                                        </div>
-                                        <ExperienceList
-                                            experiences={experiences}
-                                        />
-                                    </div>
-
-                                </div>
-                                <div style={newContainerStyle}>
-                                    <div style={newBtnContainerStyle}>
-                                        <Button
-                                            style={btnStyle}
-                                            variant="Add new experience">
-                                            Add Experience
-                                        </Button>
-                                        {/* <HelpOutline style={iconStyle} /> */}
-                                    </div>
-                                </div>
+                            <div>                                
+                                list here
                             </div>
                         )
                         :
@@ -151,10 +108,6 @@ class ExperienceContainer extends Component {
 
 
 const styles = {
-    mainContainerStyle: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
     newContentContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
@@ -187,58 +140,7 @@ const styles = {
         verticalAlign: 'middle',
         textAlign: 'center',
     },
-    experienceContainerStyle: {
-        height: `calc(100vh - ${sizes.headerHeight})`,
-        width: '100%',
-        paddingLeft: 72,
-        paddingRight: 72,
-        display: 'flex',
-    },
-    contentContainerStyle: {
-        flex: 1
-    },
-    searchBarContainerStyle: {
-        marginTop: 48,
-        marginBottom: 48,
-    },
-    experiencelistContainerStyle: {
-
-    },
-    experienceSortContainerStyle: {
-        position: 'relative',
-        height: 36
-    },
-    experienceSortTitleStyle: {
-        fontSize: fonts.h2,
-        marginBottom: 6,
-    },
-    titleSpanStyle: {
-        height: 1,
-        width: 360,
-        backgroundColor: colors.lightGreyColor,
-        position: 'absolute',
-        left: 0,
-        bottom: 9
-    },
-    newContainerStyle: {
-        flex: '132px 0 0'
-    },
-    newBtnContainerStyle: {
-        marginTop: 48,
-        position: 'relative',
-    },
-    btnStyle: {
-        backgroundColor: colors.blueColor,
-        color: colors.whiteColor,
-        textTransform: 'capitalize',
-        width: 132
-    },
-    iconStyle: {
-        position: 'absolute',
-        top: 6,
-        left: 138,
-        cursor: 'pointer'
-    },
+    
 }
 
 const stateToProps = (state) => {

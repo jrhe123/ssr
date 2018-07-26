@@ -13,15 +13,18 @@ class ExperienceList extends Component {
         } = this.props;
 
         const {
-
+            mainContainerStyle,
         } = styles;
 
+        console.log('experiences: ', experiences);
+
         return (
-            <div>
-                {/* list of experiences */}
-                <div>card</div>
-                <div>flow</div>
-                <div>status</div>
+            <div style={mainContainerStyle}>
+                {
+                    experiences.map((experience, index) => (
+                        <div>12</div>
+                    ))
+                }
                 {/* new experience */}
                 <div>
                     <img />
@@ -34,7 +37,13 @@ class ExperienceList extends Component {
 
 const styles = {
 
-    
+    mainContainerStyle: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        border: '1px solid red'
+    },
 }
 
 export default ExperienceList;
