@@ -8,7 +8,7 @@ import update from '../../../node_modules/immutability-helper';
 const initialState = {
     CHANNEL: {
         TYPE: '0', // public or private
-        COLOR:'#000000'
+        COLOR:'#EE2E24'
     },
 };
 
