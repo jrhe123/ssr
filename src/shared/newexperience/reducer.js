@@ -317,7 +317,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.Sections);
 
-            tmpExperience.NewPage = Object.assign({}, tmpNewPage.Page);
+            tmpExperience.NewPage = Object.assign({}, tmpNewPage.page);
             tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
             updated.Experience = tmpExperience;
             return updated;
