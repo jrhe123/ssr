@@ -55,6 +55,7 @@ class ExperienceList extends Component {
                                 experience.ExperienceType == 1 ?
                                     <DxPage
                                         pages={experience.ExperiencePages}
+                                        isWithBottomBar={false}
                                     />
                                     :
                                     null
@@ -107,6 +108,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingBottom: 36
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
@@ -114,11 +116,15 @@ const styles = {
     },
     experienceWrapperStyle: {
         width: 276,
-        margin: '0 auto'
+        margin: '0 auto',
+        marginTop: 24,
+        marginBottom: 24,
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
         height: newExpSize + 18,
+        marginTop: 24,
+        marginBottom: 24,
     },
     newExperienceWrapperStyle: {
         position: 'relative',

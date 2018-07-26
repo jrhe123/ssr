@@ -83,12 +83,11 @@ class DxPage extends Component {
     }
 
     findPageNumber = (pages) => {
-        
+
         let pageNo = 0;
-        for (let i =0; i < pages.length; i++) {
+        for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (page.IsDeleted == false)
-            {
+            if (page.IsDeleted == false) {
                 pageNo++;
             }
         }
@@ -117,6 +116,7 @@ class DxPage extends Component {
         } = styles;
         const {
             pages,
+            isWithBottomBar,
         } = this.props;
 
         let page = this.findRootPage(pages);
@@ -139,37 +139,42 @@ class DxPage extends Component {
                         {this.renderPhoneElementSection()}
                     </div>
                 </div>
-                <div style={controlContainerStyle}
-                    className="dx_card_bottom_bar">
-                    <div style={pageNameContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <div style={pageTitleContainerStyle}>
-                                    <p style={pageTitleStyle}>{page.Title}</p>
+                {
+                    isWithBottomBar ?
+                        <div style={controlContainerStyle}
+                            className="dx_card_bottom_bar">
+                            <div style={pageNameContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <div style={pageTitleContainerStyle}>
+                                            <p style={pageTitleStyle}>{page.Title}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={pageEditContainerStyle}>
+                                <div style={pageEditBurgerContainerStyle}>
+                                    <DropdownMenu
+                                        className="dx_card_template_bottom_bar_menu"
+                                        isOpen={this.state.isMenuOpen}
+                                        close={() => this.handleMenuClose()}
+                                        toggle={
+                                            <MoreHoriz
+                                                onClick={() => this.handleToggleBurger()}
+                                                style={editBurgerStyle} />
+                                        }
+                                        align='right'
+                                        closeOnInsideClick={false}
+                                    >
+                                        <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
+                                        <Button onClick={() => this.handleRemovePagePagesClick()}>Remove</Button>
+                                    </DropdownMenu>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div style={pageEditContainerStyle}>
-                        <div style={pageEditBurgerContainerStyle}>
-                            <DropdownMenu
-                                className="dx_card_template_bottom_bar_menu"
-                                isOpen={this.state.isMenuOpen}
-                                close={() => this.handleMenuClose()}
-                                toggle={
-                                    <MoreHoriz
-                                        onClick={() => this.handleToggleBurger()}
-                                        style={editBurgerStyle} />
-                                }
-                                align='right'
-                                closeOnInsideClick={false}
-                            >
-                                <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
-                                <Button onClick={() => this.handleRemovePagePagesClick()}>Remove</Button>
-                            </DropdownMenu>
-                        </div>
-                    </div>
-                </div>
+                        :
+                        null
+                }
                 <DxModal
                     open={this.state.isModalOpen}
                     title="Confirm Delete Pages"

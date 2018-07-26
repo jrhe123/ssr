@@ -178,7 +178,6 @@ const styles = {
 
     mainContainerStyle: {
         width: 'calc(100% - 192px - 48px)',
-        minHeight: `calc(100vh - ${sizes.headerHeight})`,
         marginLeft: 192,
         marginRight: 48,
     },
