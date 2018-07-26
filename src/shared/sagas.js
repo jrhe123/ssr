@@ -53,6 +53,7 @@ import {
 import { 
     dxChannelTypeSaga,
     dxChannelTypeUpdateSaga,
+    dxChannelColorSaga,
 } from './newchannel/sagas';
 
 // Global
@@ -83,6 +84,7 @@ export default function* rootSaga() {
         //NewChannel
         dxChannelTypeSaga(),
         dxChannelTypeUpdateSaga(),
+        dxChannelColorSaga(),
         
         // Card
         dxExperienceCardTemplateMenuToggleSaga(),

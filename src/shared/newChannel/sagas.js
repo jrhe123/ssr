@@ -10,6 +10,10 @@ import {
     CHANNEL_TYPE_UPDATE_REQUESTED,
     CHANNEL_TYPE_UPDATE__SUCCEEDED,
     CHANNEL_TYPE_UPDATE__FAILED,
+
+    CHANNEL_COLOR__REQUESTED,
+    CHANNEL_COLOR__SUCCEEDED,
+    CHANNEL_COLOR__FAILED,
 } from './constants';
 
 // Channel type request
@@ -52,4 +56,25 @@ export function* channelTypeUpdate(action) {
 
 export function* dxChannelTypeUpdateSaga() {
     yield takeEvery(CHANNEL_TYPE_UPDATE_REQUESTED, channelTypeUpdate);
+}
+
+//Channel color
+export function* channelColor(action) {
+    try {
+        yield put({
+            type: CHANNEL_COLOR__SUCCEEDED,
+            payload: {
+                channelColor: action.payload.channelColor
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: CHANNEL_COLOR__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxChannelColorSaga() {
+    yield takeEvery(CHANNEL_COLOR__REQUESTED, channelColor);
 }

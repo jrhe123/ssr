@@ -16,6 +16,7 @@ import Lock from '@material-ui/icons/Lock';
 import { connect } from 'react-redux';
 import {
     dxChannelTypeUpdate as dxChannelTypeUpdateAction,
+    dxChannelColor as dxChannelColorAction,
 } from '../../actions';
 
 // constants
@@ -96,6 +97,7 @@ class ChannelPanel extends Component{
         this.setState({ btnPickerColor: obj.color});
         this.setState({ hexPickerColor: obj.color});
         console.log('btnPickerColor', this.state.btnPickerColor);
+        this.props.dxChannelColorAction(this.state.btnPickerColor)
     }
 
     handleTitleCharacterChange = () => {
@@ -142,6 +144,8 @@ class ChannelPanel extends Component{
         const {
             channel
         } = this.props;
+        
+        console.log('does this match',channel.COLOR)
 
         return(
             <div style={mainContainerStyle}>
@@ -283,7 +287,8 @@ class ChannelPanel extends Component{
                                 padding:'12px 12px 12px 12px', 
                                 height:'36px', 
                                 fontSize:14, 
-                                color:this.state.btnPickerColor,
+                                // color:this.state.btnPickerColor,
+                                color:channel.COLOR,
                                 border:'none',
                                 outlineStyle:'none',
                                 marginBottom:6,
@@ -404,7 +409,8 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-    dxChannelTypeUpdateAction
+    dxChannelTypeUpdateAction,
+    dxChannelColorAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelPanel);
