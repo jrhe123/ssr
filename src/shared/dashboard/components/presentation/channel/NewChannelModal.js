@@ -32,6 +32,7 @@ class NewChannelModal extends Component {
 
     handleCreateChannel = () => {
         this.props.navigateToNewchannel(this.state.value);
+        console.log(this.state.value)
     }
 
     render() {
@@ -57,7 +58,7 @@ class NewChannelModal extends Component {
                 center
                 classNames={{
                     overlay: 'custom-overlay',
-                    modal: 'custom-modal',
+                    modal: 'custom-Channelmodal',
                 }}
             >
                 <div style={mainContainerStyle}>

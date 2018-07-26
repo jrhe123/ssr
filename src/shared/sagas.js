@@ -46,8 +46,13 @@ import {
     dxExperiencePageShuffleElemSaga,
     dxExperiencePageSelectElemSaga,
     dxExperiencePageUpdateElemSaga,
-    dxExperiencePageElemConnectPageSaga,
-} from './newexperience/sagas';
+    dxExperiencePageElemConnectPageSaga,} from './newexperience/sagas';
+
+
+// NewChannel 
+import { 
+    dxChannelTypeSaga,
+} from './newchannel/sagas';
 
 // Global
 import {
@@ -73,6 +78,9 @@ export default function* rootSaga() {
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),
         dxExperienceTitleUpdateSaga(),
+
+        //NewChannel
+        dxChannelTypeSaga(),
         
         // Card
         dxExperienceCardTemplateMenuToggleSaga(),

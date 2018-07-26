@@ -9,12 +9,18 @@ import { connect } from 'react-redux';
 import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
+import {
+    dxChannelType as dxChannelTypeAction
+} from './actions';
 
 export class NewChannelPage extends Component {
 
     componentDidMount(){
         const history = this.props.history;
         this.props.dxNavigateHistoryAction(history);
+        const channelType = this.props.match.params.channelType;
+        console.log('this is the channeltype', channelType);
+        this.props.dxChannelTypeAction(channelType);
     }
 
     render() {
@@ -37,6 +43,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxNavigateHistoryAction,
+    dxChannelTypeAction
 }
 
 export default connect(stateToProps, dispatchToProps)(NewChannelPage);

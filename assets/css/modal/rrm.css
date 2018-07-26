@@ -28,3 +28,10 @@
     cursor: pointer;
     outline: none;
 }
+
+/* New channel modal */
+
+.custom-Channelmodal{
+    width: 645px;
+    height: 370px;
+}

@@ -11,6 +11,10 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ColorPicker from 'rc-color-picker';
 import 'rc-color-picker/assets/index.css';
+import Lock from '@material-ui/icons/Lock';
+
+// redux
+import { connect } from 'react-redux';
 
 // constants
 import colors from '../../../styles/colors';
@@ -20,12 +24,11 @@ import fonts from '../../../styles/fonts';
 import DxInput from '../../../components/dxInput/DxInput';
 
 
-const themeStyles = () => ({
-    textField: {
-        color: 'red'
-    }
-});
-
+// const themeStyles = () => ({
+//     textField: {
+//         color: 'red'
+//     }
+// });
 
 
 class ChannelPanel extends Component{
@@ -110,6 +113,10 @@ class ChannelPanel extends Component{
         this.setState({ hexPickerColor: obj.color})
     }
 
+    handleClickOption = (val) => {
+        console.log(val);
+    }
+
     render(){
         const {
             classes
@@ -127,8 +134,14 @@ class ChannelPanel extends Component{
             colorOptionContainerStyle,
             colorOptionStyle,
             characterCounterStyle,
-            colorPickerStyle
+            colorPickerStyle,
+            lockStyle,
+            privateChannelLabel
         } = styles;
+
+        const {
+            channel
+        } = this.props;
 
         return(
             <div style={mainContainerStyle}>
@@ -145,8 +158,9 @@ class ChannelPanel extends Component{
                                 <div>
                                     <DxInput 
                                         placeholder="type"
-                                        width="120px"
+                                        width="226px"
                                         disabled={true}
+                                        value={channel.type == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
                                     />
                                     <Button 
                                         style={outlineBtnStyle}
@@ -157,20 +171,18 @@ class ChannelPanel extends Component{
                             }
                             align='left'
                         >
-                            <div onClick={() => this.props.handleClickOption(0)}>
+                            <div onClick={() => this.handleClickOption(0)}>
                                 <Button 
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
-                                >
-                                    Public Channel
-                                </Button>
+                                >Public Channel</Button>
                             </div>
-                            <div onClick={() => this.props.handleClickOption(1)}>
+                            <div onClick={() => this.handleClickOption(1)}>
                                 <Button 
                                     style={optionBtnStyle}
                                     className="dx-lower-case"
                                 >
-                                    Public Channel - Invite only
+                                    <p style={privateChannelLabel}>Private Channel - Invite only<Lock style={lockStyle}/></p>
                                 </Button>
                             </div>
                         </DropdownMenu>
@@ -254,8 +266,6 @@ class ChannelPanel extends Component{
                                 </div>                               
                             </div>
                         </DropdownMenu>
-
-
                     </div>
                 </div>
                 <div style={optionContainerStyle}>
@@ -271,9 +281,9 @@ class ChannelPanel extends Component{
                             margin="normal"
                             InputProps={{
                                 disableUnderline: true,
-                                classes:{
-                                    input: classes.textField
-                                },
+                                // classes:{
+                                //     input: classes.textField
+                                // },
                             }}
                             inputProps={{maxLength: 50}}
                             style = {textAreaStyle}
@@ -380,7 +390,25 @@ const styles = {
         width:'64px', 
         backgroundColor:'#F0F7FF', 
         color: '#6A6875'
+    },
+    lockStyle:{
+        height:'14px',
+        position: 'relative',
+    },
+    privateChannelLabel:{
+        margin:0
     }
 }
 
-export default withStyles(themeStyles)(ChannelPanel);
+const stateToProps = (state) => {
+    return {
+        channel: state.newchannel.channel
+    }
+}
+
+const dispatchToProps = {
+
+}
+
+export default connect(stateToProps, dispatchToProps)(ChannelPanel);
+// export default withStyles(themeStyles)(ChannelPanel);

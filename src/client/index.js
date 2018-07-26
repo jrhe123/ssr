@@ -18,6 +18,7 @@ import rootReducer from '../shared/reducer';
 import loginReducer from '../shared/login/reducer';
 import dashboardReducer from '../shared/dashboard/reducer';
 import newexperienceReducer from '../shared/newexperience/reducer';
+import newchannelReducer from '../shared/newchannel/reducer';
 
 import sagas from '../shared/sagas';
 
@@ -31,6 +32,7 @@ const reducer = combineReducers({
     login: loginReducer,
     dashboard: dashboardReducer,
     newexperience: newexperienceReducer,
+    newchannel: newchannelReducer,
 });
 
 const history = createHistory();
