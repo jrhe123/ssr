@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // components
 import NavBar from '../../../components/navBar/NavBar';
-import DxModal from '../presentation/DxModal';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // helpers
 import { search_object_index_by_value } from '../../../helpers';

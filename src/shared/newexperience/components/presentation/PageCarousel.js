@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // components
 import ThumbnailPage from './ThumbnailPage';
-import DxModal from './DxModal';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Slider from "react-slick";

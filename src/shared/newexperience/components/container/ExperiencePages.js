@@ -11,7 +11,7 @@ import PhoneTarget from '../presentation/PhoneTarget';
 import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
-import DxModal from '../presentation/DxModal';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
