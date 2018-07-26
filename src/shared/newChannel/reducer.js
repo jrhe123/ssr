@@ -5,26 +5,26 @@ import {
 import update from '../../../node_modules/immutability-helper';
 
 const initialState = {
-    channel: {
-        type: '0', // public or private
+    CHANNEL: {
+        TYPE: '0', // public or private
     },
 };
 
 const newchannelReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
-    let tmpChannel = Object.assign({}, updated.channel);
+    let tmpChannel = Object.assign({}, updated.CHANNEL);
 
     switch (type) {
 
         case CHANNEL_TYPE__SUCCEEDED:
-            tmpChannel.type = payload.channelType;
-            updated.channel = tmpChannel;
+            tmpChannel.TYPE = payload.channelType;
+            updated.CHANNEL = tmpChannel;
             return updated;
 
         case CHANNEL_TYPE_UPDATE__SUCCEEDED:
-            tmpChannel.type = payload.channelType;
-            updated.channel = tmpChannel;
+            tmpChannel.TYPE = payload.channelType;
+            updated.CHANNEL = tmpChannel;
             return updated;
         
         default:

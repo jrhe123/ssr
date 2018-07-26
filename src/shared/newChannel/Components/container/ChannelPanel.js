@@ -168,7 +168,7 @@ class ChannelPanel extends Component{
                                         placeholder="type"
                                         width="226px"
                                         disabled={true}
-                                        value={channel.type == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
+                                        value={channel.TYPE == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
                                     />
                                     <Button 
                                         style={outlineBtnStyle}
@@ -282,7 +282,7 @@ class ChannelPanel extends Component{
                     </div>
                     <div style={rightContainerStyle}>
                         <p>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                        <TextField
+                        {/* <TextField
                             id="multiline-static"
                             multiline
                             rows="1"
@@ -298,7 +298,22 @@ class ChannelPanel extends Component{
                             fullWidth
                             placeholder={'Hypertension'}
                             onChange={this.handleTitleCharacterChange.bind(this)}
-                        />
+                        /> */}
+                        <input 
+                            type="text" 
+                            maxlength="50" 
+                            placeholder="Hypertension"
+                            style={{ 
+                                width:'96%', 
+                                padding:'12px 12px 12px 12px', 
+                                height:'36px', 
+                                fontSize:14, 
+                                color:this.state.btnPickerColor,
+                                border:'none',
+                                outlineStyle:'none',
+                                marginBottom:6
+                            }} 
+                            onChange={this.handleTitleCharacterChange.bind(this)}/>
                         <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
                     </div>
                 </div>
@@ -369,7 +384,6 @@ const styles = {
         paddingTop:12,
         paddingRight:12,
         paddingBottom:12,
-        color:'red',
         width:'96%'
     },
     colorOptionStyle:{
@@ -409,7 +423,7 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        channel: state.newchannel.channel
+        channel: state.newchannel.CHANNEL
     }
 }
 
