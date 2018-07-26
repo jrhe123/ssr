@@ -38,10 +38,10 @@ class ExperienceNavigator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.isFilesUploaded && !this.props.isFilesUploaded){
-            this.props.dxExperienceCreateAction(this.props.experience);
+        if(nextProps.IsFilesUploaded && !this.props.IsFilesUploaded){
+            this.props.dxExperienceCreateAction(this.props.Experience);
         }
-        if(nextProps.isCompleted && !this.props.isCompleted){
+        if(nextProps.IsCompleted && !this.props.IsCompleted){
             this.props.dxLoadingAction(false);
             this.props.history.push('/dashboard');
         }
@@ -53,14 +53,14 @@ class ExperienceNavigator extends Component {
 
     handleGoback = () => {
         const {
-            experience,
+            Experience,
         } = this.props;
 
-        if (experience.index == 0) {
+        if (Experience.Index == 0) {
             this.props.history.push('/dashboard');
-        } else if (experience.index == 1) {
+        } else if (Experience.Index == 1) {
             this.props.dxExperienceIndexUpdateAction(0);
-        } else if (experience.index == 2) {
+        } else if (Experience.Index == 2) {
             this.props.dxExperienceIndexUpdateAction(0);
         }
     }
@@ -69,18 +69,18 @@ class ExperienceNavigator extends Component {
         // 1. loading
         this.props.dxLoadingAction(true);
         const {
-            experience,
+            Experience,
         } = this.props;        
-        this.props.dxExperienceUploadFileAction(experience);        
+        this.props.dxExperienceUploadFileAction(Experience);        
     }
 
     handleSaveBtnClick = () => {
         let {
-            experience,
+            Experience,
         } = this.props;
 
-        if (experience.index == 0) {
-            let { IsWarning, IsError, Message } = this.validateExperience(experience);
+        if (Experience.Index == 0) {
+            let { IsWarning, IsError, Message } = this.validateExperience(Experience);
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
@@ -94,12 +94,12 @@ class ExperienceNavigator extends Component {
                 }
                 this.saveExperience();
             }
-        } else if (experience.index == 1) {
-            let { IsError, Message } = this.validateExperienceCard(experience.cardTemplate, experience.cardTitle);
+        } else if (Experience.Index == 1) {
+            let { IsError, Message } = this.validateExperienceCard(Experience.CardTemplate, Experience.CardTitle);
             this.props.dxAlertAction(true, IsError, Message);
             if (!IsError) this.props.dxExperienceCardTemplateSaveAction();
-        } else if (experience.index == 2) {
-            let { IsWarning, IsError, Message } = this.validateExperiencePages(experience.pages);
+        } else if (Experience.Index == 2) {
+            let { IsWarning, IsError, Message } = this.validateExperiencePages(Experience.Pages);
             if (IsWarning) {
                 this.setState({
                     isModalOpen: true,
@@ -121,32 +121,32 @@ class ExperienceNavigator extends Component {
         };
         const {
             // 1. experience
-            type,
-            experienceTitle,
+            Type,
+            ExperienceTitle,
             // 2. card
-            isCardTemplateSaved,
-            card,
-            cardTitle,
+            IsCardTemplateSaved,
+            Card,
+            CardTitle,
             // 3. pages
-            isPagesSaved,
-            pages,
+            IsPagesSaved,
+            Pages,
         } = experience;
 
         // 1. experience
-        if (type != 0 && type != 1) {
+        if (Type != 0 && Type != 1) {
             res.Message = 'Invalid type';
             return res;
         }
-        if (!experienceTitle) {
+        if (!ExperienceTitle) {
             res.Message = 'Please enter title';
             return res;
         }
         // 2. card
-        if (!isCardTemplateSaved) {
+        if (!IsCardTemplateSaved) {
             res.Message = 'Please create & save your card';
             return res;
         }
-        let validateCardResponse = this.validateExperienceCard(card, cardTitle);
+        let validateCardResponse = this.validateExperienceCard(Card, CardTitle);
         res.IsError = validateCardResponse.IsError;
         res.Message = validateCardResponse.Message;
         if (res.IsError) {
@@ -155,12 +155,12 @@ class ExperienceNavigator extends Component {
             res.IsError = true;
         }
         // 3. pages
-        if (type == 1) {
-            if (!isPagesSaved) {
+        if (Type == 1) {
+            if (!IsPagesSaved) {
                 res.Message = 'Please create & save your page(s)';
                 return res;
             }
-            let validatePagesResponse = this.validateExperiencePages(pages);
+            let validatePagesResponse = this.validateExperiencePages(Pages);
             res.IsWarning = validatePagesResponse.IsWarning;
             res.IsError = validatePagesResponse.IsError;
             res.Message = validatePagesResponse.Message;
@@ -198,15 +198,15 @@ class ExperienceNavigator extends Component {
             return res;
         }
 
-        let imageIdx = search_object_index_by_value(card.settings, 'IMAGE');
+        let imageIdx = search_object_index_by_value(card.Settings, 'IMAGE');
         if (imageIdx != null
-            && !card.settings[imageIdx].Default) {
+            && !card.Settings[imageIdx].Default) {
             res.Message = 'Please select a image';
             return res;
         }
 
-        if (card.type == 'VIDEO'
-            && card.content == '') {
+        if (card.Type == 'VIDEO'
+            && card.Content == '') {
             res.Message = 'Please enter video url';
             return res;
         }
@@ -217,12 +217,12 @@ class ExperienceNavigator extends Component {
     }
 
     handleCardTemplateMenuToggle = () => {
-        let toggle = !this.props.experience.isCardTemplateMenuOpen;
+        let toggle = !this.props.Experience.IsCardTemplateMenuOpen;
         this.props.dxExperienceCardTemplateMenuUpdateAction(toggle);
     }
 
     handlePageTemplateMenuToggle = () => {
-        let toggle = !this.props.experience.isPageTemplateMenuOpen;
+        let toggle = !this.props.Experience.IsPageTemplateMenuOpen;
         this.props.dxExperiencePageTemplateMenuUpdateAction(toggle);
     }
 
@@ -232,14 +232,14 @@ class ExperienceNavigator extends Component {
 
     handleTitleChange = (e) => {
         const {
-            experience,
+            Experience,
         } = this.props;
         let content = e.target.value;
-        if (experience.index == 0) {
+        if (Experience.Index == 0) {
             this.props.dxExperienceTitleUpdateAction('EXPERIENCE', content);
-        } else if (experience.index == 1) {
+        } else if (Experience.Index == 1) {
             this.props.dxExperienceTitleUpdateAction('CARD', content);
-        } else if (experience.index == 2) {
+        } else if (Experience.Index == 2) {
             this.props.dxExperienceTitleUpdateAction('PAGE', content);
         }
     }
@@ -259,7 +259,7 @@ class ExperienceNavigator extends Component {
         let childrenPages = this.findRootPageOrChildrenPages(displayPages, 'CHILDREN');
         // Check Root page
         if (!rootPage.length
-            || !rootPage[0].sections.length) {
+            || !rootPage[0].Sections.length) {
             res.Message = 'Root page cannot be empty';
             return res;
         }
@@ -312,7 +312,7 @@ class ExperienceNavigator extends Component {
         let output = [];
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (!page.isDeleted) {
+            if (!page.IsDeleted) {
                 output.push(page);
             }
         }
@@ -324,11 +324,11 @@ class ExperienceNavigator extends Component {
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
             if (type == 'ROOT') {
-                if (page.isRoot) {
+                if (page.IsRoot) {
                     output.push(page);
                 }
             } else if (type == 'CHILDREN') {
-                if (!page.isRoot) {
+                if (!page.IsRoot) {
                     output.push(page);
                 }
             }
@@ -340,7 +340,7 @@ class ExperienceNavigator extends Component {
         let output = [];
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (!page.isConnected) {
+            if (!page.IsConnected) {
                 output.push(page);
             }
         }
@@ -351,44 +351,44 @@ class ExperienceNavigator extends Component {
         let output = [];
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            for (let j = 0; j < page.sections.length; j++) {
-                let section = page.sections[j];
-                if (section.isDeleted) continue;
+            for (let j = 0; j < page.Sections.length; j++) {
+                let section = page.Sections[j];
+                if (section.IsDeleted) continue;
                 if (type == 'BUTTON') {
-                    if (section.type == 'BUTTON'
-                        && !section.connectedPageGUID) {
+                    if (section.Type == 'BUTTON'
+                        && !section.ConnectedPageGUID) {
                         output.push({
                             page,
                             section,
                         });
                     }
                 } else if (type == 'EMBED_PDF') {
-                    if (section.type == 'EMBED_PDF'
-                        && !section.pdf) {
+                    if (section.Type == 'EMBED_PDF'
+                        && !section.Pdf) {
                         output.push({
                             page,
                             section,
                         });
                     }
                 } else if (type == 'SPLASH') {
-                    if (section.type == 'SPLASH'
-                        && !section.splashImg) {
+                    if (section.Type == 'SPLASH'
+                        && !section.SplashImg) {
                         output.push({
                             page,
                             section,
                         });
                     }
                 } else if (type == 'VIDEO') {
-                    if (section.type == 'VIDEO'
-                        && !section.videoUrl) {
+                    if (section.Type == 'VIDEO'
+                        && !section.VideoUrl) {
                         output.push({
                             page,
                             section,
                         });
                     }
                 } else if (type == 'IMAGE') {
-                    if (section.type == 'IMAGE'
-                        && !section.img) {
+                    if (section.Type == 'IMAGE'
+                        && !section.Img) {
                         output.push({
                             page,
                             section,
@@ -405,8 +405,8 @@ class ExperienceNavigator extends Component {
         for (let i = 0; i < arr.length; i++) {
             let item = arr[i];
             let { page, section } = item;
-            let { sectionGUID } = section;
-            output += `${page.title} - #${this.findSectionIndex(page.sections, sectionGUID)}: ${type} is not connected, `
+            let { SectionGUID } = section;
+            output += `${page.Title} - #${this.findSectionIndex(page.Sections, SectionGUID)}: ${type} is not connected, `
         }
         output = output.replace(/,\s*$/, '');
         return output;
@@ -416,12 +416,12 @@ class ExperienceNavigator extends Component {
         let output = [];
         for (let i = 0; i < sections.length; i++) {
             let section = sections[i];
-            if (!section.isDeleted) {
+            if (!section.IsDeleted) {
                 output.push(section);
             }
         }
         for (let i = 0; i < output.length; i++) {
-            if (output[i].sectionGUID == sectionGUID) {
+            if (output[i].SectionGUID == sectionGUID) {
                 return i + 1;
             }
         }
@@ -434,7 +434,7 @@ class ExperienceNavigator extends Component {
                 <NavBar
                     isRoute={false}
                     navType="EXPERIENCE"
-                    experience={this.props.experience}
+                    experience={this.props.Experience}
                     handleGoback={() => this.handleGoback()}
                     handleSaveBtnClick={() => this.handleSaveBtnClick()}
                     handleInputChange={(e) => this.handleTitleChange(e)}
@@ -461,9 +461,9 @@ class ExperienceNavigator extends Component {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        isCompleted: state.newexperience.isCompleted,
-        isFilesUploaded: state.newexperience.isFilesUploaded,
-        experience: state.newexperience.experience,
+        IsCompleted: state.newexperience.IsCompleted,
+        IsFilesUploaded: state.newexperience.IsFilesUploaded,
+        Experience: state.newexperience.Experience,
     }
 }
 

@@ -72,11 +72,11 @@ class ExperiencePages extends Component {
 
     renderPhoneElement = () => {
         const {
-            newPage,
-            pages,
-        } = this.props.experience;
-        let phone = pages.map((page, index) => (
-            this.renderPhoneElementSection(page.sections, newPage.pageGUID == page.pageGUID ? true : false, page.isDeleted)
+            NewPage,
+            Pages,
+        } = this.props.Experience;
+        let phone = Pages.map((page, index) => (
+            this.renderPhoneElementSection(page.Sections, NewPage.PageGUID == page.PageGUID ? true : false, page.IsDeleted)
         ))
         return phone;
     }
@@ -84,7 +84,7 @@ class ExperiencePages extends Component {
     renderPhoneElementSection = (sections, activePage, deletedPage) => {
 
         const {
-            experience,
+            Experience,
         } = this.props;
 
         let section;
@@ -92,29 +92,29 @@ class ExperiencePages extends Component {
             <PhoneElement
                 deletedPage={deletedPage}
                 activePage={activePage}
-                isDeleted={section.isDeleted}
-                sectionGUID={section.sectionGUID}
-                type={section.type}
-                isActive={section.isActive}
-                htmlContent={section.htmlContent}
-                btnContent={section.btnContent}
-                dropdownOptionArr={this.availablePageOptionList(experience.pages, experience.newPage.pageGUID, section.connectedPageGUID)}
-                pdf={section.pdf}
-                splashContent={section.splashContent}
-                splashImg={section.splashImg}
-                splashColor={section.splashColor}
-                videoUrl={section.videoUrl}
-                img={section.img}
+                isDeleted={section.IsDeleted}
+                sectionGUID={section.SectionGUID}
+                type={section.Type}
+                isActive={section.IsActive}
+                htmlContent={section.HtmlContent}
+                btnContent={section.BtnContent}
+                dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
+                pdf={section.Pdf}
+                splashContent={section.SplashContent}
+                splashImg={section.SplashImg}
+                splashColor={section.SplashColor}
+                videoUrl={section.VideoUrl}
+                img={section.Img}
 
-                key={section.sectionGUID}
+                key={section.SectionGUID}
                 index={i}
                 moveCard={this.handleMoveCard}
                 handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
-                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.sectionGUID, html)}
-                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.sectionGUID, e)}
-                handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.sectionGUID, pageGUID)}
-                handleDescInputChange={(e) => this.handleUpdateDescContent(section.sectionGUID, e)}
+                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html)}
+                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
+                handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
+                handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
                 handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
                 handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
 
@@ -162,17 +162,17 @@ class ExperiencePages extends Component {
         let res = [];
         if (pages.length && targetPageGUID) {
             let cancelOption = {
-                sectionGUID: '',
-                title: 'no connect',
+                SectionGUID: '',
+                Title: 'no connect',
             };
             res.push(cancelOption);
         }
 
         for (let i = 0; i < pages.length; i++) {
-            if (pages[i].pageGUID != currentpageGUID
-                && !pages[i].isRoot
-                && !pages[i].isDeleted
-                && !pages[i].isConnected) {
+            if (pages[i].PageGUID != currentpageGUID
+                && !pages[i].IsRoot
+                && !pages[i].IsDeleted
+                && !pages[i].IsConnected) {
                 res.push(pages[i])
             }
         }
@@ -180,9 +180,9 @@ class ExperiencePages extends Component {
     }
 
     findActiveSectionGUID = () => {
-        let sections = this.props.experience.newPage.sections;
-        let activePageSectionIndex = this.props.experience.activePageSectionIndex;
-        let sectionGUID = sections[activePageSectionIndex].sectionGUID;
+        let sections = this.props.Experience.NewPage.Sections;
+        let activePageSectionIndex = this.props.Experience.ActivePageSectionIndex;
+        let sectionGUID = sections[activePageSectionIndex].SectionGUID;
         return sectionGUID;
     }
 
@@ -265,7 +265,7 @@ class ExperiencePages extends Component {
 
     handleCarouselClick = (open) => {
         if (open) {
-            this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.experience.isPageCarouselMenuOpen);
+            this.props.dxExperiencePageCarouselMenuUpdateAction(!this.props.Experience.IsPageCarouselMenuOpen);
         } else {
             this.props.dxExperiencePageCarouselMenuUpdateAction(false);
         }
@@ -286,7 +286,7 @@ class ExperiencePages extends Component {
         } = this.state;
 
         const {
-            experience
+            Experience
         } = this.props;
 
         const {
@@ -330,11 +330,11 @@ class ExperiencePages extends Component {
         return (
             <div style={mainContainerStyle}>
                 <div
-                    className={experience.isPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
-                    style={experience.isPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                    className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
+                    style={Experience.IsPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
                 >
                     <DropdownMenu
-                        isOpen={experience.isPageTemplateMenuOpen}
+                        isOpen={Experience.IsPageTemplateMenuOpen}
                         close={() => { }}
                         align="center"
                         className="dx-layout-menu"
@@ -393,7 +393,7 @@ class ExperiencePages extends Component {
                                 </div>
                                 <div style={templateContainerStyle}>
                                     {
-                                        this.props.pageTemplates.map((template, index) => (
+                                        this.props.PageTemplates.map((template, index) => (
                                             <div>
                                                 <PageTemplateTitle
                                                     title={template.Title}
@@ -412,7 +412,7 @@ class ExperiencePages extends Component {
                     </DropdownMenu>
                 </div>
 
-                <div className={experience.isPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                <div className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
                     <div style={tableContainerStyle}
@@ -421,10 +421,10 @@ class ExperiencePages extends Component {
 
                             <div style={toolbarContainerStyle}>
                                 <PhoneToolbar
-                                    activePageSectionIndex={experience.activePageSectionIndex}
-                                    tools={experience.tools}
-                                    newPage={experience.newPage}
-                                    pages={experience.pages}
+                                    activePageSectionIndex={Experience.ActivePageSectionIndex}
+                                    tools={Experience.Tools}
+                                    newPage={Experience.NewPage}
+                                    pages={Experience.Pages}
 
                                     handleErrorMsg={(msg) => this.handleErrorMsg(msg)}
                                     handlePdfChange={(file) => this.handlePdfChange(file)}
@@ -437,11 +437,11 @@ class ExperiencePages extends Component {
                             </div>
                             <div style={editPhoneContainerStyle}>
 
-                                <div className={experience.isPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                <div className={Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
                                     style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{experience.newPage.title}</p>
+                                            <p style={pageNumStyle}>{Experience.NewPage.Title}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -453,11 +453,11 @@ class ExperiencePages extends Component {
                                         <PhoneTarget />
                                     </div>
                                 </div>
-                                <div className={!experience.isPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                <div className={!Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
                                     style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{experience.newPage.title}</p>
+                                            <p style={pageNumStyle}>{Experience.NewPage.Title}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -490,7 +490,7 @@ class ExperiencePages extends Component {
                         </div>
                     </div>
 
-                    <div style={Object.assign({}, carouselContainerStyle, { height: !experience.isPageCarouselMenuOpen ? carouselHeight : expandCarouselHeight })}
+                    <div style={Object.assign({}, carouselContainerStyle, { height: !Experience.IsPageCarouselMenuOpen ? carouselHeight : expandCarouselHeight })}
                         className="dx_float_carousel_menu"
                     >
                         <div style={carouselWrapperStyle}>
@@ -499,19 +499,19 @@ class ExperiencePages extends Component {
                                 style={carouselLabelContainerStyle}
                                 onClick={() => this.handleCarouselClick(true)}
                             >
-                                <span style={carouselLabelStyle}>{experience.newPage.title}
+                                <span style={carouselLabelStyle}>{Experience.NewPage.Title}
                                     <KeyboardArrowDown
-                                        className={!experience.isPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
+                                        className={!Experience.IsPageCarouselMenuOpen ? "dx_arrow_up_down active_up" : "dx_arrow_up_down"}
                                         style={carouselIconStyle}
                                     />
                                 </span>
                             </div>
                             {
-                                experience.isPageCarouselMenuOpen ?
+                                Experience.IsPageCarouselMenuOpen ?
                                     (
                                         <div style={carouselSlideContainerStyle}>
                                             <PageCarousel
-                                                experience={experience}
+                                                experience={Experience}
                                                 handleClickActivePage={(pageGUID) => this.handleClickActiveCarouselPage(pageGUID)}
                                                 handleConfirmDeleteCarouselPage={(pageGUID) => this.handleConfirmDeleteCarouselPage(pageGUID)}
                                             />
@@ -717,8 +717,8 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        pageTemplates: state.newexperience.pageTemplates,
-        experience: state.newexperience.experience,
+        PageTemplates: state.newexperience.PageTemplates,
+        Experience: state.newexperience.Experience,
     }
 }
 
