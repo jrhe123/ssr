@@ -27,11 +27,11 @@ import fonts from '../../../styles/fonts';
 import DxInput from '../../../components/dxInput/DxInput';
 
 
-// const themeStyles = () => ({
-//     textField: {
-//         color: 'red'
-//     }
-// });
+const themeStyles = () => ({
+    textField: {
+        color: 'red'
+    }
+});
 
 
 class ChannelPanel extends Component{
@@ -43,7 +43,6 @@ class ChannelPanel extends Component{
         hexPickerColor:'#hex',
         titleCharacterCount: 0,
         descriptionCharacterCount: 0
-
     }
 
     toggleTypeSelect = () => {
@@ -69,31 +68,42 @@ class ChannelPanel extends Component{
     colorBlueOptionclick = () => {
         this.setState({ btnPickerColor: '#4A90E2'});
         this.setState({ isColorMenuOpen: false });
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     colorYellowOptionclick = () => {
         this.setState({ btnPickerColor: '#DFA92E'});
         this.setState({ isColorMenuOpen: false });
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     colorPurpleOptionclick = () => {
         this.setState({ btnPickerColor: '#913D88'});
         this.setState({ isColorMenuOpen: false });
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     colorGreenOptionclick = () => {
         this.setState({ btnPickerColor: '#1AA98B'});
         this.setState({ isColorMenuOpen: false });
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     colorOrangeOptionclick = () => {
         this.setState({ btnPickerColor: '#EC5C03'});
         this.setState({ isColorMenuOpen: false });
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     colorGreyOptionclick = () => {
         this.setState({ btnPickerColor: '#83909B'});
         this.setState({ isColorMenuOpen: false });
+    }
+
+    handleColorPicker = (obj) => {
+        this.setState({ btnPickerColor: obj.color});
+        this.setState({ hexPickerColor: obj.color});
+        console.log('btnPickerColor', this.state.btnPickerColor);
     }
 
     handleTitleCharacterChange = () => {
@@ -109,11 +119,6 @@ class ChannelPanel extends Component{
         this.setState({
             descriptionCharacterCount: 0 + input.length
         });   
-    }
-
-    handleColorPicker = (obj) => {
-        this.setState({ btnPickerColor: obj.color});
-        this.setState({ hexPickerColor: obj.color})
     }
 
     handleClickOption = (val) => {
@@ -284,9 +289,9 @@ class ChannelPanel extends Component{
                             margin="normal"
                             InputProps={{
                                 disableUnderline: true,
-                                // classes:{
-                                //     input: classes.textField
-                                // },
+                                classes:{
+                                    input: classes.textField
+                                },
                             }}
                             inputProps={{maxLength: 50}}
                             style = {textAreaStyle}
@@ -412,5 +417,5 @@ const dispatchToProps = {
     dxChannelTypeUpdateAction
 }
 
-export default connect(stateToProps, dispatchToProps)(ChannelPanel);
+export default connect(stateToProps, dispatchToProps)(withStyles(themeStyles)(ChannelPanel));
 // export default withStyles(themeStyles)(ChannelPanel);
