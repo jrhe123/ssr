@@ -496,7 +496,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 tmpExperience.Pages = tmpPages;
                 tmpExperience.NewPage = tmpNewPage;
                 tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
-                updated.experience = tmpExperience;
+                updated.Experience = tmpExperience;
             }
             return updated;
 
