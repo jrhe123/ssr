@@ -7,6 +7,9 @@ import Add from '@material-ui/icons/Add';
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
+// components
+import DxCard from './DxCard';
+
 class ExperienceList extends Component {
 
     render() {
@@ -35,7 +38,18 @@ class ExperienceList extends Component {
             <div style={mainContainerStyle}>
                 {
                     experiences.map((experience, index) => (
-                        <div style={experienceContainerStyle}>12</div>
+                        <div style={experienceContainerStyle}>
+                            <DxCard
+                                isWithTitle={false}
+                                isWithBottomBar={false}
+                                isCenterCard={false}
+                                isEditable={false}
+                                isClickable={false}
+                                isVideoInsertClickable={false}
+                                cardTitle={experience.ExperienceTitle}
+                                template={experience.ExperienceCard}
+                            />
+                        </div>
                     ))
                 }
                 <div style={newExperienceContainerStyle}>
@@ -51,7 +65,7 @@ class ExperienceList extends Component {
                             </div>
                         </div>
                         <div style={iconContainerStyle}>
-                            <Add style={addIconStyle}/>
+                            <Add style={addIconStyle} />
                         </div>
                         <div style={newExperienceLabelContainerStyle}>
                             <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
@@ -89,7 +103,6 @@ const styles = {
     newExperienceContainerStyle: {
         flex: '300px 0 0',
         height: newExpSize + 18,
-        border: '1px solid green'
     },
     newExperienceWrapperStyle: {
         position: 'relative',
