@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 // config
-import config from '../../../config';
+import config from '../../../../config';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../../../styles/colors';
+import fonts from '../../../../styles/fonts';
 
 // components
-import DxInput from '../../../components/dxInput/DxInput';
+import DxInput from '../../../../components/dxInput/DxInput';
 import DxModal from './DxModal';
 
 // Libraries
@@ -90,68 +90,68 @@ class DxCard extends Component {
         } = styles;
 
         let card;
-        if (template.Type == 'LEFT_IMAGE_TEXT') {
+        if (template.type == 'LEFT_IMAGE_TEXT') {
             card = (
                 <div>
                     <div style={leftImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
+                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
                         />
                     </div>
-                    <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
+                    <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.settings[2].Default })}>{template.content}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             );
-        } else if (template.Type == 'RIGHT_IMAGE_TEXT') {
+        } else if (template.type == 'RIGHT_IMAGE_TEXT') {
             card = (
                 <div>
-                    <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
+                    <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.settings[2].Default })}>{template.content}</p>
                             </div>
                         </div>
                     </div>
                     <div style={rightImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
+                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 </div>
             );
-        } else if (template.Type == 'BACKGROUND_TEXT') {
+        } else if (template.type == 'BACKGROUND_TEXT') {
             card = (
-                <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.Settings[0].Default })}>
+                <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.settings[0].Default })}>
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
                         <p ref="dx_editable_p"
                             className="dx_editable_p"
                             contenteditable={isEditable ? "true" : "false"}
                             onBlur={() => this.handleContentChange()}
-                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
+                            style={Object.assign({}, txtStyle, { color: template.settings[1].Default })}>{template.content}</p>
                     </div>
                 </div>
             );
-        } else if (template.Type == 'BACKGROUND_IMAGE_TEXT') {
+        } else if (template.type == 'BACKGROUND_IMAGE_TEXT') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -160,18 +160,18 @@ class DxCard extends Component {
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.settings[1].Default })}>{template.content}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             );
-        } else if (template.Type == 'VIDEO') {
+        } else if (template.type == 'VIDEO') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={this.state.videoInsert ? videoOverlayImgStyle : overlayImgStyle}
-                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -184,7 +184,7 @@ class DxCard extends Component {
                                                 onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
                                             />
                                             {
-                                                template.Content ?
+                                                template.content ?
                                                     <ReactPlayer
                                                         config={{
                                                             facebook: {
@@ -192,13 +192,13 @@ class DxCard extends Component {
                                                             },
                                                             file: {
                                                                 attributes: {
-                                                                    poster: template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')
+                                                                    poster: template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')
                                                                 }
                                                             }
                                                         }}
                                                         width={275}
                                                         height={90}
-                                                        url={template.Content}
+                                                        url={template.content}
                                                         controls={true}
                                                         onError={(e) => this.handleVideoError(e)}
                                                     />
@@ -216,7 +216,7 @@ class DxCard extends Component {
                                                     isDark={true}
                                                     width="144px"
                                                     disabled={false}
-                                                    value={template.Content}
+                                                    value={template.content}
                                                     handleKeyPress={() => this.handleVideoInsertClick(false, this.props.isVideoInsertClickable)}
                                                 />
                                             </div>
@@ -234,12 +234,12 @@ class DxCard extends Component {
                     </div>
                 </div>
             );
-        } else if (template.Type == 'IMAGE') {
+        } else if (template.type == 'IMAGE') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../../assets/images/demo.jpg')}
+                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
                     />
                 </div>
             );

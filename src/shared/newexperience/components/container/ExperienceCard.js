@@ -97,11 +97,11 @@ class ExperienceCard extends Component {
         return (
             <div style={mainContainerStyle}>
                 <div
-                    className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
-                    style={this.props.experience.isCardTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                    className={this.props.Experience.IsCardTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
+                    style={this.props.Experience.IsCardTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
                 >
                     <DropdownMenu
-                        isOpen={this.props.experience.isCardTemplateMenuOpen}
+                        isOpen={this.props.Experience.IsCardTemplateMenuOpen}
                         close={() => { }}
                         align="center"
                         className="dx-layout-menu"
@@ -180,7 +180,7 @@ class ExperienceCard extends Component {
                                 </div>
                                 <div style={templateContainerStyle}>
                                     {
-                                        this.props.cardTemplates.map((template, index) => (
+                                        this.props.CardTemplates.map((template, index) => (
                                             <CardTemplate
                                                 key={index}
                                                 isWithTitle={true}
@@ -200,16 +200,16 @@ class ExperienceCard extends Component {
                 </div>
 
                 <div
-                    className={this.props.experience.isCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
+                    className={this.props.Experience.IsCardTemplateMenuOpen ? "dx_scale_container" : "dx_scale_container active_expand"}
                     style={rightContainerStyle}>
 
                     <div style={optionBarContainerStyle}>
                         <div style={optionBarWrapperStyle}>
                             {
-                                this.props.experience.cardTemplate ?
+                                this.props.Experience.CardTemplate ?
                                     <CardOption
-                                        settings={this.props.experience.cardTemplate.settings}
-                                        imgFile={this.props.experience.cardTemplate.settings[0].Default}
+                                        settings={this.props.Experience.CardTemplate.Settings}
+                                        imgFile={this.props.Experience.CardTemplate.Settings[0].Default}
                                         handleImageChange={(file) => this.handleImageChange(file)}
                                         handleImageError={(msg) => this.handleErrorMsg(msg)}
                                         handleColorChange={(colors, type) => this.handleColorChange(colors, type)}
@@ -223,13 +223,13 @@ class ExperienceCard extends Component {
                         <div style={tableWrapperStyle}>
                             <div style={demoCardContainerStyle}>
                                 {
-                                    this.props.experience.cardTemplate ?
+                                    this.props.Experience.CardTemplate ?
                                         <DxCard
                                             isCenterCard={true}
                                             isEditable={true}
                                             isClickable={false}
                                             isVideoInsertClickable={true}
-                                            template={this.props.experience.cardTemplate}
+                                            template={this.props.Experience.CardTemplate}
                                             handleContentChange={(val) => this.handleCardTemplateContentChange(val)}
                                             handleVideoError={(msg) => this.handleErrorMsg(msg)}
                                         />
@@ -327,8 +327,8 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        cardTemplates: state.newexperience.cardTemplates,
-        experience: state.newexperience.experience,
+        CardTemplates: state.newexperience.CardTemplates,
+        Experience: state.newexperience.Experience,
     }
 }
 

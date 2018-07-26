@@ -19,6 +19,7 @@ import {
 // components
 import * as Routes from './routes';
 import AlertBar from '../components/alertBar/AlertBar';
+import Loading from '../components/loading/Loading';
 
 // styles
 import '../../../assets/css/index.css';
@@ -63,6 +64,7 @@ class App extends Component {
         const {
             isAuthenticated,
             alertBar,
+            isLoading,
         } = this.props;
 
         return (
@@ -111,7 +113,11 @@ class App extends Component {
 
                     <Route path="*" render={() => (<Redirect to="/" />)} />
                 </Switch>
-
+                
+                {/* global loading spin */}
+                <Loading 
+                    isLoading={isLoading}
+                />
                 {/* global alert bar */}
                 <AlertBar
                     alertBar={alertBar}
@@ -126,7 +132,8 @@ const stateToProps = (state) => {
     return {
         isAuthenticated: state.root.isAuthenticated,
         user: state.root.user,
-        alertBar: state.root.alertBar
+        alertBar: state.root.alertBar,
+        isLoading: state.root.isLoading,
     }
 }
 

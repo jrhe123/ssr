@@ -19,6 +19,7 @@ import {
     NAVIGATE_HISTORY__FAILED,
 
     ALERT__SUCCEEDED,
+    LOADING__SUCCEEDED,
 } from './constants';
 
 const initialState = {
@@ -31,7 +32,9 @@ const initialState = {
         isDisplay: false,
         isError: false,
         message: ''
-    }
+    },
+
+    isLoading: false,   
 };
 
 const rootReducer = (previousState = initialState, { type, payload }) => {
@@ -69,6 +72,10 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case ALERT__SUCCEEDED:
             tempAlertBar =  Object.assign({}, payload);
             updated.alertBar = tempAlertBar;
+            return updated;
+
+        case LOADING__SUCCEEDED:
+            updated.isLoading = payload.isLoading;
             return updated;
 
         default:

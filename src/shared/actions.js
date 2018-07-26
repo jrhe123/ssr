@@ -2,6 +2,7 @@ import {
     VALIDATE_TOKEN_REQUESTED,
     NAVIGATE_HISTORY_REQUESTED,
     ALERT_REQUESTED,
+    LOADING_REQUESTED,
 } from './constants';
 
 export const dxValidateToken = (token, userGUID) => {
@@ -30,6 +31,15 @@ export const dxAlert = (isDisplay, isError, message) => {
             isDisplay,
             isError,
             message,
+        },
+    }
+}
+
+export const dxLoading = (isLoading) => {
+    return {
+        type: LOADING_REQUESTED,
+        payload: {
+            isLoading,
         },
     }
 }

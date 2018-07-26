@@ -1,11 +1,20 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import FormData from 'form-data';
 import * as apiManager from '../helpers/apiManager';
+import * as helpers from '../helpers';
 
 import {
-    EXPERIENCE_SAVE_REQUESTED,
-    EXPERIENCE_SAVE__SUCCEEDED,
-    EXPERIENCE_SAVE__FAILED,
+    EXPERIENCE_INITIAL_REQUESTED,
+    EXPERIENCE_INITIAL__SUCCEEDED,
+    EXPERIENCE_INITIAL__FAILED,
+
+    EXPERIENCE_CREATE_REQUESTED,
+    EXPERIENCE_CREATE__SUCCEEDED,
+    EXPERIENCE_CREATE__FAILED,
+
+    EXPERIENCE_UPLOAD_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_FILE__FAILED,
 
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE__SUCCEEDED,
@@ -121,35 +130,204 @@ import {
 
 } from './constants';
 
-// Experience type request
-export const dxExperienceSaveHtmlUrl = (params) => {
-    let formData = new FormData();
-    formData.append('File', params.experience, 'blob.html');
-    return (
-        apiManager.dxFileApi(`/upload/file`, formData, true)
-    )
-}
-
-export function* dxExperienceSave(action) {
+// Experience init request
+export function* dxExperienceInital(action) {
     try {
-        const response = yield call(dxExperienceSaveHtmlUrl, action.payload);
-        let { Confirmation, Response, Message } = response;
         yield put({
-            type: EXPERIENCE_SAVE__SUCCEEDED,
-            payload: {
-                experience: action.payload.experience
-            },
+            type: EXPERIENCE_INITIAL__SUCCEEDED,
+            payload: {},
         });
     } catch (error) {
         yield put({
-            type: EXPERIENCE_SAVE__FAILED,
+            type: EXPERIENCE_INITIAL__FAILED,
             payload: error,
         });
     }
 }
 
-export function* dxExperienceSaveSaga() {
-    yield takeEvery(EXPERIENCE_SAVE_REQUESTED, dxExperienceSave);
+export function* dxExperienceInitalSaga() {
+    yield takeEvery(EXPERIENCE_INITIAL_REQUESTED, dxExperienceInital);
+}
+
+// Experience create request
+export const dxExperienceCreateUrl = (params) => {
+
+    let experience = params.experience;
+    let {
+        type,
+        experienceTitle,
+        card,
+        pages,
+    } = experience;
+    const formattedParams = {
+        ExperienceType: type,
+        ExperienceTitle: experienceTitle,
+        ExperienceCard: {
+            CardGUID: card.cardGUID,
+            Type: card.type,
+            Title: card.title,
+            Content: card.content,
+            Settings: helpers.capitalize_array_object_key(card.settings),
+        },
+        ExperiencePages: __format_experience_params(pages)
+    };
+    return (
+        apiManager.dxApi(`/experience/create`, formattedParams, true)
+    )
+}
+
+const __format_experience_params = (pages) => {
+    let output = [];
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (!page.isDeleted) {
+            let sections = helpers.remove_is_deleted_item(page.sections);
+            sections = __extract_section_values(sections);
+            let item = {
+                PageGUID: page.pageGUID,
+                ParentPageGUID: page.parentPageGUID,
+                IsRoot: page.isRoot,
+                IsSplash: page.isSplash,
+                Title: page.title,
+                Sections: sections,
+            }
+            output.push(item);
+        }
+    }
+    return output;
+}
+
+const __extract_section_values = (sections) => {
+    let output = [];
+    for (let i = 0; i < sections.length; i++) {
+        let section = sections[i];
+        let item = {
+            SectionGUID: section.sectionGUID,
+            Type: section.type,
+        }
+        switch (section.type) {
+            case 'EDITOR':
+                item.Html = section.html;
+                break;
+            case 'BUTTON':
+                item.BtnContent = section.btnContent;
+                item.ConnectedPageGUID = section.connectedPageGUID;
+                break;
+            case 'EMBED_PDF':
+                item.Pdf = section.pdf;
+                break;
+            case 'SPLASH':
+                item.SplashContent = section.splashContent;
+                item.SplashImg = section.splashImg;
+                item.SplashColor = section.splashColor;
+                break;
+            case 'VIDEO':
+                item.VideoUrl = section.videoUrl;
+                break;
+            case 'IMAGE':
+                item.Img = section.img;
+                break;
+        }
+        output.push(item);
+    }
+    return output;
+}
+
+export function* dxExperienceCreate(action) {
+    try {
+        const response = yield call(dxExperienceCreateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_CREATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_CREATE__SUCCEEDED,
+                payload: {},
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CREATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceCreateSaga() {
+    yield takeEvery(EXPERIENCE_CREATE_REQUESTED, dxExperienceCreate);
+}
+
+// Experience upload file request
+export const dxExperienceUploadFileUrl = (params) => {
+    let formData = new FormData();
+    let blob = new Blob([params.htmlContent], { type: 'text/html' });
+    formData.append('File', blob, 'blob.html');
+    return (
+        apiManager.dxFileApi(`/upload/file`, formData, true)
+    )
+}
+
+export function* dxExperienceUploadSingleFile(section) {
+    try {
+        const response = yield call(dxExperienceUploadFileUrl, section)
+        return response;
+    } catch (err) {
+        return err;
+    }
+}
+
+export function* dxExperienceUploadFiles(action) {
+    try {
+
+        let experience = action.payload.experience;
+        let {
+            type,
+            pages,
+        } = experience;
+
+        if (type == 0) {
+            yield put({
+                type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+                payload: {
+                    experience: action.payload.experience
+                },
+            });
+        } else {
+
+            for (let i = 0; i < pages.length; i++) {
+                let page = pages[i];
+                if (!page.IsDeleted) {
+                    for (let j = 0; j < page.Sections.length; j++) {
+                        let section = page.Sections[j];
+                        if (!section.IsDeleted && section.Type == 'EDITOR') {
+                            let response = yield call(dxExperienceUploadSingleFile, section);
+                            if (response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                        }
+                    }
+                }
+            }
+        }
+
+        yield put({
+            type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+            payload: {
+                experience
+            },
+        });
+
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPLOAD_FILE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUploadFileSaga() {
+    yield takeEvery(EXPERIENCE_UPLOAD_FILE_REQUESTED, dxExperienceUploadFiles);
 }
 
 // Experience type request

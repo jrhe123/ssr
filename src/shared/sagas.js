@@ -14,7 +14,9 @@ import {
 
 // NewExperience
 import { 
-    dxExperienceSaveSaga,
+    dxExperienceInitalSaga,
+    dxExperienceCreateSaga,
+    dxExperienceUploadFileSaga,
     dxExperienceTypeSaga,
     dxExperienceTypeUpdateSaga,
     dxExperienceIndexUpdateSaga,
@@ -61,6 +63,7 @@ import {
     dxValidateTokenSaga,
     dxNavigateHistorySaga,
     dxAlertSaga,
+    dxLoadingSaga,
 } from './globalSagas';
 
 
@@ -75,7 +78,9 @@ export default function* rootSaga() {
         dxFetchExperienceSaga(),
 
         // NewExperience
-        dxExperienceSaveSaga(),
+        dxExperienceInitalSaga(),
+        dxExperienceCreateSaga(),
+        dxExperienceUploadFileSaga(),
         dxExperienceTypeSaga(),
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),
@@ -120,5 +125,6 @@ export default function* rootSaga() {
         dxValidateTokenSaga(),
         dxNavigateHistorySaga(),
         dxAlertSaga(),
+        dxLoadingSaga(),
     ]);
 }

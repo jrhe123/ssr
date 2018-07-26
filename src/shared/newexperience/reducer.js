@@ -1,5 +1,7 @@
 import {
-    EXPERIENCE_SAVE__SUCCEEDED,
+    EXPERIENCE_INITIAL__SUCCEEDED,
+    EXPERIENCE_CREATE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
@@ -47,79 +49,81 @@ import { search_object_index_by_value } from '../helpers';
 import { uuid } from '../helpers/tools';
 
 let templateCard = {
-    cardGUID: null,
-    content: null,      // card content
-    settings: [],       // card settings
-    title: null,        // display card title desc
-    type: null          // card type
+    CardGUID: null,
+    Content: null,      // card content
+    Settings: [],       // card settings
+    Title: null,        // display card title desc
+    Type: null          // card type
 };
 let templateNewPage = {
-    pageGUID: null,
-    parentPageGUID: null,
-    isRoot: false,      // root page
-    isSplash: false,    // splash
-    title: '',      // page title
-    sections: [],   // page sections
-    isConnected: false,     // page connected
-    isDeleted: false,       // page deleted
+    PageGUID: null,
+    ParentPageGUID: null,
+    IsRoot: false,      // root page
+    IsSplash: false,    // splash
+    Title: '',      // page title
+    Sections: [],   // page sections
+    IsConnected: false,     // page connected
+    IsDeleted: false,       // page deleted
 };
 let templateNewSection = {
-    sectionGUID: null,
-    index: null,    // quill editor tool bar render order
-    type: null,     // section type
-    isActive: false,    // section active
-    htmlContent: '',    // html content
-    btnContent: '',     // btn label
-    connectedPageGUID: null,     // btn connect page guid
-    pdf: null,        // pdf file path
-    splashContent: 'Splash image with page title',      // splash content
-    splashImg: null,        // splash img
-    splashColor: '#ffffff',  // splash color
-    videoInput: null,    // video input
-    videoUrl: null,      // video url
-    img: null,        // img
-    isDeleted: false,       // section deleted
-    pageGUID: null
+    SectionGUID: null,
+    Index: null,    // quill editor tool bar render order
+    Type: null,     // section type
+    IsActive: false,    // section active
+    HtmlContent: '',    // html content
+    BtnContent: '',     // btn label
+    ConnectedPageGUID: null,     // btn connect page guid
+    Pdf: null,        // pdf file path
+    SplashContent: 'Splash image with page title',      // splash content
+    SplashImg: null,        // splash img
+    SplashColor: '#ffffff',  // splash color
+    VideoInput: null,    // video input
+    VideoUrl: null,      // video url
+    Img: null,        // img
+    IsDeleted: false,       // section deleted
+    PageGUID: null
 };
 const initialState = {
-    index: 0,               // section index
-    cardTemplates: [],      // card templates
-    pageTemplates: [],      // page templates
-    experience: {
-        type: '0',      // with OR without page(s)
-        index: '0',     // step
+    IsCompleted: false,     // complete experience
+    IsFilesUploaded: false, // upload html files
+    Index: 0,               // section index
+    CardTemplates: [],      // card templates
+    PageTemplates: [],      // page templates
+    Experience: {
+        Type: '0',      // with OR without page(s)
+        Index: '0',     // step
 
-        isCardTemplateMenuOpen: true,   // card template menu
-        isCardTemplateSaved: false,     // card saved
-        cardTemplate: null,     // card template
-        card: null,             // card storage
+        IsCardTemplateMenuOpen: true,   // card template menu
+        IsCardTemplateSaved: false,     // card saved
+        CardTemplate: null,     // card template
+        Card: null,             // card storage
 
-        isPageTemplateMenuOpen: true,       // page template menu
-        isPagesSaved: false,                // page saved
-        activePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
+        IsPageTemplateMenuOpen: true,       // page template menu
+        IsPagesSaved: false,                // page saved
+        ActivePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
 
-        isPageCarouselMenuOpen: false,      // page carousel menu
+        IsPageCarouselMenuOpen: false,      // page carousel menu
 
-        experienceTitle: null,      // experience title
-        cardTitle: 'Card 1',        // experience card title
+        ExperienceTitle: 'New Experience',      // experience title
+        CardTitle: 'Card 1',        // experience card title
 
-        tools: [],      // toolbars
-        pages: [],      // pages
-        newPage: Object.assign({}, templateNewPage),        // current working page
-        activePageSectionIndex: 0,      // active section on a page
+        Tools: [],      // toolbars
+        Pages: [],      // pages
+        NewPage: Object.assign({}, templateNewPage),        // current working page
+        ActivePageSectionIndex: 0,      // active section on a page
     },
 };
 
 const newexperienceReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
-    let tmpIndex = updated.index;
-    let tmpExperience = Object.assign({}, updated.experience);
-    let tmpCardTemplate = Object.assign({}, tmpExperience.cardTemplate);
-    let tmpTools = Object.assign([], tmpExperience.tools);
-    let tmpPages = Object.assign([], tmpExperience.pages);
-    let tmpNewPage = Object.assign({}, tmpExperience.newPage);
-    let tmpNewPageSections = Object.assign([], tmpNewPage.sections);
+    let tmpIndex = updated.Index;
+    let tmpExperience = Object.assign({}, updated.Experience);
+    let tmpCardTemplate = Object.assign({}, tmpExperience.CardTemplate);
+    let tmpTools = Object.assign([], tmpExperience.Tools);
+    let tmpPages = Object.assign([], tmpExperience.Pages);
+    let tmpNewPage = Object.assign({}, tmpExperience.NewPage);
+    let tmpNewPageSections = Object.assign([], tmpNewPage.Sections);
 
     let tmpIsRootPage;
     let tmpConnectedPageGUID;
@@ -139,225 +143,255 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     switch (type) {
 
-        case EXPERIENCE_SAVE__SUCCEEDED:
-            console.log('payload.experience: ', payload.experience);
+        case EXPERIENCE_INITIAL__SUCCEEDED:
+            tmpExperience = {
+                Type: '0',
+                Index: '0',
+                IsCardTemplateMenuOpen: true, 
+                IsCardTemplateSaved: false, 
+                CardTemplate: null, 
+                Card: null, 
+                IsPageTemplateMenuOpen: true, 
+                IsPagesSaved: false,        
+                ActivePageTemplateOptionIndex: 0, 
+                IsPageCarouselMenuOpen: false,   
+                ExperienceTitle: 'New Experience',
+                CardTitle: 'Card 1',
+                Tools: [],  
+                Pages: [],  
+                NewPage: Object.assign({}, templateNewPage),   
+                ActivePageSectionIndex: 0,  
+            }
+            updated.Experience = tmpExperience;
+            updated.IsCompleted = false;
+            updated.IsFilesUploaded = false;
+            updated.Index = 0;
+            return updated;
+
+        case EXPERIENCE_CREATE__SUCCEEDED:
+            updated.IsCompleted = true;
+            return updated;
+
+        case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
+            updated.IsFilesUploaded = true;
+            updated.Experience = payload.experience;
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
-            tmpExperience.type = payload.experienceType;
-            updated.experience = tmpExperience;
+            tmpExperience.Type = payload.experienceType;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_TYPE_UPDATE__SUCCEEDED:
-            tmpExperience.type = payload.experienceType;
-            updated.experience = tmpExperience;
+            tmpExperience.Type = payload.experienceType;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_INDEX_UPDATE__SUCCEEDED:
 
             if (payload.experienceIndex == 2
-                && !updated.experience.pages.length) {
-                tmpNewPage.pageGUID = uuid();
-                tmpNewPage.isRoot = true;
-                tmpNewPage.title = 'Page 1';
-                tmpExperience.newPage = tmpNewPage;
+                && !updated.Experience.Pages.length) {
+                tmpNewPage.PageGUID = uuid();
+                tmpNewPage.IsRoot = true;
+                tmpNewPage.Title = 'Page 1';
+                tmpExperience.NewPage = tmpNewPage;
                 tmpPages.push(tmpNewPage);
-                tmpExperience.pages = tmpPages;
+                tmpExperience.Pages = tmpPages;
             }
-            tmpExperience.index = payload.experienceIndex;
-            updated.experience = tmpExperience;
+            tmpExperience.Index = payload.experienceIndex;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_TITLE_UPDATE__SUCCEEDED:
             if (payload.type == 'EXPERIENCE') {
-                tmpExperience.experienceTitle = payload.title;
+                tmpExperience.ExperienceTitle = payload.title;
             } else if (payload.type == 'CARD') {
-                tmpExperience.cardTitle = payload.title;
+                tmpExperience.CardTitle = payload.title;
             } else if (payload.type == 'PAGE') {
                 // update arr of pages
-                tmpPageGUID = updated.experience.newPage.pageGUID;
+                tmpPageGUID = updated.Experience.NewPage.PageGUID;
                 tmpUpdatePage = find_page_by_guid(tmpPageGUID, tmpPages);
-                tmpUpdatePage.page.title = payload.title;
+                tmpUpdatePage.page.Title = payload.title;
                 tmpPages[tmpUpdatePage.index] = tmpUpdatePage.page;
-                tmpExperience.pages = tmpPages;
+                tmpExperience.Pages = tmpPages;
 
                 // update new page
-                tmpNewPage.title = payload.title;
-                tmpExperience.newPage = tmpNewPage;
+                tmpNewPage.Title = payload.title;
+                tmpExperience.NewPage = tmpNewPage;
             }
-            updated.experience = tmpExperience;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_TOGGLE__SUCCEEDED:
-            tmpExperience.isCardTemplateMenuOpen = payload.toggle;
-            updated.experience = tmpExperience;
+            tmpExperience.IsCardTemplateMenuOpen = payload.toggle;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_FETCH__SUCCEEDED:
-            updated.cardTemplates = payload.templates;
+            updated.CardTemplates = payload.templates;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_SELECT__SUCCEEDED:
             tmpCardTemplate = Object.assign({}, templateCard);
-            tmpCardTemplate.cardGUID = uuid();
-            tmpCardTemplate.content = payload.template.Content;
-            tmpCardTemplate.settings = JSON.parse(JSON.stringify(payload.template.Settings));
-            tmpCardTemplate.title = payload.template.Title;
-            tmpCardTemplate.type = payload.template.Type;
-            tmpExperience.cardTemplate = tmpCardTemplate;
-            updated.experience = tmpExperience;
+            tmpCardTemplate.CardGUID = uuid();
+            tmpCardTemplate.Content = payload.template.Content;
+            tmpCardTemplate.Settings = JSON.parse(JSON.stringify(payload.template.Settings));
+            tmpCardTemplate.Title = payload.template.Title;
+            tmpCardTemplate.Type = payload.template.Type;
+            tmpExperience.CardTemplate = tmpCardTemplate;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_IMAGE__SUCCEEDED:
-            tmpCardTemplate.settings[0].Default = payload.imgFile;
-            tmpExperience.cardTemplate = tmpCardTemplate;
-            updated.experience = tmpExperience;
+            tmpCardTemplate.Settings[0].Default = payload.imgFile;
+            tmpExperience.CardTemplate = tmpCardTemplate;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_COLOR__SUCCEEDED:
-            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.settings, payload.type);
-            tmpCardTemplate.settings[tmpSettingIndex].Default = payload.color;
-            tmpExperience.cardTemplate = tmpCardTemplate;
-            updated.experience = tmpExperience;
+            tmpSettingIndex = search_object_index_by_value(tmpCardTemplate.Settings, payload.type);
+            tmpCardTemplate.Settings[tmpSettingIndex].Default = payload.color;
+            tmpExperience.CardTemplate = tmpCardTemplate;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_UPDATE_CONTENT__SUCCEEDED:
-            tmpCardTemplate.content = payload.content;
-            tmpExperience.cardTemplate = tmpCardTemplate;
-            updated.experience = tmpExperience;
+            tmpCardTemplate.Content = payload.content;
+            tmpExperience.CardTemplate = tmpCardTemplate;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_SAVE__SUCCEEDED:
-            tmpExperience.index = 0;
-            tmpExperience.isCardTemplateSaved = true;
-            tmpExperience.card = Object.assign({}, tmpCardTemplate);
-            updated.experience = tmpExperience;
+            tmpExperience.Index = 0;
+            tmpExperience.IsCardTemplateSaved = true;
+            tmpExperience.Card = Object.assign({}, tmpCardTemplate);
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_CARD_TEMPLATE_REMOVE__SUCCEEDED:
-            tmpExperience.isCardTemplateSaved = false;
-            tmpExperience.cardTemplate = null;
-            tmpExperience.cardTitle = '';
-            tmpExperience.card = null;
-            updated.experience = tmpExperience;
+            tmpExperience.IsCardTemplateSaved = false;
+            tmpExperience.CardTemplate = null;
+            tmpExperience.CardTitle = '';
+            tmpExperience.Card = null;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED:
-            tmpExperience.index = 0;
-            tmpExperience.isPagesSaved = true;
-            updated.experience = tmpExperience;
+            tmpExperience.Index = 0;
+            tmpExperience.IsPagesSaved = true;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED:
-            tmpExperience.isPageTemplateMenuOpen = true;
-            tmpExperience.isPagesSaved = false;
-            tmpExperience.activePageTemplateOptionIndex = 0;
-            tmpExperience.isPageCarouselMenuOpen = false;
-            tmpExperience.tools = [];
-            tmpExperience.pages = [];
-            tmpExperience.newPage = Object.assign({}, templateNewPage);
-            tmpExperience.activePageSectionIndex = 0;
-            updated.experience = tmpExperience;
+            tmpExperience.IsPageTemplateMenuOpen = true;
+            tmpExperience.IsPagesSaved = false;
+            tmpExperience.ActivePageTemplateOptionIndex = 0;
+            tmpExperience.IsPageCarouselMenuOpen = false;
+            tmpExperience.Tools = [];
+            tmpExperience.Pages = [];
+            tmpExperience.NewPage = Object.assign({}, templateNewPage);
+            tmpExperience.ActivePageSectionIndex = 0;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:
-            tmpExperience.isPageTemplateMenuOpen = payload.toggle;
-            updated.experience = tmpExperience;
+            tmpExperience.IsPageTemplateMenuOpen = payload.toggle;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED:
-            tmpExperience.activePageTemplateOptionIndex = payload.index;
-            updated.experience = tmpExperience;
+            tmpExperience.ActivePageTemplateOptionIndex = payload.index;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED:
-            updated.pageTemplates = payload.templates;
+            updated.PageTemplates = payload.templates;
             return updated;
 
         case EXPERIENCE_PAGE_CAROUSEL_TOGGLE__SUCCEEDED:
-            tmpExperience.isPageCarouselMenuOpen = payload.toggle;
-            updated.experience = tmpExperience;
+            tmpExperience.IsPageCarouselMenuOpen = payload.toggle;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_CAROUSEL_ACTIVE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
-            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
+            tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.Sections);
 
-            tmpExperience.newPage = Object.assign({}, tmpNewPage.page);
-            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-            updated.experience = tmpExperience;
+            tmpExperience.NewPage = Object.assign({}, tmpNewPage.page);
+            tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_ADD_PAGE__SUCCEEDED:
             tmpNewPage = Object.assign({}, templateNewPage);
-            tmpNewPage.pageGUID = uuid();
-            tmpNewPage.title = `Page ${find_number_of_display_page(tmpPages) + 1}`;
+            tmpNewPage.PageGUID = uuid();
+            tmpNewPage.Title = `Page ${find_number_of_display_page(tmpPages) + 1}`;
             tmpPages.push(tmpNewPage);
 
-            tmpExperience.pages = tmpPages;
-            tmpExperience.newPage = tmpNewPage;
-            updated.experience = tmpExperience;
+            tmpExperience.Pages = tmpPages;
+            tmpExperience.NewPage = tmpNewPage;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
-            tmpPages[tmpNewPage.index].isDeleted = true;
-            tmpSections = tmpPages[tmpNewPage.index].sections;
+            tmpPages[tmpNewPage.index].IsDeleted = true;
+            tmpSections = tmpPages[tmpNewPage.index].Sections;
             disconnect_pages_by_sections(tmpSections, tmpPages);
 
             tmpPagesLength = find_number_of_display_page(tmpPages);
-            tmpIsRootPage = tmpPages[tmpNewPage.index].isRoot;
+            tmpIsRootPage = tmpPages[tmpNewPage.index].IsRoot;
 
             if (!tmpPagesLength) {   // check number of pages which existed and not deleted
                 tmpNewPage = Object.assign({}, templateNewPage);
-                tmpNewPage.isRoot = true;
-                tmpNewPage.pageGUID = uuid();
-                tmpNewPage.title = `Page ${tmpPagesLength + 1}`;
+                tmpNewPage.IsRoot = true;
+                tmpNewPage.PageGUID = uuid();
+                tmpNewPage.Title = `Page ${tmpPagesLength + 1}`;
                 tmpPages.push(tmpNewPage);
-                tmpExperience.newPage = tmpNewPage;
+                tmpExperience.NewPage = tmpNewPage;
             } else {
                 tmpPageGUID = find_previous_display_page_guid(tmpPages);
                 tmpNewPage = find_page_by_guid(tmpPageGUID, tmpPages);
                 // delete root page
                 if (tmpIsRootPage) {
-                    tmpNewPage.page.isRoot = true;
-                    tmpNewPage.page.parentPageGUID = null;
+                    tmpNewPage.page.IsRoot = true;
+                    tmpNewPage.page.ParentPageGUID = null;
                 }
-                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.sections);
-                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-                tmpExperience.newPage = tmpNewPage.page;
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.page.Sections);
+                tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+                tmpExperience.NewPage = tmpNewPage.page;
             }
 
             // update tools
             deactive_tools_by_page_guid(payload.pageGUID, tmpTools);
-            tmpExperience.tools = tmpTools;
-            tmpExperience.pages = tmpPages;
-            updated.experience = tmpExperience;
+            tmpExperience.Tools = tmpTools;
+            tmpExperience.Pages = tmpPages;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_ADD_ELEM__SUCCEEDED:
-            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
-            if (!tmpUpdatePage.page.isSplash
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
+            if (!tmpUpdatePage.page.IsSplash
                 || payload.type != 'SPLASH'
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, templateNewSection);
-                tmpNewSection.sectionGUID = uuid();
-                tmpNewSection.pageGUID = tmpNewPage.pageGUID;
-                tmpNewSection.index = Number(tmpIndex);
-                tmpNewSection.type = payload.type;
-                tmpNewSection.isActive = true;
+                tmpNewSection.SectionGUID = uuid();
+                tmpNewSection.PageGUID = tmpNewPage.PageGUID;
+                tmpNewSection.Index = Number(tmpIndex);
+                tmpNewSection.Type = payload.type;
+                tmpNewSection.IsActive = true;
 
                 // update new page
-                deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
+                deactive_other_sections(tmpNewSection.SectionGUID, tmpNewPageSections);
                 if (payload.type == 'SPLASH') {   // first elem of arr
                     tmpNewPageSections.unshift(tmpNewSection);
                 } else {
                     tmpNewPageSections.push(tmpNewSection);
                 }
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
-                tmpNewPage.sections = tmpNewPageSections;
+                tmpNewPage.Sections = tmpNewPageSections;
                 if (payload.type == 'SPLASH') {
-                    tmpNewPage.isSplash = true;
+                    tmpNewPage.IsSplash = true;
                 }
 
                 // update arr of pages
@@ -366,63 +400,63 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 // add to tools
                 tmpTools.push(tmpNewSection);
 
-                tmpExperience.tools = tmpTools;
-                tmpExperience.pages = tmpPages;
-                tmpExperience.newPage = tmpNewPage;
-                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-                updated.experience = tmpExperience;
-                updated.index = tmpIndex + 1;
+                tmpExperience.Tools = tmpTools;
+                tmpExperience.Pages = tmpPages;
+                tmpExperience.NewPage = tmpNewPage;
+                tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+                updated.Experience = tmpExperience;
+                updated.Index = tmpIndex + 1;
             }
             return updated;
 
         case EXPERIENCE_PAGE_DELETE_ELEM__SUCCEEDED:
-            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
-            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
+            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.Sections, payload.sectionGUID);
 
             // update new page
-            tmpNewPageSections[tmpSectionIndex].isDeleted = true;
+            tmpNewPageSections[tmpSectionIndex].IsDeleted = true;
             // case: BUTTON
-            if(tmpNewPageSections[tmpSectionIndex].type == 'BUTTON'
-                && tmpNewPageSections[tmpSectionIndex].connectedPageGUID != null){
-                tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].connectedPageGUID, tmpPages);
-                tmpConnectedPage.page.isConnected = false;
+            if (tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
+                && tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID != null) {
+                tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID, tmpPages);
+                tmpConnectedPage.page.IsConnected = false;
                 tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
             }
             // case: SPLASH
-            if(tmpNewPageSections[tmpSectionIndex].type == 'SPLASH'){
-                tmpNewPage.isSplash = false;
+            if (tmpNewPageSections[tmpSectionIndex].Type == 'SPLASH') {
+                tmpNewPage.IsSplash = false;
             }
-            tmpNewPage.sections = tmpNewPageSections;
+            tmpNewPage.Sections = tmpNewPageSections;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
             // update tools
             deactive_tools_by_section_guid(payload.sectionGUID, tmpTools);
 
-            tmpExperience.tools = tmpTools;
-            tmpExperience.pages = tmpPages;
-            tmpExperience.newPage = tmpNewPage;
-            updated.experience = tmpExperience;
+            tmpExperience.Tools = tmpTools;
+            tmpExperience.Pages = tmpPages;
+            tmpExperience.NewPage = tmpNewPage;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_COPY_ELEM__SUCCEEDED:
-            tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
-            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.sections, payload.sectionGUID);
-            tmpCopySection = tmpUpdatePage.page.sections[tmpSectionIndex];
+            tmpUpdatePage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
+            tmpSectionIndex = find_section_index_by_guid(tmpNewPage.Sections, payload.sectionGUID);
+            tmpCopySection = tmpUpdatePage.page.Sections[tmpSectionIndex];
 
-            if (tmpCopySection.type != 'SPLASH'
+            if (tmpCopySection.Type != 'SPLASH'
             ) {     // only one splash per page
                 tmpNewSection = Object.assign({}, tmpCopySection);
-                tmpNewSection.sectionGUID = uuid();
-                tmpNewSection.index = Number(tmpIndex);
-                tmpNewSection.connectedPageGUID = null;
-                tmpNewSection.isActive = true;
+                tmpNewSection.SectionGUID = uuid();
+                tmpNewSection.Index = Number(tmpIndex);
+                tmpNewSection.ConnectedPageGUID = null;
+                tmpNewSection.IsActive = true;
 
                 // update new page
-                deactive_other_sections(tmpNewSection.sectionGUID, tmpNewPageSections);
+                deactive_other_sections(tmpNewSection.SectionGUID, tmpNewPageSections);
                 tmpNewPageSections.insert(tmpSectionIndex + 1, tmpNewSection);  // insert after clone target
                 tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
-                tmpNewPage.sections = tmpNewPageSections;
+                tmpNewPage.Sections = tmpNewPageSections;
 
                 // update arr of pages
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
@@ -430,12 +464,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 // add to tools
                 tmpTools.push(tmpNewSection);
 
-                tmpExperience.tools = tmpTools;
-                tmpExperience.pages = tmpPages;
-                tmpExperience.newPage = tmpNewPage;
-                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-                updated.experience = tmpExperience;
-                updated.index = tmpIndex + 1;
+                tmpExperience.Tools = tmpTools;
+                tmpExperience.Pages = tmpPages;
+                tmpExperience.NewPage = tmpNewPage;
+                tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+                updated.Experience = tmpExperience;
+                updated.Index = tmpIndex + 1;
             }
             return updated;
 
@@ -443,26 +477,26 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpDragIndex = payload.dragIndex;
             tmpHoverIndex = payload.hoverIndex;
 
-            tmpDragSection = tmpNewPage.sections[tmpDragIndex];
-            tmpHoverSection = tmpNewPage.sections[tmpHoverIndex];
-            if (tmpDragSection.type != 'SPLASH'
-                && tmpHoverSection.type != 'SPLASH') {
+            tmpDragSection = tmpNewPage.Sections[tmpDragIndex];
+            tmpHoverSection = tmpNewPage.Sections[tmpHoverIndex];
+            if (tmpDragSection.Type != 'SPLASH'
+                && tmpHoverSection.Type != 'SPLASH') {
                 // update new page
                 tmpNewPage = update(tmpNewPage, {
-                    sections: {
+                    Sections: {
                         $splice: [[tmpDragIndex, 1], [tmpHoverIndex, 0, tmpDragSection]],
                     },
                 });
-                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.sections);
+                tmpActiveSectionIndex = find_active_section_index(tmpNewPage.Sections);
 
                 // update arr of pages
-                tmpUpdatePage = find_page_by_guid(tmpNewPage.pageGUID, tmpPages);
+                tmpUpdatePage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpNewPage);
 
-                tmpExperience.pages = tmpPages;
-                tmpExperience.newPage = tmpNewPage;
-                tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-                updated.experience = tmpExperience;
+                tmpExperience.Pages = tmpPages;
+                tmpExperience.NewPage = tmpNewPage;
+                tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+                updated.Experience = tmpExperience;
             }
             return updated;
 
@@ -470,91 +504,91 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             deactive_other_sections(payload.sectionGUID, tmpNewPageSections);
             tmpActiveSectionIndex = find_active_section_index(tmpNewPageSections);
 
-            tmpNewPage.sections = tmpNewPageSections;
-            tmpExperience.newPage = tmpNewPage;
-            tmpExperience.activePageSectionIndex = tmpActiveSectionIndex;
-            updated.experience = tmpExperience;
+            tmpNewPage.Sections = tmpNewPageSections;
+            tmpExperience.NewPage = tmpNewPage;
+            tmpExperience.ActivePageSectionIndex = tmpActiveSectionIndex;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
-            tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
-            if (tmpUpdateSection.type == payload.type
+            tmpUpdateSection = find_section_by_guid(tmpNewPage.Sections, payload.sectionGUID);
+            if (tmpUpdateSection.Type == payload.type
                 || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
-                        tmpUpdateSection.htmlContent = payload.content;
+                        tmpUpdateSection.HtmlContent = payload.content;
                         break;
                     case 'BUTTON':
-                        tmpUpdateSection.btnContent = payload.content;
+                        tmpUpdateSection.BtnContent = payload.content;
                         break;
                     case 'EMBED_PDF':
-                        tmpUpdateSection.pdf = payload.content;
+                        tmpUpdateSection.Pdf = payload.content;
                         break;
                     case 'SPLASH_CONTENT':
-                        tmpUpdateSection.splashContent = payload.content;
+                        tmpUpdateSection.SplashContent = payload.content;
                         break;
                     case 'SPLASH_IMG':
-                        tmpUpdateSection.splashImg = payload.content;
+                        tmpUpdateSection.SplashImg = payload.content;
                         break;
                     case 'SPLASH_COLOR':
-                        tmpUpdateSection.splashColor = payload.content;
+                        tmpUpdateSection.SplashColor = payload.content;
                         break;
                     case 'VIDEO_URL':
-                        tmpUpdateSection.videoInput = payload.content;
+                        tmpUpdateSection.VideoInput = payload.content;
                         break;
                     case 'VIDEO_CONFIRM':
-                        tmpUpdateSection.videoUrl = tmpUpdateSection.videoInput;
+                        tmpUpdateSection.VideoUrl = tmpUpdateSection.VideoInput;
                         break;
                     case 'IMAGE':
-                        tmpUpdateSection.img = payload.content;
+                        tmpUpdateSection.Img = payload.content;
                         break;
                     default:
                         break;
                 }
-                tmpExperience.newPage = tmpNewPage;
-                updated.experience = tmpExperience;
+                tmpExperience.NewPage = tmpNewPage;
+                updated.Experience = tmpExperience;
             }
             return updated;
 
         case EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED:
-            tmpUpdateSection = find_section_by_guid(tmpNewPage.sections, payload.sectionGUID);
-            tmpConnectedPageGUID = tmpUpdateSection.connectedPageGUID;
+            tmpUpdateSection = find_section_by_guid(tmpNewPage.Sections, payload.sectionGUID);
+            tmpConnectedPageGUID = tmpUpdateSection.ConnectedPageGUID;
             if (payload.pageGUID) {
                 tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
-                if (!tmpUpdatePage.page.isRoot
-                    && !tmpUpdatePage.page.isConnected) {
+                if (!tmpUpdatePage.page.IsRoot
+                    && !tmpUpdatePage.page.IsConnected) {
                     // connect section
-                    tmpUpdateSection.connectedPageGUID = payload.pageGUID;
+                    tmpUpdateSection.ConnectedPageGUID = payload.pageGUID;
                     // connect page
-                    tmpUpdatePage.page.parentPageGUID = tmpUpdateSection.pageGUID;
-                    tmpUpdatePage.page.isConnected = true;
+                    tmpUpdatePage.page.ParentPageGUID = tmpUpdateSection.PageGUID;
+                    tmpUpdatePage.page.IsConnected = true;
 
                     // disconnect page
-                    if(tmpConnectedPageGUID){
+                    if (tmpConnectedPageGUID) {
                         tmpConnectedPage = find_page_by_guid(tmpConnectedPageGUID, tmpPages);
-                        tmpConnectedPage.page.isConnected = false;
+                        tmpConnectedPage.page.IsConnected = false;
                         tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
                     }
 
                     // update arr of pages
                     tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
-                    tmpExperience.pages = tmpPages;
-                    tmpExperience.newPage = tmpNewPage;
-                    updated.experience = tmpExperience;
+                    tmpExperience.Pages = tmpPages;
+                    tmpExperience.NewPage = tmpNewPage;
+                    updated.Experience = tmpExperience;
                 }
             } else {
                 // disconnect page
-                tmpUpdatePage = find_page_by_guid(tmpUpdateSection.connectedPageGUID, tmpPages);
-                tmpUpdatePage.page.parentPageGUID = null;
-                tmpUpdatePage.page.isConnected = false;
+                tmpUpdatePage = find_page_by_guid(tmpUpdateSection.ConnectedPageGUID, tmpPages);
+                tmpUpdatePage.page.ParentPageGUID = null;
+                tmpUpdatePage.page.IsConnected = false;
                 // disconnect section
-                tmpUpdateSection.connectedPageGUID = null;
+                tmpUpdateSection.ConnectedPageGUID = null;
 
                 // update arr of pages
                 tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
-                tmpExperience.pages = tmpPages;
-                tmpExperience.newPage = tmpNewPage;
-                updated.experience = tmpExperience;
+                tmpExperience.Pages = tmpPages;
+                tmpExperience.NewPage = tmpNewPage;
+                updated.Experience = tmpExperience;
             }
             return updated;
 
@@ -565,7 +599,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
 const find_page_by_guid = (guid, pages) => {
     for (let i = 0; i < pages.length; i++) {
-        if (guid == pages[i].pageGUID) {
+        if (guid == pages[i].PageGUID) {
             return {
                 index: i,
                 page: pages[i]
@@ -576,16 +610,16 @@ const find_page_by_guid = (guid, pages) => {
 }
 const deactive_other_sections = (guid, sections) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].sectionGUID != guid) {
-            sections[i].isActive = false;
+        if (sections[i].SectionGUID != guid) {
+            sections[i].IsActive = false;
         } else {
-            sections[i].isActive = true;
+            sections[i].IsActive = true;
         }
     }
 }
 const find_active_section_index = (sections) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].isActive) {
+        if (sections[i].IsActive) {
             return i;
         }
     }
@@ -593,7 +627,7 @@ const find_active_section_index = (sections) => {
 }
 const find_section_by_guid = (sections, targetSectionGUID) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].sectionGUID == targetSectionGUID) {
+        if (sections[i].SectionGUID == targetSectionGUID) {
             return sections[i];
         }
     }
@@ -601,7 +635,7 @@ const find_section_by_guid = (sections, targetSectionGUID) => {
 }
 const find_section_index_by_guid = (sections, targetSectionGUID) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].sectionGUID == targetSectionGUID) {
+        if (sections[i].SectionGUID == targetSectionGUID) {
             return i;
         }
     }
@@ -609,22 +643,22 @@ const find_section_index_by_guid = (sections, targetSectionGUID) => {
 }
 const deactive_tools_by_section_guid = (guid, sections) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].sectionGUID == guid) {
-            sections[i].isActive = false;
+        if (sections[i].SectionGUID == guid) {
+            sections[i].IsActive = false;
         }
     }
 }
 const deactive_tools_by_page_guid = (guid, sections) => {
     for (let i = 0; i < sections.length; i++) {
-        if (sections[i].pageGUID == guid) {
-            sections[i].isActive = false;
+        if (sections[i].PageGUID == guid) {
+            sections[i].IsActive = false;
         }
     }
 }
 const find_number_of_display_page = (pages) => {
     let count = 0;
     for (let i = 0; i < pages.length; i++) {
-        if (!pages[i].isDeleted) {
+        if (!pages[i].IsDeleted) {
             count++;
         }
     }
@@ -632,18 +666,18 @@ const find_number_of_display_page = (pages) => {
 }
 const find_previous_display_page_guid = (pages) => {
     for (let i = 0; i < pages.length; i++) {
-        if (!pages[i].isDeleted) {
-            return pages[i].pageGUID;
+        if (!pages[i].IsDeleted) {
+            return pages[i].PageGUID;
         }
     }
 }
 const disconnect_pages_by_sections = (sections, pages) => {
-    for(let i = 0; i < sections.length; i++){
+    for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
-        if(section.type == 'BUTTON'
-            && section.connectedPageGUID){
-            let item = find_page_by_guid(section.connectedPageGUID, pages);
-            item.page.isConnected = false;
+        if (section.Type == 'BUTTON'
+            && section.ConnectedPageGUID) {
+            let item = find_page_by_guid(section.ConnectedPageGUID, pages);
+            item.page.IsConnected = false;
             pages[item.index] = item.page;
         }
     }

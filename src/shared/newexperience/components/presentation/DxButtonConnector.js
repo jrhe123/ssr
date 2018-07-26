@@ -16,7 +16,7 @@ import fonts from '../../../styles/fonts';
 class DxButtonConnector extends Component {
 
     handleBtnConnectPageChange = (page) => {
-        this.props.handleBtnConnectPageChange(page.pageGUID);
+        this.props.handleBtnConnectPageChange(page.PageGUID);
     }
 
     render() {
@@ -87,7 +87,7 @@ class DxButtonConnector extends Component {
                                         placeholder="select a page"
                                         style={connectorDropdownStyle}
                                         data={dropdownOptionArr}
-                                        textField='title'
+                                        textField='Title'
                                         onChange={page => this.handleBtnConnectPageChange(page)}
                                     />
                                 </div>

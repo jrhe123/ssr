@@ -10,6 +10,7 @@ import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
 import {
+    dxExperienceInitial as dxExperienceInitialAction,
     dxExperienceType as dxExperienceTypeAction
 } from './actions';
 
@@ -19,7 +20,8 @@ export class NewExperiencePage extends Component {
         const history = this.props.history;
         const experienceType = this.props.match.params.param;
         this.props.dxNavigateHistoryAction(history);
-        this.props.dxExperienceTypeAction(experienceType);
+        this.props.dxExperienceInitialAction();
+        this.props.dxExperienceTypeAction(experienceType.toString());
     }
 
     render() {
@@ -42,6 +44,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxNavigateHistoryAction,
+
+    dxExperienceInitialAction,
     dxExperienceTypeAction,
 }
 

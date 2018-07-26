@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 // component
-import ExperienceList from './ExperienceList';
-import NewExperienceModal from './NewExperienceModal';
+import ExperienceList from '../presentation/experience/ExperienceList';
+import NewExperienceModal from '../presentation/experience/NewExperienceModal';
+import SearchBar from '../../../components/searchBar/SearchBar';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import HelpOutline from '@material-ui/icons/HelpOutline';
 
 // redux
 import { connect } from 'react-redux';
@@ -51,40 +51,65 @@ class ExperienceContainer extends Component {
     render() {
 
         const {
-            mainContainerStyle,
+            TotalExperienceRecord,
+            Experiences,
+        } = this.props;
 
+        const {
+            tableContainerStyle,
+            tableWrapperStyle,
             newContentContainerStyle,
             imgStyle,
             labelStyle,
-            tableContainerStyle,
-            tableWrapperStyle,
-            fullBtnStyle,
+            addBtnStyle,
 
-            experienceContainerStyle,
-            contentContainerStyle,
-            newContainerStyle,
-            newBtnContainerStyle,
-            btnStyle,
-            iconStyle,
+            mainContainerStyle,
+            topBarContainerStyle,
+            topBarWrapperStyle,
+            searchContainerStyle,
+            addBtnContainerStyle,
+            experienceListContainerStyle,
+            experienceSortContainerStyle,
+            experienceNumberContainerStyle,
+            experienceNumberStyle,
+            experienceListWrapperStyle,
         } = styles;
 
         return (
-            <div style={mainContainerStyle}>
+            <div>
                 {
-                    this.props.experiences.length ?
+                    Experiences.length ?
                         (
-                            <div style={experienceContainerStyle}>
-                                <div style={contentContainerStyle}>
-                                    <ExperienceList />
-                                </div>
-                                <div style={newContainerStyle}>
-                                    <div style={newBtnContainerStyle}>
-                                        <Button
-                                            style={btnStyle}
-                                            variant="Add new experience">
-                                            Add Experience
+                            <div style={mainContainerStyle}>
+                                <div style={topBarContainerStyle}>
+                                    <div style={topBarWrapperStyle}>
+                                        <div style={searchContainerStyle}>
+                                            <SearchBar
+                                                isShort={false}
+                                                placeholder="search for card(s) and page(s)"
+                                            />
+                                        </div>
+                                        <div style={addBtnContainerStyle}>
+                                            <Button
+                                                onClick={() => this.handleCreateExperience()}
+                                                style={addBtnStyle}
+                                                variant="Add new experience">
+                                                Add Experience
                                         </Button>
-                                        <HelpOutline style={iconStyle} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={experienceListContainerStyle}>
+                                    <div style={experienceSortContainerStyle}>
+                                        <div style={experienceNumberContainerStyle}>
+                                            <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
+                                        </div>
+                                    </div>
+                                    <div style={experienceListWrapperStyle}>
+                                        <ExperienceList 
+                                            experiences={Experiences}
+                                            handleCreateExpClick={() => this.handleCreateExperience()}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +127,7 @@ class ExperienceContainer extends Component {
                                     </p>
                                     <Button
                                         onClick={() => this.handleCreateExperience()}
-                                        style={fullBtnStyle}
+                                        style={addBtnStyle}
                                         variant="Add new experience">
                                         Create an experience
                                     </Button>
@@ -123,9 +148,16 @@ class ExperienceContainer extends Component {
 
 
 const styles = {
-    mainContainerStyle: {
-        display: 'flex',
-        flexDirection: 'row',
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: `calc(100vh - ${sizes.headerHeight})`,
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center',
     },
     newContentContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -143,57 +175,60 @@ const styles = {
         color: colors.lightGreyColor,
         marginBottom: 36
     },
-    fullBtnStyle: {
+
+    mainContainerStyle: {
+        width: 'calc(100% - 192px - 48px)',
+        minHeight: `calc(100vh - ${sizes.headerHeight})`,
+        marginLeft: 192,
+        marginRight: 48,
+    },
+    topBarContainerStyle: {
+        paddingTop: 36,
+        paddingBottom: 48,
+        width: '100%',
+    },
+    topBarWrapperStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    searchContainerStyle: {
+        flex: 1,
+    },
+    addBtnContainerStyle: {
+        flex: '132px 0 0'
+    },
+    addBtnStyle: {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
         textTransform: 'capitalize',
     },
-    tableContainerStyle: {
-        position: 'relative',
-        display: 'table',
-        width: '100%',
-        height: `calc(100vh - ${sizes.headerHeight})`,
+    experienceListContainerStyle: {
+
     },
-    tableWrapperStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
-        textAlign: 'center',
+    experienceSortContainerStyle: {
+        width: 240,
+        paddingBottom: 12,
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
-    experienceContainerStyle: {
-        height: `calc(100vh - ${sizes.headerHeight})`,
-        width: '100%',
-        paddingLeft: 60,
-        paddingRight: 60,
-        border: '1px solid red'
+    experienceNumberContainerStyle: {
+
     },
-    contentContainerStyle: {
-        flex: 4
+    experienceNumberStyle: {
+        color: colors.labelColor,
+        fontSize: fonts.h2,
+        margin: 0,
     },
-    newContainerStyle: {
-        flex: 1
-    },
-    newBtnContainerStyle: {
-        marginTop: 48,
-        position: 'relative',
-    },
-    btnStyle: {
-        backgroundColor: colors.blueColor,
-        color: colors.whiteColor,
-        textTransform: 'capitalize',
-        width: 132
-    },
-    iconStyle: {
-        position: 'absolute',
-        top: 6,
-        left: 138,
-        cursor: 'pointer'
+    experienceListWrapperStyle: {
+        marginTop: 24,
     },
 }
 
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        experiences: state.dashboard.experiences,
+        TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
+        Experiences: state.dashboard.Experiences,
     }
 }
 

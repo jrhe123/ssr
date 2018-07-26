@@ -111,7 +111,7 @@ const styles = {
     searchIconContainerStyle: {
         marginLeft: 1,
         marginRight: -3,
-        marginBottom: -9,
+        marginBottom: -3,
         paddingLeft: 0,
     },
     iconStyle: {

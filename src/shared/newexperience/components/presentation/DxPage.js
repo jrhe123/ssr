@@ -48,7 +48,7 @@ class DxPage extends Component {
         } = this.props;
 
         let page = this.findRootPage(pages);
-        let sections = page.sections;
+        let sections = page.Sections;
 
         
 
@@ -58,7 +58,7 @@ class DxPage extends Component {
 
         let section = sections.map((section, i) => {
             return (
-                <div className={!section.isDeleted ? 'dx_show' : 'dx_hidden'}
+                <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
                     style={elemContainerStyle}>
                     <ThumbnailPhoneElement
                         key={i}
@@ -77,7 +77,7 @@ class DxPage extends Component {
     findRootPage = (pages) => {
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (page.isRoot && !page.isDeleted) {
+            if (page.IsRoot && !page.IsDeleted) {
                 return page;
             }
         }
@@ -89,7 +89,7 @@ class DxPage extends Component {
         let pageNo = 0;
         for (let i =0; i < pages.length; i++) {
             let page = pages[i];
-            if (page.isDeleted == false)
+            if (page.IsDeleted == false)
             {
                 pageNo++;
             }
@@ -147,7 +147,7 @@ class DxPage extends Component {
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
                                 <div style={pageTitleContainerStyle}>
-                                    <p style={pageTitleStyle}>{page.title}</p>
+                                    <p style={pageTitleStyle}>{page.Title}</p>
                                 </div>
                             </div>
                         </div>

@@ -41,11 +41,11 @@ class PageCarousel extends Component {
             experience,
         } = this.props;
         let {
-            pages,
-            newPage,
+            Pages,
+            NewPage,
         } = experience;
 
-        pages = find_display_pages(pages);
+        Pages = find_display_pages(Pages);
 
         const settings = {
             dots: false,
@@ -62,18 +62,18 @@ class PageCarousel extends Component {
         return (
             <div>
                 {
-                    pages.length > displayNumber ?
+                    Pages.length > displayNumber ?
                         (
                             <Slider {...settings}>
                                 {
-                                    pages.map((page, index) => (
+                                    Pages.map((page, index) => (
                                         <ThumbnailPage
                                             key={index}
-                                            title={page.title}
-                                            active={page.pageGUID == newPage.pageGUID ? true : false}
+                                            title={page.Title}
+                                            active={page.PageGUID == NewPage.PageGUID ? true : false}
                                             page={page}
-                                            handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
-                                            handleDeletePage={() => this.handleDeletePage(page.pageGUID)}
+                                            handleClickActivePage={() => this.props.handleClickActivePage(page.PageGUID)}
+                                            handleDeletePage={() => this.handleDeletePage(page.PageGUID)}
                                         />
                                     ))
                                 }
@@ -83,14 +83,14 @@ class PageCarousel extends Component {
                         (
                             <div style={mainContainerStyle}>
                                 {
-                                    pages.map((page, index) => (
+                                    Pages.map((page, index) => (
                                         <ThumbnailPage
                                             key={index}
-                                            title={page.title}
-                                            active={page.pageGUID == newPage.pageGUID ? true : false}
+                                            title={page.Title}
+                                            active={page.PageGUID == NewPage.PageGUID ? true : false}
                                             page={page}
-                                            handleClickActivePage={() => this.props.handleClickActivePage(page.pageGUID)}
-                                            handleDeletePage={() => this.handleDeletePage(page.pageGUID)}
+                                            handleClickActivePage={() => this.props.handleClickActivePage(page.PageGUID)}
+                                            handleDeletePage={() => this.handleDeletePage(page.PageGUID)}
                                         />
                                     ))
                                 }
@@ -116,7 +116,7 @@ const find_display_pages = (pages) => {
     let output = [];
     for (let i = 0; i < pages.length; i++) {
         let page = pages[i]
-        if (!page.isDeleted) {
+        if (!page.IsDeleted) {
             output.push(page);
         }
     }

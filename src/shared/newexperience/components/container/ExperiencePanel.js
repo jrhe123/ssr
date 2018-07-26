@@ -18,6 +18,7 @@ import {
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
+import sizes from '../../../styles/sizes';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
@@ -73,12 +74,12 @@ class ExperiencePanel extends Component {
         } = styles;
 
         const {
-            experience
+            Experience
         } = this.props;
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => console.log(JSON.stringify(experience))}>click me</a>
+                <a onClick={() => console.log(JSON.stringify(this.props.Experience))}>click me</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>
@@ -94,7 +95,7 @@ class ExperiencePanel extends Component {
                                         placeholder="type"
                                         width="120px"
                                         disabled={true}
-                                        value={experience.type == 0 ? 'card only' : 'card + page(s)'}
+                                        value={Experience.Type == 0 ? 'card only' : 'card + page(s)'}
                                     />
                                     <Button
                                         style={outlineBtnStyle}
@@ -141,7 +142,7 @@ class ExperiencePanel extends Component {
                 </div>
                 <div style={editContainerStyle}>
                     {
-                        !experience.isCardTemplateSaved ?
+                        !Experience.IsCardTemplateSaved ?
                             <a style={btnStyle}
                                 onClick={() => this.props.handleCreateCard()}
                                 variant="Create card"
@@ -155,8 +156,8 @@ class ExperiencePanel extends Component {
                                     isEditable={false}
                                     isClickable={false}
                                     isVideoInsertClickable={false}
-                                    cardTitle={this.props.experience.cardTitle}
-                                    template={this.props.experience.card}
+                                    cardTitle={this.props.Experience.CardTitle}
+                                    template={this.props.Experience.Card}
                                     handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
                                     handleConfirmDeleteCard={() => this.props.handleRemoveCardTemplateClick()}
                                 />
@@ -164,7 +165,7 @@ class ExperiencePanel extends Component {
                     }
                 </div>
                 {
-                    experience.type == 1 ?
+                    Experience.Type == 1 ?
                         (
                             <div>
                                 <div style={optionContainerStyle}>
@@ -184,7 +185,7 @@ class ExperiencePanel extends Component {
                                     </div>
                                 </div>
                                 {
-                                    !experience.isPagesSaved ?
+                                    !Experience.IsPagesSaved ?
                                         <div style={editContainerStyle}>
                                             <a style={btnStyle}
                                                 onClick={() => this.props.handleCreatePages()}
@@ -194,7 +195,7 @@ class ExperiencePanel extends Component {
                                         :
                                         <div style={demoPagesContainerStyle}>
                                             <DxPage
-                                                pages={this.props.experience.pages}
+                                                pages={this.props.Experience.Pages}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}
                                             />
@@ -214,6 +215,7 @@ const styles = {
 
     mainContainerStyle: {
         width: 600,
+        height: `calc(100vh - ${sizes.headerHeight} - 60px)`,
         margin: '0 auto',
     },
     optionContainerStyle: {
@@ -274,7 +276,7 @@ const styles = {
         width: 144
     },
     demoCardContainerStyle: {
-        height: 120,
+        height: 132,
         width: 300,
     },
     demoPagesContainerStyle: {
@@ -287,7 +289,7 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        experience: state.newexperience.experience
+        Experience: state.newexperience.Experience
     }
 }
 
