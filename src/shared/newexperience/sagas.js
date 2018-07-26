@@ -154,22 +154,22 @@ export const dxExperienceCreateUrl = (params) => {
 
     let experience = params.experience;
     let {
-        type,
-        experienceTitle,
-        card,
-        pages,
+        Type,
+        ExperienceTitle,
+        Card,
+        Pages,
     } = experience;
     const formattedParams = {
-        ExperienceType: type,
-        ExperienceTitle: experienceTitle,
+        ExperienceType: Type,
+        ExperienceTitle: ExperienceTitle,
         ExperienceCard: {
-            CardGUID: card.cardGUID,
-            Type: card.type,
-            Title: card.title,
-            Content: card.content,
-            Settings: helpers.capitalize_array_object_key(card.settings),
+            CardGUID: Card.CardGUID,
+            Type: Card.Type,
+            Title: Card.Title,
+            Content: Card.Content,
+            Settings: Card.Settings,
         },
-        ExperiencePages: __format_experience_params(pages)
+        ExperiencePages: __format_experience_params(Pages)
     };
     return (
         apiManager.dxApi(`/experience/create`, formattedParams, true)
@@ -180,16 +180,16 @@ const __format_experience_params = (pages) => {
     let output = [];
     for (let i = 0; i < pages.length; i++) {
         let page = pages[i];
-        if (!page.isDeleted) {
-            let sections = helpers.remove_is_deleted_item(page.sections);
+        if (!page.IsDeleted) {
+            let sections = helpers.remove_is_deleted_item(page.Sections);
             sections = __extract_section_values(sections);
             let item = {
-                PageGUID: page.pageGUID,
-                ParentPageGUID: page.parentPageGUID,
-                IsRoot: page.isRoot,
-                IsSplash: page.isSplash,
-                Title: page.title,
-                Sections: sections,
+                PageGUID: page.PageGUID,
+                ParentPageGUID: page.ParentPageGUID,
+                IsRoot: page.IsRoot,
+                IsSplash: page.IsSplash,
+                Title: page.Title,
+                Sections: Sections,
             }
             output.push(item);
         }
@@ -202,30 +202,30 @@ const __extract_section_values = (sections) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
         let item = {
-            SectionGUID: section.sectionGUID,
-            Type: section.type,
+            SectionGUID: section.SectionGUID,
+            Type: section.Type,
         }
-        switch (section.type) {
+        switch (section.Type) {
             case 'EDITOR':
-                item.Html = section.html;
+                item.Html = section.Html;
                 break;
             case 'BUTTON':
-                item.BtnContent = section.btnContent;
-                item.ConnectedPageGUID = section.connectedPageGUID;
+                item.BtnContent = section.BtnContent;
+                item.ConnectedPageGUID = section.ConnectedPageGUID;
                 break;
             case 'EMBED_PDF':
-                item.Pdf = section.pdf;
+                item.Pdf = section.Pdf;
                 break;
             case 'SPLASH':
-                item.SplashContent = section.splashContent;
-                item.SplashImg = section.splashImg;
-                item.SplashColor = section.splashColor;
+                item.SplashContent = section.SplashContent;
+                item.SplashImg = section.SplashImg;
+                item.SplashColor = section.SplashColor;
                 break;
             case 'VIDEO':
-                item.VideoUrl = section.videoUrl;
+                item.VideoUrl = section.VideoUrl;
                 break;
             case 'IMAGE':
-                item.Img = section.img;
+                item.Img = section.Img;
                 break;
         }
         output.push(item);
@@ -263,7 +263,7 @@ export function* dxExperienceCreateSaga() {
 // Experience upload file request
 export const dxExperienceUploadFileUrl = (params) => {
     let formData = new FormData();
-    let blob = new Blob([params.htmlContent], { type: 'text/html' });
+    let blob = new Blob([params.HtmlContent], { type: 'text/html' });
     formData.append('File', blob, 'blob.html');
     return (
         apiManager.dxFileApi(`/upload/file`, formData, true)
@@ -284,11 +284,11 @@ export function* dxExperienceUploadFiles(action) {
 
         let experience = action.payload.experience;
         let {
-            type,
-            pages,
+            Type,
+            Pages,
         } = experience;
 
-        if (type == 0) {
+        if (Type == 0) {
             yield put({
                 type: EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
                 payload: {
@@ -297,14 +297,14 @@ export function* dxExperienceUploadFiles(action) {
             });
         } else {
 
-            for (let i = 0; i < pages.length; i++) {
-                let page = pages[i];
+            for (let i = 0; i < Pages.length; i++) {
+                let page = Pages[i];
                 if (!page.IsDeleted) {
                     for (let j = 0; j < page.Sections.length; j++) {
                         let section = page.Sections[j];
                         if (!section.IsDeleted && section.Type == 'EDITOR') {
                             let response = yield call(dxExperienceUploadSingleFile, section);
-                            if (response.Confirmation == 'SUCCESS') section.html = response.Response.File.FileGUID;
+                            if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
                         }
                     }
                 }
