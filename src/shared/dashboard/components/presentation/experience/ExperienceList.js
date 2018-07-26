@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// Libraries
+import Add from '@material-ui/icons/Add';
+
 // constatnt
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
@@ -20,6 +23,8 @@ class ExperienceList extends Component {
             newExperienceContainerStyle,
             newExperienceWrapperStyle,
             imgStyle,
+            iconContainerStyle,
+            addIconStyle,
             newExperienceLabelContainerStyle,
             newExperienceLabelStyle,
         } = styles;
@@ -34,19 +39,22 @@ class ExperienceList extends Component {
                     ))
                 }
                 <div style={newExperienceContainerStyle}>
-                    <div 
+                    <div
                         style={newExperienceWrapperStyle}
                         onClick={() => this.props.handleCreateExpClick()}
                     >
-                        <div style={Object.assign({}, tableContainerStyle, {height: newExpSize})}>
+                        <div style={Object.assign({}, tableContainerStyle, { height: newExpSize })}>
                             <div style={tableWrapperStyle}>
                                 <img
                                     style={imgStyle}
                                     src={require('../../../../../../assets/images/card_exp.png')} />
                             </div>
                         </div>
+                        <div style={iconContainerStyle}>
+                            <Add style={addIconStyle}/>
+                        </div>
                         <div style={newExperienceLabelContainerStyle}>
-                        <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
+                            <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +63,7 @@ class ExperienceList extends Component {
     }
 }
 
-const newExpSize = 90;
+const newExpSize = 72;
 const styles = {
 
     tableContainerStyle: {
@@ -84,6 +92,7 @@ const styles = {
         border: '1px solid green'
     },
     newExperienceWrapperStyle: {
+        position: 'relative',
         width: 120,
         height: newExpSize,
         borderRadius: 12,
@@ -97,6 +106,15 @@ const styles = {
         width: 90,
         height: 60,
         margin: '0 auto'
+    },
+    iconContainerStyle: {
+        position: 'absolute',
+        right: -9,
+        bottom: -9,
+    },
+    addIconStyle: {
+        fontSize: 18,
+        color: colors.blueColor,
     },
     newExperienceLabelContainerStyle: {
         height: 18
