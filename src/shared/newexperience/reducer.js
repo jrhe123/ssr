@@ -601,7 +601,25 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
-            console.log('reducer received');
+            tmpExperience.Type = payload.experience.ExperienceType;
+            tmpExperience.IsCardTemplateSaved = true;
+            tmpExperience.CardTemplate = payload.experience.ExperienceCard;
+            tmpExperience.Card = payload.experience.ExperienceCard;
+            tmpExperience.ExperienceTitle = payload.experience.ExperienceType;
+            tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
+            tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
+
+            // Experience: {
+                
+            //     CardTitle: 'Card 1',        // experience card title
+        
+            //     Tools: [],      // toolbars
+            //     Pages: [],      // pages
+            //     NewPage: Object.assign({}, templateNewPage),        // current working page
+            //     ActivePageSectionIndex: 0,      // active section on a page
+            // },
+
+            updated.Experience = tmpExperience;
             return updated;
 
 

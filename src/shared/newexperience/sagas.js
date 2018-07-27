@@ -164,6 +164,7 @@ export const dxExperienceCreateUrl = (params) => {
     let {
         Type,
         ExperienceTitle,
+        CardTitle,
         Card,
         Pages,
     } = experience;
@@ -173,7 +174,7 @@ export const dxExperienceCreateUrl = (params) => {
         ExperienceCard: {
             CardGUID: Card.CardGUID,
             Type: Card.Type,
-            Title: Card.Title,
+            Title: CardTitle,
             Content: Card.Content,
             Settings: Card.Settings,
         },
