@@ -56,6 +56,10 @@ class ExperienceContainer extends Component {
         this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
     }
 
+    handleEditExperience = (experienceGUID) => {
+        console.log('experienceGUID: ', experienceGUID);
+    }
+
     render() {
 
         const {
@@ -118,6 +122,7 @@ class ExperienceContainer extends Component {
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
+                                            handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
                                             handleErrorMsg={(msg) => {}}
                                         />
                                     </div>
