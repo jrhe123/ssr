@@ -28,6 +28,7 @@
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
     "babel-runtime": "^6.23.0",
+    "bluebird": "^3.5.1",
     "date-fns": "^1.28.5",
     "express": "^4.15.3",
     "form-data": "^2.3.2",

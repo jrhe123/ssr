@@ -1,9 +1,9 @@
 // Libraries
+import Promise from 'bluebird';
 import fetch from 'isomorphic-fetch';
 
 // config
 import config from '../config';
-
 
 export const dxApi = (url, params, isAuth) => {
     let headers = {
@@ -54,15 +54,18 @@ export const dxFileApi = (url, formData, isAuth) => {
 }
 
 export const dxHtmlApi = (url) => {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = process;
-    xhr.open("GET", url, true);
-    xhr.send();
-    function process() {
-        if (xhr.readyState == 4) {
-            return xhr.responseText;
-        }else{
-            return '';
-        }
-    }
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(xhr.responseText);
+                return;
+            } else {
+                resolve('');
+                return;
+            }
+        };
+        xhr.open("GET", url, true);
+        xhr.send();
+    })
 }

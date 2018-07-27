@@ -1,5 +1,6 @@
 import {
     LOGOUT_REQUESTED,
+    HTML_FETCH_REQUESTED,
     CHANNEL_FETCH_REQUESTED,
     EXPERIENCE_FETCH_REQUESTED,
 } from './constants';
@@ -8,6 +9,15 @@ export const dxLogout = () => {
     return {
         type: LOGOUT_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxHtmlFetch = (guid) => {
+    return {
+        type: HTML_FETCH_REQUESTED,
+        payload: {
+            guid
+        },
     }
 }
 

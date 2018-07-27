@@ -1,4 +1,5 @@
 import {
+    HTML_FETCH__SUCCEEDED,
     CHANNEL_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
 } from './constants';
@@ -14,6 +15,10 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
     switch (type) {
+
+        case HTML_FETCH__SUCCEEDED:
+            console.log('reducer received');
+            return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:
             updated.Channels = payload.channels;

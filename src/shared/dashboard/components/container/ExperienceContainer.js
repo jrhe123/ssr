@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
 } from '../../actions';
 import {
@@ -52,7 +53,7 @@ class ExperienceContainer extends Component {
     }
 
     handleLoadHtml = (guid) => {
-        console.log('out: ', guid);
+        this.props.dxHtmlFetchAction(guid);
     }
 
     render() {
@@ -241,6 +242,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxHtmlFetchAction,
     dxFetchExperienceAction,
 
     dxAlertAction,
