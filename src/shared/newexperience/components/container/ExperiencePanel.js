@@ -207,6 +207,7 @@ class ExperiencePanel extends Component {
                                                 pdfWidth={276}
                                                 displayPageNumber={true}
                                                 isWithBottomBar={true}
+                                                isLoadHtml={false}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}
                                             />

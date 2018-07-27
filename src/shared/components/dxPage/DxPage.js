@@ -44,7 +44,8 @@ class DxPage extends Component {
     renderPhoneElementSection = () => {
 
         const {
-            pages
+            pages,
+            isLoadHtml,
         } = this.props;
 
         let page = this.findRootPage(pages);
@@ -62,9 +63,11 @@ class DxPage extends Component {
                         key={i}
                         section={section}
                         pdfWidth={this.props.pdfWidth}
+                        isLoadHtml={isLoadHtml}
                         splashSize="MEDIUM"
                         videoSize="MEDIUM"
                         imgSize="MEDIUM"
+                        handleLoadHtml={(guid) => this.props.handleLoadHtml(guid)}
                     />
                 </div>
             )

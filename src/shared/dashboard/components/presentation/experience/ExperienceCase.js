@@ -65,6 +65,8 @@ class ExperienceCase extends Component {
                             pages={experience.ExperiencePages}
                             displayPageNumber={false}
                             isWithBottomBar={false}
+                            isLoadHtml={true}
+                            handleLoadHtml={(guid) => this.props.handleLoadHtml(guid)}
                         />
                         :
                         null

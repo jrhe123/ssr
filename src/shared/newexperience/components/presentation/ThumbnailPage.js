@@ -25,6 +25,7 @@ class ThumbnailPage extends Component {
                         key={i}
                         section={section}
                         pdfWidth={120}
+                        isLoadHtml={false}
                         splashSize="SMALL"
                         videoSize="SMALL"
                         imgSize="SMALL"

@@ -51,6 +51,10 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/new_experience/` + val)
     }
 
+    handleLoadHtml = (guid) => {
+        console.log('out: ', guid);
+    }
+
     render() {
 
         const {
@@ -112,6 +116,7 @@ class ExperienceContainer extends Component {
                                         <ExperienceList 
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
+                                            handleLoadHtml={(guid) => this.handleLoadHtml(guid)}
                                             handleErrorMsg={(msg) => {}}
                                         />
                                     </div>

@@ -33,6 +33,19 @@ class ThumbnailPhoneElement extends Component {
         this.setState({ numPages });
     }
 
+    handleLoadHtml = (section) => {
+        const {
+            isLoadHtml
+        } = this.props;
+
+        if (!isLoadHtml) {
+            return section.HtmlContent;
+        } else {
+            if(section.Html)
+                this.props.handleLoadHtml(section.Html);
+        }
+    }
+
     renderSection = (section) => {
 
         const {
@@ -90,7 +103,7 @@ class ThumbnailPhoneElement extends Component {
                 elem = (
                     <div
                         style={editorContainerStyle}
-                        dangerouslySetInnerHTML={{ __html: section.HtmlContent }} />
+                        dangerouslySetInnerHTML={{ __html: this.handleLoadHtml(section) }} />
                 );
                 break;
             case 'BUTTON':
@@ -152,28 +165,28 @@ class ThumbnailPhoneElement extends Component {
                     <div className="dx_thumbnail_elem_splash"
                         style={Object.assign({}, overlayContainerStyle, { color: section.SplashColor, height })}>
                         <img
-                            style={Object.assign({}, overlayImgStyle, {height})}
+                            style={Object.assign({}, overlayImgStyle, { height })}
                             src={section.SplashImg ? `${config.picHost}${section.SplashImg}` : require('../../../../assets/images/demo.jpg')}
                         />
                         <div style={overlayWrapperStyle}>
-                            <div style={Object.assign({}, splashContainerStyle, {height})}>
-                                <div style={Object.assign({}, statusbarContainerStyle, {height: line})}>
+                            <div style={Object.assign({}, splashContainerStyle, { height })}>
+                                <div style={Object.assign({}, statusbarContainerStyle, { height: line })}>
                                     <div style={leftStatusContainerStyle}>
-                                        <div style={Object.assign({}, leftStatusWrapperStyle, {height: line})}>
+                                        <div style={Object.assign({}, leftStatusWrapperStyle, { height: line })}>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
                                                 <SignalCellular0Bar
-                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
+                                                    style={Object.assign({}, statusbarIconStyle, { fontSize: iconSize, marginTop })}
                                                 />
                                             </div>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
-                                                <span 
-                                                    style={Object.assign({}, statusbarLabelStyle, {marginTop: this.props.splashSize == 'SMALL' ? 0 : 5})}>
+                                                <span
+                                                    style={Object.assign({}, statusbarLabelStyle, { marginTop: this.props.splashSize == 'SMALL' ? 0 : 5 })}>
                                                     Sketch
                                                 </span>
                                             </div>
                                             <div style={Object.assign({}, marginLeftStyle, iconContainerStyle)}>
                                                 <Wifi
-                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
+                                                    style={Object.assign({}, statusbarIconStyle, { fontSize: iconSize, marginTop })}
                                                 />
                                             </div>
                                         </div>
@@ -186,32 +199,32 @@ class ThumbnailPhoneElement extends Component {
                                         </div>
                                     </div>
                                     <div style={rightStatusContainerStyle}>
-                                        <div style={Object.assign({}, rightStatusWrapperStyle, {height: line})}>
+                                        <div style={Object.assign({}, rightStatusWrapperStyle, { height: line })}>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
                                                 <Bluetooth
-                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
+                                                    style={Object.assign({}, statusbarIconStyle, { fontSize: iconSize, marginTop })}
                                                 />
                                             </div>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
-                                                <span 
-                                                    style={Object.assign({}, statusbarLabelStyle, {marginTop: this.props.splashSize == 'SMALL' ? 0 : 5})}
+                                                <span
+                                                    style={Object.assign({}, statusbarLabelStyle, { marginTop: this.props.splashSize == 'SMALL' ? 0 : 5 })}
                                                 >100%</span>
                                             </div>
                                             <div style={Object.assign({}, marginRightStyle, iconContainerStyle)}>
                                                 <BatteryFull
                                                     className="dx_battery_icon"
-                                                    style={Object.assign({}, statusbarIconStyle, {fontSize: iconSize, marginTop})}
+                                                    style={Object.assign({}, statusbarIconStyle, { fontSize: iconSize, marginTop })}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style={Object.assign({}, toolbarContainerStyle, {height: line})}>
+                                <div style={Object.assign({}, toolbarContainerStyle, { height: line })}>
                                     <div style={leftToolbarContainerStyle}>
                                         <div style={leftToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <KeyboardArrowLeft style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
+                                                    <KeyboardArrowLeft style={Object.assign({}, statusbarSubIconStyle, { fontSize: iconSize })} />
                                                 </div>
                                             </div>
                                         </div>
@@ -220,8 +233,8 @@ class ThumbnailPhoneElement extends Component {
                                         <div style={rightToolbarWrapperStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    <Search style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
-                                                    <MoreVert style={Object.assign({}, statusbarSubIconStyle, {fontSize: iconSize})} />
+                                                    <Search style={Object.assign({}, statusbarSubIconStyle, { fontSize: iconSize })} />
+                                                    <MoreVert style={Object.assign({}, statusbarSubIconStyle, { fontSize: iconSize })} />
                                                 </div>
                                             </div>
                                         </div>
@@ -246,9 +259,9 @@ class ThumbnailPhoneElement extends Component {
                 const videoHeight = this.props.videoSize == 'SMALL' ? 54 : 120;
 
                 elem = (
-                    <div style={Object.assign({}, videoOverlayContainerStyle, {height: videoHeight})}>
+                    <div style={Object.assign({}, videoOverlayContainerStyle, { height: videoHeight })}>
                         <div
-                            style={Object.assign({}, videoOverlayImgStyle, {height: videoHeight})}
+                            style={Object.assign({}, videoOverlayImgStyle, { height: videoHeight })}
                         />
                         <div style={overlayWrapperStyle}>
                             <div style={Object.assign({}, tableContainerStyle)}>
@@ -269,7 +282,7 @@ class ThumbnailPhoneElement extends Component {
                 elem = (
                     <div style={imgContainerStyle}>
                         <img
-                            style={Object.assign({}, imgStyle, {height: imgHeight})}
+                            style={Object.assign({}, imgStyle, { height: imgHeight })}
                             src={section.Img ? `${config.picHost}${section.Img}` : require('../../../../assets/images/demo.jpg')}
                         />
                     </div>
