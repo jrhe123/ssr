@@ -16,12 +16,23 @@ import {
 
 export class NewExperiencePage extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const history = this.props.history;
-        const experienceType = this.props.match.params.param;
+        const param = this.props.match.params.param;
+        const url = this.props.match.url;
+
+        let isNewExp = url.match(/new_experience/i);
+        let isEditExp = url.match(/edit_experience/i);
+
         this.props.dxNavigateHistoryAction(history);
-        this.props.dxExperienceInitialAction();
-        this.props.dxExperienceTypeAction(experienceType);
+
+        if (isNewExp) {
+            this.props.dxExperienceInitialAction();
+            this.props.dxExperienceTypeAction(param);
+        }
+        if (isEditExp) {
+            console.log('fetch guid');
+        }
     }
 
     render() {

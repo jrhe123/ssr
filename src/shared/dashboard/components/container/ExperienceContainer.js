@@ -49,7 +49,7 @@ class ExperienceContainer extends Component {
         this.setState({
             newExperienceModalOpen: false
         });
-        this.props.history.push(`/new_experience/` + val)
+        this.props.history.push(`/new_experience/${val}`);
     }
 
     handleLoadHtml = (experienceGUID, pageGUID, sectionGUID, guid) => {
@@ -57,7 +57,7 @@ class ExperienceContainer extends Component {
     }
 
     handleEditExperience = (experienceGUID) => {
-        console.log('experienceGUID: ', experienceGUID);
+        this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
     render() {
