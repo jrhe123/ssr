@@ -204,6 +204,7 @@ class ExperiencePanel extends Component {
                                         <div style={demoPagesContainerStyle}>
                                             <DxPage
                                                 pages={this.props.Experience.Pages}
+                                                pdfWidth={276}
                                                 displayPageNumber={true}
                                                 isWithBottomBar={true}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}

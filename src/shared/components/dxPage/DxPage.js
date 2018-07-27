@@ -61,7 +61,7 @@ class DxPage extends Component {
                     <ThumbnailPhoneElement
                         key={i}
                         section={section}
-                        pdfWidth={276}
+                        pdfWidth={this.props.pdfWidth}
                         splashSize="MEDIUM"
                         videoSize="MEDIUM"
                         imgSize="MEDIUM"
@@ -230,7 +230,7 @@ const styles = {
     contentContainerStyle: {
         height: 318,
         padding: 6,
-        backgroundColor: colors.lightBlueColor,
+        backgroundColor: colors.whiteColor,
     },
     contentWrapperStyle: {
         height: '100%',

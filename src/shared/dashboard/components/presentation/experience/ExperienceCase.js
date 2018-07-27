@@ -61,6 +61,7 @@ class ExperienceCase extends Component {
                 {
                     experience.ExperienceType == 1 ?
                         <DxPage
+                            pdfWidth={264}
                             pages={experience.ExperiencePages}
                             displayPageNumber={false}
                             isWithBottomBar={false}
