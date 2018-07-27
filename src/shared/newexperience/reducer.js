@@ -609,15 +609,15 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
             tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
             tmpExperience.Pages = payload.experience.ExperiencePages;
-
+            tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             // Experience: {                
             //     Tools: [],      // toolbars
-            //     NewPage: Object.assign({}, templateNewPage),        // current working page
             // },
+
+            console.log('tmpExperience: ', tmpExperience);
 
             updated.Experience = tmpExperience;
             return updated;
-
 
         default:
             return previousState;
@@ -708,6 +708,14 @@ const disconnect_pages_by_sections = (sections, pages) => {
             pages[item.index] = item.page;
         }
     }
+}
+const find_root_page = (pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        if (pages[i].IsRoot) {
+            return pages[i];
+        }
+    }
+    return null;
 }
 
 export default newexperienceReducer;
