@@ -121,7 +121,9 @@ const styles = {
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: colors.whiteColor
+        backgroundColor: colors.whiteColor,
+        borderTop: '1px solid',
+        borderColor: colors.borderColor
     },
     labelContainerStyle: {
         flex: 1,

@@ -108,6 +108,7 @@ const styles = {
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
+        height: 512,
     },
     experienceWrapperStyle: {
         width: 276,
@@ -119,6 +120,7 @@ const styles = {
         flex: '300px 0 0',
         marginTop: 24,
         marginBottom: 24,
+        height: 512,
     },
     newExperienceWrapperStyle: {
         position: 'relative',
