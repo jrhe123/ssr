@@ -605,18 +605,14 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
             tmpExperience.Card = payload.experience.ExperienceCard;
-            tmpExperience.ExperienceTitle = payload.experience.ExperienceType;
+            tmpExperience.ExperienceTitle = payload.experience.ExperienceTitle;
             tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
             tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
+            tmpExperience.Pages = payload.experience.ExperiencePages;
 
-            // Experience: {
-                
-            //     CardTitle: 'Card 1',        // experience card title
-        
+            // Experience: {                
             //     Tools: [],      // toolbars
-            //     Pages: [],      // pages
             //     NewPage: Object.assign({}, templateNewPage),        // current working page
-            //     ActivePageSectionIndex: 0,      // active section on a page
             // },
 
             updated.Experience = tmpExperience;
