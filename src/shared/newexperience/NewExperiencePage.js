@@ -10,8 +10,12 @@ import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
 import {
+    // CREATE EXPERIENCE
     dxExperienceInitial as dxExperienceInitialAction,
-    dxExperienceType as dxExperienceTypeAction
+    dxExperienceType as dxExperienceTypeAction,
+
+    // UPDATE EXPERIENCE
+    dxExperienceView as dxExperienceViewAction,
 } from './actions';
 
 export class NewExperiencePage extends Component {
@@ -31,7 +35,7 @@ export class NewExperiencePage extends Component {
             this.props.dxExperienceTypeAction(param);
         }
         if (isEditExp) {
-            console.log('fetch guid');
+            this.props.dxExperienceViewAction(param);
         }
     }
 
@@ -58,6 +62,8 @@ const dispatchToProps = {
 
     dxExperienceInitialAction,
     dxExperienceTypeAction,
+
+    dxExperienceViewAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(NewExperiencePage);

@@ -4,6 +4,7 @@ import * as apiManager from '../helpers/apiManager';
 import * as helpers from '../helpers';
 
 import {
+    // CREATE EXPIERENCE
     EXPERIENCE_INITIAL_REQUESTED,
     EXPERIENCE_INITIAL__SUCCEEDED,
     EXPERIENCE_INITIAL__FAILED,
@@ -128,8 +129,16 @@ import {
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__FAILED,
 
+
+    // UPDATE EXPERIENCE
+    EXPERIENCE_VIEW_REQUESTED,
+    EXPERIENCE_VIEW__SUCCEEDED,
+    EXPERIENCE_VIEW__FAILED,
+
 } from './constants';
 
+
+// CREATE EXPIERENCE
 // Experience init request
 export function* dxExperienceInital(action) {
     try {
@@ -991,4 +1000,41 @@ export function* dxExperiencePageElemConnectPage(action) {
 
 export function* dxExperiencePageElemConnectPageSaga() {
     yield takeEvery(EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED, dxExperiencePageElemConnectPage);
+}
+
+
+// UPDATE EXPERIENCE
+export const dxExperienceViewUrl = (params) => {
+    return (
+        apiManager.dxApi(`/experience/view`, {ExperienceGUID: params.experienceGUID}, true)
+    )
+}
+
+export function* dxExperienceView(action) {
+    try {
+        const response = yield call(dxExperienceViewUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_VIEW__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_VIEW__SUCCEEDED,
+                payload: {
+                    experience: Response
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_VIEW__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceViewSaga() {
+    yield takeEvery(EXPERIENCE_VIEW_REQUESTED, dxExperienceView);
 }
