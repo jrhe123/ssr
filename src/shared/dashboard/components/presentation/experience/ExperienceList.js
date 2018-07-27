@@ -46,6 +46,7 @@ class ExperienceList extends Component {
                             >
                                 <ExperienceCase
                                     experience={experience}
+                                    handleErrorMsg={(msg) => this.props.handleErrorMsg(msg)}
                                 />
                             </div>
                         </div>
@@ -104,7 +105,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        paddingBottom: 36
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
@@ -117,7 +117,6 @@ const styles = {
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
-        height: newExpSize + 18,
         marginTop: 24,
         marginBottom: 24,
     },
@@ -130,6 +129,7 @@ const styles = {
         border: '1px dotted',
         borderColor: colors.blueBorderColor,
         cursor: 'pointer',
+        margin: '0 auto',
     },
     imgStyle: {
         display: 'block',

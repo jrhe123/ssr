@@ -90,7 +90,7 @@ export function* dxChannelFetchSaga() {
 export const dxFetchExperienceUrl = () => {
     return (
         apiManager.dxApi(`/experience/list`, {
-            Limit: "5",
+            Limit: "23",
             Offset: "0",
             Extra: {},
         }, true)

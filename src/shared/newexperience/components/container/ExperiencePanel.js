@@ -14,6 +14,9 @@ import {
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemove as dxExperiencePagePagesRemoveAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import colors from '../../../styles/colors';
@@ -29,6 +32,10 @@ class ExperiencePanel extends Component {
 
     state = {
         isMenuOpen: false,
+    }
+
+    handleErrorMsg = (msg) => {
+        this.props.dxAlertAction(true, true, msg);
     }
 
     handleToggle = () => {
@@ -158,6 +165,7 @@ class ExperiencePanel extends Component {
                                     isVideoInsertClickable={false}
                                     cardTitle={this.props.Experience.CardTitle}
                                     template={this.props.Experience.Card}
+                                    handleVideoError={(msg) => this.handleErrorMsg(msg)}
                                     handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
                                     handleConfirmDeleteCard={() => this.props.handleRemoveCardTemplateClick()}
                                 />
@@ -299,6 +307,8 @@ const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemoveAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

@@ -56,6 +56,7 @@ class ExperienceCase extends Component {
                     isVideoInsertClickable={false}
                     cardTitle={experience.ExperienceTitle}
                     template={experience.ExperienceCard}
+                    handleVideoError={(msg) => this.props.handleErrorMsg(msg)}
                 />
                 {
                     experience.ExperienceType == 1 ?

@@ -13,6 +13,9 @@ import { connect } from 'react-redux';
 import {
     dxFetchExperience as dxFetchExperienceAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -109,6 +112,7 @@ class ExperienceContainer extends Component {
                                         <ExperienceList 
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
+                                            handleErrorMsg={(msg) => {}}
                                         />
                                     </div>
                                 </div>
@@ -177,9 +181,9 @@ const styles = {
     },
 
     mainContainerStyle: {
-        width: 'calc(100% - 192px - 48px)',
-        marginLeft: 192,
-        marginRight: 48,
+        // width: 'calc(100% - 192px - 48px)',
+        // marginLeft: 192,
+        // marginRight: 48,
     },
     topBarContainerStyle: {
         paddingTop: 36,
@@ -233,6 +237,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxFetchExperienceAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceContainer);
