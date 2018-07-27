@@ -111,7 +111,6 @@ const styles = {
     },
     experienceWrapperStyle: {
         width: 276,
-        margin: '0 auto',
         marginTop: 24,
         marginBottom: 24,
         cursor: 'pointer',
@@ -123,7 +122,6 @@ const styles = {
         marginBottom: 24,
     },
     newExperienceWrapperStyle: {
-        margin: '0 auto',
         position: 'relative',
         width: 120,
         height: newExpSize,

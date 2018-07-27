@@ -71,7 +71,9 @@ class ExperienceCase extends Component {
                     <div style={labelContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
-                                <p style={bottomLabelStyle}>123</p>
+                                <p style={bottomLabelStyle}>
+                                {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
+                                </p>
                             </div>
                         </div>
                     </div>
