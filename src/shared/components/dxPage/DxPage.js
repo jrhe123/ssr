@@ -208,7 +208,6 @@ const styles = {
     },
     mainContainerStyle: {
         width: 276,
-        height: 330,
         position: 'relative',
         boxSizing: 'border-box',
     },
@@ -229,9 +228,9 @@ const styles = {
         fontSize: fonts.h3
     },
     contentContainerStyle: {
-        height: 'calc(100% - 30px)',
+        height: 318,
+        padding: 6,
         backgroundColor: colors.lightBlueColor,
-        padding: 9
     },
     contentWrapperStyle: {
         height: '100%',
