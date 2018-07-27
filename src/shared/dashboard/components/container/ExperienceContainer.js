@@ -52,8 +52,8 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/new_experience/` + val)
     }
 
-    handleLoadHtml = (guid) => {
-        this.props.dxHtmlFetchAction(guid);
+    handleLoadHtml = (experienceGUID, pageGUID, sectionGUID, guid) => {
+        this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
     }
 
     render() {
@@ -117,7 +117,7 @@ class ExperienceContainer extends Component {
                                         <ExperienceList 
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
-                                            handleLoadHtml={(guid) => this.handleLoadHtml(guid)}
+                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
                                             handleErrorMsg={(msg) => {}}
                                         />
                                     </div>

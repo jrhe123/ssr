@@ -80,10 +80,18 @@ export const dxHtmlFetchUrl = (params) => {
 export function* dxHtmlFetch(action) {
     try {
         const response = yield call(dxHtmlFetchUrl, action.payload);
+        const {
+            experienceGUID, 
+            pageGUID, 
+            sectionGUID,
+        } = action.payload;
         yield put({
             type: HTML_FETCH__SUCCEEDED,
             payload: {
-                Html: response
+                experienceGUID, 
+                pageGUID, 
+                sectionGUID,
+                html: response
             },
         });
     } catch (error) {

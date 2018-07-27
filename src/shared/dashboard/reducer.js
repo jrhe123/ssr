@@ -14,10 +14,14 @@ const initialState = {
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
+    let tmpExperiences;
+    let tmpPage;
+    let tmpSection;
+
     switch (type) {
 
         case HTML_FETCH__SUCCEEDED:
-            console.log('reducer received');
+            console.log('reducer received: ', payload);
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:

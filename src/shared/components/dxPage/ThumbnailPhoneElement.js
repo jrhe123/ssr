@@ -39,10 +39,12 @@ class ThumbnailPhoneElement extends Component {
         } = this.props;
 
         if (!isLoadHtml) {
-            return section.HtmlContent;
+            if (section.HtmlContent) return section.HtmlContent;
+            else return '';
         } else {
-            if(section.Html)
-                this.props.handleLoadHtml(section.Html);
+            if (section.HtmlContent) return section.HtmlContent;
+            if (section.Html) this.props.handleLoadHtml(section.SectionGUID, section.Html);
+            else return '';
         }
     }
 

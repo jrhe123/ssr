@@ -67,7 +67,7 @@ class DxPage extends Component {
                         splashSize="MEDIUM"
                         videoSize="MEDIUM"
                         imgSize="MEDIUM"
-                        handleLoadHtml={(guid) => this.props.handleLoadHtml(guid)}
+                        handleLoadHtml={(sectionGUID, guid) => this.props.handleLoadHtml(page.PageGUID, sectionGUID, guid)}
                     />
                 </div>
             )

@@ -12,11 +12,14 @@ export const dxLogout = () => {
     }
 }
 
-export const dxHtmlFetch = (guid) => {
+export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid) => {
     return {
         type: HTML_FETCH_REQUESTED,
         payload: {
-            guid
+            experienceGUID, 
+            pageGUID, 
+            sectionGUID, 
+            guid,
         },
     }
 }
