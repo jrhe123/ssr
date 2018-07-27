@@ -96,6 +96,14 @@ class App extends Component {
                         path="/new_experience/:param(0|1)"
                         component={Routes.NewExperiencePage}
                     />
+
+                    <ProtectedRouteWithParams
+                        isAuthenticated={isAuthenticated}
+                        route="edit_experience"
+                        exact
+                        path="/edit_experience/:param"
+                        component={Routes.NewExperiencePage}
+                    />
             
                     <ProtectedRouteWithParams
                         isAuthenticated={isAuthenticated}
