@@ -38,10 +38,10 @@ class ExperienceNavigator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.IsFilesUploaded && !this.props.IsFilesUploaded){
+        if (nextProps.IsFilesUploaded && !this.props.IsFilesUploaded) {
             this.props.dxExperienceCreateAction(this.props.Experience);
         }
-        if(nextProps.IsCompleted && !this.props.IsCompleted){
+        if (nextProps.IsCompleted && !this.props.IsCompleted) {
             this.props.dxLoadingAction(false);
             this.props.history.push('/dashboard');
         }
@@ -70,8 +70,12 @@ class ExperienceNavigator extends Component {
         this.props.dxLoadingAction(true);
         const {
             Experience,
-        } = this.props;        
-        this.props.dxExperienceUploadFileAction(Experience);        
+        } = this.props;
+        let experienceGUID = Experience.ExperienceGUID;
+        // CREATE
+        if (!experienceGUID) this.props.dxExperienceUploadFileAction(Experience);
+        // UPDATE
+        else console.log('update now');
     }
 
     handleSaveBtnClick = () => {
