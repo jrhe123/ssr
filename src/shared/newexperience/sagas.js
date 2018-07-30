@@ -198,6 +198,7 @@ const __format_experience_params = (pages) => {
                 IsRoot: page.IsRoot,
                 IsSplash: page.IsSplash,
                 Title: page.Title,
+                IsConnected: page.IsConnected,
                 Sections: sections,
             }
             output.push(item);

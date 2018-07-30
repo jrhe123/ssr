@@ -86,6 +86,7 @@ class ExperiencePanel extends Component {
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log(this.props.Experience)}>click me</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>

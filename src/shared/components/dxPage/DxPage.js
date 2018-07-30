@@ -125,10 +125,6 @@ class DxPage extends Component {
         let page = this.findRootPage(pages);
         let pageNumber = this.findPageNumber(pages);
 
-        console.log('page: ', page);
-        console.log('pages: ', pages);
-        console.log('pageNumber: ', pageNumber);
-
         return (
             <div style={mainContainerStyle}>
                 {
