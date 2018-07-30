@@ -11,8 +11,12 @@ import Button from '@material-ui/core/Button';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -45,7 +49,15 @@ class ExperienceContainer extends Component {
         this.setState({
             newExperienceModalOpen: false
         });
-        this.props.history.push(`/new_experience/` + val)
+        this.props.history.push(`/new_experience/${val}`);
+    }
+
+    handleLoadHtml = (experienceGUID, pageGUID, sectionGUID, guid) => {
+        this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
+    }
+
+    handleEditExperience = (experienceGUID) => {
+        this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
     render() {
@@ -109,6 +121,9 @@ class ExperienceContainer extends Component {
                                         <ExperienceList 
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
+                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
+                                            handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
+                                            handleErrorMsg={(msg) => {}}
                                         />
                                     </div>
                                 </div>
@@ -177,10 +192,9 @@ const styles = {
     },
 
     mainContainerStyle: {
-        width: 'calc(100% - 192px - 48px)',
-        minHeight: `calc(100vh - ${sizes.headerHeight})`,
-        marginLeft: 192,
-        marginRight: 48,
+        // width: 'calc(100% - 192px - 48px)',
+        // marginLeft: 192,
+        // marginRight: 48,
     },
     topBarContainerStyle: {
         paddingTop: 36,
@@ -233,7 +247,10 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxHtmlFetchAction,
     dxFetchExperienceAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperienceContainer);

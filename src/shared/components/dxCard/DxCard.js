@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
 // config
-import config from '../../../../config';
+import config from '../../config';
 
 // constants
-import colors from '../../../../styles/colors';
-import fonts from '../../../../styles/fonts';
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 // components
-import DxInput from '../../../../components/dxInput/DxInput';
-import DxModal from './DxModal';
+import DxInput from '../dxInput/DxInput';
+import DxModal from '../dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -90,68 +90,68 @@ class DxCard extends Component {
         } = styles;
 
         let card;
-        if (template.type == 'LEFT_IMAGE_TEXT') {
+        if (template.Type == 'LEFT_IMAGE_TEXT') {
             card = (
                 <div>
                     <div style={leftImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
+                            src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')}
                         />
                     </div>
-                    <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.settings[1].Default })}>
+                    <div style={Object.assign({}, rightTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.settings[2].Default })}>{template.content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             );
-        } else if (template.type == 'RIGHT_IMAGE_TEXT') {
+        } else if (template.Type == 'RIGHT_IMAGE_TEXT') {
             card = (
                 <div>
-                    <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.settings[1].Default })}>
+                    <div style={Object.assign({}, leftTextContainerStyle, { backgroundColor: template.Settings[1].Default })}>
                         <div style={tableContainerStyle}>
                             <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
                                 <p ref="dx_editable_p"
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.settings[2].Default })}>{template.content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[2].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
                     <div style={rightImageContainerStyle}>
                         <img
                             style={imgStyle}
-                            src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
+                            src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')}
                         />
                     </div>
                 </div>
             );
-        } else if (template.type == 'BACKGROUND_TEXT') {
+        } else if (template.Type == 'BACKGROUND_TEXT') {
             card = (
-                <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.settings[0].Default })}>
+                <div style={Object.assign({}, tableContainerStyle, { backgroundColor: template.Settings[0].Default })}>
                     <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center' })}>
                         <p ref="dx_editable_p"
                             className="dx_editable_p"
                             contenteditable={isEditable ? "true" : "false"}
                             onBlur={() => this.handleContentChange()}
-                            style={Object.assign({}, txtStyle, { color: template.settings[1].Default })}>{template.content}</p>
+                            style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                     </div>
                 </div>
             );
-        } else if (template.type == 'BACKGROUND_IMAGE_TEXT') {
+        } else if (template.Type == 'BACKGROUND_IMAGE_TEXT') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
+                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -160,18 +160,18 @@ class DxCard extends Component {
                                     className="dx_editable_p"
                                     contenteditable={isEditable ? "true" : "false"}
                                     onBlur={() => this.handleContentChange()}
-                                    style={Object.assign({}, txtStyle, { color: template.settings[1].Default })}>{template.content}</p>
+                                    style={Object.assign({}, txtStyle, { color: template.Settings[1].Default })}>{template.Content}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             );
-        } else if (template.type == 'VIDEO') {
+        } else if (template.Type == 'VIDEO') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={this.state.videoInsert ? videoOverlayImgStyle : overlayImgStyle}
-                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
+                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')}
                     />
                     <div style={overlayWrapperStyle}>
                         <div style={Object.assign({}, tableContainerStyle)}>
@@ -184,7 +184,7 @@ class DxCard extends Component {
                                                 onClick={() => this.handleVideoInsertClick(true, this.props.isVideoInsertClickable)}
                                             />
                                             {
-                                                template.content ?
+                                                template.Content ?
                                                     <ReactPlayer
                                                         config={{
                                                             facebook: {
@@ -192,13 +192,13 @@ class DxCard extends Component {
                                                             },
                                                             file: {
                                                                 attributes: {
-                                                                    poster: template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')
+                                                                    poster: template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')
                                                                 }
                                                             }
                                                         }}
                                                         width={275}
                                                         height={90}
-                                                        url={template.content}
+                                                        url={template.Content}
                                                         controls={true}
                                                         onError={(e) => this.handleVideoError(e)}
                                                     />
@@ -216,7 +216,7 @@ class DxCard extends Component {
                                                     isDark={true}
                                                     width="144px"
                                                     disabled={false}
-                                                    value={template.content}
+                                                    value={template.Content}
                                                     handleKeyPress={() => this.handleVideoInsertClick(false, this.props.isVideoInsertClickable)}
                                                 />
                                             </div>
@@ -234,12 +234,12 @@ class DxCard extends Component {
                     </div>
                 </div>
             );
-        } else if (template.type == 'IMAGE') {
+        } else if (template.Type == 'IMAGE') {
             card = (
                 <div style={overlayContainerStyle}>
                     <img
                         style={overlayImgStyle}
-                        src={template.settings[0].Default ? `${config.picHost}${template.settings[0].Default}` : require('../../../../../../assets/images/demo.jpg')}
+                        src={template.Settings[0].Default ? `${config.picHost}${template.Settings[0].Default}` : require('../../../../assets/images/demo.jpg')}
                     />
                 </div>
             );
@@ -251,6 +251,7 @@ class DxCard extends Component {
     render() {
 
         const {
+            enableShadow,
             isWithBottomBar,
             isEditable,
             isCenterCard,
@@ -275,7 +276,7 @@ class DxCard extends Component {
         return (
             <div style={mainContainerStyle}>
                 <div style={Object.assign({}, cardContainerStyle, isCenterCard ? { margin: '0 auto' } : {})}
-                    className={!isWithBottomBar ? "dx_card" : "dx_card_bottom_bar"}
+                    className={enableShadow ? "dx_card" : "" }
                     onClick={() => this.handleSelectCardTemplate(template)}
                 >
                     {
@@ -336,7 +337,7 @@ class DxCard extends Component {
 
 const styles = {
     mainContainerStyle: {
-        marginBottom: 24
+
     },
     tableContainerStyle: {
         position: 'relative',
@@ -349,7 +350,6 @@ const styles = {
         verticalAlign: 'middle',
     },
     cardContainerStyle: {
-        width: 'calc(100% - 24px)',
         height: 90,
         cursor: 'pointer'
     },
@@ -442,7 +442,6 @@ const styles = {
         marginRight: 6,
     },
     bottomEditContainerStyle: {
-        width: 'calc(100% - 24px)',
         height: 30,
         display: 'flex',
         flexDirection: 'row',

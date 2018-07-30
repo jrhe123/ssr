@@ -12,10 +12,14 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
 
+    HTML_FETCH_REQUESTED,
+    HTML_FETCH__SUCCEEDED,
+    HTML_FETCH__FAILED,
+
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
-    
+
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__FAILED,
@@ -32,16 +36,16 @@ export const dxLogoutUrl = () => {
                 'Content-Type': 'application/json',
             },
         })
-        .then((response) => {
+            .then((response) => {
 
-            if (!response.ok) {
-                throw new Error();
-            }
-            return response.json();
-        })
-        .catch((error) => {
-            return error;
-        })
+                if (!response.ok) {
+                    throw new Error();
+                }
+                return response.json();
+            })
+            .catch((error) => {
+                return error;
+            })
     )
 }
 
@@ -65,6 +69,42 @@ export function* dxLogoutSaga() {
     yield takeEvery(LOGOUT_REQUESTED, dxLogout);
 }
 
+// Html loading
+export const dxHtmlFetchUrl = (params) => {
+    let guid = params.guid;
+    return (
+        apiManager.dxHtmlApi(`${config.fileHost}/${guid}.html`)
+    )
+}
+
+export function* dxHtmlFetch(action) {
+    try {
+        const response = yield call(dxHtmlFetchUrl, action.payload);
+        const {
+            experienceGUID, 
+            pageGUID, 
+            sectionGUID,
+        } = action.payload;
+        yield put({
+            type: HTML_FETCH__SUCCEEDED,
+            payload: {
+                experienceGUID, 
+                pageGUID, 
+                sectionGUID,
+                html: response
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: HTML_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxHtmlFetchSaga() {
+    yield takeEvery(HTML_FETCH_REQUESTED, dxHtmlFetch);
+}
 
 // Fetch Channel
 export function* dxChannelFetch(action) {
@@ -90,7 +130,7 @@ export function* dxChannelFetchSaga() {
 export const dxFetchExperienceUrl = () => {
     return (
         apiManager.dxApi(`/experience/list`, {
-            Limit: "5",
+            Limit: "23",
             Offset: "0",
             Extra: {},
         }, true)

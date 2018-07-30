@@ -10,18 +10,33 @@ import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
 import {
+    // CREATE EXPERIENCE
     dxExperienceInitial as dxExperienceInitialAction,
-    dxExperienceType as dxExperienceTypeAction
+    dxExperienceType as dxExperienceTypeAction,
+
+    // UPDATE EXPERIENCE
+    dxExperienceView as dxExperienceViewAction,
 } from './actions';
 
 export class NewExperiencePage extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const history = this.props.history;
-        const experienceType = this.props.match.params.param;
+        const param = this.props.match.params.param;
+        const url = this.props.match.url;
+
+        let isNewExp = url.match(/new_experience/i);
+        let isEditExp = url.match(/edit_experience/i);
+
         this.props.dxNavigateHistoryAction(history);
-        this.props.dxExperienceInitialAction();
-        this.props.dxExperienceTypeAction(experienceType.toString());
+
+        if (isNewExp) {
+            this.props.dxExperienceInitialAction();
+            this.props.dxExperienceTypeAction(param);
+        }
+        if (isEditExp) {
+            this.props.dxExperienceViewAction(param);
+        }
     }
 
     render() {
@@ -47,6 +62,8 @@ const dispatchToProps = {
 
     dxExperienceInitialAction,
     dxExperienceTypeAction,
+
+    dxExperienceViewAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(NewExperiencePage);

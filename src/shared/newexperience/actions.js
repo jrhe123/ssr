@@ -1,4 +1,5 @@
 import {
+    // CREATE EXPIERENCE
     EXPERIENCE_INITIAL_REQUESTED,
     EXPERIENCE_CREATE_REQUESTED,
     EXPERIENCE_UPLOAD_FILE_REQUESTED,
@@ -34,8 +35,15 @@ import {
     EXPERIENCE_PAGE_SELECT_ELEM_REQUESTED,
     EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE_REQUESTED,
+
+
+    // UPDATE EXPERIENCE
+    EXPERIENCE_VIEW_REQUESTED,
+
 } from './constants';
 
+
+// CREATE EXPIERENCE
 export const dxExperienceInitial = () => {
     return {
         type: EXPERIENCE_INITIAL_REQUESTED,
@@ -305,6 +313,17 @@ export const dxExperiencePageSectionConnectPage = (sectionGUID, pageGUID) => {
         payload: {
             sectionGUID,
             pageGUID,
+        },
+    }
+}
+
+
+// UPDATE EXPERIENCE
+export const dxExperienceView = (experienceGUID) => {
+    return {
+        type: EXPERIENCE_VIEW_REQUESTED,
+        payload: {
+            experienceGUID
         },
     }
 }

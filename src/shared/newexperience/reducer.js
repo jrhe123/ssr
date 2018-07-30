@@ -1,4 +1,5 @@
 import {
+    // CREATE EXPERIENCE
     EXPERIENCE_INITIAL__SUCCEEDED,
     EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
@@ -34,6 +35,10 @@ import {
     EXPERIENCE_PAGE_SELECT_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED,
     EXPERIENCE_PAGE_ELEM_CONNECT_PAGE__SUCCEEDED,
+
+    // UPDATE EXPERIENCE
+    EXPERIENCE_VIEW__SUCCEEDED,
+
 } from './constants';
 
 // Function
@@ -143,24 +148,25 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     switch (type) {
 
+        // CREATE EXPERIENCE
         case EXPERIENCE_INITIAL__SUCCEEDED:
             tmpExperience = {
                 Type: '0',
                 Index: '0',
-                IsCardTemplateMenuOpen: true, 
-                IsCardTemplateSaved: false, 
-                CardTemplate: null, 
-                Card: null, 
-                IsPageTemplateMenuOpen: true, 
-                IsPagesSaved: false,        
-                ActivePageTemplateOptionIndex: 0, 
-                IsPageCarouselMenuOpen: false,   
+                IsCardTemplateMenuOpen: true,
+                IsCardTemplateSaved: false,
+                CardTemplate: null,
+                Card: null,
+                IsPageTemplateMenuOpen: true,
+                IsPagesSaved: false,
+                ActivePageTemplateOptionIndex: 0,
+                IsPageCarouselMenuOpen: false,
                 ExperienceTitle: 'New Experience',
                 CardTitle: 'Card 1',
-                Tools: [],  
-                Pages: [],  
-                NewPage: Object.assign({}, templateNewPage),   
-                ActivePageSectionIndex: 0,  
+                Tools: [],
+                Pages: [],
+                NewPage: Object.assign({}, templateNewPage),
+                ActivePageSectionIndex: 0,
             }
             updated.Experience = tmpExperience;
             updated.IsCompleted = false;
@@ -592,6 +598,27 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             }
             return updated;
 
+
+        // UPDATE EXPERIENCE
+        case EXPERIENCE_VIEW__SUCCEEDED:
+            tmpExperience.Type = payload.experience.ExperienceType;
+            tmpExperience.IsCardTemplateSaved = true;
+            tmpExperience.CardTemplate = payload.experience.ExperienceCard;
+            tmpExperience.Card = payload.experience.ExperienceCard;
+            tmpExperience.ExperienceTitle = payload.experience.ExperienceTitle;
+            tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
+            tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
+            tmpExperience.Pages = payload.experience.ExperiencePages;
+            tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
+            // Experience: {                
+            //     Tools: [],      // toolbars
+            // },
+
+            console.log('tmpExperience: ', tmpExperience);
+
+            updated.Experience = tmpExperience;
+            return updated;
+
         default:
             return previousState;
     }
@@ -681,6 +708,14 @@ const disconnect_pages_by_sections = (sections, pages) => {
             pages[item.index] = item.page;
         }
     }
+}
+const find_root_page = (pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        if (pages[i].IsRoot) {
+            return pages[i];
+        }
+    }
+    return null;
 }
 
 export default newexperienceReducer;

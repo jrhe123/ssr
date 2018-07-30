@@ -14,6 +14,9 @@ import {
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemove as dxExperiencePagePagesRemoveAction,
 } from '../../actions';
+import {
+    dxAlert as dxAlertAction,
+} from '../../../actions';
 
 // constants
 import colors from '../../../styles/colors';
@@ -21,14 +24,18 @@ import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
 // components
+import DxCard from '../../../components/dxCard/DxCard';
 import DxInput from '../../../components/dxInput/DxInput';
-import DxCard from '../presentation/DxCard';
-import DxPage from '../presentation/DxPage';
+import DxPage from '../../../components/dxPage/DxPage';
 
 class ExperiencePanel extends Component {
 
     state = {
         isMenuOpen: false,
+    }
+
+    handleErrorMsg = (msg) => {
+        this.props.dxAlertAction(true, true, msg);
     }
 
     handleToggle = () => {
@@ -79,7 +86,6 @@ class ExperiencePanel extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => console.log(JSON.stringify(this.props.Experience))}>click me</a>
                 <div style={optionContainerStyle}>
                     <div style={leftContainerStyle}>
                         <p style={labelStyle}>Type</p>
@@ -150,6 +156,7 @@ class ExperiencePanel extends Component {
                             :
                             <div style={demoCardContainerStyle}>
                                 <DxCard
+                                    enableShadow={true}
                                     isWithTitle={false}
                                     isWithBottomBar={true}
                                     isCenterCard={false}
@@ -158,6 +165,7 @@ class ExperiencePanel extends Component {
                                     isVideoInsertClickable={false}
                                     cardTitle={this.props.Experience.CardTitle}
                                     template={this.props.Experience.Card}
+                                    handleVideoError={(msg) => this.handleErrorMsg(msg)}
                                     handleEditCardTemplateClick={() => this.props.handleEditCardTemplateClick()}
                                     handleConfirmDeleteCard={() => this.props.handleRemoveCardTemplateClick()}
                                 />
@@ -196,6 +204,10 @@ class ExperiencePanel extends Component {
                                         <div style={demoPagesContainerStyle}>
                                             <DxPage
                                                 pages={this.props.Experience.Pages}
+                                                pdfWidth={276}
+                                                displayPageNumber={true}
+                                                isWithBottomBar={true}
+                                                isLoadHtml={false}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}
                                             />
@@ -277,7 +289,7 @@ const styles = {
     },
     demoCardContainerStyle: {
         height: 132,
-        width: 300,
+        width: 276,
     },
     demoPagesContainerStyle: {
         height: 420,
@@ -297,6 +309,8 @@ const dispatchToProps = {
     dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemoveAction,
+
+    dxAlertAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ExperiencePanel);

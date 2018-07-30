@@ -5,11 +5,11 @@ import Modal from 'react-responsive-modal';
 import Button from '@material-ui/core/Button';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 // styles
-import '../../../../../assets/css/modal/rrm.css';
+import '../../../../assets/css/modal/rrm.css';
 
 class DxModal extends Component {
 

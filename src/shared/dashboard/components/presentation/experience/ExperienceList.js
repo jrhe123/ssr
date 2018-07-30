@@ -8,7 +8,7 @@ import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
 // components
-import DxCard from './DxCard';
+import ExperienceCase from './ExperienceCase';
 
 class ExperienceList extends Component {
 
@@ -19,10 +19,13 @@ class ExperienceList extends Component {
         } = this.props;
 
         const {
+            expTableContainerStyle,
             tableContainerStyle,
             tableWrapperStyle,
             mainContainerStyle,
             experienceContainerStyle,
+            experienceWrapperStyle,
+
             newExperienceContainerStyle,
             newExperienceWrapperStyle,
             imgStyle,
@@ -32,43 +35,47 @@ class ExperienceList extends Component {
             newExperienceLabelStyle,
         } = styles;
 
-        console.log('experiences: ', experiences);
-
         return (
             <div style={mainContainerStyle}>
                 {
                     experiences.map((experience, index) => (
                         <div style={experienceContainerStyle}>
-                            <DxCard
-                                isWithTitle={false}
-                                isWithBottomBar={false}
-                                isCenterCard={false}
-                                isEditable={false}
-                                isClickable={false}
-                                isVideoInsertClickable={false}
-                                cardTitle={experience.ExperienceTitle}
-                                template={experience.ExperienceCard}
-                            />
+                            <div
+                                className="dx_card"
+                                style={experienceWrapperStyle}
+                            >
+                                <ExperienceCase
+                                    experience={experience}
+                                    handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
+                                    handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID)}
+                                    handleConfirmDeleteExperience={() => {}}
+                                    handleErrorMsg={(msg) => this.props.handleErrorMsg(msg)}
+                                />
+                            </div>
                         </div>
                     ))
                 }
                 <div style={newExperienceContainerStyle}>
-                    <div
-                        style={newExperienceWrapperStyle}
-                        onClick={() => this.props.handleCreateExpClick()}
-                    >
-                        <div style={Object.assign({}, tableContainerStyle, { height: newExpSize })}>
-                            <div style={tableWrapperStyle}>
-                                <img
-                                    style={imgStyle}
-                                    src={require('../../../../../../assets/images/card_exp.png')} />
+                    <div style={expTableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div
+                                style={newExperienceWrapperStyle}
+                                onClick={() => this.props.handleCreateExpClick()}
+                            >
+                                <div style={Object.assign({}, tableContainerStyle, { height: newExpSize })}>
+                                    <div style={tableWrapperStyle}>
+                                        <img
+                                            style={imgStyle}
+                                            src={require('../../../../../../assets/images/card_exp.png')} />
+                                    </div>
+                                </div>
+                                <div style={iconContainerStyle}>
+                                    <Add style={addIconStyle} />
+                                </div>
+                                <div style={newExperienceLabelContainerStyle}>
+                                    <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
+                                </div>
                             </div>
-                        </div>
-                        <div style={iconContainerStyle}>
-                            <Add style={addIconStyle} />
-                        </div>
-                        <div style={newExperienceLabelContainerStyle}>
-                            <p style={newExperienceLabelStyle}>ADD EXPERIENCE</p>
                         </div>
                     </div>
                 </div>
@@ -79,30 +86,44 @@ class ExperienceList extends Component {
 
 const newExpSize = 72;
 const styles = {
-
+    expTableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: 470
+    },
     tableContainerStyle: {
         position: 'relative',
         display: 'table',
         width: '100%',
+        height: '100%',
     },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        textAlign: 'center',
     },
     mainContainerStyle: {
         width: '100%',
         height: '100%',
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
-        border: '1px solid green'
+        height: 512,
+    },
+    experienceWrapperStyle: {
+        width: 276,
+        marginTop: 24,
+        marginBottom: 24,
+        cursor: 'pointer',
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
-        height: newExpSize + 18,
+        marginTop: 24,
+        marginBottom: 24,
+        height: 512,
     },
     newExperienceWrapperStyle: {
         position: 'relative',
@@ -113,6 +134,7 @@ const styles = {
         border: '1px dotted',
         borderColor: colors.blueBorderColor,
         cursor: 'pointer',
+        margin: '0 auto',
     },
     imgStyle: {
         display: 'block',

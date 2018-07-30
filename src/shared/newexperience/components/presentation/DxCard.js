@@ -9,7 +9,7 @@ import fonts from '../../../styles/fonts';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
-import DxModal from './DxModal';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';

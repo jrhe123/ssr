@@ -24,7 +24,7 @@ export const capitalize_array_object_key = (obj) => {
 export const remove_is_deleted_item = (arr) => {
     let output = [];
     for(let i = 0; i < arr.length; i++){
-        if(!arr[i].isDeleted){
+        if(!arr[i].IsDeleted){
             output.push(arr[i]);
         }
     } 

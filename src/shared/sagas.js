@@ -8,12 +8,14 @@ import {
 // Dashboard
 import { 
     dxLogoutSaga,
+    dxHtmlFetchSaga,
     dxChannelFetchSaga,
     dxFetchExperienceSaga,
 } from './dashboard/sagas';
 
 // NewExperience
 import { 
+    // CREATE EXPERIENCE
     dxExperienceInitalSaga,
     dxExperienceCreateSaga,
     dxExperienceUploadFileSaga,
@@ -48,8 +50,11 @@ import {
     dxExperiencePageShuffleElemSaga,
     dxExperiencePageSelectElemSaga,
     dxExperiencePageUpdateElemSaga,
-    dxExperiencePageElemConnectPageSaga,} from './newexperience/sagas';
+    dxExperiencePageElemConnectPageSaga,
 
+    // UPDATE EXPERIENCE
+    dxExperienceViewSaga,
+} from './newexperience/sagas';
 
 // NewChannel 
 import { 
@@ -74,10 +79,11 @@ export default function* rootSaga() {
 
         // Dashboard
         dxLogoutSaga(),
+        dxHtmlFetchSaga(),
         dxChannelFetchSaga(),
         dxFetchExperienceSaga(),
 
-        // NewExperience
+        // CREATE EXPERIENCE
         dxExperienceInitalSaga(),
         dxExperienceCreateSaga(),
         dxExperienceUploadFileSaga(),
@@ -91,7 +97,6 @@ export default function* rootSaga() {
         dxChannelTypeUpdateSaga(),
         dxChannelColorSaga(),
         
-        // Card
         dxExperienceCardTemplateMenuToggleSaga(),
         dxExperienceCardTemplateFetchSaga(),
         dxExperienceCardTemplateSelectSaga(),
@@ -101,16 +106,13 @@ export default function* rootSaga() {
         dxExperienceCardTemplateSaveSaga(),
         dxExperienceCardTemplateRemoveSaga(),
 
-        // Page
         dxExperiencePagePagesSaveSaga(),
         dxExperiencePagePagesRemoveSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),
-
         dxExperiencePageCarouselMenuToggleSaga(),
         dxExperiencePageCarouselPageActiveSaga(),
-
         dxExperiencePageAddPageSaga(),
         dxExperiencePageDeletePageSaga(),
         dxExperiencePageAddElemSaga(),
@@ -120,6 +122,9 @@ export default function* rootSaga() {
         dxExperiencePageSelectElemSaga(),
         dxExperiencePageUpdateElemSaga(),
         dxExperiencePageElemConnectPageSaga(),
+
+        // UPDATE EXPERIENCE
+        dxExperienceViewSaga(),
         
         // Global
         dxValidateTokenSaga(),

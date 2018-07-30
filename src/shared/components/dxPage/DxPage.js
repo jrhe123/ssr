@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 // constants
-import colors from '../../../styles/colors';
-import fonts from '../../../styles/fonts';
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 // components
-import DxModal from './DxModal';
+import DxModal from '../dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -44,13 +44,12 @@ class DxPage extends Component {
     renderPhoneElementSection = () => {
 
         const {
-            pages
+            pages,
+            isLoadHtml,
         } = this.props;
 
         let page = this.findRootPage(pages);
         let sections = page.Sections;
-
-        
 
         const {
             elemContainerStyle,
@@ -63,10 +62,12 @@ class DxPage extends Component {
                     <ThumbnailPhoneElement
                         key={i}
                         section={section}
-                        pdfWidth={276}
+                        pdfWidth={this.props.pdfWidth}
+                        isLoadHtml={isLoadHtml}
                         splashSize="MEDIUM"
                         videoSize="MEDIUM"
                         imgSize="MEDIUM"
+                        handleLoadHtml={(sectionGUID, guid) => this.props.handleLoadHtml(page.PageGUID, sectionGUID, guid)}
                     />
                 </div>
             )
@@ -85,17 +86,15 @@ class DxPage extends Component {
     }
 
     findPageNumber = (pages) => {
-        
+
         let pageNo = 0;
-        for (let i =0; i < pages.length; i++) {
+        for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (page.IsDeleted == false)
-            {
+            if (page.IsDeleted == false) {
                 pageNo++;
             }
         }
         return pageNo;
-
     }
 
     render() {
@@ -119,59 +118,74 @@ class DxPage extends Component {
         } = styles;
         const {
             pages,
+            displayPageNumber,
+            isWithBottomBar,
         } = this.props;
 
         let page = this.findRootPage(pages);
         let pageNumber = this.findPageNumber(pages);
 
+        console.log('page: ', page);
+        console.log('pages: ', pages);
+        console.log('pageNumber: ', pageNumber);
+
         return (
             <div style={mainContainerStyle}>
-
-                <div style={topControlContainerStyle}>
-                    <div style={tableContainerStyle}>
-                        <div style={tableWrapperStyle}>
-                            <div style={pageNumberContainerStyle}>
-                                <p style={pageNumberTitleStyle}>{pageNumber}</p>
+                {
+                    displayPageNumber ?
+                        <div style={topControlContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <div style={pageNumberContainerStyle}>
+                                        <p style={pageNumberTitleStyle}>{pageNumber}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        :
+                        null
+                }
                 <div style={contentContainerStyle}>
                     <div style={contentWrapperStyle}>
                         {this.renderPhoneElementSection()}
                     </div>
                 </div>
-                <div style={controlContainerStyle}
-                    className="dx_card_bottom_bar">
-                    <div style={pageNameContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <div style={pageTitleContainerStyle}>
-                                    <p style={pageTitleStyle}>{page.Title}</p>
+                {
+                    isWithBottomBar ?
+                        <div style={controlContainerStyle}
+                            className="dx_card_bottom_bar">
+                            <div style={pageNameContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <div style={pageTitleContainerStyle}>
+                                            <p style={pageTitleStyle}>{page.Title}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={pageEditContainerStyle}>
+                                <div style={pageEditBurgerContainerStyle}>
+                                    <DropdownMenu
+                                        className="dx_card_template_bottom_bar_menu"
+                                        isOpen={this.state.isMenuOpen}
+                                        close={() => this.handleMenuClose()}
+                                        toggle={
+                                            <MoreHoriz
+                                                onClick={() => this.handleToggleBurger()}
+                                                style={editBurgerStyle} />
+                                        }
+                                        align='right'
+                                        closeOnInsideClick={false}
+                                    >
+                                        <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
+                                        <Button onClick={() => this.handleRemovePagePagesClick()}>Remove</Button>
+                                    </DropdownMenu>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div style={pageEditContainerStyle}>
-                        <div style={pageEditBurgerContainerStyle}>
-                            <DropdownMenu
-                                className="dx_card_template_bottom_bar_menu"
-                                isOpen={this.state.isMenuOpen}
-                                close={() => this.handleMenuClose()}
-                                toggle={
-                                    <MoreHoriz
-                                        onClick={() => this.handleToggleBurger()}
-                                        style={editBurgerStyle} />
-                                }
-                                align='right'
-                                closeOnInsideClick={false}
-                            >
-                                <Button onClick={() => this.props.handleEditPagePagesClick()}>Edit</Button>
-                                <Button onClick={() => this.handleRemovePagePagesClick()}>Remove</Button>
-                            </DropdownMenu>
-                        </div>
-                    </div>
-                </div>
+                        :
+                        null
+                }
                 <DxModal
                     open={this.state.isModalOpen}
                     title="Confirm Delete Pages"
@@ -201,7 +215,6 @@ const styles = {
     },
     mainContainerStyle: {
         width: 276,
-        height: 330,
         position: 'relative',
         boxSizing: 'border-box',
     },
@@ -222,9 +235,9 @@ const styles = {
         fontSize: fonts.h3
     },
     contentContainerStyle: {
-        height: 'calc(100% - 30px)',
-        backgroundColor: colors.lightBlueColor,
-        padding: 9
+        height: 318,
+        padding: 6,
+        backgroundColor: colors.whiteColor,
     },
     contentWrapperStyle: {
         height: '100%',

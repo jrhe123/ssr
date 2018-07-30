@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // components
-import ThumbnailPhoneElement from './ThumbnailPhoneElement';
+import ThumbnailPhoneElement from '../../../components/dxPage/ThumbnailPhoneElement';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -25,6 +25,7 @@ class ThumbnailPage extends Component {
                         key={i}
                         section={section}
                         pdfWidth={120}
+                        isLoadHtml={false}
                         splashSize="SMALL"
                         videoSize="SMALL"
                         imgSize="SMALL"
