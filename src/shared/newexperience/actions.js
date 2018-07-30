@@ -39,7 +39,8 @@ import {
 
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW_REQUESTED,
-
+    EXPERIENCE_VIEW_HTML_FETCH_REQUESTED,
+    
 } from './constants';
 
 
@@ -324,6 +325,17 @@ export const dxExperienceView = (experienceGUID) => {
         type: EXPERIENCE_VIEW_REQUESTED,
         payload: {
             experienceGUID
+        },
+    }
+}
+
+export const dxExperienceViewHtmlFetch = (pageGUID, sectionGUID, guid) => {
+    return {
+        type: EXPERIENCE_VIEW_HTML_FETCH_REQUESTED,
+        payload: {
+            pageGUID, 
+            sectionGUID, 
+            guid,
         },
     }
 }

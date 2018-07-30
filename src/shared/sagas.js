@@ -54,6 +54,8 @@ import {
 
     // UPDATE EXPERIENCE
     dxExperienceViewSaga,
+    dxExperienceViewHtmlFetchSaga,
+
 } from './newexperience/sagas';
 
 // Global
@@ -113,6 +115,7 @@ export default function* rootSaga() {
 
         // UPDATE EXPERIENCE
         dxExperienceViewSaga(),
+        dxExperienceViewHtmlFetchSaga(),
         
         // Global
         dxValidateTokenSaga(),

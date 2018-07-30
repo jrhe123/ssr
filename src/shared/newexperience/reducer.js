@@ -38,6 +38,7 @@ import {
 
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW__SUCCEEDED,
+    EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
 
 } from './constants';
 
@@ -95,6 +96,7 @@ const initialState = {
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
     Experience: {
+        ExperienceGUID: null,
         Type: '0',      // with OR without page(s)
         Index: '0',     // step
 
@@ -601,7 +603,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
-            tmpExperience.Type = payload.experience.ExperienceType;
+            tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;            tmpExperience.Type = payload.experience.ExperienceType;
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
             tmpExperience.Card = payload.experience.ExperienceCard;
@@ -612,6 +614,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
             updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
+            console.log('receive in reducer: ', payload);
             return updated;
 
         default:

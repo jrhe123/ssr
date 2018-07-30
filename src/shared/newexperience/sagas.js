@@ -135,6 +135,10 @@ import {
     EXPERIENCE_VIEW__SUCCEEDED,
     EXPERIENCE_VIEW__FAILED,
 
+    EXPERIENCE_VIEW_HTML_FETCH_REQUESTED,
+    EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
+    EXPERIENCE_VIEW_HTML_FETCH__FAILED,
+
 } from './constants';
 
 
@@ -1006,6 +1010,7 @@ export function* dxExperiencePageElemConnectPageSaga() {
 
 
 // UPDATE EXPERIENCE
+// View Experience
 export const dxExperienceViewUrl = (params) => {
     return (
         apiManager.dxApi(`/experience/view`, {ExperienceGUID: params.experienceGUID}, true)
@@ -1039,4 +1044,39 @@ export function* dxExperienceView(action) {
 
 export function* dxExperienceViewSaga() {
     yield takeEvery(EXPERIENCE_VIEW_REQUESTED, dxExperienceView);
+}
+
+// View Experience Html loading
+export const dxExperienceViewHtmlFetchUrl = (params) => {
+    let guid = params.guid;
+    return (
+        apiManager.dxHtmlApi(`${config.fileHost}/${guid}.html`)
+    )
+}
+
+export function* dxExperienceViewHtmlFetch(action) {
+    try {
+        const response = yield call(dxExperienceViewHtmlFetchUrl, action.payload);
+        const {
+            pageGUID, 
+            sectionGUID,
+        } = action.payload;
+        yield put({
+            type: EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
+            payload: {
+                pageGUID, 
+                sectionGUID,
+                html: response
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_VIEW_HTML_FETCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceViewHtmlFetchSaga() {
+    yield takeEvery(EXPERIENCE_VIEW_HTML_FETCH_REQUESTED, dxExperienceViewHtmlFetch);
 }
