@@ -314,10 +314,12 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    // CREATE
     dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemoveAction,
 
+    // UPDATE
     dxExperienceViewHtmlFetchAction,
 
     dxAlertAction,

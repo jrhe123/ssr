@@ -74,6 +74,7 @@ let templateNewPage = {
     IsDeleted: false,       // page deleted
 };
 let templateNewSection = {
+    IsSyncServer: false,
     SectionGUID: null,
     Index: null,    // quill editor tool bar render order
     Type: null,     // section type
@@ -622,10 +623,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.page.Sections, payload.sectionGUID);
             tmpUpdateSection.HtmlContent = payload.html;
+            tmpUpdateSection.IsSyncServer = true;
             // update arr of pages
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
             tmpExperience.Pages = tmpPages;
             updated.Experience = tmpExperience;
+            console.log('updated: ', updated);
             return updated;
 
         default:

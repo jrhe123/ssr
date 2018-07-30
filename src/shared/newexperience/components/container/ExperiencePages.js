@@ -36,6 +36,8 @@ import {
     dxExperiencePageUpdateElem as dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPage as dxExperiencePageSectionConnectPageAction,
     dxExperiencePageDeletePage as dxExperiencePageDeletePageAction,
+
+    dxExperienceViewHtmlFetch as dxExperienceViewHtmlFetchAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -76,12 +78,12 @@ class ExperiencePages extends Component {
             Pages,
         } = this.props.Experience;
         let phone = Pages.map((page, index) => (
-            this.renderPhoneElementSection(page.Sections, NewPage.PageGUID == page.PageGUID ? true : false, page.IsDeleted)
+            this.renderPhoneElementSection(page, page.Sections, NewPage.PageGUID == page.PageGUID ? true : false, page.IsDeleted)
         ))
         return phone;
     }
 
-    renderPhoneElementSection = (sections, activePage, deletedPage) => {
+    renderPhoneElementSection = (page, sections, activePage, deletedPage) => {
 
         const {
             Experience,
@@ -96,7 +98,7 @@ class ExperiencePages extends Component {
                 sectionGUID={section.SectionGUID}
                 type={section.Type}
                 isActive={section.IsActive}
-                htmlContent={section.HtmlContent}
+                htmlContent={this.handleLoadHtml(page, section)}
                 btnContent={section.BtnContent}
                 dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
                 pdf={section.Pdf}
@@ -122,6 +124,20 @@ class ExperiencePages extends Component {
             />
         ))
         return section
+    }
+
+    handleLoadHtml = (page, section) => {
+        let isSyncServer = section.IsSyncServer;
+        if (isSyncServer) {
+            if (section.HtmlContent) return section.HtmlContent;
+            else return '';
+        } else {
+            if (section.HtmlContent) return section.HtmlContent;
+            if (section.Html){
+                this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
+            } 
+            else return '';
+        }
     }
 
     handleAddElem = (template) => {
@@ -723,6 +739,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    // CREATE
     dxExperiencePageTemplateFetchAction,
 
     dxExperiencePageCarouselMenuUpdateAction,
@@ -736,6 +753,9 @@ const dispatchToProps = {
     dxExperiencePageUpdateElemAction,
     dxExperiencePageSectionConnectPageAction,
     dxExperiencePageDeletePageAction,
+
+    // UPDATE
+    dxExperienceViewHtmlFetchAction,
 
     dxAlertAction,
 }
