@@ -39,6 +39,7 @@ import {
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILE__SUCCEEDED,
 
 } from './constants';
 
@@ -94,6 +95,7 @@ let templateNewSection = {
 const initialState = {
     IsCompleted: false,     // complete experience
     IsFilesUploaded: false, // upload html files
+    IsFilesUpdated: false,  // update html files
     Index: 0,               // section index
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
@@ -634,6 +636,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
             tmpExperience.Pages = tmpPages;
             updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_UPDATE_FILE__SUCCEEDED:
+            updated.IsFilesUpdated = true;
+            updated.Experience = payload.experience;
             return updated;
 
         default:

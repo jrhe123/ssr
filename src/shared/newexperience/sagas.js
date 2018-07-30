@@ -142,6 +142,10 @@ import {
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__FAILED,
 
+    EXPERIENCE_UPDATE_FILE_REQUESTED,
+    EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILE__FAILED,
+
 } from './constants';
 
 
@@ -1083,4 +1087,79 @@ export function* dxExperienceViewHtmlFetch(action) {
 
 export function* dxExperienceViewHtmlFetchSaga() {
     yield takeEvery(EXPERIENCE_VIEW_HTML_FETCH_REQUESTED, dxExperienceViewHtmlFetch);
+}
+
+// Experience update file request
+export const dxExperienceUpdateSingleFileUrl = (params) => {
+    let formData = new FormData();
+    let blob = new Blob([params.HtmlContent == '' ? ' ' : params.HtmlContent], { type: 'text/html' });
+    formData.append('File', blob, 'blob.html');
+    formData.append('FileGUID', params.Html);
+    return (
+        apiManager.dxFileApi(`/upload/update_file`, formData, true)
+    )
+}
+
+export function* dxExperienceUpdateSingleFile(section) {
+    try {
+        const response = yield call(dxExperienceUpdateSingleFileUrl, section)
+        return response;
+    } catch (err) {
+        return err;
+    }
+}
+
+export function* dxExperienceUpdateFiles(action) {
+    try {
+
+        let experience = action.payload.experience;
+        let {
+            Type,
+            Pages,
+        } = experience;
+
+        if (Type == 0) {
+            yield put({
+                type: EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+                payload: {
+                    experience: action.payload.experience
+                },
+            });
+        } else {
+
+            for (let i = 0; i < Pages.length; i++) {
+                let page = Pages[i];
+                if (!page.IsDeleted) {
+                    for (let j = 0; j < page.Sections.length; j++) {
+                        let section = page.Sections[j];
+                        if (!section.IsDeleted && section.Type == 'EDITOR') {
+                            if(section.Html){
+                                let response = yield call(dxExperienceUpdateSingleFile, section);
+                                if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                            }else{
+                                let response = yield call(dxExperienceUploadSingleFile, section);
+                                if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        yield put({
+            type: EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+            payload: {
+                experience
+            },
+        });
+
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE_FILE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUpdateFileSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_FILE_REQUESTED, dxExperienceUpdateFiles);
 }

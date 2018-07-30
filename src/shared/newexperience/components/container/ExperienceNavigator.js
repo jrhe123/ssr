@@ -10,6 +10,7 @@ import { search_object_index_by_value } from '../../../helpers';
 // redux
 import { connect } from 'react-redux';
 import {
+    // CREATE
     dxExperienceCreate as dxExperienceCreateAction,
     dxExperienceUploadFile as dxExperienceUploadFileAction,
 
@@ -23,6 +24,9 @@ import {
     dxExperiencePageTemplateMenuUpdate as dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPage as dxExperiencePageAddPageAction,
+
+    // UPDATE
+    dxExperienceUpdateFile as dxExperienceUpdateFileAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -75,7 +79,7 @@ class ExperienceNavigator extends Component {
         // CREATE
         if (!experienceGUID) this.props.dxExperienceUploadFileAction(Experience);
         // UPDATE
-        else console.log('update now: ', Experience);
+        else this.props.dxExperienceUpdateFileAction(Experience);
     }
 
     handleSaveBtnClick = () => {
@@ -472,6 +476,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    // CREATE
     dxExperienceCreateAction,
     dxExperienceUploadFileAction,
 
@@ -484,6 +489,9 @@ const dispatchToProps = {
     dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPageAction,
+
+    // UPDATE
+    dxExperienceUpdateFileAction,
 
     dxAlertAction,
     dxLoadingAction,
