@@ -38,6 +38,7 @@ import {
 
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW__SUCCEEDED,
+    EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
 
 } from './constants';
 
@@ -50,7 +51,9 @@ Array.prototype.insert = function (index, item) {
 const update = require('immutability-helper');
 
 // helpers
-import { search_object_index_by_value } from '../helpers';
+import {
+    search_object_index_by_value,
+} from '../helpers';
 import { uuid } from '../helpers/tools';
 
 let templateCard = {
@@ -71,6 +74,7 @@ let templateNewPage = {
     IsDeleted: false,       // page deleted
 };
 let templateNewSection = {
+    IsSyncServer: false,
     SectionGUID: null,
     Index: null,    // quill editor tool bar render order
     Type: null,     // section type
@@ -95,6 +99,7 @@ const initialState = {
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
     Experience: {
+        ExperienceGUID: null,
         Type: '0',      // with OR without page(s)
         Index: '0',     // step
 
@@ -517,7 +522,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
-            tmpUpdateSection = find_section_by_guid(tmpNewPage.Sections, payload.sectionGUID);
+
+            tmpUpdatePage = Object.assign({}, tmpNewPage);
+            if (payload.pageGUID) {
+                tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages).page;
+            }
+            tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
+
             if (tmpUpdateSection.Type == payload.type
                 || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
@@ -551,7 +562,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     default:
                         break;
                 }
-                tmpExperience.NewPage = tmpNewPage;
+                tmpExperience.NewPage = tmpUpdatePage;
                 updated.Experience = tmpExperience;
             }
             return updated;
@@ -601,6 +612,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
+            tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;
             tmpExperience.Type = payload.experience.ExperienceType;
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
@@ -608,9 +620,20 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.ExperienceTitle = payload.experience.ExperienceTitle;
             tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
             tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
-            tmpExperience.Pages = payload.experience.ExperiencePages;
+            tmpExperience.Pages = update_init_pages(payload.experience.ExperiencePages);
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
+            updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
+            tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
+            tmpUpdateSection = find_section_by_guid(tmpUpdatePage.page.Sections, payload.sectionGUID);
+            tmpUpdateSection.HtmlContent = payload.html;
+            tmpUpdateSection.IsSyncServer = true;
+            // update arr of pages
+            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
+            tmpExperience.Pages = tmpPages;
             updated.Experience = tmpExperience;
             return updated;
 
@@ -714,9 +737,9 @@ const find_root_page = (pages) => {
 }
 const format_pages_tools = (pages) => {
     let tools = [];
-    for(let i = 0; i < pages.length; i++){
+    for (let i = 0; i < pages.length; i++) {
         let page = pages[i];
-        for(let j = 0; j < page.Sections.length; j++){
+        for (let j = 0; j < page.Sections.length; j++) {
             let section = page.Sections[j];
             section.PageGUID = page.PageGUID;
             section.IsDeleted = false;
@@ -725,6 +748,12 @@ const format_pages_tools = (pages) => {
         }
     }
     return tools;
+}
+const update_init_pages = (pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].IsDeleted = false;
+    }
+    return pages;
 }
 
 export default newexperienceReducer;

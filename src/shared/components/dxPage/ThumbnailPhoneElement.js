@@ -43,7 +43,7 @@ class ThumbnailPhoneElement extends Component {
             else return '';
         } else {
             if (section.HtmlContent) return section.HtmlContent;
-            if (section.Html) this.props.handleLoadHtml(section.SectionGUID, section.Html);
+            if (section.Html && !section.IsSyncServer) this.props.handleLoadHtml(section.SectionGUID, section.Html);
             else return '';
         }
     }

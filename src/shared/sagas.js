@@ -54,6 +54,8 @@ import {
 
     // UPDATE EXPERIENCE
     dxExperienceViewSaga,
+    dxExperienceViewHtmlFetchSaga,
+
 } from './newexperience/sagas';
 
 // NewChannel 
@@ -125,6 +127,7 @@ export default function* rootSaga() {
 
         // UPDATE EXPERIENCE
         dxExperienceViewSaga(),
+        dxExperienceViewHtmlFetchSaga(),
         
         // Global
         dxValidateTokenSaga(),

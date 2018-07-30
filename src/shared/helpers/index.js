@@ -30,3 +30,42 @@ export const remove_is_deleted_item = (arr) => {
     } 
     return output;
 }
+
+export const find_experience_obj_by_guid = (experiences, guid) => {
+    for (let i = 0; i < experiences.length; i++) {
+        let experience = experiences[i];
+        if (experience.ExperienceGUID == guid) {
+            return {
+                index: i,
+                experience,
+            };
+        }
+    }
+    return null;
+}
+
+export const find_page_obj_by_guid = (pages, guid) => {
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (page.PageGUID == guid) {
+            return {
+                index: i,
+                page,
+            };
+        }
+    }
+    return null;
+}
+
+export const find_section_obj_by_guid = (sections, guid) => {
+    for (let i = 0; i < sections.length; i++) {
+        let section = sections[i];
+        if (section.SectionGUID == guid) {
+            return {
+                index: i,
+                section,
+            };
+        }
+    }
+    return null;
+}

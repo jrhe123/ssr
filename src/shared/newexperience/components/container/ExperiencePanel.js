@@ -13,6 +13,8 @@ import {
     dxExperienceIndexUpdate as dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdate as dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemove as dxExperiencePagePagesRemoveAction,
+
+    dxExperienceViewHtmlFetch as dxExperienceViewHtmlFetchAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -58,6 +60,10 @@ class ExperiencePanel extends Component {
 
     handleRemovePagePages = () => {
         this.props.dxExperiencePagePagesRemoveAction();
+    }
+
+    handleLoadHtml = (pageGUID, sectionGUID, guid) => {
+        this.props.dxExperienceViewHtmlFetchAction(pageGUID, sectionGUID, guid);
     }
 
     render() {
@@ -208,9 +214,10 @@ class ExperiencePanel extends Component {
                                                 pdfWidth={276}
                                                 displayPageNumber={true}
                                                 isWithBottomBar={true}
-                                                isLoadHtml={false}
+                                                isLoadHtml={true}
                                                 handleEditPagePagesClick={() => this.handleChangeProgressIndex(2)}
                                                 handleRemovePagePages={() => this.handleRemovePagePages()}
+                                                handleLoadHtml={(pageGUID, sectionGUID, guid) => this.handleLoadHtml(pageGUID, sectionGUID, guid)}
                                             />
                                         </div>
                                 }
@@ -307,9 +314,13 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    // CREATE
     dxExperienceIndexUpdateAction,
     dxExperienceTypeUpdateAction,
     dxExperiencePagePagesRemoveAction,
+
+    // UPDATE
+    dxExperienceViewHtmlFetchAction,
 
     dxAlertAction,
 }

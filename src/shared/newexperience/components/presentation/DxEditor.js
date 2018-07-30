@@ -87,6 +87,7 @@ class DxEditor extends Component {
                     modules={this.modules}
                     formats={formats}
                     defaultValue={this.props.htmlContent}
+                    value={this.props.htmlContent}
                     placeholder={this.props.placeholder} />
             </div>
         )
