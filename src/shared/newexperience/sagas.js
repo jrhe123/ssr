@@ -3,6 +3,9 @@ import FormData from 'form-data';
 import * as apiManager from '../helpers/apiManager';
 import * as helpers from '../helpers';
 
+// config
+import config from '../config';
+
 import {
     // CREATE EXPIERENCE
     EXPERIENCE_INITIAL_REQUESTED,

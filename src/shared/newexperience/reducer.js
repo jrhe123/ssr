@@ -51,7 +51,12 @@ Array.prototype.insert = function (index, item) {
 const update = require('immutability-helper');
 
 // helpers
-import { search_object_index_by_value } from '../helpers';
+import { 
+    search_object_index_by_value,
+    find_experience_obj_by_guid,
+    find_page_obj_by_guid,
+    find_section_obj_by_guid,
+} from '../helpers';
 import { uuid } from '../helpers/tools';
 
 let templateCard = {
