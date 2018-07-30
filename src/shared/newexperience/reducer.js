@@ -610,12 +610,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
             tmpExperience.Pages = payload.experience.ExperiencePages;
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
-            // Experience: {                
-            //     Tools: [],      // toolbars
-            // },
-
-            console.log('tmpExperience: ', tmpExperience);
-
+            tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
             updated.Experience = tmpExperience;
             return updated;
 
@@ -716,6 +711,20 @@ const find_root_page = (pages) => {
         }
     }
     return null;
+}
+const format_pages_tools = (pages) => {
+    let tools = [];
+    for(let i = 0; i < pages.length; i++){
+        let page = pages[i];
+        for(let j = 0; j < page.Sections.length; j++){
+            let section = page.Sections[j];
+            section.PageGUID = page.PageGUID;
+            section.IsDeleted = false;
+            section.IsActive = false;
+            tools.push(section);
+        }
+    }
+    return tools;
 }
 
 export default newexperienceReducer;
