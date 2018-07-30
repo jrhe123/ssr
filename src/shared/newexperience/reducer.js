@@ -53,9 +53,6 @@ const update = require('immutability-helper');
 // helpers
 import { 
     search_object_index_by_value,
-    find_experience_obj_by_guid,
-    find_page_obj_by_guid,
-    find_section_obj_by_guid,
 } from '../helpers';
 import { uuid } from '../helpers/tools';
 
@@ -622,7 +619,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
-            console.log('receive in reducer: ', payload);
+            tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages);
+            tmpUpdateSection = find_section_by_guid(tmpUpdatePage.page.Sections, payload.sectionGUID);
+            tmpUpdateSection.HtmlContent = payload.html;
+            // update arr of pages
+            tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
+            tmpExperience.Pages = tmpPages;
+            updated.Experience = tmpExperience;
             return updated;
 
         default:
