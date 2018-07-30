@@ -113,7 +113,7 @@ class ExperiencePages extends Component {
                 moveCard={this.handleMoveCard}
                 handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
-                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html)}
+                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
                 handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
                 handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
                 handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
@@ -161,8 +161,8 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageSelectElemAction(sectionGUID);
     }
 
-    handleUpdateHtmlContent = (sectionGUID, html) => {
-        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EDITOR', html);
+    handleUpdateHtmlContent = (sectionGUID, html, pageGUID) => {
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'EDITOR', html, pageGUID);
     }
 
     handleUpdateBtnContent = (sectionGUID, e) => {

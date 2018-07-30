@@ -297,13 +297,14 @@ export const dxExperiencePageSelectElem = (sectionGUID) => {
     }
 }
 
-export const dxExperiencePageUpdateElem = (sectionGUID, type, content) => {
+export const dxExperiencePageUpdateElem = (sectionGUID, type, content, pageGUID) => {
     return {
         type: EXPERIENCE_PAGE_UPDATE_ELEM_REQUESTED,
         payload: {
             sectionGUID,
             type,
             content,
+            pageGUID,
         },
     }
 }

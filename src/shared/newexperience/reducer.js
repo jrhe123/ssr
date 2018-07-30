@@ -522,7 +522,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
-            tmpUpdateSection = find_section_by_guid(tmpNewPage.Sections, payload.sectionGUID);
+            
+            tmpUpdatePage =  Object.assign({}, tmpNewPage);
+            if(payload.pageGUID){
+                tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages).page;
+            }
+            tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
+
             if (tmpUpdateSection.Type == payload.type
                 || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
@@ -556,7 +562,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                     default:
                         break;
                 }
-                tmpExperience.NewPage = tmpNewPage;
+                tmpExperience.NewPage = tmpUpdatePage;
                 updated.Experience = tmpExperience;
             }
             return updated;
@@ -628,7 +634,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
             tmpExperience.Pages = tmpPages;
             updated.Experience = tmpExperience;
-            console.log('updated: ', updated);
             return updated;
 
         default:

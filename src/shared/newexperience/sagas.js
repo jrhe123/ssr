@@ -974,6 +974,7 @@ export function* dxExperiencePageUpdateElem(action) {
                     sectionGUID: action.payload.sectionGUID,
                     type: type,
                     content: action.payload.content,
+                    pageGUID: action.payload.pageGUID,
                 },
             });
         }
