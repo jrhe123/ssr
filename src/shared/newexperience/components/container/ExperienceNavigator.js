@@ -75,7 +75,7 @@ class ExperienceNavigator extends Component {
         // CREATE
         if (!experienceGUID) this.props.dxExperienceUploadFileAction(Experience);
         // UPDATE
-        else console.log('update now');
+        else console.log('update now: ', Experience);
     }
 
     handleSaveBtnClick = () => {

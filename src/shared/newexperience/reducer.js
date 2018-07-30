@@ -74,7 +74,6 @@ let templateNewPage = {
     IsDeleted: false,       // page deleted
 };
 let templateNewSection = {
-    IsSyncServer: false,
     SectionGUID: null,
     Index: null,    // quill editor tool bar render order
     Type: null,     // section type
