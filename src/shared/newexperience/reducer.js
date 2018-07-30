@@ -51,7 +51,7 @@ Array.prototype.insert = function (index, item) {
 const update = require('immutability-helper');
 
 // helpers
-import { 
+import {
     search_object_index_by_value,
 } from '../helpers';
 import { uuid } from '../helpers/tools';
@@ -522,9 +522,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_UPDATE_ELEM__SUCCEEDED:
-            
-            tmpUpdatePage =  Object.assign({}, tmpNewPage);
-            if(payload.pageGUID){
+
+            tmpUpdatePage = Object.assign({}, tmpNewPage);
+            if (payload.pageGUID) {
                 tmpUpdatePage = find_page_by_guid(payload.pageGUID, tmpPages).page;
             }
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
@@ -612,14 +612,15 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
-            tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;            tmpExperience.Type = payload.experience.ExperienceType;
+            tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;
+            tmpExperience.Type = payload.experience.ExperienceType;
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
             tmpExperience.Card = payload.experience.ExperienceCard;
             tmpExperience.ExperienceTitle = payload.experience.ExperienceTitle;
             tmpExperience.IsPagesSaved = tmpExperience.Type == 0 ? false : true;
             tmpExperience.CardTitle = payload.experience.ExperienceCard.Title;
-            tmpExperience.Pages = payload.experience.ExperiencePages;
+            tmpExperience.Pages = update_init_pages(payload.experience.ExperiencePages);
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
             updated.Experience = tmpExperience;
@@ -736,9 +737,9 @@ const find_root_page = (pages) => {
 }
 const format_pages_tools = (pages) => {
     let tools = [];
-    for(let i = 0; i < pages.length; i++){
+    for (let i = 0; i < pages.length; i++) {
         let page = pages[i];
-        for(let j = 0; j < page.Sections.length; j++){
+        for (let j = 0; j < page.Sections.length; j++) {
             let section = page.Sections[j];
             section.PageGUID = page.PageGUID;
             section.IsDeleted = false;
@@ -747,6 +748,12 @@ const format_pages_tools = (pages) => {
         }
     }
     return tools;
+}
+const update_init_pages = (pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].IsDeleted = false;
+    }
+    return pages;
 }
 
 export default newexperienceReducer;
