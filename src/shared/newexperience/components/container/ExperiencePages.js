@@ -133,9 +133,9 @@ class ExperiencePages extends Component {
             else return '';
         } else {
             if (section.HtmlContent) return section.HtmlContent;
-            if (section.Html){
+            if (section.Html) {
                 this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
-            } 
+            }
             else return '';
         }
     }
@@ -312,7 +312,9 @@ class ExperiencePages extends Component {
             tableWrapperStyle,
             hiddenLeftContainerStyle,
             leftContainerStyle,
+            leftDocContainerStyle,
             leftWrapperStyle,
+            docContainerStyle,
             cateContainerStyle,
             optionBtnContainerStyle,
             btnStyle,
@@ -342,12 +344,14 @@ class ExperiencePages extends Component {
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
+        let leftContainer = Experience.ActivePageTemplateOptionIndex == 0 ? leftContainerStyle : leftDocContainerStyle;
+        leftContainer = Experience.IsPageTemplateMenuOpen ? leftContainer : hiddenLeftContainerStyle;
 
         return (
             <div style={mainContainerStyle}>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
-                    style={Experience.IsPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                    style={leftContainer}
                 >
                     <DropdownMenu
                         isOpen={Experience.IsPageTemplateMenuOpen}
@@ -356,75 +360,83 @@ class ExperiencePages extends Component {
                         className="dx-layout-menu"
                         closeOnInsideClick={false}
                     >
-                        <div style={leftWrapperStyle}>
-
-                            <div style={cateContainerStyle}>
-                                <div>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 0 ? activeOptionBtnStyle : {})}
-                                        variant="Popular"
-                                        onClick={() => this.handleClickCate(0)}
-                                    >
-                                        Popular
+                        {
+                            Experience.ActivePageTemplateOptionIndex == 0 ?
+                                <div style={leftWrapperStyle}>
+                                    <div style={cateContainerStyle}>
+                                        <div>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 0 ? activeOptionBtnStyle : {})}
+                                                variant="Popular"
+                                                onClick={() => this.handleClickCate(0)}
+                                            >
+                                                Popular
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 1 ? activeOptionBtnStyle : {})}
-                                        variant="New"
-                                        onClick={() => this.handleClickCate(1)}
-                                    >
-                                        New
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 1 ? activeOptionBtnStyle : {})}
+                                                variant="New"
+                                                onClick={() => this.handleClickCate(1)}
+                                            >
+                                                New
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 2 ? activeOptionBtnStyle : {})}
-                                        variant="Test"
-                                        onClick={() => this.handleClickCate(2)}
-                                    >
-                                        Test
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 2 ? activeOptionBtnStyle : {})}
+                                                variant="Test"
+                                                onClick={() => this.handleClickCate(2)}
+                                            >
+                                                Test
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 3 ? activeOptionBtnStyle : {})}
-                                        variant="Examples"
-                                        onClick={() => this.handleClickCate(3)}
-                                    >
-                                        Examples
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 3 ? activeOptionBtnStyle : {})}
+                                                variant="Examples"
+                                                onClick={() => this.handleClickCate(3)}
+                                            >
+                                                Examples
                                     </Button>
+                                        </div>
+                                    </div>
+                                    <div style={itemContainerStyle}>
+                                        <div style={searchBarContainerStyle}>
+                                            <SearchBar
+                                                isShort={false}
+                                                placeholder="search page elements"
+                                            />
+                                        </div>
+                                        <div style={templateContainerStyle}>
+                                            {
+                                                this.props.PageTemplates.map((template, index) => (
+                                                    <div>
+                                                        <PageTemplateTitle
+                                                            title={template.Title}
+                                                        />
+                                                        <PageTemplate
+                                                            handleDrop={(template) => this.handleAddElem(template)}
+                                                            key={template.PageTemplateGUID}
+                                                            template={template}
+                                                        />
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div style={itemContainerStyle}>
-                                <div style={searchBarContainerStyle}>
-                                    <SearchBar
-                                        isShort={false}
-                                        placeholder="search page elements"
-                                    />
+                                :
+                                <div style={leftWrapperStyle}>
+                                    <div style={docContainerStyle}>
+                                        123
+                                    </div>
                                 </div>
-                                <div style={templateContainerStyle}>
-                                    {
-                                        this.props.PageTemplates.map((template, index) => (
-                                            <div>
-                                                <PageTemplateTitle
-                                                    title={template.Title}
-                                                />
-                                                <PageTemplate
-                                                    handleDrop={(template) => this.handleAddElem(template)}
-                                                    key={template.PageTemplateGUID}
-                                                    template={template}
-                                                />
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </DropdownMenu>
                 </div>
 
@@ -566,7 +578,7 @@ const styles = {
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     txtCenterStyle: {
         textAlign: 'center'
@@ -587,10 +599,16 @@ const styles = {
     leftContainerStyle: {
         flex: 1,
     },
+    leftDocContainerStyle: {
+        flex: 2,
+    },
     leftWrapperStyle: {
         flex: 1,
         display: 'flex',
         flexDirection: 'row'
+    },
+    docContainerStyle: {
+        height: `calc(100vh - ${sizes.headerHeight})`,
     },
     cateContainerStyle: {
         flex: 1,
@@ -625,16 +643,13 @@ const styles = {
     },
     toolbarContainerStyle: {
         height: 48,
-        width: 722,
         margin: '0 auto',
         marginBottom: 12
     },
     editPhoneContainerStyle: {
-        width: 750,
         margin: '0 auto',
     },
     phoneContainerStyle: {
-        width: 750,
         height: phoneHeight,
         backgroundColor: 'transparent',
         margin: '0 auto',

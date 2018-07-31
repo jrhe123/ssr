@@ -113,7 +113,7 @@ const initialState = {
 
         IsPageTemplateMenuOpen: true,       // page template menu
         IsPagesSaved: false,                // page saved
-        ActivePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
+        ActivePageTemplateOptionIndex: 0,   // page template menu option 0 OR 1
 
         IsPageCarouselMenuOpen: false,      // page carousel menu
 

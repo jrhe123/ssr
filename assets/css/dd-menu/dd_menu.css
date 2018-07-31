@@ -4,11 +4,11 @@
 
 .dx-layout-menu{
     float: left;
-    width: 400px;
+    width: 100%;
 }
 
 .dx-layout-menu>div.dd-menu-items{
     margin-top: 0;
-    width: 400px;
+    width: 100%;
 }
 
