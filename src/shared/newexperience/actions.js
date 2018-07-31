@@ -40,6 +40,8 @@ import {
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW_REQUESTED,
     EXPERIENCE_VIEW_HTML_FETCH_REQUESTED,
+    EXPERIENCE_UPDATE_REQUESTED,
+    EXPERIENCE_UPDATE_FILE_REQUESTED,
     
 } from './constants';
 
@@ -337,6 +339,24 @@ export const dxExperienceViewHtmlFetch = (pageGUID, sectionGUID, guid) => {
             pageGUID, 
             sectionGUID, 
             guid,
+        },
+    }
+}
+
+export const dxExperienceUpdate = (experience) => {
+    return {
+        type: EXPERIENCE_UPDATE_REQUESTED,
+        payload: {
+            experience
+        },
+    }
+}
+
+export const dxExperienceUpdateFile = (experience) => {
+    return {
+        type: EXPERIENCE_UPDATE_FILE_REQUESTED,
+        payload: {
+            experience
         },
     }
 }

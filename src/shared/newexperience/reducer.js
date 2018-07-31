@@ -39,6 +39,8 @@ import {
     // UPDATE EXPERIENCE
     EXPERIENCE_VIEW__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+    EXPERIENCE_UPDATE__SUCCEEDED,
 
 } from './constants';
 
@@ -74,7 +76,6 @@ let templateNewPage = {
     IsDeleted: false,       // page deleted
 };
 let templateNewSection = {
-    IsSyncServer: false,
     SectionGUID: null,
     Index: null,    // quill editor tool bar render order
     Type: null,     // section type
@@ -95,11 +96,13 @@ let templateNewSection = {
 const initialState = {
     IsCompleted: false,     // complete experience
     IsFilesUploaded: false, // upload html files
+    IsFilesUpdated: false,  // update html files
     Index: 0,               // section index
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
     Experience: {
         ExperienceGUID: null,
+        UpdateExperienceCardGUID: null,
         Type: '0',      // with OR without page(s)
         Index: '0',     // step
 
@@ -613,6 +616,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
             tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;
+            tmpExperience.UpdateExperienceCardGUID = payload.experience.ExperienceCard.ExperienceCardGUID;
             tmpExperience.Type = payload.experience.ExperienceType;
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
@@ -635,6 +639,15 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpPages[tmpUpdatePage.index] = Object.assign({}, tmpUpdatePage.page);
             tmpExperience.Pages = tmpPages;
             updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_UPDATE_FILE__SUCCEEDED:
+            updated.IsFilesUpdated = true;
+            updated.Experience = payload.experience;
+            return updated;
+
+        case EXPERIENCE_UPDATE__SUCCEEDED:
+            updated.IsCompleted = true;
             return updated;
 
         default:

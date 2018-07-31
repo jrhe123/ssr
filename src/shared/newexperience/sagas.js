@@ -142,6 +142,14 @@ import {
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__FAILED,
 
+    EXPERIENCE_UPDATE_REQUESTED,
+    EXPERIENCE_UPDATE__SUCCEEDED,
+    EXPERIENCE_UPDATE__FAILED,
+
+    EXPERIENCE_UPDATE_FILE_REQUESTED,
+    EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILE__FAILED,
+
 } from './constants';
 
 
@@ -200,6 +208,7 @@ const __format_experience_params = (pages) => {
             let sections = helpers.remove_is_deleted_item(page.Sections);
             sections = __extract_section_values(sections);
             let item = {
+                ExperiencePageGUID: page.ExperiencePageGUID,
                 PageGUID: page.PageGUID,
                 ParentPageGUID: page.ParentPageGUID,
                 IsRoot: page.IsRoot,
@@ -1083,4 +1092,136 @@ export function* dxExperienceViewHtmlFetch(action) {
 
 export function* dxExperienceViewHtmlFetchSaga() {
     yield takeEvery(EXPERIENCE_VIEW_HTML_FETCH_REQUESTED, dxExperienceViewHtmlFetch);
+}
+
+// Experience update file request
+export const dxExperienceUpdateSingleFileUrl = (params) => {
+    let formData = new FormData();
+    let blob = new Blob([params.HtmlContent == '' ? ' ' : params.HtmlContent], { type: 'text/html' });
+    formData.append('File', blob, 'blob.html');
+    formData.append('FileGUID', params.Html);
+    return (
+        apiManager.dxFileApi(`/upload/update_file`, formData, true)
+    )
+}
+
+export function* dxExperienceUpdateSingleFile(section) {
+    try {
+        const response = yield call(dxExperienceUpdateSingleFileUrl, section)
+        return response;
+    } catch (err) {
+        return err;
+    }
+}
+
+export function* dxExperienceUpdateFiles(action) {
+    try {
+
+        let experience = action.payload.experience;
+        let {
+            Type,
+            Pages,
+        } = experience;
+
+        if (Type == 0) {
+            yield put({
+                type: EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+                payload: {
+                    experience: action.payload.experience
+                },
+            });
+        } else {
+
+            for (let i = 0; i < Pages.length; i++) {
+                let page = Pages[i];
+                if (!page.IsDeleted) {
+                    for (let j = 0; j < page.Sections.length; j++) {
+                        let section = page.Sections[j];
+                        if (!section.IsDeleted && section.Type == 'EDITOR') {
+                            if(section.Html){
+                                let response = yield call(dxExperienceUpdateSingleFile, section);
+                                if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                            }else{
+                                let response = yield call(dxExperienceUploadSingleFile, section);
+                                if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        yield put({
+            type: EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+            payload: {
+                experience
+            },
+        });
+
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE_FILE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUpdateFileSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_FILE_REQUESTED, dxExperienceUpdateFiles);
+}
+
+// Experience update request
+export const dxExperienceUpdateUrl = (params) => {
+    let experience = params.experience;
+    let {
+        ExperienceGUID,
+        UpdateExperienceCardGUID,
+        Type,
+        ExperienceTitle,
+        CardTitle,
+        Card,
+        Pages,
+    } = experience;
+    const formattedParams = {
+        ExperienceGUID,
+        ExperienceType: Type.toString(),
+        ExperienceTitle: ExperienceTitle,
+        ExperienceCard: {
+            ExperienceCardGUID: UpdateExperienceCardGUID,
+            Type: Card.Type,
+            Title: CardTitle,
+            Content: Card.Content,
+            Settings: Card.Settings,
+        },
+        ExperiencePages: __format_experience_params(Pages)
+    };
+    return (
+        apiManager.dxApi(`/experience/update`, formattedParams, true)
+    )
+}
+
+export function* dxExperienceUpdate(action) {
+    try {
+        const response = yield call(dxExperienceUpdateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_UPDATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_UPDATE__SUCCEEDED,
+                payload: {},
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUpdateSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_REQUESTED, dxExperienceUpdate);
 }

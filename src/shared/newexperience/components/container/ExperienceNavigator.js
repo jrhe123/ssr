@@ -10,6 +10,7 @@ import { search_object_index_by_value } from '../../../helpers';
 // redux
 import { connect } from 'react-redux';
 import {
+    // CREATE
     dxExperienceCreate as dxExperienceCreateAction,
     dxExperienceUploadFile as dxExperienceUploadFileAction,
 
@@ -23,6 +24,10 @@ import {
     dxExperiencePageTemplateMenuUpdate as dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelect as dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPage as dxExperiencePageAddPageAction,
+
+    // UPDATE
+    dxExperienceUpdateFile as dxExperienceUpdateFileAction,
+    dxExperienceUpdate as dxExperienceUpdateAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -38,10 +43,16 @@ class ExperienceNavigator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.IsFilesUploaded && !this.props.IsFilesUploaded){
+        // CREATE
+        if (nextProps.IsFilesUploaded && !this.props.IsFilesUploaded) {
             this.props.dxExperienceCreateAction(this.props.Experience);
         }
-        if(nextProps.IsCompleted && !this.props.IsCompleted){
+        // UPDATE
+        if (nextProps.IsFilesUpdated && !this.props.IsFilesUpdated) {
+            this.props.dxExperienceUpdateAction(this.props.Experience);
+        }
+        // EXIT
+        if (nextProps.IsCompleted && !this.props.IsCompleted) {
             this.props.dxLoadingAction(false);
             this.props.history.push('/dashboard');
         }
@@ -70,8 +81,12 @@ class ExperienceNavigator extends Component {
         this.props.dxLoadingAction(true);
         const {
             Experience,
-        } = this.props;        
-        this.props.dxExperienceUploadFileAction(Experience);        
+        } = this.props;
+        let experienceGUID = Experience.ExperienceGUID;
+        // CREATE
+        if (!experienceGUID) this.props.dxExperienceUploadFileAction(Experience);
+        // UPDATE
+        else this.props.dxExperienceUpdateFileAction(Experience);
     }
 
     handleSaveBtnClick = () => {
@@ -463,11 +478,13 @@ const stateToProps = (state) => {
         history: state.root.history,
         IsCompleted: state.newexperience.IsCompleted,
         IsFilesUploaded: state.newexperience.IsFilesUploaded,
+        IsFilesUpdated: state.newexperience.IsFilesUpdated,
         Experience: state.newexperience.Experience,
     }
 }
 
 const dispatchToProps = {
+    // CREATE
     dxExperienceCreateAction,
     dxExperienceUploadFileAction,
 
@@ -480,6 +497,10 @@ const dispatchToProps = {
     dxExperiencePageTemplateMenuUpdateAction,
     dxExperiencePageTemplateOptionSelectAction,
     dxExperiencePageAddPageAction,
+
+    // UPDATE
+    dxExperienceUpdateFileAction,
+    dxExperienceUpdateAction,
 
     dxAlertAction,
     dxLoadingAction,
