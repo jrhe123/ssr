@@ -197,6 +197,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
             tmpGoogleDocuments.push({
                     googleFileGUID: payload.googleFileGUID,
+                    fileName: payload.fileName,
                     isOpen: true,
             });
             updated.GoogleDocuments = tmpGoogleDocuments;

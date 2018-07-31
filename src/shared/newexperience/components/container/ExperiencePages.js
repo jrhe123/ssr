@@ -500,7 +500,7 @@ class ExperiencePages extends Component {
                                         {
                                             GoogleDocuments.map((doc, index) => (
                                                 <Collapsible
-                                                    trigger="Start here"
+                                                    trigger={doc.fileName}
                                                     open={doc.isOpen}
                                                 >
                                                     <GoogleWordViewer

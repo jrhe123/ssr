@@ -382,6 +382,7 @@ export function* dxExperienceUploadGoogleFile(action) {
             yield put({
                 type: EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
                 payload: {
+                    fileName: action.payload.file.name,
                     googleFileGUID: Response.GoogleFileGUID
                 },
             });
