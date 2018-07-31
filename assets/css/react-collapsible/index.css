@@ -1,0 +1,9 @@
+.Collapsible .Collapsible__trigger{
+    display: block;
+    height: 36px;
+    border-bottom: 1px solid #D9DDE2;
+    cursor: pointer;
+    padding-left: 12px;
+    line-height: 36px;
+    font-size: 14px;
+}

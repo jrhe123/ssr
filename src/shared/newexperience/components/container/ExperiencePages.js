@@ -21,6 +21,10 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Dropzone from 'react-dropzone';
+import Collapsible from 'react-collapsible';
+
+// CSS
+import '../../../../../assets/css/react-collapsible/index.css';
 
 // redux
 import { connect } from 'react-redux';
@@ -461,9 +465,13 @@ class ExperiencePages extends Component {
                                         {
                                             GoogleDocuments.length ?
                                                 GoogleDocuments.map((fileID, index) => (
-                                                    <GoogleWordViewer
-                                                        fileID={fileID}
-                                                    />
+                                                    <Collapsible 
+                                                        style={{backgroundColor: 'red'}}
+                                                        trigger="Start here">
+                                                        <GoogleWordViewer
+                                                            fileID={fileID}
+                                                        />
+                                                    </Collapsible>
                                                 ))
                                                 :
                                                 null
