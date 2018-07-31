@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import {
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
+    dxDeleteExperience as dxDeleteExperienceAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -74,8 +75,10 @@ class ExperienceContainer extends Component {
         this.setState({
             isModalOpen: false
         });
-
-        console.log('check: ', this.state.targetExperienceGUID);
+        const {
+            targetExperienceGUID
+        } = this.state;
+        this.props.dxDeleteExperienceAction(targetExperienceGUID);
     }
 
     render() {
@@ -278,6 +281,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxHtmlFetchAction,
     dxFetchExperienceAction,
+    dxDeleteExperienceAction,
 
     dxAlertAction,
 }
