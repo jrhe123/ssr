@@ -3,6 +3,7 @@ import {
     EXPERIENCE_INITIAL__SUCCEEDED,
     EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
@@ -189,6 +190,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
             updated.IsFilesUploaded = true;
             updated.Experience = payload.experience;
+            return updated;
+
+        case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
+            console.log('reducer received: ', payload);
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:

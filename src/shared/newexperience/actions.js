@@ -3,6 +3,7 @@ import {
     EXPERIENCE_INITIAL_REQUESTED,
     EXPERIENCE_CREATE_REQUESTED,
     EXPERIENCE_UPLOAD_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
@@ -68,6 +69,15 @@ export const dxExperienceUploadFile = (experience) => {
         type: EXPERIENCE_UPLOAD_FILE_REQUESTED,
         payload: {
             experience
+        },
+    }
+}
+
+export const dxExperienceUploadGoogleFile = (file) => {
+    return {
+        type: EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
+        payload: {
+            file
         },
     }
 }

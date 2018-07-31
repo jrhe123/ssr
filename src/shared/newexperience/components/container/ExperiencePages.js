@@ -29,6 +29,8 @@ import {
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
+    dxExperienceUploadGoogleFile as dxExperienceUploadGoogleFileAction,
+
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
@@ -42,6 +44,7 @@ import {
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
+    dxLoading as dxLoadingAction,
 } from '../../../actions';
 
 // constants
@@ -298,6 +301,13 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageDeletePageAction(pageGUID);
     }
 
+    handleDropDoc = (files) => {
+        if(files.length){
+            this.props.dxLoadingAction(true);
+            this.props.dxExperienceUploadGoogleFileAction(files[0]);
+		}
+    }
+
     render() {
 
         const {
@@ -453,7 +463,7 @@ class ExperiencePages extends Component {
                                                             </div>
                                                         }
                                                         style={dropZoneStyle}
-                                                        onDrop={(files) => this.handleDrop(files)}>
+                                                        onDrop={(files) => this.handleDropDoc(files)}>
                                                     </Dropzone>
                                                 </div>
                                             </div>
@@ -809,6 +819,7 @@ const dispatchToProps = {
     dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePageAction,
 
+    dxExperienceUploadGoogleFileAction,
     dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElemAction,
@@ -822,6 +833,7 @@ const dispatchToProps = {
     dxExperienceViewHtmlFetchAction,
 
     dxAlertAction,
+    dxLoadingAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));
