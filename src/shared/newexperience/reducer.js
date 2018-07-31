@@ -628,6 +628,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
             updated.Experience = tmpExperience;
+            updated.IsCompleted = false;
             return updated;
 
         case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
