@@ -142,6 +142,10 @@ import {
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__FAILED,
 
+    EXPERIENCE_UPDATE_REQUESTED,
+    EXPERIENCE_UPDATE__SUCCEEDED,
+    EXPERIENCE_UPDATE__FAILED,
+
     EXPERIENCE_UPDATE_FILE_REQUESTED,
     EXPERIENCE_UPDATE_FILE__SUCCEEDED,
     EXPERIENCE_UPDATE_FILE__FAILED,
@@ -204,6 +208,7 @@ const __format_experience_params = (pages) => {
             let sections = helpers.remove_is_deleted_item(page.Sections);
             sections = __extract_section_values(sections);
             let item = {
+                ExperiencePageGUID: page.ExperiencePageGUID,
                 PageGUID: page.PageGUID,
                 ParentPageGUID: page.ParentPageGUID,
                 IsRoot: page.IsRoot,
@@ -1162,4 +1167,61 @@ export function* dxExperienceUpdateFiles(action) {
 
 export function* dxExperienceUpdateFileSaga() {
     yield takeEvery(EXPERIENCE_UPDATE_FILE_REQUESTED, dxExperienceUpdateFiles);
+}
+
+// Experience update request
+export const dxExperienceUpdateUrl = (params) => {
+    let experience = params.experience;
+    let {
+        ExperienceGUID,
+        UpdateExperienceCardGUID,
+        Type,
+        ExperienceTitle,
+        CardTitle,
+        Card,
+        Pages,
+    } = experience;
+    const formattedParams = {
+        ExperienceGUID,
+        ExperienceType: Type.toString(),
+        ExperienceTitle: ExperienceTitle,
+        ExperienceCard: {
+            ExperienceCardGUID: UpdateExperienceCardGUID,
+            Type: Card.Type,
+            Title: CardTitle,
+            Content: Card.Content,
+            Settings: Card.Settings,
+        },
+        ExperiencePages: __format_experience_params(Pages)
+    };
+    return (
+        apiManager.dxApi(`/experience/update`, formattedParams, true)
+    )
+}
+
+export function* dxExperienceUpdate(action) {
+    try {
+        const response = yield call(dxExperienceUpdateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_UPDATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_UPDATE__SUCCEEDED,
+                payload: {},
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUpdateSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_REQUESTED, dxExperienceUpdate);
 }

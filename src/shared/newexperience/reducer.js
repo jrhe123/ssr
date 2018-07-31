@@ -40,6 +40,7 @@ import {
     EXPERIENCE_VIEW__SUCCEEDED,
     EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
     EXPERIENCE_UPDATE_FILE__SUCCEEDED,
+    EXPERIENCE_UPDATE__SUCCEEDED,
 
 } from './constants';
 
@@ -101,6 +102,7 @@ const initialState = {
     PageTemplates: [],      // page templates
     Experience: {
         ExperienceGUID: null,
+        UpdateExperienceCardGUID: null,
         Type: '0',      // with OR without page(s)
         Index: '0',     // step
 
@@ -614,6 +616,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         // UPDATE EXPERIENCE
         case EXPERIENCE_VIEW__SUCCEEDED:
             tmpExperience.ExperienceGUID = payload.experience.ExperienceGUID;
+            tmpExperience.UpdateExperienceCardGUID = payload.experience.ExperienceCard.ExperienceCardGUID;
             tmpExperience.Type = payload.experience.ExperienceType;
             tmpExperience.IsCardTemplateSaved = true;
             tmpExperience.CardTemplate = payload.experience.ExperienceCard;
@@ -641,6 +644,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_UPDATE_FILE__SUCCEEDED:
             updated.IsFilesUpdated = true;
             updated.Experience = payload.experience;
+            return updated;
+
+        case EXPERIENCE_UPDATE__SUCCEEDED:
+            updated.IsCompleted = true;
             return updated;
 
         default:

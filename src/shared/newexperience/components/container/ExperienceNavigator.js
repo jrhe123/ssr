@@ -27,6 +27,7 @@ import {
 
     // UPDATE
     dxExperienceUpdateFile as dxExperienceUpdateFileAction,
+    dxExperienceUpdate as dxExperienceUpdateAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -42,9 +43,15 @@ class ExperienceNavigator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // CREATE
         if (nextProps.IsFilesUploaded && !this.props.IsFilesUploaded) {
             this.props.dxExperienceCreateAction(this.props.Experience);
         }
+        // UPDATE
+        if (nextProps.IsFilesUpdated && !this.props.IsFilesUpdated) {
+            this.props.dxExperienceUpdateAction(this.props.Experience);
+        }
+        // EXIT
         if (nextProps.IsCompleted && !this.props.IsCompleted) {
             this.props.dxLoadingAction(false);
             this.props.history.push('/dashboard');
@@ -471,6 +478,7 @@ const stateToProps = (state) => {
         history: state.root.history,
         IsCompleted: state.newexperience.IsCompleted,
         IsFilesUploaded: state.newexperience.IsFilesUploaded,
+        IsFilesUpdated: state.newexperience.IsFilesUpdated,
         Experience: state.newexperience.Experience,
     }
 }
@@ -492,6 +500,7 @@ const dispatchToProps = {
 
     // UPDATE
     dxExperienceUpdateFileAction,
+    dxExperienceUpdateAction,
 
     dxAlertAction,
     dxLoadingAction,
