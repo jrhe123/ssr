@@ -1,7 +1,9 @@
 import {
-    HTML_FETCH__SUCCEEDED,
     CHANNEL_FETCH__SUCCEEDED,
+
+    HTML_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
+    EXPERIENCE_DELETE__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -45,6 +47,12 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case EXPERIENCE_FETCH__SUCCEEDED:
             updated.TotalExperienceRecord = payload.totalRecord;
             updated.Experiences = payload.experiences;
+            return updated;
+
+        case EXPERIENCE_DELETE__SUCCEEDED:
+            tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
+            tmpExperiences.splice(tmpExperience.index, 1);
+            updated.Experiences = tmpExperiences;
             return updated;
 
         default:

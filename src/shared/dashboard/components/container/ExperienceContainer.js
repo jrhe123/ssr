@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ExperienceList from '../presentation/experience/ExperienceList';
 import NewExperienceModal from '../presentation/experience/NewExperienceModal';
 import SearchBar from '../../../components/searchBar/SearchBar';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -13,6 +14,7 @@ import { connect } from 'react-redux';
 import {
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
+    dxDeleteExperience as dxDeleteExperienceAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -27,6 +29,8 @@ class ExperienceContainer extends Component {
 
     state = {
         newExperienceModalOpen: false,
+        isModalOpen: false,
+        targetExperienceGUID: null,
     }
 
     componentDidMount() {
@@ -58,6 +62,23 @@ class ExperienceContainer extends Component {
 
     handleEditExperience = (experienceGUID) => {
         this.props.history.push(`/edit_experience/${experienceGUID}`);
+    }
+
+    handleRemoveExperience = (experienceGUID) => {
+        this.setState({
+            isModalOpen: true,
+            targetExperienceGUID: experienceGUID,
+        })
+    }
+
+    handleConfirmDeleteExperience = () => {
+        this.setState({
+            isModalOpen: false
+        });
+        const {
+            targetExperienceGUID
+        } = this.state;
+        this.props.dxDeleteExperienceAction(targetExperienceGUID);
     }
 
     render() {
@@ -118,12 +139,13 @@ class ExperienceContainer extends Component {
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
-                                        <ExperienceList 
+                                        <ExperienceList
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
                                             handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
-                                            handleErrorMsg={(msg) => {}}
+                                            handleRemoveExperience={(experienceGUID) => this.handleRemoveExperience(experienceGUID)}
+                                            handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
                                 </div>
@@ -155,6 +177,16 @@ class ExperienceContainer extends Component {
                     open={this.state.newExperienceModalOpen}
                     onCloseModal={() => this.handleCloseExperienceModal()}
                     navigateToNewexperience={(val) => this.handleNavigateToNewexperience(val)}
+                />
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title="Confirm Delete Experience"
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    isDanger={true}
+                    handleConfirm={() => this.handleConfirmDeleteExperience()}
+                    onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
         )
@@ -249,6 +281,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxHtmlFetchAction,
     dxFetchExperienceAction,
+    dxDeleteExperienceAction,
 
     dxAlertAction,
 }

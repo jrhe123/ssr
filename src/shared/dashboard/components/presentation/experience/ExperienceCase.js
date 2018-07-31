@@ -12,13 +12,11 @@ import colors from '../../../../styles/colors';
 // components
 import DxCard from '../../../../components/dxCard/DxCard';
 import DxPage from '../../../../components/dxPage/DxPage';
-import DxModal from '../../../../components/dxModal/DxModal';
 
 class ExperienceCase extends Component {
 
     state = {
         isMenuOpen: false,
-        isModalOpen: false,
     }
 
     handleMenuClose = () => {
@@ -27,14 +25,6 @@ class ExperienceCase extends Component {
 
     handleToggleBurger = () => {
         this.setState({ isMenuOpen: !this.state.isMenuOpen });
-    }
-
-    handleCloseModal = () => {
-        this.setState({ isModalOpen: false });
-    }
-
-    handleRemoveExperience = () => {
-        this.setState({ isModalOpen: true });
     }
 
     render() {
@@ -106,21 +96,12 @@ class ExperienceCase extends Component {
                             closeOnInsideClick={false}
                         >
                             <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
-                            <Button onClick={() => this.handleRemoveExperience()}>Remove</Button>
+                            <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
                         </DropdownMenu>
                         </div>
                     </div>
                 </div>
-                <DxModal
-                    open={this.state.isModalOpen}
-                    title="Confirm Delete Experience"
-                    description="Do you want to proceed?"
-                    cancel={true}
-                    confirm={true}
-                    isDanger={true}
-                    handleConfirm={() => this.props.handleConfirmDeleteExperience()}
-                    onCloseModal={() => this.handleCloseModal()}
-                />
+                
             </div>
         )
     }
