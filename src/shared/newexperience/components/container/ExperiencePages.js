@@ -319,6 +319,45 @@ class ExperiencePages extends Component {
         }
     }
 
+    renderDropZone = () => {
+        const {
+            tableContainerStyle,
+            tableWrapperStyle,
+            dropZoneContainerStyle,
+            dropLabelStyle,
+            dropSubLabelStyle,
+            dropZoneStyle,
+        } = styles;
+        return (
+            <Collapsible
+                className="dx_collapsible_panel"
+                trigger="Open or add an existing document"
+                open={true}
+                transitionTime={200}>
+                <div style={Object.assign({}, { height: dndHeight })}>
+                    <div style={dropZoneContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <Dropzone
+                                    children={
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
+                                                <p style={dropSubLabelStyle}>Browse & Upload</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    style={dropZoneStyle}
+                                    onDrop={(files) => this.handleDropDoc(files)}>
+                                </Dropzone>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Collapsible>
+        )
+    }
+
     render() {
 
         const {
@@ -340,10 +379,6 @@ class ExperiencePages extends Component {
             leftDocContainerStyle,
             leftWrapperStyle,
             docContainerStyle,
-            dropZoneContainerStyle,
-            dropZoneStyle,
-            dropLabelStyle,
-            dropSubLabelStyle,
             cateContainerStyle,
             optionBtnContainerStyle,
             btnStyle,
@@ -464,36 +499,24 @@ class ExperiencePages extends Component {
                                     <div style={docContainerStyle}>
                                         {
                                             GoogleDocuments.length ?
-                                                GoogleDocuments.map((fileID, index) => (
-                                                    <Collapsible 
-                                                        style={{backgroundColor: 'red'}}
-                                                        trigger="Start here">
-                                                        <GoogleWordViewer
-                                                            fileID={fileID}
-                                                        />
-                                                    </Collapsible>
+                                                GoogleDocuments.map((doc, index) => (
+                                                    <div>
+                                                        <Collapsible
+                                                            trigger="Start here"
+                                                            open={doc.isOpen}
+                                                        >
+                                                            <GoogleWordViewer
+                                                                fileID={doc.googleFileGUID}
+                                                            />
+                                                        </Collapsible>
+                                                        {
+                                                            this.renderDropZone()
+                                                        }
+                                                    </div>
                                                 ))
                                                 :
-                                                null
+                                                this.renderDropZone()
                                         }
-                                        <div style={tableContainerStyle}>
-                                            <div style={tableWrapperStyle}>
-                                                <div style={dropZoneContainerStyle}>
-                                                    <Dropzone
-                                                        children={
-                                                            <div style={tableContainerStyle}>
-                                                                <div style={tableWrapperStyle}>
-                                                                    <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
-                                                                    <p style={dropSubLabelStyle}>Browse & Upload</p>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                        style={dropZoneStyle}
-                                                        onDrop={(files) => this.handleDropDoc(files)}>
-                                                    </Dropzone>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                         }
@@ -627,6 +650,7 @@ class ExperiencePages extends Component {
     }
 }
 
+const dndHeight = 600;
 const carouselHeight = 48;
 const expandCarouselHeight = 240;
 const phoneHeight = 470;
@@ -661,6 +685,9 @@ const styles = {
     },
     leftDocContainerStyle: {
         flex: 2,
+        borderTop: '0.5px solid',
+        borderColor: colors.borderColor,
+        boxSizing: 'border-box',
     },
     leftWrapperStyle: {
         flex: 1,
@@ -668,11 +695,12 @@ const styles = {
         flexDirection: 'row'
     },
     docContainerStyle: {
-        height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
+        height: `calc(100vh - ${sizes.headerHeight})`,
     },
     dropZoneContainerStyle: {
         width: 360,
+        height: dndHeight,
         margin: '0 auto',
     },
     dropZoneStyle: {

@@ -22,7 +22,7 @@ class GoogleWordViewer extends Component {
                 <Iframe
                     url={`https://drive.google.com/open?id=${fileID}`}
                     width="100%"
-                    height="500px"
+                    height="600px"
                     display="initial"
                     position="relative"
                     allowFullScreen>
@@ -37,7 +37,6 @@ const styles = {
 
     mainContainerStyle: {
         position: 'relative',
-        border: '1px solid red',
     },
     coverFrameStyle: {
         position: 'absolute',
