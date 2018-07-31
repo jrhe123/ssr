@@ -19,6 +19,7 @@ import DropdownMenu from 'react-dd-menu';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import Dropzone from 'react-dropzone';
 
 // redux
 import { connect } from 'react-redux';
@@ -315,6 +316,10 @@ class ExperiencePages extends Component {
             leftDocContainerStyle,
             leftWrapperStyle,
             docContainerStyle,
+            dropZoneContainerStyle,
+            dropZoneStyle,
+            dropLabelStyle,
+            dropSubLabelStyle,
             cateContainerStyle,
             optionBtnContainerStyle,
             btnStyle,
@@ -433,7 +438,24 @@ class ExperiencePages extends Component {
                                 :
                                 <div style={leftWrapperStyle}>
                                     <div style={docContainerStyle}>
-                                        123
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <div style={dropZoneContainerStyle}>
+                                                    <Dropzone
+                                                        children={
+                                                            <div style={tableContainerStyle}>
+                                                                <div style={tableWrapperStyle}>
+                                                                    <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
+                                                                    <p style={dropSubLabelStyle}>Browse & Upload</p>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        style={dropZoneStyle}
+                                                        onDrop={(files) => this.handleDrop(files)}>
+                                                    </Dropzone>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                         }
@@ -609,6 +631,31 @@ const styles = {
     },
     docContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
+        width: '100%',
+    },
+    dropZoneContainerStyle: {
+        width: 360,
+        margin: '0 auto',
+    },
+    dropZoneStyle: {
+        width: 360,
+        height: 240,
+        borderRadius: 12,
+        border: '1px dotted',
+        borderColor: colors.borderColor,
+        cursor: 'pointer',
+        textAlign: 'center'
+    },
+    dropLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h3,
+        color: colors.labelColor,
+        marginBottom: 24
+    },
+    dropSubLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h3,
+        color: colors.blueColor
     },
     cateContainerStyle: {
         flex: 1,
