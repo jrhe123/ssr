@@ -50,7 +50,9 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case EXPERIENCE_DELETE__SUCCEEDED:
-            console.log('receive reducer');
+            tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
+            tmpExperiences.splice(tmpExperience.index, 1);
+            updated.Experiences = tmpExperiences;
             return updated;
 
         default:

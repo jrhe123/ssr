@@ -173,12 +173,15 @@ export function* dxFetchExperienceSaga() {
 
 // Delete experience
 export const dxDeleteExperienceUrl = (params) => {
+    let formattedParams = {
+        ExperienceGUID: params.experienceGUID
+    }
     return (
         apiManager.dxApi(`/experience/delete`, formattedParams, true)
     )
 }
 
-export function* dxDeleteExperience() {
+export function* dxDeleteExperience(action) {
     try {
         const response = yield call(dxDeleteExperienceUrl, action.payload);
         let { Confirmation, Response, Message } = response;
@@ -191,8 +194,7 @@ export function* dxDeleteExperience() {
             yield put({
                 type: EXPERIENCE_DELETE__SUCCEEDED,
                 payload: {
-                    totalRecord: Response.TotalRecord,
-                    experiences: Response.Experiences,
+                    experienceGUID: action.payload.experienceGUID
                 },
             });
         }
