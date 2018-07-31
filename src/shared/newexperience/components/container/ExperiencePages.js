@@ -12,6 +12,7 @@ import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
 import DxModal from '../../../components/dxModal/DxModal';
+import GoogleWordViewer from '../presentation/GoogleWordViewer';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -64,6 +65,12 @@ class ExperiencePages extends Component {
 
     componentDidMount() {
         this.props.dxExperiencePageTemplateFetchAction(ExperiencePageData.PageTemplates);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.GoogleDocuments.length != this.props.GoogleDocuments.length) {
+            this.props.dxLoadingAction(false);
+        }
     }
 
     handleErrorMsg = (msg) => {
@@ -302,10 +309,10 @@ class ExperiencePages extends Component {
     }
 
     handleDropDoc = (files) => {
-        if(files.length){
+        if (files.length) {
             this.props.dxLoadingAction(true);
             this.props.dxExperienceUploadGoogleFileAction(files[0]);
-		}
+        }
     }
 
     render() {
@@ -315,7 +322,8 @@ class ExperiencePages extends Component {
         } = this.state;
 
         const {
-            Experience
+            GoogleDocuments,
+            Experience,
         } = this.props;
 
         const {
@@ -450,6 +458,16 @@ class ExperiencePages extends Component {
                                 :
                                 <div style={leftWrapperStyle}>
                                     <div style={docContainerStyle}>
+                                        {
+                                            GoogleDocuments.length ?
+                                                GoogleDocuments.map((fileID, index) => (
+                                                    <GoogleWordViewer
+                                                        fileID={fileID}
+                                                    />
+                                                ))
+                                                :
+                                                null
+                                        }
                                         <div style={tableContainerStyle}>
                                             <div style={tableWrapperStyle}>
                                                 <div style={dropZoneContainerStyle}>
@@ -808,6 +826,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         PageTemplates: state.newexperience.PageTemplates,
+        GoogleDocuments: state.newexperience.GoogleDocuments,
         Experience: state.newexperience.Experience,
     }
 }

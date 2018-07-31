@@ -101,6 +101,7 @@ const initialState = {
     Index: 0,               // section index
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
+    GoogleDocuments: [],    // google document arr
     Experience: {
         ExperienceGUID: null,
         UpdateExperienceCardGUID: null,
@@ -132,6 +133,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     let updated = Object.assign({}, previousState);
     let tmpIndex = updated.Index;
+    let tmpGoogleDocuments = Object.assign([], updated.GoogleDocuments);
     let tmpExperience = Object.assign({}, updated.Experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.CardTemplate);
     let tmpTools = Object.assign([], tmpExperience.Tools);
@@ -193,7 +195,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
-            console.log('reducer received: ', payload);
+            tmpGoogleDocuments.push(payload.googleFileGUID);
+            updated.GoogleDocuments = tmpGoogleDocuments;
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
