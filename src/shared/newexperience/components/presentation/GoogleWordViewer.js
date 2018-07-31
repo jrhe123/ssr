@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// Libraries
+import Iframe from 'react-iframe';
+
 // constants
 import colors from '../../../styles/colors';
 
@@ -40,7 +43,7 @@ const styles = {
         position: 'absolute',
         top: 0,
         left: 0,
-        height: 36,
+        height: 42,
         width: "100%",
         background: colors.whiteColor
     },
