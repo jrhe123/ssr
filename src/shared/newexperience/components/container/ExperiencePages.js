@@ -498,25 +498,18 @@ class ExperiencePages extends Component {
                                 <div style={leftWrapperStyle}>
                                     <div style={docContainerStyle}>
                                         {
-                                            GoogleDocuments.length ?
-                                                GoogleDocuments.map((doc, index) => (
-                                                    <div>
-                                                        <Collapsible
-                                                            trigger="Start here"
-                                                            open={doc.isOpen}
-                                                        >
-                                                            <GoogleWordViewer
-                                                                fileID={doc.googleFileGUID}
-                                                            />
-                                                        </Collapsible>
-                                                        {
-                                                            this.renderDropZone()
-                                                        }
-                                                    </div>
-                                                ))
-                                                :
-                                                this.renderDropZone()
+                                            GoogleDocuments.map((doc, index) => (
+                                                <Collapsible
+                                                    trigger="Start here"
+                                                    open={doc.isOpen}
+                                                >
+                                                    <GoogleWordViewer
+                                                        fileID={doc.googleFileGUID}
+                                                    />
+                                                </Collapsible>
+                                            ))
                                         }
+                                        {this.renderDropZone()}
                                     </div>
                                 </div>
                         }
@@ -685,9 +678,6 @@ const styles = {
     },
     leftDocContainerStyle: {
         flex: 2,
-        borderTop: '0.5px solid',
-        borderColor: colors.borderColor,
-        boxSizing: 'border-box',
     },
     leftWrapperStyle: {
         flex: 1,
@@ -697,6 +687,10 @@ const styles = {
     docContainerStyle: {
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
+        borderTop: '0.5px solid',
+        borderColor: colors.borderColor,
+        boxSizing: 'border-box',
+        overflowY: 'auto',
     },
     dropZoneContainerStyle: {
         width: 360,
