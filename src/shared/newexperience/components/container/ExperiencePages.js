@@ -91,39 +91,41 @@ class ExperiencePages extends Component {
         } = this.props;
 
         let section;
-        section = sections.map((section, i) => (
-            <PhoneElement
-                deletedPage={deletedPage}
-                activePage={activePage}
-                isDeleted={section.IsDeleted}
-                sectionGUID={section.SectionGUID}
-                type={section.Type}
-                isActive={section.IsActive}
-                htmlContent={this.handleLoadHtml(page, section)}
-                btnContent={section.BtnContent}
-                dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
-                pdf={section.Pdf}
-                splashContent={section.SplashContent}
-                splashImg={section.SplashImg}
-                splashColor={section.SplashColor}
-                videoUrl={section.VideoUrl}
-                img={section.Img}
+        if (sections) {
+            section = sections.map((section, i) => (
+                <PhoneElement
+                    deletedPage={deletedPage}
+                    activePage={activePage}
+                    isDeleted={section.IsDeleted}
+                    sectionGUID={section.SectionGUID}
+                    type={section.Type}
+                    isActive={section.IsActive}
+                    htmlContent={this.handleLoadHtml(page, section)}
+                    btnContent={section.BtnContent}
+                    dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
+                    pdf={section.Pdf}
+                    splashContent={section.SplashContent}
+                    splashImg={section.SplashImg}
+                    splashColor={section.SplashColor}
+                    videoUrl={section.VideoUrl}
+                    img={section.Img}
 
-                key={section.SectionGUID}
-                index={i}
-                moveCard={this.handleMoveCard}
-                handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
+                    key={section.SectionGUID}
+                    index={i}
+                    moveCard={this.handleMoveCard}
+                    handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
-                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
-                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
-                handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
-                handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
-                handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
-                handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
+                    handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
+                    handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
+                    handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
+                    handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
+                    handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
+                    handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
 
-                handleVideoError={(msg) => this.handleErrorMsg(msg)}
-            />
-        ))
+                    handleVideoError={(msg) => this.handleErrorMsg(msg)}
+                />
+            ))
+        }
         return section
     }
 
