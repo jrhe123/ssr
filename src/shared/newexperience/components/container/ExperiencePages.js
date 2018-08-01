@@ -432,7 +432,6 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <a onClick={() => console.log(this.props.GoogleDocuments)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={leftContainer}
