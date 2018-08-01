@@ -90,7 +90,7 @@ class DxPage extends Component {
         let pageNo = 0;
         for (let i = 0; i < pages.length; i++) {
             let page = pages[i];
-            if (page.IsDeleted == false) {
+            if (!page.IsDeleted) {
                 pageNo++;
             }
         }
