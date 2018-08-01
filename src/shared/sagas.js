@@ -39,6 +39,7 @@ import {
 
     dxExperiencePagePagesSaveSaga,
     dxExperiencePagePagesRemoveSaga,
+    dxExperiencePageDocPanelToggleSaga,
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
@@ -108,6 +109,7 @@ export default function* rootSaga() {
 
         dxExperiencePagePagesSaveSaga(),
         dxExperiencePagePagesRemoveSaga(),
+        dxExperiencePageDocPanelToggleSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),

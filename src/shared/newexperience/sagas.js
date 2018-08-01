@@ -80,6 +80,10 @@ import {
     EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
     EXPERIENCE_PAGE_PAGES_REMOVE__FAILED,
 
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__FAILED,
+
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__FAILED,
@@ -704,6 +708,28 @@ export function* dxExperiencePagePagesRemove(action) {
 
 export function* dxExperiencePagePagesRemoveSaga() {
     yield takeEvery(EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED, dxExperiencePagePagesRemove);
+}
+
+// Experience page google doc panel toggle
+export function* dxExperiencePageDocPanelToggle(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
+            payload: {
+                index: action.payload.index,
+                toggle: action.payload.toggle,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageDocPanelToggleSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED, dxExperiencePageDocPanelToggle);
 }
 
 // Experience page template toggle

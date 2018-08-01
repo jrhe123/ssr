@@ -35,7 +35,8 @@ import {
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
     dxExperienceUploadGoogleFile as dxExperienceUploadGoogleFileAction,
-
+    dxExperiencePageDocPanelToggle as dxExperiencePageDocPanelToggleAction,
+    
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
@@ -358,6 +359,10 @@ class ExperiencePages extends Component {
         )
     }
 
+    handleToggleCollapsible = (index, toggle) => {
+        this.props.dxExperiencePageDocPanelToggleAction(index, toggle);
+    }
+
     render() {
 
         const {
@@ -413,6 +418,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log(this.props.GoogleDocuments)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={leftContainer}
@@ -502,6 +508,8 @@ class ExperiencePages extends Component {
                                                 <Collapsible
                                                     trigger={doc.fileName}
                                                     open={doc.isOpen}
+                                                    onOpen={() => this.handleToggleCollapsible(index, true)}
+                                                    onClose={() => this.handleToggleCollapsible(index, false)}
                                                 >
                                                     <GoogleWordViewer
                                                         fileID={doc.googleFileGUID}
@@ -869,6 +877,7 @@ const dispatchToProps = {
     dxExperiencePageCarouselActivePageAction,
 
     dxExperienceUploadGoogleFileAction,
+    dxExperiencePageDocPanelToggleAction,
     dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElemAction,
