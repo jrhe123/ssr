@@ -142,7 +142,6 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPage = Object.assign({}, tmpExperience.NewPage);
     let tmpNewPageSections = Object.assign([], tmpNewPage.Sections);
 
-    let tmpDoc;
     let tmpIsRootPage;
     let tmpConnectedPageGUID;
     let tmpConnectedPage;
@@ -202,6 +201,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 fileName: payload.fileName,
                 isOpen: true,
             });
+            deactive_collapsible_panel_by_index(tmpGoogleDocuments, tmpGoogleDocuments.length - 1);
             updated.GoogleDocuments = tmpGoogleDocuments;
             return updated;
 
@@ -323,13 +323,11 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED:
-            tmpDoc = Object.assign({}, tmpGoogleDocuments[payload.index]);
-            tmpDoc.isOpen = payload.toggle;
-            tmpGoogleDocuments[payload.index] = tmpDoc;
+            tmpGoogleDocuments[payload.index].isOpen = payload.toggle;
+            if (payload.toggle) {
+                deactive_collapsible_panel_by_index(tmpGoogleDocuments, payload.index);
+            }
             updated.GoogleDocuments = tmpGoogleDocuments;
-
-            console.log('payload: ', payload);
-            console.log('updated: ', updated);
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:
@@ -792,6 +790,17 @@ const update_init_pages = (pages) => {
         pages[i].IsDeleted = false;
     }
     return pages;
+}
+const deactive_collapsible_panel_by_index = (arr, index) => {
+    console.log('arr: ', arr);
+    console.log('index: ', index);
+    for (let i = 0; i < arr.length; i++) {
+        if (i == index) {
+            arr[i].isOpen = true;
+        } else {
+            arr[i].isOpen = false;
+        }
+    }
 }
 
 export default newexperienceReducer;

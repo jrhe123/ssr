@@ -21,10 +21,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Dropzone from 'react-dropzone';
-import Collapsible from 'react-collapsible';
 
-// CSS
-import '../../../../../assets/css/react-collapsible/index.css';
+import Collapse from '@material-ui/core/Collapse';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 // redux
 import { connect } from 'react-redux';
@@ -36,7 +38,7 @@ import {
 
     dxExperienceUploadGoogleFile as dxExperienceUploadGoogleFileAction,
     dxExperiencePageDocPanelToggle as dxExperiencePageDocPanelToggleAction,
-    
+
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
@@ -64,6 +66,7 @@ class ExperiencePages extends Component {
         activeTab: 0,
         modalType: null,
         isModalOpen: false,
+        isDocDndPanelOpen: true,
         modalTitle: '',
         targetSectionGUID: null,
     }
@@ -316,8 +319,17 @@ class ExperiencePages extends Component {
     handleDropDoc = (files) => {
         if (files.length) {
             this.props.dxLoadingAction(true);
+            this.setState({
+                isDocDndPanelOpen: false
+            })
             this.props.dxExperienceUploadGoogleFileAction(files[0]);
         }
+    }
+
+    handleDocDndPanelToggle = () => {
+        this.setState({
+            isDocDndPanelOpen: !this.state.isDocDndPanelOpen
+        })
     }
 
     renderDropZone = () => {
@@ -330,32 +342,34 @@ class ExperiencePages extends Component {
             dropZoneStyle,
         } = styles;
         return (
-            <Collapsible
-                className="dx_collapsible_panel"
-                trigger="Open or add an existing document"
-                open={true}
-                transitionTime={200}>
-                <div style={Object.assign({}, { height: dndHeight })}>
-                    <div style={dropZoneContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <Dropzone
-                                    children={
-                                        <div style={tableContainerStyle}>
-                                            <div style={tableWrapperStyle}>
-                                                <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
-                                                <p style={dropSubLabelStyle}>Browse & Upload</p>
+            <div>
+                <ListItem button onClick={() => this.handleDocDndPanelToggle()}>
+                    <ListItemText primary="Open or add an existing document" />
+                    {this.state.isDocDndPanelOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={this.state.isDocDndPanelOpen} timeout="auto" unmountOnExit>
+                    <div style={Object.assign({}, { height: dndHeight })}>
+                        <div style={dropZoneContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <Dropzone
+                                        children={
+                                            <div style={tableContainerStyle}>
+                                                <div style={tableWrapperStyle}>
+                                                    <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
+                                                    <p style={dropSubLabelStyle}>Browse & Upload</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    }
-                                    style={dropZoneStyle}
-                                    onDrop={(files) => this.handleDropDoc(files)}>
-                                </Dropzone>
+                                        }
+                                        style={dropZoneStyle}
+                                        onDrop={(files) => this.handleDropDoc(files)}>
+                                    </Dropzone>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Collapsible>
+                </Collapse>
+            </div>
         )
     }
 
@@ -505,16 +519,17 @@ class ExperiencePages extends Component {
                                     <div style={docContainerStyle}>
                                         {
                                             GoogleDocuments.map((doc, index) => (
-                                                <Collapsible
-                                                    trigger={doc.fileName}
-                                                    open={doc.isOpen}
-                                                    onOpen={() => this.handleToggleCollapsible(index, true)}
-                                                    onClose={() => this.handleToggleCollapsible(index, false)}
-                                                >
-                                                    <GoogleWordViewer
-                                                        fileID={doc.googleFileGUID}
-                                                    />
-                                                </Collapsible>
+                                                <div key={index}>
+                                                    <ListItem button onClick={() => this.handleToggleCollapsible(index, !doc.isOpen)}>
+                                                        <ListItemText primary={doc.fileName} />
+                                                        {doc.isOpen ? <ExpandLess /> : <ExpandMore />}
+                                                    </ListItem>
+                                                    <Collapse in={doc.isOpen} timeout="auto" unmountOnExit>
+                                                        <GoogleWordViewer
+                                                            fileID={doc.googleFileGUID}
+                                                        />
+                                                    </Collapse>
+                                                </div>
                                             ))
                                         }
                                         {this.renderDropZone()}
