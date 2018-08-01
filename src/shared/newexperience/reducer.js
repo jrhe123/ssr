@@ -792,8 +792,6 @@ const update_init_pages = (pages) => {
     return pages;
 }
 const deactive_collapsible_panel_by_index = (arr, index) => {
-    console.log('arr: ', arr);
-    console.log('index: ', index);
     for (let i = 0; i < arr.length; i++) {
         if (i == index) {
             arr[i].isOpen = true;
