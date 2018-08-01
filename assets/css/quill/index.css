@@ -23,6 +23,9 @@
 .ql-snow .dx_tool_bar_font .ql-fill{
     fill: #A8B7C5;
 }
+.ql-toolbar.ql-snow .ql-formats{
+    margin-right: 12px;
+}
 
 /* font setting */
 .ql-snow .ql-picker.ql-font{

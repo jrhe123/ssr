@@ -22,6 +22,7 @@ import {
     dxExperienceInitalSaga,
     dxExperienceCreateSaga,
     dxExperienceUploadFileSaga,
+    dxExperienceUploadGoogleFileSaga,
     dxExperienceTypeSaga,
     dxExperienceTypeUpdateSaga,
     dxExperienceIndexUpdateSaga,
@@ -38,6 +39,7 @@ import {
 
     dxExperiencePagePagesSaveSaga,
     dxExperiencePagePagesRemoveSaga,
+    dxExperiencePageDocPanelToggleSaga,
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
     dxExperiencePageTemplateFetchSaga,
@@ -97,6 +99,7 @@ export default function* rootSaga() {
         dxExperienceInitalSaga(),
         dxExperienceCreateSaga(),
         dxExperienceUploadFileSaga(),
+        dxExperienceUploadGoogleFileSaga(),
         dxExperienceTypeSaga(),
         dxExperienceTypeUpdateSaga(),
         dxExperienceIndexUpdateSaga(),
@@ -118,6 +121,7 @@ export default function* rootSaga() {
 
         dxExperiencePagePagesSaveSaga(),
         dxExperiencePagePagesRemoveSaga(),
+        dxExperiencePageDocPanelToggleSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
         dxExperiencePageTemplateFetchSaga(),

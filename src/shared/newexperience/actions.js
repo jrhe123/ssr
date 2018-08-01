@@ -3,6 +3,7 @@ import {
     EXPERIENCE_INITIAL_REQUESTED,
     EXPERIENCE_CREATE_REQUESTED,
     EXPERIENCE_UPLOAD_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE_UPDATE_REQUESTED,
     EXPERIENCE_INDEX_UPDATE_REQUESTED,
@@ -19,6 +20,7 @@ import {
 
     EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
     EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
@@ -68,6 +70,15 @@ export const dxExperienceUploadFile = (experience) => {
         type: EXPERIENCE_UPLOAD_FILE_REQUESTED,
         payload: {
             experience
+        },
+    }
+}
+
+export const dxExperienceUploadGoogleFile = (file) => {
+    return {
+        type: EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
+        payload: {
+            file
         },
     }
 }
@@ -189,6 +200,16 @@ export const dxExperiencePagePagesRemove = () => {
     return {
         type: EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxExperiencePageDocPanelToggle = (index, toggle) => {
+    return {
+        type: EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
+        payload: {
+            index,
+            toggle,
+        },
     }
 }
 

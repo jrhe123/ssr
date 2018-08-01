@@ -20,6 +20,10 @@ import {
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__FAILED,
 
+    EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
+
     EXPERIENCE_TYPE_REQUESTED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE__FAILED,
@@ -75,6 +79,10 @@ import {
     EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
     EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
     EXPERIENCE_PAGE_PAGES_REMOVE__FAILED,
+
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__FAILED,
 
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
@@ -354,6 +362,45 @@ export function* dxExperienceUploadFiles(action) {
 
 export function* dxExperienceUploadFileSaga() {
     yield takeEvery(EXPERIENCE_UPLOAD_FILE_REQUESTED, dxExperienceUploadFiles);
+}
+
+// Experience upload google file request
+export const dxExperienceUploadGoogleFileUrl = (params) => {
+    let formData = new FormData();
+    formData.append('File', params.file);
+    return (
+        apiManager.dxFileApi(`/upload/doc_file`, formData, true)
+    )
+}
+
+export function* dxExperienceUploadGoogleFile(action) {
+    try {
+        const response = yield call(dxExperienceUploadGoogleFileUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
+                payload: {
+                    fileName: action.payload.file.name,
+                    googleFileGUID: Response.GoogleFileGUID
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceUploadGoogleFileSaga() {
+    yield takeEvery(EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED, dxExperienceUploadGoogleFile);
 }
 
 // Experience type request
@@ -661,6 +708,28 @@ export function* dxExperiencePagePagesRemove(action) {
 
 export function* dxExperiencePagePagesRemoveSaga() {
     yield takeEvery(EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED, dxExperiencePagePagesRemove);
+}
+
+// Experience page google doc panel toggle
+export function* dxExperiencePageDocPanelToggle(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
+            payload: {
+                index: action.payload.index,
+                toggle: action.payload.toggle,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageDocPanelToggleSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED, dxExperiencePageDocPanelToggle);
 }
 
 // Experience page template toggle
@@ -1026,7 +1095,7 @@ export function* dxExperiencePageElemConnectPageSaga() {
 // View Experience
 export const dxExperienceViewUrl = (params) => {
     return (
-        apiManager.dxApi(`/experience/view`, {ExperienceGUID: params.experienceGUID}, true)
+        apiManager.dxApi(`/experience/view`, { ExperienceGUID: params.experienceGUID }, true)
     )
 }
 
@@ -1071,13 +1140,13 @@ export function* dxExperienceViewHtmlFetch(action) {
     try {
         const response = yield call(dxExperienceViewHtmlFetchUrl, action.payload);
         const {
-            pageGUID, 
+            pageGUID,
             sectionGUID,
         } = action.payload;
         yield put({
             type: EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
             payload: {
-                pageGUID, 
+                pageGUID,
                 sectionGUID,
                 html: response
             },
@@ -1138,10 +1207,10 @@ export function* dxExperienceUpdateFiles(action) {
                     for (let j = 0; j < page.Sections.length; j++) {
                         let section = page.Sections[j];
                         if (!section.IsDeleted && section.Type == 'EDITOR') {
-                            if(section.Html){
+                            if (section.Html) {
                                 let response = yield call(dxExperienceUpdateSingleFile, section);
                                 if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
-                            }else{
+                            } else {
                                 let response = yield call(dxExperienceUploadSingleFile, section);
                                 if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
                             }

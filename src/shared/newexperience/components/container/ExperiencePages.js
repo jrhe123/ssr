@@ -12,6 +12,7 @@ import PhoneElement from '../presentation/PhoneElement';
 import PhoneToolbar from '../presentation/PhoneToolbar';
 import PageCarousel from '../presentation/PageCarousel';
 import DxModal from '../../../components/dxModal/DxModal';
+import GoogleWordViewer from '../presentation/GoogleWordViewer';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -19,6 +20,11 @@ import DropdownMenu from 'react-dd-menu';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import Dropzone from 'react-dropzone';
+import Collapsible from 'react-collapsible';
+
+// CSS
+import '../../../../../assets/css/react-collapsible/index.css';
 
 // redux
 import { connect } from 'react-redux';
@@ -28,6 +34,9 @@ import {
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
 
+    dxExperienceUploadGoogleFile as dxExperienceUploadGoogleFileAction,
+    dxExperiencePageDocPanelToggle as dxExperiencePageDocPanelToggleAction,
+    
     dxExperiencePageAddElem as dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElem as dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElem as dxExperiencePageCopyElemAction,
@@ -41,6 +50,7 @@ import {
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
+    dxLoading as dxLoadingAction,
 } from '../../../actions';
 
 // constants
@@ -60,6 +70,12 @@ class ExperiencePages extends Component {
 
     componentDidMount() {
         this.props.dxExperiencePageTemplateFetchAction(ExperiencePageData.PageTemplates);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.GoogleDocuments.length != this.props.GoogleDocuments.length) {
+            this.props.dxLoadingAction(false);
+        }
     }
 
     handleErrorMsg = (msg) => {
@@ -90,39 +106,41 @@ class ExperiencePages extends Component {
         } = this.props;
 
         let section;
-        section = sections.map((section, i) => (
-            <PhoneElement
-                deletedPage={deletedPage}
-                activePage={activePage}
-                isDeleted={section.IsDeleted}
-                sectionGUID={section.SectionGUID}
-                type={section.Type}
-                isActive={section.IsActive}
-                htmlContent={this.handleLoadHtml(page, section)}
-                btnContent={section.BtnContent}
-                dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
-                pdf={section.Pdf}
-                splashContent={section.SplashContent}
-                splashImg={section.SplashImg}
-                splashColor={section.SplashColor}
-                videoUrl={section.VideoUrl}
-                img={section.Img}
+        if (sections) {
+            section = sections.map((section, i) => (
+                <PhoneElement
+                    deletedPage={deletedPage}
+                    activePage={activePage}
+                    isDeleted={section.IsDeleted}
+                    sectionGUID={section.SectionGUID}
+                    type={section.Type}
+                    isActive={section.IsActive}
+                    htmlContent={this.handleLoadHtml(page, section)}
+                    btnContent={section.BtnContent}
+                    dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
+                    pdf={section.Pdf}
+                    splashContent={section.SplashContent}
+                    splashImg={section.SplashImg}
+                    splashColor={section.SplashColor}
+                    videoUrl={section.VideoUrl}
+                    img={section.Img}
 
-                key={section.SectionGUID}
-                index={i}
-                moveCard={this.handleMoveCard}
-                handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
+                    key={section.SectionGUID}
+                    index={i}
+                    moveCard={this.handleMoveCard}
+                    handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
-                handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
-                handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
-                handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
-                handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
-                handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
-                handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
+                    handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
+                    handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
+                    handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
+                    handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
+                    handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
+                    handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
 
-                handleVideoError={(msg) => this.handleErrorMsg(msg)}
-            />
-        ))
+                    handleVideoError={(msg) => this.handleErrorMsg(msg)}
+                />
+            ))
+        }
         return section
     }
 
@@ -133,9 +151,9 @@ class ExperiencePages extends Component {
             else return '';
         } else {
             if (section.HtmlContent) return section.HtmlContent;
-            if (section.Html){
+            if (section.Html) {
                 this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
-            } 
+            }
             else return '';
         }
     }
@@ -295,6 +313,56 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageDeletePageAction(pageGUID);
     }
 
+    handleDropDoc = (files) => {
+        if (files.length) {
+            this.props.dxLoadingAction(true);
+            this.props.dxExperienceUploadGoogleFileAction(files[0]);
+        }
+    }
+
+    renderDropZone = () => {
+        const {
+            tableContainerStyle,
+            tableWrapperStyle,
+            dropZoneContainerStyle,
+            dropLabelStyle,
+            dropSubLabelStyle,
+            dropZoneStyle,
+        } = styles;
+        return (
+            <Collapsible
+                className="dx_collapsible_panel"
+                trigger="Open or add an existing document"
+                open={true}
+                transitionTime={200}>
+                <div style={Object.assign({}, { height: dndHeight })}>
+                    <div style={dropZoneContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <Dropzone
+                                    children={
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={dropLabelStyle}>Drag & Drop PDF, DOC files here</p>
+                                                <p style={dropSubLabelStyle}>Browse & Upload</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    style={dropZoneStyle}
+                                    onDrop={(files) => this.handleDropDoc(files)}>
+                                </Dropzone>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Collapsible>
+        )
+    }
+
+    handleToggleCollapsible = (index, toggle) => {
+        this.props.dxExperiencePageDocPanelToggleAction(index, toggle);
+    }
+
     render() {
 
         const {
@@ -302,7 +370,8 @@ class ExperiencePages extends Component {
         } = this.state;
 
         const {
-            Experience
+            GoogleDocuments,
+            Experience,
         } = this.props;
 
         const {
@@ -312,7 +381,9 @@ class ExperiencePages extends Component {
             tableWrapperStyle,
             hiddenLeftContainerStyle,
             leftContainerStyle,
+            leftDocContainerStyle,
             leftWrapperStyle,
+            docContainerStyle,
             cateContainerStyle,
             optionBtnContainerStyle,
             btnStyle,
@@ -342,12 +413,15 @@ class ExperiencePages extends Component {
         } = styles;
 
         const activeOptionBtnStyle = { backgroundColor: colors.lightBlueColor };
+        let leftContainer = Experience.ActivePageTemplateOptionIndex == 0 ? leftContainerStyle : leftDocContainerStyle;
+        leftContainer = Experience.IsPageTemplateMenuOpen ? leftContainer : hiddenLeftContainerStyle;
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log(this.props.GoogleDocuments)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
-                    style={Experience.IsPageTemplateMenuOpen ? leftContainerStyle : hiddenLeftContainerStyle}
+                    style={leftContainer}
                 >
                     <DropdownMenu
                         isOpen={Experience.IsPageTemplateMenuOpen}
@@ -356,75 +430,97 @@ class ExperiencePages extends Component {
                         className="dx-layout-menu"
                         closeOnInsideClick={false}
                     >
-                        <div style={leftWrapperStyle}>
-
-                            <div style={cateContainerStyle}>
-                                <div>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 0 ? activeOptionBtnStyle : {})}
-                                        variant="Popular"
-                                        onClick={() => this.handleClickCate(0)}
-                                    >
-                                        Popular
+                        {
+                            Experience.ActivePageTemplateOptionIndex == 0 ?
+                                <div style={leftWrapperStyle}>
+                                    <div style={cateContainerStyle}>
+                                        <div>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 0 ? activeOptionBtnStyle : {})}
+                                                variant="Popular"
+                                                onClick={() => this.handleClickCate(0)}
+                                            >
+                                                Popular
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 1 ? activeOptionBtnStyle : {})}
-                                        variant="New"
-                                        onClick={() => this.handleClickCate(1)}
-                                    >
-                                        New
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 1 ? activeOptionBtnStyle : {})}
+                                                variant="New"
+                                                onClick={() => this.handleClickCate(1)}
+                                            >
+                                                New
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 2 ? activeOptionBtnStyle : {})}
-                                        variant="Test"
-                                        onClick={() => this.handleClickCate(2)}
-                                    >
-                                        Test
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 2 ? activeOptionBtnStyle : {})}
+                                                variant="Test"
+                                                onClick={() => this.handleClickCate(2)}
+                                            >
+                                                Test
                                     </Button>
-                                </div>
-                                <div style={optionBtnContainerStyle}>
-                                    <Button
-                                        className="dx-cat-btn"
-                                        style={Object.assign({}, btnStyle, activeTab == 3 ? activeOptionBtnStyle : {})}
-                                        variant="Examples"
-                                        onClick={() => this.handleClickCate(3)}
-                                    >
-                                        Examples
+                                        </div>
+                                        <div style={optionBtnContainerStyle}>
+                                            <Button
+                                                className="dx-cat-btn"
+                                                style={Object.assign({}, btnStyle, activeTab == 3 ? activeOptionBtnStyle : {})}
+                                                variant="Examples"
+                                                onClick={() => this.handleClickCate(3)}
+                                            >
+                                                Examples
                                     </Button>
+                                        </div>
+                                    </div>
+                                    <div style={itemContainerStyle}>
+                                        <div style={searchBarContainerStyle}>
+                                            <SearchBar
+                                                isShort={false}
+                                                placeholder="search page elements"
+                                            />
+                                        </div>
+                                        <div style={templateContainerStyle}>
+                                            {
+                                                this.props.PageTemplates.map((template, index) => (
+                                                    <div>
+                                                        <PageTemplateTitle
+                                                            title={template.Title}
+                                                        />
+                                                        <PageTemplate
+                                                            handleDrop={(template) => this.handleAddElem(template)}
+                                                            key={template.PageTemplateGUID}
+                                                            template={template}
+                                                        />
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div style={itemContainerStyle}>
-                                <div style={searchBarContainerStyle}>
-                                    <SearchBar
-                                        isShort={false}
-                                        placeholder="search page elements"
-                                    />
+                                :
+                                <div style={leftWrapperStyle}>
+                                    <div style={docContainerStyle}>
+                                        {
+                                            GoogleDocuments.map((doc, index) => (
+                                                <Collapsible
+                                                    trigger={doc.fileName}
+                                                    open={doc.isOpen}
+                                                    onOpen={() => this.handleToggleCollapsible(index, true)}
+                                                    onClose={() => this.handleToggleCollapsible(index, false)}
+                                                >
+                                                    <GoogleWordViewer
+                                                        fileID={doc.googleFileGUID}
+                                                    />
+                                                </Collapsible>
+                                            ))
+                                        }
+                                        {this.renderDropZone()}
+                                    </div>
                                 </div>
-                                <div style={templateContainerStyle}>
-                                    {
-                                        this.props.PageTemplates.map((template, index) => (
-                                            <div>
-                                                <PageTemplateTitle
-                                                    title={template.Title}
-                                                />
-                                                <PageTemplate
-                                                    handleDrop={(template) => this.handleAddElem(template)}
-                                                    key={template.PageTemplateGUID}
-                                                    template={template}
-                                                />
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </DropdownMenu>
                 </div>
 
@@ -555,6 +651,7 @@ class ExperiencePages extends Component {
     }
 }
 
+const dndHeight = 600;
 const carouselHeight = 48;
 const expandCarouselHeight = 240;
 const phoneHeight = 470;
@@ -566,7 +663,7 @@ const styles = {
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     txtCenterStyle: {
         textAlign: 'center'
@@ -587,10 +684,46 @@ const styles = {
     leftContainerStyle: {
         flex: 1,
     },
+    leftDocContainerStyle: {
+        flex: 2,
+    },
     leftWrapperStyle: {
         flex: 1,
         display: 'flex',
         flexDirection: 'row'
+    },
+    docContainerStyle: {
+        width: '100%',
+        height: `calc(100vh - ${sizes.headerHeight})`,
+        borderTop: '0.5px solid',
+        borderColor: colors.borderColor,
+        boxSizing: 'border-box',
+        overflowY: 'auto',
+    },
+    dropZoneContainerStyle: {
+        width: 360,
+        height: dndHeight,
+        margin: '0 auto',
+    },
+    dropZoneStyle: {
+        width: 360,
+        height: 240,
+        borderRadius: 12,
+        border: '1px dotted',
+        borderColor: colors.borderColor,
+        cursor: 'pointer',
+        textAlign: 'center'
+    },
+    dropLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h3,
+        color: colors.labelColor,
+        marginBottom: 24
+    },
+    dropSubLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h3,
+        color: colors.blueColor
     },
     cateContainerStyle: {
         flex: 1,
@@ -625,16 +758,13 @@ const styles = {
     },
     toolbarContainerStyle: {
         height: 48,
-        width: 722,
         margin: '0 auto',
         marginBottom: 12
     },
     editPhoneContainerStyle: {
-        width: 750,
         margin: '0 auto',
     },
     phoneContainerStyle: {
-        width: 750,
         height: phoneHeight,
         backgroundColor: 'transparent',
         margin: '0 auto',
@@ -734,6 +864,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         PageTemplates: state.newexperience.PageTemplates,
+        GoogleDocuments: state.newexperience.GoogleDocuments,
         Experience: state.newexperience.Experience,
     }
 }
@@ -745,6 +876,8 @@ const dispatchToProps = {
     dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePageAction,
 
+    dxExperienceUploadGoogleFileAction,
+    dxExperiencePageDocPanelToggleAction,
     dxExperiencePageAddElemAction,
     dxExperiencePageDeleteElemAction,
     dxExperiencePageCopyElemAction,
@@ -758,6 +891,7 @@ const dispatchToProps = {
     dxExperienceViewHtmlFetchAction,
 
     dxAlertAction,
+    dxLoadingAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(ExperiencePages));

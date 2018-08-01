@@ -3,6 +3,7 @@ import {
     EXPERIENCE_INITIAL__SUCCEEDED,
     EXPERIENCE_CREATE__SUCCEEDED,
     EXPERIENCE_UPLOAD_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
     EXPERIENCE_TYPE__SUCCEEDED,
     EXPERIENCE_TYPE_UPDATE__SUCCEEDED,
     EXPERIENCE_INDEX_UPDATE__SUCCEEDED,
@@ -19,6 +20,7 @@ import {
 
     EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
     EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
+    EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH__SUCCEEDED,
@@ -100,6 +102,7 @@ const initialState = {
     Index: 0,               // section index
     CardTemplates: [],      // card templates
     PageTemplates: [],      // page templates
+    GoogleDocuments: [],    // google document arr
     Experience: {
         ExperienceGUID: null,
         UpdateExperienceCardGUID: null,
@@ -113,7 +116,7 @@ const initialState = {
 
         IsPageTemplateMenuOpen: true,       // page template menu
         IsPagesSaved: false,                // page saved
-        ActivePageTemplateOptionIndex: 0,   // page template menu option 1 OR 2
+        ActivePageTemplateOptionIndex: 0,   // page template menu option 0 OR 1
 
         IsPageCarouselMenuOpen: false,      // page carousel menu
 
@@ -131,6 +134,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
 
     let updated = Object.assign({}, previousState);
     let tmpIndex = updated.Index;
+    let tmpGoogleDocuments = Object.assign([], updated.GoogleDocuments);
     let tmpExperience = Object.assign({}, updated.Experience);
     let tmpCardTemplate = Object.assign({}, tmpExperience.CardTemplate);
     let tmpTools = Object.assign([], tmpExperience.Tools);
@@ -138,6 +142,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpNewPage = Object.assign({}, tmpExperience.NewPage);
     let tmpNewPageSections = Object.assign([], tmpNewPage.Sections);
 
+    let tmpDoc;
     let tmpIsRootPage;
     let tmpConnectedPageGUID;
     let tmpConnectedPage;
@@ -189,6 +194,15 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_UPLOAD_FILE__SUCCEEDED:
             updated.IsFilesUploaded = true;
             updated.Experience = payload.experience;
+            return updated;
+
+        case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
+            tmpGoogleDocuments.push({
+                googleFileGUID: payload.googleFileGUID,
+                fileName: payload.fileName,
+                isOpen: true,
+            });
+            updated.GoogleDocuments = tmpGoogleDocuments;
             return updated;
 
         case EXPERIENCE_TYPE__SUCCEEDED:
@@ -306,6 +320,16 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.NewPage = Object.assign({}, templateNewPage);
             tmpExperience.ActivePageSectionIndex = 0;
             updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED:
+            tmpDoc = Object.assign({}, tmpGoogleDocuments[payload.index]);
+            tmpDoc.isOpen = payload.toggle;
+            tmpGoogleDocuments[payload.index] = tmpDoc;
+            updated.GoogleDocuments = tmpGoogleDocuments;
+
+            console.log('payload: ', payload);
+            console.log('updated: ', updated);
             return updated;
 
         case EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED:
