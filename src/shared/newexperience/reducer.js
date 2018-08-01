@@ -650,6 +650,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.NewPage = find_root_page(payload.experience.ExperiencePages);
             tmpExperience.Tools = format_pages_tools(payload.experience.ExperiencePages);
             updated.Experience = tmpExperience;
+            updated.IsFilesUpdated = false;
             updated.IsCompleted = false;
             return updated;
 
@@ -792,8 +793,6 @@ const update_init_pages = (pages) => {
     return pages;
 }
 const deactive_collapsible_panel_by_index = (arr, index) => {
-    console.log('arr: ', arr);
-    console.log('index: ', index);
     for (let i = 0; i < arr.length; i++) {
         if (i == index) {
             arr[i].isOpen = true;

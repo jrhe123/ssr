@@ -81,6 +81,12 @@ class ExperienceContainer extends Component {
         this.props.dxDeleteExperienceAction(targetExperienceGUID);
     }
 
+    handleCloseModal = () => {
+        this.setState({
+            isModalOpen: false,
+        })
+    }
+
     render() {
 
         const {
