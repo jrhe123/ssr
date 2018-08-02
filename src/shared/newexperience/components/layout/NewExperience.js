@@ -17,9 +17,7 @@ class NewExperience extends Component {
 
         return (
             <div>
-                <ExperienceNavigator 
-                    handleGoback={() => this.handleGoback()}
-                />
+                <ExperienceNavigator />
                 <div style={mainContainerStyle}>
                     <ExperienceControl />
                 </div>

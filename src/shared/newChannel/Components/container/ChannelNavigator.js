@@ -25,7 +25,7 @@ class ChannelNavigator extends Component {
                 navType="CHANNEL"
                 handleInputChange={(e) => this.handleTitleChange(e)}
                 handleGoback={() => this.handleGoback()}
-                />
+            />
         )
     }
 }
