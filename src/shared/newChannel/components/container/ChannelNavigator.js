@@ -14,8 +14,6 @@ class ChannelNavigator extends Component {
 
     render() {
         return (
-
-
             <NavBar
                 isRoute={false}
                 navType="CHANNEL"

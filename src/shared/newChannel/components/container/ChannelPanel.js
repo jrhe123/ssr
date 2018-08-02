@@ -22,6 +22,7 @@ import {
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
+import sizes from '../../../styles/sizes';
 
 // components
 import DxInput from '../../../components/dxInput/DxInput';
@@ -113,16 +114,23 @@ class ChannelPanel extends Component {
 
     renderColorOptions = () => {
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             colorOptionIconContainerStyle,
-            colorOptionIconStyle
+            colorOptionIconWrapperStyle,
+            colorOptionIconStyle,
         } = styles;
         return colorOptions.map((color, index) => (
             <div style={colorOptionIconContainerStyle}>
-                <IconButton
-                    style={{ backgroundColor: color }}
-                    iconStyle={colorOptionIconStyle}
-                    onClick={this.colorBlueOptionclick}
-                />
+                <div style={tableContainerStyle}>
+                    <div style={tableWrapperStyle}>
+                        <IconButton
+                            style={Object.assign({}, { backgroundColor: color }, colorOptionIconWrapperStyle)}
+                            iconStyle={colorOptionIconStyle}
+                            onClick={this.colorBlueOptionclick}
+                        />
+                    </div>
+                </div>
             </div>
         ))
     }
@@ -130,21 +138,28 @@ class ChannelPanel extends Component {
     render() {
 
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             mainContainerStyle,
+            mainWrapperStyle,
             optionContainerStyle,
             leftContainerStyle,
             labelStyle,
+            descLabelStyle,
             rightContainerStyle,
             outlineBtnStyle,
             optionBtnStyle,
             textAreaStyle,
             colorOptionContainerStyle,
-            colorOptionIconContainerStyle,
+            defaultColorOptionIconContainerStyle,
+            colorOptionIconWrapperStyle,
             colorOptionIconStyle,
             characterCounterStyle,
-            colorPickerStyle,
+            colorPickerContainerStyle,
+            hexColorPickerStyle,
             lockStyle,
-            privateChannelLabel
+            privateChannelLabel,
+            titleInputStyle,
         } = styles;
 
         const {
@@ -153,136 +168,140 @@ class ChannelPanel extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                <div style={optionContainerStyle}>
-                    <div style={leftContainerStyle}>
-                        <p style={labelStyle}>Visibility</p>
-                    </div>
-                    <div style={rightContainerStyle}>
-                        <p>What kind of channel visibility you would like your end user to experience?</p>
-                        <DropdownMenu
-                            isOpen={this.state.isTypeMenuOpen}
-                            close={this.closeTypeSelect}
-                            toggle={
-                                <div>
-                                    <DxInput
-                                        placeholder="type"
-                                        width="226px"
-                                        disabled={true}
-                                        value={channel.TYPE == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
-                                    />
-                                    <Button
-                                        style={outlineBtnStyle}
-                                        onClick={() => this.toggleTypeSelect()}>
-                                        EDIT
+                <div style={tableContainerStyle}>
+                    <div style={tableWrapperStyle}>
+                        <div style={mainWrapperStyle}>
+                            <div style={optionContainerStyle}>
+                                <div style={leftContainerStyle}>
+                                    <p style={labelStyle}>Visibility</p>
+                                </div>
+                                <div style={rightContainerStyle}>
+                                    <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
+                                    <DropdownMenu
+                                        isOpen={this.state.isTypeMenuOpen}
+                                        close={this.closeTypeSelect}
+                                        toggle={
+                                            <div>
+                                                <DxInput
+                                                    placeholder="type"
+                                                    width="226px"
+                                                    disabled={true}
+                                                    value={channel.TYPE == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
+                                                />
+                                                <Button
+                                                    style={outlineBtnStyle}
+                                                    onClick={() => this.toggleTypeSelect()}>
+                                                    EDIT
                                     </Button>
-                                </div>
-                            }
-                            align='left'
-                        >
-                            <div onClick={() => this.handleClickOption(0)}>
-                                <Button
-                                    style={optionBtnStyle}
-                                    className="dx-lower-case"
-                                >Public Channel</Button>
-                            </div>
-                            <div onClick={() => this.handleClickOption(1)}>
-                                <Button
-                                    style={optionBtnStyle}
-                                    className="dx-lower-case"
-                                >
-                                    <p style={privateChannelLabel}>Private Channel - Invite only<Lock style={lockStyle} /></p>
-                                </Button>
-                            </div>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div style={optionContainerStyle}>
-                    <div style={leftContainerStyle}>
-                        <p style={labelStyle}>Color</p>
-                    </div>
-                    <div style={rightContainerStyle}>
-                        <p>Choose a color for your channel. We recommend using one color for each channel you own.</p>
-
-                        <DropdownMenu
-                            isOpen={this.state.isColorMenuOpen}
-                            close={this.closeColorSelect}
-                            size={'md'}
-                            align='left'
-                            toggle={
-                                <div style={colorOptionIconContainerStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: this.state.btnPickerColor }}
-                                        iconStyle={colorOptionIconStyle}
-                                        onClick={() => this.toggleColorSelect()}
-                                    />
-                                </div>
-                            }
-                            closeOnInsideClick={false}
-                            closeOnOutsideClick={false}
-                        >
-                            <div style={colorOptionContainerStyle}>
-
-                                {this.renderColorOptions()}
-
-                                <div style={colorPickerStyle}>
-                                    <ColorPicker
-                                        animation="slide-up"
-                                        color={'#F0F7FF'}
-                                        onChange={this.handleColorPicker}
+                                            </div>
+                                        }
+                                        align='left'
                                     >
-                                        <span className="react-custom-trigger" fullWidth>{channel.COLOR}</span>
-                                    </ColorPicker>
+                                        <div onClick={() => this.handleClickOption(0)}>
+                                            <Button
+                                                style={optionBtnStyle}
+                                                className="dx-lower-case"
+                                            >Public Channel</Button>
+                                        </div>
+                                        <div onClick={() => this.handleClickOption(1)}>
+                                            <Button
+                                                style={optionBtnStyle}
+                                                className="dx-lower-case"
+                                            >
+                                                <p style={privateChannelLabel}>Private Channel - Invite only<Lock style={lockStyle} /></p>
+                                            </Button>
+                                        </div>
+                                    </DropdownMenu>
                                 </div>
                             </div>
-                        </DropdownMenu>
-                    </div>
-                </div>
-                <div style={optionContainerStyle}>
-                    <div style={leftContainerStyle}>
-                        <p style={labelStyle}>Title</p>
-                    </div>
-                    <div style={rightContainerStyle}>
-                        <p>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                        <input
-                            type="text"
-                            maxlength="50"
-                            placeholder="Hypertension"
-                            style={{
-                                width: '96%',
-                                padding: '12px 12px 12px 12px',
-                                height: '36px',
-                                fontSize: 14,
-                                color: channel.COLOR,
-                                border: 'none',
-                                outlineStyle: 'none',
-                                marginBottom: 6,
-                                boxShadow: '0 2px 4px 0 rgba(0,0,0,0.5)'
-                            }}
-                            onChange={this.handleTitleCharacterChange.bind(this)} />
-                        <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
-                    </div>
-                </div>
-                <div style={optionContainerStyle}>
-                    <div style={leftContainerStyle}>
-                        <p style={labelStyle}>Description</p>
-                    </div>
-                    <div style={rightContainerStyle}>
-                        <p>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
-                        <TextField
-                            id="multiline-static"
-                            multiline
-                            rows="5"
-                            margin="normal"
-                            InputProps={{
-                                disableUnderline: true,
-                            }}
-                            inputProps={{ maxLength: 1000 }}
-                            style={textAreaStyle}
-                            fullWidth
-                            placeholder={'Type something'}
-                            onChange={this.handleDescriptionCharacterChange.bind(this)}
-                        />
-                        <p style={characterCounterStyle}>{this.state.descriptionCharacterCount}/1000</p>
+                            <div style={optionContainerStyle}>
+                                <div style={leftContainerStyle}>
+                                    <p style={labelStyle}>Color</p>
+                                </div>
+                                <div style={rightContainerStyle}>
+                                    <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
+
+                                    <DropdownMenu
+                                        isOpen={this.state.isColorMenuOpen}
+                                        close={this.closeColorSelect}
+                                        size={'md'}
+                                        align='left'
+                                        toggle={
+                                            <div style={defaultColorOptionIconContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <IconButton
+                                                            style={Object.assign({}, { backgroundColor: this.state.btnPickerColor }, colorOptionIconWrapperStyle)}
+                                                            iconStyle={colorOptionIconStyle}
+                                                            onClick={() => this.toggleColorSelect()}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        closeOnInsideClick={false}
+                                        closeOnOutsideClick={false}
+                                    >
+                                        <div style={colorOptionContainerStyle}>
+
+                                            {this.renderColorOptions()}
+
+                                            <div style={colorPickerContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <ColorPicker
+                                                            style={hexColorPickerStyle}
+                                                            animation="slide-up"
+                                                            color={colors.whiteColor}
+                                                            onChange={this.handleColorPicker}
+                                                        ><span className="react-custom-trigger" fullWidth>{channel.COLOR}</span>
+                                                        </ColorPicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </DropdownMenu>
+                                </div>
+                            </div>
+                            <div style={optionContainerStyle}>
+                                <div style={leftContainerStyle}>
+                                    <p style={labelStyle}>Title</p>
+                                </div>
+                                <div style={rightContainerStyle}>
+                                    <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
+                                    <input
+                                        type="text"
+                                        maxlength="50"
+                                        placeholder="Hypertension"
+                                        style={titleInputStyle}
+                                        onChange={this.handleTitleCharacterChange.bind(this)} />
+                                    <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
+                                </div>
+                            </div>
+                            <div style={optionContainerStyle}>
+                                <div style={leftContainerStyle}>
+                                    <p style={labelStyle}>Description</p>
+                                </div>
+                                <div style={rightContainerStyle}>
+                                    <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
+                                    <TextField
+                                        id="multiline-static"
+                                        multiline
+                                        rows="5"
+                                        margin="normal"
+                                        InputProps={{
+                                            disableUnderline: true,
+                                        }}
+                                        inputProps={{ maxLength: 1000 }}
+                                        style={textAreaStyle}
+                                        fullWidth
+                                        placeholder={'Type something'}
+                                        onChange={this.handleDescriptionCharacterChange.bind(this)}
+                                    />
+                                    <p style={characterCounterStyle}>{this.state.descriptionCharacterCount}/1000</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -293,29 +312,47 @@ class ChannelPanel extends Component {
 
 const styles = {
 
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+    },
     mainContainerStyle: {
+        height: `calc(100vh - ${sizes.headerHeight})`,
+        width: '100%',
+    },
+    mainWrapperStyle: {
         width: 600,
         margin: '0 auto',
     },
     optionContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
-        paddingTop: 36,
+        marginBottom: 36,
     },
     leftContainerStyle: {
-        flex: 1,
+        flex: '120px 0 0',
         display: 'flex',
         flexDirection: 'row',
+    },
+    rightContainerStyle: {
+        flex: 1,
+    },
+    labelStyle: {
+        margin: 0,
         fontSize: fonts.h3,
         color: colors.blackColor,
     },
-    rightContainerStyle: {
-        flex: 4,
+    descLabelStyle: {
+        margin: 0,
         color: colors.labelColor,
-        fontSize: fonts.h4
-    },
-    labelStyle: {
-        textAlign: 'left',
+        fontSize: fonts.h4,
+        marginBottom: 24,
     },
     outlineBtnStyle: {
         color: colors.blueColor,
@@ -323,28 +360,25 @@ const styles = {
     optionBtnStyle: {
         width: 144
     },
+    defaultColorOptionIconContainerStyle: {
+        height: 36,
+    },
     colorOptionIconContainerStyle: {
-        height: 24,
-        width: 24,
-        border: '1px solid red'
+        height: 42,
+        width: 42,
+        marginLeft: 3,
+        marginRight: 3,
+    },
+    colorOptionIconWrapperStyle: {
+        height: 30,
+        width: 30,
     },
     colorOptionIconStyle: {
-        height: 6,
-        width: 6,
+        height: 4,
+        width: 4,
     },
     textAreaStyle: {
-        backgroundColor: 'white',
-        paddingLeft: 12,
-        paddingTop: 12,
-        paddingRight: 12,
-        paddingBottom: 12,
-        width: '96%'
-    },
-    colorOptionStyle: {
-        paddingTop: 6,
-        paddingLeft: 12,
-        paddingBottom: 6,
-        marginTop: 0
+        backgroundColor: colors.whiteColor,
     },
     colorOptionContainerStyle: {
         display: 'flex',
@@ -356,15 +390,14 @@ const styles = {
         justifyContent: 'flex-end',
         margin: 0
     },
-    colorPickerStyle: {
-        margin: '6px 12px',
-        paddingLeft: '6px',
-        paddingRight: '6px',
+    colorPickerContainerStyle: {
         textAlign: 'Left',
-        height: '20px',
-        width: '64px',
-        backgroundColor: '#F0F7FF',
-        color: '#6A6875'
+        height: 42,
+        width: 60,
+    },
+    hexColorPickerStyle: {
+        backgroundColor: colors.lightBlueColor,
+        color: colors.labelColor,
     },
     lockStyle: {
         height: '14px',
@@ -372,7 +405,15 @@ const styles = {
     },
     privateChannelLabel: {
         margin: 0
-    }
+    },
+    titleInputStyle: {
+        height: 36,
+        width: '100%',
+        fontSize: fonts.h3,
+        border: 'none',
+        outlineStyle: 'none',
+        marginBottom: 6,
+    },
 }
 
 const stateToProps = (state) => {
