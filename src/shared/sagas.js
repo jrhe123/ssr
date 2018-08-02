@@ -105,11 +105,6 @@ export default function* rootSaga() {
         dxExperienceIndexUpdateSaga(),
         dxExperienceTitleUpdateSaga(),
 
-        //NewChannel
-        dxChannelTypeSaga(),
-        dxChannelTypeUpdateSaga(),
-        dxChannelColorSaga(),
-        
         dxExperienceCardTemplateMenuToggleSaga(),
         dxExperienceCardTemplateFetchSaga(),
         dxExperienceCardTemplateSelectSaga(),
@@ -142,7 +137,14 @@ export default function* rootSaga() {
         dxExperienceViewHtmlFetchSaga(),
         dxExperienceUpdateFileSaga(),
         dxExperienceUpdateSaga(),
+
+
+        // Channel
+        // dxChannelTypeSaga(),
+        // dxChannelTypeUpdateSaga(),
+        // dxChannelColorSaga(),
         
+
         // Global
         dxValidateTokenSaga(),
         dxNavigateHistorySaga(),

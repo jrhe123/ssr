@@ -26,6 +26,8 @@ import fonts from '../../../styles/fonts';
 // components
 import DxInput from '../../../components/dxInput/DxInput';
 
+const colorOptions = ['#4A90E2', '#DFA92E', '#913D88', '#1AA98B', '#EC5C03', '#83909B'];
+
 class ChannelPanel extends Component {
 
     state = {
@@ -109,6 +111,22 @@ class ChannelPanel extends Component {
         this.props.dxChannelTypeUpdateAction(val);
     }
 
+    renderColorOptions = () => {
+        const {
+            colorOptionIconContainerStyle,
+            colorOptionIconStyle
+        } = styles;
+        return colorOptions.map((color, index) => (
+            <div style={colorOptionIconContainerStyle}>
+                <IconButton
+                    style={{ backgroundColor: color }}
+                    iconStyle={colorOptionIconStyle}
+                    onClick={this.colorBlueOptionclick}
+                />
+            </div>
+        ))
+    }
+
     render() {
 
         const {
@@ -121,7 +139,8 @@ class ChannelPanel extends Component {
             optionBtnStyle,
             textAreaStyle,
             colorOptionContainerStyle,
-            colorOptionStyle,
+            colorOptionIconContainerStyle,
+            colorOptionIconStyle,
             characterCounterStyle,
             colorPickerStyle,
             lockStyle,
@@ -190,10 +209,10 @@ class ChannelPanel extends Component {
                             size={'md'}
                             align='left'
                             toggle={
-                                <div>
+                                <div style={colorOptionIconContainerStyle}>
                                     <IconButton
-                                        style={{ backgroundColor: this.state.btnPickerColor, height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
+                                        style={{ backgroundColor: this.state.btnPickerColor }}
+                                        iconStyle={colorOptionIconStyle}
                                         onClick={() => this.toggleColorSelect()}
                                     />
                                 </div>
@@ -202,48 +221,9 @@ class ChannelPanel extends Component {
                             closeOnOutsideClick={false}
                         >
                             <div style={colorOptionContainerStyle}>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#4A90E2', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorBlueOptionclick}
-                                    />
-                                </div>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#DFA92E', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorYellowOptionclick}
-                                    />
-                                </div>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#913D88', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorPurpleOptionclick}
-                                    />
-                                </div>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#1AA98B', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorGreenOptionclick}
-                                    />
-                                </div>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#EC5C03', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorOrangeOptionclick}
-                                    />
-                                </div>
-                                <div style={colorOptionStyle}>
-                                    <IconButton
-                                        style={{ backgroundColor: '#83909B', height: 20, width: 20 }}
-                                        iconStyle={{ height: 5, width: 5 }}
-                                        onClick={this.colorGreyOptionclick}
-                                    />
-                                </div>
+
+                                {this.renderColorOptions()}
+
                                 <div style={colorPickerStyle}>
                                     <ColorPicker
                                         animation="slide-up"
@@ -342,6 +322,15 @@ const styles = {
     },
     optionBtnStyle: {
         width: 144
+    },
+    colorOptionIconContainerStyle: {
+        height: 24,
+        width: 24,
+        border: '1px solid red'
+    },
+    colorOptionIconStyle: {
+        height: 6,
+        width: 6,
     },
     textAreaStyle: {
         backgroundColor: 'white',
