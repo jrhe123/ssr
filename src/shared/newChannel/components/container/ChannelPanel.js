@@ -38,7 +38,7 @@ class ChannelPanel extends Component {
         } = styles;
 
         const {
-            channel
+            Channel
         } = this.props;
 
         return (
@@ -53,7 +53,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
                                     <ChannelOptionBar
-                                        channelType={channel.ChannelType}
+                                        channelType={Channel.ChannelType}
                                         handleClickOption={(val) => this.handleValueUpdate('CHANNEL_TYPE', val)}
                                     />
                                 </div>
@@ -65,7 +65,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
                                     <ChannelColorOptionBar 
-                                        color={channel.ChannelColor}
+                                        color={Channel.ChannelColor}
                                         handleColorPicker={(color) => this.handleValueUpdate('CHANNEL_COLOR', color)}
                                     />
                                 </div>
@@ -77,7 +77,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
                                     <ChannelTitleInput 
-                                        channelName={channel.ChannelName}
+                                        channelName={Channel.ChannelName}
                                         handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}
                                     />
                                 </div>
@@ -89,7 +89,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
                                     <ChannelDescInput 
-                                        description={channel.ChannelDescription}
+                                        description={Channel.ChannelDescription}
                                         handleDescriptionCharacterChange={(val) => this.handleValueUpdate('CHANNEL_DESCRIPTION', val)}
                                     />
                                 </div>
@@ -198,7 +198,7 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        channel: state.newchannel.Channel
+        Channel: state.newchannel.Channel
     }
 }
 

@@ -28,7 +28,7 @@ class AlertBar extends Component {
             <Alert
                 position='bottom'
                 stack={{ limit: 1 }}
-                timeout={3000}
+                timeout={1000}
                 effect='jelly'
                 html={true}
                 onClose={() => this.props.handleAlertBarClose()}
