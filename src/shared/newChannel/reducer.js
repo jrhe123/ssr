@@ -1,16 +1,20 @@
 import {
     CHANNEL_TYPE__SUCCEEDED,
     CHANNEL_VALUE__SUCCEEDED,
+    CHANNEL_CREATE__SUCCEEDED,
 } from './constants';
 
+const defaultChannel = {
+    ChannelType: '0',  // public or private
+    ChannelColor: '#EE2E24',
+    ChannelName: '',
+    ChannelDescription: '',
+}
+
 const initialState = {
-    Channel: {
-        ChannelType: '0',  // public or private
-        ChannelColor: '#EE2E24',
-        ChannelName: '',
-        ChannelDescription: '',
-    },
-};
+    IsCompleted: false,
+    Channel: Object.assign({}, defaultChannel),
+}
 
 const newchannelReducer = (previousState = initialState, { type, payload }) => {
 
@@ -22,6 +26,7 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
         case CHANNEL_TYPE__SUCCEEDED:
             tmpChannel.ChannelType = payload.channelType;
             updated.Channel = tmpChannel;
+            updated.IsCompleted = false;
             return updated;
 
         case CHANNEL_VALUE__SUCCEEDED:
@@ -42,6 +47,10 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
                     break;
             }
             updated.Channel = tmpChannel;
+            return updated;
+        
+        case CHANNEL_CREATE__SUCCEEDED:
+            updated.IsCompleted = true;
             return updated;
 
         default:

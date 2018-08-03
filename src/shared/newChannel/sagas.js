@@ -10,6 +10,10 @@ import {
     CHANNEL_VALUE_REQUESTED,
     CHANNEL_VALUE__SUCCEEDED,
     CHANNEL_VALUE__FAILED,
+
+    CHANNEL_CREATE_REQUESTED,
+    CHANNEL_CREATE__SUCCEEDED,
+    CHANNEL_CREATE__FAILED,
 } from './constants';
 
 // Channel type request
@@ -53,4 +57,52 @@ export function* dxChannelValUpdate(action) {
 
 export function* dxChannelValUpdateSaga() {
     yield takeEvery(CHANNEL_VALUE_REQUESTED, dxChannelValUpdate);
+}
+
+// Channel create
+export const dxChannelCreateUrl = (params) => {
+    const {
+        ChannelType,
+        ChannelColor,
+        ChannelName,
+        ChannelDescription,
+    } = params.channel
+    const formattedParams = {
+        IsPrivate: ChannelType == 1 ? '1' : '0',
+        ChannelColor: ChannelColor,
+        ChannelName: ChannelName,
+        ChannelDescription: ChannelDescription,
+    };
+    return (
+        apiManager.dxApi(`/channel/create`, formattedParams, true)
+    )
+}
+
+export function* dxChannelCreate(action) {
+    try {
+        const response = yield call(dxChannelCreateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: CHANNEL_CREATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: CHANNEL_CREATE__SUCCEEDED,
+                payload: {
+                    experience: Response
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: CHANNEL_CREATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxChannelCreateSaga() {
+    yield takeEvery(CHANNEL_CREATE_REQUESTED, dxChannelCreate);
 }

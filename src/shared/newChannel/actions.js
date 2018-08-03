@@ -1,6 +1,7 @@
 import {
     CHANNEL_TYPE_REQUESTED,
     CHANNEL_VALUE_REQUESTED,
+    CHANNEL_CREATE_REQUESTED,
 } from './constants';
 
 export const dxChannelType = (channelType) => {
@@ -19,6 +20,15 @@ export const dxChannelValueUpdate = (type, val) => {
         payload: {
             type, 
             val,
+        },
+    }
+}
+
+export const dxChannelCreate = (channel) => {
+    return {
+        type: CHANNEL_CREATE_REQUESTED,
+        payload: {
+            channel
         },
     }
 }
