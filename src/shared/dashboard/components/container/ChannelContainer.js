@@ -50,8 +50,15 @@ class ChannelContainer extends Component {
     }
 
     handleEditChannel = (channel) => {
+        console.log('ed channel: ', channel);
+    }
 
-        console.log('channel: ', channel);
+    handleActiveChannel = (channel) => {
+        console.log('ac channel: ', channel);
+    }
+
+    handleDeactiveChannel = (channel) => {
+        console.log('de channel: ', channel);
     }
 
     render() {
@@ -85,6 +92,8 @@ class ChannelContainer extends Component {
                                 experienceChannels={ExperienceChannels}
                                 handleAddChannelClick={() => this.handleCreateChannel()}
                                 handleEditChannel={(channel) => this.handleEditChannel(channel)}
+                                handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
+                                handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
                             />
                         )
                         :

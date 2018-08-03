@@ -134,6 +134,8 @@ class ChannelList extends Component {
                                     channelLabel={channel.ChannelName} 
                                     isLive={channel.ChannelStatus == 'LIVE' ? true : false}
                                     handleEditChannel={() => this.props.handleEditChannel(channel)}
+                                    handleActiveChannel={() => this.props.handleActiveChannel(channel)}
+                                    handleDeactiveChannel={() => this.props.handleDeactiveChannel(channel)}
                                 />
                             ))
                         }
