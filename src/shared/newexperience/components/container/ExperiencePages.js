@@ -76,7 +76,6 @@ class ExperiencePages extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('change called');
         if (nextProps.GoogleDocuments.length != this.props.GoogleDocuments.length) {
             this.props.dxLoadingAction(false);
         }
