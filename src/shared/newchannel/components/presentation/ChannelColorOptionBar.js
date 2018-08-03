@@ -34,9 +34,9 @@ class ChannelColorOptionBar extends Component {
 
     handleColorOptionclick = (color) => {
         this.setState({
-            btnPickerColor: color,
             isColorMenuOpen: false
         });
+        this.props.handleColorPicker(color);
     }
 
     renderColorOptions = () => {
@@ -114,7 +114,7 @@ class ChannelColorOptionBar extends Component {
                                     <ColorPicker
                                         animation="slide-up"
                                         color={colors.whiteColor}
-                                        onChange={this.handleColorPicker}
+                                        onChange={(obj) => this.props.handleColorPicker(obj.color)}
                                     ><span className="rc_color_picker_label">{color}</span>
                                     </ColorPicker>
                                 </div>

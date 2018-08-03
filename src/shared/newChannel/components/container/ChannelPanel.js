@@ -32,10 +32,9 @@ class ChannelPanel extends Component {
         console.log('val: ', val);
     }
 
-    handleColorPicker = (obj) => {
-        this.setState({ btnPickerColor: obj.color });
-        this.props.dxChannelColorAction(obj.color)
-    }
+    handleColorPicker = (color) => {
+        console.log('out here: ', color);
+    }    
 
     render() {
 
@@ -80,6 +79,7 @@ class ChannelPanel extends Component {
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
                                     <ChannelColorOptionBar 
                                         color={"#123123"}
+                                        handleColorPicker={(color) => this.handleColorPicker(color)}
                                     />
                                 </div>
                             </div>
