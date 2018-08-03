@@ -7,8 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
-
-
 class ChannelListInfo extends Component {
 
     render() {
