@@ -11,11 +11,7 @@ class ChannelTitleInput extends Component {
     state = {
         titleCharacterCount: 0,
     }
-
-    handleTitleCharacterChange = (e) => {
-        var val = e.target.value;
-    }
-
+    
     render() {
 
         const {
@@ -30,7 +26,7 @@ class ChannelTitleInput extends Component {
                     className='dx_input'
                     style={Object.assign({}, titleInputStyle)}
                     placeholder={""}
-                    onChange={(e) => this.handleTitleCharacterChange(e)}
+                    onChange={(e) => this.props.handleTitleCharacterChange(e.target.value)}
                 />
                 <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
             </div>

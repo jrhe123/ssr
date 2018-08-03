@@ -13,13 +13,6 @@ class ChannelDescInput extends Component {
         descriptionCharacterCount: 0
     }
 
-    handleDescriptionCharacterChange = () => {
-        // var input = event.target.value;
-        // this.setState({
-        //     descriptionCharacterCount: 0 + input.length
-        // });
-    }
-
     render() {
 
         const {
@@ -33,7 +26,7 @@ class ChannelDescInput extends Component {
                     className='dx_input'
                     style={Object.assign({}, textAreaStyle)}
                     placeholder={""}
-                    onChange={(e) => this.handleDescriptionCharacterChange(e)}
+                    onChange={(e) => this.props.handleDescriptionCharacterChange(e.target.value)}
                 />
                 <p style={characterCounterStyle}>{this.state.descriptionCharacterCount}/1000</p>
             </div>

@@ -28,13 +28,10 @@ class ChannelPanel extends Component {
         descriptionCharacterCount: 0
     }
 
-    handleChannelOptionChange = (val) => {
+    handleValueUpdate = (type, val) => {
+        console.log('type: ', type);
         console.log('val: ', val);
     }
-
-    handleColorPicker = (color) => {
-        console.log('out here: ', color);
-    }    
 
     render() {
 
@@ -67,7 +64,7 @@ class ChannelPanel extends Component {
                                     <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
                                     <ChannelOptionBar
                                         channel={channel}
-                                        handleClickOption={(val) => this.handleChannelOptionChange(val)}
+                                        handleClickOption={(val) => this.handleValueUpdate('CHANNEL_TYPE', val)}
                                     />
                                 </div>
                             </div>
@@ -79,7 +76,7 @@ class ChannelPanel extends Component {
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
                                     <ChannelColorOptionBar 
                                         color={"#123123"}
-                                        handleColorPicker={(color) => this.handleColorPicker(color)}
+                                        handleColorPicker={(color) => this.handleValueUpdate('CHANNEL_COLOR', color)}
                                     />
                                 </div>
                             </div>
@@ -89,7 +86,9 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                                    <ChannelTitleInput />
+                                    <ChannelTitleInput 
+                                        handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}
+                                    />
                                 </div>
                             </div>
                             <div style={optionContainerStyle}>
@@ -98,7 +97,9 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
-                                    <ChannelDescInput />
+                                    <ChannelDescInput 
+                                        handleDescriptionCharacterChange={(val) => this.handleValueUpdate('CHANNEL_DESCRIPTION', val)}
+                                    />
                                 </div>
                             </div>
                         </div>
