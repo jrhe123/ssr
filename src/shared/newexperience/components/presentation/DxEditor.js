@@ -68,7 +68,7 @@ class DxEditor extends Component {
     }
 
     handleChange(html) {
-        this.props.handleUpdateHtmlContent(html);
+        this.props.handleUpdateHtmlContent(html.toString());
     }
 
     render() {

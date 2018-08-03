@@ -150,12 +150,12 @@ class ExperiencePages extends Component {
     handleLoadHtml = (page, section) => {
         let isSyncServer = section.IsSyncServer;
         if (isSyncServer) {
-            if (section.HtmlContent) return section.HtmlContent;
+            if (section.HtmlContent) return section.HtmlContent == null ? '' : section.HtmlContent;
             else return '';
         } else {
-            if (section.HtmlContent) return section.HtmlContent;
+            if (section.HtmlContent) return section.HtmlContent == null ? '' : section.HtmlContent;
             if (section.Html) {
-                this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
+                return this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
             }
             else return '';
         }
