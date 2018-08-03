@@ -78,7 +78,7 @@ class ChannelContainer extends Component {
                     (
                         <ChannelList 
                             experienceChannels={ExperienceChannels}
-                            onClick={() => this.handleCreateChannel()}/>
+                            handleAddChannelClick={() => this.handleCreateChannel()}/>
                     )
                     :
                     <div style={mainWrapperStyle}>

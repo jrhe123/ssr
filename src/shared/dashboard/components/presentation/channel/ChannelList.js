@@ -76,8 +76,6 @@ class ChannelList extends Component {
             experienceChannels
         } = this.props;
 
-        console.log('experienceChannels: ', experienceChannels);
-
         return (
             <div style={mainContainerStyle}>
                 <div style={mainWrapperStyle}>
@@ -121,15 +119,23 @@ class ChannelList extends Component {
                             <Button
                                 variant="Add a new channel"
                                 style={fullBtnStyle}
-                                onClick={this.props.onClick}
+                                onClick={() => this.props.handleAddChannelClick()}
                             >
                                 Add channel
                             </Button>
                         </div>
                     </div>
                     <div style={channelListContainer}>
-                        <ChannelListInfo backgroundColor={'#EE2E24'} channelLabel={'Diabetes'} isLive />
-                        <ChannelListInfo backgroundColor={'#913D88'} channelLabel={'Hypertension'} />
+                        {
+                            experienceChannels.map((channel, index) => (
+                                <ChannelListInfo
+                                    key={index}
+                                    backgroundColor={channel.ChannelColor} 
+                                    channelLabel={channel.ChannelName} 
+                                    isLive={channel.ChannelStatus == 'LIVE' ? true : false}
+                                />
+                            ))
+                        }
                     </div>
                 </div>
             </div>
@@ -138,7 +144,7 @@ class ChannelList extends Component {
 }
 
 const styles = {
-    
+
     mainContainerStyle: {
         width: sizes.dxWidth,
         margin: '0 auto',
