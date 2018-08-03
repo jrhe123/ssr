@@ -57,7 +57,7 @@ class ChannelListInfo extends Component {
                     isOpen={this.state.isMenuOpen}
                     close={() => this.handleMenuClose()}
                     size={'md'}
-                    align='left'
+                    align='right'
                     toggle={
                         <div style={channelInfo}
                             onClick={() => this.handleMenuToggle()}>
@@ -96,14 +96,13 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
-        paddingBottom: 120
+        paddingBottom: 120,
+        marginRight: 24,
     },
     channelInfo: {
-        height: 36,
-        width: 160,
+        height: 48,
+        width: 180,
         background: colors.whiteColor,
-        marginRight: 30,
-        marginTop: 18,
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',

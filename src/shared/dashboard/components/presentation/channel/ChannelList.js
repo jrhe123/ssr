@@ -163,10 +163,6 @@ const styles = {
         height: 32,
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 44,
-        marginLeft: 120,
-        marginRight: 120,
-        marginBottom: 56,
         alignItems: 'flex-start',
         justifyContent: 'flex-start'
     },
@@ -192,8 +188,6 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginLeft: 120,
-        marginRight: 120,
         borderBottom: '1px solid #FFFFFF',
         paddingBottom: 9
     },
@@ -238,10 +232,7 @@ const styles = {
         color: '#4E546C',
     },
     channelListContainer: {
-        marginLeft: 120,
-        marginRight: 120,
-        minHeight: 72,
-        maxHeight: 'calc(100% - 190px)',
+        marginTop: 36,
         overflowY: 'scroll',
         display: 'flex',
         flexWrap: 'wrap'
