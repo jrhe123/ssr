@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 
 // Libraries
 import IconButton from '@material-ui/core/IconButton';
+import DropdownMenu from 'react-dd-menu';
+import Button from '@material-ui/core/Button';
 
 // constants
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
 class ChannelListInfo extends Component {
+
+    state = {
+        isMenuOpen: false,
+    }
+
+    handleMenuToggle = () => {
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
+        });
+    }
+
+    handleMenuClose = () => {
+        this.setState({
+            isMenuOpen: false
+        });
+    }
 
     render() {
         const {
@@ -33,13 +51,30 @@ class ChannelListInfo extends Component {
 
         return (
             <div style={channelInfoContainerStyle}>
-                <div style={channelInfo}>
-                    <IconButton
-                        style={{ backgroundColor: backgroundColor, height: 15, width: 15, marginLeft: 12 }}
-                        iconStyle={{ height: 5, width: 5 }}
-                    />
-                    <p style={{ color: backgroundColor, marginLeft: 9, fontSize: fonts.h4, marginRight: 12 }}>{channelLabel}</p>
-                </div>
+
+                <DropdownMenu
+                    className="dx_channel_drop_menu"
+                    isOpen={this.state.isMenuOpen}
+                    close={() => this.handleMenuClose()}
+                    size={'md'}
+                    align='left'
+                    toggle={
+                        <div style={channelInfo}
+                            onClick={() => this.handleMenuToggle()}>
+                            <IconButton
+                                style={{ backgroundColor: backgroundColor, height: 15, width: 15, marginLeft: 12 }}
+                                iconStyle={{ height: 5, width: 5 }}
+                            />
+                            <p style={{ color: backgroundColor, marginLeft: 9, fontSize: fonts.h4, marginRight: 12 }}>{channelLabel}</p>
+                        </div>
+                    }
+                    closeOnInsideClick={false}
+                    closeOnOutsideClick={true}
+                >
+                    <Button onClick={() => this.props.handleEditChannel()}>Edit</Button>
+                    <Button onClick={() => console.log('remove')}>REMOVE</Button>
+                </DropdownMenu>
+
                 <div style={channelStatusContainerStyle}>
                     <p style={Object.assign({}, styles.channelStatusStyle, extra)}>{extra.channelStatus}</p>
                 </div>
@@ -49,11 +84,13 @@ class ChannelListInfo extends Component {
 }
 
 const styles = {
+
     channelInfoContainerStyle: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        paddingBottom: 72
     },
     channelInfo: {
         height: 36,
@@ -82,4 +119,5 @@ const styles = {
         margin: 0
     }
 }
+
 export default ChannelListInfo;

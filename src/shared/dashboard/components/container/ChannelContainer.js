@@ -46,7 +46,12 @@ class ChannelContainer extends Component {
         this.setState({
             newChannelModalOpen: false
         });
-        this.props.history.push(`/new_channel/`+val)
+        this.props.history.push(`/new_channel/` + val)
+    }
+
+    handleEditChannel = (channel) => {
+
+        console.log('channel: ', channel);
     }
 
     render() {
@@ -75,41 +80,43 @@ class ChannelContainer extends Component {
             <div style={mainContainerStyle}>
                 {
                     ExperienceChannels.length ?
-                    (
-                        <ChannelList 
-                            experienceChannels={ExperienceChannels}
-                            handleAddChannelClick={() => this.handleCreateChannel()}/>
-                    )
-                    :
-                    <div style={mainWrapperStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={topLabelStyle}> Reach your audience via channel.
+                        (
+                            <ChannelList
+                                experienceChannels={ExperienceChannels}
+                                handleAddChannelClick={() => this.handleCreateChannel()}
+                                handleEditChannel={(channel) => this.handleEditChannel(channel)}
+                            />
+                        )
+                        :
+                        <div style={mainWrapperStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <p style={topLabelStyle}> Reach your audience via channel.
                                 </p>
-                                <div style={imgWrapperStyle}>
-                                    <img 
-                                        style={imgStyle}
-                                        src={require('../../../../../assets/images/channelPage.png')}
-                                    />
-                                </div>
-                                <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
+                                    <div style={imgWrapperStyle}>
+                                        <img
+                                            style={imgStyle}
+                                            src={require('../../../../../assets/images/channelPage.png')}
+                                        />
+                                    </div>
+                                    <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
                                 </p>
-                                <div style={btnWrapperStyle}>
-                                    <Button 
-                                        variant="Add a new channel" 
-                                        style={fullBtnStyle}
-                                        onClick={() => this.handleCreateChannel()}>
-                                        Create A Channel
+                                    <div style={btnWrapperStyle}>
+                                        <Button
+                                            variant="Add a new channel"
+                                            style={fullBtnStyle}
+                                            onClick={() => this.handleCreateChannel()}>
+                                            Create A Channel
                                     </Button>
-                                </div>
-                                <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                                    </div>
+                                    <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
                                 </p>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
                 }
-                <NewChannelModal 
+                <NewChannelModal
                     open={this.state.newChannelModalOpen}
                     onCloseModal={() => this.handleCloseChannelModal()}
                     navigateToNewchannel={(val) => this.handleNavigateToNewchannel(val)}
@@ -122,13 +129,13 @@ class ChannelContainer extends Component {
 
 const styles = {
     mainContainerStyle: {
-        display:'flex',
-        flexDirection:'row'
+        display: 'flex',
+        flexDirection: 'row'
     },
-    mainWrapperStyle:{
+    mainWrapperStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         width: '100%',
-        flex:1
+        flex: 1
     },
     tableContainerStyle: {
         position: 'relative',
@@ -143,7 +150,7 @@ const styles = {
     },
     btnWrapperStyle: {
         marginTop: '3px',
-        marginBottom:'30px'
+        marginBottom: '30px'
     },
     fullBtnStyle: {
         backgroundColor: colors.blueColor,
@@ -158,16 +165,16 @@ const styles = {
         fontSize: fonts.h1,
         color: colors.lightGreyColor,
     },
-    bottomLabelStyle:{
+    bottomLabelStyle: {
         fontSize: fonts.h4,
         color: colors.lightGreyColor,
     },
-    imgStyle:{
-        display:'block',
-        height:'132px',
-        width:'144px',
-        marginLeft:'auto',
-        marginRight:'auto',
+    imgStyle: {
+        display: 'block',
+        height: '132px',
+        width: '144px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
 
     },
     imgWrapperStyle: {
