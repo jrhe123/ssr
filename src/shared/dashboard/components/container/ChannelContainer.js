@@ -52,7 +52,7 @@ class ChannelContainer extends Component {
     render() {
 
         const {
-            Channels
+            ExperienceChannels
         } = this.props;
 
         const {
@@ -74,9 +74,10 @@ class ChannelContainer extends Component {
         return (
             <div style={mainContainerStyle}>
                 {
-                    Channels.length ?
+                    ExperienceChannels.length ?
                     (
                         <ChannelList 
+                            experienceChannels={ExperienceChannels}
                             onClick={() => this.handleCreateChannel()}/>
                     )
                     :
@@ -177,7 +178,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        Channels: state.dashboard.Channels,
+        ExperienceChannels: state.dashboard.ExperienceChannels,
     }
 }
 
