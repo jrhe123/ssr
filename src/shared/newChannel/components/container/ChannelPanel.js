@@ -78,6 +78,7 @@ class ChannelPanel extends Component {
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
                                     <ChannelTitleInput 
                                         channelName={Channel.ChannelName}
+                                        color={Channel.ChannelColor}
                                         handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}
                                     />
                                 </div>
