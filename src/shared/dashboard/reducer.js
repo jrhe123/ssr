@@ -17,7 +17,8 @@ const initialState = {
     TotalExperienceRecord: 0,
     Experiences: [],
 
-    Channels: []
+    TotalChannelRecord: 0,
+    ExperienceChannels: []
 };
 
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
@@ -41,7 +42,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:
-            // updated.Channels = payload.channels;
+            updated.TotalChannelRecord = payload.totalRecord;
+            updated.ExperienceChannels = payload.expereienceChannels;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

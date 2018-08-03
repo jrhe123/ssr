@@ -10,7 +10,7 @@ import * as apiManager from '../helpers/apiManager';
 import {
     LOGOUT_REQUESTED,
     LOGOUT__SUCCEEDED,
-    LOGOUT__FAILED,    
+    LOGOUT__FAILED,
 
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
@@ -74,16 +74,41 @@ export function* dxLogoutSaga() {
 }
 
 // Fetch Channel
+export const dxFetchChannelUrl = (params) => {
+    return (
+        apiManager.dxApi(`/channel/list`, {
+            Limit: "6",
+            Offset: "0",
+            Extra: {
+                ChannelStatus: ""
+            },
+        }, true)
+    )
+}
+
 export function* dxFetchChannel(action) {
     try {
-        yield put({
-            type: CHANNEL_FETCH__SUCCEEDED,
-            payload: {},
-        });
+        const response = yield call(dxFetchChannelUrl);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: CHANNEL_FETCH__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: CHANNEL_FETCH__SUCCEEDED,
+                payload: {
+                    totalRecord: Response.TotalRecord,
+                    expereienceChannels: Response.ExperienceChannels,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: CHANNEL_FETCH__FAILED,
-        })
+            payload: error,
+        });
     }
 }
 
@@ -103,15 +128,15 @@ export function* dxHtmlFetch(action) {
     try {
         const response = yield call(dxHtmlFetchUrl, action.payload);
         const {
-            experienceGUID, 
-            pageGUID, 
+            experienceGUID,
+            pageGUID,
             sectionGUID,
         } = action.payload;
         yield put({
             type: HTML_FETCH__SUCCEEDED,
             payload: {
-                experienceGUID, 
-                pageGUID, 
+                experienceGUID,
+                pageGUID,
                 sectionGUID,
                 html: response
             },
