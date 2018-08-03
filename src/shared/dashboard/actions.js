@@ -18,10 +18,10 @@ export const dxLogout = () => {
     }
 }
 
-export const dxChannelFetch = (channels) => {
+export const dxFetchChannel = () => {
     return {
         type: CHANNEL_FETCH_REQUESTED,
-        payload: {channels},
+        payload: {},
     }
 }
 

@@ -41,7 +41,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:
-            updated.Channels = payload.channels;
+            // updated.Channels = payload.channels;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

@@ -74,13 +74,11 @@ export function* dxLogoutSaga() {
 }
 
 // Fetch Channel
-export function* dxChannelFetch(action) {
+export function* dxFetchChannel(action) {
     try {
         yield put({
             type: CHANNEL_FETCH__SUCCEEDED,
-            payload: {
-                channels: action.payload.channels
-            },
+            payload: {},
         });
     } catch (error) {
         yield put({
@@ -89,8 +87,8 @@ export function* dxChannelFetch(action) {
     }
 }
 
-export function* dxChannelFetchSaga() {
-    yield takeEvery(CHANNEL_FETCH_REQUESTED, dxChannelFetch);
+export function* dxFetchChannelSaga() {
+    yield takeEvery(CHANNEL_FETCH_REQUESTED, dxFetchChannel);
 }
 
 // Html loading

@@ -50,14 +50,8 @@ class ChannelList extends Component {
         this.setState({ isImportOpen: false });
     }
 
-
-
     render() {
-
-        const {
-            classes
-        } = this.props;
-
+        
         const {
             mainContainerStyle,
             mainWrapperStyle,
@@ -77,7 +71,6 @@ class ChannelList extends Component {
             channelListContainer,
             textFieldStyle
         } = styles;
-
 
         return (
             <div style={mainContainerStyle}>

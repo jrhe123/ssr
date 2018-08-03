@@ -6,13 +6,10 @@ import NewChannelModal from '../presentation/channel/NewChannelModal.js';
 // libraries
 import Button from '@material-ui/core/Button';
 
-// data
-import ChannelData from '../../../../../data/ChannelData';
-
 // redux
 import { connect } from 'react-redux';
 import {
-    dxChannelFetch as dxChannelFetchAction,
+    dxFetchChannel as dxFetchChannelAction,
 } from '../../actions';
 
 // constants
@@ -30,7 +27,7 @@ class ChannelContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.dxChannelFetchAction([])
+        this.props.dxFetchChannelAction();
     }
 
     handleCreateChannel = () => {
@@ -45,7 +42,7 @@ class ChannelContainer extends Component {
         })
     }
 
-    navigateToNewchannel = (val) => {
+    handleNavigateToNewchannel = (val) => {
         this.setState({
             newChannelModalOpen: false
         });
@@ -79,7 +76,8 @@ class ChannelContainer extends Component {
                 {
                     Channels.length ?
                     (
-                        <ChannelList onClick={() => this.handleCreateChannel()}/>
+                        <ChannelList 
+                            onClick={() => this.handleCreateChannel()}/>
                     )
                     :
                     <div style={mainWrapperStyle}>
@@ -113,7 +111,7 @@ class ChannelContainer extends Component {
                 <NewChannelModal 
                     open={this.state.newChannelModalOpen}
                     onCloseModal={() => this.handleCloseChannelModal()}
-                    navigateToNewchannel={(val) => this.navigateToNewchannel(val)}
+                    navigateToNewchannel={(val) => this.handleNavigateToNewchannel(val)}
                 />
 
             </div>
@@ -184,7 +182,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-    dxChannelFetchAction,
+    dxFetchChannelAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelContainer);

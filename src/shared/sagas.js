@@ -9,7 +9,7 @@ import {
 import { 
     dxLogoutSaga,
     
-    dxChannelFetchSaga,
+    dxFetchChannelSaga,
 
     dxHtmlFetchSaga,
     dxFetchExperienceSaga,
@@ -89,8 +89,10 @@ export default function* rootSaga() {
         // Dashboard
         dxLogoutSaga(),
         
-        dxChannelFetchSaga(),
+        // channel
+        dxFetchChannelSaga(),
         
+        // experience
         dxHtmlFetchSaga(),
         dxFetchExperienceSaga(),
         dxDeleteExperienceSaga(),
