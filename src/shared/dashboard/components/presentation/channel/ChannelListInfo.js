@@ -70,12 +70,12 @@ class ChannelListInfo extends Component {
                     }
                     closeOnInsideClick={false}
                     closeOnOutsideClick={true}
-                >   
+                >
                     {
                         isLive ?
-                        <Button onClick={() => this.props.handleDeactiveChannel()}>Go Draft</Button>
-                        :
-                        <Button onClick={() => this.props.handleActiveChannel()}>Go Live</Button>
+                            <Button onClick={() => this.props.handleDeactiveChannel()}>Go Draft</Button>
+                            :
+                            <Button onClick={() => this.props.handleActiveChannel()}>Go Live</Button>
                     }
                     <Button onClick={() => this.props.handleEditChannel()}>Edit</Button>
                     <Button onClick={() => console.log('remove')}>Remove</Button>
@@ -100,7 +100,7 @@ const styles = {
         marginRight: 24,
     },
     channelInfo: {
-        height: 48,
+        height: 60,
         width: 180,
         background: colors.whiteColor,
         display: 'flex',
@@ -110,11 +110,11 @@ const styles = {
     channelStatusContainerStyle: {
         width: 60,
         height: 12,
-        fontSize: 8,
+        fontSize: fonts.h4,
         background: colors.lightBlueColor,
         textAlign: 'center',
         marginTop: 12,
-        borderRadius: 5.5,
+        borderRadius: 6,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'

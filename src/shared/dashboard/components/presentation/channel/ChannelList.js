@@ -217,7 +217,8 @@ const styles = {
         overflowY: 'scroll',
         display: 'flex',
         flexWrap: 'wrap',
-        height: `calc(100vh - ${sizes.headerHeight} - 114px - 60px)`,
+        height: `calc(100vh - ${sizes.headerHeight} - 114px - 60px - 36px)`,
+        paddingTop: 36,
     },
     menuItemStyle: {
         margin: 0,
