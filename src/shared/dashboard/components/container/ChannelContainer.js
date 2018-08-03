@@ -69,6 +69,7 @@ class ChannelContainer extends Component {
 
         const {
             mainContainerStyle,
+            channelListContainerStyle,
 
             mainWrapperStyle,
             tableContainerStyle,
@@ -79,15 +80,15 @@ class ChannelContainer extends Component {
             topLabelStyle,
             middleLabelStyle,
             bottomLabelStyle,
-            imgWrapperStyle,
-            imgStyle
+            imgStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
                 {
                     ExperienceChannels.length ?
-                        (
+                        (   
+                            <div style={channelListContainerStyle}>
                             <ChannelList
                                 experienceChannels={ExperienceChannels}
                                 handleAddChannelClick={() => this.handleCreateChannel()}
@@ -95,6 +96,7 @@ class ChannelContainer extends Component {
                                 handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
                                 handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
                             />
+                            </div>
                         )
                         :
                         <div style={mainWrapperStyle}>
@@ -102,7 +104,7 @@ class ChannelContainer extends Component {
                                 <div style={tableWrapperStyle}>
                                     <p style={topLabelStyle}> Reach your audience via channel.
                                 </p>
-                                    <div style={imgWrapperStyle}>
+                                    <div>
                                         <img
                                             style={imgStyle}
                                             src={require('../../../../../assets/images/channelPage.png')}
@@ -137,9 +139,13 @@ class ChannelContainer extends Component {
 }
 
 const styles = {
+
     mainContainerStyle: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    channelListContainerStyle: {
+        
     },
     mainWrapperStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -184,9 +190,6 @@ const styles = {
         width: '144px',
         marginLeft: 'auto',
         marginRight: 'auto',
-
-    },
-    imgWrapperStyle: {
 
     }
 };

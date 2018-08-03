@@ -58,11 +58,9 @@ class ChannelList extends Component {
             topContainerStyle,
             searchBarWrapperSrtyle,
             serachIconStyle,
-            searchUserStyle,
             channelListInfoContainerStyle,
             channelListInfoWrapperStyle,
             channelListButtonStyle,
-            questionMarkLabelStyle,
             fullBtnStyle,
             channelNumberStyle,
             dropdownBtnStyle,
@@ -125,13 +123,14 @@ class ChannelList extends Component {
                             </Button>
                         </div>
                     </div>
+
                     <div style={channelListContainer}>
                         {
                             experienceChannels.map((channel, index) => (
                                 <ChannelListInfo
                                     key={index}
-                                    backgroundColor={channel.ChannelColor} 
-                                    channelLabel={channel.ChannelName} 
+                                    backgroundColor={channel.ChannelColor}
+                                    channelLabel={channel.ChannelName}
                                     isLive={channel.ChannelStatus == 'LIVE' ? true : false}
                                     handleEditChannel={() => this.props.handleEditChannel(channel)}
                                     handleActiveChannel={() => this.props.handleActiveChannel(channel)}
@@ -142,7 +141,7 @@ class ChannelList extends Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -152,7 +151,7 @@ const styles = {
         width: sizes.dxWidth,
         margin: '0 auto',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     mainWrapperStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -160,43 +159,26 @@ const styles = {
         width: '100%'
     },
     topContainerStyle: {
-        height: 32,
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start'
+        paddingTop: 36,
+        paddingBottom: 48,
     },
     searchBarWrapperSrtyle: {
         display: 'flex',
-        flexDirection: 'flex-start',
-        alignItems: 'center'
-    },
-    searchUserStyle: {
-        width: '100%',
-        boxShadow: 'none',
-        borderWidth: 0,
-        borderBottom: 1,
-        borderColor: '#A8B7C5',
-        borderStyle: 'solid',
-        paddingLeft: 0,
-        height: '100%',
-        background: colors.backgroundColor
     },
     channelListInfoContainerStyle: {
-        height: 32,
-        flexDirection: 'row',
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottom: '1px solid #FFFFFF',
-        paddingBottom: 9
+        borderBottom: '1px solid',
+        borderColor: colors.whiteColor,
+        height: 54,
     },
     channelListInfoWrapperStyle: {
-        flexDirection: 'row',
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: 'row',
         alignItems: 'center',
-        width: 352
     },
     channelListButtonStyle: {
         flexDirection: 'row',
@@ -222,30 +204,28 @@ const styles = {
         padding: 0,
         textTransform: 'none',
         fontSize: fonts.h2,
-        color: '#4E546C'
+        color: colors.labelColor,
     },
     expandIconStyle: {
         color: colors.lightGreyColor
     },
     channelNumberStyle: {
         fontSize: fonts.h2,
-        color: '#4E546C',
+        color: colors.labelColor,
     },
     channelListContainer: {
-        marginTop: 36,
         overflowY: 'scroll',
         display: 'flex',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        height: `calc(100vh - ${sizes.headerHeight} - 114px - 60px)`,
     },
     menuItemStyle: {
         margin: 0,
         paddingTop: 9,
         paddingBottom: 9,
         textAlign: 'center',
-        borderWidth: 0,
-        borderBottom: 1,
-        borderColor: '#A8B7C5',
-        borderStyle: 'solid',
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor,
     },
     textFieldStyle: {
         height: 30
