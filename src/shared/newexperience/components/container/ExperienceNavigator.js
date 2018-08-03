@@ -43,6 +43,7 @@ class ExperienceNavigator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('called');
         // CREATE
         if (nextProps.IsFilesUploaded && !this.props.IsFilesUploaded) {
             this.props.dxExperienceCreateAction(this.props.Experience);
