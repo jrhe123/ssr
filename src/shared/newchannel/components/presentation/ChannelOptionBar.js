@@ -40,7 +40,7 @@ class ChannelOptionBar extends Component {
         } = styles;
 
         const {
-            channel
+            channelType
         } = this.props;
 
         return (
@@ -54,7 +54,7 @@ class ChannelOptionBar extends Component {
                                 placeholder="type"
                                 width="226px"
                                 disabled={true}
-                                value={channel.Type == 0 ? 'Public Channel' : 'Private Channel - Invite only'}
+                                value={channelType == 0 ? 'Public Channel' : 'Private Channel - Invite only'}
                             />
                             <Button
                                 style={outlineBtnStyle}

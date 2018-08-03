@@ -1,39 +1,49 @@
 import {
     CHANNEL_TYPE__SUCCEEDED,
-    CHANNEL_TYPE_UPDATE__SUCCEEDED,
-    CHANNEL_COLOR__SUCCEEDED,
+    CHANNEL_VALUE__SUCCEEDED,
 } from './constants';
-import update from '../../../node_modules/immutability-helper';
 
 const initialState = {
-    CHANNEL: {
-        TYPE: '0', // public or private
-        COLOR:'#EE2E24'
+    Channel: {
+        ChannelType: '0',  // public or private
+        ChannelColor: '#EE2E24',
+        ChannelName: '',
+        ChannelDescription: '',
     },
 };
 
 const newchannelReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
-    let tmpChannel = Object.assign({}, updated.CHANNEL);
+    let tmpChannel = Object.assign({}, updated.Channel);
 
     switch (type) {
 
         case CHANNEL_TYPE__SUCCEEDED:
-            tmpChannel.TYPE = payload.channelType;
-            updated.CHANNEL = tmpChannel;
+            tmpChannel.ChannelType = payload.channelType;
+            updated.Channel = tmpChannel;
             return updated;
 
-        case CHANNEL_TYPE_UPDATE__SUCCEEDED:
-            tmpChannel.TYPE = payload.channelType;
-            updated.CHANNEL = tmpChannel;
+        case CHANNEL_VALUE__SUCCEEDED:
+            switch (payload.type) {
+                case 'CHANNEL_TYPE':
+                    tmpChannel.ChannelType = payload.val;
+                    break;
+                case 'CHANNEL_COLOR':
+                    tmpChannel.ChannelColor = payload.val;
+                    break;
+                case 'CHANNEL_NAME':
+                    tmpChannel.ChannelName = payload.val;
+                    break;
+                case 'CHANNEL_DESCRIPTION':
+                    tmpChannel.ChannelDescription = payload.val;
+                    break;
+                default:
+                    break;
+            }
+            updated.Channel = tmpChannel;
             return updated;
 
-        case CHANNEL_COLOR__SUCCEEDED:
-            tmpChannel.COLOR = payload.channelColor;
-            updated.CHANNEL = tmpChannel;
-            return updated;
-        
         default:
             return previousState;
     }

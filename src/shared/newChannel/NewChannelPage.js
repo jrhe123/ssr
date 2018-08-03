@@ -18,7 +18,7 @@ export class NewChannelPage extends Component {
     componentDidMount(){
         const history = this.props.history;
         this.props.dxNavigateHistoryAction(history);
-        const channelType = this.props.match.params.channelType;
+        const channelType = this.props.match.params.param;
         this.props.dxChannelTypeAction(channelType);
     }
 

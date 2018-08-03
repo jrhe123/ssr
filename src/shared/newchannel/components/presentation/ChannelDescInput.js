@@ -9,10 +9,6 @@ import colors from '../../../styles/colors';
 
 class ChannelDescInput extends Component {
 
-    state = {
-        descriptionCharacterCount: 0
-    }
-
     render() {
 
         const {
@@ -20,15 +16,21 @@ class ChannelDescInput extends Component {
             characterCounterStyle,
         } = styles;
 
+        const {
+            description
+        } = this.props;
+
         return (
             <div>
                 <Textarea
                     className='dx_input'
+                    maxLength="1000"
                     style={Object.assign({}, textAreaStyle)}
                     placeholder={""}
+                    value={description}
                     onChange={(e) => this.props.handleDescriptionCharacterChange(e.target.value)}
                 />
-                <p style={characterCounterStyle}>{this.state.descriptionCharacterCount}/1000</p>
+                <p style={characterCounterStyle}>{description ? description.length : 0}/1000</p>
             </div>
         )
     }

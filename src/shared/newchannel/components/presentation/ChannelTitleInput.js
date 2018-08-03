@@ -7,10 +7,6 @@ import Textarea from "react-textarea-autosize";
 import fonts from '../../../styles/fonts';
 
 class ChannelTitleInput extends Component {
-
-    state = {
-        titleCharacterCount: 0,
-    }
     
     render() {
 
@@ -20,15 +16,21 @@ class ChannelTitleInput extends Component {
             titleInputStyle,
         } = styles;
 
+        const {
+            channelName
+        } = this.props;
+
         return (
             <div style={mainContainerStyle}>
                 <Textarea
                     className='dx_input'
+                    maxLength="50"
                     style={Object.assign({}, titleInputStyle)}
                     placeholder={""}
+                    value={channelName}
                     onChange={(e) => this.props.handleTitleCharacterChange(e.target.value)}
                 />
-                <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
+                <p style={characterCounterStyle}>{channelName ? channelName.length : 0}/50</p>
             </div>
         )
     }

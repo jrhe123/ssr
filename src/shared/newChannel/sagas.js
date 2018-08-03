@@ -7,13 +7,9 @@ import {
     CHANNEL_TYPE__SUCCEEDED,
     CHANNEL_TYPE__FAILED,
 
-    CHANNEL_TYPE_UPDATE_REQUESTED,
-    CHANNEL_TYPE_UPDATE__SUCCEEDED,
-    CHANNEL_TYPE_UPDATE__FAILED,
-
-    CHANNEL_COLOR__REQUESTED,
-    CHANNEL_COLOR__SUCCEEDED,
-    CHANNEL_COLOR__FAILED,
+    CHANNEL_VALUE_REQUESTED,
+    CHANNEL_VALUE__SUCCEEDED,
+    CHANNEL_VALUE__FAILED,
 } from './constants';
 
 // Channel type request
@@ -37,44 +33,24 @@ export function* dxChannelTypeSaga() {
     yield takeEvery(CHANNEL_TYPE_REQUESTED, channelType);
 }
 
-//Channel Type update
-export function* channelTypeUpdate(action) {
+//Channel Val update
+export function* dxChannelValUpdate(action) {
     try {
         yield put({
-            type: CHANNEL_TYPE_UPDATE__SUCCEEDED,
+            type: CHANNEL_VALUE__SUCCEEDED,
             payload: {
-                channelType: action.payload.channelType
+                type: action.payload.type,
+                val: action.payload.val,
             },
         });
     } catch (error) {
         yield put({
-            type: CHANNEL_TYPE_UPDATE__FAILED,
+            type: CHANNEL_VALUE__FAILED,
             payload: error,
         });
     }
 }
 
-export function* dxChannelTypeUpdateSaga() {
-    yield takeEvery(CHANNEL_TYPE_UPDATE_REQUESTED, channelTypeUpdate);
-}
-
-//Channel color
-export function* channelColor(action) {
-    try {
-        yield put({
-            type: CHANNEL_COLOR__SUCCEEDED,
-            payload: {
-                channelColor: action.payload.channelColor
-            },
-        });
-    } catch (error) {
-        yield put({
-            type: CHANNEL_COLOR__FAILED,
-            payload: error,
-        });
-    }
-}
-
-export function* dxChannelColorSaga() {
-    yield takeEvery(CHANNEL_COLOR__REQUESTED, channelColor);
+export function* dxChannelValUpdateSaga() {
+    yield takeEvery(CHANNEL_VALUE_REQUESTED, dxChannelValUpdate);
 }

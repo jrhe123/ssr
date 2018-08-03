@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxChannelTypeUpdate as dxChannelTypeUpdateAction,
-    dxChannelColor as dxChannelColorAction,
+    dxChannelValueUpdate as dxChannelValueUpdateAction,
 } from '../../actions';
 
 // constants
@@ -20,17 +19,8 @@ import ChannelDescInput from '../presentation/ChannelDescInput';
 
 class ChannelPanel extends Component {
 
-    state = {
-        isTypeMenuOpen: false,
-        isColorMenuOpen: false,
-        btnPickerColor: '#EE2E24',
-        titleCharacterCount: 0,
-        descriptionCharacterCount: 0
-    }
-
     handleValueUpdate = (type, val) => {
-        console.log('type: ', type);
-        console.log('val: ', val);
+        this.props.dxChannelValueUpdateAction(type, val);
     }
 
     render() {
@@ -63,7 +53,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
                                     <ChannelOptionBar
-                                        channel={channel}
+                                        channelType={channel.ChannelType}
                                         handleClickOption={(val) => this.handleValueUpdate('CHANNEL_TYPE', val)}
                                     />
                                 </div>
@@ -75,7 +65,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
                                     <ChannelColorOptionBar 
-                                        color={"#123123"}
+                                        color={channel.ChannelColor}
                                         handleColorPicker={(color) => this.handleValueUpdate('CHANNEL_COLOR', color)}
                                     />
                                 </div>
@@ -87,6 +77,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
                                     <ChannelTitleInput 
+                                        channelName={channel.ChannelName}
                                         handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}
                                     />
                                 </div>
@@ -98,6 +89,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
                                     <ChannelDescInput 
+                                        description={channel.ChannelDescription}
                                         handleDescriptionCharacterChange={(val) => this.handleValueUpdate('CHANNEL_DESCRIPTION', val)}
                                     />
                                 </div>
@@ -206,13 +198,12 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-        channel: state.newchannel.CHANNEL
+        channel: state.newchannel.Channel
     }
 }
 
 const dispatchToProps = {
-    dxChannelTypeUpdateAction,
-    dxChannelColorAction,
+    dxChannelValueUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelPanel);

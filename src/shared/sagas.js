@@ -68,8 +68,7 @@ import {
 // NewChannel 
 import { 
     dxChannelTypeSaga,
-    dxChannelTypeUpdateSaga,
-    dxChannelColorSaga,
+    dxChannelValUpdateSaga,
 } from './newchannel/sagas';
 
 // Global
@@ -140,9 +139,8 @@ export default function* rootSaga() {
 
 
         // Channel
-        // dxChannelTypeSaga(),
-        // dxChannelTypeUpdateSaga(),
-        // dxChannelColorSaga(),
+        dxChannelTypeSaga(),
+        dxChannelValUpdateSaga(),
         
 
         // Global
