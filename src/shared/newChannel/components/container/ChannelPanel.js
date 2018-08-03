@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-// styles
-import '../../../../../assets/css/dd-menu/dd_menu.css';
-
-// Libraries
-import TextField from '@material-ui/core/TextField';
-
 // redux
 import { connect } from 'react-redux';
 import {
@@ -20,7 +14,9 @@ import sizes from '../../../styles/sizes';
 
 // components
 import ChannelOptionBar from '../presentation/ChannelOptionBar';
-import ColorOptionBar from '../presentation/ColorOptionBar';
+import ChannelColorOptionBar from '../presentation/ChannelColorOptionBar';
+import ChannelTitleInput from '../presentation/ChannelTitleInput';
+import ChannelDescInput from '../presentation/ChannelDescInput';
 
 class ChannelPanel extends Component {
 
@@ -32,37 +28,13 @@ class ChannelPanel extends Component {
         descriptionCharacterCount: 0
     }
 
-    toggleTypeSelect = () => {
-        // this.setState({
-        //     isTypeMenuOpen: !this.state.isTypeMenuOpen
-        // });
-    }
-
-    handleClickOption = (val) => {
-        // this.props.dxChannelTypeUpdateAction(val);
-    }
-
-    closeTypeSelect = () => {
-        // this.setState({ isTypeMenuOpen: false });
+    handleChannelOptionChange = (val) => {
+        console.log('val: ', val);
     }
 
     handleColorPicker = (obj) => {
         this.setState({ btnPickerColor: obj.color });
         this.props.dxChannelColorAction(obj.color)
-    }
-
-    handleTitleCharacterChange = () => {
-        // var input = event.target.value;
-        // this.setState({
-        //     titleCharacterCount: 0 + input.length
-        // });
-    }
-
-    handleDescriptionCharacterChange = () => {
-        // var input = event.target.value;
-        // this.setState({
-        //     descriptionCharacterCount: 0 + input.length
-        // });
     }
 
     render() {
@@ -77,9 +49,6 @@ class ChannelPanel extends Component {
             labelStyle,
             descLabelStyle,
             rightContainerStyle,
-            textAreaStyle,
-            characterCounterStyle,
-            titleInputStyle,
         } = styles;
 
         const {
@@ -97,11 +66,10 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
-
-                                    <ChannelOptionBar 
+                                    <ChannelOptionBar
                                         channel={channel}
+                                        handleClickOption={(val) => this.handleChannelOptionChange(val)}
                                     />
-                                   
                                 </div>
                             </div>
                             <div style={optionContainerStyle}>
@@ -110,7 +78,9 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
-                                    <ColorOptionBar />
+                                    <ChannelColorOptionBar 
+                                        color={"#123123"}
+                                    />
                                 </div>
                             </div>
                             <div style={optionContainerStyle}>
@@ -119,13 +89,7 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                                    <input
-                                        type="text"
-                                        maxlength="50"
-                                        placeholder="Hypertension"
-                                        style={titleInputStyle}
-                                        onChange={this.handleTitleCharacterChange.bind(this)} />
-                                    <p style={characterCounterStyle}>{this.state.titleCharacterCount}/50</p>
+                                    <ChannelTitleInput />
                                 </div>
                             </div>
                             <div style={optionContainerStyle}>
@@ -134,21 +98,7 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
-                                    <TextField
-                                        id="multiline-static"
-                                        multiline
-                                        rows="5"
-                                        margin="normal"
-                                        InputProps={{
-                                            disableUnderline: true,
-                                        }}
-                                        inputProps={{ maxLength: 1000 }}
-                                        style={textAreaStyle}
-                                        fullWidth
-                                        placeholder={'Type something'}
-                                        onChange={this.handleDescriptionCharacterChange.bind(this)}
-                                    />
-                                    <p style={characterCounterStyle}>{this.state.descriptionCharacterCount}/1000</p>
+                                    <ChannelDescInput />
                                 </div>
                             </div>
                         </div>

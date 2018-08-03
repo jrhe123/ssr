@@ -11,10 +11,23 @@ import DxInput from '../../../components/dxInput/DxInput';
 // constants
 import colors from '../../../styles/colors';
 
+// styles
+import '../../../../../assets/css/dd-menu/dd_menu.css';
+
 class ChannelOptionBar extends Component {
 
     state = {
         isTypeMenuOpen: false,
+    }
+
+    handleToggleTypeSelect = () => {
+        this.setState({
+            isTypeMenuOpen: !this.state.isTypeMenuOpen
+        });
+    }
+
+    handleCloseTypeSelect = () => {
+        this.setState({ isTypeMenuOpen: false });
     }
 
     render() {
@@ -34,30 +47,30 @@ class ChannelOptionBar extends Component {
             <div>
                 <DropdownMenu
                     isOpen={this.state.isTypeMenuOpen}
-                    close={this.closeTypeSelect}
+                    close={() => this.handleCloseTypeSelect()}
                     toggle={
                         <div>
                             <DxInput
                                 placeholder="type"
                                 width="226px"
                                 disabled={true}
-                                value={channel.TYPE == 0 ? 'Public Channel' : 'Private Channel - Invite only 🔒'}
+                                value={channel.Type == 0 ? 'Public Channel' : 'Private Channel - Invite only'}
                             />
                             <Button
                                 style={outlineBtnStyle}
-                                onClick={() => this.toggleTypeSelect()}
+                                onClick={() => this.handleToggleTypeSelect()}
                             >EDIT</Button>
                         </div>
                     }
                     align='left'
                 >
-                    <div onClick={() => this.handleClickOption(0)}>
+                    <div onClick={() => this.props.handleClickOption(0)}>
                         <Button
                             style={optionBtnStyle}
                             className="dx-lower-case"
                         >Public Channel</Button>
                     </div>
-                    <div onClick={() => this.handleClickOption(1)}>
+                    <div onClick={() => this.props.handleClickOption(1)}>
                         <Button
                             style={optionBtnStyle}
                             className="dx-lower-case"

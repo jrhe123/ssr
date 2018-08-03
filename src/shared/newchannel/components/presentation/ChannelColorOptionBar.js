@@ -8,11 +8,13 @@ import DropdownMenu from 'react-dd-menu';
 import IconButton from '@material-ui/core/IconButton';
 import ColorPicker from 'rc-color-picker';
 
-const colorOptions = ['#4A90E2', '#DFA92E', '#913D88', '#1AA98B', '#EC5C03', '#83909B'];
+const colorOptions = ['#4A90E2', '#DFA92E', '#913D88', '#1AA98B', '#EC5C03', '#83909B', '#000000'];
 
+// styles
+import '../../../../../assets/css/dd-menu/dd_menu.css';
 import 'rc-color-picker/assets/index.css';
 
-class ColorOptionBar extends Component {
+class ChannelColorOptionBar extends Component {
 
     state = {
         isColorMenuOpen: false,
@@ -25,7 +27,6 @@ class ColorOptionBar extends Component {
     }
 
     handleColorClose = () => {
-        console.log('hit here');
         this.setState({
             isColorMenuOpen: false
         });
@@ -70,13 +71,18 @@ class ColorOptionBar extends Component {
             defaultColorOptionIconContainerStyle,
             colorOptionIconWrapperStyle,
             colorOptionIconStyle,
+            toolDivisionStyle,
             colorPickerContainerStyle,
-            hexColorPickerStyle,
         } = styles;
+
+        const {
+            color,
+        } = this.props;
 
         return (
             <div>
                 <DropdownMenu
+                    className="dx_color_drop_menu"
                     isOpen={this.state.isColorMenuOpen}
                     close={() => this.handleColorClose()}
                     size={'md'}
@@ -86,7 +92,7 @@ class ColorOptionBar extends Component {
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
                                     <IconButton
-                                        style={Object.assign({}, { backgroundColor: this.state.btnPickerColor }, colorOptionIconWrapperStyle)}
+                                        style={Object.assign({}, { backgroundColor: color }, colorOptionIconWrapperStyle)}
                                         iconStyle={colorOptionIconStyle}
                                         onClick={() => this.handleColorToggle()}
                                     />
@@ -95,19 +101,21 @@ class ColorOptionBar extends Component {
                         </div>
                     }
                     closeOnInsideClick={false}
-                    closeOnOutsideClick={false}
+                    closeOnOutsideClick={true}
                 >
                     <div style={colorOptionContainerStyle}>
                         {this.renderColorOptions()}
+
+                        <span style={toolDivisionStyle}></span>
+
                         <div style={colorPickerContainerStyle}>
                             <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
+                                <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'center', paddingRight: 6 })}>
                                     <ColorPicker
-                                        style={hexColorPickerStyle}
                                         animation="slide-up"
                                         color={colors.whiteColor}
                                         onChange={this.handleColorPicker}
-                                    ><span className="react-custom-trigger" fullWidth>red</span>
+                                    ><span className="rc_color_picker_label">{color}</span>
                                     </ColorPicker>
                                 </div>
                             </div>
@@ -155,17 +163,22 @@ const styles = {
     },
     colorOptionContainerStyle: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingTop: 6,
+        paddingBottom: 6,
+    },
+    toolDivisionStyle: {
+        display: 'inline-block',
+        height: 42,
+        borderRight: '1px solid',
+        borderColor: colors.toolbarBorderColor,
+        marginLeft: 6,
+        marginRight: 6,
     },
     colorPickerContainerStyle: {
         textAlign: 'Left',
         height: 42,
-        width: 60,
-    },
-    hexColorPickerStyle: {
-        backgroundColor: colors.lightBlueColor,
-        color: colors.labelColor,
     },
 }
 
-export default ColorOptionBar;
+export default ChannelColorOptionBar;
