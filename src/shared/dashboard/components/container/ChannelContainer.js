@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {
     dxFetchChannel as dxFetchChannelAction,
+    dxUpdateChannel as dxUpdateChannelAction,
 } from '../../actions';
 
 // constants
@@ -54,11 +55,11 @@ class ChannelContainer extends Component {
     }
 
     handleActiveChannel = (channel) => {
-        console.log('ac channel: ', channel);
+        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'LIVE' });
     }
 
     handleDeactiveChannel = (channel) => {
-        console.log('de channel: ', channel);
+        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'DRAFT' });
     }
 
     render() {
@@ -87,15 +88,15 @@ class ChannelContainer extends Component {
             <div style={mainContainerStyle}>
                 {
                     ExperienceChannels.length ?
-                        (   
+                        (
                             <div style={channelListContainerStyle}>
-                            <ChannelList
-                                experienceChannels={ExperienceChannels}
-                                handleAddChannelClick={() => this.handleCreateChannel()}
-                                handleEditChannel={(channel) => this.handleEditChannel(channel)}
-                                handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
-                                handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
-                            />
+                                <ChannelList
+                                    experienceChannels={ExperienceChannels}
+                                    handleAddChannelClick={() => this.handleCreateChannel()}
+                                    handleEditChannel={(channel) => this.handleEditChannel(channel)}
+                                    handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
+                                    handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
+                                />
                             </div>
                         )
                         :
@@ -145,7 +146,7 @@ const styles = {
         flexDirection: 'row'
     },
     channelListContainerStyle: {
-        
+
     },
     mainWrapperStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -203,6 +204,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxFetchChannelAction,
+    dxUpdateChannelAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelContainer);

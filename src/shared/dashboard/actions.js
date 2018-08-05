@@ -3,6 +3,7 @@ import {
 
     // CHANNEL
     CHANNEL_FETCH_REQUESTED,
+    CHANNEL_UPDATE_REQUESTED,
 
     // EXPERIENCE
     HTML_FETCH_REQUESTED,
@@ -22,6 +23,16 @@ export const dxFetchChannel = () => {
     return {
         type: CHANNEL_FETCH_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxUpdateChannel = (experienceChannelGUID, channel) => {
+    return {
+        type: CHANNEL_UPDATE_REQUESTED,
+        payload: {
+            experienceChannelGUID,
+            channel,
+        },
     }
 }
 
