@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 
 // Libraries
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import TextField from '@material-ui/core/TextField';
-import Search from '@material-ui/icons/Search';
 
 // constants
 import colors from '../../../../styles/colors';
@@ -15,14 +12,7 @@ import sizes from '../../../../styles/sizes';
 
 // components
 import ChannelListInfo from './ChannelListInfo';
-
-
-const themeStyles = () => ({
-    yourIconButtonStyle: {
-        height: 36,
-        textAlign: 'left'
-    }
-});
+import SearchBar from '../../../../components/searchBar/SearchBar';
 
 class ChannelList extends Component {
 
@@ -78,17 +68,11 @@ class ChannelList extends Component {
             <div style={mainContainerStyle}>
                 <div style={mainWrapperStyle}>
                     <div style={topContainerStyle}>
-                        <div style={searchBarWrapperSrtyle}>
-                            <div style={serachIconStyle}>
-                                <Search />
-                            </div>
-                            <div>
-                                <TextField
-                                    id="input-with-icon-textfield"
-                                    placeholder="search channel(s)"
-                                    style={textFieldStyle}
-                                />
-                            </div>
+                        <div style={searchBarWrapperSrtyle}>                        
+                            <SearchBar
+                                isShort={false}
+                                placeholder="search channel(s)"
+                            />
                         </div>
                     </div>
                     <div style={channelListInfoContainerStyle}>
@@ -165,7 +149,7 @@ const styles = {
         paddingBottom: 48,
     },
     searchBarWrapperSrtyle: {
-        display: 'flex',
+        flex: 1
     },
     channelListInfoContainerStyle: {
         display: 'flex',
@@ -239,4 +223,4 @@ const styles = {
     }
 }
 
-export default withStyles(themeStyles)(ChannelList);
+export default ChannelList;

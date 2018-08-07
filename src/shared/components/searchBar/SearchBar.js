@@ -73,6 +73,7 @@ class SearchBar extends Component {
                         style={{ width: isShort ? 110 : 220 }}
                         item>
                         <Input
+                            className="dx_search_input"
                             style={inputStyle}
                             value={content}
                             fullWidth
@@ -122,6 +123,7 @@ const styles = {
     },
     inputStyle: {
         fontSize: fonts.h3,
+        
     }
 }
 

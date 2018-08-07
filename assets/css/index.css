@@ -137,3 +137,7 @@ body{
 .dx_control_btn:hover svg{
     color: #000000 !important;
 }
+
+.dx_search_input::after{
+    border-bottom: 2px solid #0176FF !important;
+}
