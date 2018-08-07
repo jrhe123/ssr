@@ -26,11 +26,10 @@ export const dxFetchChannel = () => {
     }
 }
 
-export const dxUpdateChannel = (experienceChannelGUID, channel) => {
+export const dxUpdateChannel = (channel) => {
     return {
         type: CHANNEL_UPDATE_REQUESTED,
         payload: {
-            experienceChannelGUID,
             channel,
         },
     }

@@ -73,7 +73,7 @@ class ChannelListInfo extends Component {
                 >
                     {
                         isLive ?
-                            <Button onClick={() => this.props.handleDeactiveChannel()}>Go Draft</Button>
+                            <Button onClick={() => this.props.handleDeactiveChannel()}>Draft</Button>
                             :
                             <Button onClick={() => this.props.handleActiveChannel()}>Go Live</Button>
                     }

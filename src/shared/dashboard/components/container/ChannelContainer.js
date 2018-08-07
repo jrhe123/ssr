@@ -55,11 +55,11 @@ class ChannelContainer extends Component {
     }
 
     handleActiveChannel = (channel) => {
-        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'LIVE' });
+        this.props.dxUpdateChannelAction({ ExperienceChannelGUID: channel.ExperienceChannelGUID, ChannelStatus: 'LIVE' });
     }
 
     handleDeactiveChannel = (channel) => {
-        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'DRAFT' });
+        this.props.dxUpdateChannelAction({ ExperienceChannelGUID: channel.ExperienceChannelGUID, ChannelStatus: 'DRAFT' });
     }
 
     render() {

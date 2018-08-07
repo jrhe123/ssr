@@ -16,6 +16,10 @@ import {
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
 
+    CHANNEL_UPDATE_REQUESTED,
+    CHANNEL_UPDATE__SUCCEEDED,
+    CHANNEL_UPDATE__FAILED,
+
     HTML_FETCH_REQUESTED,
     HTML_FETCH__SUCCEEDED,
     HTML_FETCH__FAILED,
@@ -114,6 +118,42 @@ export function* dxFetchChannel(action) {
 
 export function* dxFetchChannelSaga() {
     yield takeEvery(CHANNEL_FETCH_REQUESTED, dxFetchChannel);
+}
+
+// Update Channel
+export const dxUpdateChannelUrl = (params) => {
+    return (
+        apiManager.dxApi(`/channel/update`, params.channel, true)
+    )
+}
+
+export function* dxUpdateChannel(action) {
+    try {
+        const response = yield call(dxUpdateChannelUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: CHANNEL_UPDATE__FAILED,
+                payload: Message,
+            });
+        } else {
+            yield put({
+                type: CHANNEL_UPDATE__SUCCEEDED,
+                payload: {
+                    experienceChannel: Response,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: CHANNEL_UPDATE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxUpdateChannelSaga() {
+    yield takeEvery(CHANNEL_UPDATE_REQUESTED, dxUpdateChannel);
 }
 
 // Html loading

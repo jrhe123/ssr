@@ -1,5 +1,6 @@
 import {
     CHANNEL_FETCH__SUCCEEDED,
+    CHANNEL_UPDATE__SUCCEEDED,
 
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
@@ -25,6 +26,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
     let tmpExperiences = Object.assign([], updated.Experiences);
+    let tmpExperienceChannels = Object.assign([], updated.ExperienceChannels);
 
     let tmpExperience;
     let tmpPage;
@@ -44,6 +46,11 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case CHANNEL_FETCH__SUCCEEDED:
             updated.TotalChannelRecord = payload.totalRecord;
             updated.ExperienceChannels = payload.expereienceChannels;
+            return updated;
+
+        case CHANNEL_UPDATE__SUCCEEDED:
+            console.log('receive in reducer: ', payload);
+            console.log('check: ', updated.tmpExperienceChannels);
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:
