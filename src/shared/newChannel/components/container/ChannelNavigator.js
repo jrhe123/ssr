@@ -26,14 +26,21 @@ class ChannelNavigator extends Component {
         this.props.history.push('/dashboard');
     }
 
-    handleCreateChannel = () => {
+    handleSaveChannel = () => {
         const {
             Channel,
         } = this.props;
 
+        const {
+            ExperienceChannelGUID,
+        } = Channel;
+
         let { IsError, Message } = this.validateChannel(Channel);
         if (IsError) this.props.dxAlertAction(true, IsError, Message);
-        if (!IsError) this.props.dxChannelCreateAction(this.props.Channel);
+        if (!IsError) {
+            if (!ExperienceChannelGUID) this.props.dxChannelCreateAction(this.props.Channel);
+            else console.log('do update');
+        }
     }
 
     validateChannel = (channel) => {
@@ -65,7 +72,7 @@ class ChannelNavigator extends Component {
                 isRoute={false}
                 navType="CHANNEL"
                 handleGoback={() => this.handleGoback()}
-                handleSaveBtnClick={() => this.handleCreateChannel()}
+                handleSaveBtnClick={() => this.handleSaveChannel()}
             />
         )
     }

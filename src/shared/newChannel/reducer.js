@@ -55,7 +55,9 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_VIEW__SUCCEEDED:
-            console.log('receive in reducer: ', payload);
+            tmpChannel = Object.assign({}, payload.experienceChannel);
+            updated.Channel = tmpChannel;
+            updated.IsCompleted = false;
             return updated;
 
         default:

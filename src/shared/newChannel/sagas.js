@@ -138,7 +138,7 @@ export function* dxViewChannel(action) {
             yield put({
                 type: CHANNEL_VIEW__SUCCEEDED,
                 payload: {
-                    experience: Response
+                    experienceChannel: Response
                 },
             });
         }

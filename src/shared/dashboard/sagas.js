@@ -81,7 +81,7 @@ export function* dxLogoutSaga() {
 export const dxFetchChannelUrl = (params) => {
     return (
         apiManager.dxApi(`/channel/list`, {
-            Limit: "6",
+            Limit: "5",
             Offset: "0",
             Extra: {
                 ChannelStatus: ""
