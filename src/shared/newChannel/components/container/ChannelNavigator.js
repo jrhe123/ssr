@@ -19,12 +19,12 @@ class ChannelNavigator extends Component {
     componentWillReceiveProps(nextProps) {
         // EXIT
         if (nextProps.IsCompleted && !this.props.IsCompleted) {
-            this.props.history.push('/dashboard');
+            this.props.history.push('/dashboard/1');
         }
     }
 
     handleGoback = () => {
-        this.props.history.push('/dashboard');
+        this.props.history.push('/dashboard/1');
     }
 
     handleSaveChannel = () => {

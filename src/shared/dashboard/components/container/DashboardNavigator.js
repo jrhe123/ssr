@@ -83,11 +83,12 @@ class DashboardNavigator extends Component {
                     handleChange={(index) => this.handleChange(index)}
                     handleLogoutClick={() => this.handleLogoutClick()}
                 />
-                <SwipeableViews
+                {/* <SwipeableViews
                     axis='x'
                     index={NaviIndex}
                     style={conentWrapperStyle}
-                >
+                > */}
+                <div>
                     {
                         NaviIndex == 0 ?
                             (<Experience />)
@@ -130,7 +131,8 @@ class DashboardNavigator extends Component {
                             :
                             null
                     }
-                </SwipeableViews>
+                </div>
+                {/* </SwipeableViews> */}
             </div>
         )
     }
