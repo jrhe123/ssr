@@ -140,7 +140,7 @@ export function* dxUpdateChannel(action) {
             yield put({
                 type: CHANNEL_UPDATE__SUCCEEDED,
                 payload: {
-                    experienceChannel: Response,
+                    experienceChannel: Response.ExperienceChannel,
                 },
             });
         }

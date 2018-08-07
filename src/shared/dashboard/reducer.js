@@ -12,6 +12,8 @@ import {
     find_experience_obj_by_guid,
     find_page_obj_by_guid,
     find_section_obj_by_guid,
+
+    find_experience_channel_obj_by_guid,
 } from '../helpers';
 
 const initialState = {
@@ -32,6 +34,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let tmpPage;
     let tmpSection;
 
+    let tmpExperienceChannel;
+
     switch (type) {
 
         case HTML_FETCH__SUCCEEDED:
@@ -49,8 +53,9 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_UPDATE__SUCCEEDED:
-            console.log('receive in reducer: ', payload);
-            console.log('check: ', updated.tmpExperienceChannels);
+            tmpExperienceChannel = find_experience_channel_obj_by_guid(updated.ExperienceChannels, payload.experienceChannel.ExperienceChannelGUID);
+            tmpExperienceChannels[tmpExperienceChannel.index] = Object.assign({}, payload.experienceChannel);
+            updated.ExperienceChannels = tmpExperienceChannels;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

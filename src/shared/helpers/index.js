@@ -69,3 +69,16 @@ export const find_section_obj_by_guid = (sections, guid) => {
     }
     return null;
 }
+
+export const find_experience_channel_obj_by_guid = (experienceChannels, guid) => {
+    for (let i = 0; i < experienceChannels.length; i++) {
+        let experienceChannel = experienceChannels[i];
+        if (experienceChannel.ExperienceChannelGUID == guid) {
+            return {
+                index: i,
+                experienceChannel,
+            };
+        }
+    }
+    return null;
+}

@@ -27,6 +27,17 @@ class ChannelListInfo extends Component {
         });
     }
 
+    handleToggleChannel = (toggle) => {
+        this.setState({
+            isMenuOpen: false
+        });
+        if (toggle) {
+            this.props.handleActiveChannel();
+        } else {
+            this.props.handleDeactiveChannel();
+        }
+    }
+
     render() {
         const {
             channelInfoContainerStyle,
@@ -73,9 +84,9 @@ class ChannelListInfo extends Component {
                 >
                     {
                         isLive ?
-                            <Button onClick={() => this.props.handleDeactiveChannel()}>Draft</Button>
+                            <Button onClick={() => this.handleToggleChannel(false)}>Draft</Button>
                             :
-                            <Button onClick={() => this.props.handleActiveChannel()}>Go Live</Button>
+                            <Button onClick={() => this.handleToggleChannel(true)}>Go Live</Button>
                     }
                     <Button onClick={() => this.props.handleEditChannel()}>Edit</Button>
                     <Button onClick={() => console.log('remove')}>Remove</Button>
