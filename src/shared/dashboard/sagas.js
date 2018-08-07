@@ -97,7 +97,9 @@ export function* dxFetchChannel(action) {
         if (Confirmation !== 'SUCCESS') {
             yield put({
                 type: CHANNEL_FETCH__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Channel fetch api error'
+                },
             });
         } else {
             yield put({
@@ -111,7 +113,9 @@ export function* dxFetchChannel(action) {
     } catch (error) {
         yield put({
             type: CHANNEL_FETCH__FAILED,
-            payload: error,
+            payload: {
+                message: 'Channel fetch api error'
+            },
         });
     }
 }
@@ -134,20 +138,25 @@ export function* dxUpdateChannel(action) {
         if (Confirmation !== 'SUCCESS') {
             yield put({
                 type: CHANNEL_UPDATE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Channel update api error'
+                },
             });
         } else {
             yield put({
                 type: CHANNEL_UPDATE__SUCCEEDED,
                 payload: {
                     experienceChannel: Response.ExperienceChannel,
+                    message: 'Experience channel has been updated'
                 },
             });
         }
     } catch (error) {
         yield put({
             type: CHANNEL_UPDATE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Channel update api error'
+            },
         });
     }
 }
@@ -211,7 +220,9 @@ export function* dxFetchExperience() {
         if (Confirmation !== 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_FETCH__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience fetch api error'
+                },
             });
         } else {
             yield put({
@@ -225,7 +236,9 @@ export function* dxFetchExperience() {
     } catch (error) {
         yield put({
             type: EXPERIENCE_FETCH__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience fetch api error'
+            },
         });
     }
 }
@@ -251,20 +264,25 @@ export function* dxDeleteExperience(action) {
         if (Confirmation !== 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_DELETE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience delete api error'
+                },
             });
         } else {
             yield put({
                 type: EXPERIENCE_DELETE__SUCCEEDED,
                 payload: {
-                    experienceGUID: action.payload.experienceGUID
+                    experienceGUID: action.payload.experienceGUID,
+                    message: 'Experience has been deleted'
                 },
             });
         }
     } catch (error) {
         yield put({
             type: EXPERIENCE_DELETE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience delete api error'
+            },
         });
     }
 }

@@ -9,6 +9,10 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
 
+    EXPERIENCE_FETCH__FAILED,
+    EXPERIENCE_DELETE__SUCCEEDED,
+    EXPERIENCE_DELETE__FAILED,
+
     CHANNEL_FETCH__FAILED,
     CHANNEL_UPDATE__SUCCEEDED,
     CHANNEL_UPDATE__FAILED,
@@ -82,20 +86,24 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.isLoading = payload.isLoading;
             return updated;
 
+        case EXPERIENCE_DELETE__SUCCEEDED:
         case CHANNEL_UPDATE__SUCCEEDED:
             tempAlertBar = {
                 isDisplay: true,
                 isError: false,
-                message: 'Channel has been updated'
+                message: payload.message
             }
             updated.alertBar = tempAlertBar;
             return updated;
-
-        case CHANNEL_FETCH__FAILED, CHANNEL_UPDATE__FAILED:
+        
+        case EXPERIENCE_FETCH__FAILED:
+        case EXPERIENCE_DELETE__FAILED:
+        case CHANNEL_FETCH__FAILED:
+        case CHANNEL_UPDATE__FAILED:
             tempAlertBar = {
                 isDisplay: true,
                 isError: true,
-                message: 'DX api error'
+                message: payload.message
             }
             updated.alertBar = tempAlertBar;
             return updated;
