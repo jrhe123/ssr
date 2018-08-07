@@ -206,7 +206,7 @@ export function* dxHtmlFetchSaga() {
 export const dxFetchExperienceUrl = () => {
     return (
         apiManager.dxApi(`/experience/list`, {
-            Limit: "23",
+            Limit: "3",
             Offset: "0",
             Extra: {},
         }, true)
