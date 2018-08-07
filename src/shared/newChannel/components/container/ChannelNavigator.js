@@ -7,6 +7,7 @@ import NavBar from '../../../components/navBar/NavBar';
 import { connect } from 'react-redux';
 import {
     dxChannelCreate as dxChannelCreateAction,
+    dxChannelUpdate as dxChannelUpdateAction,
 } from '../../actions';
 import {
     dxAlert as dxAlertAction,
@@ -39,7 +40,7 @@ class ChannelNavigator extends Component {
         if (IsError) this.props.dxAlertAction(true, IsError, Message);
         if (!IsError) {
             if (!ExperienceChannelGUID) this.props.dxChannelCreateAction(this.props.Channel);
-            else console.log('do update');
+            else this.props.dxChannelUpdateAction(this.props.Channel);
         }
     }
 
@@ -88,6 +89,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxChannelCreateAction,
+    dxChannelUpdateAction,
 
     dxAlertAction,
     dxLoadingAction,

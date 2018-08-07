@@ -1,6 +1,6 @@
 import {
     CHANNEL_FETCH__SUCCEEDED,
-    CHANNEL_UPDATE__SUCCEEDED,
+    CHANNEL_UPDATE_STATUS__SUCCEEDED,
 
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
@@ -52,7 +52,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.ExperienceChannels = payload.expereienceChannels;
             return updated;
 
-        case CHANNEL_UPDATE__SUCCEEDED:
+        case CHANNEL_UPDATE_STATUS__SUCCEEDED:
             tmpExperienceChannel = find_experience_channel_obj_by_guid(updated.ExperienceChannels, payload.experienceChannel.ExperienceChannelGUID);
             tmpExperienceChannels[tmpExperienceChannel.index] = Object.assign({}, payload.experienceChannel);
             updated.ExperienceChannels = tmpExperienceChannels;

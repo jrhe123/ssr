@@ -3,6 +3,7 @@ import {
     CHANNEL_VALUE__SUCCEEDED,
     CHANNEL_CREATE__SUCCEEDED,
     CHANNEL_VIEW__SUCCEEDED,
+    CHANNEL_UPDATE__SUCCEEDED,
 } from './constants';
 
 const defaultChannel = {
@@ -56,8 +57,13 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
 
         case CHANNEL_VIEW__SUCCEEDED:
             tmpChannel = Object.assign({}, payload.experienceChannel);
+            tmpChannel.ChannelType = payload.experienceChannel.IsPrivate == 0 ? '0' : '1';
             updated.Channel = tmpChannel;
             updated.IsCompleted = false;
+            return updated;
+
+        case CHANNEL_UPDATE__SUCCEEDED:
+            updated.IsCompleted = true;
             return updated;
 
         default:

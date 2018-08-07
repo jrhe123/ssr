@@ -72,6 +72,7 @@ import {
     dxChannelValUpdateSaga,
     dxChannelCreateSaga,
     dxViewChannelSaga,
+    dxChannelUpdateSaga,
 } from './newchannel/sagas';
 
 // Global
@@ -143,7 +144,8 @@ export default function* rootSaga() {
         dxExperienceViewHtmlFetchSaga(),
         dxExperienceUpdateFileSaga(),
         dxExperienceUpdateSaga(),
-
+        dxChannelUpdateSaga(),
+        
 
         // Channel
         dxChannelTypeSaga(),

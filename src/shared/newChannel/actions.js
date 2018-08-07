@@ -3,6 +3,7 @@ import {
     CHANNEL_VALUE_REQUESTED,
     CHANNEL_CREATE_REQUESTED,
     CHANNEL_VIEW_REQUESTED,
+    CHANNEL_UPDATE_REQUESTED,
 } from './constants';
 
 export const dxChannelType = (channelType) => {
@@ -39,6 +40,15 @@ export const dxChannelView = (experienceChannelGUID) => {
         type: CHANNEL_VIEW_REQUESTED,
         payload: {
             experienceChannelGUID
+        },
+    }
+}
+
+export const dxChannelUpdate = (experienceChannel) => {
+    return {
+        type: CHANNEL_UPDATE_REQUESTED,
+        payload: {
+            experienceChannel
         },
     }
 }

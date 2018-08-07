@@ -16,9 +16,9 @@ import {
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
 
-    CHANNEL_UPDATE_REQUESTED,
-    CHANNEL_UPDATE__SUCCEEDED,
-    CHANNEL_UPDATE__FAILED,
+    CHANNEL_UPDATE_STATUS_REQUESTED,
+    CHANNEL_UPDATE_STATUS__SUCCEEDED,
+    CHANNEL_UPDATE_STATUS__FAILED,
 
     HTML_FETCH_REQUESTED,
     HTML_FETCH__SUCCEEDED,
@@ -137,14 +137,14 @@ export function* dxUpdateChannel(action) {
         let { Confirmation, Response, Message } = response;
         if (Confirmation !== 'SUCCESS') {
             yield put({
-                type: CHANNEL_UPDATE__FAILED,
+                type: CHANNEL_UPDATE_STATUS__FAILED,
                 payload: {
                     message: 'Experience channel update api error'
                 },
             });
         } else {
             yield put({
-                type: CHANNEL_UPDATE__SUCCEEDED,
+                type: CHANNEL_UPDATE_STATUS__SUCCEEDED,
                 payload: {
                     experienceChannel: Response.ExperienceChannel,
                     message: 'Experience channel has been updated'
@@ -153,7 +153,7 @@ export function* dxUpdateChannel(action) {
         }
     } catch (error) {
         yield put({
-            type: CHANNEL_UPDATE__FAILED,
+            type: CHANNEL_UPDATE_STATUS__FAILED,
             payload: {
                 message: 'Experience channel update api error'
             },
@@ -162,7 +162,7 @@ export function* dxUpdateChannel(action) {
 }
 
 export function* dxUpdateChannelSaga() {
-    yield takeEvery(CHANNEL_UPDATE_REQUESTED, dxUpdateChannel);
+    yield takeEvery(CHANNEL_UPDATE_STATUS_REQUESTED, dxUpdateChannel);
 }
 
 // Html loading
