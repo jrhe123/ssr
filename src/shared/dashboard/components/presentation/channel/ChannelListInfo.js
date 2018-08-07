@@ -96,7 +96,7 @@ class ChannelListInfo extends Component {
                             <Button onClick={() => this.handleToggleChannel(true)}>Go Live</Button>
                     }
                     <Button onClick={() => this.handleEditChannel()}>Edit</Button>
-                    <Button onClick={() => console.log('remove')}>Remove</Button>
+                    {/* <Button onClick={() => console.log('remove')}>Remove</Button> */}
                 </DropdownMenu>
 
                 <div style={channelStatusContainerStyle}>
