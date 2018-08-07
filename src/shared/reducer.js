@@ -18,6 +18,13 @@ import {
     CHANNEL_UPDATE__FAILED,
 } from './dashboard';
 
+// New experience
+import {
+    EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
+    EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
+} from './newexperience';
+
 // Global
 import {
     VALIDATE_TOKEN__SUCCEEDED,
@@ -86,6 +93,15 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.isLoading = payload.isLoading;
             return updated;
 
+        case EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED:
+            updated.isLoading = true;
+            return updated;
+            
+        case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
+        case EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED:
+            updated.isLoading = false;
+            return updated;
+
         case EXPERIENCE_DELETE__SUCCEEDED:
         case CHANNEL_UPDATE__SUCCEEDED:
             tempAlertBar = {
@@ -95,7 +111,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             }
             updated.alertBar = tempAlertBar;
             return updated;
-        
+
         case EXPERIENCE_FETCH__FAILED:
         case EXPERIENCE_DELETE__FAILED:
         case CHANNEL_FETCH__FAILED:

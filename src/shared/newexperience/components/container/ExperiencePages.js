@@ -75,12 +75,6 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageTemplateFetchAction(ExperiencePageData.PageTemplates);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.GoogleDocuments.length != this.props.GoogleDocuments.length) {
-            this.props.dxLoadingAction(false);
-        }
-    }
-
     handleErrorMsg = (msg) => {
         this.props.dxAlertAction(true, true, msg);
     }
@@ -318,7 +312,6 @@ class ExperiencePages extends Component {
 
     handleDropDoc = (files) => {
         if (files.length) {
-            this.props.dxLoadingAction(true);
             this.setState({
                 isDocDndPanelOpen: false
             })
