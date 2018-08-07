@@ -35,22 +35,22 @@ const navArr = [
         title: 'Streams',
         type: 'STREAMS'
     },
-    {
-        title: 'Audience',
-        type: 'AUDIENCE'
-    },
-    {
-        title: 'DRM',
-        type: 'DRM'
-    },
-    {
-        title: 'Insights',
-        type: 'INSIGHTS'
-    },
-    {
-        title: 'Onboard',
-        type: 'ONBOARD'
-    },
+    // {
+    //     title: 'Audience',
+    //     type: 'AUDIENCE'
+    // },
+    // {
+    //     title: 'DRM',
+    //     type: 'DRM'
+    // },
+    // {
+    //     title: 'Insights',
+    //     type: 'INSIGHTS'
+    // },
+    // {
+    //     title: 'Onboard',
+    //     type: 'ONBOARD'
+    // },
 ];
 
 class DashboardNavigator extends Component {
