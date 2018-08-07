@@ -1,4 +1,6 @@
 import {
+    DASHBOARD_NAVI__SUCCEEDED,
+
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
 
@@ -8,7 +10,7 @@ import {
 } from './constants';
 
 // helpers
-import { 
+import {
     find_experience_obj_by_guid,
     find_page_obj_by_guid,
     find_section_obj_by_guid,
@@ -17,6 +19,8 @@ import {
 } from '../helpers';
 
 const initialState = {
+    NaviIndex: 0,
+
     TotalExperienceRecord: 0,
     Experiences: [],
 
@@ -37,6 +41,10 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let tmpExperienceChannel;
 
     switch (type) {
+
+        case DASHBOARD_NAVI__SUCCEEDED:
+            updated.NaviIndex = payload.index;
+            return updated;
 
         case HTML_FETCH__SUCCEEDED:
             tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);

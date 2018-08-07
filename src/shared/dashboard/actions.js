@@ -1,4 +1,5 @@
 import {
+    DASHBOARD_NAVI_REQUESTED,
     LOGOUT_REQUESTED,
 
     // CHANNEL
@@ -11,6 +12,15 @@ import {
     EXPERIENCE_DELETE_REQUESTED,
 
 } from './constants';
+
+export const dxDashboardNavi = (index) => {
+    return {
+        type: DASHBOARD_NAVI_REQUESTED,
+        payload: {
+            index
+        },
+    }
+}
 
 export const dxLogout = () => {
     return {

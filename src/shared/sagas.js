@@ -7,6 +7,7 @@ import {
 
 // Dashboard
 import { 
+    dxDashboardNaviSaga,
     dxLogoutSaga,
     
     dxFetchChannelSaga,
@@ -90,6 +91,7 @@ export default function* rootSaga() {
         dxLoginSaga(),
 
         // Dashboard
+        dxDashboardNaviSaga(),
         dxLogoutSaga(),
         
         // channel

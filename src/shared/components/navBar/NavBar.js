@@ -56,10 +56,6 @@ class NavBar extends Component {
         console.log('You clicked an item');
     }
 
-    handleChange = (index) => {
-        this.props.handleChange(index);
-    };
-
     handleInputChange = (e) => {
         this.props.handleInputChange(e);
     }
@@ -189,7 +185,7 @@ class NavBar extends Component {
                                     className="dx-tabs"
                                     value={index}
                                     onChange={
-                                        (event, value) => this.handleChange(value)
+                                        (event, value) => this.props.handleChange(value)
                                     }
                                     textColor="secondary"
                                     indicatorColor="secondary"

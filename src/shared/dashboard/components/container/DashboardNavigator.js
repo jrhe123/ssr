@@ -19,6 +19,7 @@ import SwipeableViews from 'react-swipeable-views';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxDashboardNavi as dxDashboardNaviAction,
     dxLogout as dxLogoutAction,
 } from '../../actions';
 
@@ -55,18 +56,12 @@ const navArr = [
 
 class DashboardNavigator extends Component {
 
-    state = {
-        index: 0,
-    };
-
     handleLogoutClick = () => {
         this.props.dxLogoutAction();
     }
 
     handleChange = (index) => {
-        this.setState({
-            index
-        });
+        this.props.dxDashboardNaviAction(index);
     };
 
     render() {
@@ -76,64 +71,64 @@ class DashboardNavigator extends Component {
         } = styles;
 
         const {
-            index
-        } = this.state;
+            NaviIndex
+        } = this.props;
 
         return (
             <div>
                 <NavBar
                     isRoute={true}
                     navArr={navArr}
-                    index={this.state.index}
+                    index={NaviIndex}
                     handleChange={(index) => this.handleChange(index)}
                     handleLogoutClick={() => this.handleLogoutClick()}
                 />
                 <SwipeableViews
                     axis='x'
-                    index={this.state.index}
+                    index={NaviIndex}
                     style={conentWrapperStyle}
                 >
                     {
-                        index == 0 ? 
-                        (<Experience />)
-                        :
-                        null
+                        NaviIndex == 0 ?
+                            (<Experience />)
+                            :
+                            null
                     }
                     {
-                        index == 1 ? 
-                        (<Channel />)
-                        :
-                        null
+                        NaviIndex == 1 ?
+                            (<Channel />)
+                            :
+                            null
                     }
                     {
-                        index == 2 ? 
-                        (<Stream />)
-                        :
-                        null
+                        NaviIndex == 2 ?
+                            (<Stream />)
+                            :
+                            null
                     }
                     {
-                        index == 3 ? 
-                        (<Audience />)
-                        :
-                        null
+                        NaviIndex == 3 ?
+                            (<Audience />)
+                            :
+                            null
                     }
                     {
-                        index == 4 ? 
-                        (<DRM />)
-                        :
-                        null
+                        NaviIndex == 4 ?
+                            (<DRM />)
+                            :
+                            null
                     }
                     {
-                        index == 5 ? 
-                        (<Insight />)
-                        :
-                        null
+                        NaviIndex == 5 ?
+                            (<Insight />)
+                            :
+                            null
                     }
                     {
-                        index == 6 ? 
-                        (<Onboard />)
-                        :
-                        null
+                        NaviIndex == 6 ?
+                            (<Onboard />)
+                            :
+                            null
                     }
                 </SwipeableViews>
             </div>
@@ -150,11 +145,12 @@ const styles = {
 
 const stateToProps = (state) => {
     return {
-
+        NaviIndex: state.dashboard.NaviIndex,
     }
 }
 
 const dispatchToProps = {
+    dxDashboardNaviAction,
     dxLogoutAction,
 }
 

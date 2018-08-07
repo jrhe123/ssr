@@ -8,6 +8,10 @@ import config from '../config';
 import * as apiManager from '../helpers/apiManager';
 
 import {
+    DASHBOARD_NAVI_REQUESTED,
+    DASHBOARD_NAVI__SUCCEEDED,
+    DASHBOARD_NAVI__FAILED,
+
     LOGOUT_REQUESTED,
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
@@ -33,6 +37,27 @@ import {
     EXPERIENCE_DELETE__FAILED,
 
 } from './constants';
+
+// Dashboard navi
+export function* dxDashboardNavi(action) {
+    try {
+        yield put({
+            type: DASHBOARD_NAVI__SUCCEEDED,
+            payload: {
+                index: action.payload.index,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: DASHBOARD_NAVI__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxDashboardNaviSaga() {
+    yield takeEvery(DASHBOARD_NAVI_REQUESTED, dxDashboardNavi);
+}
 
 // Logout
 export const dxLogoutUrl = () => {
