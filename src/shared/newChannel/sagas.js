@@ -153,5 +153,5 @@ export function* dxViewChannel(action) {
 }
 
 export function* dxViewChannelSaga() {
-    yield takeEvery(CHANNEL_VIEW_REQUESTED, dxChannelView);
+    yield takeEvery(CHANNEL_VIEW_REQUESTED, dxViewChannel);
 }

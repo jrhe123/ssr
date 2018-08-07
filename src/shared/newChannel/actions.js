@@ -34,7 +34,7 @@ export const dxChannelCreate = (channel) => {
     }
 }
 
-export const dxChannleView = (experienceChannelGUID) => {
+export const dxChannelView = (experienceChannelGUID) => {
     return {
         type: CHANNEL_VIEW_REQUESTED,
         payload: {

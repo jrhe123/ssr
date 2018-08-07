@@ -11,7 +11,7 @@ import {
 } from '../actions';
 import {
     dxChannelType as dxChannelTypeAction,
-    dxChannleView as dxChannleViewAction,
+    dxChannelView as dxChannelViewAction,
 } from './actions';
 
 export class NewChannelPage extends Component {
@@ -30,7 +30,7 @@ export class NewChannelPage extends Component {
             this.props.dxChannelTypeAction(param);
         }
         if (isEditChannel) {
-            this.props.dxChannleViewAction(param);
+            this.props.dxChannelViewAction(param);
         }        
     }
 
@@ -55,7 +55,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxNavigateHistoryAction,
     dxChannelTypeAction,
-    dxChannleViewAction,
+    dxChannelViewAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(NewChannelPage);

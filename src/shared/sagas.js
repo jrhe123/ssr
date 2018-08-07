@@ -11,7 +11,6 @@ import {
     
     dxFetchChannelSaga,
     dxUpdateChannelSaga,
-    dxViewChannelSaga,
 
     dxHtmlFetchSaga,
     dxFetchExperienceSaga,
@@ -72,6 +71,7 @@ import {
     dxChannelTypeSaga,
     dxChannelValUpdateSaga,
     dxChannelCreateSaga,
+    dxViewChannelSaga,
 } from './newchannel/sagas';
 
 // Global
