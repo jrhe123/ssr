@@ -139,7 +139,7 @@ export function* dxUpdateChannel(action) {
             yield put({
                 type: CHANNEL_UPDATE_STATUS__FAILED,
                 payload: {
-                    message: 'Experience channel update api error'
+                    message: 'Experience channel status update api error'
                 },
             });
         } else {
@@ -147,7 +147,7 @@ export function* dxUpdateChannel(action) {
                 type: CHANNEL_UPDATE_STATUS__SUCCEEDED,
                 payload: {
                     experienceChannel: Response.ExperienceChannel,
-                    message: 'Experience channel has been updated'
+                    message: 'Experience channel status has been updated'
                 },
             });
         }
@@ -155,7 +155,7 @@ export function* dxUpdateChannel(action) {
         yield put({
             type: CHANNEL_UPDATE_STATUS__FAILED,
             payload: {
-                message: 'Experience channel update api error'
+                message: 'Experience channel status update api error'
             },
         });
     }

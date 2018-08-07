@@ -14,8 +14,8 @@ import {
     EXPERIENCE_DELETE__FAILED,
 
     CHANNEL_FETCH__FAILED,
-    CHANNEL_UPDATE__SUCCEEDED,
-    CHANNEL_UPDATE__FAILED,
+    CHANNEL_UPDATE_STATUS__SUCCEEDED,
+    CHANNEL_UPDATE_STATUS__FAILED,
 } from './dashboard';
 
 // New experience
@@ -54,6 +54,10 @@ import {
     CHANNEL_CREATE_REQUESTED,
     CHANNEL_CREATE__SUCCEEDED,
     CHANNEL_CREATE__FAILED,
+
+    CHANNEL_UPDATE_REQUESTED,
+    CHANNEL_UPDATE__SUCCEEDED,
+    CHANNEL_UPDATE__FAILED,
 } from './newchannel';
 
 // Global
@@ -157,6 +161,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
 
         case EXPERIENCE_DELETE__SUCCEEDED:
         case CHANNEL_CREATE__SUCCEEDED:
+        case CHANNEL_UPDATE_STATUS__SUCCEEDED:
         case CHANNEL_UPDATE__SUCCEEDED:
             tempAlertBar = {
                 isDisplay: true,
@@ -174,6 +179,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case EXPERIENCE_PAGE_UPDATE_ELEM__FAILED:
         case CHANNEL_FETCH__FAILED:
         case CHANNEL_CREATE__FAILED:
+        case CHANNEL_UPDATE_STATUS__FAILED:
         case CHANNEL_UPDATE__FAILED:
             tempAlertBar = {
                 isDisplay: true,
