@@ -113,6 +113,14 @@ class App extends Component {
                         component={Routes.NewChannelPage}
                     />
 
+                    <ProtectedRouteWithParams
+                        isAuthenticated={isAuthenticated}
+                        route="edit_channel"
+                        exact
+                        path="/edit_channel/:param"
+                        component={Routes.NewChannelPage}
+                    />
+
                     <Route path="*" render={() => (<Redirect to="/" />)} />
                 </Switch>
                 

@@ -27,6 +27,13 @@ class ChannelListInfo extends Component {
         });
     }
 
+    handleEditChannel = () => {
+        this.setState({
+            isMenuOpen: false
+        });
+        this.props.handleEditChannel();
+    }
+
     handleToggleChannel = (toggle) => {
         this.setState({
             isMenuOpen: false
@@ -88,7 +95,7 @@ class ChannelListInfo extends Component {
                             :
                             <Button onClick={() => this.handleToggleChannel(true)}>Go Live</Button>
                     }
-                    <Button onClick={() => this.props.handleEditChannel()}>Edit</Button>
+                    <Button onClick={() => this.handleEditChannel()}>Edit</Button>
                     <Button onClick={() => console.log('remove')}>Remove</Button>
                 </DropdownMenu>
 

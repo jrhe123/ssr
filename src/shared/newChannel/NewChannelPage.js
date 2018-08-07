@@ -10,16 +10,28 @@ import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
 import {
-    dxChannelType as dxChannelTypeAction
+    dxChannelType as dxChannelTypeAction,
+    dxChannleView as dxChannleViewAction,
 } from './actions';
 
 export class NewChannelPage extends Component {
 
     componentDidMount(){
         const history = this.props.history;
+        const param = this.props.match.params.param;
+        const url = this.props.match.url;
+
+        let isNewChannel = url.match(/new_channel/i);
+        let isEditChannel = url.match(/edit_channel/i);
+
         this.props.dxNavigateHistoryAction(history);
-        const channelType = this.props.match.params.param;
-        this.props.dxChannelTypeAction(channelType);
+
+        if (isNewChannel) {
+            this.props.dxChannelTypeAction(param);
+        }
+        if (isEditChannel) {
+            this.props.dxChannleViewAction(param);
+        }        
     }
 
     render() {
@@ -42,7 +54,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxNavigateHistoryAction,
-    dxChannelTypeAction
+    dxChannelTypeAction,
+    dxChannleViewAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(NewChannelPage);

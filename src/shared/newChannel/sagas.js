@@ -14,6 +14,10 @@ import {
     CHANNEL_CREATE_REQUESTED,
     CHANNEL_CREATE__SUCCEEDED,
     CHANNEL_CREATE__FAILED,
+
+    CHANNEL_VIEW_REQUESTED,
+    CHANNEL_VIEW__SUCCEEDED,
+    CHANNEL_VIEW__FAILED,
 } from './constants';
 
 // Channel type request
@@ -110,4 +114,44 @@ export function* dxChannelCreate(action) {
 
 export function* dxChannelCreateSaga() {
     yield takeEvery(CHANNEL_CREATE_REQUESTED, dxChannelCreate);
+}
+
+// View Channel
+export const dxViewChannelUrl = (params) => {
+    return (
+        apiManager.dxApi(`/channel/view`, { ExperienceChannelGUID: params.experienceChannelGUID }, true)
+    )
+}
+
+export function* dxViewChannel(action) {
+    try {
+        const response = yield call(dxViewChannelUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation != 'SUCCESS') {
+            yield put({
+                type: CHANNEL_VIEW__FAILED,
+                payload: {
+                    message: 'Channel view api error'
+                },
+            });
+        } else {
+            yield put({
+                type: CHANNEL_VIEW__SUCCEEDED,
+                payload: {
+                    experience: Response
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: CHANNEL_VIEW__FAILED,
+            payload: {
+                message: 'Experience view api error'
+            },
+        });
+    }
+}
+
+export function* dxViewChannelSaga() {
+    yield takeEvery(CHANNEL_VIEW_REQUESTED, dxChannelView);
 }

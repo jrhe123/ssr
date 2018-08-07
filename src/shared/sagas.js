@@ -11,6 +11,7 @@ import {
     
     dxFetchChannelSaga,
     dxUpdateChannelSaga,
+    dxViewChannelSaga,
 
     dxHtmlFetchSaga,
     dxFetchExperienceSaga,
@@ -93,6 +94,7 @@ export default function* rootSaga() {
         // channel
         dxFetchChannelSaga(),
         dxUpdateChannelSaga(),
+        dxViewChannelSaga(),
         
         // experience
         dxHtmlFetchSaga(),

@@ -2,6 +2,7 @@ import {
     CHANNEL_TYPE__SUCCEEDED,
     CHANNEL_VALUE__SUCCEEDED,
     CHANNEL_CREATE__SUCCEEDED,
+    CHANNEL_VIEW__SUCCEEDED,
 } from './constants';
 
 const defaultChannel = {
@@ -51,6 +52,10 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
         
         case CHANNEL_CREATE__SUCCEEDED:
             updated.IsCompleted = true;
+            return updated;
+
+        case CHANNEL_VIEW__SUCCEEDED:
+            console.log('receive in reducer: ', payload);
             return updated;
 
         default:

@@ -51,7 +51,7 @@ class ChannelContainer extends Component {
     }
 
     handleEditChannel = (channel) => {
-        console.log('ed channel: ', channel);
+        console.log('ed channel: ', channel.ExperienceChannelGUID);
     }
 
     handleActiveChannel = (channel) => {
