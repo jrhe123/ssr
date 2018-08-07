@@ -98,7 +98,7 @@ export function* dxFetchChannel(action) {
             yield put({
                 type: CHANNEL_FETCH__FAILED,
                 payload: {
-                    message: 'Channel fetch api error'
+                    message: 'Experience channel fetch api error'
                 },
             });
         } else {
@@ -114,7 +114,7 @@ export function* dxFetchChannel(action) {
         yield put({
             type: CHANNEL_FETCH__FAILED,
             payload: {
-                message: 'Channel fetch api error'
+                message: 'Experience channel fetch api error'
             },
         });
     }
@@ -139,7 +139,7 @@ export function* dxUpdateChannel(action) {
             yield put({
                 type: CHANNEL_UPDATE__FAILED,
                 payload: {
-                    message: 'Channel update api error'
+                    message: 'Experience channel update api error'
                 },
             });
         } else {
@@ -155,7 +155,7 @@ export function* dxUpdateChannel(action) {
         yield put({
             type: CHANNEL_UPDATE__FAILED,
             payload: {
-                message: 'Channel update api error'
+                message: 'Experience channel update api error'
             },
         });
     }

@@ -274,18 +274,24 @@ export function* dxExperienceCreate(action) {
         if (Confirmation != 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_CREATE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience create api error'
+                },
             });
         } else {
             yield put({
                 type: EXPERIENCE_CREATE__SUCCEEDED,
-                payload: {},
+                payload: {
+                    message: 'Experience has been created'
+                },
             });
         }
     } catch (error) {
         yield put({
             type: EXPERIENCE_CREATE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience create api error'
+            },
         });
     }
 }
@@ -1110,7 +1116,9 @@ export function* dxExperienceView(action) {
         if (Confirmation != 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_VIEW__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience view api error'
+                },
             });
         } else {
             yield put({
@@ -1123,7 +1131,9 @@ export function* dxExperienceView(action) {
     } catch (error) {
         yield put({
             type: EXPERIENCE_VIEW__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience view api error'
+            },
         });
     }
 }
@@ -1279,18 +1289,24 @@ export function* dxExperienceUpdate(action) {
         if (Confirmation != 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_UPDATE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience update api error'
+                },
             });
         } else {
             yield put({
                 type: EXPERIENCE_UPDATE__SUCCEEDED,
-                payload: {},
+                payload: {
+                    message: 'Experience has been updated'
+                },
             });
         }
     } catch (error) {
         yield put({
             type: EXPERIENCE_UPDATE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience update api error'
+            },
         });
     }
 }

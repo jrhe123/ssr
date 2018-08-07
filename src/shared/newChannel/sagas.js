@@ -85,20 +85,25 @@ export function* dxChannelCreate(action) {
         if (Confirmation != 'SUCCESS') {
             yield put({
                 type: CHANNEL_CREATE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Experience channel create api error'
+                },
             });
         } else {
             yield put({
                 type: CHANNEL_CREATE__SUCCEEDED,
                 payload: {
-                    experience: Response
+                    experience: Response,
+                    message: 'Experience channel has been created'
                 },
             });
         }
     } catch (error) {
         yield put({
             type: CHANNEL_CREATE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience channel create api error'
+            },
         });
     }
 }
