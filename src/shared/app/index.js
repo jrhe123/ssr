@@ -82,10 +82,19 @@ class App extends Component {
                         path="/"
                         component={Routes.LoginPage}
                     />
+
                     <ProtectedRoute
                         isAuthenticated={isAuthenticated}
                         exact
                         path="/dashboard"
+                        component={Routes.DashboardPage}
+                    />
+
+                    <ProtectedRouteWithParams
+                        isAuthenticated={isAuthenticated}
+                        route="dashboard"
+                        exact={false}
+                        path="/dashboard/:param(0|1|2)"
                         component={Routes.DashboardPage}
                     />
 

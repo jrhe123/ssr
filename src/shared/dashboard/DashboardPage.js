@@ -9,6 +9,9 @@ import { connect } from 'react-redux';
 import {
     dxNavigateHistory as dxNavigateHistoryAction
 } from '../actions';
+import {
+    dxDashboardNavi as dxDashboardNaviAction,
+} from './actions';
 
 export class DashboardPage extends Component {
 
@@ -16,7 +19,10 @@ export class DashboardPage extends Component {
         const {
             history
         } = this.props;
+        const param = this.props.match.params.param;
         this.props.dxNavigateHistoryAction(history);
+
+        if(param) this.props.dxDashboardNaviAction(param);
     }
 
     render() {
@@ -38,7 +44,8 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-    dxNavigateHistoryAction
+    dxNavigateHistoryAction,
+    dxDashboardNaviAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(DashboardPage);
