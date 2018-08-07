@@ -8,6 +8,10 @@ import {
 import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+
+    CHANNEL_FETCH__FAILED,
+    CHANNEL_UPDATE__SUCCEEDED,
+    CHANNEL_UPDATE__FAILED,
 } from './dashboard';
 
 // Global
@@ -34,22 +38,22 @@ const initialState = {
         message: ''
     },
 
-    isLoading: false,   
+    isLoading: false,
 };
 
 const rootReducer = (previousState = initialState, { type, payload }) => {
-    
+
     let updated = Object.assign({}, previousState);
     let tmpUser;
     let tempAlertBar;
-    
+
     switch (type) {
 
         case LOGIN__SUCCEEDED:
             updated.isAuthenticated = true;
             updated.user = payload.user;
             return updated;
-        
+
         case LOGOUT__SUCCEEDED:
             updated.isAuthenticated = false;
             updated.user = {};
@@ -68,14 +72,32 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case NAVIGATE_HISTORY__SUCCEEDED:
             updated.history = payload.history;
             return updated;
-        
+
         case ALERT__SUCCEEDED:
-            tempAlertBar =  Object.assign({}, payload);
+            tempAlertBar = Object.assign({}, payload);
             updated.alertBar = tempAlertBar;
             return updated;
 
         case LOADING__SUCCEEDED:
             updated.isLoading = payload.isLoading;
+            return updated;
+
+        case CHANNEL_UPDATE__SUCCEEDED:
+            tempAlertBar = {
+                isDisplay: true,
+                isError: false,
+                message: 'Channel has been updated'
+            }
+            updated.alertBar = tempAlertBar;
+            return updated;
+
+        case CHANNEL_FETCH__FAILED, CHANNEL_UPDATE__FAILED:
+            tempAlertBar = {
+                isDisplay: true,
+                isError: true,
+                message: 'DX api error'
+            }
+            updated.alertBar = tempAlertBar;
             return updated;
 
         default:
