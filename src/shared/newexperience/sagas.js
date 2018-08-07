@@ -380,7 +380,9 @@ export function* dxExperienceUploadGoogleFile(action) {
         if (Confirmation != 'SUCCESS') {
             yield put({
                 type: EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
-                payload: Message,
+                payload: {
+                    message: 'Upload google file error'
+                },
             });
         } else {
             yield put({
@@ -394,7 +396,9 @@ export function* dxExperienceUploadGoogleFile(action) {
     } catch (error) {
         yield put({
             type: EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
-            payload: error,
+            payload: {
+                message: 'Upload google file error'
+            },
         });
     }
 }

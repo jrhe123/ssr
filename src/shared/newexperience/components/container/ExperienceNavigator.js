@@ -53,7 +53,7 @@ class ExperienceNavigator extends Component {
         }
         // EXIT
         if (nextProps.IsCompleted && !this.props.IsCompleted) {
-            this.props.dxLoadingAction(false);
+            // this.props.dxLoadingAction(false);
             this.props.history.push('/dashboard');
         }
     }
@@ -78,7 +78,7 @@ class ExperienceNavigator extends Component {
 
     saveExperience = () => {
         // 1. loading
-        this.props.dxLoadingAction(true);
+        // this.props.dxLoadingAction(true);
         const {
             Experience,
         } = this.props;
