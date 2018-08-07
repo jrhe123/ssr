@@ -1023,7 +1023,9 @@ export function* dxExperiencePageUpdateElem(action) {
             if (Confirmation !== 'SUCCESS') {
                 yield put({
                     type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
-                    payload: Message,
+                    payload: {
+                        message: 'PDF upload error'
+                    },
                 });
             } else {
                 yield put({
@@ -1043,7 +1045,9 @@ export function* dxExperiencePageUpdateElem(action) {
             if (Confirmation !== 'SUCCESS') {
                 yield put({
                     type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
-                    payload: Message,
+                    payload: {
+                        message: 'Image upload error'
+                    },
                 });
             } else {
                 yield put({
@@ -1069,7 +1073,9 @@ export function* dxExperiencePageUpdateElem(action) {
     } catch (error) {
         yield put({
             type: EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
-            payload: error,
+            payload: {
+                message: 'Element upload error'
+            },
         });
     }
 }

@@ -40,7 +40,21 @@ import {
     EXPERIENCE_UPDATE__SUCCEEDED,
     EXPERIENCE_UPDATE__FAILED,
 
+    EXPERIENCE_VIEW_REQUESTED,
+    EXPERIENCE_VIEW__SUCCEEDED,
+    EXPERIENCE_VIEW__FAILED,
+
+    EXPERIENCE_PAGE_UPDATE_ELEM__FAILED,
+
 } from './newexperience';
+
+// New channel
+import {
+
+    CHANNEL_CREATE_REQUESTED,
+    CHANNEL_CREATE__SUCCEEDED,
+    CHANNEL_CREATE__FAILED,
+} from './newchannel';
 
 // Global
 import {
@@ -117,8 +131,6 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
-        case EXPERIENCE_CREATE__SUCCEEDED:
-        case EXPERIENCE_UPDATE__SUCCEEDED:
             updated.isLoading = false;
             return updated;
 
@@ -132,7 +144,19 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.alertBar = tempAlertBar;
             return updated;
 
+        case EXPERIENCE_CREATE__SUCCEEDED:
+        case EXPERIENCE_UPDATE__SUCCEEDED:
+            tempAlertBar = {
+                isDisplay: true,
+                isError: false,
+                message: payload.message
+            }
+            updated.alertBar = tempAlertBar;
+            updated.isLoading = false;
+            return updated;
+
         case EXPERIENCE_DELETE__SUCCEEDED:
+        case CHANNEL_CREATE__SUCCEEDED:
         case CHANNEL_UPDATE__SUCCEEDED:
             tempAlertBar = {
                 isDisplay: true,
@@ -144,7 +168,12 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
 
         case EXPERIENCE_FETCH__FAILED:
         case EXPERIENCE_DELETE__FAILED:
+        case EXPERIENCE_CREATE__FAILED:
+        case EXPERIENCE_UPDATE__FAILED:
+        case EXPERIENCE_VIEW__FAILED:
+        case EXPERIENCE_PAGE_UPDATE_ELEM__FAILED:
         case CHANNEL_FETCH__FAILED:
+        case CHANNEL_CREATE__FAILED:
         case CHANNEL_UPDATE__FAILED:
             tempAlertBar = {
                 isDisplay: true,
