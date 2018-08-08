@@ -79,7 +79,6 @@ const styles = {
     liveStreamWrapperStyle:{
         textAlign: 'center',
         background:'white',
-        marginLeft:48,
         marginTop:0,
         marginBottom:6,
         padding:12,
