@@ -33,8 +33,8 @@ class StreamContainer extends Component {
         this.setState({ isMenuOpen: false });
     }
 
-    handleSearch = (value) => {
-        console.log(value)
+    handleSearchChannel = (value) => {
+        console.log('value: ', value)
     }
 
     render() {
@@ -110,7 +110,10 @@ class StreamContainer extends Component {
                                 close={this.handleCloseMenu}
                                 toggle={
                                     <div>
-                                        <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
+                                        <Button 
+                                            style={dropdownBtnStyle} 
+                                            onClick={() => this.handleToggleMenu()}
+                                        >Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
                                     </div>
                                 }
                                 align={'right'}
@@ -175,7 +178,7 @@ class StreamContainer extends Component {
                             <div style={searchBarWrapperStyle}>
                                 <SearchBar
                                     value={this.state.value}
-                                    onChange={() => handleSearch()}
+                                    onChange={(val) => this.handleSearchChannel(val)}
                                     style={searchBarStyle}
                                     placeholder={'Type for search'}
                                 />
@@ -437,14 +440,17 @@ const styles = {
     liveStreamLabelStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        margin: 0
+        margin: 0,
+        color: colors.labelColor,
+        fontSize: fonts.h3,
     },
     liveStreamNumberStyle: {
-        paddingLeft: 24,
         display: 'table-cell',
         verticalAlign: 'middle',
-        marginTop: 0,
-        marginBottom: 0
+        margin: 0,
+        paddingLeft: 12,
+        color: colors.labelColor,
+        fontSize: fonts.h3,
     },
     liveStreamWrapperStyle: {
         overflowY: 'scroll',
@@ -457,13 +463,17 @@ const styles = {
     readyToStreamLabelStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        margin: 0
+        margin: 0,
+        color: colors.labelColor,
+        fontSize: fonts.h3,
     },
     readyToStreamNumberStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
         margin: 0,
-        paddingLeft: 24
+        paddingLeft: 12,
+        color: colors.labelColor,
+        fontSize: fonts.h3,
     },
     readyToStreamWrapperStyle: {
         overflowY: 'scroll',
