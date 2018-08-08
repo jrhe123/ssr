@@ -465,10 +465,10 @@ const styles = {
         height: '100%'
     },
     currentChannleWrapperStyle: {
-        width: 'auto',
-        background: 'white',
+        backgroundColor: colors.whiteColor,
         padding: 12,
         height: 78,
+        marginBottom: 24,
     },
     currentChannelNameStyle: {
         margin: 0,
