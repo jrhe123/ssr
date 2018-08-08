@@ -39,6 +39,7 @@ class ChannelStreamsTemplate extends Component {
     render() {
         const {
             channelInfoStyle,
+            channelInfoWrapperStyle,
             channelInfoLeftStyle,
             channelTitleStyle,
             streamLabelStyle,
@@ -52,29 +53,31 @@ class ChannelStreamsTemplate extends Component {
         } = this.props;
 
         return (
-            <div 
+            <div
                 className="dx_tab"
                 style={Object.assign({}, channelInfoStyle, { backgroundColor: active ? colors.lightBlueColor : colors.whiteColor })}
                 onClick={() => this.props.handleSelectChannel()}
             >
-                <div style={channelInfoLeftStyle}>
-                    <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
-                    <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>
-                </div>
-                <div style={channelInfoRightStyle}>
-                    <DropdownMenu
-                        isOpen={this.state.isImportOpen}
-                        close={this.handleCloseImport}
-                        toggle={
-                            <div>
-                                <IconButton style={channelInfoIconStyle} onClick={() => this.handleToggleImport()}><MoreHoriz /></IconButton>
-                            </div>
-                        }
-                        align={'right'}
-                        size={'sm'}
-                    >
-                        <div>option 1</div>
-                    </DropdownMenu>
+                <div style={channelInfoWrapperStyle}>
+                    <div style={channelInfoLeftStyle}>
+                        <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
+                        <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>
+                    </div>
+                    <div style={channelInfoRightStyle}>
+                        <DropdownMenu
+                            isOpen={this.state.isImportOpen}
+                            close={this.handleCloseImport}
+                            toggle={
+                                <div>
+                                    <IconButton style={channelInfoIconStyle} onClick={() => this.handleToggleImport()}><MoreHoriz /></IconButton>
+                                </div>
+                            }
+                            align={'right'}
+                            size={'sm'}
+                        >
+                            <div>option 1</div>
+                        </DropdownMenu>
+                    </div>
                 </div>
             </div>
         );
@@ -85,23 +88,27 @@ const styles = {
 
     channelInfoStyle: {
         display: 'flex',
-        borderBottom: '1px solid',
-        borderColor: colors.borderColor,
         paddingLeft: 18,
         paddingRight: 18,
         cursor: 'pointer',
     },
-    channelInfoLeftStyle: {
+    channelInfoWrapperStyle: {
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor,
+        width: '100%',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
+    },
+    channelInfoLeftStyle: {
         flex: 1,
         fontSize: fonts.h4,
         paddingTop: 12,
-        paddingBottom: 12
+        paddingBottom: 12,
     },
     channelTitleStyle: {
         fontSize: fonts.h3,
         margin: 0,
+        marginBottom: 6,
     },
     streamLabelStyle: {
         fontSize: fonts.h4,
@@ -111,7 +118,7 @@ const styles = {
     channelInfoRightStyle: {
         flex: '24px 0 0',
         alignSelf: 'center',
-        margin: 0
+        margin: 0,
     },
     channelInfoIconStyle: {
         height: 20,
