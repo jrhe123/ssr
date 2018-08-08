@@ -44,7 +44,6 @@ class ChannelStreamsTemplate extends Component {
             streamLabelStyle,
             channelInfoRightStyle,
             channelInfoIconStyle,
-            importContainerStyle
         } = styles;
 
         const {
@@ -69,9 +68,7 @@ class ChannelStreamsTemplate extends Component {
                         align={'right'}
                         size={'sm'}
                     >
-                        <div style={importContainerStyle}>
-                            <p>Option 1</p>
-                        </div>
+                        <div>option 1</div>
                     </DropdownMenu>
                 </div>
             </div>
@@ -114,12 +111,6 @@ const styles = {
     channelInfoIconStyle: {
         height: 20,
         width: 20
-    },
-    importContainerStyle: {
-        paddingTop: 12,
-        paddingRight: 12,
-        paddingBottom: 12,
-        paddingLeft: 12
     }
 
 }
