@@ -57,6 +57,7 @@ class StreamContainer extends Component {
         let list = StreamActiveChannels.map((channel, index) => (
             <ChannelStreamsTemplate 
                 channel={channel}
+                active={true}
             />
         ))
         return list;

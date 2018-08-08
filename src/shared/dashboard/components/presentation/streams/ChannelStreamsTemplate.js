@@ -47,14 +47,15 @@ class ChannelStreamsTemplate extends Component {
         } = styles;
 
         const {
-            channel
+            channel,
+            active,
         } = this.props;
 
         return (
-            <div style={channelInfoStyle}>
+            <div style={Object.assign({}, channelInfoStyle, { backgroundColor: active ? colors.lightBlueColor : colors.whiteColor })}>
                 <div style={channelInfoLeftStyle}>
                     <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
-                    <p style={streamLabelStyle}>0 live streams</p>
+                    <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>
                 </div>
                 <div style={channelInfoRightStyle}>
                     <DropdownMenu
@@ -79,12 +80,12 @@ class ChannelStreamsTemplate extends Component {
 const styles = {
 
     channelInfoStyle: {
-        background: colors.whiteColor,
         display: 'flex',
         borderBottom: '1px solid',
         borderColor: colors.borderColor,
         paddingLeft: 18,
         paddingRight: 18,
+        cursor: 'pointer',
     },
     channelInfoLeftStyle: {
         display: 'flex',
