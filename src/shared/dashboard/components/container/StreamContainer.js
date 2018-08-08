@@ -17,10 +17,21 @@ import ReadyToStreamTemplate from '../presentation/streams/ReadyToStreamTemplate
 import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
 import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
 
+// redux
+import { connect } from 'react-redux';
+import {
+    dxFetchStreamChannel as dxFetchStreamChannelAction
+} from '../../actions';
+
 class StreamContainer extends Component {
 
     state = {
         isMenuOpen: false,
+    }
+
+    componentDidMount(){
+        // 1. Fetch active experience channels
+        this.props.dxFetchStreamChannelAction();
     }
 
     handleToggleMenu = () => {
@@ -481,4 +492,14 @@ const styles = {
     },
 }
 
-export default StreamContainer;
+const stateToProps = (state) => {
+    return {
+        history: state.root.history,
+    }
+}
+
+const dispatchToProps = {
+    dxFetchStreamChannelAction,
+}
+
+export default connect(stateToProps, dispatchToProps)(StreamContainer);

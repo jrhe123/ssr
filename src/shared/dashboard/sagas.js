@@ -36,6 +36,10 @@ import {
     EXPERIENCE_DELETE__SUCCEEDED,
     EXPERIENCE_DELETE__FAILED,
 
+    STREAM_CHANNEL_FETCH_REQUESTED,
+    STREAM_CHANNEL_FETCH__SUCCEEDED,
+    STREAM_CHANNEL_FETCH__FAILED,
+
 } from './constants';
 
 // Dashboard navi
@@ -109,7 +113,7 @@ export const dxFetchChannelUrl = (params) => {
             Limit: "5",
             Offset: "0",
             Extra: {
-                ChannelStatus: ""
+                ChannelStatus: params.status ? params.status : ''
             },
         }, true)
     )
@@ -117,7 +121,7 @@ export const dxFetchChannelUrl = (params) => {
 
 export function* dxFetchChannel(action) {
     try {
-        const response = yield call(dxFetchChannelUrl);
+        const response = yield call(dxFetchChannelUrl, action);
         let { Confirmation, Response, Message } = response;
         if (Confirmation !== 'SUCCESS') {
             yield put({
@@ -314,4 +318,39 @@ export function* dxDeleteExperience(action) {
 
 export function* dxDeleteExperienceSaga() {
     yield takeEvery(EXPERIENCE_DELETE_REQUESTED, dxDeleteExperience);
+}
+
+// Stream Fetch Active Channel
+export function* dxFetchStreamChannel(action) {
+    try {
+        const response = yield call(dxFetchChannelUrl, action);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_CHANNEL_FETCH__FAILED,
+                payload: {
+                    message: 'Experience channel fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_CHANNEL_FETCH__SUCCEEDED,
+                payload: {
+                    totalRecord: Response.TotalRecord,
+                    expereienceChannels: Response.ExperienceChannels,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: STREAM_CHANNEL_FETCH__FAILED,
+            payload: {
+                message: 'Experience channel fetch api error'
+            },
+        });
+    }
+}
+
+export function* dxFetchStreamChannelSaga() {
+    yield takeEvery(STREAM_CHANNEL_FETCH_REQUESTED, dxFetchStreamChannel);
 }

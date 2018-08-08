@@ -11,6 +11,9 @@ import {
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_DELETE_REQUESTED,
 
+    // STREAM
+    STREAM_CHANNEL_FETCH_REQUESTED,
+
 } from './constants';
 
 export const dxDashboardNavi = (index) => {
@@ -69,6 +72,15 @@ export const dxDeleteExperience = (experienceGUID) => {
         type: EXPERIENCE_DELETE_REQUESTED,
         payload: {
             experienceGUID
+        },
+    }
+}
+
+export const dxFetchStreamChannel = () => {
+    return {
+        type: STREAM_CHANNEL_FETCH_REQUESTED,
+        payload: {
+            status: 'ACTIVE'
         },
     }
 }

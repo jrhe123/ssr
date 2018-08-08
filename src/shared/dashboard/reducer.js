@@ -1,12 +1,15 @@
 import {
     DASHBOARD_NAVI__SUCCEEDED,
 
+    // channel
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
-
+    // experience
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_DELETE__SUCCEEDED,
+    // stream
+    STREAM_CHANNEL_FETCH__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -75,6 +78,10 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
             tmpExperiences.splice(tmpExperience.index, 1);
             updated.Experiences = tmpExperiences;
+            return updated;
+
+        case STREAM_CHANNEL_FETCH__SUCCEEDED:
+            console.log('reducer received: ', payload);
             return updated;
 
         default:

@@ -16,6 +16,8 @@ import {
     dxHtmlFetchSaga,
     dxFetchExperienceSaga,
     dxDeleteExperienceSaga,
+
+    dxFetchStreamChannelSaga,
 } from './dashboard/sagas';
 
 // NewExperience
@@ -103,6 +105,9 @@ export default function* rootSaga() {
         dxHtmlFetchSaga(),
         dxFetchExperienceSaga(),
         dxDeleteExperienceSaga(),
+
+        // stream
+        dxFetchStreamChannelSaga(),
 
         // CREATE EXPERIENCE
         dxExperienceInitalSaga(),
