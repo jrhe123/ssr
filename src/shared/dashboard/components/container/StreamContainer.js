@@ -239,7 +239,7 @@ class StreamContainer extends Component {
                                 CurrentStreamChannel ?
                                     <div style={currentChannleWrapperStyle}>
                                         <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
-                                        <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription}</p>
+                                        <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
                                     </div>
                                     :
                                     null

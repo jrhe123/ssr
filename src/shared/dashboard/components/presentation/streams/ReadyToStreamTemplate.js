@@ -39,7 +39,6 @@ const styles = {
         paddingLeft:6,
         paddingRight:6,
         alignItems:'center',
-        border: '1px dotted #4A90E2',
         height:48
     },
     expTitleStyle:{

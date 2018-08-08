@@ -83,7 +83,6 @@ const styles = {
         marginBottom:6,
         padding:12,
         fontSize: fonts.h4,
-        border: '1px dotted #4A90E2',
         display:'flex',
         justifyContent:'space-between',
         height:24
