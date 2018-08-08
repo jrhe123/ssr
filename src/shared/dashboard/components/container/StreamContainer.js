@@ -59,7 +59,7 @@ class StreamContainer extends Component {
             StreamActiveChannels,
         } = this.props;
         let list = StreamActiveChannels.map((channel, index) => (
-            <ChannelStreamsTemplate 
+            <ChannelStreamsTemplate
                 channel={channel}
                 active={CurrentStreamChannel.ExperienceChannelGUID == channel.ExperienceChannelGUID ? true : false}
                 handleSelectChannel={() => this.handleSelectChannel(channel)}
@@ -129,6 +129,7 @@ class StreamContainer extends Component {
         } = styles;
 
         const {
+            CurrentStreamChannel,
             TotalStreamActiveChannelRecord,
         } = this.props;
 
@@ -233,10 +234,17 @@ class StreamContainer extends Component {
 
                     <div style={rightContainerStyle}>
                         <div style={streamsContainerStyle}>
-                            <div style={generalwrapperStyle}>
-                                <p style={generalHeaderStyle}>General</p>
-                                <p style={generalContentStyle}>General channel is a default channel created by us, so you can stream first-time welcome messages, important notes and other content directly to all of your audience to be readily available in their feed automatically.</p>
-                            </div>
+
+                            {
+                                CurrentStreamChannel ?
+                                    <div style={generalwrapperStyle}>
+                                        <p style={Object.assign({}, generalHeaderStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
+                                        <p style={generalContentStyle}>{CurrentStreamChannel.ChannelDescription}</p>
+                                    </div>
+                                    :
+                                    null
+                            }
+
                             <div style={liveStreamLabelContainerStyle}>
                                 <p style={liveStreamLabelStyle}>LIVE STREAMS</p><p style={liveStreamNumberStyle}>(6)</p>
                             </div>
@@ -245,6 +253,7 @@ class StreamContainer extends Component {
                                     streamTitle="My Experience 1"
                                 />
                             </div>
+
                             <div style={readyToStreamLabelWrapperStyle}>
                                 <p style={readyToStreamLabelStyle}>READY TO STREAM</p><p style={readyToStreamNumberStyle}>(18)</p>
                             </div>
@@ -464,7 +473,7 @@ const styles = {
     generalHeaderStyle: {
         margin: 0,
         paddingBottom: 12,
-        fontSize: fonts.h2
+        fontSize: fonts.h1
     },
     generalContentStyle: {
         margin: 0,
