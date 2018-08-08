@@ -65,7 +65,8 @@ class ChannelContainer extends Component {
     render() {
 
         const {
-            ExperienceChannels
+            ExperienceChannels,
+            TotalChannelRecord,
         } = this.props;
 
         const {
@@ -92,6 +93,7 @@ class ChannelContainer extends Component {
                             <div style={channelListContainerStyle}>
                                 <ChannelList
                                     experienceChannels={ExperienceChannels}
+                                    channelNumber={TotalChannelRecord}
                                     handleAddChannelClick={() => this.handleCreateChannel()}
                                     handleEditChannel={(channel) => this.handleEditChannel(channel)}
                                     handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
@@ -199,6 +201,7 @@ const stateToProps = (state) => {
     return {
         history: state.root.history,
         ExperienceChannels: state.dashboard.ExperienceChannels,
+        TotalChannelRecord: state.dashboard.TotalChannelRecord,
     }
 }
 

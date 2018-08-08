@@ -47,7 +47,6 @@ class ChannelList extends Component {
             mainWrapperStyle,
             topContainerStyle,
             searchBarWrapperSrtyle,
-            serachIconStyle,
             channelListInfoContainerStyle,
             channelListInfoWrapperStyle,
             channelListButtonStyle,
@@ -57,11 +56,11 @@ class ChannelList extends Component {
             menuItemStyle,
             expandIconStyle,
             channelListContainer,
-            textFieldStyle
         } = styles;
 
         const {
-            experienceChannels
+            experienceChannels,
+            channelNumber,
         } = this.props;
 
         return (
@@ -77,7 +76,7 @@ class ChannelList extends Component {
                     </div>
                     <div style={channelListInfoContainerStyle}>
                         <div style={channelListInfoWrapperStyle}>
-                            <p style={channelNumberStyle}>2 Channel(s)</p>
+                            <p style={channelNumberStyle}>{channelNumber} Channel(s)</p>
                             <DropdownMenu
                                 isOpen={this.state.isMenuOpen}
                                 close={this.handleCloseMenu}
