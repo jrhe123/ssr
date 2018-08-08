@@ -9,7 +9,6 @@ import DropdownMenu from 'react-dd-menu';
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
-
 class ChannelStreamsTemplate extends Component {
 
     state = {
@@ -17,8 +16,8 @@ class ChannelStreamsTemplate extends Component {
     }
 
     handleToggleMenu = () => {
-        this.setState({ 
-            isMenuOpen: !this.state.isMenuOpen 
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
         });
     }
 
@@ -27,8 +26,8 @@ class ChannelStreamsTemplate extends Component {
     }
 
     handleToggleImport = () => {
-        this.setState({ 
-            isImportOpen: !this.state.isImportOpen 
+        this.setState({
+            isImportOpen: !this.state.isImportOpen
         });
     }
 
@@ -48,15 +47,20 @@ class ChannelStreamsTemplate extends Component {
             importContainerStyle
         } = styles;
 
+        const {
+            channel
+        } = this.props;
+
+        console.log('channel: ', channel);
 
         return (
             <div style={channelInfoStyle}>
                 <div style={channelInfoLeftStyle}>
-                    <p style={channelTitleStyle}>{this.props.headerText}</p>
+                    <p style={channelTitleStyle}>{channel.ChannelName}</p>
                     <p style={streamLabelStyle}>0 live streams</p>
                 </div>
                 <div style={channelInfoRightStyle}>
-                <DropdownMenu 
+                    <DropdownMenu
                         isOpen={this.state.isImportOpen}
                         close={this.handleCloseImport}
                         toggle={
@@ -65,11 +69,10 @@ class ChannelStreamsTemplate extends Component {
                             </div>
                         }
                         align={'right'}
-                        size={'sm'}                                   
+                        size={'sm'}
                     >
                         <div style={importContainerStyle}>
-                            <p>{this.props.headerText}</p>
-                            <p>Option 2</p>
+                            <p>Option 1</p>
                         </div>
                     </DropdownMenu>
                 </div>
@@ -80,54 +83,45 @@ class ChannelStreamsTemplate extends Component {
 
 const styles = {
 
-    channelInfoStyle:{
-        background:'white',
-        display:'flex',
-        flexDirection:'row',
-        borderWidth:0.25,
-        borderColor:colors.borderColor,
-        borderStyle:'solid',
-        borderLeft:0,
-        borderRight:0,
-        borderTop:0,
-        flex:1,
-
+    channelInfoStyle: {
+        background: colors.whiteColor,
+        display: 'flex',
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor,
+        paddingLeft: 18,
+        paddingRight: 18,
     },
-    channelInfoLeftStyle:{
-        display:'flex',
-        flexDirection:'column',
-        flex:6,
-        marginLeft:24,
-        fontSize:fonts.h4,
-        paddingTop:12,
-        paddingBottom:12
+    channelInfoLeftStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        fontSize: fonts.h4,
+        paddingTop: 12,
+        paddingBottom: 12
     },
-    channelTitleStyle:{
-        flex:1,
-        fontSize:fonts.h3,
-        marginBottom:6,
-        marginTop:0
+    channelTitleStyle: {
+        fontSize: fonts.h3,
+        margin: 0,
     },
-    streamLabelStyle:{
-        flex:1,
-        fontSize:fonts.h4,
-        color:colors.lightGreyColor,
-        margin:0
+    streamLabelStyle: {
+        fontSize: fonts.h4,
+        color: colors.lightGreyColor,
+        margin: 0
     },
-    channelInfoRightStyle:{
-        flex:1,
-        alignSelf:'center',
-        margin:0
+    channelInfoRightStyle: {
+        flex: '24px 0 0',
+        alignSelf: 'center',
+        margin: 0
     },
-    channelInfoIconStyle:{
-        height:20, 
-        width:20
+    channelInfoIconStyle: {
+        height: 20,
+        width: 20
     },
-    importContainerStyle:{
-        paddingTop:12,
-        paddingRight:12,
-        paddingBottom:12,
-        paddingLeft:12
+    importContainerStyle: {
+        paddingTop: 12,
+        paddingRight: 12,
+        paddingBottom: 12,
+        paddingLeft: 12
     }
 
 }

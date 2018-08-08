@@ -28,7 +28,10 @@ const initialState = {
     Experiences: [],
 
     TotalChannelRecord: 0,
-    ExperienceChannels: []
+    ExperienceChannels: [],
+
+    TotalStreamActiveChannelRecord: 0,
+    StreamActiveChannels: [],
 };
 
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
@@ -82,7 +85,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case STREAM_CHANNEL_FETCH__SUCCEEDED:
-            console.log('reducer received: ', payload);
+            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
+            updated.StreamActiveChannels = payload.expereienceChannels;
             return updated;
 
         default:

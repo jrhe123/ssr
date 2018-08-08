@@ -13,15 +13,16 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 // component
+import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
 import ReadyToStreamTemplate from '../presentation/streams/ReadyToStreamTemplate';
 import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
-import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
 
 // redux
 import { connect } from 'react-redux';
 import {
     dxFetchStreamChannel as dxFetchStreamChannelAction
 } from '../../actions';
+import { channel } from '../../../../../node_modules/redux-saga';
 
 class StreamContainer extends Component {
 
@@ -29,7 +30,7 @@ class StreamContainer extends Component {
         isMenuOpen: false,
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // 1. Fetch active experience channels
         this.props.dxFetchStreamChannelAction();
     }
@@ -46,6 +47,19 @@ class StreamContainer extends Component {
 
     handleSearchChannel = (value) => {
         console.log('value: ', value)
+    }
+
+    renderActiveChannelList = () => {
+        const {
+            StreamActiveChannels,
+        } = this.props;
+
+        let list = StreamActiveChannels.map((channel, index) => (
+            <ChannelStreamsTemplate 
+                channel={channel}
+            />
+        ))
+        return list;
     }
 
     render() {
@@ -108,6 +122,10 @@ class StreamContainer extends Component {
 
         } = styles;
 
+        const {
+            TotalStreamActiveChannelRecord,
+        } = this.props;
+
         return (
             <div style={mainContainerStyle}>
                 <div style={topContainerStyle}>
@@ -121,8 +139,8 @@ class StreamContainer extends Component {
                                 close={this.handleCloseMenu}
                                 toggle={
                                     <div>
-                                        <Button 
-                                            style={dropdownBtnStyle} 
+                                        <Button
+                                            style={dropdownBtnStyle}
                                             onClick={() => this.handleToggleMenu()}
                                         >Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
                                     </div>
@@ -172,18 +190,21 @@ class StreamContainer extends Component {
                         </div>
                     </div>
                 </div>
+
                 <div style={middleContainerstyle}>
                     <div style={middleWrapperStyle}>
                         <div style={channelLabelWrapperStyle}>
                             <p style={channelLabelStyle}>Channel(s)</p>
                         </div>
                         <div style={totalChannelWrapperStyle}>
-                            <p style={totalNumberStyle}>1</p>
+                            <p style={totalNumberStyle}>{TotalStreamActiveChannelRecord}</p>
                             <p style={totalLabelstyle}>Total</p>
                         </div>
                     </div>
                 </div>
+
                 <div style={bottomContainerStyle}>
+
                     <div style={leftContainerStyle}>
                         <div style={channelSearchContainerStyle}>
                             <div style={searchBarWrapperStyle}>
@@ -195,9 +216,7 @@ class StreamContainer extends Component {
                                 />
                             </div>
                             <div style={channelInfoWrapperStyle}>
-                                <ChannelStreamsTemplate
-                                    headerText={'General'}
-                                />
+                                {this.renderActiveChannelList()}
                             </div>
                             <div style={tipsWrapperStyle}>
                                 <p style={tipsHeaderStyle}>Tips:</p>
@@ -205,6 +224,7 @@ class StreamContainer extends Component {
                             </div>
                         </div>
                     </div>
+
                     <div style={rightContainerStyle}>
                         <div style={streamsContainerStyle}>
                             <div style={generalwrapperStyle}>
@@ -227,6 +247,7 @@ class StreamContainer extends Component {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         )
@@ -495,6 +516,8 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        StreamActiveChannels: state.dashboard.StreamActiveChannels,
+        TotalStreamActiveChannelRecord: state.dashboard.TotalStreamActiveChannelRecord,
     }
 }
 

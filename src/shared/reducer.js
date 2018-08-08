@@ -16,6 +16,8 @@ import {
     CHANNEL_FETCH__FAILED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__FAILED,
+
+    STREAM_CHANNEL_FETCH__FAILED,
 } from './dashboard';
 
 // New experience
@@ -181,6 +183,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case CHANNEL_CREATE__FAILED:
         case CHANNEL_UPDATE_STATUS__FAILED:
         case CHANNEL_UPDATE__FAILED:
+        case STREAM_CHANNEL_FETCH__FAILED:
             tempAlertBar = {
                 isDisplay: true,
                 isError: true,
