@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {
     dxFetchChannel as dxFetchChannelAction,
+    dxUpdateChannel as dxUpdateChannelAction,
 } from '../../actions';
 
 // constants
@@ -54,11 +55,11 @@ class ChannelContainer extends Component {
     }
 
     handleActiveChannel = (channel) => {
-        console.log('ac channel: ', channel);
+        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'LIVE' });
     }
 
     handleDeactiveChannel = (channel) => {
-        console.log('de channel: ', channel);
+        this.props.dxUpdateChannelAction(channel.ExperienceChannelGUID, { ChannelStatus: 'DRAFT' });
     }
 
     render() {
@@ -69,6 +70,7 @@ class ChannelContainer extends Component {
 
         const {
             mainContainerStyle,
+            channelListContainerStyle,
 
             mainWrapperStyle,
             tableContainerStyle,
@@ -79,8 +81,7 @@ class ChannelContainer extends Component {
             topLabelStyle,
             middleLabelStyle,
             bottomLabelStyle,
-            imgWrapperStyle,
-            imgStyle
+            imgStyle,
         } = styles;
 
         return (
@@ -88,13 +89,15 @@ class ChannelContainer extends Component {
                 {
                     ExperienceChannels.length ?
                         (
-                            <ChannelList
-                                experienceChannels={ExperienceChannels}
-                                handleAddChannelClick={() => this.handleCreateChannel()}
-                                handleEditChannel={(channel) => this.handleEditChannel(channel)}
-                                handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
-                                handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
-                            />
+                            <div style={channelListContainerStyle}>
+                                <ChannelList
+                                    experienceChannels={ExperienceChannels}
+                                    handleAddChannelClick={() => this.handleCreateChannel()}
+                                    handleEditChannel={(channel) => this.handleEditChannel(channel)}
+                                    handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
+                                    handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
+                                />
+                            </div>
                         )
                         :
                         <div style={mainWrapperStyle}>
@@ -102,7 +105,7 @@ class ChannelContainer extends Component {
                                 <div style={tableWrapperStyle}>
                                     <p style={topLabelStyle}> Reach your audience via channel.
                                 </p>
-                                    <div style={imgWrapperStyle}>
+                                    <div>
                                         <img
                                             style={imgStyle}
                                             src={require('../../../../../assets/images/channelPage.png')}
@@ -137,9 +140,13 @@ class ChannelContainer extends Component {
 }
 
 const styles = {
+
     mainContainerStyle: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    channelListContainerStyle: {
+
     },
     mainWrapperStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -185,9 +192,6 @@ const styles = {
         marginLeft: 'auto',
         marginRight: 'auto',
 
-    },
-    imgWrapperStyle: {
-
     }
 };
 
@@ -200,6 +204,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxFetchChannelAction,
+    dxUpdateChannelAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelContainer);
