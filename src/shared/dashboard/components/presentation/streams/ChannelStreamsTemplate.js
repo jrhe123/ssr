@@ -51,12 +51,10 @@ class ChannelStreamsTemplate extends Component {
             channel
         } = this.props;
 
-        console.log('channel: ', channel);
-
         return (
             <div style={channelInfoStyle}>
                 <div style={channelInfoLeftStyle}>
-                    <p style={channelTitleStyle}>{channel.ChannelName}</p>
+                    <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
                     <p style={streamLabelStyle}>0 live streams</p>
                 </div>
                 <div style={channelInfoRightStyle}>
