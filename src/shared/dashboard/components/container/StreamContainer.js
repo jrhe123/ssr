@@ -114,9 +114,9 @@ class StreamContainer extends Component {
 
             rightContainerStyle,
             streamsContainerStyle,
-            generalwrapperStyle,
-            generalHeaderStyle,
-            generalContentStyle,
+            currentChannleWrapperStyle,
+            currentChannelNameStyle,
+            currentChannelDescriptionStyle,
             liveStreamLabelStyle,
             liveStreamNumberStyle,
             liveStreamWrapperStyle,
@@ -237,9 +237,9 @@ class StreamContainer extends Component {
 
                             {
                                 CurrentStreamChannel ?
-                                    <div style={generalwrapperStyle}>
-                                        <p style={Object.assign({}, generalHeaderStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
-                                        <p style={generalContentStyle}>{CurrentStreamChannel.ChannelDescription}</p>
+                                    <div style={currentChannleWrapperStyle}>
+                                        <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
+                                        <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription}</p>
                                     </div>
                                     :
                                     null
@@ -464,18 +464,18 @@ const styles = {
     streamsContainerStyle: {
         height: '100%'
     },
-    generalwrapperStyle: {
+    currentChannleWrapperStyle: {
         width: 'auto',
         background: 'white',
         padding: 12,
         height: 78,
     },
-    generalHeaderStyle: {
+    currentChannelNameStyle: {
         margin: 0,
         paddingBottom: 12,
         fontSize: fonts.h1
     },
-    generalContentStyle: {
+    currentChannelDescriptionStyle: {
         margin: 0,
         color: colors.lightGreyColor,
         fontSize: fonts.h3
