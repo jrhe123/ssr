@@ -128,6 +128,12 @@ class StreamContainer extends Component {
             readyToStreamNumberStyle,
             readyToStreamWrapperStyle,
 
+            liveMsgContainerStyle,
+            liveMsgStyle,
+            goLabelStyle,
+            sectionLabelStyle,
+            pendingMsgContainerStyle,
+            pendingMsgStyle,
         } = styles;
 
         const {
@@ -252,29 +258,58 @@ class StreamContainer extends Component {
                                             <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
                                             <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
                                         </div>
+
                                         <div style={liveStreamLabelContainerStyle}>
                                             <span style={liveStreamLabelStyle}>LIVE STREAMS</span><span style={liveStreamNumberStyle}>({TotalLiveExperienceStreamRecord})</span>
                                         </div>
-                                        <div style={liveStreamWrapperStyle}>
-                                            {
-                                                LiveExperienceStreams.map((stream, index) => (
-                                                    <LiveStreamTemplate
-                                                        streamTitle={stream.ExperienceTitle}
-                                                    />
-                                                ))
-                                            }
-                                        </div>
+                                        {
+                                            LiveExperienceStreams.length ?
+                                                <div style={liveStreamWrapperStyle}>
+                                                    {
+                                                        LiveExperienceStreams.map((stream, index) => (
+                                                            <LiveStreamTemplate
+                                                                streamTitle={stream.ExperienceTitle}
+                                                            />
+                                                        ))
+                                                    }
+                                                </div>
+                                                :
+                                                <div style={liveMsgContainerStyle}>
+                                                    <div style={tableContainerStyle}>
+                                                        <div style={tableWrapperStyle}>
+                                                            {
+                                                                PendingExperiences.length ?
+                                                                    <p style={liveMsgStyle}>Click the green <span style={goLabelStyle}>Go Live</span> button in the below <span style={sectionLabelStyle}>READY TO STREAM</span> section</p>
+                                                                    :
+                                                                    <p style={liveMsgStyle}>There are no ready to stream experience(s) found</p>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        }
+
 
                                         <div style={readyToStreamLabelWrapperStyle}>
                                             <span style={readyToStreamLabelStyle}>READY TO STREAM</span><span style={readyToStreamNumberStyle}>({TotalPendingExperienceRecord})</span>
                                         </div>
-                                        <div style={readyToStreamWrapperStyle}>
-                                            {
-                                                PendingExperiences.map((experience, index) => {
-                                                    <ReadyToStreamTemplate />
-                                                })
-                                            }
-                                        </div>
+                                        {
+                                            PendingExperiences.length ?
+                                                <div style={readyToStreamWrapperStyle}>
+                                                    {
+                                                        PendingExperiences.map((experience, index) => (
+                                                            <ReadyToStreamTemplate />
+                                                        ))
+                                                    }
+                                                </div>
+                                                :
+                                                <div style={pendingMsgContainerStyle}>
+                                                    <div style={tableContainerStyle}>
+                                                        <div style={tableWrapperStyle}>
+                                                            <p style={pendingMsgStyle}>There are no experience(s) found to be streamed. Click here to create a new experience</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        }
                                     </div>
                                     :
                                     <div style={currentChannleWrapperStyle}>
@@ -551,6 +586,39 @@ const styles = {
     readyToStreamWrapperStyle: {
         overflowY: 'scroll',
         height: `calc((100% - 198px)/2)`,
+    },
+
+    liveMsgContainerStyle: {
+        border: '1px dotted',
+        borderColor: colors.blueBorderColor,
+        backgroundColor: colors.whiteColor,
+        height: 72,
+        marginBottom: 24,
+    },
+    liveMsgStyle: {
+        color: colors.greyLabelColor,
+        fontSize: fonts.h3,
+        margin: 0,
+    },
+    goLabelStyle: {
+        color: colors.greenColor,
+        fontWeight: 'bold'
+    },
+    sectionLabelStyle: {
+        color: colors.blackColor,
+        fontWeight: 'bold'
+    },
+    pendingMsgContainerStyle: {
+        border: '1px dotted',
+        borderColor: colors.blueBorderColor,
+        backgroundColor: colors.whiteColor,
+        height: 72,
+        marginBottom: 24,
+    },
+    pendingMsgStyle: {
+        color: colors.greyLabelColor,
+        fontSize: fonts.h3,
+        margin: 0,
     },
 }
 
