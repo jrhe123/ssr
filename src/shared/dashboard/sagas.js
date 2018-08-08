@@ -125,7 +125,7 @@ export const dxFetchChannelUrl = (params) => {
 
 export function* dxFetchChannel(action) {
     try {
-        const response = yield call(dxFetchChannelUrl, action);
+        const response = yield call(dxFetchChannelUrl, action.payload);
         let { Confirmation, Response, Message } = response;
         if (Confirmation !== 'SUCCESS') {
             yield put({
@@ -327,7 +327,7 @@ export function* dxDeleteExperienceSaga() {
 // Stream Fetch Active Channel
 export function* dxFetchStreamChannel(action) {
     try {
-        const response = yield call(dxFetchChannelUrl, action);
+        const response = yield call(dxFetchChannelUrl, action.payload);
         let { Confirmation, Response, Message } = response;
         if (Confirmation !== 'SUCCESS') {
             yield put({
