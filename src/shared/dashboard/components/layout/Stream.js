@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// components
+import StreamContainer from '../container/StreamContainer';
+
 // libraries
 import Slide from 'react-reveal/Slide';
 
@@ -16,7 +19,7 @@ class Stream extends Component {
 
         return (
             <Slide right>
-                <div>stream container here</div>
+                <StreamContainer />
             </Slide>
         )
     }
