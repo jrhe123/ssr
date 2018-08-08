@@ -360,18 +360,46 @@ export function* dxFetchStreamChannelSaga() {
 }
 
 // Stream channel select
+export const dxSelectStreamChannelUrl = (params) => {
+    let formattedParams = {
+        ExperienceChannelGUID: params.channel.ExperienceChannelGUID,
+        Limit: "-1",
+        Offset: "0",
+        Extra: {}
+    }
+    return (
+        apiManager.dxApi(`/experience/stream_list_by_channel_guid`, formattedParams, true)
+    )
+}
+
 export function* dxSelectStreamChannel(action) {
+
     try {
-        yield put({
-            type: STREAM_CHANNEL_SELECT__SUCCEEDED,
-            payload: {
-                channel: action.payload.channel,
-            },
-        });
+        const response = yield call(dxSelectStreamChannelUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_CHANNEL_SELECT__FAILED,
+                payload: {
+                    message: 'Experience stream list api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_CHANNEL_SELECT__SUCCEEDED,
+                payload: {
+                    channel: action.payload.channel,
+                    liveExperienceStreams: Response.LiveExperienceStreams,
+                    pendingExperiences: Response.PendingExperiences,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: STREAM_CHANNEL_SELECT__FAILED,
-            payload: error,
+            payload: {
+                message: 'Experience stream list api error'
+            },
         });
     }
 }

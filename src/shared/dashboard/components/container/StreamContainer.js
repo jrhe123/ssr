@@ -71,6 +71,8 @@ class StreamContainer extends Component {
     render() {
 
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             mainContainerStyle,
             topContainerStyle,
             topWrapperStyle,
@@ -130,8 +132,16 @@ class StreamContainer extends Component {
 
         const {
             CurrentStreamChannel,
+            TotalLiveExperienceStreamRecord,
+            LiveExperienceStreams,
+            TotalPendingExperienceRecord,
+            PendingExperiences,
+
             TotalStreamActiveChannelRecord,
         } = this.props;
+
+        console.log('LiveExperienceStreams: ', LiveExperienceStreams);
+        console.log('PendingExperiences: ', PendingExperiences);
 
         return (
             <div style={mainContainerStyle}>
@@ -236,30 +246,45 @@ class StreamContainer extends Component {
                         <div style={streamsContainerStyle}>
 
                             {
-                                CurrentStreamChannel ?
-                                    <div style={currentChannleWrapperStyle}>
-                                        <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
-                                        <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
+                                CurrentStreamChannel.ExperienceChannelGUID ?
+                                    <div>
+                                        <div style={currentChannleWrapperStyle}>
+                                            <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
+                                            <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
+                                        </div>
+                                        <div style={liveStreamLabelContainerStyle}>
+                                            <span style={liveStreamLabelStyle}>LIVE STREAMS</span><span style={liveStreamNumberStyle}>({TotalLiveExperienceStreamRecord})</span>
+                                        </div>
+                                        <div style={liveStreamWrapperStyle}>
+                                            {
+                                                LiveExperienceStreams.map((stream, index) => (
+                                                    <LiveStreamTemplate
+                                                        streamTitle={stream.ExperienceTitle}
+                                                    />
+                                                ))
+                                            }
+                                        </div>
+
+                                        <div style={readyToStreamLabelWrapperStyle}>
+                                            <span style={readyToStreamLabelStyle}>READY TO STREAM</span><span style={readyToStreamNumberStyle}>({TotalPendingExperienceRecord})</span>
+                                        </div>
+                                        <div style={readyToStreamWrapperStyle}>
+                                            {
+                                                PendingExperiences.map((experience, index) => {
+                                                    <ReadyToStreamTemplate />
+                                                })
+                                            }
+                                        </div>
                                     </div>
                                     :
-                                    null
+                                    <div style={currentChannleWrapperStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={currentChannelNameStyle}>Please select a channel to stream</p>
+                                            </div>
+                                        </div>
+                                    </div>
                             }
-
-                            <div style={liveStreamLabelContainerStyle}>
-                                <span style={liveStreamLabelStyle}>LIVE STREAMS</span><span style={liveStreamNumberStyle}>(6)</span>
-                            </div>
-                            <div style={liveStreamWrapperStyle}>
-                                <LiveStreamTemplate
-                                    streamTitle="My Experience 1"
-                                />
-                            </div>
-
-                            <div style={readyToStreamLabelWrapperStyle}>
-                                <span style={readyToStreamLabelStyle}>READY TO STREAM</span><span style={readyToStreamNumberStyle}>(18)</span>
-                            </div>
-                            <div style={readyToStreamWrapperStyle}>
-                                <ReadyToStreamTemplate />
-                            </div>
                         </div>
                     </div>
 
@@ -271,6 +296,17 @@ class StreamContainer extends Component {
 
 
 const styles = {
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+        textAlign: 'center'
+    },
     mainContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
         position: 'relative',
@@ -522,6 +558,11 @@ const stateToProps = (state) => {
     return {
         history: state.root.history,
         CurrentStreamChannel: state.dashboard.CurrentStreamChannel,
+        TotalLiveExperienceStreamRecord: state.dashboard.TotalLiveExperienceStreamRecord,
+        LiveExperienceStreams: state.dashboard.LiveExperienceStreams,
+        TotalPendingExperienceRecord: state.dashboard.TotalPendingExperienceRecord,
+        PendingExperiences: state.dashboard.PendingExperiences,
+
         StreamActiveChannels: state.dashboard.StreamActiveChannels,
         TotalStreamActiveChannelRecord: state.dashboard.TotalStreamActiveChannelRecord,
     }
