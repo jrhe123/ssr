@@ -13,8 +13,8 @@ import Onboard from '../layout/Onboard';
 // constants
 import sizes from '../../../styles/sizes';
 
-// libraries
-import SwipeableViews from 'react-swipeable-views';
+// styles
+import '../../../../../assets/css/react-reveal/index.css';
 
 // redux
 import { connect } from 'react-redux';
@@ -36,22 +36,6 @@ const navArr = [
         title: 'Streams',
         type: 'STREAMS'
     },
-    // {
-    //     title: 'Audience',
-    //     type: 'AUDIENCE'
-    // },
-    // {
-    //     title: 'DRM',
-    //     type: 'DRM'
-    // },
-    // {
-    //     title: 'Insights',
-    //     type: 'INSIGHTS'
-    // },
-    // {
-    //     title: 'Onboard',
-    //     type: 'ONBOARD'
-    // },
 ];
 
 class DashboardNavigator extends Component {
@@ -63,6 +47,22 @@ class DashboardNavigator extends Component {
     handleChange = (index) => {
         this.props.dxDashboardNaviAction(index);
     };
+
+    renderNav = (nav) => {
+        const {
+            NaviIndex
+        } = this.props;
+
+        let tab;
+        if (nav.type == 'EXPERIENCES') {
+            tab = <Experience active={NaviIndex == 0 ? true : false} />
+        } else if (nav.type == 'CHANNELS') {
+            tab = <Channel active={NaviIndex == 1 ? true : false} />
+        } else if (nav.type == 'STREAMS') {
+            tab = <Stream active={NaviIndex == 2 ? true : false} />
+        }
+        return tab;
+    }
 
     render() {
 
@@ -83,56 +83,13 @@ class DashboardNavigator extends Component {
                     handleChange={(index) => this.handleChange(index)}
                     handleLogoutClick={() => this.handleLogoutClick()}
                 />
-                {/* <SwipeableViews
-                    axis='x'
-                    index={NaviIndex}
-                    style={conentWrapperStyle}
-                > */}
-                <div>
+                <div style={conentWrapperStyle}>
                     {
-                        NaviIndex == 0 ?
-                            (<Experience />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 1 ?
-                            (<Channel />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 2 ?
-                            (<Stream />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 3 ?
-                            (<Audience />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 4 ?
-                            (<DRM />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 5 ?
-                            (<Insight />)
-                            :
-                            null
-                    }
-                    {
-                        NaviIndex == 6 ?
-                            (<Onboard />)
-                            :
-                            null
+                        navArr.map((nav, index) => (
+                            this.renderNav(nav)
+                        ))
                     }
                 </div>
-                {/* </SwipeableViews> */}
             </div>
         )
     }

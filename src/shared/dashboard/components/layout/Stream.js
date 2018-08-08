@@ -9,6 +9,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Lock from '@material-ui/icons/Lock';
 import DropdownMenu from 'react-dd-menu';
 import Button from '@material-ui/core/Button';
+import Slide from 'react-reveal/Slide';
 
 // constants
 import sizes from '../../../styles/sizes';
@@ -99,146 +100,156 @@ class Stream extends Component {
 
         } = styles;
 
+        const {
+            active
+        } = this.props;
+
+        if (!active) {
+            return null;
+        }
+
         return (
-            <div style={mainContainerStyle}>
-                <div style={mainWrapperStyle}>
-                    <div style={topContainerStyle}>
-                        <div style={targetContainerStyle}>
-                            <p style={targetLabelStyle}>Target</p>
-                            <div style={dropdownContainerStyle}>
-                                <DropdownMenu
-                                    isOpen={this.state.isMenuOpen}
-                                    close={this.handleCloseMenu}
-                                    toggle={
-                                        <div>
-                                            <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
-                                        </div>
-                                    }
-                                    align={'right'}
-                                    size={'md'}
-                                >
-                                    <div>
-                                        <Button
-                                            style={dropdownOptionBtnStyle}
-                                        >
-                                            <div style={dropdownMobileBtnStyle}>
-                                                <div style={dropdownBtnImgStyle}>
-                                                    <img
-                                                        style={imgStyle}
-                                                        src={require('../../../../../assets/images/mob_icon.png')}
-                                                    />
-                                                </div>
-                                                <div style={dropdownBtnTextStyle}>
-                                                    <p style={mobileOptionTopLabelStyle}>Mobile (iOS / Android)</p>
-                                                    <p style={mobileOptionBottomLabelStyle}>Users viewing streams using native iOS and Android mobile apps</p>
-                                                </div>
+            <Slide right>
+                <div style={mainContainerStyle}>
+                    <div style={mainWrapperStyle}>
+                        <div style={topContainerStyle}>
+                            <div style={targetContainerStyle}>
+                                <p style={targetLabelStyle}>Target</p>
+                                <div style={dropdownContainerStyle}>
+                                    <DropdownMenu
+                                        isOpen={this.state.isMenuOpen}
+                                        close={this.handleCloseMenu}
+                                        toggle={
+                                            <div>
+                                                <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
                                             </div>
-                                        </Button>
-                                    </div>
-                                    <div>
-                                        <Button
-                                            style={dropdownOptionBtnStyle}
-                                        >
-                                            <div style={comingSoonWrapperStyle}>
-                                                <p style={comingSoonStyle}>Coming Soon</p>
-                                                <div style={dropdownWebBtnStyle}>
+                                        }
+                                        align={'right'}
+                                        size={'md'}
+                                    >
+                                        <div>
+                                            <Button
+                                                style={dropdownOptionBtnStyle}
+                                            >
+                                                <div style={dropdownMobileBtnStyle}>
                                                     <div style={dropdownBtnImgStyle}>
-                                                        <Lock />
+                                                        <img
+                                                            style={imgStyle}
+                                                            src={require('../../../../../assets/images/mob_icon.png')}
+                                                        />
                                                     </div>
                                                     <div style={dropdownBtnTextStyle}>
-                                                        <p style={webOptionTopLabelStyle}>Web application</p>
-                                                        <p style={webOptionBottomLabelStyle}>Users viewing streams using their web browsers</p>
+                                                        <p style={mobileOptionTopLabelStyle}>Mobile (iOS / Android)</p>
+                                                        <p style={mobileOptionBottomLabelStyle}>Users viewing streams using native iOS and Android mobile apps</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </Button>
-                                    </div>
-                                </DropdownMenu>
+                                            </Button>
+                                        </div>
+                                        <div>
+                                            <Button
+                                                style={dropdownOptionBtnStyle}
+                                            >
+                                                <div style={comingSoonWrapperStyle}>
+                                                    <p style={comingSoonStyle}>Coming Soon</p>
+                                                    <div style={dropdownWebBtnStyle}>
+                                                        <div style={dropdownBtnImgStyle}>
+                                                            <Lock />
+                                                        </div>
+                                                        <div style={dropdownBtnTextStyle}>
+                                                            <p style={webOptionTopLabelStyle}>Web application</p>
+                                                            <p style={webOptionBottomLabelStyle}>Users viewing streams using their web browsers</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Button>
+                                        </div>
+                                    </DropdownMenu>
+                                </div>
+                            </div>
+                            <div style={channelContainerStyle}>
+                                <p style={channelLabelStyle}>Channel(s)</p>
+                                <p style={totalLabelstyle}>1 Total</p>
                             </div>
                         </div>
-                        <div style={channelContainerStyle}>
-                            <p style={channelLabelStyle}>Channel(s)</p>
-                            <p style={totalLabelstyle}>1 Total</p>
-                        </div>
-                    </div>
-                    <div style={bodyContainerStyle}>
-                        <div style={channelSearchContainerStyle}>
-                            <div style={searchBarWrapperStyle}>
-                                <SearchBar
-                                    value={this.state.value}
-                                    onChange={() => handleSearch()}
-                                    style={searchBarStyle}
-                                    placeholder={'Type for search'}
-                                />
+                        <div style={bodyContainerStyle}>
+                            <div style={channelSearchContainerStyle}>
+                                <div style={searchBarWrapperStyle}>
+                                    <SearchBar
+                                        value={this.state.value}
+                                        onChange={() => handleSearch()}
+                                        style={searchBarStyle}
+                                        placeholder={'Type for search'}
+                                    />
+                                </div>
+                                <div style={channelInfoContainerStyle}>
+                                    <ChannelStreamsTemplate headerText={'General'} />
+                                    <ChannelStreamsTemplate headerText={'Renaissance'} />
+                                    <ChannelStreamsTemplate headerText={'Reading'} />
+                                    <ChannelStreamsTemplate headerText={'Latin literature'} />
+                                    <ChannelStreamsTemplate headerText={'Lorem Ipsum'} />
+                                    <ChannelStreamsTemplate headerText={'Bonorum'} />
+                                    <ChannelStreamsTemplate headerText={'Rackham'} />
+                                    <ChannelStreamsTemplate headerText={'Malorum'} />
+                                    <ChannelStreamsTemplate headerText={'Injected'} />
+                                    <ChannelStreamsTemplate headerText={'Tutorials'} />
+                                    <ChannelStreamsTemplate headerText={'Content'} />
+                                    <ChannelStreamsTemplate headerText={'Specimen'} />
+                                    <ChannelStreamsTemplate headerText={'Internet'} />
+                                    <ChannelStreamsTemplate headerText={'Channel 2'} />
+                                </div>
+                                <div style={tipsContainerStyle}>
+                                    <p style={tipsHeaderStyle}>Tips:</p>
+                                    <p style={tipsLabelStyle}>Create your own channel to stream content related to your audiences’ interest to improve content discoverability and gather actionable insights. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new channel</p>
+                                </div>
                             </div>
-                            <div style={channelInfoContainerStyle}>
-                                <ChannelStreamsTemplate headerText={'General'} />
-                                <ChannelStreamsTemplate headerText={'Renaissance'} />
-                                <ChannelStreamsTemplate headerText={'Reading'} />
-                                <ChannelStreamsTemplate headerText={'Latin literature'} />
-                                <ChannelStreamsTemplate headerText={'Lorem Ipsum'} />
-                                <ChannelStreamsTemplate headerText={'Bonorum'} />
-                                <ChannelStreamsTemplate headerText={'Rackham'} />
-                                <ChannelStreamsTemplate headerText={'Malorum'} />
-                                <ChannelStreamsTemplate headerText={'Injected'} />
-                                <ChannelStreamsTemplate headerText={'Tutorials'} />
-                                <ChannelStreamsTemplate headerText={'Content'} />
-                                <ChannelStreamsTemplate headerText={'Specimen'} />
-                                <ChannelStreamsTemplate headerText={'Internet'} />
-                                <ChannelStreamsTemplate headerText={'Channel 2'} />
-                            </div>
-                            <div style={tipsContainerStyle}>
-                                <p style={tipsHeaderStyle}>Tips:</p>
-                                <p style={tipsLabelStyle}>Create your own channel to stream content related to your audiences’ interest to improve content discoverability and gather actionable insights. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new channel</p>
-                            </div>
-                        </div>
-                        <div style={streamContainerStyle}>
-                            <div style={generalwrapperStyle}>
-                                <p style={generalHeaderStyle}>General</p>
-                                <p style={generalContentStyle}>General channel is a default channel created by us, so you can stream first-time welcome messages, important notes and other content directly to all of your audience to be readily available in their feed automatically.</p>
-                            </div>
-                            <p style={liveStreamLabelStyle}>LIVE STREAMS (6)</p>
-                            <div style={liveStreamContainerStyle}>
-                                {/* <div style={liveStreamWrapperStyle}>
+                            <div style={streamContainerStyle}>
+                                <div style={generalwrapperStyle}>
+                                    <p style={generalHeaderStyle}>General</p>
+                                    <p style={generalContentStyle}>General channel is a default channel created by us, so you can stream first-time welcome messages, important notes and other content directly to all of your audience to be readily available in their feed automatically.</p>
+                                </div>
+                                <p style={liveStreamLabelStyle}>LIVE STREAMS (6)</p>
+                                <div style={liveStreamContainerStyle}>
+                                    {/* <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
                             </div>
                             <div style={liveStreamWrapperStyle}>
                                 <p style={liveStreamContentStyle}>There are no ready to stream experience(s) found.</p>
                             </div> */}
-                                <LiveStreamTemplate streamTitle="My Experience 1" />
-                                <LiveStreamTemplate streamTitle="Readings" />
-                                <LiveStreamTemplate streamTitle="Examination" />
-                                <LiveStreamTemplate streamTitle="Test Materials" />
-                                <LiveStreamTemplate streamTitle="Cardiology" />
-                                <LiveStreamTemplate streamTitle="Therapy" />
-                            </div>
-                            <p style={readyToStreamLabelStyle}>READY TO STREAM (18)</p>
-                            <div style={readyToStreamContainerStyle}>
-                                {/* <div style={readyToStreamWrapperStyle}>
+                                    <LiveStreamTemplate streamTitle="My Experience 1" />
+                                    <LiveStreamTemplate streamTitle="Readings" />
+                                    <LiveStreamTemplate streamTitle="Examination" />
+                                    <LiveStreamTemplate streamTitle="Test Materials" />
+                                    <LiveStreamTemplate streamTitle="Cardiology" />
+                                    <LiveStreamTemplate streamTitle="Therapy" />
+                                </div>
+                                <p style={readyToStreamLabelStyle}>READY TO STREAM (18)</p>
+                                <div style={readyToStreamContainerStyle}>
+                                    {/* <div style={readyToStreamWrapperStyle}>
                                 <p style={readyToStreamContentStyle}>There are no experience(s) found to be streamed. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new experience</p>
                             </div> */}
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Slide>
         )
     }
 }
