@@ -62,15 +62,13 @@ class StreamContainer extends Component {
             webOptionTopLabelStyle,
             webOptionBottomLabelStyle,
 
-
             middleContainerstyle,
             middleWrapperStyle,
-            ChannelLabelWrapperStyle,
+            channelLabelWrapperStyle,
             totalChannelWrapperStyle,
             totalNumberStyle,
             channelLabelStyle,
             totalLabelstyle,
-
 
             bottomContainerStyle,
             leftContainerStyle,
@@ -162,7 +160,7 @@ class StreamContainer extends Component {
                 </div>
                 <div style={middleContainerstyle}>
                     <div style={middleWrapperStyle}>
-                        <div style={ChannelLabelWrapperStyle}>
+                        <div style={channelLabelWrapperStyle}>
                             <p style={channelLabelStyle}>Channel(s)</p>
                         </div>
                         <div style={totalChannelWrapperStyle}>
@@ -183,20 +181,9 @@ class StreamContainer extends Component {
                                 />
                             </div>
                             <div style={channelInfoWrapperStyle}>
-                                <ChannelStreamsTemplate headerText={'General'} />
-                                <ChannelStreamsTemplate headerText={'Renaissance'} />
-                                <ChannelStreamsTemplate headerText={'Reading'} />
-                                <ChannelStreamsTemplate headerText={'Latin literature'} />
-                                <ChannelStreamsTemplate headerText={'Lorem Ipsum'} />
-                                <ChannelStreamsTemplate headerText={'Bonorum'} />
-                                <ChannelStreamsTemplate headerText={'Rackham'} />
-                                <ChannelStreamsTemplate headerText={'Malorum'} />
-                                <ChannelStreamsTemplate headerText={'Injected'} />
-                                <ChannelStreamsTemplate headerText={'Tutorials'} />
-                                <ChannelStreamsTemplate headerText={'Content'} />
-                                <ChannelStreamsTemplate headerText={'Specimen'} />
-                                <ChannelStreamsTemplate headerText={'Internet'} />
-                                <ChannelStreamsTemplate headerText={'Channel 2'} />
+                                <ChannelStreamsTemplate
+                                    headerText={'General'}
+                                />
                             </div>
                             <div style={tipsWrapperStyle}>
                                 <p style={tipsHeaderStyle}>Tips:</p>
@@ -214,33 +201,14 @@ class StreamContainer extends Component {
                                 <p style={liveStreamLabelStyle}>LIVE STREAMS</p><p style={liveStreamNumberStyle}>(6)</p>
                             </div>
                             <div style={liveStreamWrapperStyle}>
-                                <LiveStreamTemplate streamTitle="My Experience 1" />
-                                <LiveStreamTemplate streamTitle="Readings" />
-                                <LiveStreamTemplate streamTitle="Examination" />
-                                <LiveStreamTemplate streamTitle="Test Materials" />
-                                <LiveStreamTemplate streamTitle="Cardiology" />
-                                <LiveStreamTemplate streamTitle="Therapy" />
+                                <LiveStreamTemplate
+                                    streamTitle="My Experience 1"
+                                />
                             </div>
                             <div style={readyToStreamLabelWrapperStyle}>
                                 <p style={readyToStreamLabelStyle}>READY TO STREAM</p><p style={readyToStreamNumberStyle}>(18)</p>
                             </div>
                             <div style={readyToStreamWrapperStyle}>
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
-                                <ReadyToStreamTemplate />
                                 <ReadyToStreamTemplate />
                             </div>
                         </div>
@@ -360,9 +328,6 @@ const styles = {
         color: colors.whiteColor,
     },
 
-
-
-
     middleContainerstyle: {
         height: 48,
         display: 'flex',
@@ -373,7 +338,7 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    ChannelLabelWrapperStyle: {
+    channelLabelWrapperStyle: {
 
     },
     channelLabelStyle: {
@@ -395,7 +360,6 @@ const styles = {
         color: colors.lightGreyColor,
         marginLeft: 3
     },
-
 
     bottomContainerStyle: {
         height: `calc(100% - 240px)`,
@@ -440,8 +404,6 @@ const styles = {
     clickHereLinkStyle: {
         color: colors.blueColor
     },
-
-
 
     rightContainerStyle: {
         height: '100%',
