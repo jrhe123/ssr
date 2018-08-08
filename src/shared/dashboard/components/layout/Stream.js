@@ -45,11 +45,11 @@ class Stream extends Component {
     // componentDidMount() {
     //     this.div.addEventListener("scroll", this.handleScroll);
     //   }
-    
+
     //   handleScroll = e => {
     //     console.log(this.div.scrollTop);
     //   };
-    
+
 
     render() {
 
@@ -83,7 +83,7 @@ class Stream extends Component {
             totalChannelWrapperStyle,
             totalNumberStyle,
             channelLabelStyle,
-            totalLabelstyle,         
+            totalLabelstyle,
 
 
             bottomContainerStyle,
@@ -123,7 +123,153 @@ class Stream extends Component {
 
         return (
             <Slide right>
-                
+                <div style={mainContainerStyle}>
+                    <div style={topContainerStyle}>
+                        <div style={topWrapperStyle}>
+                            <div style={targetWrapperStyle}>
+                                <p style={targetLabelStyle}>Target</p>
+                            </div>
+                            <div style={dropdownWrapperStyle}>
+                                <DropdownMenu
+                                    isOpen={this.state.isMenuOpen}
+                                    close={this.handleCloseMenu}
+                                    toggle={
+                                        <div>
+                                            <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>Mobile (iOS / Android)<ExpandMore style={expandIconStyle} /></Button>
+                                        </div>
+                                    }
+                                    align={'right'}
+                                    size={'md'}
+                                >
+                                    <div>
+                                        <Button
+                                            style={dropdownOptionBtnStyle}
+                                        >
+                                            <div style={dropdownMobileBtnStyle}>
+                                                <div style={dropdownBtnImgStyle}>
+                                                    <img
+                                                        style={imgStyle}
+                                                        src={require('../../../../../assets/images/mob_icon.png')}
+                                                    />
+                                                </div>
+                                                <div style={dropdownBtnTextStyle}>
+                                                    <p style={mobileOptionTopLabelStyle}>Mobile (iOS / Android)</p>
+                                                    <p style={mobileOptionBottomLabelStyle}>Users viewing streams using native iOS and Android mobile apps</p>
+                                                </div>
+                                            </div>
+                                        </Button>
+                                    </div>
+                                    <div>
+                                        <Button
+                                            style={dropdownOptionBtnStyle}
+                                        >
+                                            <div style={comingSoonWrapperStyle}>
+                                                <div style={comingSoonStyle}>
+                                                    <p style={comingSoonLabelStyle}>Coming Soon</p>
+                                                </div>
+                                                <div style={dropdownWebBtnStyle}>
+                                                    <div style={dropdownBtnImgStyle}>
+                                                        <Lock />
+                                                    </div>
+                                                    <div style={dropdownBtnTextStyle}>
+                                                        <p style={webOptionTopLabelStyle}>Web application</p>
+                                                        <p style={webOptionBottomLabelStyle}>Users viewing streams using their web browsers</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Button>
+                                    </div>
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={middleContainerstyle}>
+                        <div style={middleWrapperStyle}>
+                            <div style={ChannelLabelWrapperStyle}>
+                                <p style={channelLabelStyle}>Channel(s)</p>
+                            </div>
+                            <div style={totalChannelWrapperStyle}>
+                                <p style={totalNumberStyle}>1</p>
+                                <p style={totalLabelstyle}>Total</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={bottomContainerStyle}>
+                        <div style={leftContainerStyle}>
+                            <div style={channelSearchContainerStyle}>
+                                <div style={searchBarWrapperStyle}>
+                                    <SearchBar
+                                        value={this.state.value}
+                                        onChange={() => handleSearch()}
+                                        style={searchBarStyle}
+                                        placeholder={'Type for search'}
+                                    />
+                                </div>
+                                <div style={channelInfoWrapperStyle}>
+                                    <ChannelStreamsTemplate headerText={'General'} />
+                                    <ChannelStreamsTemplate headerText={'Renaissance'} />
+                                    <ChannelStreamsTemplate headerText={'Reading'} />
+                                    <ChannelStreamsTemplate headerText={'Latin literature'} />
+                                    <ChannelStreamsTemplate headerText={'Lorem Ipsum'} />
+                                    <ChannelStreamsTemplate headerText={'Bonorum'} />
+                                    <ChannelStreamsTemplate headerText={'Rackham'} />
+                                    <ChannelStreamsTemplate headerText={'Malorum'} />
+                                    <ChannelStreamsTemplate headerText={'Injected'} />
+                                    <ChannelStreamsTemplate headerText={'Tutorials'} />
+                                    <ChannelStreamsTemplate headerText={'Content'} />
+                                    <ChannelStreamsTemplate headerText={'Specimen'} />
+                                    <ChannelStreamsTemplate headerText={'Internet'} />
+                                    <ChannelStreamsTemplate headerText={'Channel 2'} />
+                                </div>
+                                <div style={tipsWrapperStyle}>
+                                    <p style={tipsHeaderStyle}>Tips:</p>
+                                    <p style={tipsLabelStyle}>Create your own channel to stream content related to your audiences’ interest to improve content discoverability and gather actionable insights. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new channel</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={rightContainerStyle}>
+                            <div style={streamsContainerStyle}>
+                                <div style={generalwrapperStyle}>
+                                    <p style={generalHeaderStyle}>General</p>
+                                    <p style={generalContentStyle}>General channel is a default channel created by us, so you can stream first-time welcome messages, important notes and other content directly to all of your audience to be readily available in their feed automatically.</p>
+                                </div>
+                                <div style={liveStreamLabelContainerStyle}>
+                                    <p style={liveStreamLabelStyle}>LIVE STREAMS</p><p style={liveStreamNumberStyle}>(6)</p>
+                                </div>
+                                <div style={liveStreamWrapperStyle}>
+                                    <LiveStreamTemplate streamTitle="My Experience 1" />
+                                    <LiveStreamTemplate streamTitle="Readings" />
+                                    <LiveStreamTemplate streamTitle="Examination" />
+                                    <LiveStreamTemplate streamTitle="Test Materials" />
+                                    <LiveStreamTemplate streamTitle="Cardiology" />
+                                    <LiveStreamTemplate streamTitle="Therapy" />
+                                </div>
+                                <div style={readyToStreamLabelWrapperStyle}>
+                                    <p style={readyToStreamLabelStyle}>READY TO STREAM</p><p style={readyToStreamNumberStyle}>(18)</p>
+                                </div>
+                                <div style={readyToStreamWrapperStyle}>
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                    <ReadyToStreamTemplate />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </Slide>
         )
     }
@@ -137,24 +283,24 @@ const styles = {
     },
     topContainerStyle: {
         height: 66,
-        display:'flex',
-        paddingTop:18
+        display: 'flex',
+        paddingTop: 18
     },
-    topWrapperStyle:{
-        flex:'320px 0 0',
-        display:'flex',
-        justifyContent:'space-between',
-        alignItems:'center',
+    topWrapperStyle: {
+        flex: '320px 0 0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    targetWrapperStyle:{
+    targetWrapperStyle: {
 
     },
-    targetLabelStyle:{
-        margin:0,
-        fontSize:fonts.h1
+    targetLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h1
     },
     dropdownWrapperStyle: {
-    
+
     },
     dropdownBtnStyle: {
         padding: 0,
@@ -173,9 +319,9 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
-        borderBottom:'0.25px solid #D9DDE2',
-        paddingLeft:12,
-        paddingRight:24
+        borderBottom: '0.25px solid #D9DDE2',
+        paddingLeft: 12,
+        paddingRight: 24
     },
     dropdownWebBtnStyle: {
         display: 'flex',
@@ -213,7 +359,7 @@ const styles = {
         fontSize: fonts.h3
     },
     webOptionBottomLabelStyle: {
-        margin:0,
+        margin: 0,
         color: colors.lightGreyColor,
         fontSize: fonts.h4
     },
@@ -222,7 +368,7 @@ const styles = {
         flexDirection: 'column',
         width: '100%',
         marginBottom: 32,
-        marginLeft:12
+        marginLeft: 12
     },
     comingSoonStyle: {
         alignSelf: 'flex-end',
@@ -231,7 +377,7 @@ const styles = {
         padding: 6,
 
     },
-    comingSoonLabelStyle:{
+    comingSoonLabelStyle: {
         margin: 0,
         fontSize: fonts.h4,
         color: colors.whiteColor,
@@ -240,55 +386,55 @@ const styles = {
 
 
 
-    middleContainerstyle:{
+    middleContainerstyle: {
         height: 48,
-        display:'flex',
+        display: 'flex',
     },
-    middleWrapperStyle:{
-        flex:'320px 0 0',
-        display:'flex',
-        justifyContent:'space-between',
-        alignItems:'center',
+    middleWrapperStyle: {
+        flex: '320px 0 0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    ChannelLabelWrapperStyle:{
+    ChannelLabelWrapperStyle: {
 
     },
-    channelLabelStyle:{
-        margin:0,
-        fontSize:fonts.h1
+    channelLabelStyle: {
+        margin: 0,
+        fontSize: fonts.h1
     },
-    totalChannelWrapperStyle:{
-        paddingRight:6,
-        display:'flex',
+    totalChannelWrapperStyle: {
+        paddingRight: 6,
+        display: 'flex',
     },
-    totalNumberStyle:{
-        margin:0,
-        fontSize:fonts.h3,
+    totalNumberStyle: {
+        margin: 0,
+        fontSize: fonts.h3,
         color: colors.lightGreyColor
     },
-    totalLabelstyle:{
-        margin:0,
-        fontSize:fonts.h3,
+    totalLabelstyle: {
+        margin: 0,
+        fontSize: fonts.h3,
         color: colors.lightGreyColor,
-        marginLeft:3
+        marginLeft: 3
     },
 
 
-    bottomContainerStyle:{
-        height:`calc(100% - 240px)`,
-        position:'relative',
-        display:'flex'
+    bottomContainerStyle: {
+        height: `calc(100% - 240px)`,
+        position: 'relative',
+        display: 'flex'
     },
-    leftContainerStyle:{
-        background:colors.whiteColor,
-        height:'100%',
-        flex:'320px 0 0',
+    leftContainerStyle: {
+        background: colors.whiteColor,
+        height: '100%',
+        flex: '320px 0 0',
     },
     channelSearchContainerStyle: {
-        height:'100%'
+        height: '100%'
     },
     searchBarWrapperStyle: {
-        borderBottom:'1px solid #D9DDE2',
+        borderBottom: '1px solid #D9DDE2',
         height: 48
     },
     searchBarStyle: {
@@ -302,17 +448,17 @@ const styles = {
         overflowY: 'scroll',
     },
     tipsWrapperStyle: {
-        height:114,
-        padding:'12px 12px 0px 12px'
+        height: 114,
+        padding: '12px 12px 0px 12px'
     },
     tipsHeaderStyle: {
         marginBottom: 12,
-        marginTop:0,
-        fontSize:fonts.h4
+        marginTop: 0,
+        fontSize: fonts.h4
     },
     tipsLabelStyle: {
-        fontSize:fonts.h4,
-        margin:0,
+        fontSize: fonts.h4,
+        margin: 0,
     },
     clickHereLinkStyle: {
         color: colors.blueColor
@@ -320,20 +466,20 @@ const styles = {
 
 
 
-    rightContainerStyle:{
-        height:'100%',
-        flex:'832px 0 0',
-        paddingLeft:48,
+    rightContainerStyle: {
+        height: '100%',
+        flex: '832px 0 0',
+        paddingLeft: 48,
 
     },
-    streamsContainerStyle:{
-        height:'100%'
+    streamsContainerStyle: {
+        height: '100%'
     },
-    generalwrapperStyle:{
+    generalwrapperStyle: {
         width: 'auto',
         background: 'white',
-        padding:12,
-        height:78,
+        padding: 12,
+        height: 78,
     },
     generalHeaderStyle: {
         margin: 0,
@@ -345,44 +491,44 @@ const styles = {
         color: colors.lightGreyColor,
         fontSize: fonts.h3
     },
-    liveStreamLabelContainerStyle:{
-        height:48,
-        display:'table'
+    liveStreamLabelContainerStyle: {
+        height: 48,
+        display: 'table'
     },
     liveStreamLabelStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        margin:0
+        margin: 0
     },
-    liveStreamNumberStyle:{
-        paddingLeft:24,
+    liveStreamNumberStyle: {
+        paddingLeft: 24,
         display: 'table-cell',
         verticalAlign: 'middle',
-        marginTop:0,
-        marginBottom:0
+        marginTop: 0,
+        marginBottom: 0
     },
     liveStreamWrapperStyle: {
         overflowY: 'scroll',
-        height:`calc((100% - 198px)/2)`,
+        height: `calc((100% - 198px)/2)`,
     },
-    readyToStreamLabelWrapperStyle:{
-        height:48,
-        display:'table'
+    readyToStreamLabelWrapperStyle: {
+        height: 48,
+        display: 'table'
     },
     readyToStreamLabelStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        margin:0
+        margin: 0
     },
-    readyToStreamNumberStyle:{
+    readyToStreamNumberStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
-        margin:0,
-        paddingLeft:24
+        margin: 0,
+        paddingLeft: 24
     },
     readyToStreamWrapperStyle: {
         overflowY: 'scroll',
-        height:`calc((100% - 198px)/2)`,
+        height: `calc((100% - 198px)/2)`,
     },
 }
 
