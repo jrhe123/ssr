@@ -78,6 +78,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
             tmpExperiences.splice(tmpExperience.index, 1);
             updated.Experiences = tmpExperiences;
+            updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
             return updated;
 
         case STREAM_CHANNEL_FETCH__SUCCEEDED:
