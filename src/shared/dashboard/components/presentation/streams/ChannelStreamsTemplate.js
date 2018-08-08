@@ -35,7 +35,6 @@ class ChannelStreamsTemplate extends Component {
         this.setState({ isImportOpen: false });
     }
 
-
     render() {
         const {
             channelInfoStyle,
