@@ -10,6 +10,7 @@ import {
     EXPERIENCE_DELETE__SUCCEEDED,
     // stream
     STREAM_CHANNEL_FETCH__SUCCEEDED,
+    STREAM_CHANNEL_SELECT__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -32,6 +33,7 @@ const initialState = {
 
     TotalStreamActiveChannelRecord: 0,
     StreamActiveChannels: [],
+    CurrentStreamChannel: null,
 };
 
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
@@ -87,6 +89,12 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case STREAM_CHANNEL_FETCH__SUCCEEDED:
             updated.TotalStreamActiveChannelRecord = payload.totalRecord;
             updated.StreamActiveChannels = payload.expereienceChannels;
+            if (payload.expereienceChannels[0])
+                updated.CurrentStreamChannel = Object.assign({}, payload.expereienceChannels[0]);
+            return updated;
+
+        case STREAM_CHANNEL_SELECT__SUCCEEDED:
+            updated.CurrentStreamChannel = Object.assign({}, payload.channel);
             return updated;
 
         default:

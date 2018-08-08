@@ -20,9 +20,9 @@ import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxFetchStreamChannel as dxFetchStreamChannelAction
+    dxFetchStreamChannel as dxFetchStreamChannelAction,
+    dxSelectStreamChannel as dxSelectStreamChannelAction,
 } from '../../actions';
-import { channel } from '../../../../../node_modules/redux-saga';
 
 class StreamContainer extends Component {
 
@@ -49,15 +49,20 @@ class StreamContainer extends Component {
         console.log('value: ', value)
     }
 
+    handleSelectChannel = (channel) => {
+        this.props.dxSelectStreamChannelAction(channel);
+    }
+
     renderActiveChannelList = () => {
         const {
+            CurrentStreamChannel,
             StreamActiveChannels,
         } = this.props;
-
         let list = StreamActiveChannels.map((channel, index) => (
             <ChannelStreamsTemplate 
                 channel={channel}
-                active={true}
+                active={CurrentStreamChannel.ExperienceChannelGUID == channel.ExperienceChannelGUID ? true : false}
+                handleSelectChannel={() => this.handleSelectChannel(channel)}
             />
         ))
         return list;
@@ -517,6 +522,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        CurrentStreamChannel: state.dashboard.CurrentStreamChannel,
         StreamActiveChannels: state.dashboard.StreamActiveChannels,
         TotalStreamActiveChannelRecord: state.dashboard.TotalStreamActiveChannelRecord,
     }
@@ -524,6 +530,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxFetchStreamChannelAction,
+    dxSelectStreamChannelAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(StreamContainer);

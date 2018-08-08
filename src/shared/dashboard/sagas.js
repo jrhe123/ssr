@@ -40,6 +40,10 @@ import {
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_FETCH__FAILED,
 
+    STREAM_CHANNEL_SELECT_REQUESTED,
+    STREAM_CHANNEL_SELECT__SUCCEEDED,
+    STREAM_CHANNEL_SELECT__FAILED,
+
 } from './constants';
 
 // Dashboard navi
@@ -353,4 +357,25 @@ export function* dxFetchStreamChannel(action) {
 
 export function* dxFetchStreamChannelSaga() {
     yield takeEvery(STREAM_CHANNEL_FETCH_REQUESTED, dxFetchStreamChannel);
+}
+
+// Stream channel select
+export function* dxSelectStreamChannel(action) {
+    try {
+        yield put({
+            type: STREAM_CHANNEL_SELECT__SUCCEEDED,
+            payload: {
+                channel: action.payload.channel,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: STREAM_CHANNEL_SELECT__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxSelectStreamChannelSaga() {
+    yield takeEvery(STREAM_CHANNEL_SELECT_REQUESTED, dxSelectStreamChannel);
 }

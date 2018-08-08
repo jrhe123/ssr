@@ -52,7 +52,11 @@ class ChannelStreamsTemplate extends Component {
         } = this.props;
 
         return (
-            <div style={Object.assign({}, channelInfoStyle, { backgroundColor: active ? colors.lightBlueColor : colors.whiteColor })}>
+            <div 
+                className="dx_tab"
+                style={Object.assign({}, channelInfoStyle, { backgroundColor: active ? colors.lightBlueColor : colors.whiteColor })}
+                onClick={() => this.props.handleSelectChannel()}
+            >
                 <div style={channelInfoLeftStyle}>
                     <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
                     <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>

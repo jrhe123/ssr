@@ -13,6 +13,7 @@ import {
 
     // STREAM
     STREAM_CHANNEL_FETCH_REQUESTED,
+    STREAM_CHANNEL_SELECT_REQUESTED,
 
 } from './constants';
 
@@ -81,6 +82,15 @@ export const dxFetchStreamChannel = () => {
         type: STREAM_CHANNEL_FETCH_REQUESTED,
         payload: {
             status: 'ACTIVE'
+        },
+    }
+}
+
+export const dxSelectStreamChannel = (channel) => {
+    return {
+        type: STREAM_CHANNEL_SELECT_REQUESTED,
+        payload: {
+            channel
         },
     }
 }
