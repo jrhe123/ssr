@@ -246,7 +246,7 @@ class StreamContainer extends Component {
                             }
 
                             <div style={liveStreamLabelContainerStyle}>
-                                <p style={liveStreamLabelStyle}>LIVE STREAMS</p><p style={liveStreamNumberStyle}>(6)</p>
+                                <span style={liveStreamLabelStyle}>LIVE STREAMS</span><span style={liveStreamNumberStyle}>(6)</span>
                             </div>
                             <div style={liveStreamWrapperStyle}>
                                 <LiveStreamTemplate
@@ -255,7 +255,7 @@ class StreamContainer extends Component {
                             </div>
 
                             <div style={readyToStreamLabelWrapperStyle}>
-                                <p style={readyToStreamLabelStyle}>READY TO STREAM</p><p style={readyToStreamNumberStyle}>(18)</p>
+                                <span style={readyToStreamLabelStyle}>READY TO STREAM</span><span style={readyToStreamNumberStyle}>(18)</span>
                             </div>
                             <div style={readyToStreamWrapperStyle}>
                                 <ReadyToStreamTemplate />
@@ -481,19 +481,14 @@ const styles = {
         fontSize: fonts.h3
     },
     liveStreamLabelContainerStyle: {
-        height: 48,
-        display: 'table'
+        marginBottom: 12,
     },
     liveStreamLabelStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
         margin: 0,
         color: colors.labelColor,
         fontSize: fonts.h3,
     },
     liveStreamNumberStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
         margin: 0,
         paddingLeft: 12,
         color: colors.labelColor,
@@ -504,19 +499,14 @@ const styles = {
         height: `calc((100% - 198px)/2)`,
     },
     readyToStreamLabelWrapperStyle: {
-        height: 48,
-        display: 'table'
+        marginBottom: 12,
     },
     readyToStreamLabelStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
         margin: 0,
         color: colors.labelColor,
         fontSize: fonts.h3,
     },
     readyToStreamNumberStyle: {
-        display: 'table-cell',
-        verticalAlign: 'middle',
         margin: 0,
         paddingLeft: 12,
         color: colors.labelColor,

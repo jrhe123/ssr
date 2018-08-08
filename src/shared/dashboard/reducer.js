@@ -91,6 +91,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.StreamActiveChannels = payload.expereienceChannels;
             if (payload.expereienceChannels[0])
                 updated.CurrentStreamChannel = Object.assign({}, payload.expereienceChannels[0]);
+            else
+                updated.CurrentStreamChannel = null;
             return updated;
 
         case STREAM_CHANNEL_SELECT__SUCCEEDED:
