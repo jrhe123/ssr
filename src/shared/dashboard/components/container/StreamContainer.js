@@ -21,6 +21,7 @@ import DxModal from '../../../components/dxModal/DxModal';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxDashboardNavi as dxDashboardNaviAction,
     dxFetchStreamChannel as dxFetchStreamChannelAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
     dxCreateStream as dxCreateStreamAction,
@@ -123,6 +124,14 @@ class StreamContainer extends Component {
 
         this.setState({ isModalOpen: false });
         this.props.dxRemoveStreamAction(targetExperienceStream.ExperienceStreamGUID);
+    }
+
+    handleNavigateToChannel = () => {
+        this.props.dxDashboardNaviAction(1);
+    }
+
+    handleNavigateToExperience = () => {
+        this.props.dxDashboardNaviAction(0);
     }
 
     renderActiveChannelList = () => {
@@ -332,7 +341,7 @@ class StreamContainer extends Component {
                             </div>
                             <div style={tipsWrapperStyle}>
                                 <p style={tipsHeaderStyle}>Tips:</p>
-                                <p style={tipsLabelStyle}>Create your own channel to stream content related to your audiences’ interest to improve content discoverability and gather actionable insights. Click <a href='#' style={clickHereLinkStyle}>here</a> to create a new channel</p>
+                                <p style={tipsLabelStyle}>Create your own channel to stream content related to your audiences’ interest to improve content discoverability and gather actionable insights. Click <a onClick={() => this.handleNavigateToChannel()} style={clickHereLinkStyle}>here</a> to create a new channel</p>
                             </div>
                         </div>
                     </div>
@@ -398,7 +407,7 @@ class StreamContainer extends Component {
                                                 <div style={pendingMsgContainerStyle}>
                                                     <div style={tableContainerStyle}>
                                                         <div style={tableWrapperStyle}>
-                                                            <p style={pendingMsgStyle}>There are no experience(s) found to be streamed. Click here to create a new experience</p>
+                                                            <p style={pendingMsgStyle}>There are no experience(s) found to be streamed. Click <span onClick={() => this.handleNavigateToExperience()} style={clickHereLinkStyle}>here</span> to create a new experience</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -626,7 +635,8 @@ const styles = {
         margin: 0,
     },
     clickHereLinkStyle: {
-        color: colors.blueColor
+        color: colors.blueColor,
+        cursor: 'pointer',
     },
 
     rightContainerStyle: {
@@ -748,6 +758,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxDashboardNaviAction,
     dxFetchStreamChannelAction,
     dxSelectStreamChannelAction,
     dxCreateStreamAction,

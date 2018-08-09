@@ -93,6 +93,10 @@ class ExperienceContainer extends Component {
         })
     }
 
+    handleDraftExperience = (experienceGUID) => {
+        console.log('out here: ', experienceGUID);
+    }
+
     render() {
 
         const {
@@ -157,6 +161,7 @@ class ExperienceContainer extends Component {
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
                                             handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
                                             handleRemoveExperience={(experienceGUID) => this.handleRemoveExperience(experienceGUID)}
+                                            handleDraftExperience={(experienceGUID) => this.handleDraftExperience(experienceGUID)}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>

@@ -54,6 +54,7 @@ class ExperienceList extends Component {
                                     handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
                                     handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID)}
                                     handleRemoveExperience={() => this.props.handleRemoveExperience(experience.ExperienceGUID)}
+                                    handleDraftExperience={() => this.props.handleDraftExperience(experience.ExperienceGUID)}
                                     handleErrorMsg={(msg) => this.props.handleErrorMsg(msg)}
                                 />
                             </div>

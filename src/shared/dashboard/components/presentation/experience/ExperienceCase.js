@@ -102,7 +102,18 @@ class ExperienceCase extends Component {
                                         :
                                         null
                                 }
-                                <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
+                                {
+                                    enableEditExperience ?
+                                        <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
+                                        :
+                                        null
+                                }
+                                {
+                                    !enableEditExperience ?
+                                        <Button onClick={() => this.props.handleDraftExperience()}>Draft</Button>
+                                        :
+                                        null
+                                }
                             </DropdownMenu>
                         </div>
                     </div>
