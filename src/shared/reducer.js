@@ -20,6 +20,8 @@ import {
     STREAM_CHANNEL_FETCH__FAILED,
     STREAM_CREATE__SUCCEEDED,
     STREAM_CREATE__FAILED,
+    STREAM_REMOVE__SUCCEEDED,
+    STREAM_REMOVE__FAILED,
 } from './dashboard';
 
 // New experience
@@ -168,6 +170,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case CHANNEL_UPDATE_STATUS__SUCCEEDED:
         case CHANNEL_UPDATE__SUCCEEDED:
         case STREAM_CREATE__SUCCEEDED:
+        case STREAM_REMOVE__SUCCEEDED:
             tempAlertBar = {
                 isDisplay: true,
                 isError: false,
@@ -188,6 +191,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case CHANNEL_UPDATE__FAILED:
         case STREAM_CHANNEL_FETCH__FAILED:
         case STREAM_CREATE__FAILED:
+        case STREAM_REMOVE__FAILED:
             tempAlertBar = {
                 isDisplay: true,
                 isError: true,

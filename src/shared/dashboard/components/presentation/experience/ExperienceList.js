@@ -25,6 +25,10 @@ class ExperienceList extends Component {
             mainContainerStyle,
             experienceContainerStyle,
             experienceWrapperStyle,
+            statusContainerStyle,
+            statusWrapperStyle,
+            statusLabelContainerStyle,
+            statusLabelStyle,
 
             newExperienceContainerStyle,
             newExperienceWrapperStyle,
@@ -46,11 +50,19 @@ class ExperienceList extends Component {
                             >
                                 <ExperienceCase
                                     experience={experience}
+                                    enableEditExperience={experience.ExperienceStreamList.length ? false : true}
                                     handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
                                     handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID)}
                                     handleRemoveExperience={() => this.props.handleRemoveExperience(experience.ExperienceGUID)}
                                     handleErrorMsg={(msg) => this.props.handleErrorMsg(msg)}
                                 />
+                            </div>
+                            <div style={statusContainerStyle}>
+                                <div style={statusWrapperStyle}>
+                                    <div style={statusLabelContainerStyle}>
+                                        <p style={Object.assign({}, statusLabelStyle, {color: experience.ExperienceStreamList.length ? colors.greenColor : colors.greyLabelColor})}>{experience.ExperienceStreamList.length ? 'Live' : 'Draft'}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))
@@ -118,6 +130,23 @@ const styles = {
         marginTop: 24,
         marginBottom: 24,
         cursor: 'pointer',
+    },
+    statusContainerStyle: {
+        height: 18,
+        paddingRight: 24,
+    },
+    statusWrapperStyle: {
+        height: 18,
+        width: 72,
+        float: 'right',
+    },
+    statusLabelContainerStyle: {
+        borderRadius: 6,
+        backgroundColor: colors.whiteColor,
+    },
+    statusLabelStyle: {
+        textAlign: 'center',
+        fontSize: fonts.h4
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
