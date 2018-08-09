@@ -17,6 +17,10 @@ class ThumbnailPage extends Component {
             elemContainerStyle,
         } = styles;
 
+        if(!Sections){
+            return null;
+        }
+
         let section = Sections.map((section, i) => {
             return (
                 <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'} 

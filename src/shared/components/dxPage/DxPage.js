@@ -55,6 +55,10 @@ class DxPage extends Component {
             elemContainerStyle,
         } = styles;
 
+        if(!sections){
+            return null;
+        }
+
         let section = sections.map((section, i) => {
             return (
                 <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
