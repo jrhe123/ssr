@@ -64,8 +64,7 @@ class LiveStreamTemplate extends Component {
                         align={'right'}
                     >
                         <div style={importContainerStyle}>
-                            <p>{this.props.streamTitle}</p>
-                            <p>Option 2</p>
+                            <p>Remove</p>
                         </div>
                     </DropdownMenu>
                 </div>
