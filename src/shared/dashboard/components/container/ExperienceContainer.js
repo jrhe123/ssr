@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxDashboardNavi as dxDashboardNaviAction,
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -94,7 +95,7 @@ class ExperienceContainer extends Component {
     }
 
     handleDraftExperience = (experienceGUID) => {
-        console.log('out here: ', experienceGUID);
+        this.props.dxDashboardNaviAction(2);
     }
 
     render() {
@@ -297,6 +298,7 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
+    dxDashboardNaviAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,

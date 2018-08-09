@@ -706,7 +706,7 @@ const styles = {
         borderColor: colors.blueBorderColor,
         backgroundColor: colors.whiteColor,
         height: 72,
-        marginBottom: 24,
+        marginBottom: 106,
     },
     liveMsgStyle: {
         color: colors.greyLabelColor,
