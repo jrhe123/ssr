@@ -217,8 +217,10 @@ class StreamContainer extends Component {
 
             rightContainerStyle,
             streamsContainerStyle,
-            currentChannleWrapperStyle,
+            streamsWrapperStyle,
+            currentChannleContainerStyle,
             currentChannelNameStyle,
+            currentChannelDescriptionWrapperStyle,
             currentChannelDescriptionStyle,
             liveStreamLabelStyle,
             liveStreamNumberStyle,
@@ -230,10 +232,12 @@ class StreamContainer extends Component {
             readyToStreamWrapperStyle,
 
             liveMsgContainerStyle,
+            liveMsgWrapperStyle,
             liveMsgStyle,
             goLabelStyle,
             sectionLabelStyle,
             pendingMsgContainerStyle,
+            pendingMsgWrapperStyle,
             pendingMsgStyle,
         } = styles;
 
@@ -325,7 +329,6 @@ class StreamContainer extends Component {
                 </div>
 
                 <div style={bottomContainerStyle}>
-
                     <div style={leftContainerStyle}>
                         <div style={channelSearchContainerStyle}>
                             <div style={searchBarWrapperStyle}>
@@ -351,10 +354,12 @@ class StreamContainer extends Component {
 
                             {
                                 CurrentStreamChannel.ExperienceChannelGUID ?
-                                    <div>
-                                        <div style={currentChannleWrapperStyle}>
+                                    <div style={streamsWrapperStyle}>
+                                        <div style={currentChannleContainerStyle}>
                                             <p style={Object.assign({}, currentChannelNameStyle, { color: CurrentStreamChannel.ChannelColor })}>{CurrentStreamChannel.ChannelName}</p>
-                                            <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
+                                            <div style={currentChannelDescriptionWrapperStyle}>
+                                                <p style={currentChannelDescriptionStyle}>{CurrentStreamChannel.ChannelDescription ? CurrentStreamChannel.ChannelDescription : 'No description..'}</p>
+                                            </div>
                                         </div>
 
                                         <div style={liveStreamLabelContainerStyle}>
@@ -374,14 +379,16 @@ class StreamContainer extends Component {
                                                 </div>
                                                 :
                                                 <div style={liveMsgContainerStyle}>
-                                                    <div style={tableContainerStyle}>
-                                                        <div style={tableWrapperStyle}>
-                                                            {
-                                                                PendingExperiences.length ?
-                                                                    <p style={liveMsgStyle}>Click the green <span style={goLabelStyle}>Go Live</span> button in the below <span style={sectionLabelStyle}>READY TO STREAM</span> section</p>
-                                                                    :
-                                                                    <p style={liveMsgStyle}>There are no ready to stream experience(s) found</p>
-                                                            }
+                                                    <div style={liveMsgWrapperStyle}>
+                                                        <div style={tableContainerStyle}>
+                                                            <div style={tableWrapperStyle}>
+                                                                {
+                                                                    PendingExperiences.length ?
+                                                                        <p style={liveMsgStyle}>Click the green <span style={goLabelStyle}>Go Live</span> button in the below <span style={sectionLabelStyle}>READY TO STREAM</span> section</p>
+                                                                        :
+                                                                        <p style={liveMsgStyle}>There are no ready to stream experience(s) found</p>
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -405,16 +412,18 @@ class StreamContainer extends Component {
                                                 </div>
                                                 :
                                                 <div style={pendingMsgContainerStyle}>
-                                                    <div style={tableContainerStyle}>
-                                                        <div style={tableWrapperStyle}>
-                                                            <p style={pendingMsgStyle}>There are no experience(s) found to be streamed. Click <span onClick={() => this.handleNavigateToExperience()} style={clickHereLinkStyle}>here</span> to create a new experience</p>
+                                                    <div style={pendingMsgWrapperStyle}>
+                                                        <div style={tableContainerStyle}>
+                                                            <div style={tableWrapperStyle}>
+                                                                <p style={pendingMsgStyle}>There are no experience(s) found to be streamed. Click <span onClick={() => this.handleNavigateToExperience()} style={clickHereLinkStyle}>here</span> to create a new experience</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                         }
                                     </div>
                                     :
-                                    <div style={currentChannleWrapperStyle}>
+                                    <div style={currentChannleContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={tableWrapperStyle}>
                                                 <p style={currentChannelNameStyle}>Please select a channel to stream</p>
@@ -475,7 +484,7 @@ const styles = {
     },
     targetLabelStyle: {
         margin: 0,
-        fontSize: fonts.h1
+        fontSize: fonts.h2
     },
     dropdownWrapperStyle: {
 
@@ -483,7 +492,7 @@ const styles = {
     dropdownBtnStyle: {
         padding: 0,
         textTransform: 'none',
-        fontSize: fonts.h1
+        fontSize: fonts.h2
     },
     expandIconStyle: {
         color: colors.lightGreyColor
@@ -576,7 +585,7 @@ const styles = {
     },
     channelLabelStyle: {
         margin: 0,
-        fontSize: fonts.h1
+        fontSize: fonts.h2
     },
     totalChannelWrapperStyle: {
         paddingRight: 6,
@@ -595,7 +604,7 @@ const styles = {
     },
 
     bottomContainerStyle: {
-        height: `calc(100% - 240px)`,
+        height: `calc(100% - 204px)`,
         position: 'relative',
         display: 'flex'
     },
@@ -648,21 +657,29 @@ const styles = {
     streamsContainerStyle: {
         height: '100%'
     },
-    currentChannleWrapperStyle: {
+    streamsWrapperStyle:{
+        height:'100%'
+    },
+    currentChannleContainerStyle: {
         backgroundColor: colors.whiteColor,
         padding: 12,
         height: 78,
         marginBottom: 24,
+        
     },
     currentChannelNameStyle: {
         margin: 0,
         paddingBottom: 12,
-        fontSize: fonts.h1
+        fontSize: fonts.h2
+    },
+    currentChannelDescriptionWrapperStyle:{
+        height:42,
+        overflowY: 'scroll',
     },
     currentChannelDescriptionStyle: {
         margin: 0,
         color: colors.lightGreyColor,
-        fontSize: fonts.h3
+        fontSize: fonts.h3,
     },
     liveStreamLabelContainerStyle: {
         marginBottom: 12,
@@ -680,7 +697,7 @@ const styles = {
     },
     liveStreamWrapperStyle: {
         overflowY: 'auto',
-        height: 180,
+        height: 'calc((100% - 194px)/2)',
     },
     readyToStreamLabelWrapperStyle: {
         marginBottom: 12,
@@ -698,15 +715,18 @@ const styles = {
     },
     readyToStreamWrapperStyle: {
         overflowY: 'auto',
-        height: 180,
+        height: 'calc((100% - 194px)/2)',
     },
 
     liveMsgContainerStyle: {
+        height: 'calc((100% - 194px)/2)',
+    },
+    liveMsgWrapperStyle:{
+        height: 72,
+        marginBottom: 106,
         border: '1px dotted',
         borderColor: colors.blueBorderColor,
         backgroundColor: colors.whiteColor,
-        height: 72,
-        marginBottom: 106,
     },
     liveMsgStyle: {
         color: colors.greyLabelColor,
@@ -722,11 +742,14 @@ const styles = {
         fontWeight: 'bold'
     },
     pendingMsgContainerStyle: {
+        height: 'calc((100% - 194px)/2)',
+    },
+    pendingMsgWrapperStyle:{
+        height: 72,
+        marginBottom: 24,
         border: '1px dotted',
         borderColor: colors.blueBorderColor,
         backgroundColor: colors.whiteColor,
-        height: 72,
-        marginBottom: 24,
     },
     pendingMsgStyle: {
         color: colors.greyLabelColor,
