@@ -21,17 +21,21 @@ class ReadyToStreamTemplate extends Component {
             goLiveBtnStyle,
         } = styles;
 
+        const {
+            experience
+        } = this.props;
+
         return (
             <div style={mainContainerStyle}>
                 <div style={tableContainerStyle}>
                     <div style={tableWrapperStyle}>
                         <div style={redayToStreamWrapperStyle}>
-                            <p style={expTitleStyle}>My experience 1</p>
-                            <p style={expLabelStyle}>Streamed in <span style={numberStreamStyle}>0</span> other channel(s)</p>
+                            <p style={expTitleStyle}>{experience.ExperienceTitle}</p>
+                            <p style={expLabelStyle}>Streamed in <span style={numberStreamStyle}>{experience.ExperienceStreams.length}</span> other channel(s)</p>
                             <Button
                                 variant="Add a new stream"
                                 style={goLiveBtnStyle}
-                                onClick={() => this.handleOpenModal()}
+                                onClick={() => this.props.handleGoLiveStream()}
                             >Go Live</Button>
                         </div>
                     </div>

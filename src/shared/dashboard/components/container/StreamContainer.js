@@ -53,11 +53,35 @@ class StreamContainer extends Component {
         this.props.dxSelectStreamChannelAction(channel);
     }
 
+    handleGoLiveStream = (experience) => {
+        console.log('out here: ', experience);
+    }
+
     renderActiveChannelList = () => {
         const {
             CurrentStreamChannel,
             StreamActiveChannels,
         } = this.props;
+
+        const {
+            tableContainerStyle,
+            tableWrapperStyle,
+            channelMsgContainerStyle,
+            channelMsgStyle
+        } = styles;
+
+        if (!StreamActiveChannels.length) {
+            return (
+                <div style={channelMsgContainerStyle}>
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <p style={channelMsgStyle}>No live channels found</p>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         let list = StreamActiveChannels.map((channel, index) => (
             <ChannelStreamsTemplate
                 channel={channel}
@@ -145,9 +169,6 @@ class StreamContainer extends Component {
 
             TotalStreamActiveChannelRecord,
         } = this.props;
-
-        console.log('LiveExperienceStreams: ', LiveExperienceStreams);
-        console.log('PendingExperiences: ', PendingExperiences);
 
         return (
             <div style={mainContainerStyle}>
@@ -297,7 +318,10 @@ class StreamContainer extends Component {
                                                 <div style={readyToStreamWrapperStyle}>
                                                     {
                                                         PendingExperiences.map((experience, index) => (
-                                                            <ReadyToStreamTemplate />
+                                                            <ReadyToStreamTemplate
+                                                                experience={experience}
+                                                                handleGoLiveStream={() => this.handleGoLiveStream(experience)}
+                                                            />
                                                         ))
                                                     }
                                                 </div>
@@ -619,6 +643,13 @@ const styles = {
         color: colors.greyLabelColor,
         fontSize: fonts.h3,
         margin: 0,
+    },
+    channelMsgContainerStyle: {
+        height: 48,
+    },
+    channelMsgStyle: {
+        fontSize: fonts.h3,
+        color: colors.labelColor,
     },
 }
 
