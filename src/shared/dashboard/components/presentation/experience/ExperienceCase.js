@@ -110,7 +110,7 @@ class ExperienceCase extends Component {
                                 }
                                 {
                                     !enableEditExperience ?
-                                        <Button onClick={() => this.props.handleDraftExperience()}>Draft</Button>
+                                        <Button onClick={() => this.props.handleDraftExperience()}>Stream</Button>
                                         :
                                         null
                                 }
