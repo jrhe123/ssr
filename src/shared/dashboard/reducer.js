@@ -12,6 +12,7 @@ import {
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CREATE__SUCCEEDED,
+    STREAM_REMOVE__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -21,11 +22,13 @@ import {
     find_section_obj_by_guid,
 
     find_experience_channel_obj_by_guid,
+    find_experience_stream_obj_by_guid,
 } from '../helpers';
 
 const initialState = {
     NaviIndex: 0,
 
+    IsReloadExperience: false,
     TotalExperienceRecord: 0,
     Experiences: [],
 
@@ -35,6 +38,7 @@ const initialState = {
     TotalStreamActiveChannelRecord: 0,
     StreamActiveChannels: [],
 
+    IsReloadStream: false,
     CurrentStreamChannel: {},
     TotalLiveExperienceStreamRecord: 0,
     LiveExperienceStreams: [],
@@ -85,13 +89,11 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case EXPERIENCE_FETCH__SUCCEEDED:
             updated.TotalExperienceRecord = payload.totalRecord;
             updated.Experiences = payload.experiences;
+            updated.IsReloadExperience = false;
             return updated;
 
         case EXPERIENCE_DELETE__SUCCEEDED:
-            tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
-            tmpExperiences.splice(tmpExperience.index, 1);
-            updated.Experiences = tmpExperiences;
-            updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
+            updated.IsReloadExperience = true;
             return updated;
 
         case STREAM_CHANNEL_FETCH__SUCCEEDED:
@@ -107,14 +109,15 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.LiveExperienceStreams = Object.assign([], payload.liveExperienceStreams.ExperienceStreams);
             updated.TotalPendingExperienceRecord = payload.pendingExperiences.TotalRecord;
             updated.PendingExperiences = Object.assign([], payload.pendingExperiences.Experiences);
+            updated.IsReloadStream = false;
             return updated;
 
         case STREAM_CREATE__SUCCEEDED:
-            tmpExperience = find_experience_obj_by_guid(updated.PendingExperiences, payload.experience.ExperienceGUID);
-            tmpPendingExperiences.splice(tmpExperience.index, 1);
-            tmpLiveExperienceStreams.unshift(tmpExperience.experience);
-            updated.PendingExperiences = tmpPendingExperiences;
-            updated.LiveExperienceStreams = tmpLiveExperienceStreams;
+            updated.IsReloadStream = true;
+            return updated;
+
+        case STREAM_REMOVE__SUCCEEDED:
+            updated.IsReloadStream = true;
             return updated;
 
         default:

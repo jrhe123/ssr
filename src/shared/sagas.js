@@ -20,6 +20,7 @@ import {
     dxFetchStreamChannelSaga,
     dxSelectStreamChannelSaga,
     dxCreateStreamSaga,
+    dxRemoveStreamSaga,
 } from './dashboard/sagas';
 
 // NewExperience
@@ -112,6 +113,7 @@ export default function* rootSaga() {
         dxFetchStreamChannelSaga(),
         dxSelectStreamChannelSaga(),
         dxCreateStreamSaga(),
+        dxRemoveStreamSaga(),
 
         // CREATE EXPERIENCE
         dxExperienceInitalSaga(),

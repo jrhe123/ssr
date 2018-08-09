@@ -82,3 +82,16 @@ export const find_experience_channel_obj_by_guid = (experienceChannels, guid) =>
     }
     return null;
 }
+
+export const find_experience_stream_obj_by_guid = (experienceStreams, guid) => {
+    for (let i = 0; i < experienceStreams.length; i++) {
+        let experienceStream = experienceStreams[i];
+        if (experienceStream.ExperienceStreamGUID == guid) {
+            return {
+                index: i,
+                experienceStream,
+            };
+        }
+    }
+    return null;
+}

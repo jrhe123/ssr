@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
-class ReadyToStreamTemplate extends Component {
+class ReadyToStream extends Component {
 
     render() {
         const {
@@ -89,4 +89,4 @@ const styles = {
         fontSize: fonts.h3,
     }
 }
-export default ReadyToStreamTemplate;
+export default ReadyToStream;

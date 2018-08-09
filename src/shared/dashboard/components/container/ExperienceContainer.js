@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 // redux
 import { connect } from 'react-redux';
 import {
+    dxDashboardNavi as dxDashboardNaviAction,
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -35,6 +36,12 @@ class ExperienceContainer extends Component {
 
     componentDidMount() {
         this.props.dxFetchExperienceAction();
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.IsReloadExperience && !this.props.IsReloadExperience) {
+            this.props.dxFetchExperienceAction();
+        }
     }
 
     handleCreateExperience = () => {
@@ -85,6 +92,10 @@ class ExperienceContainer extends Component {
         this.setState({
             isModalOpen: false,
         })
+    }
+
+    handleDraftExperience = (experienceGUID) => {
+        this.props.dxDashboardNaviAction(2);
     }
 
     render() {
@@ -151,6 +162,7 @@ class ExperienceContainer extends Component {
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
                                             handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
                                             handleRemoveExperience={(experienceGUID) => this.handleRemoveExperience(experienceGUID)}
+                                            handleDraftExperience={(experienceGUID) => this.handleDraftExperience(experienceGUID)}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
@@ -281,10 +293,12 @@ const stateToProps = (state) => {
         history: state.root.history,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         Experiences: state.dashboard.Experiences,
+        IsReloadExperience: state.dashboard.IsReloadExperience,
     }
 }
 
 const dispatchToProps = {
+    dxDashboardNaviAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,

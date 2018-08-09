@@ -48,6 +48,10 @@ import {
     STREAM_CREATE__SUCCEEDED,
     STREAM_CREATE__FAILED,
 
+    STREAM_REMOVE_REQUESTED,
+    STREAM_REMOVE__SUCCEEDED,
+    STREAM_REMOVE__FAILED,
+
 } from './constants';
 
 // Dashboard navi
@@ -439,6 +443,7 @@ export function* dxCreateStream(action) {
                 type: STREAM_CREATE__SUCCEEDED,
                 payload: {
                     experience: action.payload.experience,
+                    experienceStream: Response.ExperienceStream,
                     message: 'Stream has been created'
                 },
             });
@@ -455,4 +460,48 @@ export function* dxCreateStream(action) {
 
 export function* dxCreateStreamSaga() {
     yield takeEvery(STREAM_CREATE_REQUESTED, dxCreateStream);
+}
+
+// Remove Stream
+export const dxRemoveStreamUrl = (params) => {
+    let formattedParams = {
+        ExperienceStreamGUID: params.experienceStreamGUID,
+    }
+    return (
+        apiManager.dxApi(`/stream/delete`, formattedParams, true)
+    )
+}
+
+export function* dxRemoveStream(action) {
+    try {
+        const response = yield call(dxRemoveStreamUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_REMOVE__FAILED,
+                payload: {
+                    message: 'Stream remove api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_REMOVE__SUCCEEDED,
+                payload: {
+                    experienceStreamGUID: action.payload.experienceStreamGUID,
+                    message: 'Stream has been removed'
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: STREAM_REMOVE__FAILED,
+            payload: {
+                message: 'Stream remove api error'
+            },
+        });
+    }
+}
+
+export function* dxRemoveStreamSaga() {
+    yield takeEvery(STREAM_REMOVE_REQUESTED, dxRemoveStream);
 }

@@ -31,6 +31,7 @@ class ExperienceCase extends Component {
 
         const {
             experience,
+            enableEditExperience,
         } = this.props;
 
         const {
@@ -76,32 +77,48 @@ class ExperienceCase extends Component {
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
                                 <p style={bottomLabelStyle}>
-                                {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
+                                    {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div style={controlContainerStyle}>
                         <div style={controlWrapperStyle}>
-                        <DropdownMenu
-                            className="dx_card_template_bottom_bar_menu"
-                            isOpen={this.state.isMenuOpen}
-                            close={() => this.handleMenuClose()}
-                            toggle={
-                                <MoreHoriz
-                                    onClick={() => this.handleToggleBurger()}
-                                    style={editBurgerStyle} />
-                            }
-                            align='right'
-                            closeOnInsideClick={false}
-                        >
-                            <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
-                            <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
-                        </DropdownMenu>
+                            <DropdownMenu
+                                className="dx_card_template_bottom_bar_menu"
+                                isOpen={this.state.isMenuOpen}
+                                close={() => this.handleMenuClose()}
+                                toggle={
+                                    <MoreHoriz
+                                        onClick={() => this.handleToggleBurger()}
+                                        style={editBurgerStyle} />
+                                }
+                                align='right'
+                                closeOnInsideClick={false}
+                            >
+                                {
+                                    enableEditExperience ?
+                                        <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
+                                        :
+                                        null
+                                }
+                                {
+                                    enableEditExperience ?
+                                        <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
+                                        :
+                                        null
+                                }
+                                {
+                                    !enableEditExperience ?
+                                        <Button onClick={() => this.props.handleDraftExperience()}>Stream</Button>
+                                        :
+                                        null
+                                }
+                            </DropdownMenu>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         )
     }
