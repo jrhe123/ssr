@@ -156,8 +156,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        // borderBottom: '1px solid',
-        // borderColor: colors.whiteColor,
         height: 54,
     },
     channelListInfoWrapperStyle: {
