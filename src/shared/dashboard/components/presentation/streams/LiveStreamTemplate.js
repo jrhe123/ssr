@@ -19,8 +19,8 @@ class LiveStreamTemplate extends Component {
     }
 
     handleToggleMenu = () => {
-        this.setState({ 
-            isMenuOpen: !this.state.isMenuOpen 
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
         });
     }
 
@@ -29,8 +29,8 @@ class LiveStreamTemplate extends Component {
     }
 
     handleToggleImport = () => {
-        this.setState({ 
-            isImportOpen: !this.state.isImportOpen 
+        this.setState({
+            isImportOpen: !this.state.isImportOpen
         });
     }
 
@@ -53,7 +53,7 @@ class LiveStreamTemplate extends Component {
             <div style={liveStreamWrapperStyle}>
                 <p style={expTitleStyle}>{this.props.streamTitle}</p>
                 <div style={liveInfoWrapperStyle}>
-                    <DropdownMenu 
+                    <DropdownMenu
                         isOpen={this.state.isImportOpen}
                         close={this.handleCloseImport}
                         toggle={
@@ -76,40 +76,36 @@ class LiveStreamTemplate extends Component {
 
 const styles = {
 
-    liveStreamWrapperStyle:{
+    liveStreamWrapperStyle: {
         textAlign: 'center',
-        background:'white',
-        marginTop:0,
-        marginBottom:6,
-        padding:12,
+        background: 'white',
+        marginTop: 0,
+        marginBottom: 6,
+        padding: 12,
         fontSize: fonts.h4,
-        display:'flex',
-        justifyContent:'space-between',
-        height:24
+        display: 'flex',
+        justifyContent: 'space-between',
+        height: 24
     },
-    expTitleStyle:{
-        marginTop:0,
-        marginLeft:6,
-        marginBottom:0,
-        fontSize:fonts.h3
+    expTitleStyle: {
+        marginTop: 0,
+        marginLeft: 6,
+        marginBottom: 0,
+        fontSize: fonts.h3
     },
-    liveInfoWrapperStyle:{
-        alignSelf:'center',
-        margin:0
+    liveInfoWrapperStyle: {
+        alignSelf: 'center',
+        margin: 0
     },
-    liveInfoIconStyle:{
-        height:20, 
-        width:20
+    liveInfoIconStyle: {
+        height: 20,
+        width: 20
     },
-    importContainerStyle:{
-        paddingTop:12,
-        paddingRight:12,
-        paddingBottom:12,
-        paddingLeft:12,
-        textAlign:'left',
+    importContainerStyle: {
+        textAlign: 'left',
     },
-    widthStyle:{
-        width:50
+    widthStyle: {
+        width: 50
     }
 }
 export default LiveStreamTemplate;

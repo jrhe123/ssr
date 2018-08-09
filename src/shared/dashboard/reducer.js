@@ -11,6 +11,7 @@ import {
     // stream
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
+    STREAM_CREATE__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -46,6 +47,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let updated = Object.assign({}, previousState);
     let tmpExperiences = Object.assign([], updated.Experiences);
     let tmpExperienceChannels = Object.assign([], updated.ExperienceChannels);
+    let tmpPendingExperiences = Object.assign([], updated.PendingExperiences);
+    let tmpLiveExperienceStreams = Object.assign([], updated.LiveExperienceStreams);
 
     let tmpExperience;
     let tmpPage;
@@ -104,6 +107,14 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.LiveExperienceStreams = Object.assign([], payload.liveExperienceStreams.ExperienceStreams);
             updated.TotalPendingExperienceRecord = payload.pendingExperiences.TotalRecord;
             updated.PendingExperiences = Object.assign([], payload.pendingExperiences.Experiences);
+            return updated;
+
+        case STREAM_CREATE__SUCCEEDED:
+            tmpExperience = find_experience_obj_by_guid(updated.PendingExperiences, payload.experience.ExperienceGUID);
+            tmpPendingExperiences.splice(tmpExperience.index, 1);
+            tmpLiveExperienceStreams.unshift(tmpExperience.experience);
+            updated.PendingExperiences = tmpPendingExperiences;
+            updated.LiveExperienceStreams = tmpLiveExperienceStreams;
             return updated;
 
         default:

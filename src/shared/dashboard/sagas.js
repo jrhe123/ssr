@@ -44,6 +44,10 @@ import {
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CHANNEL_SELECT__FAILED,
 
+    STREAM_CREATE_REQUESTED,
+    STREAM_CREATE__SUCCEEDED,
+    STREAM_CREATE__FAILED,
+
 } from './constants';
 
 // Dashboard navi
@@ -406,4 +410,49 @@ export function* dxSelectStreamChannel(action) {
 
 export function* dxSelectStreamChannelSaga() {
     yield takeEvery(STREAM_CHANNEL_SELECT_REQUESTED, dxSelectStreamChannel);
+}
+
+// Create Stream
+export const dxCreateStreamUrl = (params) => {
+    let formattedParams = {
+        ExperienceChannelGUID: params.channel.ExperienceChannelGUID,
+        ExperienceGUID: params.experience.ExperienceGUID
+    }
+    return (
+        apiManager.dxApi(`/stream/create`, formattedParams, true)
+    )
+}
+
+export function* dxCreateStream(action) {
+    try {
+        const response = yield call(dxCreateStreamUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_CREATE__FAILED,
+                payload: {
+                    message: 'Stream create api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_CREATE__SUCCEEDED,
+                payload: {
+                    experience: action.payload.experience,
+                    message: 'Stream has been created'
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: STREAM_CREATE__FAILED,
+            payload: {
+                message: 'Stream create api error'
+            },
+        });
+    }
+}
+
+export function* dxCreateStreamSaga() {
+    yield takeEvery(STREAM_CREATE_REQUESTED, dxCreateStream);
 }

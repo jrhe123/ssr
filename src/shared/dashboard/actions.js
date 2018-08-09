@@ -14,6 +14,7 @@ import {
     // STREAM
     STREAM_CHANNEL_FETCH_REQUESTED,
     STREAM_CHANNEL_SELECT_REQUESTED,
+    STREAM_CREATE_REQUESTED,
 
 } from './constants';
 
@@ -91,6 +92,16 @@ export const dxSelectStreamChannel = (channel) => {
         type: STREAM_CHANNEL_SELECT_REQUESTED,
         payload: {
             channel
+        },
+    }
+}
+
+export const dxCreateStream = (channel, experience) => {
+    return {
+        type: STREAM_CREATE_REQUESTED,
+        payload: {
+            channel,
+            experience,
         },
     }
 }

@@ -23,6 +23,7 @@ import { connect } from 'react-redux';
 import {
     dxFetchStreamChannel as dxFetchStreamChannelAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
+    dxCreateStream as dxCreateStreamAction,
 } from '../../actions';
 
 class StreamContainer extends Component {
@@ -76,7 +77,8 @@ class StreamContainer extends Component {
             CurrentStreamChannel
         } = this.props;
 
-        console.log('targetExperience: ', targetExperience);
+        this.setState({ isModalOpen: false });
+        this.props.dxCreateStreamAction(CurrentStreamChannel, targetExperience);
     }
 
     renderActiveChannelList = () => {
@@ -622,8 +624,8 @@ const styles = {
         fontSize: fonts.h3,
     },
     liveStreamWrapperStyle: {
-        overflowY: 'scroll',
-        height: `calc((100% - 198px)/2)`,
+        overflowY: 'auto',
+        height: 180,
     },
     readyToStreamLabelWrapperStyle: {
         marginBottom: 12,
@@ -640,8 +642,8 @@ const styles = {
         fontSize: fonts.h3,
     },
     readyToStreamWrapperStyle: {
-        overflowY: 'scroll',
-        height: `calc((100% - 198px)/2)`,
+        overflowY: 'auto',
+        height: 180,
     },
 
     liveMsgContainerStyle: {
@@ -702,6 +704,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxFetchStreamChannelAction,
     dxSelectStreamChannelAction,
+    dxCreateStreamAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(StreamContainer);
