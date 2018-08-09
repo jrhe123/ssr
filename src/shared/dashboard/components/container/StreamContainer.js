@@ -13,9 +13,9 @@ import fonts from '../../../styles/fonts';
 import colors from '../../../styles/colors';
 
 // component
-import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
-import ReadyToStreamTemplate from '../presentation/streams/ReadyToStreamTemplate';
-import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
+import ChannelStream from '../presentation/streams/ChannelStream'
+import ReadyToStream from '../presentation/streams/ReadyToStream';
+import LiveStream from '../presentation/streams/LiveStream';
 import DxModal from '../../../components/dxModal/DxModal';
 
 // redux
@@ -107,7 +107,7 @@ class StreamContainer extends Component {
         }
 
         let list = StreamActiveChannels.map((channel, index) => (
-            <ChannelStreamsTemplate
+            <ChannelStream
                 channel={channel}
                 active={CurrentStreamChannel.ExperienceChannelGUID == channel.ExperienceChannelGUID ? true : false}
                 handleSelectChannel={() => this.handleSelectChannel(channel)}
@@ -312,7 +312,7 @@ class StreamContainer extends Component {
                                                 <div style={liveStreamWrapperStyle}>
                                                     {
                                                         LiveExperienceStreams.map((stream, index) => (
-                                                            <LiveStreamTemplate
+                                                            <LiveStream
                                                                 streamTitle={stream.ExperienceTitle}
                                                             />
                                                         ))
@@ -342,7 +342,7 @@ class StreamContainer extends Component {
                                                 <div style={readyToStreamWrapperStyle}>
                                                     {
                                                         PendingExperiences.map((experience, index) => (
-                                                            <ReadyToStreamTemplate
+                                                            <ReadyToStream
                                                                 experience={experience}
                                                                 handleGoLiveStream={() => this.handleGoLiveStream(experience)}
                                                             />

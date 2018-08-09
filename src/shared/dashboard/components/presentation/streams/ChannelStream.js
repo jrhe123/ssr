@@ -9,7 +9,7 @@ import DropdownMenu from 'react-dd-menu';
 import fonts from '../../../../styles/fonts';
 import colors from '../../../../styles/colors';
 
-class ChannelStreamsTemplate extends Component {
+class ChannelStream extends Component {
 
     state = {
         isMenuOpen: false
@@ -125,4 +125,4 @@ const styles = {
     }
 
 }
-export default ChannelStreamsTemplate;
+export default ChannelStream;

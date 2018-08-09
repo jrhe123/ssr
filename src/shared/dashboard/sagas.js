@@ -439,6 +439,7 @@ export function* dxCreateStream(action) {
                 type: STREAM_CREATE__SUCCEEDED,
                 payload: {
                     experience: action.payload.experience,
+                    experienceStream: Response.ExperienceStream,
                     message: 'Stream has been created'
                 },
             });

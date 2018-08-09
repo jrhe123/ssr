@@ -112,6 +112,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case STREAM_CREATE__SUCCEEDED:
             tmpExperience = find_experience_obj_by_guid(updated.PendingExperiences, payload.experience.ExperienceGUID);
             tmpPendingExperiences.splice(tmpExperience.index, 1);
+            // assign experience stream guid
+            tmpExperience.experience.ExperienceStreamGUID = payload.experienceStream.ExperienceStreamGUID;
             tmpLiveExperienceStreams.unshift(tmpExperience.experience);
             updated.PendingExperiences = tmpPendingExperiences;
             updated.LiveExperienceStreams = tmpLiveExperienceStreams;

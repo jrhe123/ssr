@@ -10,9 +10,9 @@ import DropdownMenu from 'react-dd-menu';
 
 // constants
 import fonts from '../../../../styles/fonts';
+import colors from '../../../../styles/colors';
 
-
-class LiveStreamTemplate extends Component {
+class LiveStream extends Component {
 
     state = {
         isMenuOpen: false
@@ -45,7 +45,6 @@ class LiveStreamTemplate extends Component {
             liveInfoWrapperStyle,
             liveInfoIconStyle,
             importContainerStyle,
-            widthStyle
         } = styles;
 
 
@@ -77,8 +76,7 @@ const styles = {
 
     liveStreamWrapperStyle: {
         textAlign: 'center',
-        background: 'white',
-        marginTop: 0,
+        backgroundColor: colors.whiteColor,
         marginBottom: 6,
         padding: 12,
         fontSize: fonts.h4,
@@ -97,14 +95,11 @@ const styles = {
         margin: 0
     },
     liveInfoIconStyle: {
-        height: 20,
-        width: 20
+        height: 24,
+        width: 24
     },
     importContainerStyle: {
         textAlign: 'left',
     },
-    widthStyle: {
-        width: 50
-    }
 }
-export default LiveStreamTemplate;
+export default LiveStream;
