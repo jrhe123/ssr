@@ -403,6 +403,8 @@ const styles = {
         background: colors.whiteColor,
         color: colors.blackColor,
         minWidth: sizes.dxWidth,
+        position:'relative',
+        zIndex:10
     },
     mainWrapperStyle: {
         height: sizes.headerHeight,

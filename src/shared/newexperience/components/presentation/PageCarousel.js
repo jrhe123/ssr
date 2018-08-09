@@ -7,7 +7,7 @@ import DxModal from '../../../components/dxModal/DxModal';
 // Libraries
 import Slider from "react-slick";
 
-const displayNumber = 5;
+const displayNumber = 4;
 
 class PageCarousel extends Component {
 

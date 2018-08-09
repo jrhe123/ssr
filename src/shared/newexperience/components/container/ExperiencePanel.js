@@ -84,6 +84,7 @@ class ExperiencePanel extends Component {
             optionBtnStyle,
             demoCardContainerStyle,
             demoPagesContainerStyle,
+            pagePreviewContainerStyle,
         } = styles;
 
         const {
@@ -181,7 +182,7 @@ class ExperiencePanel extends Component {
                 {
                     Experience.Type == 1 ?
                         (
-                            <div>
+                            <div style={pagePreviewContainerStyle}>
                                 <div style={optionContainerStyle}>
                                     <div style={leftContainerStyle}>
                                         <img
@@ -303,6 +304,9 @@ const styles = {
         width: 276,
         marginTop: 12,
         marginLeft: 120,
+    },
+    pagePreviewContainerStyle:{
+        paddingBottom:30
     },
 }
 
