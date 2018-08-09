@@ -12,6 +12,7 @@ import {
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CREATE__SUCCEEDED,
+    STREAM_REMOVE__SUCCEEDED,
 } from './constants';
 
 // helpers
@@ -21,6 +22,7 @@ import {
     find_section_obj_by_guid,
 
     find_experience_channel_obj_by_guid,
+    find_experience_stream_obj_by_guid,
 } from '../helpers';
 
 const initialState = {
@@ -35,6 +37,7 @@ const initialState = {
     TotalStreamActiveChannelRecord: 0,
     StreamActiveChannels: [],
 
+    IsReloadStream: false,
     CurrentStreamChannel: {},
     TotalLiveExperienceStreamRecord: 0,
     LiveExperienceStreams: [],
@@ -110,13 +113,11 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case STREAM_CREATE__SUCCEEDED:
-            tmpExperience = find_experience_obj_by_guid(updated.PendingExperiences, payload.experience.ExperienceGUID);
-            tmpPendingExperiences.splice(tmpExperience.index, 1);
-            // assign experience stream guid
-            tmpExperience.experience.ExperienceStreamGUID = payload.experienceStream.ExperienceStreamGUID;
-            tmpLiveExperienceStreams.unshift(tmpExperience.experience);
-            updated.PendingExperiences = tmpPendingExperiences;
-            updated.LiveExperienceStreams = tmpLiveExperienceStreams;
+            updated.IsReloadStream = true;
+            return updated;
+
+        case STREAM_REMOVE__SUCCEEDED:
+            updated.IsReloadStream = true;
             return updated;
 
         default:

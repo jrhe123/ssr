@@ -15,7 +15,7 @@ import {
     STREAM_CHANNEL_FETCH_REQUESTED,
     STREAM_CHANNEL_SELECT_REQUESTED,
     STREAM_CREATE_REQUESTED,
-
+    STREAM_REMOVE_REQUESTED,
 } from './constants';
 
 export const dxDashboardNavi = (index) => {
@@ -102,6 +102,15 @@ export const dxCreateStream = (channel, experience) => {
         payload: {
             channel,
             experience,
+        },
+    }
+}
+
+export const dxRemoveStream = (experienceStreamGUID) => {
+    return {
+        type: STREAM_REMOVE_REQUESTED,
+        payload: {
+            experienceStreamGUID
         },
     }
 }

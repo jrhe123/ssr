@@ -24,6 +24,7 @@ import {
     dxFetchStreamChannel as dxFetchStreamChannelAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
     dxCreateStream as dxCreateStreamAction,
+    dxRemoveStream as dxRemoveStreamAction,
 } from '../../actions';
 
 class StreamContainer extends Component {
@@ -41,6 +42,13 @@ class StreamContainer extends Component {
     componentDidMount() {
         // 1. Fetch active experience channels
         this.props.dxFetchStreamChannelAction();
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.IsReloadStream && !this.props.IsReloadStream) {
+            // this.props.dxExperienceCreateAction(this.props.Experience);
+            console.log('reload stream');
+        }
     }
 
     handleToggleMenu = () => {
@@ -113,7 +121,9 @@ class StreamContainer extends Component {
         const {
             targetExperienceStream,
         } = this.state;
-        console.log('call delete here: ', targetExperienceStream);
+
+        this.setState({ isModalOpen: false });
+        this.props.dxRemoveStreamAction(targetExperienceStream.ExperienceStreamGUID);
     }
 
     renderActiveChannelList = () => {
@@ -726,6 +736,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        IsReloadStream: state.dashboard.IsReloadStream,
         CurrentStreamChannel: state.dashboard.CurrentStreamChannel,
         TotalLiveExperienceStreamRecord: state.dashboard.TotalLiveExperienceStreamRecord,
         LiveExperienceStreams: state.dashboard.LiveExperienceStreams,
@@ -741,6 +752,7 @@ const dispatchToProps = {
     dxFetchStreamChannelAction,
     dxSelectStreamChannelAction,
     dxCreateStreamAction,
+    dxRemoveStreamAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(StreamContainer);
