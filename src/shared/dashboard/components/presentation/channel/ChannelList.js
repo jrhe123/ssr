@@ -146,8 +146,6 @@ const styles = {
         flexDirection: 'row',
         paddingTop: 36,
         paddingBottom: 48,
-        //
-
     },
     searchBarWrapperSrtyle: {
         flex: 1
