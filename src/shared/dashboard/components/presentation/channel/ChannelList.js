@@ -73,6 +73,15 @@ class ChannelList extends Component {
                                 placeholder="search channel(s)"
                             />
                         </div>
+                        <div style={channelListButtonStyle}>
+                            <Button
+                                variant="Add a new channel"
+                                style={fullBtnStyle}
+                                onClick={() => this.props.handleAddChannelClick()}
+                            >
+                                Add Channel
+                            </Button>
+                        </div>
                     </div>
                     <div style={channelListInfoContainerStyle}>
                         <div style={channelListInfoWrapperStyle}>
@@ -95,15 +104,6 @@ class ChannelList extends Component {
                                     <p style={menuItemStyle}>Second option</p>
                                 </div>
                             </DropdownMenu>
-                        </div>
-                        <div style={channelListButtonStyle}>
-                            <Button
-                                variant="Add a new channel"
-                                style={fullBtnStyle}
-                                onClick={() => this.props.handleAddChannelClick()}
-                            >
-                                Add channel
-                            </Button>
                         </div>
                     </div>
 
@@ -146,6 +146,8 @@ const styles = {
         flexDirection: 'row',
         paddingTop: 36,
         paddingBottom: 48,
+        //
+
     },
     searchBarWrapperSrtyle: {
         flex: 1
@@ -153,7 +155,7 @@ const styles = {
     channelListInfoContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         borderBottom: '1px solid',
         borderColor: colors.whiteColor,
         height: 54,
@@ -177,11 +179,6 @@ const styles = {
         backgroundColor: colors.blueColor,
         color: colors.whiteColor,
         textTransform: 'none',
-        width: 120,
-        height: 24,
-        fontSize: fonts.h4,
-        paddingTop: 3,
-        paddingBottom: 3,
     },
     dropdownBtnStyle: {
         padding: 0,
@@ -200,7 +197,7 @@ const styles = {
         overflowY: 'scroll',
         display: 'flex',
         flexWrap: 'wrap',
-        height: `calc(100vh - ${sizes.headerHeight} - 114px - 60px - 36px)`,
+        height: `calc(100vh - ${sizes.headerHeight} - 116px - 60px - 36px)`,
         paddingTop: 36,
     },
     menuItemStyle: {
