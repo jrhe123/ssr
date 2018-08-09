@@ -16,6 +16,7 @@ import colors from '../../../styles/colors';
 import ChannelStreamsTemplate from '../presentation/streams/ChannelStreamsTemplate'
 import ReadyToStreamTemplate from '../presentation/streams/ReadyToStreamTemplate';
 import LiveStreamTemplate from '../presentation/streams/LiveStreamTemplate';
+import DxModal from '../../../components/dxModal/DxModal';
 
 // redux
 import { connect } from 'react-redux';
@@ -28,6 +29,8 @@ class StreamContainer extends Component {
 
     state = {
         isMenuOpen: false,
+        isModalOpen: false,
+        targetExperience: {}
     }
 
     componentDidMount() {
@@ -54,7 +57,26 @@ class StreamContainer extends Component {
     }
 
     handleGoLiveStream = (experience) => {
-        console.log('out here: ', experience);
+        this.setState({
+            isModalOpen: true,
+            targetExperience: experience,
+        })
+    }
+
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false });
+    }
+
+    handleConfirmLiveStream = () => {
+        const {
+            targetExperience
+        } = this.state;
+
+        const {
+            CurrentStreamChannel
+        } = this.props;
+
+        console.log('targetExperience: ', targetExperience);
     }
 
     renderActiveChannelList = () => {
@@ -348,6 +370,16 @@ class StreamContainer extends Component {
                     </div>
 
                 </div>
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title="Confirm Stream Experience"
+                    description="Do you want to proceed?"
+                    cancel={true}
+                    confirm={true}
+                    isDanger={false}
+                    handleConfirm={() => this.handleConfirmLiveStream()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         )
     }
