@@ -28,6 +28,7 @@ import {
 const initialState = {
     NaviIndex: 0,
 
+    IsReloadExperience: false,
     TotalExperienceRecord: 0,
     Experiences: [],
 
@@ -88,13 +89,11 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
         case EXPERIENCE_FETCH__SUCCEEDED:
             updated.TotalExperienceRecord = payload.totalRecord;
             updated.Experiences = payload.experiences;
+            updated.IsReloadExperience = false;
             return updated;
 
         case EXPERIENCE_DELETE__SUCCEEDED:
-            tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
-            tmpExperiences.splice(tmpExperience.index, 1);
-            updated.Experiences = tmpExperiences;
-            updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
+            updated.IsReloadExperience = true;
             return updated;
 
         case STREAM_CHANNEL_FETCH__SUCCEEDED:

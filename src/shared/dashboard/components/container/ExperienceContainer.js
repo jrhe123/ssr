@@ -37,6 +37,12 @@ class ExperienceContainer extends Component {
         this.props.dxFetchExperienceAction();
     }
 
+    componentWillReceiveProps(nextProps){
+        if (nextProps.IsReloadExperience && !this.props.IsReloadExperience) {
+            this.props.dxFetchExperienceAction();
+        }
+    }
+
     handleCreateExperience = () => {
         this.setState({
             newExperienceModalOpen: true
@@ -281,6 +287,7 @@ const stateToProps = (state) => {
         history: state.root.history,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         Experiences: state.dashboard.Experiences,
+        IsReloadExperience: state.dashboard.IsReloadExperience,
     }
 }
 
