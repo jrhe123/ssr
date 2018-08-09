@@ -156,14 +156,17 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        borderBottom: '1px solid',
-        borderColor: colors.whiteColor,
+        // borderBottom: '1px solid',
+        // borderColor: colors.whiteColor,
         height: 54,
     },
     channelListInfoWrapperStyle: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        width:240,
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
     channelListButtonStyle: {
         flexDirection: 'row',
