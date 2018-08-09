@@ -7,6 +7,7 @@ import '../../../../../../assets/css/dd-menu/dd_StreamMenu.css';
 import IconButton from '@material-ui/core/IconButton';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
+import Button from '@material-ui/core/Button';
 
 // constants
 import fonts from '../../../../styles/fonts';
@@ -45,6 +46,7 @@ class LiveStream extends Component {
             liveInfoWrapperStyle,
             liveInfoIconStyle,
             importContainerStyle,
+            removeBtnStyle,
         } = styles;
 
 
@@ -53,6 +55,7 @@ class LiveStream extends Component {
                 <p style={expTitleStyle}>{this.props.streamTitle}</p>
                 <div style={liveInfoWrapperStyle}>
                     <DropdownMenu
+                        className="dx_live_stream_dd"
                         isOpen={this.state.isImportOpen}
                         close={this.handleCloseImport}
                         toggle={
@@ -63,7 +66,12 @@ class LiveStream extends Component {
                         align={'right'}
                     >
                         <div style={importContainerStyle}>
-                            <p>Remove</p>
+                            <Button
+                                style={removeBtnStyle}
+                                onClick={() => this.props.handleRemoveStream()}
+                                variant="Remove experience stream">
+                                Remove
+                            </Button>
                         </div>
                     </DropdownMenu>
                 </div>
@@ -100,6 +108,9 @@ const styles = {
     },
     importContainerStyle: {
         textAlign: 'left',
+    },
+    removeBtnStyle: {
+
     },
 }
 export default LiveStream;

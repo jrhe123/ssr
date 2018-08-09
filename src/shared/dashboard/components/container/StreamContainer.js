@@ -31,7 +31,11 @@ class StreamContainer extends Component {
     state = {
         isMenuOpen: false,
         isModalOpen: false,
-        targetExperience: {}
+        modalType: 'CREATE',
+        modalTitle: '',
+        isModalDanger: false,
+        targetExperience: {},
+        targetExperienceStream: {},
     }
 
     componentDidMount() {
@@ -57,15 +61,29 @@ class StreamContainer extends Component {
         this.props.dxSelectStreamChannelAction(channel);
     }
 
-    handleGoLiveStream = (experience) => {
-        this.setState({
-            isModalOpen: true,
-            targetExperience: experience,
-        })
+    handleConfirmModal = () => {
+        const {
+            modalType,
+        } = this.state;
+        if (modalType == 'CREATE') {
+            this.handleConfirmLiveStream();
+        } else if (modalType == 'REMOVE') {
+            this.handleConfirmRemoveLiveStream();
+        }
     }
 
     handleCloseModal = () => {
         this.setState({ isModalOpen: false });
+    }
+
+    handleGoLiveStream = (experience) => {
+        this.setState({
+            isModalOpen: true,
+            modalType: 'CREATE',
+            modalTitle: 'Confirm Stream Experience',
+            isModalDanger: false,
+            targetExperience: experience,
+        })
     }
 
     handleConfirmLiveStream = () => {
@@ -79,6 +97,23 @@ class StreamContainer extends Component {
 
         this.setState({ isModalOpen: false });
         this.props.dxCreateStreamAction(CurrentStreamChannel, targetExperience);
+    }
+
+    handleRemoveStream = (experienceStream) => {
+        this.setState({
+            isModalOpen: true,
+            modalType: 'REMOVE',
+            modalTitle: 'Confirm Remove Stream',
+            isModalDanger: true,
+            targetExperienceStream: experienceStream,
+        })
+    }
+
+    handleConfirmRemoveLiveStream = () => {
+        const {
+            targetExperienceStream,
+        } = this.state;
+        console.log('call delete here: ', targetExperienceStream);
     }
 
     renderActiveChannelList = () => {
@@ -314,6 +349,7 @@ class StreamContainer extends Component {
                                                         LiveExperienceStreams.map((stream, index) => (
                                                             <LiveStream
                                                                 streamTitle={stream.ExperienceTitle}
+                                                                handleRemoveStream={() => this.handleRemoveStream(stream)}
                                                             />
                                                         ))
                                                     }
@@ -374,12 +410,12 @@ class StreamContainer extends Component {
                 </div>
                 <DxModal
                     open={this.state.isModalOpen}
-                    title="Confirm Stream Experience"
+                    title={this.state.modalTitle}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
-                    isDanger={false}
-                    handleConfirm={() => this.handleConfirmLiveStream()}
+                    isDanger={this.state.isModalDanger}
+                    handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
