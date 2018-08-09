@@ -46,8 +46,7 @@ class StreamContainer extends Component {
 
     componentWillReceiveProps(nextProps){
         if (nextProps.IsReloadStream && !this.props.IsReloadStream) {
-            // this.props.dxExperienceCreateAction(this.props.Experience);
-            console.log('reload stream');
+            this.props.dxSelectStreamChannelAction(this.props.CurrentStreamChannel);
         }
     }
 
