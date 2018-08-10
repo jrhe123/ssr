@@ -112,7 +112,7 @@ class ExperiencePages extends Component {
                     sectionGUID={section.SectionGUID}
                     type={section.Type}
                     isActive={section.IsActive}
-                    htmlContent={this.handleLoadHtml(page, section)}
+                    htmlContent={this.handleLoadHtml(page, section, activePage)}
                     btnContent={section.BtnContent}
                     dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
                     pdf={section.Pdf}
@@ -141,7 +141,7 @@ class ExperiencePages extends Component {
         return section
     }
 
-    handleLoadHtml = (page, section) => {
+    handleLoadHtml = (page, section, activePage) => {
         let isSyncServer = section.IsSyncServer;
         if (isSyncServer) {
             if (section.HtmlContent) return section.HtmlContent == null ? '' : section.HtmlContent;
@@ -149,7 +149,9 @@ class ExperiencePages extends Component {
         } else {
             if (section.HtmlContent) return section.HtmlContent == null ? '' : section.HtmlContent;
             if (section.Html) {
-                return this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
+                // Pagination loading
+                if (!activePage) return '';
+                else return this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
             }
             else return '';
         }
