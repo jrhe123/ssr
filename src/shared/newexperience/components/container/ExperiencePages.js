@@ -165,7 +165,9 @@ class ExperiencePages extends Component {
         if (template.Type == 'SPLASH') {
             dxPhoneArea.scrollTop = 0;
         } else {
-            dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+            setTimeout(() => {
+                dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
+            }, 100);
         }
     }
 
@@ -499,6 +501,7 @@ class ExperiencePages extends Component {
                                                         />
                                                         <PageTemplate
                                                             handleDrop={(template) => this.handleAddElem(template)}
+                                                            handleTemplateClick={(template) => this.handleAddElem(template)}
                                                             key={template.PageTemplateGUID}
                                                             template={template}
                                                         />
