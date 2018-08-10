@@ -13,7 +13,7 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 import ThumbnailPhoneElement from './ThumbnailPhoneElement';
 
-const displayEditorSectionNumber = 5;
+const displayEditorSectionNumber = 6;
 
 class DxPage extends Component {
 
