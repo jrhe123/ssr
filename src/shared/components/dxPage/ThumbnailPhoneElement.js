@@ -55,6 +55,8 @@ class ThumbnailPhoneElement extends Component {
             tableWrapperStyle,
             // editor
             editorContainerStyle,
+            loadingHtmlContainerStyle,
+            loadingHtmlMsgStyle,
             // btn
             btnContainerStyle,
             contentContainerStyle,
@@ -103,9 +105,21 @@ class ThumbnailPhoneElement extends Component {
         switch (section.Type) {
             case 'EDITOR':
                 elem = (
-                    <div
-                        style={editorContainerStyle}
-                        dangerouslySetInnerHTML={{ __html: this.handleLoadHtml(section) }} />
+                    <div style={editorContainerStyle}>
+                        <div dangerouslySetInnerHTML={{ __html: this.handleLoadHtml(section) }} />
+                        {
+                            section.Html && !section.HtmlContent ?
+                                <div style={loadingHtmlContainerStyle}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <p style={loadingHtmlMsgStyle}>Loading..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                :
+                                null
+                        }
+                    </div>
                 );
                 break;
             case 'BUTTON':
@@ -336,7 +350,23 @@ const styles = {
     },
     // editor
     editorContainerStyle: {
-        padding: 4
+        position: 'relative',
+        padding: 4,
+        minHeight: 36,
+    },
+    loadingHtmlContainerStyle: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        top: 0,
+        left: 0,
+        zIndex: 98,
+    },
+    loadingHtmlMsgStyle: {
+        color: colors.whiteColor,
+        fontSize: fonts.h4,
+        textAlign: 'center',
     },
     // btn
     btnContainerStyle: {
