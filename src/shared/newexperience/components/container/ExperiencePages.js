@@ -102,43 +102,52 @@ class ExperiencePages extends Component {
             Experience,
         } = this.props;
 
-        let section;
+        let sectionArr = [];
         if (sections) {
-            section = sections.map((section, i) => (
-                <PhoneElement
-                    deletedPage={deletedPage}
-                    activePage={activePage}
-                    isDeleted={section.IsDeleted}
-                    sectionGUID={section.SectionGUID}
-                    type={section.Type}
-                    isActive={section.IsActive}
-                    htmlContent={this.handleLoadHtml(page, section, activePage)}
-                    btnContent={section.BtnContent}
-                    dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
-                    pdf={section.Pdf}
-                    splashContent={section.SplashContent}
-                    splashImg={section.SplashImg}
-                    splashColor={section.SplashColor}
-                    videoUrl={section.VideoUrl}
-                    img={section.Img}
+            for (let i = 0; i < sections.length; i++) {
+                let section = sections[i];
 
-                    key={section.SectionGUID}
-                    index={i}
-                    moveCard={this.handleMoveCard}
-                    handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
+                // if(i > 0){
+                //     let preSection = section[i - 1];
+                //     console.log();
+                // }
+                let item = (
+                    <PhoneElement
+                        deletedPage={deletedPage}
+                        activePage={activePage}
+                        isDeleted={section.IsDeleted}
+                        sectionGUID={section.SectionGUID}
+                        type={section.Type}
+                        isActive={section.IsActive}
+                        htmlContent={this.handleLoadHtml(page, section, activePage)}
+                        btnContent={section.BtnContent}
+                        dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
+                        pdf={section.Pdf}
+                        splashContent={section.SplashContent}
+                        splashImg={section.SplashImg}
+                        splashColor={section.SplashColor}
+                        videoUrl={section.VideoUrl}
+                        img={section.Img}
 
-                    handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
-                    handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
-                    handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
-                    handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
-                    handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
-                    handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
+                        key={section.SectionGUID}
+                        index={i}
+                        moveCard={this.handleMoveCard}
+                        handleSectionClick={(sectionGUID) => this.handleSectionClick(sectionGUID)}
 
-                    handleVideoError={(msg) => this.handleErrorMsg(msg)}
-                />
-            ))
+                        handleUpdateHtmlContent={(html) => this.handleUpdateHtmlContent(section.SectionGUID, html, page.PageGUID)}
+                        handleBtnInputChange={(e) => this.handleUpdateBtnContent(section.SectionGUID, e)}
+                        handleBtnConnectPageChange={(pageGUID) => this.handleBtnConnectPageChange(section.SectionGUID, pageGUID)}
+                        handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
+                        handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
+                        handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
+
+                        handleVideoError={(msg) => this.handleErrorMsg(msg)}
+                    />
+                )
+                sectionArr.push(item);
+            }
         }
-        return section
+        return sectionArr
     }
 
     handleLoadHtml = (page, section, activePage) => {
