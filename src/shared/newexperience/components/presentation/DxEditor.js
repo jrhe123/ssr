@@ -7,6 +7,10 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.core.css';
 import '../../../../../assets/css/quill/index.css';
 
+// constants
+import colors from '../../../styles/colors';
+import fonts from '../../../styles/fonts';
+
 // Quill setup
 const Quill = ReactQuill.Quill
 var Font = Quill.import('formats/font');
@@ -41,7 +45,7 @@ class DxEditor extends Component {
             //     ['clean'],                                       // remove formatting
             // ]
             toolbar: {
-                container: '#toolbar-'+this.props.sectionGUID
+                container: '#toolbar-' + this.props.sectionGUID
             }
         }
         this.quillRef = null;
@@ -72,13 +76,16 @@ class DxEditor extends Component {
     }
 
     render() {
-
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             mainContainerStyle,
+            loadingHtmlContainerStyle,
+            loadingHtmlMsgStyle,
         } = styles;
 
         return (
-            <div 
+            <div
                 style={mainContainerStyle}>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
@@ -89,6 +96,18 @@ class DxEditor extends Component {
                     defaultValue={this.props.htmlContent}
                     value={this.props.htmlContent}
                     placeholder={this.props.placeholder} />
+                {
+                    this.props.html && !this.props.htmlContent ?
+                        <div style={loadingHtmlContainerStyle}>
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <p style={loadingHtmlMsgStyle}>Loading..</p>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        null
+                }
             </div>
         )
     }
@@ -96,12 +115,37 @@ class DxEditor extends Component {
 
 const styles = {
 
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+    },
     mainContainerStyle: {
         width: 320,
         boxSizing: 'border-box',
         margin: '0 auto',
-        cursor: 'default'
-    }
+        cursor: 'default',
+        position: 'relative',
+    },
+    loadingHtmlContainerStyle: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        top: 0,
+        left: 0,
+        zIndex: 98,
+    },
+    loadingHtmlMsgStyle: {
+        color: colors.whiteColor,
+        fontSize: fonts.h4,
+        textAlign: 'center',
+    },
 }
 
 export default DxEditor;

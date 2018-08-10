@@ -116,6 +116,7 @@ class PhoneElement extends Component {
                 section = (
                     <DxEditor
                         sectionGUID={this.props.sectionGUID}
+                        html={this.props.html}
                         htmlContent={this.props.htmlContent}
                         handleUpdateHtmlContent={(html) => this.props.handleUpdateHtmlContent(html)}
                     />

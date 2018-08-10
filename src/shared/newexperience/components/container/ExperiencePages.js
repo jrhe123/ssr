@@ -107,10 +107,16 @@ class ExperiencePages extends Component {
             for (let i = 0; i < sections.length; i++) {
                 let section = sections[i];
 
-                // if(i > 0){
-                //     let preSection = section[i - 1];
-                //     console.log();
-                // }
+                let readyToLoad = true;
+                if (i > 0) {
+                    let preSection = sections[i - 1];
+                    if (preSection.Type == 'EDITOR'
+                        && preSection.Html
+                        && !preSection.HtmlContent
+                    ) {
+                        readyToLoad = false;
+                    }
+                }
                 let item = (
                     <PhoneElement
                         deletedPage={deletedPage}
@@ -119,7 +125,8 @@ class ExperiencePages extends Component {
                         sectionGUID={section.SectionGUID}
                         type={section.Type}
                         isActive={section.IsActive}
-                        htmlContent={this.handleLoadHtml(page, section, activePage)}
+                        html={section.Html}
+                        htmlContent={this.handleLoadHtml(page, section, activePage, readyToLoad)}
                         btnContent={section.BtnContent}
                         dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
                         pdf={section.Pdf}
@@ -150,7 +157,7 @@ class ExperiencePages extends Component {
         return sectionArr
     }
 
-    handleLoadHtml = (page, section, activePage) => {
+    handleLoadHtml = (page, section, activePage, readyToLoad) => {
         let isSyncServer = section.IsSyncServer;
         if (isSyncServer) {
             if (section.HtmlContent) return section.HtmlContent == null ? '' : section.HtmlContent;
@@ -160,6 +167,8 @@ class ExperiencePages extends Component {
             if (section.Html) {
                 // Pagination loading
                 if (!activePage) return '';
+                // Sectional loading
+                else if (!readyToLoad) return '';
                 else return this.props.dxExperienceViewHtmlFetchAction(page.PageGUID, section.SectionGUID, section.Html);
             }
             else return '';
