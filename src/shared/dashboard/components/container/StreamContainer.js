@@ -665,7 +665,6 @@ const styles = {
         padding: 12,
         height: 78,
         marginBottom: 24,
-        
     },
     currentChannelNameStyle: {
         margin: 0,
@@ -697,7 +696,8 @@ const styles = {
     },
     liveStreamWrapperStyle: {
         overflowY: 'auto',
-        height: 'calc((100% - 194px)/2)',
+        height: 'calc((100% - 212px)/2)',
+        marginBottom:18,
     },
     readyToStreamLabelWrapperStyle: {
         marginBottom: 12,
@@ -715,11 +715,12 @@ const styles = {
     },
     readyToStreamWrapperStyle: {
         overflowY: 'auto',
-        height: 'calc((100% - 194px)/2)',
+        height: 'calc((100% - 212px)/2)',
     },
 
     liveMsgContainerStyle: {
-        height: 'calc((100% - 194px)/2)',
+        height: 'calc((100% - 212px)/2)',
+        marginBottom:18,
     },
     liveMsgWrapperStyle:{
         height: 72,
@@ -742,7 +743,7 @@ const styles = {
         fontWeight: 'bold'
     },
     pendingMsgContainerStyle: {
-        height: 'calc((100% - 194px)/2)',
+        height: 'calc((100% - 212px)/2)',
     },
     pendingMsgWrapperStyle:{
         height: 72,
