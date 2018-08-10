@@ -55,7 +55,7 @@ class DxPage extends Component {
             elemContainerStyle,
         } = styles;
 
-        if(!sections){
+        if (!sections) {
             return null;
         }
 
@@ -241,7 +241,7 @@ const styles = {
     },
     contentWrapperStyle: {
         height: '100%',
-        overflow: 'hidden'
+        // overflow: 'hidden'
     },
     elemContainerStyle: {
         width: '100%',
