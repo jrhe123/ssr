@@ -13,6 +13,8 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 import ThumbnailPhoneElement from './ThumbnailPhoneElement';
 
+const displayEditorSectionNumber = 1;
+
 class DxPage extends Component {
 
     state = {
@@ -59,7 +61,16 @@ class DxPage extends Component {
             return null;
         }
 
+        let sectionCounter = 0;
         let section = sections.map((section, i) => {
+            // Preview only loading 5 section EDITOR
+            if (section.Type == 'EDITOR') {
+                sectionCounter++;
+            }
+            if (sectionCounter > displayEditorSectionNumber) {
+                return null;
+            }
+            // END
             return (
                 <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
                     style={elemContainerStyle}>
@@ -241,7 +252,7 @@ const styles = {
     },
     contentWrapperStyle: {
         height: '100%',
-        // overflow: 'hidden'
+        overflow: 'hidden'
     },
     elemContainerStyle: {
         width: '100%',
