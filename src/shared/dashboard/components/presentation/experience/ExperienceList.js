@@ -124,7 +124,7 @@ const styles = {
     },
     experienceContainerStyle: {
         flex: '300px 0 0',
-        height: 512,
+        height: 540,
     },
     experienceWrapperStyle: {
         width: 276,
