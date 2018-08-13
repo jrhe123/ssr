@@ -26,6 +26,10 @@ import {
 
 // New experience
 import {
+    EXPERIENCE_VIEW_HTML_FETCH_REQUESTED,
+    EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED,
+    EXPERIENCE_VIEW_HTML_FETCH__FAILED,
+
     EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED,
     EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED,
     EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED,
@@ -134,16 +138,19 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.isLoading = payload.isLoading;
             return updated;
 
+        case EXPERIENCE_VIEW_HTML_FETCH_REQUESTED:
         case EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED:
         case EXPERIENCE_UPLOAD_FILE_REQUESTED:
         case EXPERIENCE_UPDATE_FILE_REQUESTED:
             updated.isLoading = true;
             return updated;
 
+        case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
             updated.isLoading = false;
             return updated;
 
+        case EXPERIENCE_VIEW_HTML_FETCH__FAILED:
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED:
             updated.isLoading = false;
             tempAlertBar = {
