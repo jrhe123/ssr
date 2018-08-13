@@ -1228,8 +1228,11 @@ export function* dxExperienceUpdateFiles(action) {
                         let section = page.Sections[j];
                         if (!section.IsDeleted && section.Type == 'EDITOR') {
                             if (section.Html) {
-                                let response = yield call(dxExperienceUpdateSingleFile, section);
-                                if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                                // Sync server html content
+                                if (section.IsSyncServer) {
+                                    let response = yield call(dxExperienceUpdateSingleFile, section);
+                                    if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
+                                }
                             } else {
                                 let response = yield call(dxExperienceUploadSingleFile, section);
                                 if (response.Confirmation == 'SUCCESS') section.Html = response.Response.File.FileGUID;
