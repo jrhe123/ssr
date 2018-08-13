@@ -20,11 +20,17 @@ import sizes from '../../../styles/sizes';
 
 // components
 import ChannelList from '../presentation/channel/ChannelList';
+import DxModal from '../../../components/dxModal/DxModal';
 
 class ChannelContainer extends Component {
 
     state = {
         newChannelModalOpen: false,
+        isModalOpen: false,
+        modalType: 'LIVE',
+        modalTitle: '',
+        modalDesc: '',
+        targetChannel: null
     }
 
     componentDidMount() {
@@ -55,11 +61,53 @@ class ChannelContainer extends Component {
     }
 
     handleActiveChannel = (channel) => {
+        const {
+            ExperienceStreams
+        } = channel;
+        if (!ExperienceStreams.length) {
+            this.setState({
+                isModalOpen: true,
+                modalType: 'LIVE',
+                modalTitle: 'Confirm Go Live channel',
+                modalDesc: 'No stream found in this channel. Do you want to proceed?',
+                targetChannel: channel
+            })
+            return;
+        }
         this.props.dxUpdateChannelAction({ ExperienceChannelGUID: channel.ExperienceChannelGUID, ChannelStatus: 'LIVE' });
     }
 
     handleDeactiveChannel = (channel) => {
+        const {
+            ExperienceStreams
+        } = channel;
+        if (ExperienceStreams.length) {
+            this.setState({
+                isModalOpen: true,
+                modalType: 'DRAFT',
+                modalTitle: 'Confirm Draft channel',
+                modalDesc: 'Streams found in this channel. Do you want to proceed?',
+                targetChannel: channel
+            })
+            return;
+        }
         this.props.dxUpdateChannelAction({ ExperienceChannelGUID: channel.ExperienceChannelGUID, ChannelStatus: 'DRAFT' });
+    }
+
+    handleConfirmToggleChannel = () => {
+        const {
+            modalType,
+            targetChannel,
+        } = this.state;
+
+        this.setState({ isModalOpen: false });
+        this.props.dxUpdateChannelAction({ ExperienceChannelGUID: targetChannel.ExperienceChannelGUID, ChannelStatus: modalType });
+    }
+
+    handleCloseModal = () => {
+        this.setState({
+            isModalOpen: false,
+        })
     }
 
     render() {
@@ -135,7 +183,16 @@ class ChannelContainer extends Component {
                     onCloseModal={() => this.handleCloseChannelModal()}
                     navigateToNewchannel={(val) => this.handleNavigateToNewchannel(val)}
                 />
-
+                <DxModal
+                    open={this.state.isModalOpen}
+                    title={this.state.modalTitle}
+                    description={this.state.modalDesc}
+                    cancel={true}
+                    confirm={true}
+                    isDanger={true}
+                    handleConfirm={() => this.handleConfirmToggleChannel()}
+                    onCloseModal={() => this.handleCloseModal()}
+                />
             </div>
         );
     }

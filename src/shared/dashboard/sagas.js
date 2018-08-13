@@ -125,7 +125,7 @@ export const dxFetchChannelUrl = (params) => {
             Limit: "5",
             Offset: "0",
             Extra: {
-                ChannelStatus: params.status ? params.status : ''
+                ChannelStatus: ''
             },
         }, true)
     )

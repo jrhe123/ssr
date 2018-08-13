@@ -81,9 +81,7 @@ export const dxDeleteExperience = (experienceGUID) => {
 export const dxFetchStreamChannel = () => {
     return {
         type: STREAM_CHANNEL_FETCH_REQUESTED,
-        payload: {
-            status: 'LIVE'
-        },
+        payload: {},
     }
 }
 
