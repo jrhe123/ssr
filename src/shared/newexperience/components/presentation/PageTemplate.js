@@ -86,7 +86,10 @@ class PageTemplate extends Component {
         let card;
         if (template.Type == 'EDITOR') {
             card = (
-                <div style={pageContainerStyle}>
+                <div 
+                    style={pageContainerStyle}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <div style={leftImageContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
@@ -108,7 +111,10 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'BUTTON') {
             card = (
-                <div style={Object.assign({}, pageContainerStyle, btnPageContainerStyle)}>
+                <div 
+                    style={Object.assign({}, pageContainerStyle, btnPageContainerStyle)}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div style={topBtnContainerStyle}>
@@ -142,7 +148,10 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'EMBED_PDF') {
             card = (
-                <div style={Object.assign({}, pageContainerStyle)}>
+                <div 
+                    style={Object.assign({}, pageContainerStyle)}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <div style={leftImageContainerStyle}>
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
@@ -164,7 +173,10 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'SPLASH') {
             card = (
-                <div style={overlayContainerStyle}>
+                <div 
+                    style={overlayContainerStyle}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <img
                         style={overlayImgStyle}
                         src={require('../../../../../assets/images/demo.jpg')}
@@ -249,7 +261,10 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'VIDEO') {
             card = (
-                <div style={videoOverlayContainerStyle}>
+                <div 
+                    style={videoOverlayContainerStyle}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <img
                         style={videoOverlayImgStyle}
                         src={require('../../../../../assets/images/demo.jpg')}
@@ -269,7 +284,10 @@ class PageTemplate extends Component {
             )
         } else if (template.Type == 'IMAGE') {
             card = (
-                <div style={videoOverlayContainerStyle}>
+                <div 
+                    style={videoOverlayContainerStyle}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
                     <img
                         style={videoOverlayImgStyle}
                         src={require('../../../../../assets/images/demo.jpg')}

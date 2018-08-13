@@ -13,6 +13,8 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import DropdownMenu from 'react-dd-menu';
 import ThumbnailPhoneElement from './ThumbnailPhoneElement';
 
+const displayEditorSectionNumber = 6;
+
 class DxPage extends Component {
 
     state = {
@@ -55,28 +57,41 @@ class DxPage extends Component {
             elemContainerStyle,
         } = styles;
 
-        if(!sections){
+        if (!sections) {
             return null;
         }
 
-        let section = sections.map((section, i) => {
-            return (
-                <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
-                    style={elemContainerStyle}>
-                    <ThumbnailPhoneElement
-                        key={i}
-                        section={section}
-                        pdfWidth={this.props.pdfWidth}
-                        isLoadHtml={isLoadHtml}
-                        splashSize="MEDIUM"
-                        videoSize="MEDIUM"
-                        imgSize="MEDIUM"
-                        handleLoadHtml={(sectionGUID, guid) => this.props.handleLoadHtml(page.PageGUID, sectionGUID, guid)}
-                    />
-                </div>
-            )
-        })
-        return section;
+        let sectionCounter = 0;
+        let sectionArr = [];
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            let item = null;
+
+            // Preview only loading 5 section EDITOR
+            if (section.Type == 'EDITOR') {
+                sectionCounter++;
+            }
+            if (sectionCounter <= displayEditorSectionNumber) {
+                item = (
+                    <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
+                        style={elemContainerStyle}>
+                        <ThumbnailPhoneElement
+                            key={i}
+                            section={section}
+                            pdfWidth={this.props.pdfWidth}
+                            isLoadHtml={isLoadHtml}
+                            splashSize="MEDIUM"
+                            videoSize="MEDIUM"
+                            imgSize="MEDIUM"
+                            handleLoadHtml={(sectionGUID, guid) => this.props.handleLoadHtml(page.PageGUID, sectionGUID, guid)}
+                        />
+                    </div>
+                )
+            }
+            // END
+            sectionArr.push(item);
+        }
+        return sectionArr;
     }
 
     findRootPage = (pages) => {
