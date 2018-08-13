@@ -89,9 +89,8 @@ const styles = {
         position: 'relative',
         height: 180,
         width: 120,
+        margin: '0 auto',
         marginTop: 12,
-        marginLeft: 12,
-        marginRight: 12,
         cursor: 'pointer',
     },
     closeContainerStyle: {
