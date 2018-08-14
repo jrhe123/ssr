@@ -51,14 +51,15 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let updated = Object.assign({}, previousState);
     let tmpExperiences = Object.assign([], updated.Experiences);
     let tmpExperienceChannels = Object.assign([], updated.ExperienceChannels);
-    let tmpPendingExperiences = Object.assign([], updated.PendingExperiences);
-    let tmpLiveExperienceStreams = Object.assign([], updated.LiveExperienceStreams);
+    let tmpStreamActiveChannels = Object.assign([], updated.StreamActiveChannels);
+    let tmpCurrentStreamChannel = Object.assign({}, updated.CurrentStreamChannel);
 
     let tmpExperience;
     let tmpPage;
     let tmpSection;
 
     let tmpExperienceChannel;
+    let tmpExperienceStream;
 
     switch (type) {
 
@@ -100,7 +101,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.TotalStreamActiveChannelRecord = payload.totalRecord;
             updated.StreamActiveChannels = payload.expereienceChannels;
             updated.CurrentStreamChannel = {};
-            if (!payload.expereienceChannels[0]) updated.CurrentStreamChannel = {};                
+            if (!payload.expereienceChannels[0]) updated.CurrentStreamChannel = {};
             return updated;
 
         case STREAM_CHANNEL_SELECT__SUCCEEDED:
@@ -113,10 +114,19 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case STREAM_CREATE__SUCCEEDED:
+            tmpExperienceChannel = find_experience_channel_obj_by_guid(tmpStreamActiveChannels, tmpCurrentStreamChannel.ExperienceChannelGUID);
+            tmpCurrentStreamChannel.ExperienceStreams.push(payload.experienceStream);
+            tmpStreamActiveChannels[tmpExperienceChannel.index] = Object.assign({}, tmpCurrentStreamChannel);
+            updated.StreamActiveChannels = tmpStreamActiveChannels;
             updated.IsReloadStream = true;
             return updated;
 
         case STREAM_REMOVE__SUCCEEDED:
+            tmpExperienceChannel = find_experience_channel_obj_by_guid(tmpStreamActiveChannels, tmpCurrentStreamChannel.ExperienceChannelGUID);
+            tmpExperienceStream = find_experience_stream_obj_by_guid(tmpCurrentStreamChannel.ExperienceStreams, payload.experienceStreamGUID);
+            tmpCurrentStreamChannel.ExperienceStreams.splice(tmpExperienceStream.index, 1);
+            tmpStreamActiveChannels[tmpExperienceChannel.index] = Object.assign({}, tmpCurrentStreamChannel);
+            updated.StreamActiveChannels = tmpStreamActiveChannels;
             updated.IsReloadStream = true;
             return updated;
 
