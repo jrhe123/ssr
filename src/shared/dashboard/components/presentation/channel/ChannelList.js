@@ -94,7 +94,7 @@ class ChannelList extends Component {
                                         <Button style={dropdownBtnStyle} onClick={() => this.handleToggleMenu()}>All<ExpandMore style={expandIconStyle} /></Button>
                                     </div>
                                 }
-                                align={'center'}
+                                align={'right'}
                                 size={'sm'}
                             >
                                 <div>

@@ -720,7 +720,7 @@ const styles = {
     currentChannelNameStyle: {
         margin: 0,
         paddingBottom: 12,
-        fontSize: fonts.h2
+        fontSize: fonts.h1
     },
     currentChannelDescriptionWrapperStyle: {
         height: 42,
