@@ -56,8 +56,8 @@ class NewChannelModal extends Component {
                 onClose={() => this.onCloseModal()}
                 center
                 classNames={{
-                    overlay: 'custom-overlay',
-                    modal: 'custom-Channelmodal',
+                    overlay: 'custom_overlay',
+                    modal: 'custom_channelmodal',
                 }}
             >
                 <div style={mainContainerStyle}>
@@ -86,7 +86,7 @@ class NewChannelModal extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <FormControlLabel
+                                {/* <FormControlLabel
                                     value="1"
                                     control={<Radio style={{ color: colors.blackColor }} />}
                                     label={<p style={labelStyle}>Private Channel - Invite only  <Lock style={lockStyle}/> </p>}
@@ -95,6 +95,18 @@ class NewChannelModal extends Component {
                                     <div style={tableContainerStyle}>
                                         <div style={tableWrapperStyle}>
                                             <span style={subLabelStyle}>Exclusive invite is required to join this channel. Manage users via audience tab</span>
+                                        </div>
+                                    </div>
+                                </div> */}
+                                <FormControlLabel
+                                    value="2"
+                                    control={<Radio style={{ color: colors.blackColor }} />}
+                                    label={<p style={labelStyle}>Invitation Channel</p>}
+                                />
+                                <div style={descContainerStyle}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <span style={subLabelStyle}>Exclusive invite code is required to join this channel.</span>
                                         </div>
                                     </div>
                                 </div>

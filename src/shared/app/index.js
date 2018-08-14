@@ -118,7 +118,7 @@ class App extends Component {
                         isAuthenticated={isAuthenticated}
                         route="new_channel"
                         exact
-                        path="/new_channel/:param(0|1)"
+                        path="/new_channel/:param(0|1|2)"
                         component={Routes.NewChannelPage}
                     />
 

@@ -43,6 +43,21 @@ class ChannelOptionBar extends Component {
             channelType
         } = this.props;
 
+        let channelLabel;
+        switch (channelType.toString()) {
+            case '0':
+                channelLabel = "Public Channel"
+                break;
+            case '1':
+                channelLabel = "Private Channel - Invite only"
+                break;
+            case '2':
+                channelLabel = "Invitation Channel - Invite only"
+                break;
+            default:
+                break;
+        }
+
         return (
             <div>
                 <DropdownMenu
@@ -54,7 +69,7 @@ class ChannelOptionBar extends Component {
                                 placeholder="type"
                                 width="226px"
                                 disabled={true}
-                                value={channelType == 0 ? 'Public Channel' : 'Private Channel - Invite only'}
+                                value={channelLabel}
                             />
                             <Button
                                 style={outlineBtnStyle}
@@ -70,12 +85,20 @@ class ChannelOptionBar extends Component {
                             className="dx-lower-case"
                         >Public Channel</Button>
                     </div>
-                    <div onClick={() => this.props.handleClickOption(1)}>
+                    {/* <div onClick={() => this.props.handleClickOption(1)}>
                         <Button
                             style={optionBtnStyle}
                             className="dx-lower-case"
                         >
                             <p style={privateChannelLabel}>Private Channel - Invite only<Lock style={lockStyle} /></p>
+                        </Button>
+                    </div> */}
+                    <div onClick={() => this.props.handleClickOption(2)}>
+                        <Button
+                            style={optionBtnStyle}
+                            className="dx-lower-case"
+                        >
+                            <p style={privateChannelLabel}>Invitation Channel - Invite only<Lock style={lockStyle} /></p>
                         </Button>
                     </div>
                 </DropdownMenu>

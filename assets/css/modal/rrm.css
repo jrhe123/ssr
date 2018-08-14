@@ -1,4 +1,4 @@
-.custom-overlay {
+.custom_overlay {
     /* background: rgba(36, 123, 160, 0.7); */
 }
 .custom-modal {
@@ -29,8 +29,7 @@
 }
 
 /* New channel modal */
-
-.custom-Channelmodal{
-    width: 645px;
-    height: 370px;
+.custom_channelmodal {
+    width: 600px;
+    padding: 24;
 }
