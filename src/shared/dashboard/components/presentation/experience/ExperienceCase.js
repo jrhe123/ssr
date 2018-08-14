@@ -160,7 +160,8 @@ const styles = {
     },
     controlWrapperStyle: {
         position: 'absolute',
-        top: 3
+        top: 3,
+        zIndex: 100
     },
     editBurgerStyle: {
         fontSize: 30,
