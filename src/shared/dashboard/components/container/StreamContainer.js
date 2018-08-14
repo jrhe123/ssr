@@ -45,7 +45,7 @@ class StreamContainer extends Component {
         this.props.dxFetchStreamChannelAction();
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
         if (nextProps.IsReloadStream && !this.props.IsReloadStream) {
             this.props.dxSelectStreamChannelAction(this.props.CurrentStreamChannel);
         }
@@ -132,6 +132,10 @@ class StreamContainer extends Component {
 
     handleNavigateToExperience = () => {
         this.props.dxDashboardNaviAction(0);
+    }
+
+    handleClickOtherStreamHyper = (experience) => {
+        console.log('out here: ', experience);
     }
 
     renderActiveChannelList = () => {
@@ -406,6 +410,7 @@ class StreamContainer extends Component {
                                                             <ReadyToStream
                                                                 experience={experience}
                                                                 handleGoLiveStream={() => this.handleGoLiveStream(experience)}
+                                                                handleClickOtherStreamHyper={() => this.handleClickOtherStreamHyper(experience)}
                                                             />
                                                         ))
                                                     }
@@ -657,8 +662,8 @@ const styles = {
     streamsContainerStyle: {
         height: '100%'
     },
-    streamsWrapperStyle:{
-        height:'100%'
+    streamsWrapperStyle: {
+        height: '100%'
     },
     currentChannleContainerStyle: {
         backgroundColor: colors.whiteColor,
@@ -671,8 +676,8 @@ const styles = {
         paddingBottom: 12,
         fontSize: fonts.h2
     },
-    currentChannelDescriptionWrapperStyle:{
-        height:42,
+    currentChannelDescriptionWrapperStyle: {
+        height: 42,
         overflowY: 'scroll',
     },
     currentChannelDescriptionStyle: {
@@ -697,7 +702,7 @@ const styles = {
     liveStreamWrapperStyle: {
         overflowY: 'auto',
         height: 'calc((100% - 212px)/2)',
-        marginBottom:18,
+        marginBottom: 18,
     },
     readyToStreamLabelWrapperStyle: {
         marginBottom: 12,
@@ -720,9 +725,9 @@ const styles = {
 
     liveMsgContainerStyle: {
         height: 'calc((100% - 212px)/2)',
-        marginBottom:18,
+        marginBottom: 18,
     },
-    liveMsgWrapperStyle:{
+    liveMsgWrapperStyle: {
         height: 72,
         marginBottom: 106,
         border: '1px dotted',
@@ -745,7 +750,7 @@ const styles = {
     pendingMsgContainerStyle: {
         height: 'calc((100% - 212px)/2)',
     },
-    pendingMsgWrapperStyle:{
+    pendingMsgWrapperStyle: {
         height: 72,
         marginBottom: 24,
         border: '1px dotted',

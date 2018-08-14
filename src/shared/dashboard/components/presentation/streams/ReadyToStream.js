@@ -31,7 +31,10 @@ class ReadyToStream extends Component {
                     <div style={tableWrapperStyle}>
                         <div style={redayToStreamWrapperStyle}>
                             <p style={expTitleStyle}>{experience.ExperienceTitle}</p>
-                            <p style={expLabelStyle}>Streamed in <span style={numberStreamStyle}>{experience.ExperienceStreams.length}</span> other channel(s)</p>
+                            <p style={expLabelStyle}>Streamed in <span 
+                                style={numberStreamStyle}
+                                onClick={() => this.props.handleClickOtherStreamHyper()}
+                            >{experience.ExperienceStreams.length}</span> other channel(s)</p>
                             <Button
                                 variant="Add a new stream"
                                 style={goLiveBtnStyle}
@@ -81,7 +84,9 @@ const styles = {
     },
     numberStreamStyle: {
         fontWeight: 'bold',
-        color: colors.blackColor
+        color: colors.blackColor,
+        textDecoration: 'underline',
+        cursor: 'pointer'
     },
     goLiveBtnStyle: {
         backgroundColor: colors.lightBlueColor,
