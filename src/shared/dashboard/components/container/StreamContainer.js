@@ -199,7 +199,7 @@ class StreamContainer extends Component {
                 <div style={channelMsgContainerStyle}>
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
-                            <p style={channelMsgStyle}>No live channels found</p>
+                            <p style={channelMsgStyle}>No channels found</p>
                         </div>
                     </div>
                 </div>
