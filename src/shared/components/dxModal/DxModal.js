@@ -25,6 +25,8 @@ class DxModal extends Component {
             description,
             cancel,
             confirm,
+            isContent,
+            content,
             isDanger,
         } = this.props;
 
@@ -59,6 +61,12 @@ class DxModal extends Component {
                     </div>
                     <div style={contentContainerStyle}>
                         <p style={contentStyle}>{description}</p>
+                        {
+                            isContent ?
+                                content
+                                :
+                                null
+                        }
                     </div>
                     <div style={btnContainerStyle}>
                         <div style={controlContainerStyle}>
@@ -130,11 +138,11 @@ const styles = {
     },
     contentContainerStyle: {
         height: 'calc(100% - 126px)',
+        padding: 18,
     },
     contentStyle: {
         fontSize: fonts.h1,
         margin: 0,
-        padding: 18,
     },
     btnContainerStyle: {
         borderTop: '1px solid',

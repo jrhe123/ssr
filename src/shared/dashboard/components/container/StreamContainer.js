@@ -35,6 +35,9 @@ class StreamContainer extends Component {
         isModalOpen: false,
         modalType: 'CREATE',
         modalTitle: '',
+        modalDesc: '',
+        isContentModal: false,
+        modalContent: null,
         isModalDanger: false,
         targetExperience: {},
         targetExperienceStream: {},
@@ -89,6 +92,8 @@ class StreamContainer extends Component {
             isModalOpen: true,
             modalType: 'CREATE',
             modalTitle: 'Confirm Stream Experience',
+            modalDesc: 'Do you want to proceed?',
+            isContentModal: false,
             isModalDanger: false,
             targetExperience: experience,
         })
@@ -112,6 +117,8 @@ class StreamContainer extends Component {
             isModalOpen: true,
             modalType: 'REMOVE',
             modalTitle: 'Confirm Remove Stream',
+            modalDesc: 'Do you want to proceed?',
+            isContentModal: false,
             isModalDanger: true,
             targetExperienceStream: experienceStream,
         })
@@ -135,7 +142,16 @@ class StreamContainer extends Component {
     }
 
     handleClickOtherStreamHyper = (experience) => {
-        console.log('out here: ', experience);
+        this.setState({
+            isModalOpen: true,
+            modalType: 'VIEW',
+            modalTitle: experience.ExperienceTitle,
+            modalDesc: `Currently streamed in ${experience.ExperienceStreams.length} channels`,
+            isContentModal: true,
+            modalContent: (<div>123123123</div>),
+            isModalDanger: false,
+            targetExperience: experience,
+        })
     }
 
     renderActiveChannelList = () => {
@@ -443,9 +459,11 @@ class StreamContainer extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title={this.state.modalTitle}
-                    description="Do you want to proceed?"
+                    description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}
+                    isContent={this.state.isContentModal}
+                    content={this.state.modalContent}
                     isDanger={this.state.isModalDanger}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
