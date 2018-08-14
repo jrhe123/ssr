@@ -15,8 +15,10 @@ import colors from '../../../styles/colors';
 // component
 import ChannelStream from '../presentation/streams/ChannelStream'
 import ReadyToStream from '../presentation/streams/ReadyToStream';
+import ChannelTab from '../presentation/streams/ChannelTab';
 import LiveStream from '../presentation/streams/LiveStream';
 import DxModal from '../../../components/dxModal/DxModal';
+import DxSearchBar from '../../../components/searchBar/SearchBar';
 
 // redux
 import { connect } from 'react-redux';
@@ -142,13 +144,38 @@ class StreamContainer extends Component {
     }
 
     handleClickOtherStreamHyper = (experience) => {
+        const {
+            modalSearchContainerStyle,
+            modalChannelTabListContainerStyle,
+        } = styles;
+        console.log('experience: ', experience);
+        const content = (
+            <div>
+                <div style={modalSearchContainerStyle}>
+                    <DxSearchBar
+                        isShort={false}
+                        placeholder="search channel(s)"
+                    />
+                </div>
+                <div style={modalChannelTabListContainerStyle}>
+                    {
+                        experience.ExperienceStreams.map((experienceStream, index) => (
+                            <ChannelTab 
+                                channelName={experienceStream.ChannelName}
+                                channelColor={experienceStream.ChannelColor}
+                            />
+                        ))
+                    }                    
+                </div>
+            </div>
+        );
         this.setState({
             isModalOpen: true,
             modalType: 'VIEW',
             modalTitle: experience.ExperienceTitle,
             modalDesc: `Currently streamed in ${experience.ExperienceStreams.length} channels`,
             isContentModal: true,
-            modalContent: (<div>123123123</div>),
+            modalContent: content,
             isModalDanger: false,
             targetExperience: experience,
         })
@@ -465,6 +492,7 @@ class StreamContainer extends Component {
                     isContent={this.state.isContentModal}
                     content={this.state.modalContent}
                     isDanger={this.state.isModalDanger}
+                    searchValue={"my value here"}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
@@ -786,6 +814,13 @@ const styles = {
     channelMsgStyle: {
         fontSize: fonts.h3,
         color: colors.labelColor,
+    },
+
+    modalSearchContainerStyle: {
+        marginBottom: 18
+    },
+    modalChannelTabListContainerStyle: {
+
     },
 }
 

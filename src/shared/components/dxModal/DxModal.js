@@ -43,6 +43,8 @@ class DxModal extends Component {
             btnWrapperStyle,
             cancelBtnStyle,
             confirmBtnStyle,
+
+            mainContentContainerStyle,
         } = styles;
 
         return (
@@ -63,7 +65,9 @@ class DxModal extends Component {
                         <p style={contentStyle}>{description}</p>
                         {
                             isContent ?
-                                content
+                                <div style={mainContentContainerStyle}>
+                                { content }
+                                </div>
                                 :
                                 null
                         }
@@ -173,6 +177,11 @@ const styles = {
     confirmBtnStyle: {
         color: colors.whiteColor,
         textTransform: 'capitalize',
+    },
+
+    mainContentContainerStyle: {
+        marginTop: 12,
+        marginBottom: 12,
     },
 }
 
