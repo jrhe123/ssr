@@ -148,7 +148,7 @@ class StreamContainer extends Component {
             modalSearchContainerStyle,
             modalChannelTabListContainerStyle,
         } = styles;
-        console.log('experience: ', experience);
+
         const content = (
             <div>
                 <div style={modalSearchContainerStyle}>
