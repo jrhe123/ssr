@@ -145,3 +145,10 @@ body{
 .dx_tab{
     transition: background-color 0.2s linear;
 }
+
+.dx_pwd_input>label[data-shrink="true"]{
+    color: #0176FF !important;
+}
+.dx_pwd_input>div::after{
+    border-bottom: 2px solid #0176FF !important;
+}

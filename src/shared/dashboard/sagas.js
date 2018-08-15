@@ -16,6 +16,10 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
 
+    PASSWORD_INPUT_REQUESTED,
+    PASSWORD_INPUT__SUCCEEDED,
+    PASSWORD_INPUT__FAILED,
+
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
@@ -116,6 +120,28 @@ export function* dxLogout() {
 
 export function* dxLogoutSaga() {
     yield takeEvery(LOGOUT_REQUESTED, dxLogout);
+}
+
+// Password update
+export function* dxInputPassword(action) {
+    try {
+        yield put({
+            type: PASSWORD_INPUT__SUCCEEDED,
+            payload: {
+                value: action.payload.value,
+                type: action.payload.type,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: PASSWORD_INPUT__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxInputPasswordSaga() {
+    yield takeEvery(PASSWORD_INPUT_REQUESTED, dxInputPassword);
 }
 
 // Fetch Channel

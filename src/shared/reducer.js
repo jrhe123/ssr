@@ -8,6 +8,7 @@ import {
 import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
+    PASSWORD_INPUT__SUCCEEDED,
 
     EXPERIENCE_FETCH__FAILED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -87,6 +88,8 @@ const initialState = {
     history: null,
     isAuthenticated: false,
     user: {},
+    password: '',
+    confirmPassword: '',
 
     alertBar: {
         isDisplay: false,
@@ -113,6 +116,14 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case LOGOUT__SUCCEEDED:
             updated.isAuthenticated = false;
             updated.user = {};
+            return updated;
+
+        case PASSWORD_INPUT__SUCCEEDED:
+            if(payload.type == 'PASSWORD'){
+                updated.password = payload.value;
+            }else if(payload.type == 'CONFIRM_PASSWORD'){
+                updated.confirmPassword = payload.value;
+            }
             return updated;
 
         case VALIDATE_TOKEN__SUCCEEDED:

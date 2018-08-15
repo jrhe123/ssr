@@ -16,6 +16,8 @@ import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import {
     dxDashboardNavi as dxDashboardNaviAction,
+    dxPasswordInput as dxPasswordInputAction,
+
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -38,7 +40,6 @@ class ExperienceContainer extends Component {
         modalTitle: '',
         modalDesc: '',
         isContentModal: false,
-        modalContent: null,
         isModalDanger: true,
         targetExperienceGUID: null,
     }
@@ -80,6 +81,11 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
+    handlePwdChange = (e, type) => {
+        const value = e.target.value;
+        this.props.dxPasswordInputAction(value, type);
+    }
+
     handleConfirmModal = () => {
         const {
             modalType
@@ -87,44 +93,34 @@ class ExperienceContainer extends Component {
         if (modalType == 'DELETE') {
             this.handleConfirmDeleteExperience();
         } else if (modalType == 'LOCK') {
-            console.log('do unlock');
+            this.handleConfirmUnlockSite();
         }
     }
 
     handleUnlockSite = () => {
-        const {
-            pwdContainerStyle,
-            pwdInputWrapperStyle,
-        } = styles;
-        const content = (
-            <div style={pwdContainerStyle}>
-                <div style={pwdInputWrapperStyle}>
-                    <TextField
-                        label="Password"
-                        type="password"
-                        margin="normal"
-                        fullWidth
-                    />
-                </div>
-                <div style={pwdInputWrapperStyle}>
-                    <TextField
-                        label="Confirm Password"
-                        type="password"
-                        margin="normal"
-                        fullWidth
-                    />
-                </div>
-            </div>
-        );
         this.setState({
             isModalOpen: true,
             modalType: 'LOCK',
             modalTitle: 'Confirm Unlock Site',
             modalDesc: 'Do you want to proceed?',
             isContentModal: true,
-            modalContent: content,
             isModalDanger: false,
         })
+    }
+
+    handleConfirmUnlockSite = () => {
+        if(!this.props.password){
+            this.props.dxAlertAction(true, true, 'Please enter your password');
+            return;
+        }
+        if(this.props.password != this.props.confirmPassword){
+            this.props.dxAlertAction(true, true, 'Password not matched');
+            return;
+        }
+        this.setState({
+            isModalOpen: false
+        });
+        console.log('call reducer');
     }
 
     handleRemoveExperience = (experienceGUID) => {
@@ -187,6 +183,9 @@ class ExperienceContainer extends Component {
             experienceNumberContainerStyle,
             experienceNumberStyle,
             experienceListWrapperStyle,
+
+            pwdContainerStyle,
+            pwdInputWrapperStyle,
         } = styles;
 
         return (
@@ -278,7 +277,37 @@ class ExperienceContainer extends Component {
                     cancel={true}
                     confirm={true}
                     isContent={this.state.isContentModal}
-                    content={this.state.modalContent}
+                    content={
+                        this.state.isContentModal ?
+                            <div style={pwdContainerStyle}>
+                                <div style={pwdInputWrapperStyle}>
+                                    <TextField
+                                        className="dx_pwd_input"
+                                        label="Password"
+                                        type="password"
+                                        margin="normal"
+                                        fullWidth
+                                        value={this.props.password}
+                                        onChange={(e) => this.handlePwdChange(e, 'PASSWORD')}
+                                    />
+                                </div>
+                                <div style={pwdInputWrapperStyle}>
+                                    <TextField
+                                        className="dx_pwd_input"
+                                        label="Confirm Password"
+                                        type="password"
+                                        margin="normal"
+                                        fullWidth
+                                        value={this.props.confirmPassword}
+                                        error={this.props.confirmPassword && this.props.password != this.props.confirmPassword}
+                                        helperText={(this.props.confirmPassword.length && this.props.password != this.props.confirmPassword) ? "Password not match" : null}
+                                        onChange={(e) => this.handlePwdChange(e, 'CONFIRM_PASSWORD')}
+                                    />
+                                </div>
+                            </div>
+                            :
+                            null
+                    }
                     isDanger={this.state.isModalDanger}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
@@ -357,7 +386,6 @@ const styles = {
         width: 60,
         height: 60,
         cursor: 'pointer',
-        border: '1px solid red'
     },
     lockIconStyle: {
         color: colors.blackColor,
@@ -381,16 +409,19 @@ const styles = {
         marginTop: 24,
     },
     pwdContainerStyle: {
-        border: '1px solid red'
+        paddingTop: 12,
+        paddingBottom: 12,
     },
     pwdInputWrapperStyle: {
-        border: '1px solid green'
+        marginBottom: 12,
     },
 }
 
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        password: state.root.password,
+        confirmPassword: state.root.confirmPassword,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         Experiences: state.dashboard.Experiences,
         IsReloadExperience: state.dashboard.IsReloadExperience,
@@ -399,6 +430,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxDashboardNaviAction,
+    dxPasswordInputAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,
