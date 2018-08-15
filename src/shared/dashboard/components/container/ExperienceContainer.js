@@ -8,6 +8,8 @@ import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
+import Lock from '@material-ui/icons/Lock';
+import LockOpen from '@material-ui/icons/LockOpen';
 
 // redux
 import { connect } from 'react-redux';
@@ -38,7 +40,7 @@ class ExperienceContainer extends Component {
         this.props.dxFetchExperienceAction();
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
         if (nextProps.IsReloadExperience && !this.props.IsReloadExperience) {
             this.props.dxFetchExperienceAction();
         }
@@ -107,6 +109,7 @@ class ExperienceContainer extends Component {
 
         const {
             tableContainerStyle,
+            tableContainerV2Style,
             tableWrapperStyle,
             newContentContainerStyle,
             imgStyle,
@@ -119,6 +122,8 @@ class ExperienceContainer extends Component {
             searchContainerStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
+            lockContainerStyle,
+            lockIconStyle,
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
             experienceNumberStyle,
@@ -150,6 +155,15 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
+                                    <div style={lockContainerStyle}>
+                                        <div style={tableContainerV2Style}>
+                                            <div style={tableWrapperStyle}>
+                                                <Lock 
+                                                    style={lockIconStyle}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div style={experienceSortContainerStyle}>
                                         <div style={experienceNumberContainerStyle}>
                                             <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
@@ -219,6 +233,12 @@ const styles = {
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
     },
+    tableContainerV2Style: {
+        position: 'relative',
+        display: 'table',
+        width: '100%',
+        height: `100%`,
+    },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
@@ -242,9 +262,7 @@ const styles = {
     },
 
     mainContainerStyle: {
-        // width: 'calc(100% - 192px - 48px)',
-        // marginLeft: 192,
-        // marginRight: 48,
+
     },
     topBarContainerStyle: {
         paddingTop: 36,
@@ -267,7 +285,20 @@ const styles = {
         textTransform: 'capitalize',
     },
     experienceListContainerStyle: {
-
+        position: 'relative',
+    },
+    lockContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: 60,
+        height: 60,
+        cursor: 'pointer',
+        border: '1px solid red'
+    },
+    lockIconStyle: {
+        color: colors.blackColor,
+        width: 36
     },
     experienceSortContainerStyle: {
         width: 240,
