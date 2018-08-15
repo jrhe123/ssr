@@ -170,7 +170,7 @@ const styles = {
         fontSize: fonts.h4,
     },
     btnContainerStyle: {
-        marginTop: 60,
+        marginTop: 72,
         textAlign: 'center'
     },
     btnStyle: {

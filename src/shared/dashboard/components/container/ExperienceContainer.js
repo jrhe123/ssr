@@ -10,6 +10,7 @@ import DxModal from '../../../components/dxModal/DxModal';
 import Button from '@material-ui/core/Button';
 import Lock from '@material-ui/icons/Lock';
 import LockOpen from '@material-ui/icons/LockOpen';
+import TextField from '@material-ui/core/TextField';
 
 // redux
 import { connect } from 'react-redux';
@@ -33,6 +34,12 @@ class ExperienceContainer extends Component {
     state = {
         newExperienceModalOpen: false,
         isModalOpen: false,
+        modalType: 'DELETE',
+        modalTitle: '',
+        modalDesc: '',
+        isContentModal: false,
+        modalContent: null,
+        isModalDanger: true,
         targetExperienceGUID: null,
     }
 
@@ -73,9 +80,61 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
+    handleConfirmModal = () => {
+        const {
+            modalType
+        } = this.state;
+        if (modalType == 'DELETE') {
+            this.handleConfirmDeleteExperience();
+        } else if (modalType == 'LOCK') {
+            console.log('do unlock');
+        }
+    }
+
+    handleUnlockSite = () => {
+        const {
+            pwdContainerStyle,
+            pwdInputWrapperStyle,
+        } = styles;
+        const content = (
+            <div style={pwdContainerStyle}>
+                <div style={pwdInputWrapperStyle}>
+                    <TextField
+                        label="Password"
+                        type="password"
+                        margin="normal"
+                        fullWidth
+                    />
+                </div>
+                <div style={pwdInputWrapperStyle}>
+                    <TextField
+                        label="Confirm Password"
+                        type="password"
+                        margin="normal"
+                        fullWidth
+                    />
+                </div>
+            </div>
+        );
+        this.setState({
+            isModalOpen: true,
+            modalType: 'LOCK',
+            modalTitle: 'Confirm Unlock Site',
+            modalDesc: 'Do you want to proceed?',
+            isContentModal: true,
+            modalContent: content,
+            isModalDanger: false,
+        })
+    }
+
     handleRemoveExperience = (experienceGUID) => {
         this.setState({
             isModalOpen: true,
+            modalType: 'DELETE',
+            modalTitle: 'Confirm Delete Experience',
+            modalDesc: 'Do you want to proceed?',
+            isContentModal: false,
+            isModalDanger: true,
             targetExperienceGUID: experienceGUID,
         })
     }
@@ -155,10 +214,12 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
-                                    <div style={lockContainerStyle}>
+                                    <div
+                                        style={lockContainerStyle}
+                                        onClick={() => this.handleUnlockSite()}>
                                         <div style={tableContainerV2Style}>
                                             <div style={tableWrapperStyle}>
-                                                <Lock 
+                                                <Lock
                                                     style={lockIconStyle}
                                                 />
                                             </div>
@@ -212,12 +273,14 @@ class ExperienceContainer extends Component {
                 />
                 <DxModal
                     open={this.state.isModalOpen}
-                    title="Confirm Delete Experience"
-                    description="Do you want to proceed?"
+                    title={this.state.modalTitle}
+                    description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}
-                    isDanger={true}
-                    handleConfirm={() => this.handleConfirmDeleteExperience()}
+                    isContent={this.state.isContentModal}
+                    content={this.state.modalContent}
+                    isDanger={this.state.isModalDanger}
+                    handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
             </div>
@@ -316,6 +379,12 @@ const styles = {
     },
     experienceListWrapperStyle: {
         marginTop: 24,
+    },
+    pwdContainerStyle: {
+        border: '1px solid red'
+    },
+    pwdInputWrapperStyle: {
+        border: '1px solid green'
     },
 }
 

@@ -492,7 +492,6 @@ class StreamContainer extends Component {
                     isContent={this.state.isContentModal}
                     content={this.state.modalContent}
                     isDanger={this.state.isModalDanger}
-                    searchValue={"my value here"}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
                 />
