@@ -159,6 +159,7 @@ class ExperienceContainer extends Component {
     render() {
 
         const {
+            isUnlocked,
             TotalExperienceRecord,
             Experiences,
         } = this.props;
@@ -239,6 +240,7 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
+                                            isUnlocked={isUnlocked}
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}

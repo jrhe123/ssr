@@ -15,6 +15,7 @@ class ExperienceList extends Component {
     render() {
 
         const {
+            isUnlocked,
             experiences
         } = this.props;
 
@@ -49,8 +50,9 @@ class ExperienceList extends Component {
                                 style={experienceWrapperStyle}
                             >
                                 <ExperienceCase
+                                    isUnlocked={isUnlocked}
                                     experience={experience}
-                                    enableEditExperience={experience.ExperienceStreamList.length ? false : true}
+                                    enableEditExperience={(experience.ExperienceStreamList.length && !isUnlocked) ? false : true}
                                     handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
                                     handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID)}
                                     handleRemoveExperience={() => this.props.handleRemoveExperience(experience.ExperienceGUID)}
