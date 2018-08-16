@@ -23,7 +23,10 @@ class DxButtonConnector extends Component {
 
         const {
             dropdownOptionArr,
+            defaultConnectorPage,
         } = this.props;
+
+        console.log('defaultConnectorPage: ', defaultConnectorPage);
 
         const {
             mainContainerStyle,
@@ -87,6 +90,7 @@ class DxButtonConnector extends Component {
                                         placeholder="select a page"
                                         style={connectorDropdownStyle}
                                         data={dropdownOptionArr}
+                                        defaultValue={defaultConnectorPage ? defaultConnectorPage : null}
                                         textField='Title'
                                         onChange={page => this.handleBtnConnectPageChange(page)}
                                     />

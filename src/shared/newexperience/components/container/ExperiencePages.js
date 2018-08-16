@@ -131,6 +131,7 @@ class ExperiencePages extends Component {
                         htmlContent={this.handleLoadHtml(page, section, activePage, readyToLoad)}
                         btnContent={section.BtnContent}
                         dropdownOptionArr={this.availablePageOptionList(Experience.Pages, Experience.NewPage.PageGUID, section.ConnectedPageGUID)}
+                        defaultConnectorPage={this.fetchConnectedPageInfo(Experience.Pages, section.ConnectedPageGUID)}
                         pdf={section.Pdf}
                         splashContent={section.SplashContent}
                         splashImg={section.SplashImg}
@@ -232,6 +233,19 @@ class ExperiencePages extends Component {
             }
         }
         return res;
+    }
+
+    fetchConnectedPageInfo = (pages, targetPageGUID) => {
+        if (!targetPageGUID) {
+            return null;
+        }
+        for (let i = 0; i < pages.length; i++) {
+            let page = pages[i];
+            if (page.PageGUID == targetPageGUID) {
+                return page;
+            }
+        }
+        return null;
     }
 
     findActiveSectionGUID = () => {
@@ -467,6 +481,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log(this.props.Experience)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={leftContainer}

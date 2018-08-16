@@ -128,6 +128,7 @@ class PhoneElement extends Component {
                         sectionGUID={this.props.sectionGUID}
                         btnContent={this.props.btnContent}
                         dropdownOptionArr={this.props.dropdownOptionArr}
+                        defaultConnectorPage={this.props.defaultConnectorPage}
                         handleBtnInputChange={(e) => this.props.handleBtnInputChange(e)}
                         handleBtnConnectPageChange={(pageGUID) => this.props.handleBtnConnectPageChange(pageGUID)}
                     />
