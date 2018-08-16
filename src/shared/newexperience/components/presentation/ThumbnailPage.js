@@ -17,13 +17,13 @@ class ThumbnailPage extends Component {
             elemContainerStyle,
         } = styles;
 
-        if(!Sections){
+        if (!Sections) {
             return null;
         }
 
         let section = Sections.map((section, i) => {
             return (
-                <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'} 
+                <div className={!section.IsDeleted ? 'dx_show' : 'dx_hidden'}
                     style={elemContainerStyle}>
                     <ThumbnailPhoneElement
                         key={i}
@@ -43,6 +43,7 @@ class ThumbnailPage extends Component {
     render() {
 
         const {
+            rootPageContainerStyle,
             mainContainerStyle,
             closeContainerStyle,
             closeIconStyle,
@@ -54,23 +55,28 @@ class ThumbnailPage extends Component {
         const {
             active,
             title,
+            isRoot,
         } = this.props;
+
+        console.log('isRoot: ', isRoot);
 
         return (
             <div
                 style={mainContainerStyle}
                 onClick={() => this.props.handleClickActivePage()}
             >
-                <div 
+                <div
                     className="dx_hover_btn"
                     style={closeContainerStyle}
                     onClick={() => this.props.handleDeletePage()}
                 >
-                    <img 
+                    <img
                         style={closeIconStyle}
-                        src={require('../../../../../assets/images/close_button.png')}/>
+                        src={require('../../../../../assets/images/close_button.png')} />
                 </div>
-                <div style={contentContainerStyle}>
+                <div
+                    style={Object.assign({}, contentContainerStyle, isRoot ? rootPageContainerStyle : null)}
+                >
                     {this.renderPhoneElementSection()}
                 </div>
                 <div style={titleContainerStyle}>
@@ -85,6 +91,9 @@ class ThumbnailPage extends Component {
 
 const styles = {
 
+    rootPageContainerStyle: {
+        boxShadow: `0px 0px 48px 9px ${colors.redColor}`
+    },
     mainContainerStyle: {
         position: 'relative',
         height: 180,
@@ -115,8 +124,8 @@ const styles = {
         overflow: 'hidden'
     },
     elemContainerStyle: {
-        maxHeight: 156,  
-        width: 120, 
+        maxHeight: 156,
+        width: 120,
         overflow: 'hidden'
     },
     titleContainerStyle: {

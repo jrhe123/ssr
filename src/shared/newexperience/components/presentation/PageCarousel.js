@@ -59,6 +59,8 @@ class PageCarousel extends Component {
             mainContainerStyle
         } = styles;
 
+        console.log('Pages: ', Pages);
+
         return (
             <div>
                 {
@@ -72,6 +74,7 @@ class PageCarousel extends Component {
                                             title={page.Title}
                                             active={page.PageGUID == NewPage.PageGUID ? true : false}
                                             page={page}
+                                            isRoot={page.IsRoot}
                                             handleClickActivePage={() => this.props.handleClickActivePage(page.PageGUID)}
                                             handleDeletePage={() => this.handleDeletePage(page.PageGUID)}
                                         />
@@ -89,6 +92,7 @@ class PageCarousel extends Component {
                                             title={page.Title}
                                             active={page.PageGUID == NewPage.PageGUID ? true : false}
                                             page={page}
+                                            isRoot={page.IsRoot}
                                             handleClickActivePage={() => this.props.handleClickActivePage(page.PageGUID)}
                                             handleDeletePage={() => this.handleDeletePage(page.PageGUID)}
                                         />
