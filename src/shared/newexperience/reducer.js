@@ -831,7 +831,7 @@ const disconnect_button_connectors_by_root_page_guid = (pages, rootPageGUID) => 
                 if (!section.IsDeleted
                     && section.Type == 'BUTTON'
                     && section.ConnectedPageGUID == rootPageGUID) {
-                    pages[i].Sections[j].ConnectedPageGUID = '';
+                    pages[i].Sections[j].ConnectedPageGUID = null;
                 }
             }
         }

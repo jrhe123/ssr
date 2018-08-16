@@ -88,7 +88,7 @@ class DxButtonConnector extends Component {
                                         placeholder="select a page"
                                         style={connectorDropdownStyle}
                                         data={dropdownOptionArr}
-                                        defaultValue={defaultConnectorPage ? defaultConnectorPage : null}
+                                        value={defaultConnectorPage ? defaultConnectorPage : null}
                                         textField='Title'
                                         onChange={page => this.handleBtnConnectPageChange(page)}
                                     />
