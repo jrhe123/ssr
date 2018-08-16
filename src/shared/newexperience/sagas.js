@@ -193,12 +193,12 @@ export const dxExperienceCreateUrl = (params) => {
     } = experience;
     const formattedParams = {
         ExperienceType: Type.toString(),
-        ExperienceTitle: ExperienceTitle,
+        ExperienceTitle: ExperienceTitle ? ExperienceTitle.trim() : '',
         ExperienceCard: {
             CardGUID: Card.CardGUID,
             Type: Card.Type,
-            Title: CardTitle,
-            Content: Card.Content,
+            Title: CardTitle ? CardTitle.trim() : '',
+            Content: Card.Content ? Card.Content.trim() : '',
             Settings: Card.Settings,
         },
         ExperiencePages: __format_experience_params(Pages)
@@ -221,7 +221,7 @@ const __format_experience_params = (pages) => {
                 ParentPageGUID: page.ParentPageGUID,
                 IsRoot: page.IsRoot,
                 IsSplash: page.IsSplash,
-                Title: page.Title,
+                Title: page.Title ? page.Title.trim() : '',
                 IsConnected: page.IsConnected,
                 Sections: sections,
             }
@@ -1276,12 +1276,12 @@ export const dxExperienceUpdateUrl = (params) => {
     const formattedParams = {
         ExperienceGUID,
         ExperienceType: Type.toString(),
-        ExperienceTitle: ExperienceTitle,
+        ExperienceTitle: ExperienceTitle ? ExperienceTitle.trim() : '',
         ExperienceCard: {
             ExperienceCardGUID: UpdateExperienceCardGUID,
             Type: Card.Type,
-            Title: CardTitle,
-            Content: Card.Content,
+            Title: CardTitle ? CardTitle.trim() : '',
+            Content: Card.Content ? Card.Content.trim() : '',
             Settings: Card.Settings,
         },
         ExperiencePages: __format_experience_params(Pages)

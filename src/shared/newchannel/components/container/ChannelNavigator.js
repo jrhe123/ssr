@@ -50,8 +50,13 @@ class ChannelNavigator extends Component {
             Message: '',
         }
         if (channel.ChannelType != '0'
-            && channel.ChannelType != '1') {
+            && channel.ChannelType != '1'
+            && channel.ChannelType != '2') {
             res.Message = 'Please enter select channel type';
+            return res;
+        }
+        if (channel.ChannelType == '2' && !channel.ChannelCode) {
+            res.Message = 'Please enter your promo code';
             return res;
         }
         if (!channel.ChannelColor) {

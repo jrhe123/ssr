@@ -74,12 +74,14 @@ export const dxChannelCreateUrl = (params) => {
         ChannelColor,
         ChannelName,
         ChannelDescription,
+        ChannelCode,
     } = params.channel
     const formattedParams = {
-        IsPrivate: ChannelType == 1 ? '1' : '0',
-        ChannelColor: ChannelColor,
-        ChannelName: ChannelName,
-        ChannelDescription: ChannelDescription,
+        ChannelType,
+        ChannelColor: ChannelColor.trim(),
+        ChannelName: ChannelName.trim(),
+        ChannelDescription,
+        ChannelCode: ChannelCode ? ChannelCode.trim() : null,
     };
     return (
         apiManager.dxApi(`/channel/create`, formattedParams, true)
@@ -94,7 +96,7 @@ export function* dxChannelCreate(action) {
             yield put({
                 type: CHANNEL_CREATE__FAILED,
                 payload: {
-                    message: 'Experience channel create api error'
+                    message: Message
                 },
             });
         } else {
@@ -102,7 +104,7 @@ export function* dxChannelCreate(action) {
                 type: CHANNEL_CREATE__SUCCEEDED,
                 payload: {
                     experience: Response,
-                    message: 'Experience channel has been created'
+                    message: 'Channel has been created'
                 },
             });
         }
@@ -110,7 +112,7 @@ export function* dxChannelCreate(action) {
         yield put({
             type: CHANNEL_CREATE__FAILED,
             payload: {
-                message: 'Experience channel create api error'
+                message: 'Channel create api error'
             },
         });
     }
@@ -150,7 +152,7 @@ export function* dxViewChannel(action) {
         yield put({
             type: CHANNEL_VIEW__FAILED,
             payload: {
-                message: 'Experience view api error'
+                message: 'Channel view api error'
             },
         });
     }
@@ -170,14 +172,16 @@ export const dxChannelUpdateUrl = (params) => {
         ChannelName,
         ChannelDescription,
         ChannelColor,
-        ChannelType
+        ChannelType,
+        ChannelCode,
     } = experienceChannel;
     const formattedParams = {
         ExperienceChannelGUID,
-        ChannelName,
+        ChannelName: ChannelName.trim(),
+        ChannelColor: ChannelColor.trim(),
         ChannelDescription,
-        ChannelColor,
-        IsPrivate: ChannelType == 0 ? '0' : '1',
+        ChannelType,
+        ChannelCode: ChannelCode ? ChannelCode.trim() : null,
     };
     return (
         apiManager.dxApi(`/channel/update`, formattedParams, true)
@@ -192,7 +196,7 @@ export function* dxChannelUpdate(action) {
             yield put({
                 type: CHANNEL_UPDATE__FAILED,
                 payload: {
-                    message: 'Experience channel update api error'
+                    message: Message
                 },
             });
         } else {
@@ -200,7 +204,7 @@ export function* dxChannelUpdate(action) {
                 type: CHANNEL_UPDATE__SUCCEEDED,
                 payload: {
                     experience: Response,
-                    message: 'Experience channel has been updated'
+                    message: 'Channel has been updated'
                 },
             });
         }
@@ -208,7 +212,7 @@ export function* dxChannelUpdate(action) {
         yield put({
             type: CHANNEL_UPDATE__FAILED,
             payload: {
-                message: 'Experience channel update api error'
+                message: 'Channel update api error'
             },
         });
     }
