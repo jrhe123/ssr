@@ -332,8 +332,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // Set root
             tmpNewPage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
             tmpPages[tmpNewPage.index].IsRoot = true;
+            tmpPages[tmpNewPage.index].IsConnected = false;
             tmpNewPage.page.IsRoot = true;
-
+            tmpNewPage.page.IsConnected = false;
+            // Disconnect btn to target: new root page
+            disconnect_button_connectors_by_root_page_guid(tmpPages, tmpNewPage.page.PageGUID)
+            
             tmpExperience.Pages = tmpPages;
             tmpExperience.NewPage = tmpNewPage.page;
             updated.Experience = tmpExperience;
@@ -815,6 +819,21 @@ const deactive_collapsible_panel_by_index = (arr, index) => {
             arr[i].isOpen = true;
         } else {
             arr[i].isOpen = false;
+        }
+    }
+}
+const disconnect_button_connectors_by_root_page_guid = (pages, rootPageGUID) => {
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (!page.IsDeleted && !page.IsRoot) {
+            for (let j = 0; j < page.Sections.length; j++) {
+                let section = page.Sections[j];
+                if (!section.IsDeleted
+                    && section.Type == 'BUTTON'
+                    && section.ConnectedPageGUID == rootPageGUID) {
+                    pages[i].Sections[j].ConnectedPageGUID = '';
+                }
+            }
         }
     }
 }
