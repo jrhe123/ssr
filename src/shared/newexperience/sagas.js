@@ -80,6 +80,10 @@ import {
     EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
     EXPERIENCE_PAGE_PAGES_REMOVE__FAILED,
 
+    EXPERIENCE_PAGE_SET_ROOT_REQUESTED,
+    EXPERIENCE_PAGE_SET_ROOT__SUCCEEDED,
+    EXPERIENCE_PAGE_SET_ROOT__FAILED,
+
     EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__FAILED,
@@ -718,6 +722,25 @@ export function* dxExperiencePagePagesRemove(action) {
 
 export function* dxExperiencePagePagesRemoveSaga() {
     yield takeEvery(EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED, dxExperiencePagePagesRemove);
+}
+
+// Experience pages set root page
+export function* dxExperiencePageSetRootPage(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_PAGE_SET_ROOT__SUCCEEDED,
+            payload: {},
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_PAGE_SET_ROOT__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperiencePageSetRootPageSaga() {
+    yield takeEvery(EXPERIENCE_PAGE_SET_ROOT_REQUESTED, dxExperiencePageSetRootPage);
 }
 
 // Experience page google doc panel toggle

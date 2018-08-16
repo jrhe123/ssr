@@ -33,6 +33,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { connect } from 'react-redux';
 import {
     dxExperiencePageTemplateFetch as dxExperiencePageTemplateFetchAction,
+    dxExperiencePageSetRootPage as dxExperiencePageSetRootPageAction,
 
     dxExperiencePageCarouselMenuUpdate as dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePage as dxExperiencePageCarouselActivePageAction,
@@ -394,7 +395,7 @@ class ExperiencePages extends Component {
     }
 
     handleSetRootPage = () => {
-        console.log('check: ', this.props.Experience.NewPage);
+        this.props.dxExperiencePageSetRootPageAction();
     }
 
     render() {
@@ -983,6 +984,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     // CREATE
     dxExperiencePageTemplateFetchAction,
+    dxExperiencePageSetRootPageAction,
 
     dxExperiencePageCarouselMenuUpdateAction,
     dxExperiencePageCarouselActivePageAction,

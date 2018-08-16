@@ -48,6 +48,7 @@ import {
 
     dxExperiencePagePagesSaveSaga,
     dxExperiencePagePagesRemoveSaga,
+    dxExperiencePageSetRootPageSaga,
     dxExperiencePageDocPanelToggleSaga,
     dxExperiencePageTemplateMenuToggleSaga,
     dxExperiencePageTemplateOptionSelectSaga,
@@ -141,6 +142,7 @@ export default function* rootSaga() {
 
         dxExperiencePagePagesSaveSaga(),
         dxExperiencePagePagesRemoveSaga(),
+        dxExperiencePageSetRootPageSaga(),
         dxExperiencePageDocPanelToggleSaga(),
         dxExperiencePageTemplateMenuToggleSaga(),
         dxExperiencePageTemplateOptionSelectSaga(),
@@ -163,14 +165,12 @@ export default function* rootSaga() {
         dxExperienceUpdateFileSaga(),
         dxExperienceUpdateSaga(),
         dxChannelUpdateSaga(),
-        
 
         // Channel
         dxChannelTypeSaga(),
         dxChannelValUpdateSaga(),
         dxChannelCreateSaga(),
         
-
         // Global
         dxValidateTokenSaga(),
         dxValidateUnlockTokenSaga(),

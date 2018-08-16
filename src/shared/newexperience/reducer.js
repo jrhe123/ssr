@@ -20,6 +20,7 @@ import {
 
     EXPERIENCE_PAGE_PAGES_SAVE__SUCCEEDED,
     EXPERIENCE_PAGE_PAGES_REMOVE__SUCCEEDED,
+    EXPERIENCE_PAGE_SET_ROOT__SUCCEEDED,
     EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE__SUCCEEDED,
     EXPERIENCE_PAGE_TEMPLATE_OPTION_SELECT__SUCCEEDED,
@@ -320,6 +321,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpExperience.NewPage = Object.assign({}, templateNewPage);
             tmpExperience.ActivePageSectionIndex = 0;
             updated.Experience = tmpExperience;
+            return updated;
+
+        case EXPERIENCE_PAGE_SET_ROOT__SUCCEEDED:
+            console.log('receive in reducer');
             return updated;
 
         case EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED:

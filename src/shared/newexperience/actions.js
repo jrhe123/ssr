@@ -20,6 +20,7 @@ import {
 
     EXPERIENCE_PAGE_PAGES_SAVE_REQUESTED,
     EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
+    EXPERIENCE_PAGE_SET_ROOT_REQUESTED,
     EXPERIENCE_PAGE_DOC_PANEL_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_TOGGLE_REQUESTED,
     EXPERIENCE_PAGE_TEMPLATE_FETCH_REQUESTED,
@@ -199,6 +200,13 @@ export const dxExperiencePagePagesSave = () => {
 export const dxExperiencePagePagesRemove = () => {
     return {
         type: EXPERIENCE_PAGE_PAGES_REMOVE_REQUESTED,
+        payload: {},
+    }
+}
+
+export const dxExperiencePageSetRootPage = () => {
+    return {
+        type: EXPERIENCE_PAGE_SET_ROOT_REQUESTED,
         payload: {},
     }
 }
