@@ -393,6 +393,10 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageDocPanelToggleAction(index, toggle);
     }
 
+    handleSetRootPage = () => {
+        console.log('check: ', this.props.Experience.NewPage);
+    }
+
     render() {
 
         const {
@@ -631,7 +635,7 @@ class ExperiencePages extends Component {
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                                <a 
+                                                <a
                                                     style={leftBtnContainerStyle}
                                                     className="dx_exp_view_mode dx_tool_tip"
                                                 >
@@ -647,12 +651,12 @@ class ExperiencePages extends Component {
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                                 <a
-                                                    style={midBtnContainerStyle} 
+                                                    style={midBtnContainerStyle}
                                                     className="dx_exp_view_mode dx_tool_tip"
                                                 >
                                                     <img
                                                         style={controlIconStyle}
-                                                        src={require('../../../../../assets/images/eye_off_icon.png')} />
+                                                        src={require('../../../../../assets/images/build_off_icon.png')} />
                                                     <span class="dx_tool_tip_text">PREVIEW</span>
                                                 </a>
                                             </div>
@@ -661,13 +665,19 @@ class ExperiencePages extends Component {
                                     <div style={rightControlContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                                <a 
+                                                <a
                                                     style={rightBtnContainerStyle}
                                                     className="dx_exp_view_mode dx_tool_tip"
+                                                    onClick={() => this.handleSetRootPage()}
                                                 >
                                                     <img
                                                         style={controlIconStyle}
-                                                        src={require('../../../../../assets/images/eye_off_icon.png')} />
+                                                        src={
+                                                            Experience.NewPage.IsRoot ?
+                                                                require('../../../../../assets/images/eye_on_icon.png')
+                                                                :
+                                                                require('../../../../../assets/images/eye_off_icon.png')
+                                                        } />
                                                     <span class="dx_tool_tip_text">SET ROOT</span>
                                                 </a>
                                             </div>
