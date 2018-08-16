@@ -77,7 +77,7 @@ export const dxChannelCreateUrl = (params) => {
         ChannelCode,
     } = params.channel
     const formattedParams = {
-        ChannelType,
+        ChannelType: ChannelType.toString(),
         ChannelColor: ChannelColor.trim(),
         ChannelName: ChannelName.trim(),
         ChannelDescription,
@@ -180,7 +180,7 @@ export const dxChannelUpdateUrl = (params) => {
         ChannelName: ChannelName.trim(),
         ChannelColor: ChannelColor.trim(),
         ChannelDescription,
-        ChannelType,
+        ChannelType: ChannelType.toString(),
         ChannelCode: ChannelCode ? ChannelCode.trim() : null,
     };
     return (

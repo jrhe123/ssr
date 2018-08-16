@@ -27,6 +27,7 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
     switch (type) {
 
         case CHANNEL_TYPE__SUCCEEDED:
+            tmpChannel = Object.assign({}, defaultChannel);
             tmpChannel.ChannelType = payload.channelType;
             updated.Channel = tmpChannel;
             updated.IsCompleted = false;
@@ -56,7 +57,6 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_CREATE__SUCCEEDED:
-            updated.Channel = Object.assign({}, defaultChannel);
             updated.IsCompleted = true;
             return updated;
 
