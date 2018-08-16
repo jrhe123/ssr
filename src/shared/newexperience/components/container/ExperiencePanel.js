@@ -100,6 +100,7 @@ class ExperiencePanel extends Component {
                     <div style={rightContainerStyle}>
                         <p>Select what kind of experience you would like your end user to experience?</p>
                         <DropdownMenu
+                            className="dx_experience_drop_menu"
                             isOpen={this.state.isMenuOpen}
                             close={() => this.handleClose()}
                             toggle={
