@@ -61,6 +61,7 @@ class ChannelOptionBar extends Component {
         return (
             <div>
                 <DropdownMenu
+                    className="dx_channel_option_drop_menu"
                     isOpen={this.state.isTypeMenuOpen}
                     close={() => this.handleCloseTypeSelect()}
                     toggle={
@@ -113,7 +114,8 @@ const styles = {
         color: colors.blueColor,
     },
     optionBtnStyle: {
-        width: 144
+        width: 250,
+        justifyContent: 'flex-start'
     },
     lockStyle: {
         height: '14px',

@@ -19,3 +19,7 @@
 .dd-menu.dx_channel_drop_menu .dd-menu-items{
     width: 90px;
 }
+
+.dx_channel_option_drop_menu .dd-menu-items{
+    width: 250px;
+}
