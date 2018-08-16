@@ -26,8 +26,6 @@ class DxButtonConnector extends Component {
             defaultConnectorPage,
         } = this.props;
 
-        console.log('defaultConnectorPage: ', defaultConnectorPage);
-
         const {
             mainContainerStyle,
             mainWrapperStyle,
