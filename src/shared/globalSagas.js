@@ -8,6 +8,10 @@ import {
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
 
+    VALIDATE_UNLOCK_TOKEN_REQUESTED,
+    VALIDATE_UNLOCK_TOKEN__SUCCEEDED,
+    VALIDATE_UNLOCK_TOKEN__FAILED,
+
     NAVIGATE_HISTORY_REQUESTED,
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
@@ -33,7 +37,6 @@ export const dxValidateTokenUrl = (params) => {
             },
         })
         .then((response) => {
-
             if (!response.ok) {
                 throw new Error();
             }
@@ -70,6 +73,56 @@ export function* dxValidateToken(action) {
 
 export function* dxValidateTokenSaga() {
     yield takeEvery(VALIDATE_TOKEN_REQUESTED, dxValidateToken);
+}
+
+// Validate unlock token
+export const dxValidateUnlockTokenUrl = (params) => {
+
+    return (
+        fetch(`${config.apiHost}/root`, {
+            method: 'post',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            return error;
+        })
+    )
+}
+
+export function* dxValidateUnlockToken(action) {
+    try {
+        const response = yield call(dxValidateUnlockTokenUrl, action.payload);
+        let token = localStorage.getItem('unlock_token', token);
+        yield put({
+            type: VALIDATE_UNLOCK_TOKEN__SUCCEEDED,
+            payload: {
+                user: {
+                    UserGUID: "5f92de5b-e627-43e5-a42f-75f9e4715380",
+                    UserTypeID: 1,
+                    AuthorizationToken: token
+                }
+            },
+        });
+    } catch (error) {
+        localStorage.clear();
+        yield put({
+            type: VALIDATE_UNLOCK_TOKEN__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxValidateUnlockTokenSaga() {
+    yield takeEvery(VALIDATE_UNLOCK_TOKEN_REQUESTED, dxValidateUnlockToken);
 }
 
 // Navigate history

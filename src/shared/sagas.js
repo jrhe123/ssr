@@ -86,6 +86,7 @@ import {
 // Global
 import {
     dxValidateTokenSaga,
+    dxValidateUnlockTokenSaga,
     dxNavigateHistorySaga,
     dxAlertSaga,
     dxLoadingSaga,
@@ -172,6 +173,7 @@ export default function* rootSaga() {
 
         // Global
         dxValidateTokenSaga(),
+        dxValidateUnlockTokenSaga(),
         dxNavigateHistorySaga(),
         dxAlertSaga(),
         dxLoadingSaga(),

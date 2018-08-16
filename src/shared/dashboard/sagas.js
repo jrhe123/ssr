@@ -159,6 +159,8 @@ export function* dxUnlockSite(action) {
                 },
             });
         } else {
+            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';        
+            localStorage.setItem('unlock_token', token);
             yield put({
                 type: UNLOCK_SITE__SUCCEEDED,
                 payload: {

@@ -78,6 +78,9 @@ import {
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
 
+    VALIDATE_UNLOCK_TOKEN__SUCCEEDED,
+    VALIDATE_UNLOCK_TOKEN__FAILED,
+
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
 
@@ -150,6 +153,14 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case VALIDATE_TOKEN__FAILED:
             updated.isAuthenticated = false;
             updated.user = {};
+            return updated;
+
+        case VALIDATE_UNLOCK_TOKEN__SUCCEEDED:
+            updated.isUnlocked = true;
+            return updated;
+        
+        case VALIDATE_UNLOCK_TOKEN__FAILED:
+            updated.isUnlocked = false;
             return updated;
 
         case NAVIGATE_HISTORY__SUCCEEDED:
