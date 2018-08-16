@@ -56,9 +56,7 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case CHANNEL_VIEW__SUCCEEDED:
-            tmpChannel = Object.assign({}, payload.experienceChannel);
-            tmpChannel.ChannelType = payload.experienceChannel.IsPrivate == 0 ? '0' : '1';
-            updated.Channel = tmpChannel;
+            updated.Channel = payload.experienceChannel;
             updated.IsCompleted = false;
             return updated;
 
