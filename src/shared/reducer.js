@@ -10,6 +10,7 @@ import {
     LOGOUT__FAILED,
     PASSWORD_INPUT__SUCCEEDED,
     UNLOCK_SITE__SUCCEEDED,
+    UNLOCK_SITE__FAILED,
 
     EXPERIENCE_FETCH__FAILED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -133,6 +134,12 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.password = '';
             updated.confirmPassword = '';
             updated.isUnlocked = true;
+            tempAlertBar = {
+                isDisplay: true,
+                isError: false,
+                message: payload.message
+            }
+            updated.alertBar = tempAlertBar;
             return updated;
 
         case VALIDATE_TOKEN__SUCCEEDED:
@@ -206,6 +213,7 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.alertBar = tempAlertBar;
             return updated;
 
+        case UNLOCK_SITE__FAILED:
         case EXPERIENCE_FETCH__FAILED:
         case EXPERIENCE_DELETE__FAILED:
         case EXPERIENCE_CREATE__FAILED:

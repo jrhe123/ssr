@@ -151,20 +151,21 @@ export function* dxInputPasswordSaga() {
 // Site unlock
 export function* dxUnlockSite(action) {
     try {
-        if(action.payload.password != '123456'){
+        if (action.payload.password != '123456') {
             yield put({
                 type: UNLOCK_SITE__FAILED,
                 payload: {
                     message: 'Password is incorrect'
                 },
             });
+        } else {
+            yield put({
+                type: UNLOCK_SITE__SUCCEEDED,
+                payload: {
+                    message: 'Site has been unlocked'
+                },
+            });
         }
-        yield put({
-            type: UNLOCK_SITE__SUCCEEDED,
-            payload: {
-                message: 'Site has been unlocked'
-            },
-        });
     } catch (error) {
         yield put({
             type: UNLOCK_SITE__FAILED,

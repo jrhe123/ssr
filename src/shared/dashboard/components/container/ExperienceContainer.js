@@ -110,11 +110,11 @@ class ExperienceContainer extends Component {
     }
 
     handleConfirmUnlockSite = () => {
-        if(!this.props.password){
+        if (!this.props.password) {
             this.props.dxAlertAction(true, true, 'Please enter your password');
             return;
         }
-        if(this.props.password != this.props.confirmPassword){
+        if (this.props.password != this.props.confirmPassword) {
             this.props.dxAlertAction(true, true, 'Password not matched');
             return;
         }
@@ -214,14 +214,21 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
-                                    <div
-                                        style={lockContainerStyle}
-                                        onClick={() => this.handleUnlockSite()}>
+
+                                    <div style={lockContainerStyle}>
                                         <div style={tableContainerV2Style}>
                                             <div style={tableWrapperStyle}>
-                                                <Lock
-                                                    style={lockIconStyle}
-                                                />
+                                                {
+                                                    this.props.isUnlocked ?
+                                                        <LockOpen 
+                                                            style={lockIconStyle}
+                                                        />
+                                                        :
+                                                        <Lock
+                                                            onClick={() => this.handleUnlockSite()}
+                                                            style={lockIconStyle}
+                                                        />
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -421,6 +428,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        isUnlocked: state.root.isUnlocked,
         password: state.root.password,
         confirmPassword: state.root.confirmPassword,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
