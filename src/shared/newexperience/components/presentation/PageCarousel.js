@@ -59,8 +59,6 @@ class PageCarousel extends Component {
             mainContainerStyle
         } = styles;
 
-        console.log('Pages: ', Pages);
-
         return (
             <div>
                 {

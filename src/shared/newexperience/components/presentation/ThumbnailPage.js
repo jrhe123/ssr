@@ -58,8 +58,6 @@ class ThumbnailPage extends Component {
             isRoot,
         } = this.props;
 
-        console.log('isRoot: ', isRoot);
-
         return (
             <div
                 style={mainContainerStyle}
@@ -92,7 +90,7 @@ class ThumbnailPage extends Component {
 const styles = {
 
     rootPageContainerStyle: {
-        boxShadow: `0px 0px 48px 9px ${colors.redColor}`
+        boxShadow: `0px 0px 48px 9px ${colors.greenColor}`
     },
     mainContainerStyle: {
         position: 'relative',
@@ -134,6 +132,7 @@ const styles = {
     },
     titleStyle: {
         fontSize: fonts.h5,
+        fontWeight: 'bold',
         textAlign: 'center',
         margin: 0
     },

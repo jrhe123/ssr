@@ -20,6 +20,7 @@ import DropdownMenu from 'react-dd-menu';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import Star from '@material-ui/icons/Star';
 import Dropzone from 'react-dropzone';
 
 import Collapse from '@material-ui/core/Collapse';
@@ -427,6 +428,8 @@ class ExperiencePages extends Component {
             phoneWrapperStyle,
             pageNumContainerStyle,
             pageNumStyle,
+            rootIndicatorContainerStyle,
+            rootIndicatorIconStyle,
             controlContainerStyle,
             leftControlContainerStyle,
             leftBtnContainerStyle,
@@ -583,7 +586,16 @@ class ExperiencePages extends Component {
                                     style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{Experience.NewPage.Title}</p>
+                                            <p style={pageNumStyle}>{Experience.NewPage.Title}<span>
+                                                {
+                                                    Experience.NewPage.IsRoot ?
+                                                        <div style={rootIndicatorContainerStyle}>
+                                                            <Star style={rootIndicatorIconStyle} />
+                                                        </div>
+                                                        :
+                                                        null
+                                                }
+                                            </span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -599,7 +611,16 @@ class ExperiencePages extends Component {
                                     style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{Experience.NewPage.Title}</p>
+                                            <p style={pageNumStyle}>{Experience.NewPage.Title}<span>
+                                                {
+                                                    Experience.NewPage.IsRoot ?
+                                                        <div style={rootIndicatorContainerStyle}>
+                                                            <Star style={rootIndicatorIconStyle} />
+                                                        </div>
+                                                        :
+                                                        null
+                                                }
+                                            </span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -809,7 +830,7 @@ const styles = {
         boxSizing: 'border-box',
     },
     pageNumContainerStyle: {
-        height: 24
+        height: 24,
     },
     pageNumStyle: {
         textAlign: 'center',
@@ -817,10 +838,24 @@ const styles = {
         color: colors.lightGreyColor,
         margin: 0
     },
+    rootIndicatorContainerStyle: {
+        display: 'inline-block',
+        position: 'relative',
+        height: 18,
+        width: 24,
+    },
+    rootIndicatorIconStyle: {
+        fontSize: 18,
+        color: colors.blackColor,
+        position: 'absolute',
+        top: 4,
+        left: 3
+    },
     controlContainerStyle: {
         height: 48,
         width: 400,
         margin: '0 auto',
+        marginTop: 12,
         display: 'flex',
         flexDirection: 'row'
     },
