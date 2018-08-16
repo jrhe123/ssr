@@ -66,8 +66,14 @@ body{
     width: 120px;
     left: -42px;
 }
+.dx_exp_view_mode .dx_tool_tip_text{
+    width: 60px;
+    left: -18px;
+}
 .dx_tool_bar_color:hover .dx_tool_tip_text,
-.dx_tool_bar_bgcolor:hover .dx_tool_tip_text{
+.dx_tool_bar_bgcolor:hover .dx_tool_tip_text,
+.dx_exp_view_mode:hover .dx_tool_tip_text
+{
     visibility: visible;
     background-color: rgba(0, 0, 0, 0.6);
     transition: background-color 0.15s linear;

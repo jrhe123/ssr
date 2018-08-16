@@ -433,6 +433,8 @@ class ExperiencePages extends Component {
             controlContainerStyle,
             leftControlContainerStyle,
             leftBtnContainerStyle,
+            midControlContainerStyle,
+            midBtnContainerStyle,
             rightControlContainerStyle,
             rightBtnContainerStyle,
             controlIconStyle,
@@ -629,10 +631,29 @@ class ExperiencePages extends Component {
                                     <div style={leftControlContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                                <a style={leftBtnContainerStyle}>
+                                                <a 
+                                                    style={leftBtnContainerStyle}
+                                                    className="dx_exp_view_mode dx_tool_tip"
+                                                >
                                                     <img
                                                         style={controlIconStyle}
                                                         src={require('../../../../../assets/images/build_on_icon.png')} />
+                                                    <span class="dx_tool_tip_text">EDITOR</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={midControlContainerStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
+                                                <a
+                                                    style={midBtnContainerStyle} 
+                                                    className="dx_exp_view_mode dx_tool_tip"
+                                                >
+                                                    <img
+                                                        style={controlIconStyle}
+                                                        src={require('../../../../../assets/images/eye_off_icon.png')} />
+                                                    <span class="dx_tool_tip_text">PREVIEW</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -640,10 +661,14 @@ class ExperiencePages extends Component {
                                     <div style={rightControlContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                                <a style={rightBtnContainerStyle}>
+                                                <a 
+                                                    style={rightBtnContainerStyle}
+                                                    className="dx_exp_view_mode dx_tool_tip"
+                                                >
                                                     <img
                                                         style={controlIconStyle}
                                                         src={require('../../../../../assets/images/eye_off_icon.png')} />
+                                                    <span class="dx_tool_tip_text">SET ROOT</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -863,6 +888,17 @@ const styles = {
         flex: 1,
     },
     leftBtnContainerStyle: {
+        height: 48,
+        width: 48,
+        margin: '0 auto',
+        borderRadius: 6,
+        display: 'block',
+        cursor: 'pointer'
+    },
+    midControlContainerStyle: {
+        flex: 1,
+    },
+    midBtnContainerStyle: {
         height: 48,
         width: 48,
         margin: '0 auto',
