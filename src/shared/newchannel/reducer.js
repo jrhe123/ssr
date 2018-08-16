@@ -7,10 +7,11 @@ import {
 } from './constants';
 
 const defaultChannel = {
-    ChannelType: '0',  // public or private
+    ChannelType: '0',  // public or private or invitation
     ChannelColor: '#EE2E24',
     ChannelName: '',
     ChannelDescription: '',
+    ChannelCode: '',
 }
 
 const initialState = {
@@ -44,6 +45,9 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
                     break;
                 case 'CHANNEL_DESCRIPTION':
                     tmpChannel.ChannelDescription = payload.val;
+                    break;
+                case 'CHANNEL_CODE':
+                    tmpChannel.ChannelCode = payload.val;
                     break;
                 default:
                     break;

@@ -16,6 +16,7 @@ import ChannelOptionBar from '../presentation/ChannelOptionBar';
 import ChannelColorOptionBar from '../presentation/ChannelColorOptionBar';
 import ChannelTitleInput from '../presentation/ChannelTitleInput';
 import ChannelDescInput from '../presentation/ChannelDescInput';
+import DxInput from '../../../components/dxInput/DxInput';
 
 class ChannelPanel extends Component {
 
@@ -58,13 +59,37 @@ class ChannelPanel extends Component {
                                     />
                                 </div>
                             </div>
+                            {
+                                Channel.ChannelType == '2' ?
+                                    (
+                                        <div style={optionContainerStyle}>
+                                            <div style={leftContainerStyle}>
+                                                <p style={labelStyle}>Promo Code</p>
+                                            </div>
+                                            <div style={rightContainerStyle}>
+                                                <p style={descLabelStyle}>Enter your promo code.</p>
+                                                <DxInput
+                                                    enableEnter={false}
+                                                    placeholder="Enter your promo code.."
+                                                    handleValChange={(e) => this.handleValueUpdate('CHANNEL_CODE', e.target.value)}
+                                                    isDark={false}
+                                                    width="225px"
+                                                    disabled={false}
+                                                    value={Channel.ChannelCode}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                    :
+                                    null
+                            }
                             <div style={optionContainerStyle}>
                                 <div style={leftContainerStyle}>
                                     <p style={labelStyle}>Color</p>
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a color for your channel. We recommend using one color for each channel you own.</p>
-                                    <ChannelColorOptionBar 
+                                    <ChannelColorOptionBar
                                         color={Channel.ChannelColor}
                                         handleColorPicker={(color) => this.handleValueUpdate('CHANNEL_COLOR', color)}
                                     />
@@ -76,7 +101,7 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
-                                    <ChannelTitleInput 
+                                    <ChannelTitleInput
                                         channelName={Channel.ChannelName}
                                         color={Channel.ChannelColor}
                                         handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}
@@ -89,7 +114,7 @@ class ChannelPanel extends Component {
                                 </div>
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Write an amazing description for your channel. Your audience will read this before joining the channel</p>
-                                    <ChannelDescInput 
+                                    <ChannelDescInput
                                         description={Channel.ChannelDescription}
                                         handleDescriptionCharacterChange={(val) => this.handleValueUpdate('CHANNEL_DESCRIPTION', val)}
                                     />
