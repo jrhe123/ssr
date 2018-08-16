@@ -20,6 +20,10 @@ import {
     PASSWORD_INPUT__SUCCEEDED,
     PASSWORD_INPUT__FAILED,
 
+    UNLOCK_SITE_REQUESTED,
+    UNLOCK_SITE__SUCCEEDED,
+    UNLOCK_SITE__FAILED,
+
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
@@ -142,6 +146,35 @@ export function* dxInputPassword(action) {
 
 export function* dxInputPasswordSaga() {
     yield takeEvery(PASSWORD_INPUT_REQUESTED, dxInputPassword);
+}
+
+// Site unlock
+export function* dxUnlockSite(action) {
+    try {
+        if(action.payload.password != '123456'){
+            yield put({
+                type: UNLOCK_SITE__FAILED,
+                payload: {
+                    message: 'Password is incorrect'
+                },
+            });
+        }
+        yield put({
+            type: UNLOCK_SITE__SUCCEEDED,
+            payload: {
+                message: 'Site has been unlocked'
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: UNLOCK_SITE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxUnlockSiteSaga() {
+    yield takeEvery(UNLOCK_SITE_REQUESTED, dxUnlockSite);
 }
 
 // Fetch Channel

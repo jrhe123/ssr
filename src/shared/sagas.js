@@ -10,6 +10,7 @@ import {
     dxDashboardNaviSaga,
     dxLogoutSaga,
     dxInputPasswordSaga,
+    dxUnlockSiteSaga,
     
     dxFetchChannelSaga,
     dxUpdateChannelSaga,
@@ -100,6 +101,7 @@ export default function* rootSaga() {
         dxDashboardNaviSaga(),
         dxLogoutSaga(),
         dxInputPasswordSaga(),
+        dxUnlockSiteSaga(),
         
         // channel
         dxFetchChannelSaga(),

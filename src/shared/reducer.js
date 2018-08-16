@@ -9,6 +9,7 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
     PASSWORD_INPUT__SUCCEEDED,
+    UNLOCK_SITE__SUCCEEDED,
 
     EXPERIENCE_FETCH__FAILED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -88,6 +89,7 @@ const initialState = {
     history: null,
     isAuthenticated: false,
     user: {},
+    isUnlocked: false,
     password: '',
     confirmPassword: '',
 
@@ -116,14 +118,21 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case LOGOUT__SUCCEEDED:
             updated.isAuthenticated = false;
             updated.user = {};
+            updated.isUnlocked = false;
             return updated;
 
         case PASSWORD_INPUT__SUCCEEDED:
-            if(payload.type == 'PASSWORD'){
+            if (payload.type == 'PASSWORD') {
                 updated.password = payload.value;
-            }else if(payload.type == 'CONFIRM_PASSWORD'){
+            } else if (payload.type == 'CONFIRM_PASSWORD') {
                 updated.confirmPassword = payload.value;
             }
+            return updated;
+
+        case UNLOCK_SITE__SUCCEEDED:
+            updated.password = '';
+            updated.confirmPassword = '';
+            updated.isUnlocked = true;
             return updated;
 
         case VALIDATE_TOKEN__SUCCEEDED:

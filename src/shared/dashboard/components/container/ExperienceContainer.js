@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import {
     dxDashboardNavi as dxDashboardNaviAction,
     dxPasswordInput as dxPasswordInputAction,
+    dxSiteUnlock as dxSiteUnlockAction,
 
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
@@ -120,7 +121,7 @@ class ExperienceContainer extends Component {
         this.setState({
             isModalOpen: false
         });
-        console.log('call reducer');
+        this.props.dxSiteUnlockAction(this.props.password);
     }
 
     handleRemoveExperience = (experienceGUID) => {
@@ -431,6 +432,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxDashboardNaviAction,
     dxPasswordInputAction,
+    dxSiteUnlockAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,

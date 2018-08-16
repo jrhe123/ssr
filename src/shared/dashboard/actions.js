@@ -2,6 +2,7 @@ import {
     DASHBOARD_NAVI_REQUESTED,
     LOGOUT_REQUESTED,
     PASSWORD_INPUT_REQUESTED,
+    UNLOCK_SITE_REQUESTED,
 
     // CHANNEL
     CHANNEL_FETCH_REQUESTED,
@@ -45,6 +46,15 @@ export const dxPasswordInput = (value, type) => {
     }
 }
 
+export const dxSiteUnlock = (password) => {
+    return {
+        type: UNLOCK_SITE_REQUESTED,
+        payload: {
+            password
+        },
+    }
+}
+
 export const dxFetchChannel = () => {
     return {
         type: CHANNEL_FETCH_REQUESTED,
@@ -65,9 +75,9 @@ export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid) => {
     return {
         type: HTML_FETCH_REQUESTED,
         payload: {
-            experienceGUID, 
-            pageGUID, 
-            sectionGUID, 
+            experienceGUID,
+            pageGUID,
+            sectionGUID,
             guid,
         },
     }
