@@ -150,6 +150,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
     let tmpPageGUID;
     let tmpPagesLength;
     let tmpSections;
+    let tmpRootPage;
     let tmpUpdatePage;
     let tmpNewSection;
     let tmpCopySection;
@@ -324,7 +325,18 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_PAGE_SET_ROOT__SUCCEEDED:
-            console.log('receive in reducer');
+            // Unset root
+            tmpRootPage = find_root_page(tmpPages);
+            tmpUpdatePage = find_page_by_guid(tmpRootPage.PageGUID, tmpPages);
+            tmpPages[tmpUpdatePage.index].IsRoot = false;
+            // Set root
+            tmpNewPage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
+            tmpPages[tmpNewPage.index].IsRoot = true;
+            tmpNewPage.page.IsRoot = true;
+
+            tmpExperience.Pages = tmpPages;
+            tmpExperience.NewPage = tmpNewPage.page;
+            updated.Experience = tmpExperience;
             return updated;
 
         case EXPERIENCE_PAGE_DOC_PANEL_TOGGLE__SUCCEEDED:

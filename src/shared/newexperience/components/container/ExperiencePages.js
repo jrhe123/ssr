@@ -315,6 +315,8 @@ class ExperiencePages extends Component {
                 let dxPhoneArea = this.refs.dx_phone_area;
                 dxPhoneArea.scrollTop = dxPhoneArea.scrollHeight;
             }, 0.1);
+        } else if (modalType == 'ROOT') {
+            this.props.dxExperiencePageSetRootPageAction();
         }
     }
 
@@ -395,7 +397,15 @@ class ExperiencePages extends Component {
     }
 
     handleSetRootPage = () => {
-        this.props.dxExperiencePageSetRootPageAction();
+        const {
+            Experience,
+        } = this.props;
+        if (Experience.NewPage.IsRoot) return;
+        this.setState({
+            modalType: 'ROOT',
+            isModalOpen: true,
+            modalTitle: 'Confirm Set Current Page as Root Page',
+        });
     }
 
     render() {
