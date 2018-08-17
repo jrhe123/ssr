@@ -73,6 +73,8 @@ class PhoneToolbar extends Component {
                 return (
                     <DxLinkToolbar 
                         isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].LinkColor : '#000000'}
+                        handleColorChange={(color) => this.props.handleLinkColorChange(color)}
                     />
                 )
             } else {

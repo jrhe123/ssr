@@ -291,6 +291,11 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'IMAGE', file);
     }
 
+    handleLinkColorChange = (color) => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_COLOR', color.color);
+    }
+
     handleDeleteElem = (sectionGUID) => {
         this.setState({
             modalType: 'DELETE',
@@ -481,6 +486,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
+                <a onClick={() => console.log('check: ', this.props.Experience)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={leftContainer}
@@ -609,6 +615,7 @@ class ExperiencePages extends Component {
                                     handleVideoInputChange={(e) => this.handleVideoInputChange(e)}
                                     handleVideoInsertClick={() => this.handleVideoInsertClick()}
                                     handleImageChange={(file) => this.handleImageChange(file)}
+                                    handleLinkColorChange={(color) => this.handleLinkColorChange(color)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>
