@@ -333,8 +333,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPage = find_page_by_guid(tmpNewPage.PageGUID, tmpPages);
             tmpPages[tmpNewPage.index].IsRoot = true;
             tmpPages[tmpNewPage.index].IsConnected = false;
+            tmpPages[tmpNewPage.index].ParentPageGUID = null;
             tmpNewPage.page.IsRoot = true;
             tmpNewPage.page.IsConnected = false;
+            tmpNewPage.page.ParentPageGUID = null;
             // Disconnect btn to target: new root page
             disconnect_button_connectors_by_root_page_guid(tmpPages, tmpNewPage.page.PageGUID)
             
