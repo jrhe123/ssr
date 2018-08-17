@@ -99,6 +99,9 @@ class ThumbnailPhoneElement extends Component {
             // img
             imgContainerStyle,
             imgStyle,
+            // link
+            linkContainerStyle,
+            linkStyle
         } = styles;
 
         let elem;
@@ -301,6 +304,17 @@ class ThumbnailPhoneElement extends Component {
                             style={Object.assign({}, imgStyle, { height: imgHeight })}
                             src={section.Img ? `${config.picHost}${section.Img}` : require('../../../../assets/images/demo.jpg')}
                         />
+                    </div>
+                );
+                break;
+            case 'LINK':
+                elem = (
+                    <div style={linkContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <p style={Object.assign({}, linkStyle, { color: section.LinkColor })}>{section.LinkLabel ? section.LinkLabel : section.Link}</p>
+                            </div>
+                        </div>
                     </div>
                 );
                 break;
@@ -515,6 +529,15 @@ const styles = {
     imgStyle: {
         display: 'block',
         width: '100%',
+    },
+    // link
+    linkContainerStyle: {
+        padding: 4,
+        paddingLeft: 6,
+        paddingRight: 6,
+    },
+    linkStyle: {
+        fontSize: fonts.h4,
     },
 }
 

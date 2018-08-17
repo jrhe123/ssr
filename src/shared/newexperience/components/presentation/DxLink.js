@@ -31,7 +31,7 @@ class DxLink extends Component {
                                 placeholder="Hyperlink label.."
                                 handleValChange={(e) => this.props.handleLinkLabelInputChange(e)}
                                 isDark={false}
-                                width="144px"
+                                width="290px"
                                 disabled={false}
                                 textColor={linkColor}
                                 isUnderline={true}
