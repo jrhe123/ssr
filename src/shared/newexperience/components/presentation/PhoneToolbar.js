@@ -7,6 +7,7 @@ import DxSplashToolbar from './DxSplashToolbar';
 import DxVideoViewerToolbar from './DxVideoViewerToolbar';
 import DxImageViewerToolbar from './DxImageViewerToolbar';
 import DxLinkToolbar from './DxLinkToolbar';
+import DxAdButtonConnectorToolbar from './DxAdButtonConnectorToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -81,7 +82,11 @@ class PhoneToolbar extends Component {
                     />
                 )
             } else if (section.Type == 'AD_BUTTON') {
-                return null;
+                return (
+                    <DxAdButtonConnectorToolbar 
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                    />
+                );
             } else {
                 return (
                     <div
