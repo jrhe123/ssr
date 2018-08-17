@@ -27,6 +27,7 @@ import DxSplash from './DxSplash';
 import DxVideoViewer from './DxVideoViewer';
 import DxImageViewer from './DxImageViewer';
 import DxLink from './DxLink';
+import DxAdButtonConnector from './DxAdButtonConnector';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -179,7 +180,7 @@ class PhoneElement extends Component {
                 break;
             case 'AD_BUTTON':
                 section = (
-                    <div>ad btn</div>
+                    <DxAdButtonConnector />
                 )
                 break;
             default:

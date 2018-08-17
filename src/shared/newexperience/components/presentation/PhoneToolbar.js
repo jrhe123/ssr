@@ -80,6 +80,8 @@ class PhoneToolbar extends Component {
                         handleLinkInsertClick={() => this.props.handleLinkInsertClick()}
                     />
                 )
+            } else if (section.Type == 'AD_BUTTON') {
+                return null;
             } else {
                 return (
                     <div
