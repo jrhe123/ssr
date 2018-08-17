@@ -93,10 +93,10 @@ let templateNewSection = {
     VideoInput: null,    // video input
     VideoUrl: null,      // video url
     Img: null,        // img
-    LinkLabel: null,          // link label
-    LinkColor: '#0176FF',     // link color
     LinkInput: null,          // link input
     Link: null,               // link
+    LinkLabel: null,          // link label
+    LinkColor: '#0176FF',     // link color
     IsDeleted: false,       // section deleted
     PageGUID: null
 };

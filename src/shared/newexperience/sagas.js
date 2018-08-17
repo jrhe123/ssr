@@ -265,6 +265,11 @@ const __extract_section_values = (sections) => {
             case 'IMAGE':
                 item.Img = section.Img;
                 break;
+            case 'LINK':
+                item.Link = section.Link;
+                item.LinkLabel = section.LinkLabel;
+                item.LinkColor = section.LinkColor;
+                break;
         }
         output.push(item);
     }

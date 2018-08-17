@@ -103,7 +103,7 @@ class DxInput extends Component {
                 value={value != null ? value : ''}
                 onChange={(e) => this.props.handleValChange(e)}
                 onKeyPress={(e) => this.handleKeyPress(e, enableEnter)}
-                onClick={() => this.handleInputClick()}
+                onDoubleClick={() => this.handleInputClick()}
             />
         )
     }
