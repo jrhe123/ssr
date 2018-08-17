@@ -332,14 +332,14 @@ class ThumbnailPhoneElement extends Component {
                             <div style={leftContentContainerStyle}>
                                 <div style={tableContainerStyle}>
                                     <div style={tableWrapperStyle}>
-                                        <p style={btnLabelStyle}>{section.BtnContent}</p>
+                                        <p style={Object.assign({}, btnLabelStyle, { color: section.AdBtnColor })}>{section.BtnContent}</p>
                                     </div>
                                 </div>
                             </div>
                             <div style={rightIconContainerStyle}>
                                 <div style={tableContainerStyle}>
                                     <div style={tableWrapperStyle}>
-                                        <KeyboardArrowRight style={expandIconStyle} />
+                                        <KeyboardArrowRight style={Object.assign({}, expandIconStyle, { color: section.AdBtnColor })} />
                                     </div>
                                 </div>
                             </div>
