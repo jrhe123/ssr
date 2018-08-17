@@ -16,6 +16,21 @@ class DxInput extends Component {
         }
     }
 
+    handleInputClick = () => {
+        let {
+            enableClick,
+            hyperValue,
+        } = this.props;
+
+        if (enableClick && hyperValue) {
+            const regex = /(http(s?))\:\/\//gi;
+            if (!regex.test(hyperValue)) {
+                hyperValue = `http://${hyperValue}`;
+            }
+            window.open(hyperValue, "_blank");
+        }
+    }
+
     render() {
 
         const {
@@ -33,6 +48,7 @@ class DxInput extends Component {
             value,
             textColor,
             isUnderline,
+            isPointer,
         } = this.props;
 
         const extra = {};
@@ -61,6 +77,9 @@ class DxInput extends Component {
         if (isUnderline) {
             extra.textDecoration = 'underline';
         }
+        if (isPointer) {
+            extra.cursor = 'pointer';
+        }
 
         if (multiLine) {
             return (
@@ -84,6 +103,7 @@ class DxInput extends Component {
                 value={value != null ? value : ''}
                 onChange={(e) => this.props.handleValChange(e)}
                 onKeyPress={(e) => this.handleKeyPress(e, enableEnter)}
+                onClick={() => this.handleInputClick()}
             />
         )
     }

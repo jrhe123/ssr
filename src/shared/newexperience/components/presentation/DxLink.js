@@ -35,7 +35,10 @@ class DxLink extends Component {
                                 disabled={false}
                                 textColor={linkColor}
                                 isUnderline={true}
+                                isPointer={true}
+                                enableClick={true}
                                 value={linkLabel ? linkLabel : link}
+                                hyperValue={link}
                             />
                         }
                     </div>
