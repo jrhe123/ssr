@@ -270,6 +270,12 @@ const __extract_section_values = (sections) => {
                 item.LinkLabel = section.LinkLabel;
                 item.LinkColor = section.LinkColor;
                 break;
+            case 'AD_BUTTON':
+                item.AdBtnImg = section.AdBtnImg;
+                item.AdBtnColor = section.AdBtnColor;
+                item.BtnContent = section.BtnContent;
+                item.ConnectedPageGUID = section.ConnectedPageGUID;
+                break;
         }
         output.push(item);
     }

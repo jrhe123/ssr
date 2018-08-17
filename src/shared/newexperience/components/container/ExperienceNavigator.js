@@ -314,6 +314,18 @@ class ExperienceNavigator extends Component {
             res.Message = `${this.printUnconnectedElems(unconnectedLinks, 'LINK')}`;
             return res;
         }
+        // 8. AD_BUTTON
+        let unconnectedAdBtnsI = this.findUnconnectedElems(displayPages, 'AD_BUTTON_IMG');
+        if (unconnectedAdBtnsI.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedAdBtnsI, 'AD_BUTTON image')}`;
+            return res;
+        }
+        let unconnectedAdBtnsC = this.findUnconnectedElems(displayPages, 'AD_BUTTON_CONNECT');
+        if (unconnectedAdBtnsC.length > 0) {
+            res.IsWarning = true;
+            res.Message = `Confirm unconnected button(s)`;
+            return res;
+        }
         // Check unconnected pages
         let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
@@ -420,7 +432,23 @@ class ExperienceNavigator extends Component {
                             section,
                         });
                     }
-                }
+                } else if (type == 'AD_BUTTON_IMG') {
+                    if (section.Type == 'AD_BUTTON'
+                        && !section.AdBtnImg) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                } else if (type == 'AD_BUTTON_CONNECT') {
+                    if (section.Type == 'AD_BUTTON'
+                        && !section.ConnectedPageGUID) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                }              
             }
         }
         return output;
