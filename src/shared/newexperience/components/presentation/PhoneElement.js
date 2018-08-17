@@ -169,7 +169,11 @@ class PhoneElement extends Component {
                 break;
             case 'LINK':
                 section = (
-                    <DxLink />
+                    <DxLink 
+                        link={this.props.link}
+                        linkLabel={this.props.linkLabel}
+                        linkColor={this.props.linkColor}
+                    />
                 )
                 break;
             default:

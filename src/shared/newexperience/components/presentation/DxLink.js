@@ -9,6 +9,12 @@ class DxLink extends Component {
     render() {
 
         const {
+            link,
+            linkLabel,
+            linkColor,
+        } = this.props;
+
+        const {
             tableContainerStyle,
             tableWrapperStyle,
             mainContainerStyle,

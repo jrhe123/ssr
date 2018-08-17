@@ -138,6 +138,9 @@ class ExperiencePages extends Component {
                         splashColor={section.SplashColor}
                         videoUrl={section.VideoUrl}
                         img={section.Img}
+                        link={section.Link}
+                        linkLabel={section.LinkLabel}
+                        linkColor={section.LinkColor}
 
                         key={section.SectionGUID}
                         index={i}
