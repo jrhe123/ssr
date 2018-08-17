@@ -26,6 +26,7 @@ import DxPdfViewer from './DxPdfViewer';
 import DxSplash from './DxSplash';
 import DxVideoViewer from './DxVideoViewer';
 import DxImageViewer from './DxImageViewer';
+import DxLink from './DxLink';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -164,6 +165,11 @@ class PhoneElement extends Component {
                     <DxImageViewer
                         img={this.props.img}
                     />
+                )
+                break;
+            case 'LINK':
+                section = (
+                    <DxLink />
                 )
                 break;
             default:
