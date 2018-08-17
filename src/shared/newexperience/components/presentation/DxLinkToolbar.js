@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 
 // Libraries
 import ColorPicker from 'rc-color-picker';
+import Button from '@material-ui/core/Button';
 import '../../../../../assets/css/rc-color-picker/rc-color-picker.css';
+
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
+// constants
+import colors from '../../../styles/colors';
 
 class DxLinkToolbar extends Component {
 
-    handleImgChange = (event) => {
-        let file = event.target.files[0];
-        if (!file.type.match('image.*')) {
-            this.props.handleImgError('The supported file types are .jpg , .jpeg , .png , .bmp');
-            return;
-        }
-        this.props.handleImgChange(file);
+    state = {
+        isOpen: false
+    }
+
+    handleLinkInsertClick = () => {
+        this.setState({ isOpen: !this.state.isOpen });
+        this.props.handleLinkInsertClick();
     }
 
     render() {
@@ -21,26 +28,57 @@ class DxLinkToolbar extends Component {
             mainContainerStyle,
             optionContainerStyle,
             displayImgStyle,
+            linkInputContainerStyle,
+            linkInputWrapperStyle,
+            linkInputBtnStyle,
         } = styles;
 
         return (
             <div
                 className={this.props.isActive ? 'dx_show_toolbar' : 'dx_hidden_toolbar'}
             >
-                <div style={mainContainerStyle}>
-                    <div style={optionContainerStyle}>
-                        <img
-                            style={displayImgStyle}
-                            src={require('../../../../../assets/images/link_icon.png')}
-                        />
-                    </div>
-                    <div style={optionContainerStyle}>
-                        <ColorPicker
-                            animation="slide-up"
-                            color={this.props.color}
-                            onChange={(colors) => this.props.handleColorChange(colors)}
-                        />
-                    </div>
+                <div>
+                    {
+                        this.state.isOpen ?
+                            <div style={linkInputContainerStyle}>
+                                <div style={linkInputWrapperStyle}>
+                                    <DxInput
+                                        enableEnter={true}
+                                        placeholder="Embed hyperlink"
+                                        handleValChange={(e) => this.props.handleVideoInputChange(e)}
+                                        width="200px"
+                                        disabled={false}
+                                        value={this.props.videoInput}
+                                        handleKeyPress={() => this.handleLinkInsertClick()}
+                                    />
+                                </div>
+                                <Button
+                                    style={linkInputBtnStyle}
+                                    onClick={() => this.handleLinkInsertClick()}
+                                    variant="Enter video url">
+                                    Confirm
+                                </Button>
+                            </div>
+                            :
+                            <div style={mainContainerStyle}>
+                                <div 
+                                    style={optionContainerStyle}
+                                    onClick={() => this.setState({ isOpen: !this.state.isOpen })}
+                                >
+                                    <img
+                                        style={displayImgStyle}
+                                        src={require('../../../../../assets/images/link_icon.png')}
+                                    />
+                                </div>
+                                <div style={optionContainerStyle}>
+                                    <ColorPicker
+                                        animation="slide-up"
+                                        color={this.props.color}
+                                        onChange={(colors) => this.props.handleColorChange(colors)}
+                                    />
+                                </div>
+                            </div>
+                    }
                 </div>
             </div>
         )
@@ -50,7 +88,9 @@ class DxLinkToolbar extends Component {
 const styles = {
 
     mainContainerStyle: {
+        height: 48,
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
     },
     optionContainerStyle: {
@@ -63,7 +103,25 @@ const styles = {
     displayImgStyle: {
         display: 'block',
         width: 48,
-        height: 48
+        height: 48,
+        cursor: 'pointer'
+    },
+    linkInputContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: 320,
+        margin: '0 auto'
+    },
+    linkInputWrapperStyle: {
+        flex: 4,
+        marginTop: 3
+    },
+    linkInputBtnStyle: {
+        flex: 1,
+        backgroundColor: colors.blueColor,
+        color: colors.whiteColor,
+        textTransform: 'capitalize',
+        marginLeft: 6
     },
 }
 
