@@ -153,6 +153,7 @@ class ExperiencePages extends Component {
                         handleDescInputChange={(e) => this.handleUpdateDescContent(section.SectionGUID, e)}
                         handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
                         handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
+                        handleLinkLabelInputChange={(e) => this.handleUpdateLinkLabelContent(section.SectionGUID, e)}
 
                         handleVideoError={(msg) => this.handleErrorMsg(msg)}
                     />
@@ -308,6 +309,11 @@ class ExperiencePages extends Component {
     handleLinkInsertClick = () => {
         let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_CONFIRM');
+    }
+
+    handleUpdateLinkLabelContent = (sectionGUID, e) => {
+        let value = e.target.value;
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_LABEL', value);
     }
 
     handleDeleteElem = (sectionGUID) => {

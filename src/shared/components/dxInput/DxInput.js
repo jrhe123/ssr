@@ -31,6 +31,8 @@ class DxInput extends Component {
             marginTop,
             disabled,
             value,
+            textColor,
+            isUnderline,
         } = this.props;
 
         const extra = {};
@@ -52,6 +54,12 @@ class DxInput extends Component {
         }
         if (marginTop) {
             extra.marginTop = marginTop;
+        }
+        if (textColor) {
+            extra.color = textColor;
+        }
+        if (isUnderline) {
+            extra.textDecoration = 'underline';
         }
 
         if (multiLine) {

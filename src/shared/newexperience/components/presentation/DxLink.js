@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
+// components
+import DxInput from '../../../components/dxInput/DxInput';
+
 // constants
-import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
 class DxLink extends Component {
@@ -18,14 +20,24 @@ class DxLink extends Component {
             tableContainerStyle,
             tableWrapperStyle,
             mainContainerStyle,
-            hyperLinkLabelStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
                 <div style={tableContainerStyle}>
                     <div style={tableWrapperStyle}>
-                        <p style={hyperLinkLabelStyle}>https://wooooo</p>
+                        {
+                            <DxInput
+                                placeholder="Hyperlink label.."
+                                handleValChange={(e) => this.props.handleLinkLabelInputChange(e)}
+                                isDark={false}
+                                width="144px"
+                                disabled={false}
+                                textColor={linkColor}
+                                isUnderline={true}
+                                value={linkLabel ? linkLabel : link}
+                            />
+                        }
                     </div>
                 </div>
             </div>
@@ -48,15 +60,6 @@ const styles = {
     mainContainerStyle: {
         height: 72,
         cursor: 'default',
-    },
-    hyperLinkLabelStyle: {
-        margin: 0,
-        paddingLeft: 12,
-        paddingRight: 12,
-        fontSize: fonts.h3,
-        color: colors.blueColor,
-        textDecoration: 'underline',
-        cursor: 'pointer'
     },
 }
 

@@ -173,6 +173,7 @@ class PhoneElement extends Component {
                         link={this.props.link}
                         linkLabel={this.props.linkLabel}
                         linkColor={this.props.linkColor}
+                        handleLinkLabelInputChange={(e) => this.props.handleLinkLabelInputChange(e)}
                     />
                 )
                 break;

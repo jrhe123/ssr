@@ -582,7 +582,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
 
             if (tmpUpdateSection.Type == payload.type
-                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM'].indexOf(payload.type) != -1) {
+                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM', 'LINK_LABEL'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.HtmlContent = payload.content;
@@ -619,6 +619,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'LINK_CONFIRM':
                         tmpUpdateSection.Link = tmpUpdateSection.LinkInput;
+                        break;
+                    case 'LINK_LABEL':
+                        tmpUpdateSection.LinkLabel = payload.content;
                         break;
                     default:
                         break;
