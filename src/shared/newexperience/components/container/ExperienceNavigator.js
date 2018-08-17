@@ -308,6 +308,12 @@ class ExperienceNavigator extends Component {
             res.Message = `Confirm unconnected button(s)`;
             return res;
         }
+        // 7. LINK
+        let unconnectedLinks = this.findUnconnectedElems(displayPages, 'LINK');
+        if (unconnectedLinks.length > 0) {
+            res.Message = `${this.printUnconnectedElems(unconnectedLinks, 'LINK')}`;
+            return res;
+        }
         // Check unconnected pages
         let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
@@ -401,6 +407,14 @@ class ExperienceNavigator extends Component {
                 } else if (type == 'IMAGE') {
                     if (section.Type == 'IMAGE'
                         && !section.Img) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                } else if (type == 'LINK') {
+                    if (section.Type == 'LINK'
+                        && !section.Link) {
                         output.push({
                             page,
                             section,
