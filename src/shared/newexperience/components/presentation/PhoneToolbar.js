@@ -6,6 +6,7 @@ import DxPdfViewerToolbar from './DxPdfViewerToolbar';
 import DxSplashToolbar from './DxSplashToolbar';
 import DxVideoViewerToolbar from './DxVideoViewerToolbar';
 import DxImageViewerToolbar from './DxImageViewerToolbar';
+import DxLinkToolbar from './DxLinkToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -66,6 +67,12 @@ class PhoneToolbar extends Component {
                         imgFile={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].Img : null}
                         handleImgChange={(file) => this.props.handleImageChange(file)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
+                    />
+                )
+            } else if (section.Type == 'LINK') {
+                return (
+                    <DxLinkToolbar 
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
                     />
                 )
             } else {
