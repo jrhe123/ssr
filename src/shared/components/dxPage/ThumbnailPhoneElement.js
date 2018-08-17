@@ -538,6 +538,7 @@ const styles = {
     },
     linkStyle: {
         fontSize: fonts.h4,
+        textDecoration: 'underline'
     },
 }
 
