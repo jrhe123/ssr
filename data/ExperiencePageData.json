@@ -37,8 +37,13 @@
         },
         {
             "PageTemplateGUID": "935d9b87-96d5-4007-a0b2-e93cd262bc6f",
-            "Title": "Advanced Button",
+            "Title": "Advanced Button Image",
             "Type": "AD_BUTTON"
+        },
+        {
+            "PageTemplateGUID": "2248aa56-6b39-41d6-abc5-fbb1dced8a70",
+            "Title": "Advanced Button Background Color",
+            "Type": "AD_BUTTON_2"
         }
     ]
 }

@@ -92,6 +92,10 @@ class PhoneToolbar extends Component {
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 );
+            } else if (section.Type == 'AD_BUTTON_2') {
+                return (
+                    <div>btn 2</div>
+                );
             } else {
                 return (
                     <div
