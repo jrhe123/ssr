@@ -34,6 +34,11 @@
             "PageTemplateGUID": "2c54867d-ffb8-4793-bc88-1757c5dd1621",
             "Title": "Hyperlink",
             "Type": "LINK"
+        },
+        {
+            "PageTemplateGUID": "935d9b87-96d5-4007-a0b2-e93cd262bc6f",
+            "Title": "Advanced Button",
+            "Type": "AD_BUTTON"
         }
     ]
 }
