@@ -294,6 +294,31 @@ class PageTemplate extends Component {
                     />
                 </div>
             )
+        } else if (template.Type == 'LINK') {
+            card = (
+                <div 
+                    style={Object.assign({}, pageContainerStyle)}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
+                    <div style={leftImageContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <img
+                                    style={imgStyle}
+                                    src={require('../../../../../assets/images/link_icon.png')}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div style={rightTextContainerStyle}>
+                        <div style={tableContainerStyle}>
+                            <div style={Object.assign({}, tableWrapperStyle, { textAlign: 'left' })}>
+                                <p style={txtStyle}>Choose this page element to embed and show a Hyper link on the page directly to the user</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
         }
         return card;
     }

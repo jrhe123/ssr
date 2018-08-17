@@ -29,6 +29,11 @@
             "PageTemplateGUID": "5cc63d87-ec3c-49f0-a967-6179b7ebdc6f",
             "Title": "Image",
             "Type": "IMAGE"
+        },
+        {
+            "PageTemplateGUID": "2c54867d-ffb8-4793-bc88-1757c5dd1621",
+            "Title": "Hyperlink",
+            "Type": "LINK"
         }
     ]
 }
