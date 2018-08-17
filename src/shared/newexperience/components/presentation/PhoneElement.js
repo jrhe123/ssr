@@ -177,6 +177,11 @@ class PhoneElement extends Component {
                     />
                 )
                 break;
+            case 'AD_BUTTON':
+                section = (
+                    <div>ad btn</div>
+                )
+                break;
             default:
                 break;
         }

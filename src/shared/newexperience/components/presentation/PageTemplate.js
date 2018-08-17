@@ -319,6 +319,43 @@ class PageTemplate extends Component {
                     </div>
                 </div>
             )
+        } else if (template.Type == 'AD_BUTTON') {
+            card = (
+                <div 
+                    style={Object.assign({}, pageContainerStyle, btnPageContainerStyle)}
+                    onClick={() => this.props.handleTemplateClick(template)}
+                >
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <div style={topBtnContainerStyle}>
+                                <div style={btnLabelContainerStyle}>
+                                    <div style={btnLabelWrapperStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <p style={btnLabelStyle}>Text for a button</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={expandIconContainerStyle}>
+                                        <div style={tableContainerStyle}>
+                                            <div style={tableWrapperStyle}>
+                                                <KeyboardArrowRight style={expandIconStyle} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={bottomDescContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={txtStyle}>Connect another page with this button</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
         }
         return card;
     }
