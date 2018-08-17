@@ -97,6 +97,8 @@ let templateNewSection = {
     Link: null,               // link
     LinkLabel: null,          // link label
     LinkColor: '#0176FF',     // link color
+    AdBtnImg: null,         // ad btn img
+    AdBtnColor: '#000000',  // ad btn color
     IsDeleted: false,       // section deleted
     PageGUID: null
 };
@@ -343,7 +345,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPage.page.ParentPageGUID = null;
             // Disconnect btn to target: new root page
             disconnect_button_connectors_by_root_page_guid(tmpPages, tmpNewPage.page.PageGUID)
-            
+
             tmpExperience.Pages = tmpPages;
             tmpExperience.NewPage = tmpNewPage.page;
             updated.Experience = tmpExperience;
@@ -582,7 +584,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
 
             if (tmpUpdateSection.Type == payload.type
-                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM', 'LINK_LABEL'].indexOf(payload.type) != -1) {
+                || ['BUTTON', 'SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM', 'LINK_LABEL', 'AD_BTN_IMAGE', 'AD_BTN_COLOR'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.HtmlContent = payload.content;
@@ -622,6 +624,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'LINK_LABEL':
                         tmpUpdateSection.LinkLabel = payload.content;
+                        break;
+                    case 'AD_BTN_IMAGE':
+                        tmpUpdateSection.AdBtnImg = payload.content;
+                        break;
+                    case 'AD_BTN_COLOR':
+                        tmpUpdateSection.AdBtnColor = payload.content;
                         break;
                     default:
                         break;

@@ -85,6 +85,11 @@ class PhoneToolbar extends Component {
                 return (
                     <DxAdButtonConnectorToolbar 
                         isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        imgFile={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnImg : null}
+                        color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnColor : '#000000'}
+                        handleImgChange={(file) => this.props.handleAdBtnImageChange(file)}
+                        handleColorChange={(color) => this.props.handleAdBtnColorChange(color)}
+                        handleImgError={(msg) => this.props.handleErrorMsg(msg)}
                     />
                 );
             } else {

@@ -1065,7 +1065,7 @@ export function* dxExperiencePageUpdateElem(action) {
                     },
                 });
             }
-        } else if (type == 'SPLASH_IMG' || type == 'IMAGE') {
+        } else if (type == 'SPLASH_IMG' || type == 'IMAGE' || type == 'AD_BTN_IMAGE') {
 
             const response = yield call(dxExperiencePageUpdateImageUrl, action.payload);
             let { Confirmation, Response, Message } = response;

@@ -180,7 +180,17 @@ class PhoneElement extends Component {
                 break;
             case 'AD_BUTTON':
                 section = (
-                    <DxAdButtonConnector />
+                    <DxAdButtonConnector 
+                        sectionGUID={this.props.sectionGUID}
+                        adBtnImg={this.props.adBtnImg}
+                        adBtnColor={this.props.adBtnColor}
+                        btnContent={this.props.btnContent}                        
+                        dropdownOptionArr={this.props.dropdownOptionArr}
+                        defaultConnectorPage={this.props.defaultConnectorPage}
+                        
+                        handleBtnInputChange={(e) => this.props.handleBtnInputChange(e)}
+                        handleBtnConnectPageChange={(pageGUID) => this.props.handleBtnConnectPageChange(pageGUID)}
+                    />
                 )
                 break;
             default:

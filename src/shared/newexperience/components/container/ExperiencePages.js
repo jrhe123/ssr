@@ -141,6 +141,8 @@ class ExperiencePages extends Component {
                         link={section.Link}
                         linkLabel={section.LinkLabel}
                         linkColor={section.LinkColor}
+                        adBtnImg={section.AdBtnImg}
+                        adBtnColor={section.AdBtnColor}
 
                         key={section.SectionGUID}
                         index={i}
@@ -154,7 +156,7 @@ class ExperiencePages extends Component {
                         handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
                         handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
                         handleLinkLabelInputChange={(e) => this.handleUpdateLinkLabelContent(section.SectionGUID, e)}
-
+                        
                         handleVideoError={(msg) => this.handleErrorMsg(msg)}
                     />
                 )
@@ -314,6 +316,16 @@ class ExperiencePages extends Component {
     handleUpdateLinkLabelContent = (sectionGUID, e) => {
         let value = e.target.value;
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_LABEL', value);
+    }
+
+    handleAdBtnImageChange = (file) => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'AD_BTN_IMAGE', file);
+    }
+
+    handleAdBtnColorChange = (color) => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'AD_BTN_COLOR', color.color);
     }
 
     handleDeleteElem = (sectionGUID) => {
@@ -506,7 +518,7 @@ class ExperiencePages extends Component {
 
         return (
             <div style={mainContainerStyle}>
-                {/* <a onClick={() => console.log('check: ', this.props.Experience)}>click me</a> */}
+                <a onClick={() => console.log('check: ', this.props.Experience)}>click me</a>
                 <div
                     className={Experience.IsPageTemplateMenuOpen ? "dx_scale_container active_expand" : "dx_scale_container"}
                     style={leftContainer}
@@ -638,6 +650,8 @@ class ExperiencePages extends Component {
                                     handleLinkColorChange={(color) => this.handleLinkColorChange(color)}
                                     handleLinkInputChange={(e) => this.handleLinkInputChange(e)}
                                     handleLinkInsertClick={() => this.handleLinkInsertClick()}
+                                    handleAdBtnImageChange={(file) => this.handleAdBtnImageChange(file)}
+                                    handleAdBtnColorChange={(color) => this.handleAdBtnColorChange(color)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>

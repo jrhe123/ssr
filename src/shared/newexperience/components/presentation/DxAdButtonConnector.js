@@ -9,6 +9,9 @@ import '../../../../../assets/css/react-widget/index.css';
 // components
 import DxInput from '../../../components/dxInput/DxInput';
 
+// config
+import config from '../../../config';
+
 // constants
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
@@ -22,12 +25,15 @@ class DxAdButtonConnector extends Component {
     render() {
 
         const {
+            adBtnImg,
+            adBtnColor,
             dropdownOptionArr,
             defaultConnectorPage,
         } = this.props;
 
         const {
             mainContainerStyle,
+            overlayImgStyle,
             mainWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
@@ -47,6 +53,11 @@ class DxAdButtonConnector extends Component {
         return (
             <div style={mainContainerStyle}>
 
+                <img
+                    style={overlayImgStyle}
+                    src={adBtnImg ? `${config.picHost}${adBtnImg}` : require('../../../../../assets/images/demo.jpg')}
+                />
+
                 <div style={mainWrapperStyle}>
                     <div style={contentContainerStyle}>
                         <div style={leftContentContainerStyle}>
@@ -62,6 +73,7 @@ class DxAdButtonConnector extends Component {
                                         isTransparent={true}
                                         disabled={false}
                                         value={this.props.btnContent}
+                                        textColor={adBtnColor}
                                     />
                                 </div>
                             </div>
@@ -69,7 +81,9 @@ class DxAdButtonConnector extends Component {
                         <div style={rightIconContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
-                                    <KeyboardArrowRight style={expandIconStyle} />
+                                    <KeyboardArrowRight
+                                        style={Object.assign({}, expandIconStyle, { color: adBtnColor })}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -116,6 +130,13 @@ const styles = {
         width: 320,
         boxSizing: 'border-box',
         margin: '0 auto'
+    },
+    overlayImgStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
     },
     mainWrapperStyle: {
         flex: 1,
