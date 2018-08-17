@@ -1,5 +1,5 @@
-// const apiHost = 'http://localhost:3000';
-const apiHost = 'http://40.85.246.196:3000';
+const apiHost = 'http://localhost:3000';
+// const apiHost = 'http://40.85.246.196:3000';
 
 export default {
     apiHost: apiHost,
