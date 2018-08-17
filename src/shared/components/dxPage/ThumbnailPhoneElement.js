@@ -101,7 +101,9 @@ class ThumbnailPhoneElement extends Component {
             imgStyle,
             // link
             linkContainerStyle,
-            linkStyle
+            linkStyle,
+            // ad btn
+            adBtnContainerStyle,
         } = styles;
 
         let elem;
@@ -313,6 +315,32 @@ class ThumbnailPhoneElement extends Component {
                         <div style={tableContainerStyle}>
                             <div style={tableWrapperStyle}>
                                 <p style={Object.assign({}, linkStyle, { color: section.LinkColor })}>{section.LinkLabel ? section.LinkLabel : section.Link}</p>
+                            </div>
+                        </div>
+                    </div>
+                );
+                break;
+            case 'AD_BUTTON':
+                elem = (
+                    <div style={adBtnContainerStyle}>
+                        <img
+                            style={Object.assign({}, overlayImgStyle)}
+                            src={section.AdBtnImg ? `${config.picHost}${section.AdBtnImg}` : require('../../../../assets/images/demo.jpg')}
+                        />
+                        <div style={contentContainerStyle}>
+                            <div style={leftContentContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={btnLabelStyle}>{section.BtnContent}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={rightIconContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <KeyboardArrowRight style={expandIconStyle} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -539,6 +567,15 @@ const styles = {
     linkStyle: {
         fontSize: fonts.h4,
         textDecoration: 'underline'
+    },
+    // ad btn
+    adBtnContainerStyle: {
+        position: 'relative',
+        margin: '0 auto',
+        minHeight: 18,
+        borderTop: '1px solid',
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
 }
 
