@@ -296,6 +296,17 @@ class ExperiencePages extends Component {
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_COLOR', color.color);
     }
 
+    handleLinkInputChange = (e) => {
+        let value = e.target.value;
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_URL', value);
+    }
+
+    handleLinkInsertClick = () => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'LINK_CONFIRM');
+    }
+
     handleDeleteElem = (sectionGUID) => {
         this.setState({
             modalType: 'DELETE',
@@ -616,6 +627,8 @@ class ExperiencePages extends Component {
                                     handleVideoInsertClick={() => this.handleVideoInsertClick()}
                                     handleImageChange={(file) => this.handleImageChange(file)}
                                     handleLinkColorChange={(color) => this.handleLinkColorChange(color)}
+                                    handleLinkInputChange={(e) => this.handleLinkInputChange(e)}
+                                    handleLinkInsertClick={() => this.handleLinkInsertClick()}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>

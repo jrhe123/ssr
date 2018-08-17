@@ -95,6 +95,7 @@ let templateNewSection = {
     Img: null,        // img
     LinkLabel: null,          // link label
     LinkColor: '#0176FF',     // link color
+    LinkInput: null,          // link input
     Link: null,               // link
     IsDeleted: false,       // section deleted
     PageGUID: null
@@ -581,7 +582,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
 
             if (tmpUpdateSection.Type == payload.type
-                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR'].indexOf(payload.type) != -1) {
+                || ['SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.HtmlContent = payload.content;
@@ -612,6 +613,12 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'LINK_COLOR':
                         tmpUpdateSection.LinkColor = payload.content;
+                        break;
+                    case 'LINK_URL':
+                        tmpUpdateSection.LinkInput = payload.content;
+                        break;
+                    case 'LINK_CONFIRM':
+                        tmpUpdateSection.Link = tmpUpdateSection.LinkInput;
                         break;
                     default:
                         break;

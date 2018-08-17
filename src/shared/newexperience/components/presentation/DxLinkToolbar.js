@@ -45,10 +45,10 @@ class DxLinkToolbar extends Component {
                                     <DxInput
                                         enableEnter={true}
                                         placeholder="Embed hyperlink"
-                                        handleValChange={(e) => this.props.handleVideoInputChange(e)}
+                                        handleValChange={(e) => this.props.handleLinkInputChange(e)}
                                         width="200px"
                                         disabled={false}
-                                        value={this.props.videoInput}
+                                        value={this.props.linkInput}
                                         handleKeyPress={() => this.handleLinkInsertClick()}
                                     />
                                 </div>
