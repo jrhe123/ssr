@@ -104,6 +104,7 @@ class ThumbnailPhoneElement extends Component {
             linkStyle,
             // ad btn
             adBtnContainerStyle,
+            adBtnOverlayImgStyle,
         } = styles;
 
         let elem;
@@ -324,7 +325,7 @@ class ThumbnailPhoneElement extends Component {
                 elem = (
                     <div style={adBtnContainerStyle}>
                         <img
-                            style={Object.assign({}, overlayImgStyle)}
+                            style={Object.assign({}, adBtnOverlayImgStyle)}
                             src={section.AdBtnImg ? `${config.picHost}${section.AdBtnImg}` : require('../../../../assets/images/demo.jpg')}
                         />
                         <div style={contentContainerStyle}>
@@ -576,6 +577,13 @@ const styles = {
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: colors.borderColor
+    },
+    adBtnOverlayImgStyle: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
     },
 }
 
