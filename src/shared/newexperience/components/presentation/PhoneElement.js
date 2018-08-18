@@ -28,6 +28,7 @@ import DxVideoViewer from './DxVideoViewer';
 import DxImageViewer from './DxImageViewer';
 import DxLink from './DxLink';
 import DxAdButtonConnector from './DxAdButtonConnector';
+import DxAdButton2Connector from './DxAdButton2Connector';
 
 // constants
 import fonts from '../../../styles/fonts';
@@ -195,7 +196,17 @@ class PhoneElement extends Component {
                 break;
             case 'AD_BUTTON_2':
                 section = (
-                    <div>btn 2</div>
+                    <DxAdButton2Connector 
+                        sectionGUID={this.props.sectionGUID}
+                        adBtnBgColor={this.props.adBtnBgColor}
+                        adBtnColor={this.props.adBtnColor}
+                        btnContent={this.props.btnContent}                        
+                        dropdownOptionArr={this.props.dropdownOptionArr}
+                        defaultConnectorPage={this.props.defaultConnectorPage}
+                        
+                        handleBtnInputChange={(e) => this.props.handleBtnInputChange(e)}
+                        handleBtnConnectPageChange={(pageGUID) => this.props.handleBtnConnectPageChange(pageGUID)}
+                    />
                 )
                 break;
             default:

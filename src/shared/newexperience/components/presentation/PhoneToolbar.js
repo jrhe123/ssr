@@ -8,6 +8,7 @@ import DxVideoViewerToolbar from './DxVideoViewerToolbar';
 import DxImageViewerToolbar from './DxImageViewerToolbar';
 import DxLinkToolbar from './DxLinkToolbar';
 import DxAdButtonConnectorToolbar from './DxAdButtonConnectorToolbar';
+import DxAdButton2ConnectorToolbar from './DxAdButton2ConnectorToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -94,7 +95,13 @@ class PhoneToolbar extends Component {
                 );
             } else if (section.Type == 'AD_BUTTON_2') {
                 return (
-                    <div>btn 2</div>
+                    <DxAdButton2ConnectorToolbar 
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnColor : '#000000'}
+                        bgColor={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnBgColor : '#ffffff'}
+                        handleColorChange={(color) => this.props.handleAdBtnColorChange(color)}
+                        handleBgColorChange={(color) => this.props.handleAdBtnBgColorChange(color)}
+                    />
                 );
             } else {
                 return (
