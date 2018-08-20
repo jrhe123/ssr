@@ -77,6 +77,7 @@ class PhoneToolbar extends Component {
                         isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
                         color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].LinkColor : '#000000'}
                         linkInput={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].LinkInput : null}
+                        link={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].Link : null}
                         handleLinkInputChange={(e) => this.props.handleLinkInputChange(e)}
                         handleColorChange={(color) => this.props.handleLinkColorChange(color)}
                         handleLinkInsertClick={() => this.props.handleLinkInsertClick()}
