@@ -70,4 +70,5 @@ app.get('*', async (req, res) => {
     store.close();
 });
 
-app.listen(3001, () => console.log('Demo app listening on port 3001'));
+const port = 443;
+app.listen(port, () => console.log(`Demo app listening on port ${port}`));
