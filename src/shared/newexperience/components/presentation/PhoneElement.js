@@ -229,7 +229,8 @@ class PhoneElement extends Component {
             isActive,
         } = this.props;
 
-        const opacity = isDragging ? 0 : 1;
+        // const opacity = isDragging ? 0.5 : 1;
+        const opacity = 1;
         const {
             mainContainerStyle,
             tableContainerStyle,
