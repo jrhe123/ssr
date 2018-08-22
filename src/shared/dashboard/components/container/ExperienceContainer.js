@@ -144,8 +144,6 @@ class ExperienceContainer extends Component {
             experienceNumberStyle,
             experienceListWrapperStyle,
 
-            pwdContainerStyle,
-            pwdInputWrapperStyle,
         } = styles;
 
         return (
@@ -309,13 +307,6 @@ const styles = {
     },
     experienceListWrapperStyle: {
         marginTop: 24,
-    },
-    pwdContainerStyle: {
-        paddingTop: 12,
-        paddingBottom: 12,
-    },
-    pwdInputWrapperStyle: {
-        marginBottom: 12,
     },
 }
 
