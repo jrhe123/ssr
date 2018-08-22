@@ -9,9 +9,7 @@ import {
 import { 
     dxDashboardNaviSaga,
     dxLogoutSaga,
-    dxInputPasswordSaga,
-    dxUnlockSiteSaga,
-    
+
     dxFetchChannelSaga,
     dxUpdateChannelSaga,
 
@@ -87,7 +85,6 @@ import {
 // Global
 import {
     dxValidateTokenSaga,
-    dxValidateUnlockTokenSaga,
     dxNavigateHistorySaga,
     dxAlertSaga,
     dxLoadingSaga,
@@ -102,8 +99,6 @@ export default function* rootSaga() {
         // Dashboard
         dxDashboardNaviSaga(),
         dxLogoutSaga(),
-        dxInputPasswordSaga(),
-        dxUnlockSiteSaga(),
         
         // channel
         dxFetchChannelSaga(),
@@ -173,7 +168,6 @@ export default function* rootSaga() {
         
         // Global
         dxValidateTokenSaga(),
-        dxValidateUnlockTokenSaga(),
         dxNavigateHistorySaga(),
         dxAlertSaga(),
         dxLoadingSaga(),

@@ -16,14 +16,6 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
 
-    PASSWORD_INPUT_REQUESTED,
-    PASSWORD_INPUT__SUCCEEDED,
-    PASSWORD_INPUT__FAILED,
-
-    UNLOCK_SITE_REQUESTED,
-    UNLOCK_SITE__SUCCEEDED,
-    UNLOCK_SITE__FAILED,
-
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
@@ -124,60 +116,6 @@ export function* dxLogout() {
 
 export function* dxLogoutSaga() {
     yield takeEvery(LOGOUT_REQUESTED, dxLogout);
-}
-
-// Password update
-export function* dxInputPassword(action) {
-    try {
-        yield put({
-            type: PASSWORD_INPUT__SUCCEEDED,
-            payload: {
-                value: action.payload.value,
-                type: action.payload.type,
-            },
-        });
-    } catch (error) {
-        yield put({
-            type: PASSWORD_INPUT__FAILED,
-            payload: error,
-        });
-    }
-}
-
-export function* dxInputPasswordSaga() {
-    yield takeEvery(PASSWORD_INPUT_REQUESTED, dxInputPassword);
-}
-
-// Site unlock
-export function* dxUnlockSite(action) {
-    try {
-        if (action.payload.password != '123456') {
-            yield put({
-                type: UNLOCK_SITE__FAILED,
-                payload: {
-                    message: 'Password is incorrect'
-                },
-            });
-        } else {
-            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';        
-            localStorage.setItem('unlock_token', token);
-            yield put({
-                type: UNLOCK_SITE__SUCCEEDED,
-                payload: {
-                    message: 'Site has been unlocked'
-                },
-            });
-        }
-    } catch (error) {
-        yield put({
-            type: UNLOCK_SITE__FAILED,
-            payload: error,
-        });
-    }
-}
-
-export function* dxUnlockSiteSaga() {
-    yield takeEvery(UNLOCK_SITE_REQUESTED, dxUnlockSite);
 }
 
 // Fetch Channel

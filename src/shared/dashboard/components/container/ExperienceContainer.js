@@ -8,16 +8,11 @@ import DxModal from '../../../components/dxModal/DxModal';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import Lock from '@material-ui/icons/Lock';
-import LockOpen from '@material-ui/icons/LockOpen';
-import TextField from '@material-ui/core/TextField';
 
 // redux
 import { connect } from 'react-redux';
 import {
     dxDashboardNavi as dxDashboardNaviAction,
-    dxPasswordInput as dxPasswordInputAction,
-    dxSiteUnlock as dxSiteUnlockAction,
 
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
@@ -82,46 +77,13 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
-    handlePwdChange = (e, type) => {
-        const value = e.target.value;
-        this.props.dxPasswordInputAction(value, type);
-    }
-
     handleConfirmModal = () => {
         const {
             modalType
         } = this.state;
         if (modalType == 'DELETE') {
             this.handleConfirmDeleteExperience();
-        } else if (modalType == 'LOCK') {
-            this.handleConfirmUnlockSite();
         }
-    }
-
-    handleUnlockSite = () => {
-        this.setState({
-            isModalOpen: true,
-            modalType: 'LOCK',
-            modalTitle: 'Confirm Unlock Site',
-            modalDesc: 'Do you want to proceed?',
-            isContentModal: true,
-            isModalDanger: false,
-        })
-    }
-
-    handleConfirmUnlockSite = () => {
-        if (!this.props.password) {
-            this.props.dxAlertAction(true, true, 'Please enter your password');
-            return;
-        }
-        if (this.props.password != this.props.confirmPassword) {
-            this.props.dxAlertAction(true, true, 'Password not matched');
-            return;
-        }
-        this.setState({
-            isModalOpen: false
-        });
-        this.props.dxSiteUnlockAction(this.props.password);
     }
 
     handleRemoveExperience = (experienceGUID) => {
@@ -159,14 +121,12 @@ class ExperienceContainer extends Component {
     render() {
 
         const {
-            isUnlocked,
             TotalExperienceRecord,
             Experiences,
         } = this.props;
 
         const {
             tableContainerStyle,
-            tableContainerV2Style,
             tableWrapperStyle,
             newContentContainerStyle,
             imgStyle,
@@ -179,8 +139,6 @@ class ExperienceContainer extends Component {
             searchContainerStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
-            lockContainerStyle,
-            lockIconStyle,
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
             experienceNumberStyle,
@@ -216,23 +174,6 @@ class ExperienceContainer extends Component {
                                 </div>
                                 <div style={experienceListContainerStyle}>
 
-                                    <div style={lockContainerStyle}>
-                                        <div style={tableContainerV2Style}>
-                                            <div style={tableWrapperStyle}>
-                                                {
-                                                    this.props.isUnlocked ?
-                                                        <LockOpen 
-                                                            style={lockIconStyle}
-                                                        />
-                                                        :
-                                                        <Lock
-                                                            onClick={() => this.handleUnlockSite()}
-                                                            style={lockIconStyle}
-                                                        />
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div style={experienceSortContainerStyle}>
                                         <div style={experienceNumberContainerStyle}>
                                             <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
@@ -240,7 +181,6 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
-                                            isUnlocked={isUnlocked}
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
@@ -287,37 +227,7 @@ class ExperienceContainer extends Component {
                     cancel={true}
                     confirm={true}
                     isContent={this.state.isContentModal}
-                    content={
-                        this.state.isContentModal ?
-                            <div style={pwdContainerStyle}>
-                                <div style={pwdInputWrapperStyle}>
-                                    <TextField
-                                        className="dx_pwd_input"
-                                        label="Password"
-                                        type="password"
-                                        margin="normal"
-                                        fullWidth
-                                        value={this.props.password}
-                                        onChange={(e) => this.handlePwdChange(e, 'PASSWORD')}
-                                    />
-                                </div>
-                                <div style={pwdInputWrapperStyle}>
-                                    <TextField
-                                        className="dx_pwd_input"
-                                        label="Confirm Password"
-                                        type="password"
-                                        margin="normal"
-                                        fullWidth
-                                        value={this.props.confirmPassword}
-                                        error={this.props.confirmPassword && this.props.password != this.props.confirmPassword}
-                                        helperText={(this.props.confirmPassword.length && this.props.password != this.props.confirmPassword) ? "Password not match" : null}
-                                        onChange={(e) => this.handlePwdChange(e, 'CONFIRM_PASSWORD')}
-                                    />
-                                </div>
-                            </div>
-                            :
-                            null
-                    }
+                    content={null}
                     isDanger={this.state.isModalDanger}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}
@@ -334,12 +244,6 @@ const styles = {
         display: 'table',
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
-    },
-    tableContainerV2Style: {
-        position: 'relative',
-        display: 'table',
-        width: '100%',
-        height: `100%`,
     },
     tableWrapperStyle: {
         display: 'table-cell',
@@ -389,18 +293,6 @@ const styles = {
     experienceListContainerStyle: {
         position: 'relative',
     },
-    lockContainerStyle: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: 60,
-        height: 60,
-        cursor: 'pointer',
-    },
-    lockIconStyle: {
-        color: colors.blackColor,
-        width: 36
-    },
     experienceSortContainerStyle: {
         width: 240,
         paddingBottom: 12,
@@ -430,9 +322,6 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        isUnlocked: state.root.isUnlocked,
-        password: state.root.password,
-        confirmPassword: state.root.confirmPassword,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         Experiences: state.dashboard.Experiences,
         IsReloadExperience: state.dashboard.IsReloadExperience,
@@ -441,8 +330,6 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxDashboardNaviAction,
-    dxPasswordInputAction,
-    dxSiteUnlockAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,
