@@ -486,7 +486,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update new page
             tmpNewPageSections[tmpSectionIndex].IsDeleted = true;
             // case: BUTTON
-            if (tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
+            if ((tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
+                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON'
+                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON_2')
                 && tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID != null) {
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID, tmpPages);
                 tmpConnectedPage.page.IsConnected = false;
@@ -816,7 +818,9 @@ const disconnect_page_by_parent_page_guid = (parentPageGUID, pageGUID, pages) =>
             for (let j = 0; j < page.Sections.length; j++) {
                 let section = page.Sections[j];
                 if (section.ConnectedPageGUID == pageGUID
-                    && section.Type == 'BUTTON') {
+                    && (section.Type == 'BUTTON'
+                        || section.Type == 'AD_BUTTON'
+                        || section.Type == 'AD_BUTTON_2')) {
                     pages[i].Sections[j].ConnectedPageGUID = null;
                 }
             }
@@ -826,7 +830,9 @@ const disconnect_page_by_parent_page_guid = (parentPageGUID, pageGUID, pages) =>
 const disconnect_pages_by_sections = (sections, pages) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
-        if (section.Type == 'BUTTON'
+        if ((section.Type == 'BUTTON'
+                || section.Type == 'AD_BUTTON'
+                || section.Type == 'AD_BUTTON_2')
             && section.ConnectedPageGUID) {
             let item = find_page_by_guid(section.ConnectedPageGUID, pages);
             item.page.IsConnected = false;
@@ -879,7 +885,9 @@ const disconnect_button_connectors_by_root_page_guid = (pages, rootPageGUID) => 
             for (let j = 0; j < page.Sections.length; j++) {
                 let section = page.Sections[j];
                 if (!section.IsDeleted
-                    && section.Type == 'BUTTON'
+                    && (section.Type == 'BUTTON'
+                        || section.Type == 'AD_BUTTON'
+                        || section.Type == 'AD_BUTTON_2')
                     && section.ConnectedPageGUID == rootPageGUID) {
                     pages[i].Sections[j].ConnectedPageGUID = null;
                 }
