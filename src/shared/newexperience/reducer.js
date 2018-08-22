@@ -402,6 +402,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpPages[tmpNewPage.index].IsDeleted = true;
+            // Disconnect Parent Page if Button
+            if (tmpNewPage.page.ParentPageGUID)
+                disconnect_page_by_parent_page_guid(tmpNewPage.page.ParentPageGUID, tmpNewPage.page.PageGUID, tmpPages);
+            // Disconnect Children Pages if Button
             tmpSections = tmpPages[tmpNewPage.index].Sections;
             disconnect_pages_by_sections(tmpSections, tmpPages);
 
@@ -804,6 +808,20 @@ const find_previous_display_page_guid = (pages) => {
         }
     }
 }
+const disconnect_page_by_parent_page_guid = (parentPageGUID, pageGUID, pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (page.PageGUID == parentPageGUID) {
+            for (let j = 0; j < page.Sections.length; j++) {
+                let section = page.Sections[j];
+                if (section.ConnectedPageGUID == pageGUID
+                    && section.Type == 'BUTTON') {
+                    pages[i].Sections[j].ConnectedPageGUID = null;
+                }
+            }
+        }
+    }
+}
 const disconnect_pages_by_sections = (sections, pages) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
@@ -811,6 +829,7 @@ const disconnect_pages_by_sections = (sections, pages) => {
             && section.ConnectedPageGUID) {
             let item = find_page_by_guid(section.ConnectedPageGUID, pages);
             item.page.IsConnected = false;
+            item.page.ParentPageGUID = null;
             pages[item.index] = item.page;
         }
     }
