@@ -175,6 +175,7 @@ class CardTemplate extends Component {
                                                     width="144px"
                                                     disabled={false}
                                                     value={template.Content}
+                                                    isRounded={true}
                                                 />
                                             </div>
                                             <Button

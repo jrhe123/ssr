@@ -5,6 +5,7 @@ import ExperienceList from '../presentation/experience/ExperienceList';
 import NewExperienceModal from '../presentation/experience/NewExperienceModal';
 import SearchBar from '../../../components/searchBar/SearchBar';
 import DxModal from '../../../components/dxModal/DxModal';
+import ConfirmForm from '../presentation/experience/ConfirmForm';
 
 // Libraries
 import Button from '@material-ui/core/Button';
@@ -73,9 +74,24 @@ class ExperienceContainer extends Component {
         this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
     }
 
+    handleConfirmFormChange = (val) => {
+        console.log('out here: ', val);
+    }
+
     handleEditExperience = (experienceGUID, confirmToEdit) => {
-        console.log('confirmToEdit: ', confirmToEdit);
-        // this.props.history.push(`/edit_experience/${experienceGUID}`);
+        if (!confirmToEdit) {
+            this.setState({
+                isModalOpen: true,
+                modalType: 'CONFIRM',
+                modalTitle: 'Confirm EDIT Experience',
+                modalDesc: 'Do you want to proceed?',
+                isContentModal: true,
+                isModalDanger: false,
+                targetExperienceGUID: experienceGUID,
+            })
+            return;
+        }
+        this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
     handleConfirmModal = () => {
@@ -84,6 +100,8 @@ class ExperienceContainer extends Component {
         } = this.state;
         if (modalType == 'DELETE') {
             this.handleConfirmDeleteExperience();
+        } else if (modalType == 'CONFIRM') {
+            console.log('confirm with input');
         }
     }
 
@@ -222,7 +240,12 @@ class ExperienceContainer extends Component {
                     cancel={true}
                     confirm={true}
                     isContent={this.state.isContentModal}
-                    content={null}
+                    content={
+                        <ConfirmForm 
+                            value=""
+                            handleInputChange={(val) => this.handleConfirmFormChange(val)} 
+                        />
+                    }
                     isDanger={this.state.isModalDanger}
                     handleConfirm={() => this.handleConfirmModal()}
                     onCloseModal={() => this.handleCloseModal()}

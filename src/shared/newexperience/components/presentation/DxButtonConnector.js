@@ -62,6 +62,7 @@ class DxButtonConnector extends Component {
                                         isTransparent={true}
                                         disabled={false}
                                         value={this.props.btnContent}
+                                        isRounded={true}
                                     />
                                 </div>
                             </div>

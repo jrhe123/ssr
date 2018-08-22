@@ -68,6 +68,7 @@ class DxAdButton2Connector extends Component {
                                         disabled={false}
                                         value={this.props.btnContent}
                                         textColor={adBtnColor}
+                                        isRounded={true}
                                     />
                                 </div>
                             </div>

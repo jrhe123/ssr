@@ -218,6 +218,7 @@ class DxCard extends Component {
                                                     disabled={false}
                                                     value={template.Content}
                                                     handleKeyPress={() => this.handleVideoInsertClick(false, this.props.isVideoInsertClickable)}
+                                                    isRounded={true}
                                                 />
                                             </div>
                                             <Button

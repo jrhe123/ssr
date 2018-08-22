@@ -76,6 +76,7 @@ class ChannelPanel extends Component {
                                                     width="225px"
                                                     disabled={false}
                                                     value={Channel.ChannelCode}
+                                                    isRounded={true}
                                                 />
                                             </div>
                                         </div>

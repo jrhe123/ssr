@@ -71,6 +71,7 @@ class ChannelOptionBar extends Component {
                                 width="226px"
                                 disabled={true}
                                 value={channelLabel}
+                                isRounded={true}
                             />
                             <Button
                                 style={outlineBtnStyle}

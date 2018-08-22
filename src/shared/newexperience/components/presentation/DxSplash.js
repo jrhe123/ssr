@@ -137,6 +137,7 @@ class DxSplash extends Component {
                                             textCenter={true}
                                             value={this.props.splashContent}
                                             handleValChange={(e) => this.props.handleDescInputChange(e)}
+                                            isRounded={true}
                                         />
                                     </div>
                                 </div>

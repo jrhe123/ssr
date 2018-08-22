@@ -371,6 +371,7 @@ class NavBar extends Component {
                                             width="240px"
                                             disabled={false}
                                             value={title}
+                                            isRounded={true}
                                         />
                                     </div>
                                 </div>
