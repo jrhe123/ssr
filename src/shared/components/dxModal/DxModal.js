@@ -21,7 +21,10 @@ class DxModal extends Component {
 
         const {
             open,
+            userCustomTitle,
             title,
+            customTitle,
+            hasBottomDiv,
             description,
             cancel,
             confirm,
@@ -58,15 +61,20 @@ class DxModal extends Component {
                 }}
             >
                 <div style={mainContainerStyle}>
-                    <div style={titleContainerStyle}>
-                        <p style={titleStyle}>{title}</p>
+                    <div style={Object.assign({}, titleContainerStyle, hasBottomDiv ? { borderBottom: '1px solid', borderColor: colors.borderColor } : null)}>
+                        {
+                            userCustomTitle ?
+                                customTitle
+                                :
+                                <p style={titleStyle}>{title}</p>
+                        }
                     </div>
                     <div style={contentContainerStyle}>
                         <p style={contentStyle}>{description}</p>
                         {
                             isContent ?
                                 <div style={mainContentContainerStyle}>
-                                { content }
+                                    {content}
                                 </div>
                                 :
                                 null
@@ -129,16 +137,15 @@ const styles = {
         height: '100%',
     },
     titleContainerStyle: {
-        borderBottom: '1px solid',
-        borderColor: colors.borderColor,
         height: 54,
+        paddingLeft: 18,
+        paddingRight: 18,
     },
     titleStyle: {
         fontSize: fonts.h1,
         fontWeight: 'bold',
         margin: 0,
         paddingTop: 15,
-        paddingLeft: 18
     },
     contentContainerStyle: {
         height: 'calc(100% - 126px)',

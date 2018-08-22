@@ -800,6 +800,7 @@ class ExperiencePages extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title={this.state.modalTitle}
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}

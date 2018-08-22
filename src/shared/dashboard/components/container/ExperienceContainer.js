@@ -235,7 +235,12 @@ class ExperienceContainer extends Component {
                 />
                 <DxModal
                     open={this.state.isModalOpen}
+                    hasBottomDiv={false}
+                    userCustomTitle={true}
                     title={this.state.modalTitle}
+                    customTitle={
+                        <p>my title here</p>
+                    }
                     description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}

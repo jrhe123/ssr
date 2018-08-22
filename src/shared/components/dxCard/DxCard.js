@@ -324,6 +324,7 @@ class DxCard extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title="Confirm Delete Card"
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}

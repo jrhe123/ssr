@@ -12,7 +12,7 @@ class ConfirmForm extends Component {
                 <DxInput
                     enableEnter={false}
                     placeholder="Type here.."
-                    handleValChange={(e) => this.handleInputChange(e.target.value)}
+                    handleValChange={(e) => this.props.handleInputChange(e.target.value)}
                     isDark={true}
                     disabled={false}
                     value={this.props.value}

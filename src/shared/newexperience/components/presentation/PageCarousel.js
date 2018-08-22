@@ -102,6 +102,7 @@ class PageCarousel extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title="Confirm Delete Page"
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}
