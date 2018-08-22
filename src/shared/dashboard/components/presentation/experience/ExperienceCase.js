@@ -96,24 +96,8 @@ class ExperienceCase extends Component {
                                 align='right'
                                 closeOnInsideClick={false}
                             >
-                                {
-                                    enableEditExperience ?
-                                        <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
-                                        :
-                                        null
-                                }
-                                {
-                                    enableEditExperience ?
-                                        <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
-                                        :
-                                        null
-                                }
-                                {
-                                    !enableEditExperience ?
-                                        <Button onClick={() => this.props.handleDraftExperience()}>Stream</Button>
-                                        :
-                                        null
-                                }
+                                <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
+                                <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
                             </DropdownMenu>
                         </div>
                     </div>

@@ -50,11 +50,9 @@ class ExperienceList extends Component {
                             >
                                 <ExperienceCase
                                     experience={experience}
-                                    enableEditExperience={(experience.ExperienceStreamList.length) ? false : true}
                                     handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
-                                    handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID)}
-                                    handleRemoveExperience={() => this.props.handleRemoveExperience(experience.ExperienceGUID)}
-                                    handleDraftExperience={() => this.props.handleDraftExperience(experience.ExperienceGUID)}
+                                    handleEditExperience={() => this.props.handleEditExperience(experience.ExperienceGUID, experience.ExperienceStreamList.length ? false : true)}
+                                    handleRemoveExperience={() => this.props.handleRemoveExperience(experience.ExperienceGUID, experience.ExperienceStreamList.length ? false : true)}
                                     handleErrorMsg={(msg) => this.props.handleErrorMsg(msg)}
                                 />
                             </div>

@@ -73,8 +73,9 @@ class ExperienceContainer extends Component {
         this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
     }
 
-    handleEditExperience = (experienceGUID) => {
-        this.props.history.push(`/edit_experience/${experienceGUID}`);
+    handleEditExperience = (experienceGUID, confirmToEdit) => {
+        console.log('confirmToEdit: ', confirmToEdit);
+        // this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
     handleConfirmModal = () => {
@@ -86,16 +87,17 @@ class ExperienceContainer extends Component {
         }
     }
 
-    handleRemoveExperience = (experienceGUID) => {
-        this.setState({
-            isModalOpen: true,
-            modalType: 'DELETE',
-            modalTitle: 'Confirm Delete Experience',
-            modalDesc: 'Do you want to proceed?',
-            isContentModal: false,
-            isModalDanger: true,
-            targetExperienceGUID: experienceGUID,
-        })
+    handleRemoveExperience = (experienceGUID, confirmToRemove) => {
+        console.log('confirmToRemove: ', confirmToRemove);
+        // this.setState({
+        //     isModalOpen: true,
+        //     modalType: 'DELETE',
+        //     modalTitle: 'Confirm Delete Experience',
+        //     modalDesc: 'Do you want to proceed?',
+        //     isContentModal: false,
+        //     isModalDanger: true,
+        //     targetExperienceGUID: experienceGUID,
+        // })
     }
 
     handleConfirmDeleteExperience = () => {
@@ -112,10 +114,6 @@ class ExperienceContainer extends Component {
         this.setState({
             isModalOpen: false,
         })
-    }
-
-    handleDraftExperience = (experienceGUID) => {
-        this.props.dxDashboardNaviAction(2);
     }
 
     render() {
@@ -182,9 +180,8 @@ class ExperienceContainer extends Component {
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
-                                            handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
-                                            handleRemoveExperience={(experienceGUID) => this.handleRemoveExperience(experienceGUID)}
-                                            handleDraftExperience={(experienceGUID) => this.handleDraftExperience(experienceGUID)}
+                                            handleEditExperience={(experienceGUID, confirmToEdit) => this.handleEditExperience(experienceGUID, confirmToEdit)}
+                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove)}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
