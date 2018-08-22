@@ -83,8 +83,7 @@ class ExperienceContainer extends Component {
             this.setState({
                 isModalOpen: true,
                 modalType: 'CONFIRM',
-                modalTitle: 'Confirm EDIT Experience',
-                modalDesc: 'Do you want to proceed?',
+                modalDesc: null,
                 isContentModal: true,
                 isModalDanger: false,
                 targetExperienceGUID: experienceGUID,
@@ -160,6 +159,9 @@ class ExperienceContainer extends Component {
             experienceNumberStyle,
             experienceListWrapperStyle,
 
+            confirmModalTitleContainerStyle,
+            confirmModalTitleStyle,
+            confirmModalHighlightTitleStyle,
         } = styles;
 
         return (
@@ -235,20 +237,22 @@ class ExperienceContainer extends Component {
                 />
                 <DxModal
                     open={this.state.isModalOpen}
-                    hasBottomDiv={false}
+                    hasBottomDiv={this.state.modalType == 'DELETE' ? true : false}
                     userCustomTitle={true}
                     title={this.state.modalTitle}
                     customTitle={
-                        <p>my title here</p>
+                        <div style={confirmModalTitleContainerStyle}>
+                            <p style={confirmModalTitleStyle}>You are going to EDIT a LIVE experience. To avoid accidental edits, please type "<span style={confirmModalHighlightTitleStyle}>LIVE EDIT</span>" in the below text box and Press "EDIT"</p>
+                        </div>
                     }
                     description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}
                     isContent={this.state.isContentModal}
                     content={
-                        <ConfirmForm 
+                        <ConfirmForm
                             value=""
-                            handleInputChange={(val) => this.handleConfirmFormChange(val)} 
+                            handleInputChange={(val) => this.handleConfirmFormChange(val)}
                         />
                     }
                     isDanger={this.state.isModalDanger}
@@ -332,6 +336,18 @@ const styles = {
     },
     experienceListWrapperStyle: {
         marginTop: 24,
+    },
+
+    confirmModalTitleContainerStyle: {
+        marginTop:  60,
+    },
+    confirmModalTitleStyle: {
+        margin: 0,
+        fontSize: fonts.h1,
+        textAlign: 'justify'
+    },
+    confirmModalHighlightTitleStyle: {
+        color: colors.redColor
     },
 }
 
