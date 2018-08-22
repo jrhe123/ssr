@@ -490,6 +490,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                 && tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID != null) {
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID, tmpPages);
                 tmpConnectedPage.page.IsConnected = false;
+                tmpConnectedPage.page.ParentPageGUID = null;
                 tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
             }
             // case: SPLASH
