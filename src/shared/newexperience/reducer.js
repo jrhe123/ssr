@@ -99,6 +99,7 @@ let templateNewSection = {
     LinkColor: '#0176FF',     // link color
     AdBtnImg: null,         // ad btn img
     AdBtnColor: '#000000',  // ad btn color
+    AdBtnBgColor: '#ffffff',// ad btn bg color
     IsDeleted: false,       // section deleted
     PageGUID: null
 };
@@ -401,6 +402,10 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
         case EXPERIENCE_PAGE_DELETE_PAGE__SUCCEEDED:
             tmpNewPage = find_page_by_guid(payload.pageGUID, tmpPages);
             tmpPages[tmpNewPage.index].IsDeleted = true;
+            // Disconnect Parent Page if Button
+            if (tmpNewPage.page.ParentPageGUID)
+                disconnect_page_by_parent_page_guid(tmpNewPage.page.ParentPageGUID, tmpNewPage.page.PageGUID, tmpPages);
+            // Disconnect Children Pages if Button
             tmpSections = tmpPages[tmpNewPage.index].Sections;
             disconnect_pages_by_sections(tmpSections, tmpPages);
 
@@ -481,10 +486,13 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             // update new page
             tmpNewPageSections[tmpSectionIndex].IsDeleted = true;
             // case: BUTTON
-            if (tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
+            if ((tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
+                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON'
+                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON_2')
                 && tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID != null) {
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID, tmpPages);
                 tmpConnectedPage.page.IsConnected = false;
+                tmpConnectedPage.page.ParentPageGUID = null;
                 tmpPages[tmpConnectedPage.index] = Object.assign({}, tmpConnectedPage.page);
             }
             // case: SPLASH
@@ -584,7 +592,7 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpUpdateSection = find_section_by_guid(tmpUpdatePage.Sections, payload.sectionGUID);
 
             if (tmpUpdateSection.Type == payload.type
-                || ['BUTTON', 'SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM', 'LINK_LABEL', 'AD_BTN_IMAGE', 'AD_BTN_COLOR'].indexOf(payload.type) != -1) {
+                || ['BUTTON', 'SPLASH_CONTENT', 'SPLASH_IMG', 'SPLASH_COLOR', 'VIDEO_URL', 'VIDEO_CONFIRM', 'LINK_COLOR', 'LINK_URL', 'LINK_CONFIRM', 'LINK_LABEL', 'AD_BTN_IMAGE', 'AD_BTN_COLOR', 'AD_BTN_BG_COLOR'].indexOf(payload.type) != -1) {
                 switch (payload.type) {
                     case 'EDITOR':
                         tmpUpdateSection.HtmlContent = payload.content;
@@ -630,6 +638,9 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
                         break;
                     case 'AD_BTN_COLOR':
                         tmpUpdateSection.AdBtnColor = payload.content;
+                        break;
+                    case 'AD_BTN_BG_COLOR':
+                        tmpUpdateSection.AdBtnBgColor = payload.content;
                         break;
                     default:
                         break;
@@ -800,13 +811,32 @@ const find_previous_display_page_guid = (pages) => {
         }
     }
 }
+const disconnect_page_by_parent_page_guid = (parentPageGUID, pageGUID, pages) => {
+    for (let i = 0; i < pages.length; i++) {
+        let page = pages[i];
+        if (page.PageGUID == parentPageGUID) {
+            for (let j = 0; j < page.Sections.length; j++) {
+                let section = page.Sections[j];
+                if (section.ConnectedPageGUID == pageGUID
+                    && (section.Type == 'BUTTON'
+                        || section.Type == 'AD_BUTTON'
+                        || section.Type == 'AD_BUTTON_2')) {
+                    pages[i].Sections[j].ConnectedPageGUID = null;
+                }
+            }
+        }
+    }
+}
 const disconnect_pages_by_sections = (sections, pages) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
-        if (section.Type == 'BUTTON'
+        if ((section.Type == 'BUTTON'
+                || section.Type == 'AD_BUTTON'
+                || section.Type == 'AD_BUTTON_2')
             && section.ConnectedPageGUID) {
             let item = find_page_by_guid(section.ConnectedPageGUID, pages);
             item.page.IsConnected = false;
+            item.page.ParentPageGUID = null;
             pages[item.index] = item.page;
         }
     }
@@ -855,7 +885,9 @@ const disconnect_button_connectors_by_root_page_guid = (pages, rootPageGUID) => 
             for (let j = 0; j < page.Sections.length; j++) {
                 let section = page.Sections[j];
                 if (!section.IsDeleted
-                    && section.Type == 'BUTTON'
+                    && (section.Type == 'BUTTON'
+                        || section.Type == 'AD_BUTTON'
+                        || section.Type == 'AD_BUTTON_2')
                     && section.ConnectedPageGUID == rootPageGUID) {
                     pages[i].Sections[j].ConnectedPageGUID = null;
                 }

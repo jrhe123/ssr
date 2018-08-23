@@ -326,6 +326,13 @@ class ExperienceNavigator extends Component {
             res.Message = `Confirm unconnected button(s)`;
             return res;
         }
+        // 9. AD_BUTTON_2
+        let unconnectedAdBtn2s = this.findUnconnectedElems(displayPages, 'AD_BUTTON_2_CONNECT');
+        if (unconnectedAdBtn2s.length > 0) {
+            res.IsWarning = true;
+            res.Message = `Confirm unconnected button(s)`;
+            return res;
+        }
         // Check unconnected pages
         let unconnectedPages = this.findUnconnectedPages(childrenPages);
         if (unconnectedPages.length > 0) {
@@ -448,7 +455,15 @@ class ExperienceNavigator extends Component {
                             section,
                         });
                     }
-                }              
+                } else if (type == 'AD_BUTTON_2_CONNECT') {
+                    if (section.Type == 'AD_BUTTON_2'
+                        && !section.ConnectedPageGUID) {
+                        output.push({
+                            page,
+                            section,
+                        });
+                    }
+                }                
             }
         }
         return output;
@@ -500,6 +515,7 @@ class ExperienceNavigator extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title={this.state.modalTitle}
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}

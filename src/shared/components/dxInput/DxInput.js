@@ -49,10 +49,12 @@ class DxInput extends Component {
             textColor,
             isUnderline,
             isPointer,
+            isRounded,
+            isFullWidth,
         } = this.props;
 
         const extra = {};
-        extra.width = width ? width : '120px';
+        extra.width = width ? `${width} - 24px` : '120px - 24px';
         extra.maxHeight = maxHeight ? maxHeight : '360px';
         if (isDark) {
             extra.backgroundColor = colors.lightBlueColor;
@@ -79,6 +81,12 @@ class DxInput extends Component {
         }
         if (isPointer) {
             extra.cursor = 'pointer';
+        }
+        if (isRounded) {
+            extra.borderRadius = '18px';
+        }
+        if (isFullWidth) {
+            extra.width = 'calc(100% - 24px)';
         }
 
         if (multiLine) {
@@ -112,7 +120,6 @@ class DxInput extends Component {
 const styles = {
     inputStyle: {
         height: 28,
-        borderRadius: '18px',
         border: 'none',
         fontSize: fonts.h2
     },

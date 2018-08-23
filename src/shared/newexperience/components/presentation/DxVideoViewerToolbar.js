@@ -47,6 +47,7 @@ class DxVideoViewerToolbar extends Component {
                                         disabled={false}
                                         value={this.props.videoInput}
                                         handleKeyPress={() => this.handleVideoInsertClick()}
+                                        isRounded={true}
                                     />
                                 </div>
                                 <Button

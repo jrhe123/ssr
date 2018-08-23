@@ -110,6 +110,7 @@ class ExperiencePanel extends Component {
                                         width="120px"
                                         disabled={true}
                                         value={Experience.Type == 0 ? 'card only' : 'card + page(s)'}
+                                        isRounded={true}
                                     />
                                     <Button
                                         style={outlineBtnStyle}

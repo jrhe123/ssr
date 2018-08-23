@@ -48,8 +48,9 @@ class DxLinkToolbar extends Component {
                                         handleValChange={(e) => this.props.handleLinkInputChange(e)}
                                         width="200px"
                                         disabled={false}
-                                        value={this.props.linkInput}
+                                        value={this.props.linkInput == null ? this.props.link : this.props.linkInput}
                                         handleKeyPress={() => this.handleLinkInsertClick()}
+                                        isRounded={true}
                                     />
                                 </div>
                                 <Button

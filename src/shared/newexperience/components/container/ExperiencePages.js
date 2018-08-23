@@ -143,6 +143,7 @@ class ExperiencePages extends Component {
                         linkColor={section.LinkColor}
                         adBtnImg={section.AdBtnImg}
                         adBtnColor={section.AdBtnColor}
+                        adBtnBgColor={section.AdBtnBgColor}
 
                         key={section.SectionGUID}
                         index={i}
@@ -326,6 +327,11 @@ class ExperiencePages extends Component {
     handleAdBtnColorChange = (color) => {
         let sectionGUID = this.findActiveSectionGUID();
         this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'AD_BTN_COLOR', color.color);
+    }
+
+    handleAdBtnBgColorChange = (color) => {
+        let sectionGUID = this.findActiveSectionGUID();
+        this.props.dxExperiencePageUpdateElemAction(sectionGUID, 'AD_BTN_BG_COLOR', color.color);
     }
 
     handleDeleteElem = (sectionGUID) => {
@@ -652,6 +658,7 @@ class ExperiencePages extends Component {
                                     handleLinkInsertClick={() => this.handleLinkInsertClick()}
                                     handleAdBtnImageChange={(file) => this.handleAdBtnImageChange(file)}
                                     handleAdBtnColorChange={(color) => this.handleAdBtnColorChange(color)}
+                                    handleAdBtnBgColorChange={(color) => this.handleAdBtnBgColorChange(color)}
                                 />
                             </div>
                             <div style={editPhoneContainerStyle}>
@@ -793,6 +800,7 @@ class ExperiencePages extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title={this.state.modalTitle}
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}

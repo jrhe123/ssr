@@ -204,6 +204,7 @@ class DxPage extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title="Confirm Delete Pages"
+                    hasBottomDiv={true}
                     description="Do you want to proceed?"
                     cancel={true}
                     confirm={true}

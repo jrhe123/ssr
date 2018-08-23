@@ -47,18 +47,23 @@ class ChannelPanel extends Component {
                 <div style={tableContainerStyle}>
                     <div style={tableWrapperStyle}>
                         <div style={mainWrapperStyle}>
-                            <div style={optionContainerStyle}>
-                                <div style={leftContainerStyle}>
-                                    <p style={labelStyle}>Visibility</p>
-                                </div>
-                                <div style={rightContainerStyle}>
-                                    <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
-                                    <ChannelOptionBar
-                                        channelType={Channel.ChannelType}
-                                        handleClickOption={(val) => this.handleValueUpdate('CHANNEL_TYPE', val)}
-                                    />
-                                </div>
-                            </div>
+                            {
+                                Channel.ChannelType == '3' ?
+                                    null
+                                    :
+                                    <div style={optionContainerStyle}>
+                                        <div style={leftContainerStyle}>
+                                            <p style={labelStyle}>Visibility</p>
+                                        </div>
+                                        <div style={rightContainerStyle}>
+                                            <p style={descLabelStyle}>What kind of channel visibility you would like your end user to experience?</p>
+                                            <ChannelOptionBar
+                                                channelType={Channel.ChannelType}
+                                                handleClickOption={(val) => this.handleValueUpdate('CHANNEL_TYPE', val)}
+                                            />
+                                        </div>
+                                    </div>
+                            }
                             {
                                 Channel.ChannelType == '2' ?
                                     (
@@ -76,6 +81,7 @@ class ChannelPanel extends Component {
                                                     width="225px"
                                                     disabled={false}
                                                     value={Channel.ChannelCode}
+                                                    isRounded={true}
                                                 />
                                             </div>
                                         </div>
@@ -102,6 +108,7 @@ class ChannelPanel extends Component {
                                 <div style={rightContainerStyle}>
                                     <p style={descLabelStyle}>Choose a channel title relevant to your audience’s interest. Ex. Diabetes, Radiology, News etc.</p>
                                     <ChannelTitleInput
+                                        isDisabled={Channel.ChannelType == '3' ? true : false}
                                         channelName={Channel.ChannelName}
                                         color={Channel.ChannelColor}
                                         handleTitleCharacterChange={(val) => this.handleValueUpdate('CHANNEL_NAME', val)}

@@ -5,19 +5,15 @@ import ExperienceList from '../presentation/experience/ExperienceList';
 import NewExperienceModal from '../presentation/experience/NewExperienceModal';
 import SearchBar from '../../../components/searchBar/SearchBar';
 import DxModal from '../../../components/dxModal/DxModal';
+import ConfirmForm from '../presentation/experience/ConfirmForm';
 
 // Libraries
 import Button from '@material-ui/core/Button';
-import Lock from '@material-ui/icons/Lock';
-import LockOpen from '@material-ui/icons/LockOpen';
-import TextField from '@material-ui/core/TextField';
 
 // redux
 import { connect } from 'react-redux';
 import {
     dxDashboardNavi as dxDashboardNaviAction,
-    dxPasswordInput as dxPasswordInputAction,
-    dxSiteUnlock as dxSiteUnlockAction,
 
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
@@ -78,13 +74,23 @@ class ExperienceContainer extends Component {
         this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
     }
 
-    handleEditExperience = (experienceGUID) => {
-        this.props.history.push(`/edit_experience/${experienceGUID}`);
+    handleConfirmFormChange = (val) => {
+        console.log('out here: ', val);
     }
 
-    handlePwdChange = (e, type) => {
-        const value = e.target.value;
-        this.props.dxPasswordInputAction(value, type);
+    handleEditExperience = (experienceGUID, confirmToEdit) => {
+        if (!confirmToEdit) {
+            this.setState({
+                isModalOpen: true,
+                modalType: 'CONFIRM',
+                modalDesc: null,
+                isContentModal: true,
+                isModalDanger: false,
+                targetExperienceGUID: experienceGUID,
+            })
+            return;
+        }
+        this.props.history.push(`/edit_experience/${experienceGUID}`);
     }
 
     handleConfirmModal = () => {
@@ -93,47 +99,22 @@ class ExperienceContainer extends Component {
         } = this.state;
         if (modalType == 'DELETE') {
             this.handleConfirmDeleteExperience();
-        } else if (modalType == 'LOCK') {
-            this.handleConfirmUnlockSite();
+        } else if (modalType == 'CONFIRM') {
+            console.log('confirm with input');
         }
     }
 
-    handleUnlockSite = () => {
-        this.setState({
-            isModalOpen: true,
-            modalType: 'LOCK',
-            modalTitle: 'Confirm Unlock Site',
-            modalDesc: 'Do you want to proceed?',
-            isContentModal: true,
-            isModalDanger: false,
-        })
-    }
-
-    handleConfirmUnlockSite = () => {
-        if (!this.props.password) {
-            this.props.dxAlertAction(true, true, 'Please enter your password');
-            return;
-        }
-        if (this.props.password != this.props.confirmPassword) {
-            this.props.dxAlertAction(true, true, 'Password not matched');
-            return;
-        }
-        this.setState({
-            isModalOpen: false
-        });
-        this.props.dxSiteUnlockAction(this.props.password);
-    }
-
-    handleRemoveExperience = (experienceGUID) => {
-        this.setState({
-            isModalOpen: true,
-            modalType: 'DELETE',
-            modalTitle: 'Confirm Delete Experience',
-            modalDesc: 'Do you want to proceed?',
-            isContentModal: false,
-            isModalDanger: true,
-            targetExperienceGUID: experienceGUID,
-        })
+    handleRemoveExperience = (experienceGUID, confirmToRemove) => {
+        console.log('confirmToRemove: ', confirmToRemove);
+        // this.setState({
+        //     isModalOpen: true,
+        //     modalType: 'DELETE',
+        //     modalTitle: 'Confirm Delete Experience',
+        //     modalDesc: 'Do you want to proceed?',
+        //     isContentModal: false,
+        //     isModalDanger: true,
+        //     targetExperienceGUID: experienceGUID,
+        // })
     }
 
     handleConfirmDeleteExperience = () => {
@@ -152,21 +133,15 @@ class ExperienceContainer extends Component {
         })
     }
 
-    handleDraftExperience = (experienceGUID) => {
-        this.props.dxDashboardNaviAction(2);
-    }
-
     render() {
 
         const {
-            isUnlocked,
             TotalExperienceRecord,
             Experiences,
         } = this.props;
 
         const {
             tableContainerStyle,
-            tableContainerV2Style,
             tableWrapperStyle,
             newContentContainerStyle,
             imgStyle,
@@ -179,15 +154,14 @@ class ExperienceContainer extends Component {
             searchContainerStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
-            lockContainerStyle,
-            lockIconStyle,
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
             experienceNumberStyle,
             experienceListWrapperStyle,
 
-            pwdContainerStyle,
-            pwdInputWrapperStyle,
+            confirmModalTitleContainerStyle,
+            confirmModalTitleStyle,
+            confirmModalHighlightTitleStyle,
         } = styles;
 
         return (
@@ -216,23 +190,6 @@ class ExperienceContainer extends Component {
                                 </div>
                                 <div style={experienceListContainerStyle}>
 
-                                    <div style={lockContainerStyle}>
-                                        <div style={tableContainerV2Style}>
-                                            <div style={tableWrapperStyle}>
-                                                {
-                                                    this.props.isUnlocked ?
-                                                        <LockOpen 
-                                                            style={lockIconStyle}
-                                                        />
-                                                        :
-                                                        <Lock
-                                                            onClick={() => this.handleUnlockSite()}
-                                                            style={lockIconStyle}
-                                                        />
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div style={experienceSortContainerStyle}>
                                         <div style={experienceNumberContainerStyle}>
                                             <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
@@ -240,13 +197,11 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
-                                            isUnlocked={isUnlocked}
                                             experiences={Experiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
-                                            handleEditExperience={(experienceGUID) => this.handleEditExperience(experienceGUID)}
-                                            handleRemoveExperience={(experienceGUID) => this.handleRemoveExperience(experienceGUID)}
-                                            handleDraftExperience={(experienceGUID) => this.handleDraftExperience(experienceGUID)}
+                                            handleEditExperience={(experienceGUID, confirmToEdit) => this.handleEditExperience(experienceGUID, confirmToEdit)}
+                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove)}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
@@ -282,41 +237,23 @@ class ExperienceContainer extends Component {
                 />
                 <DxModal
                     open={this.state.isModalOpen}
+                    hasBottomDiv={this.state.modalType == 'DELETE' ? true : false}
+                    userCustomTitle={true}
                     title={this.state.modalTitle}
+                    customTitle={
+                        <div style={confirmModalTitleContainerStyle}>
+                            <p style={confirmModalTitleStyle}>You are going to EDIT a LIVE experience. To avoid accidental edits, please type "<span style={confirmModalHighlightTitleStyle}>LIVE EDIT</span>" in the below text box and Press "EDIT"</p>
+                        </div>
+                    }
                     description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}
                     isContent={this.state.isContentModal}
                     content={
-                        this.state.isContentModal ?
-                            <div style={pwdContainerStyle}>
-                                <div style={pwdInputWrapperStyle}>
-                                    <TextField
-                                        className="dx_pwd_input"
-                                        label="Password"
-                                        type="password"
-                                        margin="normal"
-                                        fullWidth
-                                        value={this.props.password}
-                                        onChange={(e) => this.handlePwdChange(e, 'PASSWORD')}
-                                    />
-                                </div>
-                                <div style={pwdInputWrapperStyle}>
-                                    <TextField
-                                        className="dx_pwd_input"
-                                        label="Confirm Password"
-                                        type="password"
-                                        margin="normal"
-                                        fullWidth
-                                        value={this.props.confirmPassword}
-                                        error={this.props.confirmPassword && this.props.password != this.props.confirmPassword}
-                                        helperText={(this.props.confirmPassword.length && this.props.password != this.props.confirmPassword) ? "Password not match" : null}
-                                        onChange={(e) => this.handlePwdChange(e, 'CONFIRM_PASSWORD')}
-                                    />
-                                </div>
-                            </div>
-                            :
-                            null
+                        <ConfirmForm
+                            value=""
+                            handleInputChange={(val) => this.handleConfirmFormChange(val)}
+                        />
                     }
                     isDanger={this.state.isModalDanger}
                     handleConfirm={() => this.handleConfirmModal()}
@@ -334,12 +271,6 @@ const styles = {
         display: 'table',
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
-    },
-    tableContainerV2Style: {
-        position: 'relative',
-        display: 'table',
-        width: '100%',
-        height: `100%`,
     },
     tableWrapperStyle: {
         display: 'table-cell',
@@ -389,18 +320,6 @@ const styles = {
     experienceListContainerStyle: {
         position: 'relative',
     },
-    lockContainerStyle: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: 60,
-        height: 60,
-        cursor: 'pointer',
-    },
-    lockIconStyle: {
-        color: colors.blackColor,
-        width: 36
-    },
     experienceSortContainerStyle: {
         width: 240,
         paddingBottom: 12,
@@ -418,21 +337,23 @@ const styles = {
     experienceListWrapperStyle: {
         marginTop: 24,
     },
-    pwdContainerStyle: {
-        paddingTop: 12,
-        paddingBottom: 12,
+
+    confirmModalTitleContainerStyle: {
+        marginTop:  60,
     },
-    pwdInputWrapperStyle: {
-        marginBottom: 12,
+    confirmModalTitleStyle: {
+        margin: 0,
+        fontSize: fonts.h1,
+        textAlign: 'justify'
+    },
+    confirmModalHighlightTitleStyle: {
+        color: colors.redColor
     },
 }
 
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        isUnlocked: state.root.isUnlocked,
-        password: state.root.password,
-        confirmPassword: state.root.confirmPassword,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         Experiences: state.dashboard.Experiences,
         IsReloadExperience: state.dashboard.IsReloadExperience,
@@ -441,8 +362,6 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxDashboardNaviAction,
-    dxPasswordInputAction,
-    dxSiteUnlockAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
     dxDeleteExperienceAction,

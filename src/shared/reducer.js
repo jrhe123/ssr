@@ -8,9 +8,6 @@ import {
 import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
-    PASSWORD_INPUT__SUCCEEDED,
-    UNLOCK_SITE__SUCCEEDED,
-    UNLOCK_SITE__FAILED,
 
     EXPERIENCE_FETCH__FAILED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -78,9 +75,6 @@ import {
     VALIDATE_TOKEN__SUCCEEDED,
     VALIDATE_TOKEN__FAILED,
 
-    VALIDATE_UNLOCK_TOKEN__SUCCEEDED,
-    VALIDATE_UNLOCK_TOKEN__FAILED,
-
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
 
@@ -93,9 +87,6 @@ const initialState = {
     history: null,
     isAuthenticated: false,
     user: {},
-    isUnlocked: false,
-    password: '',
-    confirmPassword: '',
 
     alertBar: {
         isDisplay: false,
@@ -125,26 +116,6 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.isUnlocked = false;
             return updated;
 
-        case PASSWORD_INPUT__SUCCEEDED:
-            if (payload.type == 'PASSWORD') {
-                updated.password = payload.value;
-            } else if (payload.type == 'CONFIRM_PASSWORD') {
-                updated.confirmPassword = payload.value;
-            }
-            return updated;
-
-        case UNLOCK_SITE__SUCCEEDED:
-            updated.password = '';
-            updated.confirmPassword = '';
-            updated.isUnlocked = true;
-            tempAlertBar = {
-                isDisplay: true,
-                isError: false,
-                message: payload.message
-            }
-            updated.alertBar = tempAlertBar;
-            return updated;
-
         case VALIDATE_TOKEN__SUCCEEDED:
             updated.isAuthenticated = true;
             updated.user = payload.user;
@@ -153,14 +124,6 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case VALIDATE_TOKEN__FAILED:
             updated.isAuthenticated = false;
             updated.user = {};
-            return updated;
-
-        case VALIDATE_UNLOCK_TOKEN__SUCCEEDED:
-            updated.isUnlocked = true;
-            return updated;
-        
-        case VALIDATE_UNLOCK_TOKEN__FAILED:
-            updated.isUnlocked = false;
             return updated;
 
         case NAVIGATE_HISTORY__SUCCEEDED:
@@ -224,7 +187,6 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
             updated.alertBar = tempAlertBar;
             return updated;
 
-        case UNLOCK_SITE__FAILED:
         case EXPERIENCE_FETCH__FAILED:
         case EXPERIENCE_DELETE__FAILED:
         case EXPERIENCE_CREATE__FAILED:

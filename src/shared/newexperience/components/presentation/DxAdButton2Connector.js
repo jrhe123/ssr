@@ -16,7 +16,7 @@ import config from '../../../config';
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
-class DxAdButtonConnector extends Component {
+class DxAdButton2Connector extends Component {
 
     handleBtnConnectPageChange = (page) => {
         this.props.handleBtnConnectPageChange(page.PageGUID);
@@ -25,7 +25,7 @@ class DxAdButtonConnector extends Component {
     render() {
 
         const {
-            adBtnImg,
+            adBtnBgColor,
             adBtnColor,
             dropdownOptionArr,
             defaultConnectorPage,
@@ -33,7 +33,6 @@ class DxAdButtonConnector extends Component {
 
         const {
             mainContainerStyle,
-            overlayImgStyle,
             mainWrapperStyle,
             tableContainerStyle,
             tableWrapperStyle,
@@ -53,13 +52,8 @@ class DxAdButtonConnector extends Component {
         return (
             <div style={mainContainerStyle}>
 
-                <img
-                    style={overlayImgStyle}
-                    src={adBtnImg ? `${config.picHost}${adBtnImg}` : require('../../../../../assets/images/demo.jpg')}
-                />
-
                 <div style={mainWrapperStyle}>
-                    <div style={contentContainerStyle}>
+                    <div style={Object.assign({}, contentContainerStyle, { backgroundColor: adBtnBgColor })}>
                         <div style={leftContentContainerStyle}>
                             <div style={tableContainerStyle}>
                                 <div style={tableWrapperStyle}>
@@ -132,13 +126,6 @@ const styles = {
         boxSizing: 'border-box',
         margin: '0 auto'
     },
-    overlayImgStyle: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-    },
     mainWrapperStyle: {
         flex: 1,
     },
@@ -196,4 +183,4 @@ const styles = {
     },
 }
 
-export default DxAdButtonConnector;
+export default DxAdButton2Connector;

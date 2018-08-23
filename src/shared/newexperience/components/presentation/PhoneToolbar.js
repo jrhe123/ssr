@@ -8,6 +8,7 @@ import DxVideoViewerToolbar from './DxVideoViewerToolbar';
 import DxImageViewerToolbar from './DxImageViewerToolbar';
 import DxLinkToolbar from './DxLinkToolbar';
 import DxAdButtonConnectorToolbar from './DxAdButtonConnectorToolbar';
+import DxAdButton2ConnectorToolbar from './DxAdButton2ConnectorToolbar';
 
 class PhoneToolbar extends Component {
 
@@ -76,6 +77,7 @@ class PhoneToolbar extends Component {
                         isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
                         color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].LinkColor : '#000000'}
                         linkInput={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].LinkInput : null}
+                        link={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].Link : null}
                         handleLinkInputChange={(e) => this.props.handleLinkInputChange(e)}
                         handleColorChange={(color) => this.props.handleLinkColorChange(color)}
                         handleLinkInsertClick={() => this.props.handleLinkInsertClick()}
@@ -90,6 +92,16 @@ class PhoneToolbar extends Component {
                         handleImgChange={(file) => this.props.handleAdBtnImageChange(file)}
                         handleColorChange={(color) => this.props.handleAdBtnColorChange(color)}
                         handleImgError={(msg) => this.props.handleErrorMsg(msg)}
+                    />
+                );
+            } else if (section.Type == 'AD_BUTTON_2') {
+                return (
+                    <DxAdButton2ConnectorToolbar 
+                        isActive={(newPage.PageGUID == section.PageGUID && section.IsActive) ? true : false}
+                        color={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnColor : '#000000'}
+                        bgColor={newPage.Sections[activePageSectionIndex] ? newPage.Sections[activePageSectionIndex].AdBtnBgColor : '#ffffff'}
+                        handleColorChange={(color) => this.props.handleAdBtnColorChange(color)}
+                        handleBgColorChange={(color) => this.props.handleAdBtnBgColorChange(color)}
                     />
                 );
             } else {

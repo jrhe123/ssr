@@ -39,6 +39,7 @@ class DxLink extends Component {
                                 enableClick={true}
                                 value={linkLabel ? linkLabel : link}
                                 hyperValue={link}
+                                isRounded={true}
                             />
                         }
                     </div>

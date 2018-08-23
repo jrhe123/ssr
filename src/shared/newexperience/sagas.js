@@ -276,6 +276,12 @@ const __extract_section_values = (sections) => {
                 item.BtnContent = section.BtnContent;
                 item.ConnectedPageGUID = section.ConnectedPageGUID;
                 break;
+            case 'AD_BUTTON_2':
+                item.AdBtnBgColor = section.AdBtnBgColor;
+                item.AdBtnColor = section.AdBtnColor;
+                item.BtnContent = section.BtnContent;
+                item.ConnectedPageGUID = section.ConnectedPageGUID;
+                break;
         }
         output.push(item);
     }

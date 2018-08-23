@@ -175,14 +175,23 @@ export const dxChannelUpdateUrl = (params) => {
         ChannelType,
         ChannelCode,
     } = experienceChannel;
-    const formattedParams = {
-        ExperienceChannelGUID,
-        ChannelName: ChannelName.trim(),
-        ChannelColor: ChannelColor.trim(),
-        ChannelDescription,
-        ChannelType: ChannelType.toString(),
-        ChannelCode: ChannelCode ? ChannelCode.trim() : null,
-    };
+    let formattedParams;
+    if (experienceChannel.ChannelType == '3') {
+        formattedParams = {
+            ExperienceChannelGUID,
+            ChannelColor: ChannelColor.trim(),
+            ChannelDescription,
+        };
+    } else {
+        formattedParams = {
+            ExperienceChannelGUID,
+            ChannelName: ChannelName.trim(),
+            ChannelColor: ChannelColor.trim(),
+            ChannelDescription,
+            ChannelType: ChannelType.toString(),
+            ChannelCode: ChannelCode ? ChannelCode.trim() : null,
+        };
+    }
     return (
         apiManager.dxApi(`/channel/update`, formattedParams, true)
     )

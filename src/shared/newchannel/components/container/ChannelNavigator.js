@@ -51,8 +51,9 @@ class ChannelNavigator extends Component {
         }
         if (channel.ChannelType != '0'
             && channel.ChannelType != '1'
-            && channel.ChannelType != '2') {
-            res.Message = 'Please enter select channel type';
+            && channel.ChannelType != '2'
+            && channel.ChannelType != '3') {
+            res.Message = 'Please select channel type';
             return res;
         }
         if (channel.ChannelType == '2' && !channel.ChannelCode) {
@@ -60,7 +61,7 @@ class ChannelNavigator extends Component {
             return res;
         }
         if (!channel.ChannelColor) {
-            res.Message = 'Please enter select channel color';
+            res.Message = 'Please select channel color';
             return res;
         }
         if (!channel.ChannelName) {

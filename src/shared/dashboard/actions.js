@@ -1,8 +1,6 @@
 import {
     DASHBOARD_NAVI_REQUESTED,
     LOGOUT_REQUESTED,
-    PASSWORD_INPUT_REQUESTED,
-    UNLOCK_SITE_REQUESTED,
 
     // CHANNEL
     CHANNEL_FETCH_REQUESTED,
@@ -33,25 +31,6 @@ export const dxLogout = () => {
     return {
         type: LOGOUT_REQUESTED,
         payload: {},
-    }
-}
-
-export const dxPasswordInput = (value, type) => {
-    return {
-        type: PASSWORD_INPUT_REQUESTED,
-        payload: {
-            type,
-            value,
-        },
-    }
-}
-
-export const dxSiteUnlock = (password) => {
-    return {
-        type: UNLOCK_SITE_REQUESTED,
-        payload: {
-            password
-        },
     }
 }
 

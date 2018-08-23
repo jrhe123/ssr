@@ -486,6 +486,7 @@ class StreamContainer extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     title={this.state.modalTitle}
+                    hasBottomDiv={true}
                     description={this.state.modalDesc}
                     cancel={true}
                     confirm={true}

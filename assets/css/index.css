@@ -1,3 +1,22 @@
+@font-face {
+    font-family: 'AvenirLTStd';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      local('AvenirLTStd'),
+      local('AvenirLTStd-Book'),
+      url(../fonts/AvenirLTStd-Book.woff) format('woff');
+  }
+  
+@font-face {
+    font-family: 'AvenirLTStd';
+    font-style: normal;
+    font-weight: 700;
+    src:
+      local('AvenirLTStd Heavy'),
+      local('AvenirLTStd-Heavy'),
+      url(../fonts/AvenirLTStd-Heavy.woff) format('woff');
+  }
 html,
 body{
 	margin: 0;
@@ -5,7 +24,7 @@ body{
     height: 100%;
     width: 100%;
     background-color: #F2F3F6;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'AvenirLTStd', sans-serif;
 }
 
 .dx_collapsible_panel{

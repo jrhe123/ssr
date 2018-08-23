@@ -332,14 +332,36 @@ class ThumbnailPhoneElement extends Component {
                             <div style={leftContentContainerStyle}>
                                 <div style={tableContainerStyle}>
                                     <div style={tableWrapperStyle}>
-                                        <p style={btnLabelStyle}>{section.BtnContent}</p>
+                                        <p style={Object.assign({}, btnLabelStyle, { color: section.AdBtnColor })}>{section.BtnContent}</p>
                                     </div>
                                 </div>
                             </div>
                             <div style={rightIconContainerStyle}>
                                 <div style={tableContainerStyle}>
                                     <div style={tableWrapperStyle}>
-                                        <KeyboardArrowRight style={expandIconStyle} />
+                                        <KeyboardArrowRight style={Object.assign({}, expandIconStyle, { color: section.AdBtnColor })} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+                break;
+            case 'AD_BUTTON_2':
+                elem = (
+                    <div style={adBtnContainerStyle}>
+                        <div style={Object.assign({}, contentContainerStyle, { backgroundColor: section.AdBtnBgColor })}>
+                            <div style={leftContentContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={Object.assign({}, btnLabelStyle, { color: section.AdBtnColor })}>{section.BtnContent}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={rightIconContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <KeyboardArrowRight style={Object.assign({}, expandIconStyle, { color: section.AdBtnColor })} />
                                     </div>
                                 </div>
                             </div>
