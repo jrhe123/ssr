@@ -24,6 +24,7 @@ class ChannelTitleInput extends Component {
         return (
             <div style={mainContainerStyle}>
                 <Textarea
+                    disabled={this.props.isDisabled}
                     className='dx_input'
                     maxLength="50"
                     style={Object.assign({}, titleInputStyle, { color })}
