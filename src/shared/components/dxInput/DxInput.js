@@ -54,7 +54,7 @@ class DxInput extends Component {
         } = this.props;
 
         const extra = {};
-        extra.width = width ? `${width} - 24px` : '120px - 24px';
+        extra.width = width ? `${width}` : '120px';
         extra.maxHeight = maxHeight ? maxHeight : '360px';
         if (isDark) {
             extra.backgroundColor = colors.lightBlueColor;
