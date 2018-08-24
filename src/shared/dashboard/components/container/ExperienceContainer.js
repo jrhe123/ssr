@@ -39,6 +39,7 @@ class ExperienceContainer extends Component {
         isContentModal: false,
         isModalDanger: true,
         targetExperienceGUID: null,
+        confirmInput: null
     }
 
     componentDidMount() {
@@ -75,18 +76,21 @@ class ExperienceContainer extends Component {
     }
 
     handleConfirmFormChange = (val) => {
-        console.log('out here: ', val);
+        this.setState({
+            confirmInput: val
+        })
     }
 
     handleEditExperience = (experienceGUID, confirmToEdit) => {
         if (!confirmToEdit) {
             this.setState({
                 isModalOpen: true,
-                modalType: 'CONFIRM',
+                modalType: 'CONFIRM_EDIT',
                 modalDesc: null,
                 isContentModal: true,
                 isModalDanger: false,
                 targetExperienceGUID: experienceGUID,
+                confirmInput: null
             })
             return;
         }
@@ -95,26 +99,46 @@ class ExperienceContainer extends Component {
 
     handleConfirmModal = () => {
         const {
-            modalType
+            modalType,
+            targetExperienceGUID,
+            confirmInput,
         } = this.state;
         if (modalType == 'DELETE') {
             this.handleConfirmDeleteExperience();
-        } else if (modalType == 'CONFIRM') {
-            console.log('confirm with input');
+        } else if (modalType == 'CONFIRM_EDIT'
+            || modalType == 'CONFIRM_DELETE') {
+
+            if (confirmInput && confirmInput.toUpperCase() == 'LIVE EDIT') {
+                if (modalType == 'CONFIRM_EDIT') this.props.history.push(`/edit_experience/${targetExperienceGUID}`);
+                if (modalType == 'CONFIRM_DELETE') this.handleConfirmDeleteExperience();
+            } else {
+                this.props.dxAlertAction(true, true, 'Please type "LIVE EDIT" in the below text box');
+            }
         }
     }
 
     handleRemoveExperience = (experienceGUID, confirmToRemove) => {
-        console.log('confirmToRemove: ', confirmToRemove);
-        // this.setState({
-        //     isModalOpen: true,
-        //     modalType: 'DELETE',
-        //     modalTitle: 'Confirm Delete Experience',
-        //     modalDesc: 'Do you want to proceed?',
-        //     isContentModal: false,
-        //     isModalDanger: true,
-        //     targetExperienceGUID: experienceGUID,
-        // })
+        if (!confirmToRemove) {
+            this.setState({
+                isModalOpen: true,
+                modalType: 'CONFIRM_DELETE',
+                modalDesc: null,
+                isContentModal: true,
+                isModalDanger: false,
+                targetExperienceGUID: experienceGUID,
+                confirmInput: null
+            })
+            return;
+        }
+        this.setState({
+            isModalOpen: true,
+            modalType: 'DELETE',
+            modalTitle: 'Confirm Delete Experience',
+            modalDesc: 'Do you want to proceed?',
+            isContentModal: false,
+            isModalDanger: true,
+            targetExperienceGUID: experienceGUID,
+        })
     }
 
     handleConfirmDeleteExperience = () => {
@@ -238,7 +262,7 @@ class ExperienceContainer extends Component {
                 <DxModal
                     open={this.state.isModalOpen}
                     hasBottomDiv={this.state.modalType == 'DELETE' ? true : false}
-                    userCustomTitle={true}
+                    userCustomTitle={this.state.modalType != 'DELETE' ? true : false}
                     title={this.state.modalTitle}
                     customTitle={
                         <div style={confirmModalTitleContainerStyle}>
@@ -251,8 +275,9 @@ class ExperienceContainer extends Component {
                     isContent={this.state.isContentModal}
                     content={
                         <ConfirmForm
-                            value=""
+                            value={this.state.confirmInput}
                             handleInputChange={(val) => this.handleConfirmFormChange(val)}
+                            handleConfirmPress={() => this.handleConfirmModal()}
                         />
                     }
                     isDanger={this.state.isModalDanger}
@@ -339,7 +364,7 @@ const styles = {
     },
 
     confirmModalTitleContainerStyle: {
-        marginTop:  60,
+        marginTop: 60,
     },
     confirmModalTitleStyle: {
         margin: 0,

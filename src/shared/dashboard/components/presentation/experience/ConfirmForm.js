@@ -8,23 +8,22 @@ class ConfirmForm extends Component {
     render() {
 
         return (
-            <div>
-                <DxInput
-                    enableEnter={false}
-                    placeholder="Type here.."
-                    handleValChange={(e) => this.props.handleInputChange(e.target.value)}
-                    isDark={true}
-                    disabled={false}
-                    value={this.props.value}
-                    isRounded={false}
-                    isFullWidth={true}
-                />
-            </div>
+            <DxInput
+                enableEnter={true}
+                placeholder="Type here.."
+                handleValChange={(e) => this.props.handleInputChange(e.target.value)}
+                isDark={true}
+                disabled={false}
+                value={this.props.value}
+                isRounded={false}
+                isFullWidth={true}
+                handleKeyPress={() => this.props.handleConfirmPress()}
+            />
         )
     }
 }
 
-const styles ={
+const styles = {
 
 }
 
