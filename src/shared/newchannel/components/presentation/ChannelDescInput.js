@@ -45,7 +45,7 @@ const styles = {
         backgroundColor: colors.whiteColor,
         border: 'none',
         outlineStyle: 'none',
-        maxHeight: 144,
+        maxHeight: 84,
         overflowY:'auto'
     },
     characterCounterStyle: {
