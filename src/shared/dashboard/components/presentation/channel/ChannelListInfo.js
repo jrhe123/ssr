@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 
 // Libraries
-import IconButton from '@material-ui/core/IconButton';
 import DropdownMenu from 'react-dd-menu';
+import Language from '@material-ui/icons/Language';
+import Lock from '@material-ui/icons/Lock';
+import Fingerprint from '@material-ui/icons/Fingerprint';
+import Edit from '@material-ui/icons/Edit';
+import FlashOn from '@material-ui/icons/FlashOn';
+import FlashOff from '@material-ui/icons/FlashOff';
 import Button from '@material-ui/core/Button';
 
 // constants
@@ -45,11 +50,48 @@ class ChannelListInfo extends Component {
         }
     }
 
+    renderChannelIcon = (channelType) => {
+        const {
+            channelIconStyle
+        } = styles;
+        let icon;
+        switch (channelType) {
+            case '0':
+            case '3':
+                icon = (
+                    <Language style={channelIconStyle} />
+                )
+                break;
+            case '1':
+                icon = (
+                    <Lock style={channelIconStyle} />
+                )
+                break;
+            case '2':
+                icon = (
+                    <Fingerprint style={channelIconStyle} />
+                )
+                break;
+            default:
+                break;
+        }
+        return icon;
+    }
+
     render() {
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             channelInfoContainerStyle,
             channelStatusContainerStyle,
-            channelInfo
+            channelInfoWrapperStyle,
+            channelIconContainerStyle,
+            channelInfo,
+            channelInfoWrapper,
+            channelTextStyle,
+            channelColorIconStyle,
+            flashonIconStyle,
+            editIconStyle,
         } = styles;
 
         const {
@@ -57,15 +99,6 @@ class ChannelListInfo extends Component {
             backgroundColor,
             isLive
         } = this.props;
-
-        const extra = {};
-        if (isLive) {
-            extra.color = '#2DD1AC';
-            extra.channelStatus = 'Live'
-        } else {
-            extra.color = '#A8B7C5';
-            extra.channelStatus = 'Draft'
-        }
 
         return (
             <div style={channelInfoContainerStyle}>
@@ -77,13 +110,23 @@ class ChannelListInfo extends Component {
                     size={'md'}
                     align='right'
                     toggle={
-                        <div style={channelInfo}
-                            onClick={() => this.handleMenuToggle()}>
-                            <IconButton
-                                style={{ backgroundColor: backgroundColor, height: 15, width: 15, marginLeft: 12 }}
-                                iconStyle={{ height: 5, width: 5 }}
-                            />
-                            <p style={{ color: backgroundColor, marginLeft: 9, fontSize: fonts.h4, marginRight: 12 }}>{channelLabel}</p>
+                        <div style={channelInfoWrapperStyle}>
+                            <div style={channelIconContainerStyle}>
+                                {
+                                    this.renderChannelIcon(this.props.channelType)
+                                }
+                            </div>
+                            <div style={channelInfo}
+                                onClick={() => this.handleMenuToggle()}>
+                                <div style={channelInfoWrapper}>
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <span style={Object.assign({}, channelColorIconStyle, { backgroundColor })}></span>
+                                            <p style={channelTextStyle}>{channelLabel}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     }
                     closeOnInsideClick={false}
@@ -91,16 +134,26 @@ class ChannelListInfo extends Component {
                 >
                     {
                         isLive ?
-                            <Button onClick={() => this.handleToggleChannel(false)}>Draft</Button>
+                            <Button onClick={() => this.handleToggleChannel(false)}>
+                                <FlashOff />
+                            </Button>
                             :
-                            <Button onClick={() => this.handleToggleChannel(true)}>Go Live</Button>
+                            <Button onClick={() => this.handleToggleChannel(true)}>
+                                <FlashOn />
+                            </Button>
                     }
-                    <Button onClick={() => this.handleEditChannel()}>Edit</Button>
-                    {/* <Button onClick={() => console.log('remove')}>Remove</Button> */}
+                    <Button onClick={() => this.handleEditChannel()}>
+                        <Edit />
+                    </Button>
                 </DropdownMenu>
 
                 <div style={channelStatusContainerStyle}>
-                    <p style={Object.assign({}, styles.channelStatusStyle, extra)}>{extra.channelStatus}</p>
+                    {
+                        isLive ?
+                            <FlashOn style={flashonIconStyle}/>
+                            :
+                            <Edit style={editIconStyle}/>
+                    }
                 </div>
             </div>
         );
@@ -109,37 +162,85 @@ class ChannelListInfo extends Component {
 
 const styles = {
 
+    tableContainerStyle: {
+        position: 'relative',
+        display: 'table',
+        height: '100%',
+        width: '100%',
+    },
+    tableWrapperStyle: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
+    },
     channelInfoContainerStyle: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
-        paddingBottom: 120,
-        marginRight: 24,
+        paddingBottom: 60,
+        width: 240,
+        marginRight: 48,
+    },
+    channelInfoWrapperStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: 240,
+        position: 'relative'
+    },
+    channelIconContainerStyle: {
+        flex: '18px 0 0',
+        position: 'relative',
+    },
+    channelIconStyle: {
+        position: 'absolute',
+        top: 21,
+        left: 0,
+        width: 18,
+        height: 18,
     },
     channelInfo: {
-        height: 60,
-        width: 180,
-        background: colors.whiteColor,
-        display: 'flex',
+        flex: 1,
         alignItems: 'center',
+        paddingLeft: 6
+    },
+    channelInfoWrapper: {
+        display: 'flex',
+        height: 60,
+        background: colors.whiteColor,
         cursor: 'pointer',
     },
-    channelStatusContainerStyle: {
-        width: 60,
+    channelColorIconStyle: {
+        position: 'absolute',
+        top: 22,
+        left: 7,
+        display: 'block',
+        width: 12,
         height: 12,
-        fontSize: fonts.h4,
-        background: colors.lightBlueColor,
-        textAlign: 'center',
+        borderRadius: '50%',
+    },
+    channelTextStyle: {
+        paddingLeft: 36,
+        margin: 0,
+        fontSize: fonts.h3,
+    },
+    channelStatusContainerStyle: {
+        width: 24,
+        height: 18,
+        backgroundColor: colors.whiteColor,
         marginTop: 12,
         borderRadius: 6,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    channelStatusStyle: {
-        margin: 0
-    }
+    flashonIconStyle: {
+        color: colors.greenColor,
+        fontSize: '14px'
+    },
+    editIconStyle: {
+        color: colors.greyLabelColor,
+        fontSize: '14px'
+    },
 }
 
 export default ChannelListInfo;

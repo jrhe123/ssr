@@ -113,6 +113,7 @@ class ChannelList extends Component {
                                 <ChannelListInfo
                                     key={index}
                                     backgroundColor={channel.ChannelColor}
+                                    channelType={channel.ChannelType}
                                     channelLabel={channel.ChannelName}
                                     isLive={channel.ChannelStatus == 'LIVE' ? true : false}
                                     handleEditChannel={() => this.props.handleEditChannel(channel)}
