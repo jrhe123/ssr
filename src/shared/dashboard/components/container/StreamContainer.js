@@ -34,6 +34,9 @@ class StreamContainer extends Component {
 
     state = {
         isMenuOpen: false,
+        isChannelMenuOpen: false,
+        channelFilterLabel: 'All channel(s)',
+        channelFilter: 'ALL',
         isModalOpen: false,
         modalType: 'CREATE',
         modalTitle: '',
@@ -68,6 +71,16 @@ class StreamContainer extends Component {
 
     handleSearchChannel = (value) => {
         console.log('value: ', value)
+    }
+
+    handleToggleChannelMenu = () => {
+        this.setState({
+            isChannelMenuOpen: !this.state.isChannelMenuOpen
+        });
+    }
+
+    handleCloseChannelMenu = () => {
+        this.setState({ isChannelMenuOpen: false });
     }
 
     handleSelectChannel = (channel) => {
@@ -160,12 +173,12 @@ class StreamContainer extends Component {
                 <div style={modalChannelTabListContainerStyle}>
                     {
                         experience.ExperienceStreams.map((experienceStream, index) => (
-                            <ChannelTab 
+                            <ChannelTab
                                 channelName={experienceStream.ChannelName}
                                 channelColor={experienceStream.ChannelColor}
                             />
                         ))
-                    }                    
+                    }
                 </div>
             </div>
         );
@@ -246,6 +259,11 @@ class StreamContainer extends Component {
             middleContainerstyle,
             middleWrapperStyle,
             channelLabelWrapperStyle,
+
+            channelFilterContainerStyle,
+            channelDropdownWrapperStyle,
+            channelDropdownBtnStyle,
+
             totalChannelWrapperStyle,
             totalNumberStyle,
             channelLabelStyle,
@@ -367,6 +385,26 @@ class StreamContainer extends Component {
                     <div style={middleWrapperStyle}>
                         <div style={channelLabelWrapperStyle}>
                             <p style={channelLabelStyle}>Channel(s)</p>
+                        </div>
+                        <div style={channelFilterContainerStyle}>
+                            <div style={channelDropdownWrapperStyle}>
+                                <DropdownMenu
+                                    className="dx_channel_filter_menu"
+                                    isOpen={this.state.isChannelMenuOpen}
+                                    close={this.handleCloseChannelMenu}
+                                    toggle={
+                                        <Button
+                                            style={Object.assign({}, channelDropdownBtnStyle, !this.state.isChannelMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : null)}
+                                            onClick={() => this.handleToggleChannelMenu()}
+                                        >{this.state.channelFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                    }
+                                    align={'right'}
+                                    size={'md'}
+                                >
+                                    <div>1</div>
+                                    <div>2</div>
+                                </DropdownMenu>
+                            </div>
                         </div>
                         <div style={totalChannelWrapperStyle}>
                             <p style={totalNumberStyle}>{TotalStreamActiveChannelRecord}</p>
@@ -546,7 +584,9 @@ const styles = {
         fontSize: fonts.h2
     },
     expandIconStyle: {
-        color: colors.lightGreyColor
+        paddingLeft: 3,
+        fontSize: '18px',
+        color: colors.blackColor
     },
     dropdownOptionBtnStyle: {
         width: '100%',
@@ -638,6 +678,19 @@ const styles = {
         margin: 0,
         fontSize: fonts.h2
     },
+    channelFilterContainerStyle: {
+
+    },
+    channelDropdownWrapperStyle: {
+
+    },
+    channelDropdownBtnStyle: {
+        textTransform: 'none',
+        fontSize: fonts.h4,
+        backgroundColor: colors.whiteColor,
+        borderTopLeftRadius: '12px',
+        borderTopRightRadius: '12px',
+    },
     totalChannelWrapperStyle: {
         paddingRight: 6,
         display: 'flex',
@@ -655,7 +708,8 @@ const styles = {
     },
 
     bottomContainerStyle: {
-        height: `calc(100% - 204px)`,
+        marginTop: 6,
+        height: `calc(100% - 210px)`,
         position: 'relative',
         display: 'flex'
     },

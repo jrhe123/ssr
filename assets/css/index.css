@@ -177,3 +177,11 @@ body{
 .dx_pwd_input>div::after{
     border-bottom: 2px solid #0176FF !important;
 }
+
+.dx_channel_filter_menu>div.dd-menu-items{
+    margin: 0 !important;
+    width: 125px !important;
+}
+.dx_channel_filter_menu>div.dd-menu-items>ul{
+    box-shadow: none !important;
+}
