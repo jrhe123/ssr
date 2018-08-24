@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 // Libraries
 import IconButton from '@material-ui/core/IconButton';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import Language from '@material-ui/icons/Language';
+import Lock from '@material-ui/icons/Lock';
+import Fingerprint from '@material-ui/icons/Fingerprint';
 import DropdownMenu from 'react-dd-menu';
 
 // constants
@@ -35,10 +38,39 @@ class ChannelStream extends Component {
         this.setState({ isImportOpen: false });
     }
 
+    renderChannelIcon = (channel) => {
+        const {
+            channelIconStyle
+        } = styles;
+        let icon;
+        switch (channel.ChannelType) {
+            case '0':
+            case '3':
+                icon = (
+                    <Language style={channelIconStyle}/>
+                )
+                break;
+            case '1':
+                icon = (
+                    <Lock style={channelIconStyle}/>
+                )
+                break;
+            case '2':
+                icon = (
+                    <Fingerprint style={channelIconStyle}/>
+                )
+                break;
+            default:
+                break;
+        }
+        return icon;
+    }
+
     render() {
         const {
             channelInfoStyle,
             channelInfoWrapperStyle,
+            channelIconContainerStyle,
             channelInfoLeftStyle,
             channelTitleStyle,
             streamLabelStyle,
@@ -58,6 +90,11 @@ class ChannelStream extends Component {
                 onClick={() => this.props.handleSelectChannel()}
             >
                 <div style={channelInfoWrapperStyle}>
+                    <div style={channelIconContainerStyle}>
+                        {
+                            this.renderChannelIcon(channel)
+                        }
+                    </div>
                     <div style={channelInfoLeftStyle}>
                         <p style={Object.assign({}, channelTitleStyle, { color: channel.ChannelColor })}>{channel.ChannelName}</p>
                         <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>
@@ -92,11 +129,24 @@ const styles = {
         cursor: 'pointer',
     },
     channelInfoWrapperStyle: {
+        position: 'relative',
         borderBottom: '1px solid',
         borderColor: colors.borderColor,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
+        paddingLeft: 24,
+    },
+    channelIconContainerStyle: {
+        position: 'absolute',
+        top: 12,
+        left: 0,
+        height: 18,
+        width: 18,
+    },
+    channelIconStyle: {
+        width: 18,
+        height: 18,
     },
     channelInfoLeftStyle: {
         flex: 1,
