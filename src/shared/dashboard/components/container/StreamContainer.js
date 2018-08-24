@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import SearchBar from 'material-ui-search-bar';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Lock from '@material-ui/icons/Lock';
+import Language from '@material-ui/icons/Language';
+import Fingerprint from '@material-ui/icons/Fingerprint';
 import DropdownMenu from 'react-dd-menu';
 import Button from '@material-ui/core/Button';
 
@@ -35,7 +37,7 @@ class StreamContainer extends Component {
     state = {
         isMenuOpen: false,
         isChannelMenuOpen: false,
-        channelFilterLabel: 'All channel(s)',
+        channelFilterLabel: 'All channel',
         channelFilter: 'ALL',
         isModalOpen: false,
         modalType: 'CREATE',
@@ -263,6 +265,11 @@ class StreamContainer extends Component {
             channelFilterContainerStyle,
             channelDropdownWrapperStyle,
             channelDropdownBtnStyle,
+            channelFilterOptionContainerStyle,
+            channelFilterOptionIconContainerStyle,
+            channelFilterOptionIconStyle,
+            channelFilterOptionTextContainerStyle,
+            channelFilterOptionTextStyle,
 
             totalChannelWrapperStyle,
             totalNumberStyle,
@@ -394,15 +401,37 @@ class StreamContainer extends Component {
                                     close={this.handleCloseChannelMenu}
                                     toggle={
                                         <Button
-                                            style={Object.assign({}, channelDropdownBtnStyle, !this.state.isChannelMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : null)}
+                                            style={Object.assign({}, channelDropdownBtnStyle, !this.state.isChannelMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                             onClick={() => this.handleToggleChannelMenu()}
                                         >{this.state.channelFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                     }
                                     align={'right'}
                                     size={'md'}
                                 >
-                                    <div>1</div>
-                                    <div>2</div>
+                                    <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
+                                        <div style={channelFilterOptionIconContainerStyle}>
+                                            <Language style={channelFilterOptionIconStyle} />
+                                        </div>
+                                        <div style={channelFilterOptionTextContainerStyle}>
+                                            <div style={tableContainerStyle}>
+                                                <div style={tableWrapperStyle}>
+                                                    <p style={channelFilterOptionTextStyle}>Public channel</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={Object.assign({}, channelFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                        <div style={channelFilterOptionIconContainerStyle}>
+                                            <Fingerprint style={channelFilterOptionIconStyle} />
+                                        </div>
+                                        <div style={channelFilterOptionTextContainerStyle}>
+                                            <div style={tableContainerStyle}>
+                                                <div style={tableWrapperStyle}>
+                                                    <p style={channelFilterOptionTextStyle}>Password channel</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </DropdownMenu>
                             </div>
                         </div>
@@ -690,6 +719,41 @@ const styles = {
         backgroundColor: colors.whiteColor,
         borderTopLeftRadius: '12px',
         borderTopRightRadius: '12px',
+        width: '130px',
+    },
+    channelFilterOptionContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        height: 36,
+        paddingLeft: 6,
+        paddingRight: 6,
+        cursor: 'pointer',
+        border: '1px solid',
+        borderTop: 'none',
+        borderColor: colors.borderColor,
+        boxSizing: 'border-box'
+    },
+    channelFilterOptionIconContainerStyle: {
+        flex: '14px 0 0',
+        height: 36,
+        position: 'relative',
+    },
+    channelFilterOptionIconStyle: {
+        position: 'absolute',
+        top: 9,
+        left: 0,
+        width: 14,
+        height: 14,
+    },
+    channelFilterOptionTextContainerStyle: {
+        flex: 1,
+        height: 36,
+        paddingLeft: 3,
+    },
+    channelFilterOptionTextStyle: {
+        margin: 0,
+        fontSize: fonts.h4,
+        color: colors.blackColor
     },
     totalChannelWrapperStyle: {
         paddingRight: 6,
