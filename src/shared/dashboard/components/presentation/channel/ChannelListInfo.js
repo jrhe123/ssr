@@ -91,7 +91,9 @@ class ChannelListInfo extends Component {
             channelTextStyle,
             channelColorIconStyle,
             flashonIconStyle,
+            flashoffIconStyle,
             editIconStyle,
+            optionBtnLabelStyle,
         } = styles;
 
         const {
@@ -135,24 +137,28 @@ class ChannelListInfo extends Component {
                     {
                         isLive ?
                             <Button onClick={() => this.handleToggleChannel(false)}>
-                                <FlashOff />
+                                <FlashOff style={flashoffIconStyle} /><span style={optionBtnLabelStyle}>Draft</span>
                             </Button>
                             :
                             <Button onClick={() => this.handleToggleChannel(true)}>
-                                <FlashOn />
+                                <FlashOn style={flashonIconStyle} /><span style={optionBtnLabelStyle}>Live</span>
                             </Button>
                     }
                     <Button onClick={() => this.handleEditChannel()}>
-                        <Edit />
+                        <div style={tableContainerStyle}>
+                            <div style={tableWrapperStyle}>
+                                <Edit style={editIconStyle} /><span style={optionBtnLabelStyle}>Edit</span>
+                            </div>
+                        </div>
                     </Button>
                 </DropdownMenu>
 
                 <div style={channelStatusContainerStyle}>
                     {
                         isLive ?
-                            <FlashOn style={flashonIconStyle}/>
+                            <FlashOn style={flashonIconStyle} />
                             :
-                            <Edit style={editIconStyle}/>
+                            <Edit style={editIconStyle} />
                     }
                 </div>
             </div>
@@ -237,9 +243,19 @@ const styles = {
         color: colors.greenColor,
         fontSize: '14px'
     },
+    flashoffIconStyle: {
+        color: colors.greyLabelColor,
+        fontSize: '14px'
+    },
     editIconStyle: {
         color: colors.greyLabelColor,
         fontSize: '14px'
+    },
+    optionBtnLabelStyle: {
+        paddingLeft: 6,
+        fontSize: fonts.h3,
+        margin: 0,
+        color: colors.blackColor
     },
 }
 
