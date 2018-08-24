@@ -101,7 +101,7 @@ class ChannelColorOptionBar extends Component {
                         </div>
                     }
                     closeOnInsideClick={false}
-                    closeOnOutsideClick={true}
+                    closeOnOutsideClick={false}
                 >
                     <div style={colorOptionContainerStyle}>
                         {this.renderColorOptions()}
@@ -115,6 +115,7 @@ class ChannelColorOptionBar extends Component {
                                         animation="slide-up"
                                         color={colors.whiteColor}
                                         onChange={(obj) => this.props.handleColorPicker(obj.color)}
+                                        onClose={() => this.handleColorClose()}
                                     ><span className="rc_color_picker_label">{color}</span>
                                     </ColorPicker>
                                 </div>
