@@ -20,7 +20,7 @@ import DropdownMenu from 'react-dd-menu';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import Star from '@material-ui/icons/Star';
+import Home from '@material-ui/icons/Home';
 import Dropzone from 'react-dropzone';
 
 import Collapse from '@material-ui/core/Collapse';
@@ -157,7 +157,7 @@ class ExperiencePages extends Component {
                         handleDeleteElem={(sectionGUID) => this.handleDeleteElem(sectionGUID)}
                         handleCloneElem={(sectionGUID) => this.handleCloneElem(sectionGUID)}
                         handleLinkLabelInputChange={(e) => this.handleUpdateLinkLabelContent(section.SectionGUID, e)}
-                        
+
                         handleVideoError={(msg) => this.handleErrorMsg(msg)}
                     />
                 )
@@ -499,14 +499,12 @@ class ExperiencePages extends Component {
             phoneContainerStyle,
             phoneWrapperStyle,
             pageNumContainerStyle,
-            pageNumStyle,
             rootIndicatorContainerStyle,
-            rootIndicatorIconStyle,
+            rootIndicatorStyle,
+            pageNumStyle,
             controlContainerStyle,
             leftControlContainerStyle,
             leftBtnContainerStyle,
-            midControlContainerStyle,
-            midBtnContainerStyle,
             rightControlContainerStyle,
             rightBtnContainerStyle,
             controlIconStyle,
@@ -663,20 +661,25 @@ class ExperiencePages extends Component {
                             </div>
                             <div style={editPhoneContainerStyle}>
 
-                                <div className={Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
-                                    style={pageNumContainerStyle}>
+                                <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{Experience.NewPage.Title}<span>
-                                                {
-                                                    Experience.NewPage.IsRoot ?
-                                                        <div style={rootIndicatorContainerStyle}>
-                                                            <Star style={rootIndicatorIconStyle} />
-                                                        </div>
-                                                        :
-                                                        null
-                                                }
-                                            </span></p>
+                                            <p className={Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                                style={pageNumStyle}>{Experience.NewPage.Title}</p>
+                                            <div style={rootIndicatorContainerStyle}
+                                                onClick={() => this.handleSetRootPage()}>
+                                                <a className="dx_root_indicator dx_tool_tip">
+                                                    <Home style={rootIndicatorStyle} />
+                                                    <span class="dx_tool_tip_text">
+                                                        {
+                                                            Experience.NewPage.IsRoot ?
+                                                            "Home page (default)"
+                                                            :
+                                                            "set this page as home page"
+                                                        }
+                                                    </span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -688,20 +691,11 @@ class ExperiencePages extends Component {
                                         <PhoneTarget />
                                     </div>
                                 </div>
-                                <div className={!Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
-                                    style={pageNumContainerStyle}>
+                                <div style={pageNumContainerStyle}>
                                     <div style={tableContainerStyle}>
                                         <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                            <p style={pageNumStyle}>{Experience.NewPage.Title}<span>
-                                                {
-                                                    Experience.NewPage.IsRoot ?
-                                                        <div style={rootIndicatorContainerStyle}>
-                                                            <Star style={rootIndicatorIconStyle} />
-                                                        </div>
-                                                        :
-                                                        null
-                                                }
-                                            </span></p>
+                                            <p className={!Experience.IsPageCarouselMenuOpen ? 'dx_opacity_visible dx_flow' : 'dx_opacity_hidden dx_flow'}
+                                                style={pageNumStyle}>{Experience.NewPage.Title}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -722,38 +716,17 @@ class ExperiencePages extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={midControlContainerStyle}>
-                                        <div style={tableContainerStyle}>
-                                            <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
-                                                <a
-                                                    style={midBtnContainerStyle}
-                                                    className="dx_exp_view_mode dx_tool_tip"
-                                                >
-                                                    <img
-                                                        style={controlIconStyle}
-                                                        src={require('../../../../../assets/images/build_off_icon.png')} />
-                                                    <span class="dx_tool_tip_text">PREVIEW</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div style={rightControlContainerStyle}>
                                         <div style={tableContainerStyle}>
                                             <div style={Object.assign({}, txtCenterStyle, tableWrapperStyle)}>
                                                 <a
                                                     style={rightBtnContainerStyle}
                                                     className="dx_exp_view_mode dx_tool_tip"
-                                                    onClick={() => this.handleSetRootPage()}
                                                 >
                                                     <img
                                                         style={controlIconStyle}
-                                                        src={
-                                                            Experience.NewPage.IsRoot ?
-                                                                require('../../../../../assets/images/eye_on_icon.png')
-                                                                :
-                                                                require('../../../../../assets/images/eye_off_icon.png')
-                                                        } />
-                                                    <span class="dx_tool_tip_text">SET ROOT</span>
+                                                        src={require('../../../../../assets/images/eye_on_icon.png')} />
+                                                    <span class="dx_tool_tip_text">PREVIEW</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -941,26 +914,28 @@ const styles = {
         boxSizing: 'border-box',
     },
     pageNumContainerStyle: {
+        position: 'relative',
         height: 24,
+        width: 320,
+        margin: '0 auto',
+    },
+    rootIndicatorContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        height: 24,
+        width: 24,
+        cursor: 'pointer',
+    },
+    rootIndicatorStyle: {
+        width: 24,
+        color: colors.orangeColor
     },
     pageNumStyle: {
         textAlign: 'center',
         fontSize: fonts.h4,
         color: colors.lightGreyColor,
         margin: 0
-    },
-    rootIndicatorContainerStyle: {
-        display: 'inline-block',
-        position: 'relative',
-        height: 18,
-        width: 24,
-    },
-    rootIndicatorIconStyle: {
-        fontSize: 18,
-        color: colors.blackColor,
-        position: 'absolute',
-        top: 4,
-        left: 3
     },
     controlContainerStyle: {
         height: 48,
@@ -974,17 +949,6 @@ const styles = {
         flex: 1,
     },
     leftBtnContainerStyle: {
-        height: 48,
-        width: 48,
-        margin: '0 auto',
-        borderRadius: 6,
-        display: 'block',
-        cursor: 'pointer'
-    },
-    midControlContainerStyle: {
-        flex: 1,
-    },
-    midBtnContainerStyle: {
         height: 48,
         width: 48,
         margin: '0 auto',
@@ -1037,7 +1001,7 @@ const styles = {
         fontSize: 24,
         position: 'absolute',
         right: 0,
-        top: -3
+        top: -6
     },
     carouselSlideContainerStyle: {
         position: 'relative',

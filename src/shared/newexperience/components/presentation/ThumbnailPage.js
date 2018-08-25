@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// Libraries
+import Home from '@material-ui/icons/Home';
+
 // components
 import ThumbnailPhoneElement from '../../../components/dxPage/ThumbnailPhoneElement';
 
@@ -43,8 +46,10 @@ class ThumbnailPage extends Component {
     render() {
 
         const {
-            rootPageContainerStyle,
             mainContainerStyle,
+            rootIndicatorContainerStyle,
+            rootIndicatorWrapperStyle,
+            rootIndicatorStyle,
             closeContainerStyle,
             closeIconStyle,
             contentContainerStyle,
@@ -63,6 +68,16 @@ class ThumbnailPage extends Component {
                 style={mainContainerStyle}
                 onClick={() => this.props.handleClickActivePage()}
             >
+                {
+                    isRoot ?
+                        <div style={rootIndicatorContainerStyle}>
+                            <div style={rootIndicatorWrapperStyle}>
+                                <Home style={rootIndicatorStyle} />
+                            </div>
+                        </div>
+                        :
+                        null
+                }
                 <div
                     className="dx_hover_btn"
                     style={closeContainerStyle}
@@ -73,7 +88,7 @@ class ThumbnailPage extends Component {
                         src={require('../../../../../assets/images/close_button.png')} />
                 </div>
                 <div
-                    style={Object.assign({}, contentContainerStyle, isRoot ? rootPageContainerStyle : null)}
+                    style={contentContainerStyle}
                 >
                     {this.renderPhoneElementSection()}
                 </div>
@@ -89,21 +104,34 @@ class ThumbnailPage extends Component {
 
 const styles = {
 
-    rootPageContainerStyle: {
-        boxShadow: `0px 0px 48px 9px ${colors.greenColor}`
-    },
     mainContainerStyle: {
         position: 'relative',
-        height: 180,
+        height: 156,
         width: 120,
         margin: '0 auto',
-        marginTop: 12,
+        paddingTop: 24,
         cursor: 'pointer',
+    },
+    rootIndicatorContainerStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: 24,
+        width: '100%',
+    },
+    rootIndicatorWrapperStyle: {
+        width: 24,
+        margin: '0 auto',
+        cursor: 'pointer',
+    },
+    rootIndicatorStyle: {
+        width: 24,
+        color: colors.orangeColor
     },
     closeContainerStyle: {
         position: 'absolute',
         right: -9,
-        top: -9,
+        top: 15,
         width: 18,
         height: 18,
         zIndex: 99,
@@ -127,7 +155,6 @@ const styles = {
         overflow: 'hidden'
     },
     titleContainerStyle: {
-        height: 24,
         width: 120,
     },
     titleStyle: {

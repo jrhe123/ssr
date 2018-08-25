@@ -89,9 +89,15 @@ body{
     width: 60px;
     left: -18px;
 }
+.dx_root_indicator .dx_tool_tip_text{
+    width: 150px;
+    top: -33px;
+    left: -78px;
+}
 .dx_tool_bar_color:hover .dx_tool_tip_text,
 .dx_tool_bar_bgcolor:hover .dx_tool_tip_text,
-.dx_exp_view_mode:hover .dx_tool_tip_text
+.dx_exp_view_mode:hover .dx_tool_tip_text,
+.dx_root_indicator:hover .dx_tool_tip_text
 {
     visibility: visible;
     background-color: rgba(0, 0, 0, 0.6);
