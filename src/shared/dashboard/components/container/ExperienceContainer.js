@@ -35,6 +35,7 @@ import sizes from '../../../styles/sizes';
 class ExperienceContainer extends Component {
 
     state = {
+        experienceType: '',
         newExperienceModalOpen: false,
         isModalOpen: false,
         modalType: 'DELETE',
@@ -55,13 +56,8 @@ class ExperienceContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.dxFetchExperienceAction();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.IsReloadExperience && !this.props.IsReloadExperience) {
-            this.props.dxFetchExperienceAction();
-        }
+        this.props.dxFetchExperienceAction('CARD_ONLY');
+        this.props.dxFetchExperienceAction('CARD_AND_PAGES');
     }
 
     handleCreateExperience = () => {
@@ -83,8 +79,8 @@ class ExperienceContainer extends Component {
         this.props.history.push(`/new_experience/${val}`);
     }
 
-    handleLoadHtml = (experienceGUID, pageGUID, sectionGUID, guid) => {
-        this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid);
+    handleLoadHtml = (experienceGUID, pageGUID, sectionGUID, guid, experienceType) => {
+        this.props.dxHtmlFetchAction(experienceGUID, pageGUID, sectionGUID, guid, experienceType);
     }
 
     handleConfirmFormChange = (val) => {
@@ -129,9 +125,10 @@ class ExperienceContainer extends Component {
         }
     }
 
-    handleRemoveExperience = (experienceGUID, confirmToRemove) => {
+    handleRemoveExperience = (experienceGUID, confirmToRemove, type) => {
         if (!confirmToRemove) {
             this.setState({
+                experienceType: type,
                 isModalOpen: true,
                 modalType: 'CONFIRM_DELETE',
                 modalDesc: null,
@@ -143,6 +140,7 @@ class ExperienceContainer extends Component {
             return;
         }
         this.setState({
+            experienceType: type,
             isModalOpen: true,
             modalType: 'DELETE',
             modalTitle: 'Confirm Delete Experience',
@@ -158,9 +156,10 @@ class ExperienceContainer extends Component {
             isModalOpen: false
         });
         const {
-            targetExperienceGUID
+            targetExperienceGUID,
+            experienceType
         } = this.state;
-        this.props.dxDeleteExperienceAction(targetExperienceGUID);
+        this.props.dxDeleteExperienceAction(targetExperienceGUID, experienceType);
     }
 
     handleCloseModal = () => {
@@ -193,7 +192,10 @@ class ExperienceContainer extends Component {
 
         const {
             TotalExperienceRecord,
-            Experiences,
+            TotalCardOnlyExperienceRecord,
+            TotalCardAndPagesExperienceRecord,
+            CardOnlyExperiences,
+            CardAndPagesExperiences,
         } = this.props;
 
         const {
@@ -243,7 +245,7 @@ class ExperienceContainer extends Component {
         return (
             <div>
                 {
-                    Experiences.length ?
+                    TotalExperienceRecord ?
                         (
                             <div style={mainContainerStyle}>
                                 <div style={topBarContainerStyle}>
@@ -279,7 +281,7 @@ class ExperienceContainer extends Component {
                                                 <div style={experienceNumberWrapperStyle}>
                                                     <div style={tableContainerStyleV2}>
                                                         <div style={tableWrapperStyleV2}>
-                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card only</p>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardOnlyExperienceRecord}</span> Card only</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -338,11 +340,11 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
-                                            experiences={Experiences}
+                                            experiences={CardOnlyExperiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
-                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
+                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid, 'CARD_ONLY')}
                                             handleEditExperience={(experienceGUID, confirmToEdit) => this.handleEditExperience(experienceGUID, confirmToEdit)}
-                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove)}
+                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove, 'CARD_ONLY')}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
@@ -355,7 +357,7 @@ class ExperienceContainer extends Component {
                                                 <div style={experienceNumberWrapperStyle}>
                                                     <div style={tableContainerStyleV2}>
                                                         <div style={tableWrapperStyleV2}>
-                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card + Page(s)</p>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardAndPagesExperienceRecord}</span> Card + Page(s)</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -415,11 +417,11 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
-                                            experiences={Experiences}
+                                            experiences={CardAndPagesExperiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
-                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
+                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid, 'CARD_AND_PAGES')}
                                             handleEditExperience={(experienceGUID, confirmToEdit) => this.handleEditExperience(experienceGUID, confirmToEdit)}
-                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove)}
+                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove, 'CARD_AND_PAGES')}
                                             handleErrorMsg={(msg) => { }}
                                         />
                                     </div>
@@ -671,8 +673,10 @@ const stateToProps = (state) => {
     return {
         history: state.root.history,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
-        Experiences: state.dashboard.Experiences,
-        IsReloadExperience: state.dashboard.IsReloadExperience,
+        TotalCardOnlyExperienceRecord: state.dashboard.TotalCardOnlyExperienceRecord,
+        TotalCardAndPagesExperienceRecord: state.dashboard.TotalCardAndPagesExperienceRecord,
+        CardOnlyExperiences: state.dashboard.CardOnlyExperiences,
+        CardAndPagesExperiences: state.dashboard.CardAndPagesExperiences,
     }
 }
 

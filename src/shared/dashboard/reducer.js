@@ -28,9 +28,13 @@ import {
 const initialState = {
     NaviIndex: 0,
 
-    IsReloadExperience: false,
-    TotalExperienceRecord: 0,
     Experiences: [],
+
+    TotalExperienceRecord: 0,
+    TotalCardOnlyExperienceRecord: 0,
+    TotalCardAndPagesExperienceRecord: 0,
+    CardOnlyExperiences: [],
+    CardAndPagesExperiences: [],
 
     TotalChannelRecord: 0,
     ExperienceChannels: [],
@@ -49,7 +53,8 @@ const initialState = {
 const dashboardReducer = (previousState = initialState, { type, payload }) => {
 
     let updated = Object.assign({}, previousState);
-    let tmpExperiences = Object.assign([], updated.Experiences);
+    let tmpCardOnlyExperiences = Object.assign([], updated.CardOnlyExperiences);
+    let tmpCardAndPagesExperiences = Object.assign([], updated.CardAndPagesExperiences);
     let tmpExperienceChannels = Object.assign([], updated.ExperienceChannels);
     let tmpStreamActiveChannels = Object.assign([], updated.StreamActiveChannels);
     let tmpCurrentStreamChannel = Object.assign({}, updated.CurrentStreamChannel);
@@ -68,12 +73,21 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case HTML_FETCH__SUCCEEDED:
-            tmpExperience = find_experience_obj_by_guid(updated.Experiences, payload.experienceGUID);
-            tmpPage = find_page_obj_by_guid(tmpExperience.experience.ExperiencePages, payload.pageGUID);
-            tmpSection = find_section_obj_by_guid(tmpPage.page.Sections, payload.sectionGUID);
-            tmpPage.page.Sections[tmpSection.index].HtmlContent = payload.html;
-            tmpExperiences[tmpExperience.index] = tmpExperience.experience;
-            updated.Experiences = tmpExperiences;
+            if (payload.experienceType == 'CARD_ONLY') {
+                tmpExperience = find_experience_obj_by_guid(updated.CardOnlyExperiences, payload.experienceGUID);
+                tmpPage = find_page_obj_by_guid(tmpExperience.experience.ExperiencePages, payload.pageGUID);
+                tmpSection = find_section_obj_by_guid(tmpPage.page.Sections, payload.sectionGUID);
+                tmpPage.page.Sections[tmpSection.index].HtmlContent = payload.html;
+                tmpCardOnlyExperiences[tmpExperience.index] = tmpExperience.experience;
+                updated.CardOnlyExperiences = tmpCardOnlyExperiences;
+            } else if (payload.experienceType == 'CARD_AND_PAGES') {
+                tmpExperience = find_experience_obj_by_guid(updated.CardAndPagesExperiences, payload.experienceGUID);
+                tmpPage = find_page_obj_by_guid(tmpExperience.experience.ExperiencePages, payload.pageGUID);
+                tmpSection = find_section_obj_by_guid(tmpPage.page.Sections, payload.sectionGUID);
+                tmpPage.page.Sections[tmpSection.index].HtmlContent = payload.html;
+                tmpCardAndPagesExperiences[tmpExperience.index] = tmpExperience.experience;
+                updated.CardAndPagesExperiences = tmpCardAndPagesExperiences;
+            }
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:
@@ -88,13 +102,28 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:
-            updated.TotalExperienceRecord = payload.totalRecord;
-            updated.Experiences = payload.experiences;
-            updated.IsReloadExperience = false;
+            if (payload.experienceType == 'CARD_ONLY') {
+                updated.TotalCardOnlyExperienceRecord = payload.totalRecord;
+                updated.CardOnlyExperiences = payload.experiences;
+            } else if (payload.experienceType == 'CARD_AND_PAGES') {
+                updated.TotalCardAndPagesExperienceRecord = payload.totalRecord;
+                updated.CardAndPagesExperiences = payload.experiences;
+            }
+            updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
             return updated;
 
         case EXPERIENCE_DELETE__SUCCEEDED:
-            updated.IsReloadExperience = true;
+            if (payload.experienceType == 'CARD_ONLY') {
+                tmpExperience = find_experience_obj_by_guid(updated.CardOnlyExperiences, payload.experienceGUID);
+                tmpCardOnlyExperiences.splice(tmpExperience.index, 1);
+                updated.CardOnlyExperiences = tmpCardOnlyExperiences;
+                updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
+            } else if (payload.experienceType == 'CARD_AND_PAGES') {
+                tmpExperience = find_experience_obj_by_guid(updated.CardAndPagesExperiences, payload.experienceGUID);
+                tmpCardAndPagesExperiences.splice(tmpExperience.index, 1);
+                updated.CardAndPagesExperiences = tmpCardOnlyExperiences;
+                updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
+            }
             return updated;
 
         case STREAM_CHANNEL_FETCH__SUCCEEDED:

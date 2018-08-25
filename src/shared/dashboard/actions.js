@@ -50,7 +50,7 @@ export const dxUpdateChannel = (channel) => {
     }
 }
 
-export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid) => {
+export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid, experienceType) => {
     return {
         type: HTML_FETCH_REQUESTED,
         payload: {
@@ -58,22 +58,26 @@ export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid) => {
             pageGUID,
             sectionGUID,
             guid,
+            experienceType,
         },
     }
 }
 
-export const dxFetchExperience = () => {
+export const dxFetchExperience = (experienceType) => {
     return {
         type: EXPERIENCE_FETCH_REQUESTED,
-        payload: {},
+        payload: {
+            experienceType
+        },
     }
 }
 
-export const dxDeleteExperience = (experienceGUID) => {
+export const dxDeleteExperience = (experienceGUID, experienceType) => {
     return {
         type: EXPERIENCE_DELETE_REQUESTED,
         payload: {
-            experienceGUID
+            experienceGUID,
+            experienceType,
         },
     }
 }

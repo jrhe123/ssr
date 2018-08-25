@@ -221,6 +221,7 @@ export function* dxHtmlFetch(action) {
             experienceGUID,
             pageGUID,
             sectionGUID,
+            experienceType,
         } = action.payload;
         yield put({
             type: HTML_FETCH__SUCCEEDED,
@@ -228,7 +229,8 @@ export function* dxHtmlFetch(action) {
                 experienceGUID,
                 pageGUID,
                 sectionGUID,
-                html: response
+                html: response,
+                experienceType,
             },
         });
     } catch (error) {
@@ -244,19 +246,27 @@ export function* dxHtmlFetchSaga() {
 }
 
 // Fetch experience
-export const dxFetchExperienceUrl = () => {
+export const dxFetchExperienceUrl = (payload) => {
+    let searchParams = {};
+    if (payload.experienceType == 'CARD_ONLY'
+        || payload.experienceType == 'CARD_AND_PAGES') {
+        searchParams = {
+            SearchType: "EXPERIENCE_TYPE",
+            SearchField: payload.experienceType
+        }
+    }
     return (
         apiManager.dxApi(`/experience/list`, {
             Limit: "3",
             Offset: "0",
-            Extra: {},
+            Extra: searchParams,
         }, true)
     )
 }
 
-export function* dxFetchExperience() {
+export function* dxFetchExperience(action) {
     try {
-        const response = yield call(dxFetchExperienceUrl);
+        const response = yield call(dxFetchExperienceUrl, action.payload);
         let { Confirmation, Response, Message } = response;
         if (Confirmation !== 'SUCCESS') {
             yield put({
@@ -269,6 +279,7 @@ export function* dxFetchExperience() {
             yield put({
                 type: EXPERIENCE_FETCH__SUCCEEDED,
                 payload: {
+                    experienceType: action.payload.experienceType,
                     totalRecord: Response.TotalRecord,
                     experiences: Response.Experiences,
                 },
@@ -314,6 +325,7 @@ export function* dxDeleteExperience(action) {
                 type: EXPERIENCE_DELETE__SUCCEEDED,
                 payload: {
                     experienceGUID: action.payload.experienceGUID,
+                    experienceType: action.payload.experienceType,
                     message: 'Experience has been deleted'
                 },
             });
