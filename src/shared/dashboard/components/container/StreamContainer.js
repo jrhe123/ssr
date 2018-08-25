@@ -405,7 +405,7 @@ class StreamContainer extends Component {
                                             onClick={() => this.handleToggleChannelMenu()}
                                         >{this.state.channelFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                     }
-                                    align={'right'}
+                                    align={'center'}
                                     size={'md'}
                                 >
                                     <div style={Object.assign({}, channelFilterOptionContainerStyle)}>

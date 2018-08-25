@@ -4,12 +4,10 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import DropdownMenu from 'react-dd-menu';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Lock from '@material-ui/icons/Lock';
 import Language from '@material-ui/icons/Language';
 import Fingerprint from '@material-ui/icons/Fingerprint';
 import Edit from '@material-ui/icons/Edit';
 import FlashOn from '@material-ui/icons/FlashOn';
-import FlashOff from '@material-ui/icons/FlashOff';
 
 // constants
 import colors from '../../../../styles/colors';
@@ -155,24 +153,24 @@ class ChannelList extends Component {
                                 >
                                     <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
                                         <div style={channelTypeFilterOptionIconContainerStyle}>
-                                            icon
+                                            <Language style={channelTypeFilterOptionIconStyle} />
                                         </div>
                                         <div style={channelTypeFilterOptionTextContainerStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    text
+                                                    <p style={channelTypeFilterOptionTextStyle}>Public channel</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style={Object.assign({}, channelTypeFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
                                         <div style={channelTypeFilterOptionIconContainerStyle}>
-                                            icon
+                                            <Fingerprint style={channelTypeFilterOptionIconStyle} />
                                         </div>
                                         <div style={channelTypeFilterOptionTextContainerStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    text
+                                                    <p style={channelTypeFilterOptionTextStyle}>Password channel</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,24 +202,24 @@ class ChannelList extends Component {
                                 >
                                     <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
                                         <div style={channelStatusFilterOptionIconContainerStyle}>
-                                            icon
+                                            <FlashOn style={Object.assign({}, channelStatusFilterOptionIconStyle, { color: colors.greenColor })} />
                                         </div>
                                         <div style={channelStatusFilterOptionTextContainerStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    text
+                                                    <p style={channelTypeFilterOptionTextStyle}>Live</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style={Object.assign({}, channelStatusFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
                                         <div style={channelStatusFilterOptionIconContainerStyle}>
-                                            icon
+                                            <Edit style={channelStatusFilterOptionIconStyle} />
                                         </div>
                                         <div style={channelStatusFilterOptionTextContainerStyle}>
                                             <div style={tableContainerStyle}>
                                                 <div style={tableWrapperStyle}>
-                                                    text
+                                                    <p style={channelTypeFilterOptionTextStyle}>Draft</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -382,7 +380,8 @@ const styles = {
     channelTypeFilterOptionTextStyle: {
         margin: 0,
         fontSize: fonts.h4,
-        color: colors.blackColor
+        color: colors.blackColor,
+        textAlign: 'center',
     },
 
 
