@@ -27,11 +27,10 @@ class ExperienceCase extends Component {
         this.setState({ isMenuOpen: !this.state.isMenuOpen });
     }
 
-    render() {
-
+    renderBottomToolBar = () => {
+        
         const {
             experience,
-            enableEditExperience,
         } = this.props;
 
         const {
@@ -46,63 +45,93 @@ class ExperienceCase extends Component {
         } = styles;
 
         return (
-            <div>
-                <DxCard
-                    enableShadow={false}
-                    isWithTitle={false}
-                    isWithBottomBar={false}
-                    isCenterCard={false}
-                    isEditable={false}
-                    isClickable={false}
-                    isVideoInsertClickable={false}
-                    cardTitle={experience.ExperienceTitle}
-                    template={experience.ExperienceCard}
-                    handleVideoError={(msg) => this.props.handleErrorMsg(msg)}
-                />
-                {
-                    experience.ExperienceType == 1 ?
-                        <DxPage
-                            pdfWidth={264}
-                            pages={experience.ExperiencePages}
-                            displayPageNumber={false}
-                            isWithBottomBar={false}
-                            isLoadHtml={true}
-                            handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(pageGUID, sectionGUID, guid)}
-                        />
-                        :
-                        null
-                }
-                <div style={bottomControlContainerStyle}>
-                    <div style={labelContainerStyle}>
-                        <div style={tableContainerStyle}>
-                            <div style={tableWrapperStyle}>
-                                <p style={bottomLabelStyle}>
-                                    {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={controlContainerStyle}>
-                        <div style={controlWrapperStyle}>
-                            <DropdownMenu
-                                className="dx_card_template_bottom_bar_menu"
-                                isOpen={this.state.isMenuOpen}
-                                close={() => this.handleMenuClose()}
-                                toggle={
-                                    <MoreHoriz
-                                        onClick={() => this.handleToggleBurger()}
-                                        style={editBurgerStyle} />
-                                }
-                                align='right'
-                                closeOnInsideClick={false}
-                            >
-                                <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
-                                <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
-                            </DropdownMenu>
+            <div style={bottomControlContainerStyle}>
+                <div style={labelContainerStyle}>
+                    <div style={tableContainerStyle}>
+                        <div style={tableWrapperStyle}>
+                            <p style={bottomLabelStyle}>
+                                {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
+                            </p>
                         </div>
                     </div>
                 </div>
+                <div style={controlContainerStyle}>
+                    <div style={controlWrapperStyle}>
+                        <DropdownMenu
+                            className="dx_card_template_bottom_bar_menu"
+                            isOpen={this.state.isMenuOpen}
+                            close={() => this.handleMenuClose()}
+                            toggle={
+                                <MoreHoriz
+                                    onClick={() => this.handleToggleBurger()}
+                                    style={editBurgerStyle} />
+                            }
+                            align='right'
+                            closeOnInsideClick={false}
+                        >
+                            <Button onClick={() => this.props.handleEditExperience()}>Edit</Button>
+                            <Button onClick={() => this.props.handleRemoveExperience()}>Remove</Button>
+                        </DropdownMenu>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
+    render() {
+
+        const {
+            experience,
+        } = this.props;
+
+        const {
+            mainContainerStyle,
+            dxPageContainerStyle,
+        } = styles;
+
+        return (
+            <div style={mainContainerStyle}>
+                <div className="dx_card">
+                    <DxCard
+                        enableShadow={false}
+                        isWithTitle={false}
+                        isWithBottomBar={false}
+                        isCenterCard={false}
+                        isEditable={false}
+                        isClickable={false}
+                        isVideoInsertClickable={false}
+                        cardTitle={experience.ExperienceTitle}
+                        template={experience.ExperienceCard}
+                        handleVideoError={(msg) => this.props.handleErrorMsg(msg)}
+                    />
+                    {
+                        experience.ExperienceType == 0 ?
+                            this.renderBottomToolBar()
+                            :
+                            null
+                    }
+                </div>
+                {
+                    experience.ExperienceType == 1 ?
+                        <div 
+                            style={dxPageContainerStyle}
+                            className="dx_card"
+                        >
+                            <DxPage
+                                pdfWidth={264}
+                                pages={experience.ExperiencePages}
+                                displayPageNumber={false}
+                                isWithBottomBar={false}
+                                isLoadHtml={true}
+                                handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(pageGUID, sectionGUID, guid)}
+                            />
+                            {
+                                this.renderBottomToolBar()
+                            }
+                        </div>
+                        :
+                        null
+                }
             </div>
         )
     }
@@ -119,6 +148,12 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
+    },
+    mainContainerStyle: {
+        backgroundColor: 'transparent',
+    },
+    dxPageContainerStyle: {
+        marginTop: 36,
     },
     bottomControlContainerStyle: {
         height: 36,

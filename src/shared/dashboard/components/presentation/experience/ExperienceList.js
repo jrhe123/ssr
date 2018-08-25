@@ -47,10 +47,7 @@ class ExperienceList extends Component {
                 {
                     experiences.map((experience, index) => (
                         <div style={experienceContainerStyle}>
-                            <div
-                                className="dx_card"
-                                style={experienceWrapperStyle}
-                            >
+                            <div style={experienceWrapperStyle}>
                                 <ExperienceCase
                                     experience={experience}
                                     handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(experience.ExperienceGUID, pageGUID, sectionGUID, guid)}
