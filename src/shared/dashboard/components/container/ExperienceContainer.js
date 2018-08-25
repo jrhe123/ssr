@@ -166,7 +166,9 @@ class ExperienceContainer extends Component {
 
         const {
             tableContainerStyle,
+            tableContainerStyleV2,
             tableWrapperStyle,
+            tableWrapperStyleV2,
             newContentContainerStyle,
             imgStyle,
             labelStyle,
@@ -176,11 +178,17 @@ class ExperienceContainer extends Component {
             topBarContainerStyle,
             topBarWrapperStyle,
             searchContainerStyle,
+            midLabelContainerStyle,
+            midLabelStyle,
+            capitalMidLabelStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
+            experienceTypeIndicatorStyle,
+            experienceNumberWrapperStyle,
             experienceNumberStyle,
+            capitalExperienceNumberStyle,
             experienceListWrapperStyle,
 
             confirmModalTitleContainerStyle,
@@ -202,6 +210,13 @@ class ExperienceContainer extends Component {
                                                 placeholder="search for card(s) and page(s)"
                                             />
                                         </div>
+                                        <div style={midLabelContainerStyle}>
+                                            <div style={tableContainerStyleV2}>
+                                                <div style={tableWrapperStyleV2}>
+                                                    <p style={midLabelStyle}><span style={capitalMidLabelStyle}>{TotalExperienceRecord}</span> Experience(s)</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div style={addBtnContainerStyle}>
                                             <Button
                                                 onClick={() => this.handleCreateExperience()}
@@ -213,10 +228,40 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
-
                                     <div style={experienceSortContainerStyle}>
                                         <div style={experienceNumberContainerStyle}>
-                                            <p style={experienceNumberStyle}>{TotalExperienceRecord} Experience(s)</p>
+                                            <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_card.png')} />
+                                            <div style={experienceNumberWrapperStyle}>
+                                                <div style={tableContainerStyleV2}>
+                                                    <div style={tableWrapperStyleV2}>
+                                                        <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card only</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={experienceListWrapperStyle}>
+                                        <ExperienceList
+                                            experiences={Experiences}
+                                            handleCreateExpClick={() => this.handleCreateExperience()}
+                                            handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid)}
+                                            handleEditExperience={(experienceGUID, confirmToEdit) => this.handleEditExperience(experienceGUID, confirmToEdit)}
+                                            handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove)}
+                                            handleErrorMsg={(msg) => { }}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={experienceListContainerStyle}>
+                                    <div style={experienceSortContainerStyle}>
+                                        <div style={experienceNumberContainerStyle}>
+                                            <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_pages.png')} />
+                                            <div style={experienceNumberWrapperStyle}>
+                                                <div style={tableContainerStyleV2}>
+                                                    <div style={tableWrapperStyleV2}>
+                                                        <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card + Page(s)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
@@ -297,10 +342,19 @@ const styles = {
         width: '100%',
         height: `calc(100vh - ${sizes.headerHeight})`,
     },
+    tableContainerStyleV2: {
+        display: 'table',
+        width: '100%',
+        height: `100%`,
+    },
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
         textAlign: 'center',
+    },
+    tableWrapperStyleV2: {
+        display: 'table-cell',
+        verticalAlign: 'middle',
     },
     newContentContainerStyle: {
         height: `calc(100vh - ${sizes.headerHeight})`,
@@ -334,6 +388,18 @@ const styles = {
     searchContainerStyle: {
         flex: 1,
     },
+    midLabelContainerStyle: {
+        flex: 1,
+    },
+    midLabelStyle: {
+        color: colors.labelColor,
+        margin: 0,
+        fontSize: fonts.h3,
+    },
+    capitalMidLabelStyle: {
+        fontSize: fonts.h1,
+        fontWeight: 'bold'
+    },
     addBtnContainerStyle: {
         flex: '132px 0 0'
     },
@@ -352,12 +418,26 @@ const styles = {
         borderColor: colors.borderColor
     },
     experienceNumberContainerStyle: {
-
+        height: 54,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    experienceTypeIndicatorStyle: {
+        flex: '36px 0 0',
+        height: 54,
+    },
+    experienceNumberWrapperStyle: {
+        flex: 1,
+        paddingLeft: 12,
     },
     experienceNumberStyle: {
         color: colors.labelColor,
-        fontSize: fonts.h2,
+        fontSize: fonts.h3,
         margin: 0,
+    },
+    capitalExperienceNumberStyle: {
+        fontSize: fonts.h1,
+        fontWeight: 'bold'
     },
     experienceListWrapperStyle: {
         marginTop: 24,
