@@ -266,6 +266,7 @@ class StreamContainer extends Component {
             channelDropdownWrapperStyle,
             channelDropdownBtnStyle,
             channelFilterOptionContainerStyle,
+            channelFilterOptionWrapperStyle,
             channelFilterOptionIconContainerStyle,
             channelFilterOptionIconStyle,
             channelFilterOptionTextContainerStyle,
@@ -409,25 +410,29 @@ class StreamContainer extends Component {
                                     size={'md'}
                                 >
                                     <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
-                                        <div style={channelFilterOptionIconContainerStyle}>
-                                            <Language style={channelFilterOptionIconStyle} />
-                                        </div>
-                                        <div style={channelFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelFilterOptionTextStyle}>Public channel</p>
+                                        <div style={channelFilterOptionWrapperStyle}>
+                                            <div style={channelFilterOptionIconContainerStyle}>
+                                                <Language style={channelFilterOptionIconStyle} />
+                                            </div>
+                                            <div style={channelFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelFilterOptionTextStyle}>Public channel</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style={Object.assign({}, channelFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
-                                        <div style={channelFilterOptionIconContainerStyle}>
-                                            <Fingerprint style={channelFilterOptionIconStyle} />
-                                        </div>
-                                        <div style={channelFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelFilterOptionTextStyle}>Password channel</p>
+                                        <div style={channelFilterOptionWrapperStyle}>
+                                            <div style={channelFilterOptionIconContainerStyle}>
+                                                <Fingerprint style={channelFilterOptionIconStyle} />
+                                            </div>
+                                            <div style={channelFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelFilterOptionTextStyle}>Password channel</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -725,16 +730,19 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         height: 36,
-        paddingLeft: 6,
-        paddingRight: 6,
         cursor: 'pointer',
         border: '1px solid',
         borderTop: 'none',
         borderColor: colors.borderColor,
         boxSizing: 'border-box'
     },
+    channelFilterOptionWrapperStyle: {
+        display: 'inline-block',
+        margin: '0 auto',
+    },
     channelFilterOptionIconContainerStyle: {
-        flex: '14px 0 0',
+        float: 'left',
+        width: 14,
         height: 36,
         position: 'relative',
     },
@@ -746,7 +754,7 @@ const styles = {
         height: 14,
     },
     channelFilterOptionTextContainerStyle: {
-        flex: 1,
+        float: 'left',
         height: 36,
         paddingLeft: 3,
     },
