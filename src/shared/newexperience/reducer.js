@@ -196,6 +196,25 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             return updated;
 
         case EXPERIENCE_CREATE__SUCCEEDED:
+            tmpExperience = {
+                Type: '0',
+                Index: '0',
+                IsCardTemplateMenuOpen: true,
+                IsCardTemplateSaved: false,
+                CardTemplate: null,
+                Card: null,
+                IsPageTemplateMenuOpen: true,
+                IsPagesSaved: false,
+                ActivePageTemplateOptionIndex: 0,
+                IsPageCarouselMenuOpen: false,
+                ExperienceTitle: 'New Experience',
+                CardTitle: 'Card 1',
+                Tools: [],
+                Pages: [],
+                NewPage: Object.assign({}, templateNewPage),
+                ActivePageSectionIndex: 0,
+            }
+            updated.Experience = tmpExperience;
             updated.IsCompleted = true;
             return updated;
 
@@ -487,8 +506,8 @@ const newexperienceReducer = (previousState = initialState, { type, payload }) =
             tmpNewPageSections[tmpSectionIndex].IsDeleted = true;
             // case: BUTTON
             if ((tmpNewPageSections[tmpSectionIndex].Type == 'BUTTON'
-                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON'
-                    || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON_2')
+                || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON'
+                || tmpNewPageSections[tmpSectionIndex].Type == 'AD_BUTTON_2')
                 && tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID != null) {
                 tmpConnectedPage = find_page_by_guid(tmpNewPageSections[tmpSectionIndex].ConnectedPageGUID, tmpPages);
                 tmpConnectedPage.page.IsConnected = false;
@@ -831,8 +850,8 @@ const disconnect_pages_by_sections = (sections, pages) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i];
         if ((section.Type == 'BUTTON'
-                || section.Type == 'AD_BUTTON'
-                || section.Type == 'AD_BUTTON_2')
+            || section.Type == 'AD_BUTTON'
+            || section.Type == 'AD_BUTTON_2')
             && section.ConnectedPageGUID) {
             let item = find_page_by_guid(section.ConnectedPageGUID, pages);
             item.page.IsConnected = false;
