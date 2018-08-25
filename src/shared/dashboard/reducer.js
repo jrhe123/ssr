@@ -121,7 +121,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             } else if (payload.experienceType == 'CARD_AND_PAGES') {
                 tmpExperience = find_experience_obj_by_guid(updated.CardAndPagesExperiences, payload.experienceGUID);
                 tmpCardAndPagesExperiences.splice(tmpExperience.index, 1);
-                updated.CardAndPagesExperiences = tmpCardOnlyExperiences;
+                updated.CardAndPagesExperiences = tmpCardAndPagesExperiences;
                 updated.TotalExperienceRecord = updated.TotalExperienceRecord - 1;
             }
             return updated;
