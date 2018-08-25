@@ -9,6 +9,10 @@ import ConfirmForm from '../presentation/experience/ConfirmForm';
 
 // Libraries
 import Button from '@material-ui/core/Button';
+import DropdownMenu from 'react-dd-menu';
+import Edit from '@material-ui/icons/Edit';
+import FlashOn from '@material-ui/icons/FlashOn';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 // redux
 import { connect } from 'react-redux';
@@ -39,7 +43,11 @@ class ExperienceContainer extends Component {
         isContentModal: false,
         isModalDanger: true,
         targetExperienceGUID: null,
-        confirmInput: null
+        confirmInput: null,
+
+        isCardAndPageExperienceMenuOpen: false,
+        cardAndPageExperienceFilter: 'ALL',
+        cardAndPageExperienceFilterLabel: 'All',
     }
 
     componentDidMount() {
@@ -157,6 +165,16 @@ class ExperienceContainer extends Component {
         })
     }
 
+    handleToggleCardAndPageExperienceMenu = () => {
+        this.setState({
+            isCardAndPageExperienceMenuOpen: !this.state.isCardAndPageExperienceMenuOpen
+        });
+    }
+
+    handleCloseCardAndPageExperienceMenu = () => {
+        this.setState({ isCardAndPageExperienceMenuOpen: false });
+    }
+
     render() {
 
         const {
@@ -183,6 +201,7 @@ class ExperienceContainer extends Component {
             capitalMidLabelStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
+            topSubBarContainerStyle,
             experienceSortContainerStyle,
             experienceNumberContainerStyle,
             experienceTypeIndicatorStyle,
@@ -190,6 +209,16 @@ class ExperienceContainer extends Component {
             experienceNumberStyle,
             capitalExperienceNumberStyle,
             experienceListWrapperStyle,
+
+            expandIconStyle,
+            experienceFilterContainerStyle,
+            cardAndPageExperienceDropdownBtnStyle,
+            cardAndPageExperienceFilterOptionContainerStyle,
+            cardAndPageExperienceFilterOptionWrapperStyle,
+            cardAndPageExperienceFilterOptionIconContainerStyle,
+            cardAndPageExperienceFilterOptionIconStyle,
+            cardAndPageExperienceFilterOptionTextContainerStyle,
+            cardAndPageExperienceFilterOptionTextStyle,
 
             confirmModalTitleContainerStyle,
             confirmModalTitleStyle,
@@ -228,16 +257,21 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
-                                    <div style={experienceSortContainerStyle}>
-                                        <div style={experienceNumberContainerStyle}>
-                                            <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_card.png')} />
-                                            <div style={experienceNumberWrapperStyle}>
-                                                <div style={tableContainerStyleV2}>
-                                                    <div style={tableWrapperStyleV2}>
-                                                        <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card only</p>
+                                    <div style={topSubBarContainerStyle}>
+                                        <div style={experienceSortContainerStyle}>
+                                            <div style={experienceNumberContainerStyle}>
+                                                <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_card.png')} />
+                                                <div style={experienceNumberWrapperStyle}>
+                                                    <div style={tableContainerStyleV2}>
+                                                        <div style={tableWrapperStyleV2}>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card only</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div style={experienceFilterContainerStyle}>
+                                            123
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
@@ -252,16 +286,62 @@ class ExperienceContainer extends Component {
                                     </div>
                                 </div>
                                 <div style={experienceListContainerStyle}>
-                                    <div style={experienceSortContainerStyle}>
-                                        <div style={experienceNumberContainerStyle}>
-                                            <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_pages.png')} />
-                                            <div style={experienceNumberWrapperStyle}>
-                                                <div style={tableContainerStyleV2}>
-                                                    <div style={tableWrapperStyleV2}>
-                                                        <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card + Page(s)</p>
+                                    <div style={topSubBarContainerStyle}>
+                                        <div style={experienceSortContainerStyle}>
+                                            <div style={experienceNumberContainerStyle}>
+                                                <img style={experienceTypeIndicatorStyle} src={require('../../../../../assets/images/exp_pages.png')} />
+                                                <div style={experienceNumberWrapperStyle}>
+                                                    <div style={tableContainerStyleV2}>
+                                                        <div style={tableWrapperStyleV2}>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalExperienceRecord}</span> Card + Page(s)</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div style={experienceFilterContainerStyle}>
+                                            <DropdownMenu
+                                                className="dx_channel_filter_menu"
+                                                isOpen={this.state.isCardAndPageExperienceMenuOpen}
+                                                close={this.handleCloseCardAndPageExperienceMenu}
+                                                toggle={
+                                                    <Button
+                                                        style={Object.assign({}, cardAndPageExperienceDropdownBtnStyle, !this.state.isCardAndPageExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
+                                                        onClick={() => this.handleToggleCardAndPageExperienceMenu()}
+                                                    >{this.state.cardAndPageExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                                }
+                                                align={'center'}
+                                                size={'md'}
+                                            >
+                                                <div style={Object.assign({}, cardAndPageExperienceFilterOptionContainerStyle)}>
+                                                    <div style={cardAndPageExperienceFilterOptionWrapperStyle}>
+                                                        <div style={cardAndPageExperienceFilterOptionIconContainerStyle}>
+                                                            <FlashOn style={cardAndPageExperienceFilterOptionIconStyle} />
+                                                        </div>
+                                                        <div style={cardAndPageExperienceFilterOptionTextContainerStyle}>
+                                                            <div style={tableContainerStyleV2}>
+                                                                <div style={tableWrapperStyleV2}>
+                                                                    <p style={cardAndPageExperienceFilterOptionTextStyle}>Live</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style={Object.assign({}, cardAndPageExperienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                                    <div style={cardAndPageExperienceFilterOptionWrapperStyle}>
+                                                        <div style={cardAndPageExperienceFilterOptionIconContainerStyle}>
+                                                            <Edit style={cardAndPageExperienceFilterOptionIconStyle} />
+                                                        </div>
+                                                        <div style={cardAndPageExperienceFilterOptionTextContainerStyle}>
+                                                            <div style={tableContainerStyleV2}>
+                                                                <div style={tableWrapperStyleV2}>
+                                                                    <p style={cardAndPageExperienceFilterOptionTextStyle}>Draft</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </DropdownMenu>
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
@@ -411,11 +491,12 @@ const styles = {
     experienceListContainerStyle: {
         position: 'relative',
     },
+    topSubBarContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
     experienceSortContainerStyle: {
-        width: 240,
-        paddingBottom: 12,
-        borderBottom: '1px solid',
-        borderColor: colors.borderColor
+        flex: '180px 0 0',
     },
     experienceNumberContainerStyle: {
         height: 54,
@@ -428,7 +509,9 @@ const styles = {
     },
     experienceNumberWrapperStyle: {
         flex: 1,
-        paddingLeft: 12,
+        marginLeft: 12,
+        borderBottom: '1px solid',
+        borderColor: colors.borderColor
     },
     experienceNumberStyle: {
         color: colors.labelColor,
@@ -441,6 +524,64 @@ const styles = {
     },
     experienceListWrapperStyle: {
         marginTop: 24,
+    },
+    experienceFilterContainerStyle: {
+        flex: 1,
+    },
+
+
+    experienceFilterWrapperStyle: {
+        border: '1px solid red'
+    },
+    expandIconStyle: {
+        paddingLeft: 3,
+        fontSize: '18px',
+        color: colors.blackColor
+    },
+   cardAndPageExperienceDropdownBtnStyle: {
+        textTransform: 'none',
+        fontSize: fonts.h4,
+        backgroundColor: colors.whiteColor,
+        borderTopLeftRadius: '12px',
+        borderTopRightRadius: '12px',
+        width: '130px',
+    },
+    cardAndPageExperienceFilterOptionContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        height: 36,
+        cursor: 'pointer',
+        border: '1px solid',
+        borderTop: 'none',
+        borderColor: colors.borderColor,
+        boxSizing: 'border-box'
+    },
+    cardAndPageExperienceFilterOptionWrapperStyle: {
+        display: 'inline-block',
+        margin: '0 auto',
+    },
+    cardAndPageExperienceFilterOptionIconContainerStyle: {
+        float: 'left',
+        width: 14,
+        height: 36,
+        position: 'relative',
+    },
+    cardAndPageExperienceFilterOptionIconStyle: {
+        position: 'absolute',
+        top: 9,
+        left: 0,
+        width: 14,
+        height: 14,
+    },
+    cardAndPageExperienceFilterOptionTextContainerStyle: {
+        float: 'left',
+        height: 36,
+        paddingLeft: 3,
+    },
+    cardAndPageExperienceFilterOptionTextStyle: {
+        margin: 0,
+        fontSize: fonts.h4,
+        color: colors.blackColor
     },
 
     confirmModalTitleContainerStyle: {
