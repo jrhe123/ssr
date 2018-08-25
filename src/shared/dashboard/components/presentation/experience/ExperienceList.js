@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 // Libraries
 import Add from '@material-ui/icons/Add';
+import Edit from '@material-ui/icons/Edit';
+import FlashOn from '@material-ui/icons/FlashOn';
 
 // constatnt
 import fonts from '../../../../styles/fonts';
@@ -28,7 +30,8 @@ class ExperienceList extends Component {
             statusContainerStyle,
             statusWrapperStyle,
             statusLabelContainerStyle,
-            statusLabelStyle,
+            flashonIconStyle,
+            editIconStyle,
 
             newExperienceContainerStyle,
             newExperienceWrapperStyle,
@@ -59,7 +62,12 @@ class ExperienceList extends Component {
                             <div style={statusContainerStyle}>
                                 <div style={statusWrapperStyle}>
                                     <div style={statusLabelContainerStyle}>
-                                        <p style={Object.assign({}, statusLabelStyle, {color: experience.ExperienceStreamList.length ? colors.greenColor : colors.greyLabelColor})}>{experience.ExperienceStreamList.length ? 'Live' : 'Draft'}</p>
+                                        {
+                                            experience.ExperienceStreamList.length ?
+                                                <FlashOn style={flashonIconStyle} />
+                                                :
+                                                <Edit style={editIconStyle} />
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -136,16 +144,24 @@ const styles = {
     },
     statusWrapperStyle: {
         height: 18,
-        width: 72,
         float: 'right',
     },
     statusLabelContainerStyle: {
-        borderRadius: 6,
+        width: 24,
+        height: 18,
         backgroundColor: colors.whiteColor,
+        borderRadius: 6,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    statusLabelStyle: {
-        textAlign: 'center',
-        fontSize: fonts.h4
+    flashonIconStyle: {
+        color: colors.greenColor,
+        fontSize: '14px'
+    },
+    editIconStyle: {
+        color: colors.greyLabelColor,
+        fontSize: '14px'
     },
     newExperienceContainerStyle: {
         flex: '300px 0 0',
