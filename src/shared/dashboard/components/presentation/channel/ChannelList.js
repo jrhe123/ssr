@@ -86,6 +86,7 @@ class ChannelList extends Component {
             channelTypeDropdownWrapperStyle,
             channelTypeDropdownBtnStyle,
             channelTypeFilterOptionContainerStyle,
+            channelTypeFilterOptionWrapperStyle,
             channelTypeFilterOptionIconContainerStyle,
             channelTypeFilterOptionIconStyle,
             channelTypeFilterOptionTextContainerStyle,
@@ -97,6 +98,7 @@ class ChannelList extends Component {
             channelStatusDropdownWrapperStyle,
             channelStatusDropdownBtnStyle,
             channelStatusFilterOptionContainerStyle,
+            channelStatusFilterOptionWrapperStyle,
             channelStatusFilterOptionIconContainerStyle,
             channelStatusFilterOptionIconStyle,
             channelStatusFilterOptionTextContainerStyle,
@@ -152,25 +154,29 @@ class ChannelList extends Component {
                                     size={'md'}
                                 >
                                     <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
-                                        <div style={channelTypeFilterOptionIconContainerStyle}>
-                                            <Language style={channelTypeFilterOptionIconStyle} />
-                                        </div>
-                                        <div style={channelTypeFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelTypeFilterOptionTextStyle}>Public channel</p>
+                                        <div style={channelTypeFilterOptionWrapperStyle}>
+                                            <div style={channelTypeFilterOptionIconContainerStyle}>
+                                                <Language style={channelTypeFilterOptionIconStyle} />
+                                            </div>
+                                            <div style={channelTypeFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>Public channel</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style={Object.assign({}, channelTypeFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
-                                        <div style={channelTypeFilterOptionIconContainerStyle}>
-                                            <Fingerprint style={channelTypeFilterOptionIconStyle} />
-                                        </div>
-                                        <div style={channelTypeFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelTypeFilterOptionTextStyle}>Password channel</p>
+                                        <div style={channelTypeFilterOptionWrapperStyle}>
+                                            <div style={channelTypeFilterOptionIconContainerStyle}>
+                                                <Fingerprint style={channelTypeFilterOptionIconStyle} />
+                                            </div>
+                                            <div style={channelTypeFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>Password channel</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,25 +207,29 @@ class ChannelList extends Component {
                                     size={'md'}
                                 >
                                     <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
-                                        <div style={channelStatusFilterOptionIconContainerStyle}>
-                                            <FlashOn style={Object.assign({}, channelStatusFilterOptionIconStyle, { color: colors.greenColor })} />
-                                        </div>
-                                        <div style={channelStatusFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelTypeFilterOptionTextStyle}>Live</p>
+                                        <div style={channelStatusFilterOptionWrapperStyle}>
+                                            <div style={channelStatusFilterOptionIconContainerStyle}>
+                                                <FlashOn style={Object.assign({}, channelStatusFilterOptionIconStyle, { color: colors.greenColor })} />
+                                            </div>
+                                            <div style={channelStatusFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>Live</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style={Object.assign({}, channelStatusFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
-                                        <div style={channelStatusFilterOptionIconContainerStyle}>
-                                            <Edit style={channelStatusFilterOptionIconStyle} />
-                                        </div>
-                                        <div style={channelStatusFilterOptionTextContainerStyle}>
-                                            <div style={tableContainerStyle}>
-                                                <div style={tableWrapperStyle}>
-                                                    <p style={channelTypeFilterOptionTextStyle}>Draft</p>
+                                        <div style={channelStatusFilterOptionWrapperStyle}>
+                                            <div style={channelStatusFilterOptionIconContainerStyle}>
+                                                <Edit style={channelStatusFilterOptionIconStyle} />
+                                            </div>
+                                            <div style={channelStatusFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>Draft</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -352,16 +362,19 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         height: 36,
-        paddingLeft: 6,
-        paddingRight: 6,
         cursor: 'pointer',
         border: '1px solid',
         borderTop: 'none',
         borderColor: colors.borderColor,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+    },
+    channelTypeFilterOptionWrapperStyle: {
+        display: 'inline-block',
+        margin: '0 auto',
     },
     channelTypeFilterOptionIconContainerStyle: {
-        flex: '14px 0 0',
+        float: 'left',
+        width: 14,
         height: 36,
         position: 'relative',
     },
@@ -373,7 +386,7 @@ const styles = {
         height: 14,
     },
     channelTypeFilterOptionTextContainerStyle: {
-        flex: 1,
+        float: 'left',
         height: 36,
         paddingLeft: 3,
     },
@@ -383,9 +396,6 @@ const styles = {
         color: colors.blackColor,
         textAlign: 'center',
     },
-
-
-
 
     channelStatusFilterContainerStyle: {
         flex: 1,
@@ -416,16 +426,19 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         height: 36,
-        paddingLeft: 6,
-        paddingRight: 6,
         cursor: 'pointer',
         border: '1px solid',
         borderTop: 'none',
         borderColor: colors.borderColor,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+    },
+    channelStatusFilterOptionWrapperStyle: {
+        display: 'inline-block',
+        margin: '0 auto',
     },
     channelStatusFilterOptionIconContainerStyle: {
-        flex: '14px 0 0',
+        float: 'left',
+        width: 14,
         height: 36,
         position: 'relative',
     },
@@ -437,7 +450,7 @@ const styles = {
         height: 14,
     },
     channelStatusFilterOptionTextContainerStyle: {
-        flex: 1,
+        float: 'left',
         height: 36,
         paddingLeft: 3,
     },
