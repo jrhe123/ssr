@@ -559,6 +559,7 @@ const styles = {
     },
     experienceListContainerStyle: {
         position: 'relative',
+        marginBottom: 60,
     },
     topSubBarContainerStyle: {
         display: 'flex',
