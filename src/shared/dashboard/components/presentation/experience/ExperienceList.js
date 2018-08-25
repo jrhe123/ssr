@@ -126,18 +126,18 @@ const styles = {
         flexWrap: 'wrap',
     },
     experienceContainerStyle: {
-        flex: '300px 0 0',
+        flex: '324px 0 0',
+        marginRight: 48,
         height: 540,
     },
     experienceWrapperStyle: {
-        width: 276,
+        width: 324,
         marginTop: 24,
         marginBottom: 24,
         cursor: 'pointer',
     },
     statusContainerStyle: {
         height: 18,
-        paddingRight: 24,
     },
     statusWrapperStyle: {
         height: 18,
@@ -161,7 +161,7 @@ const styles = {
         fontSize: '14px'
     },
     newExperienceContainerStyle: {
-        flex: '300px 0 0',
+        flex: '324px 0 0',
         marginTop: 24,
         marginBottom: 24,
         height: 512,

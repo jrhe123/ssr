@@ -28,7 +28,7 @@ class ExperienceCase extends Component {
     }
 
     renderBottomToolBar = () => {
-        
+
         const {
             experience,
         } = this.props;
@@ -85,49 +85,86 @@ class ExperienceCase extends Component {
         } = this.props;
 
         const {
+            tableContainerStyle,
+            tableWrapperStyle,
             mainContainerStyle,
+            dxCardContainerStyle,
+            leftIconContainerStyle,
+            leftIconWrapperStyle,
+            rightContentContainerStyle,
             dxPageContainerStyle,
         } = styles;
 
         return (
             <div style={mainContainerStyle}>
-                <div className="dx_card">
-                    <DxCard
-                        enableShadow={false}
-                        isWithTitle={false}
-                        isWithBottomBar={false}
-                        isCenterCard={false}
-                        isEditable={false}
-                        isClickable={false}
-                        isVideoInsertClickable={false}
-                        cardTitle={experience.ExperienceTitle}
-                        template={experience.ExperienceCard}
-                        handleVideoError={(msg) => this.props.handleErrorMsg(msg)}
-                    />
-                    {
-                        experience.ExperienceType == 0 ?
-                            this.renderBottomToolBar()
-                            :
-                            null
-                    }
+                <div style={dxCardContainerStyle}>
+                    <div style={leftIconContainerStyle}>
+                        <div
+                            style={leftIconWrapperStyle}
+                            className="dx_card"
+                        >
+                            <div style={tableContainerStyle}>
+                                <div style={tableWrapperStyle}>
+                                    <img src={require('../../../../../../assets/images/card_indicator.png')} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style={rightContentContainerStyle}
+                        className="dx_card"
+                    >
+                        <DxCard
+                            enableShadow={false}
+                            isWithTitle={false}
+                            isWithBottomBar={false}
+                            isCenterCard={false}
+                            isEditable={false}
+                            isClickable={false}
+                            isVideoInsertClickable={false}
+                            cardTitle={experience.ExperienceTitle}
+                            template={experience.ExperienceCard}
+                            handleVideoError={(msg) => this.props.handleErrorMsg(msg)}
+                        />
+                        {
+                            experience.ExperienceType == 0 ?
+                                this.renderBottomToolBar()
+                                :
+                                null
+                        }
+                    </div>
                 </div>
                 {
                     experience.ExperienceType == 1 ?
-                        <div 
-                            style={dxPageContainerStyle}
-                            className="dx_card"
-                        >
-                            <DxPage
-                                pdfWidth={264}
-                                pages={experience.ExperiencePages}
-                                displayPageNumber={false}
-                                isWithBottomBar={false}
-                                isLoadHtml={true}
-                                handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(pageGUID, sectionGUID, guid)}
-                            />
-                            {
-                                this.renderBottomToolBar()
-                            }
+                        <div style={dxPageContainerStyle}>
+                            <div style={leftIconContainerStyle}>
+                                <div 
+                                    style={leftIconWrapperStyle}
+                                    className="dx_card"
+                                >
+                                    <div style={tableContainerStyle}>
+                                        <div style={tableWrapperStyle}>
+                                            <img src={require('../../../../../../assets/images/page_indicator.png')} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style={rightContentContainerStyle}
+                                className="dx_card"
+                            >
+                                <DxPage
+                                    pdfWidth={264}
+                                    pages={experience.ExperiencePages}
+                                    displayPageNumber={false}
+                                    isWithBottomBar={false}
+                                    isLoadHtml={true}
+                                    handleLoadHtml={(pageGUID, sectionGUID, guid) => this.props.handleLoadHtml(pageGUID, sectionGUID, guid)}
+                                />
+                                {
+                                    this.renderBottomToolBar()
+                                }
+                            </div>
                         </div>
                         :
                         null
@@ -148,12 +185,34 @@ const styles = {
     tableWrapperStyle: {
         display: 'table-cell',
         verticalAlign: 'middle',
+        textAlign: 'center'
     },
     mainContainerStyle: {
         backgroundColor: 'transparent',
     },
+    dxCardContainerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    leftIconContainerStyle: {
+        flex: '48px 0 0',
+        position: 'relative'
+    },
+    leftIconWrapperStyle: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: 48,
+        width: 48,
+        backgroundColor: colors.lightBlueColor
+    },
+    rightContentContainerStyle: {
+        flex: 1,
+    },
     dxPageContainerStyle: {
         marginTop: 36,
+        display: 'flex',
+        flexDirection: 'row',
     },
     bottomControlContainerStyle: {
         height: 36,
