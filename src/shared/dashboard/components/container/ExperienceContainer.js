@@ -45,6 +45,10 @@ class ExperienceContainer extends Component {
         targetExperienceGUID: null,
         confirmInput: null,
 
+        isCardOnlyExperienceMenuOpen: false,
+        cardOnlyExperienceFilter: 'ALL',
+        cardOnlyExperienceFilterLabel: 'All',
+
         isCardAndPageExperienceMenuOpen: false,
         cardAndPageExperienceFilter: 'ALL',
         cardAndPageExperienceFilterLabel: 'All',
@@ -165,6 +169,16 @@ class ExperienceContainer extends Component {
         })
     }
 
+    handleToggleCardOnlyExperienceMenu = () => {
+        this.setState({
+            isCardOnlyExperienceMenuOpen: !this.state.isCardOnlyExperienceMenuOpen
+        });
+    }
+
+    handleCloseCardOnlyExperienceMenu = () => {
+        this.setState({ isCardOnlyExperienceMenuOpen: false });
+    }
+
     handleToggleCardAndPageExperienceMenu = () => {
         this.setState({
             isCardAndPageExperienceMenuOpen: !this.state.isCardAndPageExperienceMenuOpen
@@ -212,13 +226,14 @@ class ExperienceContainer extends Component {
 
             expandIconStyle,
             experienceFilterContainerStyle,
-            cardAndPageExperienceDropdownBtnStyle,
-            cardAndPageExperienceFilterOptionContainerStyle,
-            cardAndPageExperienceFilterOptionWrapperStyle,
-            cardAndPageExperienceFilterOptionIconContainerStyle,
-            cardAndPageExperienceFilterOptionIconStyle,
-            cardAndPageExperienceFilterOptionTextContainerStyle,
-            cardAndPageExperienceFilterOptionTextStyle,
+            experienceFilterWrapperStyle,
+            experienceDropdownBtnStyle,
+            experienceFilterOptionContainerStyle,
+            experienceFilterOptionWrapperStyle,
+            experienceFilterOptionIconContainerStyle,
+            experienceFilterOptionIconStyle,
+            experienceFilterOptionTextContainerStyle,
+            experienceFilterOptionTextStyle,
 
             confirmModalTitleContainerStyle,
             confirmModalTitleStyle,
@@ -271,7 +286,54 @@ class ExperienceContainer extends Component {
                                             </div>
                                         </div>
                                         <div style={experienceFilterContainerStyle}>
-                                            123
+                                            <div style={experienceFilterWrapperStyle}>
+                                                <div style={tableContainerStyleV2}>
+                                                    <div style={tableWrapperStyleV2}>
+                                                        <DropdownMenu
+                                                            className="dx_channel_filter_menu"
+                                                            isOpen={this.state.isCardOnlyExperienceMenuOpen}
+                                                            close={this.handleCloseCardOnlyExperienceMenu}
+                                                            toggle={
+                                                                <Button
+                                                                    style={Object.assign({}, experienceDropdownBtnStyle, !this.state.isCardOnlyExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
+                                                                    onClick={() => this.handleToggleCardOnlyExperienceMenu()}
+                                                                >{this.state.cardOnlyExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                                            }
+                                                            align={'center'}
+                                                            size={'md'}
+                                                        >
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                                <div style={experienceFilterOptionWrapperStyle}>
+                                                                    <div style={experienceFilterOptionIconContainerStyle}>
+                                                                        <FlashOn style={Object.assign({}, experienceFilterOptionIconStyle, { color: colors.greenColor })} />
+                                                                    </div>
+                                                                    <div style={experienceFilterOptionTextContainerStyle}>
+                                                                        <div style={tableContainerStyleV2}>
+                                                                            <div style={tableWrapperStyleV2}>
+                                                                                <p style={experienceFilterOptionTextStyle}>Live</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                                                <div style={experienceFilterOptionWrapperStyle}>
+                                                                    <div style={experienceFilterOptionIconContainerStyle}>
+                                                                        <Edit style={experienceFilterOptionIconStyle} />
+                                                                    </div>
+                                                                    <div style={experienceFilterOptionTextContainerStyle}>
+                                                                        <div style={tableContainerStyleV2}>
+                                                                            <div style={tableWrapperStyleV2}>
+                                                                                <p style={experienceFilterOptionTextStyle}>Draft</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </DropdownMenu>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
@@ -299,49 +361,56 @@ class ExperienceContainer extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div style={experienceFilterContainerStyle}>
-                                            <DropdownMenu
-                                                className="dx_channel_filter_menu"
-                                                isOpen={this.state.isCardAndPageExperienceMenuOpen}
-                                                close={this.handleCloseCardAndPageExperienceMenu}
-                                                toggle={
-                                                    <Button
-                                                        style={Object.assign({}, cardAndPageExperienceDropdownBtnStyle, !this.state.isCardAndPageExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
-                                                        onClick={() => this.handleToggleCardAndPageExperienceMenu()}
-                                                    >{this.state.cardAndPageExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
-                                                }
-                                                align={'center'}
-                                                size={'md'}
-                                            >
-                                                <div style={Object.assign({}, cardAndPageExperienceFilterOptionContainerStyle)}>
-                                                    <div style={cardAndPageExperienceFilterOptionWrapperStyle}>
-                                                        <div style={cardAndPageExperienceFilterOptionIconContainerStyle}>
-                                                            <FlashOn style={cardAndPageExperienceFilterOptionIconStyle} />
-                                                        </div>
-                                                        <div style={cardAndPageExperienceFilterOptionTextContainerStyle}>
-                                                            <div style={tableContainerStyleV2}>
-                                                                <div style={tableWrapperStyleV2}>
-                                                                    <p style={cardAndPageExperienceFilterOptionTextStyle}>Live</p>
+                                            <div style={experienceFilterWrapperStyle}>
+                                                <div style={tableContainerStyleV2}>
+                                                    <div style={tableWrapperStyleV2}>
+                                                        <DropdownMenu
+                                                            className="dx_channel_filter_menu"
+                                                            isOpen={this.state.isCardAndPageExperienceMenuOpen}
+                                                            close={this.handleCloseCardAndPageExperienceMenu}
+                                                            toggle={
+                                                                <Button
+                                                                    style={Object.assign({}, experienceDropdownBtnStyle, !this.state.isCardAndPageExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
+                                                                    onClick={() => this.handleToggleCardAndPageExperienceMenu()}
+                                                                >{this.state.cardAndPageExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                                            }
+                                                            align={'center'}
+                                                            size={'md'}
+                                                        >
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                                <div style={experienceFilterOptionWrapperStyle}>
+                                                                    <div style={experienceFilterOptionIconContainerStyle}>
+                                                                        <FlashOn style={Object.assign({}, experienceFilterOptionIconStyle, { color: colors.greenColor })} />
+                                                                    </div>
+                                                                    <div style={experienceFilterOptionTextContainerStyle}>
+                                                                        <div style={tableContainerStyleV2}>
+                                                                            <div style={tableWrapperStyleV2}>
+                                                                                <p style={experienceFilterOptionTextStyle}>Live</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style={Object.assign({}, cardAndPageExperienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
-                                                    <div style={cardAndPageExperienceFilterOptionWrapperStyle}>
-                                                        <div style={cardAndPageExperienceFilterOptionIconContainerStyle}>
-                                                            <Edit style={cardAndPageExperienceFilterOptionIconStyle} />
-                                                        </div>
-                                                        <div style={cardAndPageExperienceFilterOptionTextContainerStyle}>
-                                                            <div style={tableContainerStyleV2}>
-                                                                <div style={tableWrapperStyleV2}>
-                                                                    <p style={cardAndPageExperienceFilterOptionTextStyle}>Draft</p>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                                                <div style={experienceFilterOptionWrapperStyle}>
+                                                                    <div style={experienceFilterOptionIconContainerStyle}>
+                                                                        <Edit style={experienceFilterOptionIconStyle} />
+                                                                    </div>
+                                                                    <div style={experienceFilterOptionTextContainerStyle}>
+                                                                        <div style={tableContainerStyleV2}>
+                                                                            <div style={tableWrapperStyleV2}>
+                                                                                <p style={experienceFilterOptionTextStyle}>Draft</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </DropdownMenu>
                                                     </div>
                                                 </div>
-                                            </DropdownMenu>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style={experienceListWrapperStyle}>
@@ -525,20 +594,20 @@ const styles = {
     experienceListWrapperStyle: {
         marginTop: 24,
     },
+
     experienceFilterContainerStyle: {
         flex: 1,
     },
-
-
     experienceFilterWrapperStyle: {
-        border: '1px solid red'
+        height: 54,
+        paddingLeft: 120,
     },
     expandIconStyle: {
         paddingLeft: 3,
         fontSize: '18px',
         color: colors.blackColor
     },
-   cardAndPageExperienceDropdownBtnStyle: {
+    experienceDropdownBtnStyle: {
         textTransform: 'none',
         fontSize: fonts.h4,
         backgroundColor: colors.whiteColor,
@@ -546,7 +615,7 @@ const styles = {
         borderTopRightRadius: '12px',
         width: '130px',
     },
-    cardAndPageExperienceFilterOptionContainerStyle: {
+    experienceFilterOptionContainerStyle: {
         display: 'flex',
         flexDirection: 'row',
         height: 36,
@@ -556,29 +625,29 @@ const styles = {
         borderColor: colors.borderColor,
         boxSizing: 'border-box'
     },
-    cardAndPageExperienceFilterOptionWrapperStyle: {
+    experienceFilterOptionWrapperStyle: {
         display: 'inline-block',
         margin: '0 auto',
     },
-    cardAndPageExperienceFilterOptionIconContainerStyle: {
+    experienceFilterOptionIconContainerStyle: {
         float: 'left',
         width: 14,
         height: 36,
         position: 'relative',
     },
-    cardAndPageExperienceFilterOptionIconStyle: {
+    experienceFilterOptionIconStyle: {
         position: 'absolute',
         top: 9,
         left: 0,
         width: 14,
         height: 14,
     },
-    cardAndPageExperienceFilterOptionTextContainerStyle: {
+    experienceFilterOptionTextContainerStyle: {
         float: 'left',
         height: 36,
         paddingLeft: 3,
     },
-    cardAndPageExperienceFilterOptionTextStyle: {
+    experienceFilterOptionTextStyle: {
         margin: 0,
         fontSize: fonts.h4,
         color: colors.blackColor
