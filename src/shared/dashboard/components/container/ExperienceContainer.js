@@ -597,7 +597,7 @@ const styles = {
         fontWeight: 'bold'
     },
     experienceListWrapperStyle: {
-        marginTop: 24,
+        marginTop: 48,
     },
 
     experienceFilterContainerStyle: {
