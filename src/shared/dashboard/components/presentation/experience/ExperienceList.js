@@ -17,6 +17,7 @@ class ExperienceList extends Component {
     render() {
 
         const {
+            isCardOnly,
             experiences
         } = this.props;
 
@@ -46,7 +47,9 @@ class ExperienceList extends Component {
             <div style={mainContainerStyle}>
                 {
                     experiences.map((experience, index) => (
-                        <div style={experienceContainerStyle}>
+
+                        // <div style={t}></div>
+                        <div style={Object.assign({}, experienceContainerStyle, { height: isCardOnly ? 240 : 540 })}>
                             <div style={experienceWrapperStyle}>
                                 <ExperienceCase
                                     experience={experience}
@@ -106,7 +109,7 @@ const styles = {
         position: 'relative',
         display: 'table',
         width: '100%',
-        height: 470
+        height: 240
     },
     tableContainerStyle: {
         position: 'relative',
@@ -128,11 +131,9 @@ const styles = {
     experienceContainerStyle: {
         flex: '324px 0 0',
         marginRight: 48,
-        height: 540,
     },
     experienceWrapperStyle: {
         width: 324,
-        marginTop: 24,
         marginBottom: 24,
         cursor: 'pointer',
     },
@@ -162,9 +163,6 @@ const styles = {
     },
     newExperienceContainerStyle: {
         flex: '324px 0 0',
-        marginTop: 24,
-        marginBottom: 24,
-        height: 512,
     },
     newExperienceWrapperStyle: {
         position: 'relative',

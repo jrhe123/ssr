@@ -340,6 +340,7 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
+                                            isCardOnly={true}
                                             experiences={CardOnlyExperiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid, 'CARD_ONLY')}
@@ -417,6 +418,7 @@ class ExperienceContainer extends Component {
                                     </div>
                                     <div style={experienceListWrapperStyle}>
                                         <ExperienceList
+                                            isCardOnly={false}
                                             experiences={CardAndPagesExperiences}
                                             handleCreateExpClick={() => this.handleCreateExperience()}
                                             handleLoadHtml={(experienceGUID, pageGUID, sectionGUID, guid) => this.handleLoadHtml(experienceGUID, pageGUID, sectionGUID, guid, 'CARD_AND_PAGES')}
