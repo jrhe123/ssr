@@ -562,7 +562,7 @@ const styles = {
     },
 
     mainContainerStyle: {
-
+        overFlowY: 'auto',
     },
     topBarContainerStyle: {
         paddingTop: 36,
