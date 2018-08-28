@@ -127,7 +127,8 @@ const styles = {
     },
     experienceContainerStyle: {
         flex: '324px 0 0',
-        // marginRight: 48,
+        marginRight: 36,
+        marginBottom: 36,
     },
     experienceWrapperStyle: {
         width: 324,
