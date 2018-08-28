@@ -14,6 +14,7 @@ import {
     dxUpdateChannelSaga,
 
     dxHtmlFetchSaga,
+    dxExperienceSearchUpdateSaga,
     dxFetchExperienceSaga,
     dxFetchMoreExperienceSaga,
     dxDeleteExperienceSaga,
@@ -108,6 +109,7 @@ export default function* rootSaga() {
         
         // experience
         dxHtmlFetchSaga(),
+        dxExperienceSearchUpdateSaga(),
         dxFetchExperienceSaga(),
         dxFetchMoreExperienceSaga(),
         dxDeleteExperienceSaga(),

@@ -5,6 +5,7 @@ import colors from '../../styles/colors';
 
 // Libraries
 import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,31 +15,13 @@ import fonts from '../../styles/fonts';
 
 class SearchBar extends Component {
 
-    state = {
-        hasClear: false,
-    }
-
-    componentDidMount() {
-        const {
-            content,
-        } = this.props;
-        this.setState({
-            hasClear: content && content.length ? true : false
-        })
-    }
-
     handleValueChange = (event) => {
         let val = event.target.value.trim();
-        this.setState({
-            hasClear: val.length > 0 ? true : false,
-        })
         this.props.handleSearchInputChange(val);
     }
 
     handleClearContent = () => {
-        this.setState({
-            hasClear: false,
-        })
+        this.props.handleSearchInputChange('');
     }
 
     render() {
@@ -55,10 +38,6 @@ class SearchBar extends Component {
             clearIconContainerStyle,
             inputStyle,
         } = styles;
-
-        const {
-            hasClear,
-        } = this.state;
 
         return (
             <div>
@@ -89,7 +68,7 @@ class SearchBar extends Component {
                             }}
                             onChange={(event) => this.handleValueChange(event)}
                             endAdornment={
-                                hasClear ?
+                                content ?
                                     (
                                         <InputAdornment
                                             style={clearIconContainerStyle}

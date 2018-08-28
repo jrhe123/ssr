@@ -6,6 +6,7 @@ import {
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
     // experience
     HTML_FETCH__SUCCEEDED,
+    EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH_MORE__SUCCEEDED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -102,6 +103,10 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             tmpExperienceChannel = find_experience_channel_obj_by_guid(updated.ExperienceChannels, payload.experienceChannel.ExperienceChannelGUID);
             tmpExperienceChannels[tmpExperienceChannel.index] = Object.assign({}, payload.experienceChannel);
             updated.ExperienceChannels = tmpExperienceChannels;
+            return updated;
+
+        case EXPERIENCE_UPDATE_SEARCH__SUCCEEDED:
+            updated.ExperienceSearchInput = payload.val;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

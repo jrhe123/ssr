@@ -28,6 +28,10 @@ import {
     HTML_FETCH__SUCCEEDED,
     HTML_FETCH__FAILED,
 
+    EXPERIENCE_UPDATE_SEARCH_REQUESTED,
+    EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
+    EXPERIENCE_UPDATE_SEARCH__FAILED,
+
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__FAILED,
@@ -247,6 +251,27 @@ export function* dxHtmlFetch(action) {
 
 export function* dxHtmlFetchSaga() {
     yield takeEvery(HTML_FETCH_REQUESTED, dxHtmlFetch);
+}
+
+// Update experience search input
+export function* dxExperienceSearchUpdate(action) {
+    try {
+        yield put({
+            type: EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
+            payload: {
+                val: action.payload.val
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE_SEARCH__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceSearchUpdateSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_SEARCH_REQUESTED, dxExperienceSearchUpdate);
 }
 
 // Fetch experience

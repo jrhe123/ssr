@@ -20,6 +20,7 @@ import {
     dxDashboardNavi as dxDashboardNaviAction,
 
     dxHtmlFetch as dxHtmlFetchAction,
+    dxUpdateExperienceSearch as dxUpdateExperienceSearchAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxFetchMoreExperience as dxFetchMoreExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -198,7 +199,7 @@ class ExperienceContainer extends Component {
     }
 
     handleSearchInputChange = (val) => {
-        console.log('out here: ', val);
+        this.props.dxUpdateExperienceSearchAction(val);
     }
 
     render() {
@@ -747,6 +748,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxDashboardNaviAction,
     dxHtmlFetchAction,
+    dxUpdateExperienceSearchAction,
     dxFetchExperienceAction,
     dxFetchMoreExperienceAction,
     dxDeleteExperienceAction,
