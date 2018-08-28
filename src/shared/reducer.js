@@ -9,6 +9,10 @@ import {
     LOGOUT__SUCCEEDED,
     LOGOUT__FAILED,
 
+    EXPERIENCE_FETCH_MORE_REQUESTED,
+    EXPERIENCE_FETCH_MORE__SUCCEEDED,
+    EXPERIENCE_FETCH_MORE__FAILED,
+
     EXPERIENCE_FETCH__FAILED,
     EXPERIENCE_DELETE__SUCCEEDED,
     EXPERIENCE_DELETE__FAILED,
@@ -143,16 +147,19 @@ const rootReducer = (previousState = initialState, { type, payload }) => {
         case EXPERIENCE_UPLOAD_GOOGLE_FILE_REQUESTED:
         case EXPERIENCE_UPLOAD_FILE_REQUESTED:
         case EXPERIENCE_UPDATE_FILE_REQUESTED:
+        case EXPERIENCE_FETCH_MORE_REQUESTED:
             updated.isLoading = true;
             return updated;
 
         case EXPERIENCE_VIEW_HTML_FETCH__SUCCEEDED:
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__SUCCEEDED:
+        case EXPERIENCE_FETCH_MORE__SUCCEEDED:
             updated.isLoading = false;
             return updated;
 
         case EXPERIENCE_VIEW_HTML_FETCH__FAILED:
         case EXPERIENCE_UPLOAD_GOOGLE_FILE__FAILED:
+        case EXPERIENCE_FETCH_MORE__FAILED:
             updated.isLoading = false;
             tempAlertBar = {
                 isDisplay: true,

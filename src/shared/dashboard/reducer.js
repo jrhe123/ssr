@@ -121,10 +121,12 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
                 updated.TotalCardOnlyExperienceRecord = payload.totalRecord;
                 tmpCardOnlyExperiences = [...tmpCardOnlyExperiences, ...payload.experiences];
                 updated.CardOnlyExperiences = tmpCardOnlyExperiences;
+                updated.CurrentCardOnlyExperiencesPageIndex = updated.CurrentCardOnlyExperiencesPageIndex + 1;
             } else if (payload.experienceType == 'CARD_AND_PAGES') {
                 updated.TotalCardAndPagesExperienceRecord = payload.totalRecord;
                 tmpCardAndPagesExperiences = [...tmpCardAndPagesExperiences, ...payload.experiences];
                 updated.CardAndPagesExperiences = tmpCardAndPagesExperiences;
+                updated.CurrentCardAndPagesExperiencesPageIndex = updated.CurrentCardAndPagesExperiencesPageIndex + 1;
             }
             return updated;
 
