@@ -29,8 +29,7 @@ import {
 const initialState = {
     NaviIndex: 0,
 
-    Experiences: [],
-
+    ExperienceSearchInput: null,
     TotalExperienceRecord: 0,
     TotalCardOnlyExperienceRecord: 0,
     TotalCardAndPagesExperienceRecord: 0,

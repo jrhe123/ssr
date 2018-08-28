@@ -197,9 +197,14 @@ class ExperienceContainer extends Component {
         this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex);
     }
 
+    handleSearchInputChange = (val) => {
+        console.log('out here: ', val);
+    }
+
     render() {
 
         const {
+            ExperienceSearchInput,
             TotalExperienceRecord,
             TotalCardOnlyExperienceRecord,
             TotalCardAndPagesExperienceRecord,
@@ -266,6 +271,8 @@ class ExperienceContainer extends Component {
                                             <SearchBar
                                                 isShort={false}
                                                 placeholder="search for card(s) and page(s)"
+                                                content={ExperienceSearchInput}
+                                                handleSearchInputChange={(val) => this.handleSearchInputChange(val)}
                                             />
                                         </div>
                                         <div style={midLabelContainerStyle}>
@@ -726,6 +733,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        ExperienceSearchInput: state.dashboard.ExperienceSearchInput,
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         TotalCardOnlyExperienceRecord: state.dashboard.TotalCardOnlyExperienceRecord,
         TotalCardAndPagesExperienceRecord: state.dashboard.TotalCardAndPagesExperienceRecord,

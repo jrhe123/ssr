@@ -16,22 +16,28 @@ class SearchBar extends Component {
 
     state = {
         hasClear: false,
-        content: '',
+    }
+
+    componentDidMount() {
+        const {
+            content,
+        } = this.props;
+        this.setState({
+            hasClear: content && content.length ? true : false
+        })
     }
 
     handleValueChange = (event) => {
-
         let val = event.target.value.trim();
         this.setState({
             hasClear: val.length > 0 ? true : false,
-            content: val
         })
+        this.props.handleSearchInputChange(val);
     }
 
     handleClearContent = () => {
         this.setState({
             hasClear: false,
-            content: '',
         })
     }
 
@@ -40,6 +46,7 @@ class SearchBar extends Component {
         const {
             isShort,
             placeholder,
+            content,
         } = this.props;
 
         const {
@@ -51,7 +58,6 @@ class SearchBar extends Component {
 
         const {
             hasClear,
-            content,
         } = this.state;
 
         return (
@@ -123,7 +129,7 @@ const styles = {
     },
     inputStyle: {
         fontSize: fonts.h3,
-        
+
     }
 }
 
