@@ -273,6 +273,8 @@ class ExperienceContainer extends Component {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* CARD ONLY */}
                                 <div style={experienceListContainerStyle}>
                                     <div style={topSubBarContainerStyle}>
                                         <div style={experienceSortContainerStyle}>
@@ -281,7 +283,7 @@ class ExperienceContainer extends Component {
                                                 <div style={experienceNumberWrapperStyle}>
                                                     <div style={tableContainerStyleV2}>
                                                         <div style={tableWrapperStyleV2}>
-                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardOnlyExperienceRecord}</span> Card only</p>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardOnlyExperienceRecord}</span> Card Only</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -350,6 +352,8 @@ class ExperienceContainer extends Component {
                                         />
                                     </div>
                                 </div>
+
+                                {/* CARD & PAGES */}
                                 <div style={experienceListContainerStyle}>
                                     <div style={topSubBarContainerStyle}>
                                         <div style={experienceSortContainerStyle}>
@@ -563,7 +567,7 @@ const styles = {
     },
     experienceListContainerStyle: {
         position: 'relative',
-        marginBottom: 60,
+        marginBottom: 90,
     },
     topSubBarContainerStyle: {
         display: 'flex',
