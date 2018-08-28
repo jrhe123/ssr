@@ -131,10 +131,10 @@ class DxSplash extends Component {
                                             multiLine={true}
                                             placeholder="Splash image with page title"
                                             color={this.props.splashColor}
-                                            width={descContainerWidth}
                                             maxHeight={118}
                                             isTransparent={true}
                                             textCenter={true}
+                                            isFullWidth={true}
                                             value={this.props.splashContent}
                                             handleValChange={(e) => this.props.handleDescInputChange(e)}
                                             isRounded={true}
