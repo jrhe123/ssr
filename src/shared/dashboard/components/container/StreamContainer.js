@@ -32,6 +32,9 @@ import {
     dxRemoveStream as dxRemoveStreamAction,
 } from '../../actions';
 
+// styles
+import '../../../../../assets/css/material-ui-search-bar/index.css';
+
 class StreamContainer extends Component {
 
     state = {
@@ -446,6 +449,7 @@ class StreamContainer extends Component {
                         <div style={channelSearchContainerStyle}>
                             <div style={searchBarWrapperStyle}>
                                 <SearchBar
+                                    className="dx_stream_search_bar"
                                     value={this.state.value}
                                     onChange={(val) => this.handleSearchChannel(val)}
                                     style={searchBarStyle}
@@ -794,7 +798,7 @@ const styles = {
     searchBarStyle: {
         boxShadow: 'none',
         paddingLeft: 6,
-        height: '100%'
+        height: '100%',
     },
     channelInfoWrapperStyle: {
         height: 'calc(100% - 174px)',
@@ -839,7 +843,6 @@ const styles = {
     },
     currentChannelNameStyle: {
         margin: 0,
-        paddingBottom: 12,
         fontSize: fonts.h1
     },
     currentChannelDescriptionWrapperStyle: {
@@ -848,6 +851,7 @@ const styles = {
     },
     currentChannelDescriptionStyle: {
         margin: 0,
+        marginTop: 12,
         color: colors.lightGreyColor,
         fontSize: fonts.h3,
     },

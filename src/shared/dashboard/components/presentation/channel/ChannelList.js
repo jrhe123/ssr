@@ -102,13 +102,13 @@ class ChannelList extends Component {
             channelStatusFilterOptionIconContainerStyle,
             channelStatusFilterOptionIconStyle,
             channelStatusFilterOptionTextContainerStyle,
-            channelStatusFilterOptionTextStyle,
 
             channelListInfoContainerStyle,
             channelListInfoWrapperStyle,
             channelListButtonStyle,
             fullBtnStyle,
             channelNumberStyle,
+            capitalChannelNumberStyle,
             dropdownBtnStyle,
             menuItemStyle,
             expandIconStyle,
@@ -250,7 +250,7 @@ class ChannelList extends Component {
 
                     <div style={channelListInfoContainerStyle}>
                         <div style={channelListInfoWrapperStyle}>
-                            <p style={channelNumberStyle}>{channelNumber} Channel(s)</p>
+                            <p style={channelNumberStyle}><span style={capitalChannelNumberStyle}>{channelNumber}</span> Channel(s)</p>
                             <DropdownMenu
                                 isOpen={this.state.isMenuOpen}
                                 close={this.handleCloseMenu}
@@ -496,8 +496,12 @@ const styles = {
         color: colors.labelColor,
     },
     channelNumberStyle: {
-        fontSize: fonts.h2,
+        fontSize: fonts.h3,
         color: colors.labelColor,
+    },
+    capitalChannelNumberStyle: {
+        fontSize: fonts.h1,
+        fontWeight: 'bold'
     },
     channelListContainer: {
         overflowY: 'scroll',
