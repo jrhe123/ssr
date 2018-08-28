@@ -303,7 +303,7 @@ class ExperienceContainer extends Component {
                                                 <div style={experienceNumberWrapperStyle}>
                                                     <div style={tableContainerStyleV2}>
                                                         <div style={tableWrapperStyleV2}>
-                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardOnlyExperienceRecord}</span> Card Only</p>
+                                                            <p style={experienceNumberStyle}><span style={capitalExperienceNumberStyle}>{TotalCardOnlyExperienceRecord}</span> Card only</p>
                                                         </div>
                                                     </div>
                                                 </div>

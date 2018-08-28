@@ -280,8 +280,9 @@ export const dxFetchExperienceUrl = (payload) => {
     if (payload.experienceType == 'CARD_ONLY'
         || payload.experienceType == 'CARD_AND_PAGES') {
         searchParams = {
-            SearchType: "EXPERIENCE_TYPE",
-            SearchField: payload.experienceType
+            ExperienceType: payload.experienceType,
+            SearchType: "",
+            SearchField: "",
         }
     }
     return (
@@ -334,8 +335,9 @@ export const dxFetchMoreExperienceUrl = (payload) => {
     if (payload.experienceType == 'CARD_ONLY'
         || payload.experienceType == 'CARD_AND_PAGES') {
         searchParams = {
-            SearchType: "EXPERIENCE_TYPE",
-            SearchField: payload.experienceType
+            ExperienceType: payload.experienceType,
+            SearchType: "",
+            SearchField: "",
         }
     }
     return (
