@@ -195,3 +195,16 @@ body{
 .dx_channel_filter_menu>div.dd-menu-items>ul>div{
     background: #FFFFFF;
 }
+
+.dx_glowing_btn{
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    animation: glowing 1500ms infinite;
+}
+@keyframes glowing {
+    0% { background-color: rgba(0, 0, 0, 0.4) }
+    50% { background-color: rgba(0, 0, 0, 0.6) }
+    100% { background-color: rgba(0, 0, 0, 0.4) }
+}

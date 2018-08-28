@@ -240,6 +240,9 @@ class ExperienceContainer extends Component {
             confirmModalTitleContainerStyle,
             confirmModalTitleStyle,
             confirmModalHighlightTitleStyle,
+
+            loadingBtnContainerStyle,
+            loadingBtnStyle,
         } = styles;
 
         return (
@@ -430,6 +433,11 @@ class ExperienceContainer extends Component {
                                             handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove, 'CARD_AND_PAGES')}
                                             handleErrorMsg={(msg) => { }}
                                         />
+                                        <div style={loadingBtnContainerStyle}>
+                                            <a style={loadingBtnStyle}
+                                                className="dx_glowing_btn"
+                                            >Load more</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -672,6 +680,18 @@ const styles = {
     },
     confirmModalHighlightTitleStyle: {
         color: colors.redColor
+    },
+
+    loadingBtnContainerStyle: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    loadingBtnStyle: {
+        padding: '6px 24px',
+        borderRadius: '15px',
+        color: colors.whiteColor,
+        fontSize: fonts.h3,
     },
 }
 
