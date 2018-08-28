@@ -254,14 +254,54 @@ export function* dxHtmlFetchSaga() {
 }
 
 // Update experience search input
+export const dxExperienceSearchUpdateUrl = (payload, experienceType) => {
+    let searchParams = {};
+    if (experienceType == 'CARD_ONLY'
+        || experienceType == 'CARD_AND_PAGES') {
+        searchParams = {
+            ExperienceType: experienceType,
+            SearchType: "EXPERIENCE_TITLE",
+            SearchField: payload.val,
+        }
+    }
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: config.cardOnlyExperienceLimit.toString(),
+            Offset: "0",
+            Extra: searchParams,
+        }, true)
+    )
+}
 export function* dxExperienceSearchUpdate(action) {
     try {
-        yield put({
-            type: EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
-            payload: {
-                val: action.payload.val
-            },
-        });
+        const cardOnly = yield call(dxExperienceSearchUpdateUrl, action.payload, 'CARD_ONLY');
+        let cardOnlyConfirmation = cardOnly.Confirmation;
+        let cardOnlyResponse = cardOnly.Response;
+
+        const cardAndPages = yield call(dxExperienceSearchUpdateUrl, action.payload, 'CARD_AND_PAGES');
+        let cardAndPagesConfirmation = cardAndPages.Confirmation;
+        let cardAndPagesResponse = cardAndPages.Response;
+
+        if (cardOnlyConfirmation !== 'SUCCESS'
+            && cardAndPagesConfirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_UPDATE_SEARCH__FAILED,
+                payload: {
+                    message: 'Experience fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
+                payload: {
+                    val: action.payload.val,
+                    cardOnlyTotal: cardOnlyResponse.TotalRecord,
+                    cardOnlyExperiences: cardOnlyResponse.Experiences,
+                    cardAndPgesTotal: cardAndPagesResponse.TotalRecord,
+                    cardAndPgesExperiences: cardAndPagesResponse.Experiences,
+                },
+            });
+        }
     } catch (error) {
         yield put({
             type: EXPERIENCE_UPDATE_SEARCH__FAILED,

@@ -107,6 +107,14 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
 
         case EXPERIENCE_UPDATE_SEARCH__SUCCEEDED:
             updated.ExperienceSearchInput = payload.val;
+            // card only
+            updated.CurrentCardOnlyExperiencesPageIndex = 0;
+            updated.CardOnlyExperiences = payload.cardOnlyExperiences;
+            updated.TotalCardOnlyExperienceRecord = payload.cardOnlyTotal;
+            // card and pages
+            updated.CurrentCardAndPagesExperiencesPageIndex = 0;
+            updated.CardAndPagesExperiences = payload.cardAndPgesExperiences;
+            updated.TotalCardAndPagesExperienceRecord = payload.cardAndPgesTotal;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:
