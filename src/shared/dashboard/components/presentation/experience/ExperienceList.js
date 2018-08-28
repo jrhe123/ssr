@@ -74,7 +74,7 @@ class ExperienceList extends Component {
                         </div>
                     ))
                 }
-                <div style={newExperienceContainerStyle}>
+                {/* <div style={newExperienceContainerStyle}>
                     <div style={expTableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <div
@@ -97,7 +97,7 @@ class ExperienceList extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }
