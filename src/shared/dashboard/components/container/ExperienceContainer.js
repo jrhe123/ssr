@@ -188,6 +188,10 @@ class ExperienceContainer extends Component {
         this.setState({ isCardAndPageExperienceMenuOpen: false });
     }
 
+    handleLoadMoreExperience = (experienceType) => {
+        console.log('load more: ', experienceType);
+    }
+
     render() {
 
         const {
@@ -353,6 +357,18 @@ class ExperienceContainer extends Component {
                                             handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove, 'CARD_ONLY')}
                                             handleErrorMsg={(msg) => { }}
                                         />
+                                        {
+                                            CardOnlyExperiences &&
+                                                TotalCardOnlyExperienceRecord > CardOnlyExperiences.length ?
+                                                <div style={loadingBtnContainerStyle}>
+                                                    <a style={loadingBtnStyle}
+                                                        className="dx_glowing_btn"
+                                                        onClick={() => this.handleLoadMoreExperience('CARD_ONLY')}
+                                                    >Load more</a>
+                                                </div>
+                                                :
+                                                null
+                                        }
                                     </div>
                                 </div>
 
@@ -433,11 +449,18 @@ class ExperienceContainer extends Component {
                                             handleRemoveExperience={(experienceGUID, confirmToRemove) => this.handleRemoveExperience(experienceGUID, confirmToRemove, 'CARD_AND_PAGES')}
                                             handleErrorMsg={(msg) => { }}
                                         />
-                                        <div style={loadingBtnContainerStyle}>
-                                            <a style={loadingBtnStyle}
-                                                className="dx_glowing_btn"
-                                            >Load more</a>
-                                        </div>
+                                        {
+                                            CardAndPagesExperiences &&
+                                                TotalCardAndPagesExperienceRecord > CardAndPagesExperiences.length ?
+                                                <div style={loadingBtnContainerStyle}>
+                                                    <a style={loadingBtnStyle}
+                                                        className="dx_glowing_btn"
+                                                        onClick={() => this.handleLoadMoreExperience('CARD_AND_PAGES')}
+                                                    >Load more</a>
+                                                </div>
+                                                :
+                                                null
+                                        }
                                     </div>
                                 </div>
                             </div>
