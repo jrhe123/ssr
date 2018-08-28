@@ -100,7 +100,7 @@ class ChannelStream extends Component {
                         <p style={streamLabelStyle}>{channel.ExperienceStreams.length} live streams</p>
                     </div>
                     <div style={channelInfoRightStyle}>
-                        <DropdownMenu
+                        {/* <DropdownMenu
                             isOpen={this.state.isImportOpen}
                             close={this.handleCloseImport}
                             toggle={
@@ -112,7 +112,7 @@ class ChannelStream extends Component {
                             size={'sm'}
                         >
                             <div>option 1</div>
-                        </DropdownMenu>
+                        </DropdownMenu> */}
                     </div>
                 </div>
             </div>
