@@ -46,9 +46,7 @@ class ExperienceList extends Component {
         return (
             <div style={mainContainerStyle}>
                 {
-                    experiences.map((experience, index) => (
-
-                        // <div style={t}></div>
+                    experiences.map((experience) => (
                         <div style={Object.assign({}, experienceContainerStyle, { height: isCardOnly ? 240 : 540 })}>
                             <div style={experienceWrapperStyle}>
                                 <ExperienceCase
