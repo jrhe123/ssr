@@ -7,6 +7,7 @@ import {
     // experience
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
+    EXPERIENCE_FETCH_MORE__SUCCEEDED,
     EXPERIENCE_DELETE__SUCCEEDED,
     // stream
     STREAM_CHANNEL_FETCH__SUCCEEDED,
@@ -34,7 +35,9 @@ const initialState = {
     TotalCardOnlyExperienceRecord: 0,
     TotalCardAndPagesExperienceRecord: 0,
     CardOnlyExperiences: [],
+    CurrentCardOnlyExperiencesPageIndex: 0,
     CardAndPagesExperiences: [],
+    CurrentCardAndPagesExperiencesPageIndex: 0,
 
     TotalChannelRecord: 0,
     ExperienceChannels: [],
@@ -111,6 +114,18 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
                 updated.CardAndPagesExperiences = payload.experiences;
             }
             updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
+            return updated;
+
+        case EXPERIENCE_FETCH_MORE__SUCCEEDED:
+            if (payload.experienceType == 'CARD_ONLY') {
+                updated.TotalCardOnlyExperienceRecord = payload.totalRecord;
+                tmpCardOnlyExperiences = [...tmpCardOnlyExperiences, ...payload.experiences];
+                updated.CardOnlyExperiences = tmpCardOnlyExperiences;
+            } else if (payload.experienceType == 'CARD_AND_PAGES') {
+                updated.TotalCardAndPagesExperienceRecord = payload.totalRecord;
+                tmpCardAndPagesExperiences = [...tmpCardAndPagesExperiences, ...payload.experiences];
+                updated.CardAndPagesExperiences = tmpCardAndPagesExperiences;
+            }
             return updated;
 
         case EXPERIENCE_DELETE__SUCCEEDED:

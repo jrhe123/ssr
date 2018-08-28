@@ -9,6 +9,7 @@ import {
     // EXPERIENCE
     HTML_FETCH_REQUESTED,
     EXPERIENCE_FETCH_REQUESTED,
+    EXPERIENCE_FETCH_MORE_REQUESTED,
     EXPERIENCE_DELETE_REQUESTED,
 
     // STREAM
@@ -68,6 +69,16 @@ export const dxFetchExperience = (experienceType) => {
         type: EXPERIENCE_FETCH_REQUESTED,
         payload: {
             experienceType
+        },
+    }
+}
+
+export const dxFetchMoreExperience = (experienceType, currentPageIndex) => {
+    return {
+        type: EXPERIENCE_FETCH_MORE_REQUESTED,
+        payload: {
+            experienceType,
+            currentPageIndex,
         },
     }
 }

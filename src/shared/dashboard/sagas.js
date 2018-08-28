@@ -32,6 +32,10 @@ import {
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__FAILED,
 
+    EXPERIENCE_FETCH_MORE_REQUESTED,
+    EXPERIENCE_FETCH_MORE__SUCCEEDED,
+    EXPERIENCE_FETCH_MORE__FAILED,
+
     EXPERIENCE_DELETE_REQUESTED,
     EXPERIENCE_DELETE__SUCCEEDED,
     EXPERIENCE_DELETE__FAILED,
@@ -297,6 +301,60 @@ export function* dxFetchExperience(action) {
 
 export function* dxFetchExperienceSaga() {
     yield takeEvery(EXPERIENCE_FETCH_REQUESTED, dxFetchExperience);
+}
+
+// Fetch more experience
+export const dxFetchMoreExperienceUrl = (payload) => {
+    let searchParams = {};
+    if (payload.experienceType == 'CARD_ONLY'
+        || payload.experienceType == 'CARD_AND_PAGES') {
+        searchParams = {
+            SearchType: "EXPERIENCE_TYPE",
+            SearchField: payload.experienceType
+        }
+    }
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: config.cardOnlyExperienceLimit.toString(),
+            Offset: ((payload.currentPageIndex + 1) * config.cardOnlyExperienceLimit).toString(),
+            Extra: searchParams,
+        }, true)
+    )
+}
+
+export function* dxFetchMoreExperience(action) {
+    try {
+        const response = yield call(dxFetchMoreExperienceUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_FETCH_MORE__FAILED,
+                payload: {
+                    message: 'Experience fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_FETCH_MORE__SUCCEEDED,
+                payload: {
+                    experienceType: action.payload.experienceType,
+                    totalRecord: Response.TotalRecord,
+                    experiences: Response.Experiences,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_FETCH_MORE__FAILED,
+            payload: {
+                message: 'Experience fetch api error'
+            },
+        });
+    }
+}
+
+export function* dxFetchMoreExperienceSaga() {
+    yield takeEvery(EXPERIENCE_FETCH_MORE_REQUESTED, dxFetchMoreExperience);
 }
 
 // Delete experience

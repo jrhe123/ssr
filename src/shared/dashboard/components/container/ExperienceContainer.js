@@ -21,6 +21,7 @@ import {
 
     dxHtmlFetch as dxHtmlFetchAction,
     dxFetchExperience as dxFetchExperienceAction,
+    dxFetchMoreExperience as dxFetchMoreExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
 } from '../../actions';
 import {
@@ -189,7 +190,11 @@ class ExperienceContainer extends Component {
     }
 
     handleLoadMoreExperience = (experienceType) => {
-        console.log('load more: ', experienceType);
+        const {
+            CurrentCardOnlyExperiencesPageIndex,
+            CurrentCardAndPagesExperiencesPageIndex,
+        } = this.props;
+        this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex);
     }
 
     render() {
@@ -725,7 +730,9 @@ const stateToProps = (state) => {
         TotalCardOnlyExperienceRecord: state.dashboard.TotalCardOnlyExperienceRecord,
         TotalCardAndPagesExperienceRecord: state.dashboard.TotalCardAndPagesExperienceRecord,
         CardOnlyExperiences: state.dashboard.CardOnlyExperiences,
+        CurrentCardOnlyExperiencesPageIndex: state.dashboard.CurrentCardOnlyExperiencesPageIndex,
         CardAndPagesExperiences: state.dashboard.CardAndPagesExperiences,
+        CurrentCardAndPagesExperiencesPageIndex: state.dashboard.CurrentCardAndPagesExperiencesPageIndex,
     }
 }
 
@@ -733,6 +740,7 @@ const dispatchToProps = {
     dxDashboardNaviAction,
     dxHtmlFetchAction,
     dxFetchExperienceAction,
+    dxFetchMoreExperienceAction,
     dxDeleteExperienceAction,
 
     dxAlertAction,
