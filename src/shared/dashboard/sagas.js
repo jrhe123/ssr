@@ -257,7 +257,7 @@ export const dxFetchExperienceUrl = (payload) => {
     }
     return (
         apiManager.dxApi(`/experience/list`, {
-            Limit: "4",
+            Limit: config.cardOnlyExperienceLimit.toString(),
             Offset: "0",
             Extra: searchParams,
         }, true)
