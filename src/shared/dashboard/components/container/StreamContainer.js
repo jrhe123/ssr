@@ -55,13 +55,6 @@ class StreamContainer extends Component {
         this.props.dxFetchStreamChannelAction();
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.IsReloadStream && !this.props.IsReloadStream) {
-            console.log('called now');
-            this.props.dxSelectStreamChannelAction(this.props.CurrentStreamChannel);
-        }
-    }
-
     handleToggleMenu = () => {
         this.setState({
             isMenuOpen: !this.state.isMenuOpen
@@ -954,7 +947,6 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
-        IsReloadStream: state.dashboard.IsReloadStream,
         CurrentStreamChannel: state.dashboard.CurrentStreamChannel,
         TotalLiveExperienceStreamRecord: state.dashboard.TotalLiveExperienceStreamRecord,
         LiveExperienceStreams: state.dashboard.LiveExperienceStreams,

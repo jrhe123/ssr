@@ -42,7 +42,6 @@ const initialState = {
     TotalStreamActiveChannelRecord: 0,
     StreamActiveChannels: [],
 
-    IsReloadStream: false,
     CurrentStreamChannel: {},
     TotalLiveExperienceStreamRecord: 0,
     LiveExperienceStreams: [],
@@ -143,7 +142,6 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.LiveExperienceStreams = Object.assign([], payload.liveExperienceStreams.ExperienceStreams);
             updated.TotalPendingExperienceRecord = payload.pendingExperiences.TotalRecord;
             updated.PendingExperiences = Object.assign([], payload.pendingExperiences.Experiences);
-            updated.IsReloadStream = false;
             return updated;
 
         case STREAM_CREATE__SUCCEEDED:
