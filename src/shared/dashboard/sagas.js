@@ -500,6 +500,7 @@ export function* dxRemoveStream(action) {
                 type: STREAM_REMOVE__SUCCEEDED,
                 payload: {
                     experienceStreamGUID: action.payload.experienceStreamGUID,
+                    experience: Response.Experience,
                     message: 'Stream has been removed'
                 },
             });

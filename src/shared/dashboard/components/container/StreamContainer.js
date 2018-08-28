@@ -57,6 +57,7 @@ class StreamContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.IsReloadStream && !this.props.IsReloadStream) {
+            console.log('called now');
             this.props.dxSelectStreamChannelAction(this.props.CurrentStreamChannel);
         }
     }
