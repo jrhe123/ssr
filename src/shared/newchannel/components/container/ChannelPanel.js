@@ -41,6 +41,7 @@ class ChannelPanel extends Component {
             leftContainerStyle,
             labelStyle,
             descLabelStyle,
+            promoInputStyle,
             rightContainerStyle,
         } = styles;
 
@@ -79,28 +80,18 @@ class ChannelPanel extends Component {
                                             </div>
                                             <div style={rightContainerStyle}>
                                                 <p style={descLabelStyle}>Enter your promo code.</p>
-                                                {/* <DxInput
-                                                    enableEnter={false}
-                                                    placeholder="Enter your promo code.."
-                                                    handleValChange={(e) => this.handleValueUpdate('CHANNEL_CODE', e.target.value)}
-                                                    isDark={false}
-                                                    width="225px"
-                                                    disabled={false}
-                                                    value={Channel.ChannelCode}
-                                                    isRounded={true}
-                                                /> */}
                                                 <Input
-                                                    className="dx_search_input"
-                                                    // style={inputStyle}
-                                                    value={"123"}
+                                                    style={promoInputStyle}
+                                                    value={Channel.ChannelCode}
                                                     fullWidth
-                                                    placeholder={"123"}
+                                                    disableUnderline={true} 
+                                                    placeholder={'Enter your promo code..'}
                                                     inputProps={{ 'aria-label': 'Search' }}
-                                                    onChange={(event) => this.handleValueChange(event)}
+                                                    onChange={(e) => this.handleValueUpdate('CHANNEL_CODE', e.target.value)}
                                                     endAdornment={
                                                         <InputAdornment
                                                             position="end">
-                                                            <Close />
+                                                            <CheckCircle />
                                                         </InputAdornment>
                                                     }
                                                 />
@@ -200,6 +191,16 @@ const styles = {
         color: colors.labelColor,
         fontSize: fonts.h4,
         marginBottom: 24,
+    },
+    promoInputStyle: {
+        height: 28,
+        width: 225,
+        paddingLeft: 12,
+        paddingRight: 12,
+        backgroundColor: colors.whiteColor,
+        borderRadius: '18px',
+        border: 'none',
+        fontSize: fonts.h3
     },
     defaultColorOptionIconContainerStyle: {
         height: 36,
