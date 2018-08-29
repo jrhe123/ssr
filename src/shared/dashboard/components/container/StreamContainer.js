@@ -40,8 +40,6 @@ class StreamContainer extends Component {
     state = {
         isMenuOpen: false,
         isChannelMenuOpen: false,
-        channelFilterLabel: 'All channel',
-        channelFilter: 'ALL',
         isModalOpen: false,
         modalType: 'CREATE',
         modalTitle: '',
@@ -318,7 +316,10 @@ class StreamContainer extends Component {
             TotalPendingExperienceRecord,
             PendingExperiences,
 
+            StreamChannelSearchInput,
             TotalStreamActiveChannelRecord,
+            StreamChannelTypeFilter,
+            StreamChannelTypeFilterLabel,
         } = this.props;
 
         return (
@@ -401,7 +402,7 @@ class StreamContainer extends Component {
                                         <Button
                                             style={Object.assign({}, channelDropdownBtnStyle, !this.state.isChannelMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                             onClick={() => this.handleToggleChannelMenu()}
-                                        >{this.state.channelFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                        >{StreamChannelTypeFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                     }
                                     align={'center'}
                                     size={'md'}
@@ -461,10 +462,10 @@ class StreamContainer extends Component {
                             <div style={searchBarWrapperStyle}>
                                 <SearchBar
                                     className="dx_stream_search_bar"
-                                    value={this.state.value}
-                                    onChange={(val) => this.handleSearchChannel(val)}
+                                    value={StreamChannelSearchInput}
                                     style={searchBarStyle}
                                     placeholder={'Type for search'}
+                                    onChange={(val) => this.handleSearchChannel(val)}
                                 />
                             </div>
                             <div style={channelInfoWrapperStyle}>
@@ -969,8 +970,11 @@ const stateToProps = (state) => {
         TotalPendingExperienceRecord: state.dashboard.TotalPendingExperienceRecord,
         PendingExperiences: state.dashboard.PendingExperiences,
 
+        StreamChannelSearchInput: state.dashboard.StreamChannelSearchInput,
         StreamActiveChannels: state.dashboard.StreamActiveChannels,
         TotalStreamActiveChannelRecord: state.dashboard.TotalStreamActiveChannelRecord,
+        StreamChannelTypeFilter: state.dashboard.StreamChannelTypeFilter,
+        StreamChannelTypeFilterLabel: state.dashboard.StreamChannelTypeFilterLabel,
     }
 }
 
