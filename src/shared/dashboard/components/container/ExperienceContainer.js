@@ -254,8 +254,11 @@ class ExperienceContainer extends Component {
             topBarWrapperStyle,
             searchContainerStyle,
             midLabelContainerStyle,
+            midLabelWrapperStyle,
             midLabelStyle,
             capitalMidLabelStyle,
+            clearFilterContainerStyle,
+            clearFilterStyle,
             addBtnContainerStyle,
             experienceListContainerStyle,
             topSubBarContainerStyle,
@@ -329,10 +332,15 @@ class ExperienceContainer extends Component {
                                             />
                                         </div>
                                         <div style={midLabelContainerStyle}>
-                                            <div style={tableContainerStyleV2}>
-                                                <div style={tableWrapperStyleV2}>
-                                                    <p style={midLabelStyle}><span style={capitalMidLabelStyle}>{TotalExperienceRecord}</span> Experience(s)</p>
+                                            <div style={midLabelWrapperStyle}>
+                                                <div style={tableContainerStyleV2}>
+                                                    <div style={tableWrapperStyleV2}>
+                                                        <p style={midLabelStyle}><span style={capitalMidLabelStyle}>{TotalExperienceRecord}</span> Experience(s)</p>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div style={clearFilterContainerStyle}>
+                                                <a style={clearFilterStyle}>Clear Filter</a>
                                             </div>
                                         </div>
                                         <div style={addBtnContainerStyle}>
@@ -657,6 +665,11 @@ const styles = {
     },
     midLabelContainerStyle: {
         flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    midLabelWrapperStyle: {
+        width: 120,
     },
     midLabelStyle: {
         color: colors.labelColor,
@@ -666,6 +679,17 @@ const styles = {
     capitalMidLabelStyle: {
         fontSize: fonts.h1,
         fontWeight: 'bold'
+    },
+    clearFilterContainerStyle: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    clearFilterStyle: {
+        fontSize: fonts.h3,
+        color: colors.labelColor,
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
     addBtnContainerStyle: {
         flex: '132px 0 0'
