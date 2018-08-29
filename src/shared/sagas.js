@@ -12,6 +12,7 @@ import {
 
     dxChannelSearchUpdateSaga,
     dxChannelFilterUpdateSaga,
+    dxChannelFilterClearSaga,
     dxFetchChannelSaga,
     dxUpdateChannelSaga,
 
@@ -109,6 +110,7 @@ export default function* rootSaga() {
         // channel
         dxChannelSearchUpdateSaga(),
         dxChannelFilterUpdateSaga(),
+        dxChannelFilterClearSaga(),
         dxFetchChannelSaga(),
         dxUpdateChannelSaga(),
         dxViewChannelSaga(),

@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import {
     dxUpdateChannelSearch as dxUpdateChannelSearchAction,
     dxUpdateChannelFilter as dxUpdateChannelFilterAction,
+    dxClearChannelFilter as dxClearChannelFilterAction,
     dxFetchChannel as dxFetchChannelAction,
     dxUpdateChannel as dxUpdateChannelAction,
 } from '../../actions';
@@ -130,7 +131,7 @@ class ChannelContainer extends Component {
     }
 
     handleClearFilter = () => {
-        console.log('clear here');
+        this.props.dxClearChannelFilterAction();
     }
 
     render() {
@@ -313,6 +314,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxUpdateChannelSearchAction,
     dxUpdateChannelFilterAction,
+    dxClearChannelFilterAction,
     dxFetchChannelAction,
     dxUpdateChannelAction,
 }

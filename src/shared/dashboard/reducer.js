@@ -4,6 +4,7 @@ import {
     // channel
     CHANNEL_UPDATE_SEARCH__SUCCEEDED,
     CHANNEL_UPDATE_FILTER__SUCCEEDED,
+    CHANNEL_CLEAR_FILTER__SUCCEEDED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
     // experience
@@ -143,6 +144,16 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             }
             updated.TotalChannelRecord = payload.totalRecord;
             updated.ExperienceChannels = payload.expereienceChannels;
+            return updated;
+
+        case CHANNEL_CLEAR_FILTER__SUCCEEDED:
+            updated.TotalChannelRecord = payload.totalRecord;
+            updated.ExperienceChannels = payload.expereienceChannels;
+            updated.ChannelSearchInput = '';
+            updated.ChannelTypeFilter = 'ALL';
+            updated.ChannelTypeFilterLabel = 'ALL channel';
+            updated.ChannelStatusFilter = 'ALL';
+            updated.ChannelStatusFilterLabel = 'All';
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:
