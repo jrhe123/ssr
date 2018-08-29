@@ -1,4 +1,8 @@
 import {
+    CHANNEL_CODE_VALUE_REQUESTED,
+    CHANNEL_CODE_VALUE__SUCCEEDED,
+    CHANNEL_CODE_VALUE__FAILED,
+
     CHANNEL_TYPE__SUCCEEDED,
     CHANNEL_VALUE__SUCCEEDED,
     CHANNEL_CREATE__SUCCEEDED,
@@ -49,13 +53,26 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
                 case 'CHANNEL_DESCRIPTION':
                     tmpChannel.ChannelDescription = payload.val;
                     break;
-                case 'CHANNEL_CODE':
-                    tmpChannel.ChannelCode = payload.val;
-                    tmpChannel.ChannelCodeAvailable = payload.available;
-                    break;
                 default:
                     break;
             }
+            updated.Channel = tmpChannel;
+            return updated;
+
+        case CHANNEL_CODE_VALUE_REQUESTED:
+            tmpChannel.ChannelSyncing = true;
+            updated.Channel = tmpChannel;
+            return updated;
+
+        case CHANNEL_CODE_VALUE__SUCCEEDED:
+            tmpChannel.ChannelCode = payload.val;
+            tmpChannel.ChannelCodeAvailable = payload.available;
+            tmpChannel.ChannelSyncing = false;
+            updated.Channel = tmpChannel;
+            return updated;
+
+        case CHANNEL_CODE_VALUE__FAILED:
+            tmpChannel.ChannelSyncing = false;
             updated.Channel = tmpChannel;
             return updated;
 

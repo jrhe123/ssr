@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     dxChannelValueUpdate as dxChannelValueUpdateAction,
+    dxChannelCodeValueUpdate as dxChannelCodeValueUpdateAction,
 } from '../../actions';
 
 // constants
@@ -16,6 +17,7 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import NotInterested from '@material-ui/icons/NotInterested';
+import { ClipLoader } from 'react-spinners';
 
 // components
 import ChannelOptionBar from '../presentation/ChannelOptionBar';
@@ -30,10 +32,39 @@ class ChannelPanel extends Component {
             Channel
         } = this.props;
         if (type == 'CHANNEL_CODE') {
-            this.props.dxChannelValueUpdateAction(type, val, Channel.ExperienceChannelGUID);
+            this.props.dxChannelCodeValueUpdateAction(val, Channel.ExperienceChannelGUID);
         } else {
             this.props.dxChannelValueUpdateAction(type, val);
         }
+    }
+
+    renderAdornment = (channel) => {
+        let adornment;
+        if (channel.ChannelSyncing) {
+            adornment = (
+                <div style={{ paddingRight: 6, height: 12 }}>
+                    <ClipLoader
+                        size={12}
+                        color={colors.greenColor}
+                        loading={true}
+                    />
+                </div>
+            )
+        } else {
+            if (channel.ChannelCodeAvailable) {
+                adornment = (
+                    <CheckCircle style={{ color: colors.greenColor }} />
+                )
+            } else {
+                adornment = (
+                    <a className="dx_promo_code_view dx_tool_tip">
+                        <NotInterested style={{ color: colors.redColor }} />
+                        <span class="dx_tool_tip_text">Already taken</span>
+                    </a>
+                )
+            }
+        }
+        return adornment;
     }
 
     render() {
@@ -98,21 +129,7 @@ class ChannelPanel extends Component {
                                                         Channel.ChannelCode ?
                                                             <InputAdornment
                                                                 position="end">
-                                                                {
-                                                                    Channel.ChannelSyncing ?
-                                                                        <p>sync ing</p>
-                                                                        :
-                                                                        null
-                                                                }
-                                                                {
-                                                                    !Channel.ChannelSyncing && Channel.ChannelCodeAvailable ?
-                                                                        <CheckCircle style={{ color: colors.greenColor }} />
-                                                                        :
-                                                                        <a className="dx_promo_code_view dx_tool_tip">
-                                                                            <NotInterested style={{ color: colors.redColor }} />
-                                                                            <span class="dx_tool_tip_text">Already taken</span>
-                                                                        </a>
-                                                                }
+                                                                { this.renderAdornment(Channel) }
                                                             </InputAdornment>
                                                             :
                                                             null
@@ -281,6 +298,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxChannelValueUpdateAction,
+    dxChannelCodeValueUpdateAction,
 }
 
 export default connect(stateToProps, dispatchToProps)(ChannelPanel);

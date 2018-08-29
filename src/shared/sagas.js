@@ -87,6 +87,7 @@ import {
 import { 
     dxChannelTypeSaga,
     dxChannelValUpdateSaga,
+    dxChannelCodeValUpdateSaga,
     dxChannelCreateSaga,
     dxViewChannelSaga,
     dxChannelUpdateSaga,
@@ -184,6 +185,7 @@ export default function* rootSaga() {
         // Channel
         dxChannelTypeSaga(),
         dxChannelValUpdateSaga(),
+        dxChannelCodeValUpdateSaga(),
         dxChannelCreateSaga(),
         
         // Global

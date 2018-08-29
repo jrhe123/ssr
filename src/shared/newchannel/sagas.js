@@ -11,6 +11,10 @@ import {
     CHANNEL_VALUE__SUCCEEDED,
     CHANNEL_VALUE__FAILED,
 
+    CHANNEL_CODE_VALUE_REQUESTED,
+    CHANNEL_CODE_VALUE__SUCCEEDED,
+    CHANNEL_CODE_VALUE__FAILED,
+
     CHANNEL_CREATE_REQUESTED,
     CHANNEL_CREATE__SUCCEEDED,
     CHANNEL_CREATE__FAILED,
@@ -46,6 +50,28 @@ export function* dxChannelTypeSaga() {
 }
 
 //Channel Val update
+export function* dxChannelValUpdate(action) {
+    try {
+        yield put({
+            type: CHANNEL_VALUE__SUCCEEDED,
+            payload: {
+                type: action.payload.type,
+                val: action.payload.val,
+            },
+        });
+    } catch (error) {
+        yield put({
+            type: CHANNEL_VALUE__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxChannelValUpdateSaga() {
+    yield takeEvery(CHANNEL_VALUE_REQUESTED, dxChannelValUpdate);
+}
+
+//Channel Code Val update
 export const dxChannelSyncChannelCodeUrl = (payload) => {
     const formattedParams = {
         ChannelCode: payload.val,
@@ -56,55 +82,38 @@ export const dxChannelSyncChannelCodeUrl = (payload) => {
     )
 }
 
-export function* dxChannelValUpdate(action) {
-    if (action.payload.type == 'CHANNEL_CODE') {
-        try {
-            if(action.payload.val){
-                const response = yield call(dxChannelSyncChannelCodeUrl, action.payload);
-                let { Confirmation, Response, Message } = response;
-                yield put({
-                    type: CHANNEL_VALUE__SUCCEEDED,
-                    payload: {
-                        type: action.payload.type,
-                        val: action.payload.val,
-                        available: Confirmation == 'SUCCESS' ? true: false
-                    },
-                });
-            }else{
-                yield put({
-                    type: CHANNEL_VALUE__SUCCEEDED,
-                    payload: {
-                        type: action.payload.type,
-                        val: action.payload.val,
-                    },
-                });
-            }            
-        } catch (error) {
+export function* dxChannelCodeValUpdate(action) {
+    try {
+        if (action.payload.val) {
+            const response = yield call(dxChannelSyncChannelCodeUrl, action.payload);
+            let { Confirmation, Response, Message } = response;
             yield put({
-                type: CHANNEL_VALUE__FAILED,
-                payload: error,
+                type: CHANNEL_CODE_VALUE__SUCCEEDED,
+                payload: {
+                    type: action.payload.type,
+                    val: action.payload.val,
+                    available: Confirmation == 'SUCCESS' ? true : false
+                },
             });
-        }
-    } else {
-        try {
+        } else {
             yield put({
-                type: CHANNEL_VALUE__SUCCEEDED,
+                type: CHANNEL_CODE_VALUE__SUCCEEDED,
                 payload: {
                     type: action.payload.type,
                     val: action.payload.val,
                 },
             });
-        } catch (error) {
-            yield put({
-                type: CHANNEL_VALUE__FAILED,
-                payload: error,
-            });
         }
+    } catch (error) {
+        yield put({
+            type: CHANNEL_CODE_VALUE__FAILED,
+            payload: error,
+        });
     }
 }
 
-export function* dxChannelValUpdateSaga() {
-    yield takeEvery(CHANNEL_VALUE_REQUESTED, dxChannelValUpdate);
+export function* dxChannelCodeValUpdateSaga() {
+    yield takeEvery(CHANNEL_CODE_VALUE_REQUESTED, dxChannelCodeValUpdate);
 }
 
 // Channel create

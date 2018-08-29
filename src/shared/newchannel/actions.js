@@ -28,11 +28,10 @@ export const dxChannelValueUpdate = (type, val, experienceChannelGUID) => {
     }
 }
 
-export const dxChannelCodeValueUpdate = (type, val, experienceChannelGUID) => {
+export const dxChannelCodeValueUpdate = (val, experienceChannelGUID) => {
     return {
         type: CHANNEL_CODE_VALUE_REQUESTED,
         payload: {
-            type, 
             val,
             experienceChannelGUID,
         },
