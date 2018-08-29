@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Libraries
 import Home from '@material-ui/icons/Home';
+import Cancel from '@material-ui/icons/Cancel';
 
 // components
 import ThumbnailPhoneElement from '../../../components/dxPage/ThumbnailPhoneElement';
@@ -83,9 +84,7 @@ class ThumbnailPage extends Component {
                     style={closeContainerStyle}
                     onClick={() => this.props.handleDeletePage()}
                 >
-                    <img
-                        style={closeIconStyle}
-                        src={require('../../../../../assets/images/close_button.png')} />
+                    <Cancel style={closeIconStyle}/>
                 </div>
                 <div
                     style={contentContainerStyle}
@@ -136,12 +135,17 @@ const styles = {
         height: 18,
         zIndex: 99,
         borderRadius: '50%',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        backgroundColor: colors.whiteColor
     },
     closeIconStyle: {
+        position: 'absolute',
+        right: -3,
+        top: -3,
         display: 'block',
-        height: 18,
-        width: 18
+        height: 24,
+        width: 24,
+        color: colors.redColor,
     },
     contentContainerStyle: {
         backgroundColor: colors.whiteColor,

@@ -11,6 +11,12 @@ import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 import sizes from '../../../styles/sizes';
 
+// Libraries
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import NotInterested from '@material-ui/icons/NotInterested';
+
 // components
 import ChannelOptionBar from '../presentation/ChannelOptionBar';
 import ChannelColorOptionBar from '../presentation/ChannelColorOptionBar';
@@ -73,7 +79,7 @@ class ChannelPanel extends Component {
                                             </div>
                                             <div style={rightContainerStyle}>
                                                 <p style={descLabelStyle}>Enter your promo code.</p>
-                                                <DxInput
+                                                {/* <DxInput
                                                     enableEnter={false}
                                                     placeholder="Enter your promo code.."
                                                     handleValChange={(e) => this.handleValueUpdate('CHANNEL_CODE', e.target.value)}
@@ -82,6 +88,21 @@ class ChannelPanel extends Component {
                                                     disabled={false}
                                                     value={Channel.ChannelCode}
                                                     isRounded={true}
+                                                /> */}
+                                                <Input
+                                                    className="dx_search_input"
+                                                    // style={inputStyle}
+                                                    value={"123"}
+                                                    fullWidth
+                                                    placeholder={"123"}
+                                                    inputProps={{ 'aria-label': 'Search' }}
+                                                    onChange={(event) => this.handleValueChange(event)}
+                                                    endAdornment={
+                                                        <InputAdornment
+                                                            position="end">
+                                                            <Close />
+                                                        </InputAdornment>
+                                                    }
                                                 />
                                             </div>
                                         </div>

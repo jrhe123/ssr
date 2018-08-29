@@ -5,7 +5,6 @@ import colors from '../../styles/colors';
 
 // Libraries
 import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
@@ -108,7 +107,6 @@ const styles = {
     },
     inputStyle: {
         fontSize: fonts.h3,
-
     }
 }
 
