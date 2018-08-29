@@ -817,6 +817,7 @@ const styles = {
     tipsLabelStyle: {
         fontSize: fonts.h4,
         margin: 0,
+        textAlign: 'justify'
     },
     clickHereLinkStyle: {
         color: colors.blueColor,
