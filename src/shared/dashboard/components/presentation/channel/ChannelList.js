@@ -155,6 +155,17 @@ class ChannelList extends Component {
                                 >
                                     <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
                                         <div style={channelTypeFilterOptionWrapperStyle}>
+                                            <div style={channelTypeFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>All channel</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
+                                        <div style={channelTypeFilterOptionWrapperStyle}>
                                             <div style={channelTypeFilterOptionIconContainerStyle}>
                                                 <Language style={channelTypeFilterOptionIconStyle} />
                                             </div>
@@ -206,6 +217,17 @@ class ChannelList extends Component {
                                     align={'center'}
                                     size={'md'}
                                 >
+                                    <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
+                                        <div style={channelStatusFilterOptionWrapperStyle}>
+                                            <div style={channelStatusFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelTypeFilterOptionTextStyle}>All</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
                                         <div style={channelStatusFilterOptionWrapperStyle}>
                                             <div style={channelStatusFilterOptionIconContainerStyle}>
