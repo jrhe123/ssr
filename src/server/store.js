@@ -8,10 +8,10 @@ import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../shared/reducer';
 import socketReducer from '../shared/socketReducer';
 import socketIoMiddleware from '../shared/socket';
-import loginReducer from '../shared/login/reducer';
-import dashboardReducer from '../shared/dashboard/reducer';
-import newexperienceReducer from '../shared/newexperience/reducer';
-import newchannelReducer from '../shared/newchannel/reducer'
+// import loginReducer from '../shared/login/reducer';
+// import dashboardReducer from '../shared/dashboard/reducer';
+// import newexperienceReducer from '../shared/newexperience/reducer';
+// import newchannelReducer from '../shared/newchannel/reducer'
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -26,10 +26,10 @@ export default (initialState) => {
         combineReducers({      
             socketReducer: socketReducer,
             root: rootReducer,
-            login: loginReducer,
-            dashboard: dashboardReducer,
-            newexperience: newexperienceReducer,
-            newchannel:newchannelReducer,
+            // login: loginReducer,
+            // dashboard: dashboardReducer,
+            // newexperience: newexperienceReducer,
+            // newchannel:newchannelReducer,
 
         }),
         initialState,

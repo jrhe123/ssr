@@ -29,7 +29,6 @@ export const dxApi = (url, params, isAuth) => {
     )
 }
 
-
 export const dxFileApi = (url, formData, isAuth) => {
     let headers = {
         'Accept': 'application/json',

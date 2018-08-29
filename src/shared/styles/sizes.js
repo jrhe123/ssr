@@ -1,4 +1,4 @@
 export default {
-    headerHeight: '72px',
+    dxHeaderHeight: '72px',
     dxWidth: '1200px',
 }

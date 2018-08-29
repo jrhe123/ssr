@@ -46,8 +46,7 @@ const ProtectedRouteWithParams
 class App extends Component {
 
     componentDidMount(){
-        let token = localStorage.getItem('token');
-        if(token) this.props.dxValidateTokenAction(token, '5f92de5b-e627-43e5-a42f-75f9e4715380');
+        
     }
 
     handleAlertBarClose = () => {
@@ -96,38 +95,6 @@ class App extends Component {
                         exact={false}
                         path="/dashboard/:param(0|1|2)"
                         component={Routes.DashboardPage}
-                    />
-
-                    <ProtectedRouteWithParams
-                        isAuthenticated={isAuthenticated}
-                        route="new_experience"
-                        exact
-                        path="/new_experience/:param(0|1)"
-                        component={Routes.NewExperiencePage}
-                    />
-
-                    <ProtectedRouteWithParams
-                        isAuthenticated={isAuthenticated}
-                        route="edit_experience"
-                        exact
-                        path="/edit_experience/:param"
-                        component={Routes.NewExperiencePage}
-                    />
-            
-                    <ProtectedRouteWithParams
-                        isAuthenticated={isAuthenticated}
-                        route="new_channel"
-                        exact
-                        path="/new_channel/:param(0|1|2)"
-                        component={Routes.NewChannelPage}
-                    />
-
-                    <ProtectedRouteWithParams
-                        isAuthenticated={isAuthenticated}
-                        route="edit_channel"
-                        exact
-                        path="/edit_channel/:param"
-                        component={Routes.NewChannelPage}
                     />
 
                     <Route path="*" render={() => (<Redirect to="/" />)} />

@@ -1,3 +1,0 @@
-export const LOGIN_REQUESTED = 'LOGIN_REQUESTED';
-export const LOGIN__SUCCEEDED = 'LOGIN__SUCCEEDED';
-export const LOGIN__FAILED = 'LOGIN__FAILED';
