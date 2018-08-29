@@ -22,12 +22,18 @@ import ChannelOptionBar from '../presentation/ChannelOptionBar';
 import ChannelColorOptionBar from '../presentation/ChannelColorOptionBar';
 import ChannelTitleInput from '../presentation/ChannelTitleInput';
 import ChannelDescInput from '../presentation/ChannelDescInput';
-import DxInput from '../../../components/dxInput/DxInput';
 
 class ChannelPanel extends Component {
 
     handleValueUpdate = (type, val) => {
-        this.props.dxChannelValueUpdateAction(type, val);
+        const {
+            Channel
+        } = this.props;
+        if (type == 'CHANNEL_CODE') {
+            this.props.dxChannelValueUpdateAction(type, val, Channel.ExperienceChannelGUID);
+        } else {
+            this.props.dxChannelValueUpdateAction(type, val);
+        }
     }
 
     render() {
@@ -84,15 +90,23 @@ class ChannelPanel extends Component {
                                                     style={promoInputStyle}
                                                     value={Channel.ChannelCode}
                                                     fullWidth
-                                                    disableUnderline={true} 
+                                                    disableUnderline={true}
                                                     placeholder={'Enter your promo code..'}
                                                     inputProps={{ 'aria-label': 'Search' }}
                                                     onChange={(e) => this.handleValueUpdate('CHANNEL_CODE', e.target.value)}
                                                     endAdornment={
-                                                        <InputAdornment
-                                                            position="end">
-                                                            <CheckCircle />
-                                                        </InputAdornment>
+                                                        Channel.ChannelCode ?
+                                                            <InputAdornment
+                                                                position="end">
+                                                                {
+                                                                    Channel.ChannelCodeAvailable ?
+                                                                        <CheckCircle style={{ color: colors.greenColor }} />
+                                                                        :
+                                                                        <NotInterested style={{ color: colors.redColor }} />
+                                                                }
+                                                            </InputAdornment>
+                                                            :
+                                                            null
                                                     }
                                                 />
                                             </div>
@@ -196,7 +210,6 @@ const styles = {
         height: 28,
         width: 225,
         paddingLeft: 12,
-        paddingRight: 12,
         backgroundColor: colors.whiteColor,
         borderRadius: '18px',
         border: 'none',

@@ -46,20 +46,60 @@ export function* dxChannelTypeSaga() {
 }
 
 //Channel Val update
+export const dxChannelSyncChannelCodeUrl = (payload) => {
+    const formattedParams = {
+        ChannelCode: payload.val,
+        ExperienceChannelGUID: payload.experienceChannelGUID ? payload.experienceChannelGUID : null
+    };
+    return (
+        apiManager.dxApi(`/channel/sync_channel_code`, formattedParams, true)
+    )
+}
+
 export function* dxChannelValUpdate(action) {
-    try {
-        yield put({
-            type: CHANNEL_VALUE__SUCCEEDED,
-            payload: {
-                type: action.payload.type,
-                val: action.payload.val,
-            },
-        });
-    } catch (error) {
-        yield put({
-            type: CHANNEL_VALUE__FAILED,
-            payload: error,
-        });
+    if (action.payload.type == 'CHANNEL_CODE') {
+        try {
+            if(action.payload.val){
+                const response = yield call(dxChannelSyncChannelCodeUrl, action.payload);
+                let { Confirmation, Response, Message } = response;
+                yield put({
+                    type: CHANNEL_VALUE__SUCCEEDED,
+                    payload: {
+                        type: action.payload.type,
+                        val: action.payload.val,
+                        available: Confirmation == 'SUCCESS' ? true: false
+                    },
+                });
+            }else{
+                yield put({
+                    type: CHANNEL_VALUE__SUCCEEDED,
+                    payload: {
+                        type: action.payload.type,
+                        val: action.payload.val,
+                    },
+                });
+            }            
+        } catch (error) {
+            yield put({
+                type: CHANNEL_VALUE__FAILED,
+                payload: error,
+            });
+        }
+    } else {
+        try {
+            yield put({
+                type: CHANNEL_VALUE__SUCCEEDED,
+                payload: {
+                    type: action.payload.type,
+                    val: action.payload.val,
+                },
+            });
+        } catch (error) {
+            yield put({
+                type: CHANNEL_VALUE__FAILED,
+                payload: error,
+            });
+        }
     }
 }
 

@@ -12,6 +12,7 @@ const defaultChannel = {
     ChannelName: '',
     ChannelDescription: '',
     ChannelCode: '',
+    ChannelCodeAvailable: false,
 }
 
 const initialState = {
@@ -49,6 +50,7 @@ const newchannelReducer = (previousState = initialState, { type, payload }) => {
                     break;
                 case 'CHANNEL_CODE':
                     tmpChannel.ChannelCode = payload.val;
+                    tmpChannel.ChannelCodeAvailable = payload.available;
                     break;
                 default:
                     break;
