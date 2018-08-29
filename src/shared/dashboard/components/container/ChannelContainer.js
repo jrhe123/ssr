@@ -155,7 +155,39 @@ class ChannelContainer extends Component {
         return (
             <div style={mainContainerStyle}>
                 {
-                    ExperienceChannels.length ?
+                    !TotalChannelRecord
+                        && !ChannelSearchInput
+                        && ChannelTypeFilter == 'ALL'
+                        && ChannelStatusFilter == 'ALL' ?
+                        (
+                            <div style={mainWrapperStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <p style={topLabelStyle}> Reach your audience via channel.
+                                </p>
+                                        <div>
+                                            <img
+                                                style={imgStyle}
+                                                src={require('../../../../../assets/images/channelPage.png')}
+                                            />
+                                        </div>
+                                        <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
+                                </p>
+                                        <div style={btnWrapperStyle}>
+                                            <Button
+                                                variant="Add a new channel"
+                                                style={fullBtnStyle}
+                                                onClick={() => this.handleCreateChannel()}>
+                                                Create A Channel
+                                    </Button>
+                                        </div>
+                                        <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
+                                </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
                         (
                             <div style={channelListContainerStyle}>
                                 <ChannelList
@@ -175,34 +207,6 @@ class ChannelContainer extends Component {
                                 />
                             </div>
                         )
-                        :
-                        <div style={mainWrapperStyle}>
-                            <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
-                                    <p style={topLabelStyle}> Reach your audience via channel.
-                                </p>
-                                    <div>
-                                        <img
-                                            style={imgStyle}
-                                            src={require('../../../../../assets/images/channelPage.png')}
-                                        />
-                                    </div>
-                                    <p style={middleLabelStyle}> Let's create a channel to stream your experience(s)
-                                </p>
-                                    <div style={btnWrapperStyle}>
-                                        <Button
-                                            variant="Add a new channel"
-                                            style={fullBtnStyle}
-                                            onClick={() => this.handleCreateChannel()}>
-                                            Create A Channel
-                                    </Button>
-                                    </div>
-                                    <p style={bottomLabelStyle}> Your audience can subscribe and follow channel(s). Channel(s) improve content discoverablity.
-                                </p>
-                                </div>
-                            </div>
-
-                        </div>
                 }
                 <NewChannelModal
                     open={this.state.newChannelModalOpen}
