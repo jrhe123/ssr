@@ -39,10 +39,14 @@ export const dxLogout = () => {
     }
 }
 
-export const dxUpdateChannelSearch = () => {
+export const dxUpdateChannelSearch = (val, channelTypeFilter, channelStatusFilter) => {
     return {
         type: CHANNEL_UPDATE_SEARCH_REQUESTED,
-        payload: {},
+        payload: {
+            val,
+            channelTypeFilter,
+            channelStatusFilter,
+        },
     }
 }
 

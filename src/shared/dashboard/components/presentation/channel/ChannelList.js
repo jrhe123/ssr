@@ -312,7 +312,7 @@ class ChannelList extends Component {
                     <div style={channelListInfoContainerStyle}>
                         <div style={channelListInfoWrapperStyle}>
                             <p style={channelNumberStyle}><span style={capitalChannelNumberStyle}>{channelNumber}</span> Channel(s)</p>
-                            <DropdownMenu
+                            {/* <DropdownMenu
                                 isOpen={this.state.isMenuOpen}
                                 close={this.handleCloseMenu}
                                 toggle={
@@ -329,7 +329,7 @@ class ChannelList extends Component {
                                 <div>
                                     <p style={menuItemStyle}>Second option</p>
                                 </div>
-                            </DropdownMenu>
+                            </DropdownMenu> */}
                         </div>
                     </div>
 

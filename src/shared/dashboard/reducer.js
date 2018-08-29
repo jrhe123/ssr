@@ -2,6 +2,7 @@ import {
     DASHBOARD_NAVI__SUCCEEDED,
 
     // channel
+    CHANNEL_UPDATE_SEARCH__SUCCEEDED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
     // experience
@@ -109,6 +110,12 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
                 tmpCardAndPagesExperiences[tmpExperience.index] = tmpExperience.experience;
                 updated.CardAndPagesExperiences = tmpCardAndPagesExperiences;
             }
+            return updated;
+
+        case CHANNEL_UPDATE_SEARCH__SUCCEEDED:
+            updated.ChannelSearchInput = payload.val;
+            updated.TotalChannelRecord = payload.totalRecord;
+            updated.ExperienceChannels = payload.expereienceChannels;
             return updated;
 
         case CHANNEL_FETCH__SUCCEEDED:

@@ -16,7 +16,7 @@ import fonts from '../../styles/fonts';
 class SearchBar extends Component {
 
     handleValueChange = (event) => {
-        let val = event.target.value.trim();
+        let val = event.target.value;
         this.props.handleSearchInputChange(val);
     }
 
