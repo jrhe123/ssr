@@ -23,11 +23,7 @@ class ChannelList extends Component {
     state = {
         isMenuOpen: false,
         isChannelTypeMenuOpen: false,
-        channelTypeFilterLabel: 'All channel',
-        channelTypeFilter: 'ALL',
         isChannelStatusMenuOpen: false,
-        channelStatusFilterLabel: 'All',
-        channelStatusFilter: 'ALL',
     }
 
     handleToggleMenu = () => {
@@ -68,6 +64,23 @@ class ChannelList extends Component {
 
     handleCloseChannelStatusMenu = () => {
         this.setState({ isChannelStatusMenuOpen: false });
+    }
+
+    handleSelectFilter = (type, option) => {
+        const {
+            channelTypeFilter,
+            channelStatusFilter,
+        } = this.props;
+
+        if (type == 'CHANNEL_TYPE') {
+            if (option != channelTypeFilter) {
+                this.props.handleSelectFilter(type, option);
+            }
+        } else if (type == 'CHANNEL_STATUS') {
+            if (option != channelStatusFilter) {
+                this.props.handleSelectFilter(type, option);
+            }
+        }
     }
 
     render() {
@@ -118,6 +131,12 @@ class ChannelList extends Component {
         const {
             experienceChannels,
             channelNumber,
+
+            searchInputValue,
+            channelTypeFilter,
+            channelTypeFilterLabel,
+            channelStatusFilter,
+            channelStatusFilterLabel,
         } = this.props;
 
         return (
@@ -129,7 +148,7 @@ class ChannelList extends Component {
                             <SearchBar
                                 isShort={false}
                                 placeholder="search channel(s)"
-                                content={this.props.searchInputValue}
+                                content={searchInputValue}
                                 handleSearchInputChange={(val) => this.props.handleSearchInputChange(val)}
                             />
                         </div>
@@ -150,12 +169,15 @@ class ChannelList extends Component {
                                         <Button
                                             style={Object.assign({}, channelTypeDropdownBtnStyle, !this.state.isChannelTypeMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                             onClick={() => this.handleToggleChannelTypeMenu()}
-                                        >{this.state.channelTypeFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                        >{channelTypeFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                     }
                                     align={'center'}
                                     size={'md'}
                                 >
-                                    <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelTypeFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_TYPE', 'ALL')}
+                                    >
                                         <div style={channelTypeFilterOptionWrapperStyle}>
                                             <div style={channelTypeFilterOptionTextContainerStyle}>
                                                 <div style={tableContainerStyle}>
@@ -166,7 +188,10 @@ class ChannelList extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelTypeFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelTypeFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_TYPE', 'PUBLIC')}
+                                    >
                                         <div style={channelTypeFilterOptionWrapperStyle}>
                                             <div style={channelTypeFilterOptionIconContainerStyle}>
                                                 <Language style={channelTypeFilterOptionIconStyle} />
@@ -180,7 +205,10 @@ class ChannelList extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelTypeFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                    <div
+                                        style={Object.assign({}, channelTypeFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_TYPE', 'INVITATION')}
+                                    >
                                         <div style={channelTypeFilterOptionWrapperStyle}>
                                             <div style={channelTypeFilterOptionIconContainerStyle}>
                                                 <Fingerprint style={channelTypeFilterOptionIconStyle} />
@@ -214,12 +242,15 @@ class ChannelList extends Component {
                                         <Button
                                             style={Object.assign({}, channelStatusDropdownBtnStyle, !this.state.isChannelStatusMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                             onClick={() => this.handleToggleChannelStatusMenu()}
-                                        >{this.state.channelStatusFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                        >{channelStatusFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                     }
                                     align={'center'}
                                     size={'md'}
                                 >
-                                    <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelStatusFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_STATUS', 'ALL')}
+                                    >
                                         <div style={channelStatusFilterOptionWrapperStyle}>
                                             <div style={channelStatusFilterOptionTextContainerStyle}>
                                                 <div style={tableContainerStyle}>
@@ -230,7 +261,10 @@ class ChannelList extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelStatusFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelStatusFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_STATUS', 'LIVE')}
+                                    >
                                         <div style={channelStatusFilterOptionWrapperStyle}>
                                             <div style={channelStatusFilterOptionIconContainerStyle}>
                                                 <FlashOn style={Object.assign({}, channelStatusFilterOptionIconStyle, { color: colors.greenColor })} />
@@ -244,7 +278,10 @@ class ChannelList extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelStatusFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                    <div
+                                        style={Object.assign({}, channelStatusFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}
+                                        onClick={() => this.handleSelectFilter('CHANNEL_STATUS', 'DRAFT')}
+                                    >
                                         <div style={channelStatusFilterOptionWrapperStyle}>
                                             <div style={channelStatusFilterOptionIconContainerStyle}>
                                                 <Edit style={channelStatusFilterOptionIconStyle} />

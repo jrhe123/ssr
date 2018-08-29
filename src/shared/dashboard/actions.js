@@ -3,6 +3,7 @@ import {
     LOGOUT_REQUESTED,
 
     // CHANNEL
+    CHANNEL_UPDATE_SEARCH_REQUESTED,
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_UPDATE_STATUS_REQUESTED,
 
@@ -34,6 +35,13 @@ export const dxDashboardNavi = (index) => {
 export const dxLogout = () => {
     return {
         type: LOGOUT_REQUESTED,
+        payload: {},
+    }
+}
+
+export const dxUpdateChannelSearch = () => {
+    return {
+        type: CHANNEL_UPDATE_SEARCH_REQUESTED,
         payload: {},
     }
 }

@@ -52,6 +52,10 @@ const initialState = {
     ChannelSearchInput: null,
     TotalChannelRecord: 0,
     ExperienceChannels: [],
+    ChannelTypeFilter: 'ALL',
+    ChannelTypeFilterLabel: 'All channel',
+    ChannelStatusFilter: 'ALL',
+    ChannelStatusFilterLabel: 'All',
 
     // 3. stream
     TotalStreamActiveChannelRecord: 0,

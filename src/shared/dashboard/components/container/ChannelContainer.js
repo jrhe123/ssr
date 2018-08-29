@@ -114,12 +114,21 @@ class ChannelContainer extends Component {
         console.log('out here: ', val);
     }
 
+    handleSelectFilter = (type, option) => {
+        console.log('type: ', type);
+        console.log('option: ', option);
+    }
+
     render() {
 
         const {
             ChannelSearchInput,
             ExperienceChannels,
             TotalChannelRecord,
+            ChannelTypeFilter,
+            ChannelTypeFilterLabel,
+            ChannelStatusFilter,
+            ChannelStatusFilterLabel,
         } = this.props;
 
         const {
@@ -148,11 +157,16 @@ class ChannelContainer extends Component {
                                     experienceChannels={ExperienceChannels}
                                     channelNumber={TotalChannelRecord}
                                     searchInputValue={ChannelSearchInput}
+                                    channelTypeFilter={ChannelTypeFilter}
+                                    channelTypeFilterLabel={ChannelTypeFilterLabel}
+                                    channelStatusFilter={ChannelStatusFilter}
+                                    channelStatusFilterLabel={ChannelStatusFilterLabel}
                                     handleAddChannelClick={() => this.handleCreateChannel()}
                                     handleEditChannel={(channel) => this.handleEditChannel(channel)}
                                     handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
                                     handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
                                     handleSearchInputChange={(val) => this.handleSearchInputChange(val)}
+                                    handleSelectFilter={(type, option) => this.handleSelectFilter(type, option)}
                                 />
                             </div>
                         )
@@ -265,9 +279,15 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+
         ChannelSearchInput: state.dashboard.ChannelSearchInput,
         ExperienceChannels: state.dashboard.ExperienceChannels,
         TotalChannelRecord: state.dashboard.TotalChannelRecord,
+
+        ChannelTypeFilter: state.dashboard.ChannelTypeFilter,
+        ChannelTypeFilterLabel: state.dashboard.ChannelTypeFilterLabel,
+        ChannelStatusFilter: state.dashboard.ChannelStatusFilter,
+        ChannelStatusFilterLabel: state.dashboard.ChannelStatusFilterLabel,
     }
 }
 
