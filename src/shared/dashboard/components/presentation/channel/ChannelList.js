@@ -162,7 +162,7 @@ class ChannelList extends Component {
                             </div>
                             <div style={channelTypeDropdownWrapperStyle}>
                                 <DropdownMenu
-                                    className="dx_channel_filter_menu"
+                                    className="dx_channel_type_filter_menu"
                                     isOpen={this.state.isChannelTypeMenuOpen}
                                     close={this.handleCloseChannelTypeMenu}
                                     toggle={
@@ -417,7 +417,7 @@ const styles = {
         backgroundColor: colors.whiteColor,
         borderTopLeftRadius: '12px',
         borderTopRightRadius: '12px',
-        width: '130px',
+        width: '180px',
     },
     channelTypeFilterOptionContainerStyle: {
         display: 'flex',

@@ -196,6 +196,18 @@ body{
     background: #FFFFFF;
 }
 
+.dx_channel_type_filter_menu>div.dd-menu-items{
+    margin: 0 !important;
+    width: 180px !important;
+}
+.dx_channel_type_filter_menu>div.dd-menu-items>ul{
+    box-shadow: none !important;
+    background: transparent !important;
+}
+.dx_channel_type_filter_menu>div.dd-menu-items>ul>div{
+    background: #FFFFFF;
+}
+
 .dx_glowing_btn{
     cursor: pointer;
     display: inline-block;
