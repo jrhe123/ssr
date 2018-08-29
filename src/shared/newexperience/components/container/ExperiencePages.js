@@ -57,6 +57,9 @@ import {
     dxLoading as dxLoadingAction,
 } from '../../../actions';
 
+// helpers
+import { find_page_obj_by_guid } from '../../../helpers';
+
 // constants
 import sizes from '../../../styles/sizes';
 import fonts from '../../../styles/fonts';
@@ -218,7 +221,20 @@ class ExperiencePages extends Component {
     }
 
     handleBtnConnectPageChange = (sectionGUID, pageGUID) => {
-        this.props.dxExperiencePageSectionConnectPageAction(sectionGUID, pageGUID);
+        const {
+            Experience,
+        } = this.props;
+        const {
+            NewPage,
+            Pages,
+        } = Experience;
+        const targetPage = find_page_obj_by_guid(Pages, pageGUID);
+        if (NewPage.ParentPageGUID
+            && NewPage.ParentPageGUID == targetPage.page.PageGUID) {
+            this.handleErrorMsg('Sorry, cannot support loop connection');
+        } else {
+            this.props.dxExperiencePageSectionConnectPageAction(sectionGUID, pageGUID);
+        }
     }
 
     availablePageOptionList = (pages, currentpageGUID, targetPageGUID) => {
@@ -673,9 +689,9 @@ class ExperiencePages extends Component {
                                                     <span class="dx_tool_tip_text">
                                                         {
                                                             Experience.NewPage.IsRoot ?
-                                                            "Home page (default)"
-                                                            :
-                                                            "set this page as home page"
+                                                                "Home page (default)"
+                                                                :
+                                                                "set this page as home page"
                                                         }
                                                     </span>
                                                 </a>
