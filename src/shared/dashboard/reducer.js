@@ -164,13 +164,17 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case EXPERIENCE_CLEAR_FILTER__SUCCEEDED:
-            updated.ExperienceSearchInput = null;
+            updated.ExperienceSearchInput = '';
             // card only
             updated.CurrentCardOnlyExperiencesPageIndex = 0;
+            updated.CurrentCardOnlyExperiencesFilter = 'ALL';
+            updated.CurrentCardOnlyExperiencesFilterLabel = 'All';
             updated.CardOnlyExperiences = payload.cardOnlyExperiences;
             updated.TotalCardOnlyExperienceRecord = payload.cardOnlyTotal;
             // card and pages
             updated.CurrentCardAndPagesExperiencesPageIndex = 0;
+            updated.CurrentCardAndPagesExperiencesFilter = 'ALL';
+            updated.CurrentCardAndPagesExperiencesFilterLabel = 'All';
             updated.CardAndPagesExperiences = payload.cardAndPgesExperiences;
             updated.TotalCardAndPagesExperienceRecord = payload.cardAndPgesTotal;
             // total
