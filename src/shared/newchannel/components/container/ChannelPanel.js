@@ -102,7 +102,10 @@ class ChannelPanel extends Component {
                                                                     Channel.ChannelCodeAvailable ?
                                                                         <CheckCircle style={{ color: colors.greenColor }} />
                                                                         :
-                                                                        <NotInterested style={{ color: colors.redColor }} />
+                                                                        <a className="dx_promo_code_view dx_tool_tip">
+                                                                            <NotInterested style={{ color: colors.redColor }} />
+                                                                            <span class="dx_tool_tip_text">Already taken</span>
+                                                                        </a>
                                                                 }
                                                             </InputAdornment>
                                                             :

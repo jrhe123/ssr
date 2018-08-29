@@ -94,10 +94,16 @@ body{
     top: -33px;
     left: -78px;
 }
+.dx_promo_code_view .dx_tool_tip_text{
+    width: 80px;
+    top: -33px;
+    left: -36px;
+}
 .dx_tool_bar_color:hover .dx_tool_tip_text,
 .dx_tool_bar_bgcolor:hover .dx_tool_tip_text,
 .dx_exp_view_mode:hover .dx_tool_tip_text,
-.dx_root_indicator:hover .dx_tool_tip_text
+.dx_root_indicator:hover .dx_tool_tip_text,
+.dx_promo_code_view:hover .dx_tool_tip_text
 {
     visibility: visible;
     background-color: rgba(0, 0, 0, 0.6);
