@@ -376,8 +376,8 @@ export const dxFetchMoreExperienceUrl = (payload) => {
         || payload.experienceType == 'CARD_AND_PAGES') {
         searchParams = {
             ExperienceType: payload.experienceType,
-            SearchType: "",
-            SearchField: "",
+            SearchType: "EXPERIENCE_TITLE",
+            SearchField: payload.experienceSearch,
         }
     }
     return (

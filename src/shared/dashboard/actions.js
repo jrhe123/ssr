@@ -83,12 +83,13 @@ export const dxFetchExperience = (experienceType) => {
     }
 }
 
-export const dxFetchMoreExperience = (experienceType, currentPageIndex) => {
+export const dxFetchMoreExperience = (experienceType, currentPageIndex, experienceSearch) => {
     return {
         type: EXPERIENCE_FETCH_MORE_REQUESTED,
         payload: {
             experienceType,
             currentPageIndex,
+            experienceSearch,
         },
     }
 }

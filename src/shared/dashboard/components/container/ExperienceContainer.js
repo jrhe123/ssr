@@ -192,10 +192,11 @@ class ExperienceContainer extends Component {
 
     handleLoadMoreExperience = (experienceType) => {
         const {
+            ExperienceSearchInput,
             CurrentCardOnlyExperiencesPageIndex,
             CurrentCardAndPagesExperiencesPageIndex,
         } = this.props;
-        this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex);
+        this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex, ExperienceSearchInput);
     }
 
     handleSearchInputChange = (val) => {
