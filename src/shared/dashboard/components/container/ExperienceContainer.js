@@ -203,6 +203,11 @@ class ExperienceContainer extends Component {
         this.props.dxUpdateExperienceSearchAction(val);
     }
 
+    handleSelectFilter = (filterType, option) => {
+        console.log('filterType: ', filterType);
+        console.log('option: ', option);
+    }
+
     render() {
 
         const {
@@ -327,7 +332,9 @@ class ExperienceContainer extends Component {
                                                             align={'center'}
                                                             size={'md'}
                                                         >   
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}
+                                                                onClick={() => this.handleSelectFilter('CARD_ONLY', 'ALL')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionTextContainerStyle}>
                                                                         <div style={tableContainerStyleV2}>
@@ -338,7 +345,9 @@ class ExperienceContainer extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}
+                                                                onClick={() => this.handleSelectFilter('CARD_ONLY', 'LIVE')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionIconContainerStyle}>
                                                                         <FlashOn style={Object.assign({}, experienceFilterOptionIconStyle, { color: colors.greenColor })} />
@@ -352,7 +361,9 @@ class ExperienceContainer extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}
+                                                                onClick={() => this.handleSelectFilter('CARD_ONLY', 'DRAFT')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionIconContainerStyle}>
                                                                         <Edit style={experienceFilterOptionIconStyle} />
@@ -430,7 +441,9 @@ class ExperienceContainer extends Component {
                                                             align={'center'}
                                                             size={'md'}
                                                         >
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}
+                                                                onClick={() => this.handleSelectFilter('CARD_AND_PAGES', 'ALL')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionTextContainerStyle}>
                                                                         <div style={tableContainerStyleV2}>
@@ -441,7 +454,9 @@ class ExperienceContainer extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle)}
+                                                                onClick={() => this.handleSelectFilter('CARD_AND_PAGES', 'LIVE')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionIconContainerStyle}>
                                                                         <FlashOn style={Object.assign({}, experienceFilterOptionIconStyle, { color: colors.greenColor })} />
@@ -455,7 +470,9 @@ class ExperienceContainer extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                                            <div style={Object.assign({}, experienceFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}
+                                                                onClick={() => this.handleSelectFilter('CARD_AND_PAGES', 'DRAFT')}
+                                                            >
                                                                 <div style={experienceFilterOptionWrapperStyle}>
                                                                     <div style={experienceFilterOptionIconContainerStyle}>
                                                                         <Edit style={experienceFilterOptionIconStyle} />
