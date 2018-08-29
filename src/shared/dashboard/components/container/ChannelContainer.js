@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import {
     dxUpdateChannelSearch as dxUpdateChannelSearchAction,
+    dxUpdateChannelFilter as dxUpdateChannelFilterAction,
     dxFetchChannel as dxFetchChannelAction,
     dxUpdateChannel as dxUpdateChannelAction,
 } from '../../actions';
@@ -120,8 +121,12 @@ class ChannelContainer extends Component {
     }
 
     handleSelectFilter = (type, option) => {
-        console.log('type: ', type);
-        console.log('option: ', option);
+        const {
+            ChannelSearchInput,
+            ChannelTypeFilter,
+            ChannelStatusFilter,
+        } = this.props;
+        this.props.dxUpdateChannelFilterAction(type, option, ChannelSearchInput, type == 'CHANNEL_TYPE' ? ChannelStatusFilter : ChannelTypeFilter);
     }
 
     render() {
@@ -302,6 +307,7 @@ const stateToProps = (state) => {
 
 const dispatchToProps = {
     dxUpdateChannelSearchAction,
+    dxUpdateChannelFilterAction,
     dxFetchChannelAction,
     dxUpdateChannelAction,
 }

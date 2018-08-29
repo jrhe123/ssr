@@ -3,6 +3,7 @@ import {
 
     // channel
     CHANNEL_UPDATE_SEARCH__SUCCEEDED,
+    CHANNEL_UPDATE_FILTER__SUCCEEDED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_UPDATE_STATUS__SUCCEEDED,
     // experience
@@ -114,6 +115,32 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
 
         case CHANNEL_UPDATE_SEARCH__SUCCEEDED:
             updated.ChannelSearchInput = payload.val;
+            updated.TotalChannelRecord = payload.totalRecord;
+            updated.ExperienceChannels = payload.expereienceChannels;
+            return updated;
+
+        case CHANNEL_UPDATE_FILTER__SUCCEEDED:
+            if (payload.filterType == 'CHANNEL_TYPE') {
+                if (payload.filter == 'ALL') {
+                    tmpFilterLabel = 'All channel';
+                } else if (payload.filter == 'PUBLIC') {
+                    tmpFilterLabel = 'Public channel';
+                } else if (payload.filter == 'INVITATION') {
+                    tmpFilterLabel = 'Password channel';
+                }
+                updated.ChannelTypeFilter = payload.filter;
+                updated.ChannelTypeFilterLabel = tmpFilterLabel;
+            } else if (payload.filterType == 'CHANNEL_STATUS') {
+                if (payload.filter == 'ALL') {
+                    tmpFilterLabel = 'All';
+                } else if (payload.filter == 'LIVE') {
+                    tmpFilterLabel = 'Live';
+                } else if (payload.filter == 'DRAFT') {
+                    tmpFilterLabel = 'Draft';
+                }
+                updated.ChannelStatusFilter = payload.filter;
+                updated.ChannelStatusFilterLabel = tmpFilterLabel;
+            }
             updated.TotalChannelRecord = payload.totalRecord;
             updated.ExperienceChannels = payload.expereienceChannels;
             return updated;

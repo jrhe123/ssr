@@ -4,6 +4,7 @@ import {
 
     // CHANNEL
     CHANNEL_UPDATE_SEARCH_REQUESTED,
+    CHANNEL_UPDATE_FILTER_REQUESTED,
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_UPDATE_STATUS_REQUESTED,
 
@@ -46,6 +47,18 @@ export const dxUpdateChannelSearch = (val, channelTypeFilter, channelStatusFilte
             val,
             channelTypeFilter,
             channelStatusFilter,
+        },
+    }
+}
+
+export const dxUpdateChannelFilter = (filterType, filter, val, otherFilter) => {
+    return {
+        type: CHANNEL_UPDATE_FILTER_REQUESTED,
+        payload: {
+            filterType,
+            filter,
+            val,
+            otherFilter,
         },
     }
 }

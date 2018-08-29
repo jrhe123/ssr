@@ -20,6 +20,10 @@ import {
     CHANNEL_UPDATE_SEARCH__SUCCEEDED,
     CHANNEL_UPDATE_SEARCH__FAILED,
 
+    CHANNEL_UPDATE_FILTER_REQUESTED,
+    CHANNEL_UPDATE_FILTER__SUCCEEDED,
+    CHANNEL_UPDATE_FILTER__FAILED,
+
     CHANNEL_FETCH_REQUESTED,
     CHANNEL_FETCH__SUCCEEDED,
     CHANNEL_FETCH__FAILED,
@@ -144,7 +148,7 @@ export const dxChannelSearchUpdateUrl = (payload) => {
         ChannelStatus: payload.channelStatusFilter,
         ChannelType: payload.channelTypeFilter,
         SearchType: "CHANNEL_NAME",
-        SearchField: payload.val.toString()
+        SearchField: payload.val
     };
     return (
         apiManager.dxApi(`/channel/list`, {
@@ -188,6 +192,56 @@ export function* dxChannelSearchUpdate(action) {
 
 export function* dxChannelSearchUpdateSaga() {
     yield takeEvery(CHANNEL_UPDATE_SEARCH_REQUESTED, dxChannelSearchUpdate);
+}
+
+// Update channel filter
+export const dxChannelFilterUpdateUrl = (payload) => {
+    const formattedParams = {
+        ChannelStatus: payload.filterType == 'CHANNEL_STATUS' ? payload.filter : payload.otherFilter,
+        ChannelType: payload.filterType == 'CHANNEL_TYPE' ? payload.filter : payload.otherFilter,
+        SearchType: "CHANNEL_NAME",
+        SearchField: payload.val
+    };
+    return (
+        apiManager.dxApi(`/channel/list`, {
+            Limit: "-1",
+            Offset: "0",
+            Extra: formattedParams,
+        }, true)
+    )
+}
+export function* dxChannelFilterUpdate(action) {
+    try {
+        const response = yield call(dxChannelFilterUpdateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: CHANNEL_UPDATE_FILTER__FAILED,
+                payload: {
+                    message: 'Experience channel fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: CHANNEL_UPDATE_FILTER__SUCCEEDED,
+                payload: {
+                    filterType: action.payload.filterType,
+                    filter: action.payload.filter,
+                    totalRecord: Response.TotalRecord,
+                    expereienceChannels: Response.ExperienceChannels,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: CHANNEL_UPDATE_FILTER__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxChannelFilterUpdateSaga() {
+    yield takeEvery(CHANNEL_UPDATE_FILTER_REQUESTED, dxChannelFilterUpdate);
 }
 
 // Fetch Channel
@@ -326,7 +380,7 @@ export const dxExperienceSearchUpdateUrl = (payload, experienceType) => {
             ExperienceType: experienceType,
             FilterType: experienceType == 'CARD_ONLY' ? payload.currentCardOnlyExperiencesFilter : payload.currentCardAndPagesExperiencesFilter,
             SearchType: "EXPERIENCE_TITLE",
-            SearchField: payload.val.toString(),
+            SearchField: payload.val,
         }
     }
     return (
@@ -388,7 +442,7 @@ export const dxExperienceFilterUpdateUrl = (payload) => {
             ExperienceType: payload.experienceType,
             FilterType: payload.option,
             SearchType: "EXPERIENCE_TITLE",
-            SearchField: payload.experienceSearchVal.toString(),
+            SearchField: payload.experienceSearchVal,
         }
     }
     return (
@@ -558,7 +612,7 @@ export const dxFetchMoreExperienceUrl = (payload) => {
             ExperienceType: payload.experienceType,
             FilterType: payload.filterType,
             SearchType: "EXPERIENCE_TITLE",
-            SearchField: payload.experienceSearch.toString(),
+            SearchField: payload.experienceSearch,
         }
     }
     return (
