@@ -41,6 +41,8 @@ class ExperienceCase extends Component {
             controlContainerStyle,
             controlWrapperStyle,
             bottomLabelStyle,
+            bottomTitleLabelStyle,
+            bottomDescLabelStyle,
             editBurgerStyle,
         } = styles;
 
@@ -50,7 +52,8 @@ class ExperienceCase extends Component {
                     <div style={tableContainerStyle}>
                         <div style={tableWrapperStyle}>
                             <p style={bottomLabelStyle}>
-                                {experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}
+                                <span style={bottomTitleLabelStyle}>{experience.ExperienceTitle}</span>
+                                <span style={bottomDescLabelStyle}>{experience.ExperienceType == 1 ? `1 card & ${experience.ExperiencePageNumber} pages` : `1 card`}</span>
                             </p>
                         </div>
                     </div>
@@ -138,7 +141,7 @@ class ExperienceCase extends Component {
                     experience.ExperienceType == 1 ?
                         <div style={dxPageContainerStyle}>
                             <div style={leftIconContainerStyle}>
-                                <div 
+                                <div
                                     style={leftIconWrapperStyle}
                                     className="dx_card"
                                 >
@@ -230,7 +233,26 @@ const styles = {
         margin: 0,
         fontSize: fonts.h3,
         paddingLeft: 6,
-        paddingRight: 6
+        paddingRight: 6,
+        height: 18,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bottomTitleLabelStyle: {
+        display: 'inline-block',
+        width: 90,
+        height: 18,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textAlign: 'left',
+        paddingRight: 12,
+        paddingLeft: 12,
+    },
+    bottomDescLabelStyle: {
+        display: 'inline-block',
+        height: 18,
     },
     controlContainerStyle: {
         flex: '30px 0 0',
