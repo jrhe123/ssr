@@ -64,16 +64,16 @@ class RestrictDomainPage extends Component{
                             <div style={inviteCodeLabelStyle}>
                                 <p style={domainIconContainerStyle}><Schedule style={domainIconStyle}/></p>
                                 <p style={channelCodeStyle}>pmh.org</p>
-                                <img style={imgStyle}
+                                {/* <img style={imgStyle}
                                     src={require('../../../../../../assets/images/close_button.png')}
-                                /> 
+                                />  */}
                             </div>
                             <div style={inviteCodeLabelStyle}>
                                 <p style={domainIconContainerStyle}><Schedule style={domainIconStyle}/></p>
                                 <p style={channelCodeStyle}>digitalxi.org</p>
-                                <img style={imgStyle}
+                                {/* <img style={imgStyle}
                                     src={require('../../../../../../assets/images/close_button.png')}
-                                /> 
+                                />  */}
                             </div>
                         </div>
                     </div>

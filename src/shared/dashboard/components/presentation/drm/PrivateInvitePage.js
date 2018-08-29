@@ -84,16 +84,16 @@ class PrivateInvitePage extends Component{
                             <div style={inviteCodeLabelStyle}>
                                 <p style={channelNameStyle}>#generic</p>
                                 <p style={channelCodeStyle}>demo_1</p>
-                                <img style={imgStyle}
+                                {/* <img style={imgStyle}
                                     src={require('../../../../../../assets/images/close_button.png')}
-                                /> 
+                                />  */}
                             </div>
                             <div style={inviteCodeLabelStyle}>
                                 <p style={channelNameStyle}>#diabetes_channel</p>
                                 <p style={channelCodeStyle}>diabetes101</p>
-                                <img style={imgStyle}
+                                {/* <img style={imgStyle}
                                     src={require('../../../../../../assets/images/close_button.png')}
-                                /> 
+                                />  */}
                             </div>
                         </div>
                     </div>
