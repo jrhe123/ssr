@@ -408,6 +408,17 @@ class StreamContainer extends Component {
                                 >
                                     <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
                                         <div style={channelFilterOptionWrapperStyle}>
+                                            <div style={channelFilterOptionTextContainerStyle}>
+                                                <div style={tableContainerStyle}>
+                                                    <div style={tableWrapperStyle}>
+                                                        <p style={channelFilterOptionTextStyle}>All channel</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
+                                        <div style={channelFilterOptionWrapperStyle}>
                                             <div style={channelFilterOptionIconContainerStyle}>
                                                 <Language style={channelFilterOptionIconStyle} />
                                             </div>
