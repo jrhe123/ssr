@@ -9,6 +9,7 @@ import {
     // EXPERIENCE
     HTML_FETCH_REQUESTED,
     EXPERIENCE_UPDATE_SEARCH_REQUESTED,
+    EXPERIENCE_UPDATE_FILTER_REQUESTED,
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH_MORE_REQUESTED,
     EXPERIENCE_DELETE_REQUESTED,
@@ -70,6 +71,16 @@ export const dxUpdateExperienceSearch = (val) => {
         type: EXPERIENCE_UPDATE_SEARCH_REQUESTED,
         payload: {
             val
+        },
+    }
+}
+
+export const dxUpdateExperienceFilter = (experienceType, option) => {
+    return {
+        type: EXPERIENCE_UPDATE_FILTER_REQUESTED,
+        payload: {
+            experienceType,
+            option,
         },
     }
 }

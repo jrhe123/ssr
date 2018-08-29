@@ -21,6 +21,7 @@ import {
 
     dxHtmlFetch as dxHtmlFetchAction,
     dxUpdateExperienceSearch as dxUpdateExperienceSearchAction,
+    dxUpdateExperienceFilter as dxUpdateExperienceFilterAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxFetchMoreExperience as dxFetchMoreExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -199,8 +200,19 @@ class ExperienceContainer extends Component {
     }
 
     handleSelectFilter = (filterType, option) => {
-        console.log('filterType: ', filterType);
-        console.log('option: ', option);
+        const {
+            CurrentCardOnlyExperiencesFilter,
+            CurrentCardAndPagesExperiencesFilter,
+        } = this.props;
+        if (filterType == 'CARD_ONLY') {
+            if (option != CurrentCardOnlyExperiencesFilter) {
+                this.props.dxUpdateExperienceFilterAction(filterType, option);
+            }
+        } else if (filterType == 'CARD_AND_PAGES') {
+            if (option != CurrentCardAndPagesExperiencesFilter) {
+                this.props.dxUpdateExperienceFilterAction(filterType, option);
+            }
+        }
     }
 
     render() {
@@ -214,7 +226,7 @@ class ExperienceContainer extends Component {
             CardOnlyExperiences,
             CurrentCardOnlyExperiencesFilter,
             CurrentCardOnlyExperiencesFilterLabel,
-            
+
             CardAndPagesExperiences,
             CurrentCardAndPagesExperiencesFilter,
             CurrentCardAndPagesExperiencesFilterLabel,
@@ -332,7 +344,7 @@ class ExperienceContainer extends Component {
                                                             }
                                                             align={'center'}
                                                             size={'md'}
-                                                        >   
+                                                        >
                                                             <div style={Object.assign({}, experienceFilterOptionContainerStyle)}
                                                                 onClick={() => this.handleSelectFilter('CARD_ONLY', 'ALL')}
                                                             >
@@ -779,12 +791,12 @@ const stateToProps = (state) => {
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         TotalCardOnlyExperienceRecord: state.dashboard.TotalCardOnlyExperienceRecord,
         TotalCardAndPagesExperienceRecord: state.dashboard.TotalCardAndPagesExperienceRecord,
-        
+
         CardOnlyExperiences: state.dashboard.CardOnlyExperiences,
         CurrentCardOnlyExperiencesPageIndex: state.dashboard.CurrentCardOnlyExperiencesPageIndex,
         CurrentCardOnlyExperiencesFilter: state.dashboard.CurrentCardOnlyExperiencesFilter,
         CurrentCardOnlyExperiencesFilterLabel: state.dashboard.CurrentCardOnlyExperiencesFilterLabel,
-        
+
         CardAndPagesExperiences: state.dashboard.CardAndPagesExperiences,
         CurrentCardAndPagesExperiencesPageIndex: state.dashboard.CurrentCardAndPagesExperiencesPageIndex,
         CurrentCardAndPagesExperiencesFilter: state.dashboard.CurrentCardAndPagesExperiencesFilter,
@@ -796,6 +808,7 @@ const dispatchToProps = {
     dxDashboardNaviAction,
     dxHtmlFetchAction,
     dxUpdateExperienceSearchAction,
+    dxUpdateExperienceFilterAction,
     dxFetchExperienceAction,
     dxFetchMoreExperienceAction,
     dxDeleteExperienceAction,

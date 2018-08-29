@@ -7,6 +7,7 @@ import {
     // experience
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILTER__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH_MORE__SUCCEEDED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -30,24 +31,27 @@ import {
 const initialState = {
     NaviIndex: 0,
 
+    // 1. experience
     ExperienceSearchInput: null,
     TotalExperienceRecord: 0,
+    // CARD ONLY
     TotalCardOnlyExperienceRecord: 0,
-    TotalCardAndPagesExperienceRecord: 0,
-
     CardOnlyExperiences: [],
     CurrentCardOnlyExperiencesPageIndex: 0,
     CurrentCardOnlyExperiencesFilter: 'ALL',
     CurrentCardOnlyExperiencesFilterLabel: 'All',
-
+    // CARD AND PAGES
+    TotalCardAndPagesExperienceRecord: 0,
     CardAndPagesExperiences: [],
     CurrentCardAndPagesExperiencesPageIndex: 0,
     CurrentCardAndPagesExperiencesFilter: 'ALL',
     CurrentCardAndPagesExperiencesFilterLabel: 'All',
 
+    // 2. channel
     TotalChannelRecord: 0,
     ExperienceChannels: [],
 
+    // 3. stream
     TotalStreamActiveChannelRecord: 0,
     StreamActiveChannels: [],
 
@@ -69,6 +73,7 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
     let tmpLiveExperienceStreams = Object.assign([], updated.LiveExperienceStreams);
     let tmpPendingExperiences = Object.assign([], updated.PendingExperiences);
 
+    let tmpFilterLabel;
     let tmpExperience;
     let tmpPage;
     let tmpSection;
@@ -121,6 +126,36 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.CurrentCardAndPagesExperiencesPageIndex = 0;
             updated.CardAndPagesExperiences = payload.cardAndPgesExperiences;
             updated.TotalCardAndPagesExperienceRecord = payload.cardAndPgesTotal;
+            return updated;
+
+        case EXPERIENCE_UPDATE_FILTER__SUCCEEDED:
+            if (payload.experienceType == 'CARD_ONLY') {
+                if (payload.option == 'ALL') {
+                    tmpFilterLabel = 'All';
+                } else if (payload.option == 'LIVE') {
+                    tmpFilterLabel = 'Live';
+                } else if (payload.option == 'DRAFT') {
+                    tmpFilterLabel = 'Draft';
+                }
+                updated.TotalCardOnlyExperienceRecord = payload.totalRecord;
+                updated.CardOnlyExperiences = payload.experiences;
+                updated.CurrentCardOnlyExperiencesPageIndex = 0;
+                updated.CurrentCardOnlyExperiencesFilter = payload.option;
+                updated.CurrentCardOnlyExperiencesFilterLabel = tmpFilterLabel;
+            } else if (payload.experienceType == 'CARD_AND_PAGES') {
+                if (payload.option == 'ALL') {
+                    tmpFilterLabel = 'All';
+                } else if (payload.option == 'LIVE') {
+                    tmpFilterLabel = 'Live';
+                } else if (payload.option == 'DRAFT') {
+                    tmpFilterLabel = 'Draft';
+                }
+                updated.TotalCardAndPagesExperienceRecord = payload.totalRecord;
+                updated.CardAndPagesExperiences = payload.experiences;
+                updated.CurrentCardAndPagesExperiencesPageIndex = 0;
+                updated.CurrentCardAndPagesExperiencesFilter = payload.option;
+                updated.CurrentCardAndPagesExperiencesFilterLabel = tmpFilterLabel;
+            }
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

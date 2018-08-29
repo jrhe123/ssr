@@ -32,6 +32,10 @@ import {
     EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
     EXPERIENCE_UPDATE_SEARCH__FAILED,
 
+    EXPERIENCE_UPDATE_FILTER_REQUESTED,
+    EXPERIENCE_UPDATE_FILTER__SUCCEEDED,
+    EXPERIENCE_UPDATE_FILTER__FAILED,
+
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__FAILED,
@@ -312,6 +316,60 @@ export function* dxExperienceSearchUpdate(action) {
 
 export function* dxExperienceSearchUpdateSaga() {
     yield takeEvery(EXPERIENCE_UPDATE_SEARCH_REQUESTED, dxExperienceSearchUpdate);
+}
+
+// Update experience filter
+export const dxExperienceFilterUpdateUrl = (payload) => {
+    let searchParams = {};
+    if (payload.experienceType == 'CARD_ONLY'
+        || payload.experienceType == 'CARD_AND_PAGES') {
+        searchParams = {
+            ExperienceType: payload.experienceType,
+            FilterType: payload.option
+            // SearchType: "EXPERIENCE_TITLE",
+            // SearchField: payload.val,
+        }
+    }
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: config.cardOnlyExperienceLimit.toString(),
+            Offset: "0",
+            Extra: searchParams,
+        }, true)
+    )
+}
+export function* dxExperienceFilterUpdate(action) {
+    try {
+        const response = yield call(dxExperienceFilterUpdateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_UPDATE_FILTER__FAILED,
+                payload: {
+                    message: 'Experience fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_UPDATE_FILTER__SUCCEEDED,
+                payload: {
+                    experienceType: action.payload.experienceType,
+                    option: action.payload.option,
+                    totalRecord: Response.TotalRecord,
+                    experiences: Response.Experiences,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_UPDATE_FILTER__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceFilterUpdateSaga() {
+    yield takeEvery(EXPERIENCE_UPDATE_FILTER_REQUESTED, dxExperienceFilterUpdate);
 }
 
 // Fetch experience
