@@ -129,6 +129,10 @@ class ChannelContainer extends Component {
         this.props.dxUpdateChannelFilterAction(type, option, ChannelSearchInput, type == 'CHANNEL_TYPE' ? ChannelStatusFilter : ChannelTypeFilter);
     }
 
+    handleClearFilter = () => {
+        console.log('clear here');
+    }
+
     render() {
 
         const {
@@ -209,6 +213,7 @@ class ChannelContainer extends Component {
                                     handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
                                     handleSearchInputChange={(val) => this.handleSearchInputChange(val)}
                                     handleSelectFilter={(type, option) => this.handleSelectFilter(type, option)}
+                                    handleClearFilter={() => this.handleClearFilter()}
                                 />
                             </div>
                         )
