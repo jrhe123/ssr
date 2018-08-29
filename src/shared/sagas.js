@@ -1,9 +1,9 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 
-// Login
+// Home
 import { 
 
-} from './login/sagas';
+} from './home/sagas';
 
 // Global
 import {
@@ -15,7 +15,7 @@ import {
 
 export default function* rootSaga() {
     yield all([
-        // Login
+        // Home
         
         // Global
         dxNavigateHistorySaga(),

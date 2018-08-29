@@ -12,7 +12,6 @@ import { withRouter } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import {
-    dxValidateToken as dxValidateTokenAction,
     dxAlert as dxAlertAction,
 } from '../actions';
 
@@ -24,29 +23,27 @@ import Loading from '../components/loading/Loading';
 // styles
 import '../../../assets/css/index.css';
 
-const LoginRoute
-    = ({ isAuthenticated, ...props }) =>
-        !isAuthenticated
-            ? <Route {...props} />
-            : <Redirect to="/dashboard" />;
+const PublicRoute
+    = ({ ...props }) =>
+        <Route {...props} />;
 
 const ProtectedRoute
-    = ({ isAuthenticated, route, ...props }) => 
+    = ({ isAuthenticated, route, ...props }) =>
         isAuthenticated
             ? <Route {...props} />
-            : <Redirect to={"/"+route} />;
+            : <Redirect to={"/" + route} />;
 
 const ProtectedRouteWithParams
-    = ({ isAuthenticated, route, ...props }) => 
+    = ({ isAuthenticated, route, ...props }) =>
         isAuthenticated
             ? <Route {...props} />
-            : <Redirect to={"/"+route+'/'+props.computedMatch.params.param} />;
+            : <Redirect to={"/" + route + '/' + props.computedMatch.params.param} />;
 
 
 class App extends Component {
 
-    componentDidMount(){
-        
+    componentDidMount() {
+
     }
 
     handleAlertBarClose = () => {
@@ -55,7 +52,6 @@ class App extends Component {
 
     render() {
         const {
-            isAuthenticated,
             alertBar,
             isLoading,
         } = this.props;
@@ -65,43 +61,27 @@ class App extends Component {
                 {/* SEO */}
                 <Helmet
                     htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
-                    titleTemplate="%s | DigitalXi - PublishXi "
+                    titleTemplate="%s | DigitalXi - WebApp "
                     titleAttributes={{ itemprop: 'name', lang: 'en' }}
                     meta={[
-                        { name: 'description', content: 'DigitalXi - PublishXi' },
+                        { name: 'description', content: 'DigitalXi - WebApp' },
                         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                     ]}
                 />
 
                 {/* config router */}
                 <Switch>
-                    <LoginRoute
-                        isAuthenticated={isAuthenticated}
+                    <PublicRoute
                         exact
                         path="/"
-                        component={Routes.LoginPage}
-                    />
-
-                    <ProtectedRoute
-                        isAuthenticated={isAuthenticated}
-                        exact
-                        path="/dashboard"
-                        component={Routes.DashboardPage}
-                    />
-
-                    <ProtectedRouteWithParams
-                        isAuthenticated={isAuthenticated}
-                        route="dashboard"
-                        exact={false}
-                        path="/dashboard/:param(0|1|2)"
-                        component={Routes.DashboardPage}
+                        component={Routes.HomePage}
                     />
 
                     <Route path="*" render={() => (<Redirect to="/" />)} />
                 </Switch>
-                
+
                 {/* global loading spin */}
-                <Loading 
+                <Loading
                     isLoading={isLoading}
                 />
                 {/* global alert bar */}
@@ -116,7 +96,6 @@ class App extends Component {
 
 const stateToProps = (state) => {
     return {
-        isAuthenticated: state.root.isAuthenticated,
         user: state.root.user,
         alertBar: state.root.alertBar,
         isLoading: state.root.isLoading,
@@ -124,7 +103,6 @@ const stateToProps = (state) => {
 }
 
 const dispatchToProps = {
-    dxValidateTokenAction,
     dxAlertAction,
 }
 

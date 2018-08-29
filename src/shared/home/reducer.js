@@ -6,7 +6,7 @@ const initialState = {
     
 };
 
-const loginReducer = (previousState = initialState, { type, payload }) => {
+const homeReducer = (previousState = initialState, { type, payload }) => {
     
     let updated = Object.assign({}, previousState);
     switch (type) {
@@ -17,4 +17,4 @@ const loginReducer = (previousState = initialState, { type, payload }) => {
     }
 };
 
-export default loginReducer;
+export default homeReducer;

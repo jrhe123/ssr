@@ -1,16 +1,19 @@
-// Login
+// Home
 import {
-    LOGIN__SUCCEEDED,
-    LOGIN__FAILED,
-} from './login';
+
+} from './home';
 
 // Global
 import {
-    
+
+    // navigate
     NAVIGATE_HISTORY__SUCCEEDED,
     NAVIGATE_HISTORY__FAILED,
 
+    // alert
     ALERT__SUCCEEDED,
+
+    // loading
     LOADING__SUCCEEDED,
 } from './constants';
 

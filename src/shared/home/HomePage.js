@@ -12,7 +12,7 @@ export class LoginPage extends Component {
         return (
             <div>
                 <Helmet
-                    title="Login"
+                    title="Home"
                 />
                 my starter
             </div>
