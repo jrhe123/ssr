@@ -70,5 +70,5 @@ app.get('*', async (req, res) => {
     store.close();
 });
 
-const port = 3001;
+const port = 3002;
 app.listen(port, () => console.log(`Demo app listening on port ${port}`));
