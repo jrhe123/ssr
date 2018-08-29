@@ -110,9 +110,14 @@ class ChannelContainer extends Component {
         })
     }
 
+    handleSearchInputChange = (val) => {
+        console.log('out here: ', val);
+    }
+
     render() {
 
         const {
+            ChannelSearchInput,
             ExperienceChannels,
             TotalChannelRecord,
         } = this.props;
@@ -142,10 +147,12 @@ class ChannelContainer extends Component {
                                 <ChannelList
                                     experienceChannels={ExperienceChannels}
                                     channelNumber={TotalChannelRecord}
+                                    searchInputValue={ChannelSearchInput}
                                     handleAddChannelClick={() => this.handleCreateChannel()}
                                     handleEditChannel={(channel) => this.handleEditChannel(channel)}
                                     handleActiveChannel={(channel) => this.handleActiveChannel(channel)}
                                     handleDeactiveChannel={(channel) => this.handleDeactiveChannel(channel)}
+                                    handleSearchInputChange={(val) => this.handleSearchInputChange(val)}
                                 />
                             </div>
                         )
@@ -258,6 +265,7 @@ const styles = {
 const stateToProps = (state) => {
     return {
         history: state.root.history,
+        ChannelSearchInput: state.dashboard.ChannelSearchInput,
         ExperienceChannels: state.dashboard.ExperienceChannels,
         TotalChannelRecord: state.dashboard.TotalChannelRecord,
     }

@@ -49,6 +49,7 @@ const initialState = {
     CurrentCardAndPagesExperiencesFilterLabel: 'All',
 
     // 2. channel
+    ChannelSearchInput: null,
     TotalChannelRecord: 0,
     ExperienceChannels: [],
 

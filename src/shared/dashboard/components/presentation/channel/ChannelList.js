@@ -129,6 +129,8 @@ class ChannelList extends Component {
                             <SearchBar
                                 isShort={false}
                                 placeholder="search channel(s)"
+                                content={this.props.searchInputValue}
+                                handleSearchInputChange={(val) => this.props.handleSearchInputChange(val)}
                             />
                         </div>
                         <div style={channelTypeFilterContainerStyle}>
