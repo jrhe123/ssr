@@ -49,12 +49,7 @@ class ExperienceContainer extends Component {
         confirmInput: null,
 
         isCardOnlyExperienceMenuOpen: false,
-        cardOnlyExperienceFilter: 'ALL',
-        cardOnlyExperienceFilterLabel: 'All',
-
         isCardAndPageExperienceMenuOpen: false,
-        cardAndPageExperienceFilter: 'ALL',
-        cardAndPageExperienceFilterLabel: 'All',
     }
 
     componentDidMount() {
@@ -215,8 +210,14 @@ class ExperienceContainer extends Component {
             TotalExperienceRecord,
             TotalCardOnlyExperienceRecord,
             TotalCardAndPagesExperienceRecord,
+
             CardOnlyExperiences,
+            CurrentCardOnlyExperiencesFilter,
+            CurrentCardOnlyExperiencesFilterLabel,
+            
             CardAndPagesExperiences,
+            CurrentCardAndPagesExperiencesFilter,
+            CurrentCardAndPagesExperiencesFilterLabel,
         } = this.props;
 
         const {
@@ -327,7 +328,7 @@ class ExperienceContainer extends Component {
                                                                 <Button
                                                                     style={Object.assign({}, experienceDropdownBtnStyle, !this.state.isCardOnlyExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                                                     onClick={() => this.handleToggleCardOnlyExperienceMenu()}
-                                                                >{this.state.cardOnlyExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                                                >{CurrentCardOnlyExperiencesFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                                             }
                                                             align={'center'}
                                                             size={'md'}
@@ -436,7 +437,7 @@ class ExperienceContainer extends Component {
                                                                 <Button
                                                                     style={Object.assign({}, experienceDropdownBtnStyle, !this.state.isCardAndPageExperienceMenuOpen ? { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' } : { borderTop: '1px solid', borderLeft: '1px solid', borderRight: '1px solid', borderColor: colors.borderColor })}
                                                                     onClick={() => this.handleToggleCardAndPageExperienceMenu()}
-                                                                >{this.state.cardAndPageExperienceFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
+                                                                >{CurrentCardAndPagesExperiencesFilterLabel}<ExpandMore style={expandIconStyle} /></Button>
                                                             }
                                                             align={'center'}
                                                             size={'md'}
@@ -778,10 +779,16 @@ const stateToProps = (state) => {
         TotalExperienceRecord: state.dashboard.TotalExperienceRecord,
         TotalCardOnlyExperienceRecord: state.dashboard.TotalCardOnlyExperienceRecord,
         TotalCardAndPagesExperienceRecord: state.dashboard.TotalCardAndPagesExperienceRecord,
+        
         CardOnlyExperiences: state.dashboard.CardOnlyExperiences,
         CurrentCardOnlyExperiencesPageIndex: state.dashboard.CurrentCardOnlyExperiencesPageIndex,
+        CurrentCardOnlyExperiencesFilter: state.dashboard.CurrentCardOnlyExperiencesFilter,
+        CurrentCardOnlyExperiencesFilterLabel: state.dashboard.CurrentCardOnlyExperiencesFilterLabel,
+        
         CardAndPagesExperiences: state.dashboard.CardAndPagesExperiences,
         CurrentCardAndPagesExperiencesPageIndex: state.dashboard.CurrentCardAndPagesExperiencesPageIndex,
+        CurrentCardAndPagesExperiencesFilter: state.dashboard.CurrentCardAndPagesExperiencesFilter,
+        CurrentCardAndPagesExperiencesFilterLabel: state.dashboard.CurrentCardAndPagesExperiencesFilterLabel,
     }
 }
 

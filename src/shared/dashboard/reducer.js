@@ -34,10 +34,16 @@ const initialState = {
     TotalExperienceRecord: 0,
     TotalCardOnlyExperienceRecord: 0,
     TotalCardAndPagesExperienceRecord: 0,
+
     CardOnlyExperiences: [],
     CurrentCardOnlyExperiencesPageIndex: 0,
+    CurrentCardOnlyExperiencesFilter: 'ALL',
+    CurrentCardOnlyExperiencesFilterLabel: 'All',
+
     CardAndPagesExperiences: [],
     CurrentCardAndPagesExperiencesPageIndex: 0,
+    CurrentCardAndPagesExperiencesFilter: 'ALL',
+    CurrentCardAndPagesExperiencesFilterLabel: 'All',
 
     TotalChannelRecord: 0,
     ExperienceChannels: [],
