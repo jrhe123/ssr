@@ -68,6 +68,10 @@ import {
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_FETCH__FAILED,
 
+    STREAM_CHANNEL_UPDATE_SEARCH_REQUESTED,
+    STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED,
+    STREAM_CHANNEL_UPDATE_SEARCH__FAILED,
+
     STREAM_CHANNEL_SELECT_REQUESTED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CHANNEL_SELECT__FAILED,
@@ -785,6 +789,58 @@ export function* dxFetchStreamChannel(action) {
 
 export function* dxFetchStreamChannelSaga() {
     yield takeEvery(STREAM_CHANNEL_FETCH_REQUESTED, dxFetchStreamChannel);
+}
+
+// Stream channel Search Update
+export const dxStreamChannelSearchUpdateUrl = (payload) => {
+    const formattedParams = {
+        ChannelStatus: 'ALL',
+        ChannelType: payload.channelTypeFilter,
+        SearchType: "CHANNEL_NAME",
+        SearchField: payload.val
+    };
+    return (
+        apiManager.dxApi(`/channel/list`, {
+            Limit: "-1",
+            Offset: "0",
+            Extra: formattedParams,
+        }, true)
+    )
+}
+
+export function* dxStreamChannelSearchUpdate(action) {
+    try {
+        const response = yield call(dxStreamChannelSearchUpdateUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_CHANNEL_UPDATE_SEARCH__FAILED,
+                payload: {
+                    message: 'Experience channel fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED,
+                payload: {
+                    val: action.payload.val,
+                    totalRecord: Response.TotalRecord,
+                    expereienceChannels: Response.ExperienceChannels,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: STREAM_CHANNEL_UPDATE_SEARCH__FAILED,
+            payload: {
+                message: 'Experience channel fetch api error'
+            },
+        });
+    }
+}
+
+export function* dxStreamChannelSearchUpdateSaga() {
+    yield takeEvery(STREAM_CHANNEL_UPDATE_SEARCH_REQUESTED, dxStreamChannelSearchUpdate);
 }
 
 // Stream channel select

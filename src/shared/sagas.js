@@ -25,6 +25,7 @@ import {
     dxDeleteExperienceSaga,
 
     dxFetchStreamChannelSaga,
+    dxStreamChannelSearchUpdateSaga,
     dxSelectStreamChannelSaga,
     dxCreateStreamSaga,
     dxRemoveStreamSaga,
@@ -126,6 +127,7 @@ export default function* rootSaga() {
 
         // stream
         dxFetchStreamChannelSaga(),
+        dxStreamChannelSearchUpdateSaga(),
         dxSelectStreamChannelSaga(),
         dxCreateStreamSaga(),
         dxRemoveStreamSaga(),

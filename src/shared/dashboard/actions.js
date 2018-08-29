@@ -20,6 +20,7 @@ import {
 
     // STREAM
     STREAM_CHANNEL_FETCH_REQUESTED,
+    STREAM_CHANNEL_UPDATE_SEARCH_REQUESTED,
     STREAM_CHANNEL_SELECT_REQUESTED,
     STREAM_CREATE_REQUESTED,
     STREAM_REMOVE_REQUESTED,
@@ -164,6 +165,16 @@ export const dxFetchStreamChannel = () => {
     return {
         type: STREAM_CHANNEL_FETCH_REQUESTED,
         payload: {},
+    }
+}
+
+export const dxUpdateStreamChannelSearch = (val, channelTypeFilter) => {
+    return {
+        type: STREAM_CHANNEL_UPDATE_SEARCH_REQUESTED,
+        payload: {
+            val,
+            channelTypeFilter,
+        },
     }
 }
 

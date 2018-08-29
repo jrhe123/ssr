@@ -17,6 +17,7 @@ import {
     EXPERIENCE_DELETE__SUCCEEDED,
     // stream
     STREAM_CHANNEL_FETCH__SUCCEEDED,
+    STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CREATE__SUCCEEDED,
     STREAM_REMOVE__SUCCEEDED,
@@ -280,6 +281,13 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.StreamActiveChannels = payload.expereienceChannels;
             updated.CurrentStreamChannel = {};
             if (!payload.expereienceChannels[0]) updated.CurrentStreamChannel = {};
+            return updated;
+
+        case STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED:
+            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
+            updated.StreamActiveChannels = payload.expereienceChannels;
+            updated.CurrentStreamChannel = {};
+            updated.StreamChannelSearchInput = payload.val;
             return updated;
 
         case STREAM_CHANNEL_SELECT__SUCCEEDED:

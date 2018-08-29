@@ -27,6 +27,7 @@ import { connect } from 'react-redux';
 import {
     dxDashboardNavi as dxDashboardNaviAction,
     dxFetchStreamChannel as dxFetchStreamChannelAction,
+    dxUpdateStreamChannelSearch as dxUpdateStreamChannelSearchAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
     dxCreateStream as dxCreateStreamAction,
     dxRemoveStream as dxRemoveStreamAction,
@@ -67,7 +68,10 @@ class StreamContainer extends Component {
     }
 
     handleSearchChannel = (value) => {
-        console.log('value: ', value)
+        const {
+            StreamChannelTypeFilter,
+        } = this.props;
+        this.props.dxUpdateStreamChannelSearchAction(value, StreamChannelTypeFilter);
     }
 
     handleToggleChannelMenu = () => {
@@ -981,6 +985,7 @@ const stateToProps = (state) => {
 const dispatchToProps = {
     dxDashboardNaviAction,
     dxFetchStreamChannelAction,
+    dxUpdateStreamChannelSearchAction,
     dxSelectStreamChannelAction,
     dxCreateStreamAction,
     dxRemoveStreamAction,
