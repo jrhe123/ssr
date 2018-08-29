@@ -430,7 +430,7 @@ const styles = {
         backgroundColor: colors.whiteColor,
         borderTopLeftRadius: '12px',
         borderTopRightRadius: '12px',
-        width: '180px',
+        width: '156px',
     },
     channelTypeFilterOptionContainerStyle: {
         display: 'flex',

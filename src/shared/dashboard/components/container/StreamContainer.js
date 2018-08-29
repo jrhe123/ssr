@@ -394,7 +394,7 @@ class StreamContainer extends Component {
                         <div style={channelFilterContainerStyle}>
                             <div style={channelDropdownWrapperStyle}>
                                 <DropdownMenu
-                                    className="dx_channel_filter_menu"
+                                    className="dx_channel_type_filter_menu"
                                     isOpen={this.state.isChannelMenuOpen}
                                     close={this.handleCloseChannelMenu}
                                     toggle={
@@ -733,7 +733,7 @@ const styles = {
         backgroundColor: colors.whiteColor,
         borderTopLeftRadius: '12px',
         borderTopRightRadius: '12px',
-        width: '130px',
+        width: '156px',
     },
     channelFilterOptionContainerStyle: {
         display: 'flex',
