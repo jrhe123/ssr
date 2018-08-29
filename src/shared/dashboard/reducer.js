@@ -18,6 +18,7 @@ import {
     // stream
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED,
+    STREAM_CHANNEL_UPDATE_FILTER__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CREATE__SUCCEEDED,
     STREAM_REMOVE__SUCCEEDED,
@@ -284,10 +285,25 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             return updated;
 
         case STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED:
-            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
-            updated.StreamActiveChannels = payload.expereienceChannels;
             updated.CurrentStreamChannel = {};
             updated.StreamChannelSearchInput = payload.val;
+            updated.StreamActiveChannels = payload.expereienceChannels;
+            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
+            return updated;
+
+        case STREAM_CHANNEL_UPDATE_FILTER__SUCCEEDED:
+            if (payload.channelTypeFilter == 'ALL') {
+                tmpFilterLabel = 'All channel';
+            } else if (payload.channelTypeFilter == 'PUBLIC') {
+                tmpFilterLabel = 'Public channel';
+            } else if (payload.channelTypeFilter == 'INVITATION') {
+                tmpFilterLabel = 'Password channel';
+            }
+            updated.CurrentStreamChannel = {};
+            updated.StreamChannelTypeFilter = payload.channelTypeFilter;
+            updated.StreamChannelTypeFilterLabel = tmpFilterLabel;
+            updated.StreamActiveChannels = payload.expereienceChannels;
+            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
             return updated;
 
         case STREAM_CHANNEL_SELECT__SUCCEEDED:

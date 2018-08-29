@@ -28,6 +28,7 @@ import {
     dxDashboardNavi as dxDashboardNaviAction,
     dxFetchStreamChannel as dxFetchStreamChannelAction,
     dxUpdateStreamChannelSearch as dxUpdateStreamChannelSearchAction,
+    dxUpdateStreamChannelTypeFilter as dxUpdateStreamChannelTypeFilterAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
     dxCreateStream as dxCreateStreamAction,
     dxRemoveStream as dxRemoveStreamAction,
@@ -53,7 +54,6 @@ class StreamContainer extends Component {
     }
 
     componentDidMount() {
-        // 1. Fetch active experience channels
         this.props.dxFetchStreamChannelAction();
     }
 
@@ -193,6 +193,16 @@ class StreamContainer extends Component {
             isModalDanger: false,
             targetExperience: experience,
         })
+    }
+
+    handleSelectOption = (option) => {
+        const {
+            StreamChannelSearchInput,
+            StreamChannelTypeFilter,
+        } = this.props;
+        if (StreamChannelTypeFilter != option) {
+            this.props.dxUpdateStreamChannelTypeFilterAction(option, StreamChannelSearchInput);
+        }
     }
 
     renderActiveChannelList = () => {
@@ -411,7 +421,10 @@ class StreamContainer extends Component {
                                     align={'center'}
                                     size={'md'}
                                 >
-                                    <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectOption('ALL')}
+                                    >
                                         <div style={channelFilterOptionWrapperStyle}>
                                             <div style={channelFilterOptionTextContainerStyle}>
                                                 <div style={tableContainerStyle}>
@@ -422,7 +435,10 @@ class StreamContainer extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelFilterOptionContainerStyle)}>
+                                    <div
+                                        style={Object.assign({}, channelFilterOptionContainerStyle)}
+                                        onClick={() => this.handleSelectOption('PUBLIC')}
+                                    >
                                         <div style={channelFilterOptionWrapperStyle}>
                                             <div style={channelFilterOptionIconContainerStyle}>
                                                 <Language style={channelFilterOptionIconStyle} />
@@ -436,7 +452,10 @@ class StreamContainer extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={Object.assign({}, channelFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}>
+                                    <div
+                                        style={Object.assign({}, channelFilterOptionContainerStyle, { borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' })}
+                                        onClick={() => this.handleSelectOption('INVITATION')}
+                                    >
                                         <div style={channelFilterOptionWrapperStyle}>
                                             <div style={channelFilterOptionIconContainerStyle}>
                                                 <Fingerprint style={channelFilterOptionIconStyle} />
@@ -986,6 +1005,7 @@ const dispatchToProps = {
     dxDashboardNaviAction,
     dxFetchStreamChannelAction,
     dxUpdateStreamChannelSearchAction,
+    dxUpdateStreamChannelTypeFilterAction,
     dxSelectStreamChannelAction,
     dxCreateStreamAction,
     dxRemoveStreamAction,

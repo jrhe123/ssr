@@ -26,6 +26,7 @@ import {
 
     dxFetchStreamChannelSaga,
     dxStreamChannelSearchUpdateSaga,
+    dxStreamChannelTypeFilterUpdateSaga,
     dxSelectStreamChannelSaga,
     dxCreateStreamSaga,
     dxRemoveStreamSaga,
@@ -128,6 +129,7 @@ export default function* rootSaga() {
         // stream
         dxFetchStreamChannelSaga(),
         dxStreamChannelSearchUpdateSaga(),
+        dxStreamChannelTypeFilterUpdateSaga(),
         dxSelectStreamChannelSaga(),
         dxCreateStreamSaga(),
         dxRemoveStreamSaga(),
