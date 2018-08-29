@@ -22,6 +22,7 @@ import {
     dxHtmlFetch as dxHtmlFetchAction,
     dxUpdateExperienceSearch as dxUpdateExperienceSearchAction,
     dxUpdateExperienceFilter as dxUpdateExperienceFilterAction,
+    dxClearExperienceFilter as dxClearExperienceFilterAction,
     dxFetchExperience as dxFetchExperienceAction,
     dxFetchMoreExperience as dxFetchMoreExperienceAction,
     dxDeleteExperience as dxDeleteExperienceAction,
@@ -222,6 +223,10 @@ class ExperienceContainer extends Component {
         }
     }
 
+    handleClearFilter = () => {
+        this.props.dxClearExperienceFilterAction();
+    }
+
     render() {
 
         const {
@@ -339,9 +344,20 @@ class ExperienceContainer extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div style={clearFilterContainerStyle}>
-                                                <a style={clearFilterStyle}>Clear Filter</a>
-                                            </div>
+                                            {
+                                                ExperienceSearchInput
+                                                    || CurrentCardOnlyExperiencesFilter != 'ALL'
+                                                    || CurrentCardAndPagesExperiencesFilter != 'ALL'
+                                                    ?
+                                                    <div style={clearFilterContainerStyle}>
+                                                        <a 
+                                                            style={clearFilterStyle}
+                                                            onClick={() => this.handleClearFilter()}
+                                                        >Clear Filter</a>
+                                                    </div>
+                                                    :
+                                                    null
+                                            }
                                         </div>
                                         <div style={addBtnContainerStyle}>
                                             <Button
@@ -846,6 +862,7 @@ const dispatchToProps = {
     dxHtmlFetchAction,
     dxUpdateExperienceSearchAction,
     dxUpdateExperienceFilterAction,
+    dxClearExperienceFilterAction,
     dxFetchExperienceAction,
     dxFetchMoreExperienceAction,
     dxDeleteExperienceAction,

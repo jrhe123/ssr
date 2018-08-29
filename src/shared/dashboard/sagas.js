@@ -36,6 +36,10 @@ import {
     EXPERIENCE_UPDATE_FILTER__SUCCEEDED,
     EXPERIENCE_UPDATE_FILTER__FAILED,
 
+    EXPERIENCE_CLEAR_FILTER_REQUESTED,
+    EXPERIENCE_CLEAR_FILTER__SUCCEEDED,
+    EXPERIENCE_CLEAR_FILTER__FAILED,
+
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH__FAILED,
@@ -371,6 +375,67 @@ export function* dxExperienceFilterUpdate(action) {
 
 export function* dxExperienceFilterUpdateSaga() {
     yield takeEvery(EXPERIENCE_UPDATE_FILTER_REQUESTED, dxExperienceFilterUpdate);
+}
+
+// Clear experience filter
+export const dxExperienceFilterClearUrl = (payload, experienceType) => {
+    let searchParams = {};
+    if (experienceType == 'CARD_ONLY'
+        || experienceType == 'CARD_AND_PAGES') {
+        searchParams = {
+            ExperienceType: experienceType,
+            FilterType: 'ALL',
+            SearchType: "EXPERIENCE_TITLE",
+            SearchField: "",
+        }
+    }
+    return (
+        apiManager.dxApi(`/experience/list`, {
+            Limit: config.cardOnlyExperienceLimit.toString(),
+            Offset: "0",
+            Extra: searchParams,
+        }, true)
+    )
+}
+export function* dxExperienceFilterClear(action) {
+    try {
+        const cardOnly = yield call(dxExperienceFilterClearUrl, action.payload, 'CARD_ONLY');
+        let cardOnlyConfirmation = cardOnly.Confirmation;
+        let cardOnlyResponse = cardOnly.Response;
+
+        const cardAndPages = yield call(dxExperienceFilterClearUrl, action.payload, 'CARD_AND_PAGES');
+        let cardAndPagesConfirmation = cardAndPages.Confirmation;
+        let cardAndPagesResponse = cardAndPages.Response;
+
+        if (cardOnlyConfirmation !== 'SUCCESS'
+            && cardAndPagesConfirmation !== 'SUCCESS') {
+            yield put({
+                type: EXPERIENCE_CLEAR_FILTER__FAILED,
+                payload: {
+                    message: 'Experience fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: EXPERIENCE_CLEAR_FILTER__SUCCEEDED,
+                payload: {
+                    cardOnlyTotal: cardOnlyResponse.TotalRecord,
+                    cardOnlyExperiences: cardOnlyResponse.Experiences,
+                    cardAndPgesTotal: cardAndPagesResponse.TotalRecord,
+                    cardAndPgesExperiences: cardAndPagesResponse.Experiences,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: EXPERIENCE_CLEAR_FILTER__FAILED,
+            payload: error,
+        });
+    }
+}
+
+export function* dxExperienceFilterClearSaga() {
+    yield takeEvery(EXPERIENCE_CLEAR_FILTER_REQUESTED, dxExperienceFilterClear);
 }
 
 // Fetch experience

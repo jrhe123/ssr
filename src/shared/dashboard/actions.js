@@ -10,6 +10,7 @@ import {
     HTML_FETCH_REQUESTED,
     EXPERIENCE_UPDATE_SEARCH_REQUESTED,
     EXPERIENCE_UPDATE_FILTER_REQUESTED,
+    EXPERIENCE_CLEAR_FILTER_REQUESTED,
     EXPERIENCE_FETCH_REQUESTED,
     EXPERIENCE_FETCH_MORE_REQUESTED,
     EXPERIENCE_DELETE_REQUESTED,
@@ -85,6 +86,13 @@ export const dxUpdateExperienceFilter = (experienceType, option, experienceSearc
             option,
             experienceSearchVal,
         },
+    }
+}
+
+export const dxClearExperienceFilter = () => {
+    return {
+        type: EXPERIENCE_CLEAR_FILTER_REQUESTED,
+        payload: {},
     }
 }
 

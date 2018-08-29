@@ -8,6 +8,7 @@ import {
     HTML_FETCH__SUCCEEDED,
     EXPERIENCE_UPDATE_SEARCH__SUCCEEDED,
     EXPERIENCE_UPDATE_FILTER__SUCCEEDED,
+    EXPERIENCE_CLEAR_FILTER__SUCCEEDED,
     EXPERIENCE_FETCH__SUCCEEDED,
     EXPERIENCE_FETCH_MORE__SUCCEEDED,
     EXPERIENCE_DELETE__SUCCEEDED,
@@ -158,6 +159,20 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
                 updated.CurrentCardAndPagesExperiencesFilter = payload.option;
                 updated.CurrentCardAndPagesExperiencesFilterLabel = tmpFilterLabel;
             }
+            // total
+            updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
+            return updated;
+
+        case EXPERIENCE_CLEAR_FILTER__SUCCEEDED:
+            updated.ExperienceSearchInput = null;
+            // card only
+            updated.CurrentCardOnlyExperiencesPageIndex = 0;
+            updated.CardOnlyExperiences = payload.cardOnlyExperiences;
+            updated.TotalCardOnlyExperienceRecord = payload.cardOnlyTotal;
+            // card and pages
+            updated.CurrentCardAndPagesExperiencesPageIndex = 0;
+            updated.CardAndPagesExperiences = payload.cardAndPgesExperiences;
+            updated.TotalCardAndPagesExperienceRecord = payload.cardAndPgesTotal;
             // total
             updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
             return updated;
