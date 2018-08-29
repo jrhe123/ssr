@@ -19,6 +19,7 @@ import {
     STREAM_CHANNEL_FETCH__SUCCEEDED,
     STREAM_CHANNEL_UPDATE_SEARCH__SUCCEEDED,
     STREAM_CHANNEL_UPDATE_FILTER__SUCCEEDED,
+    STREAM_CHANNEL_CLEAR_FILTER__SUCCEEDED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CREATE__SUCCEEDED,
     STREAM_REMOVE__SUCCEEDED,
@@ -302,6 +303,15 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.CurrentStreamChannel = {};
             updated.StreamChannelTypeFilter = payload.channelTypeFilter;
             updated.StreamChannelTypeFilterLabel = tmpFilterLabel;
+            updated.StreamActiveChannels = payload.expereienceChannels;
+            updated.TotalStreamActiveChannelRecord = payload.totalRecord;
+            return updated;
+
+        case STREAM_CHANNEL_CLEAR_FILTER__SUCCEEDED:
+            updated.CurrentStreamChannel = {};
+            updated.StreamChannelSearchInput = '';
+            updated.StreamChannelTypeFilter = 'ALL';
+            updated.StreamChannelTypeFilterLabel = 'All channel';
             updated.StreamActiveChannels = payload.expereienceChannels;
             updated.TotalStreamActiveChannelRecord = payload.totalRecord;
             return updated;

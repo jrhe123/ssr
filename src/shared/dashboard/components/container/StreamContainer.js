@@ -29,6 +29,7 @@ import {
     dxFetchStreamChannel as dxFetchStreamChannelAction,
     dxUpdateStreamChannelSearch as dxUpdateStreamChannelSearchAction,
     dxUpdateStreamChannelTypeFilter as dxUpdateStreamChannelTypeFilterAction,
+    dxClearStreamChannelFilter as dxClearStreamChannelFilterAction,
     dxSelectStreamChannel as dxSelectStreamChannelAction,
     dxCreateStream as dxCreateStreamAction,
     dxRemoveStream as dxRemoveStreamAction,
@@ -205,6 +206,10 @@ class StreamContainer extends Component {
         }
     }
 
+    handleClearFilter = () => {
+        this.props.dxClearStreamChannelFilterAction();
+    }
+
     renderActiveChannelList = () => {
         const {
             CurrentStreamChannel,
@@ -285,6 +290,9 @@ class StreamContainer extends Component {
             totalNumberStyle,
             channelLabelStyle,
             totalLabelstyle,
+
+            clearFilterContainerStyle,
+            clearFilterStyle,
 
             bottomContainerStyle,
             leftContainerStyle,
@@ -477,6 +485,19 @@ class StreamContainer extends Component {
                             <p style={totalLabelstyle}>Total</p>
                         </div>
                     </div>
+                    {
+                        StreamChannelSearchInput
+                            || StreamChannelTypeFilter != 'ALL'
+                            ?
+                            <div style={clearFilterContainerStyle}>
+                                <a 
+                                    style={clearFilterStyle}
+                                    onClick={() => this.handleClearFilter()}
+                                >Clear Filter</a>
+                            </div>
+                            :
+                            null
+                    }
                 </div>
 
                 <div style={bottomContainerStyle}>
@@ -708,6 +729,8 @@ const styles = {
         color: colors.lightGreyColor,
         fontSize: fonts.h4
     },
+
+
     comingSoonWrapperStyle: {
         display: 'flex',
         flexDirection: 'column',
@@ -810,6 +833,18 @@ const styles = {
         fontSize: fonts.h3,
         color: colors.lightGreyColor,
         marginLeft: 3
+    },
+    clearFilterContainerStyle: {
+        paddingLeft: 48,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    clearFilterStyle: {
+        fontSize: fonts.h3,
+        color: colors.labelColor,
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
 
     bottomContainerStyle: {
@@ -1006,6 +1041,7 @@ const dispatchToProps = {
     dxFetchStreamChannelAction,
     dxUpdateStreamChannelSearchAction,
     dxUpdateStreamChannelTypeFilterAction,
+    dxClearStreamChannelFilterAction,
     dxSelectStreamChannelAction,
     dxCreateStreamAction,
     dxRemoveStreamAction,

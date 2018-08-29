@@ -22,6 +22,7 @@ import {
     STREAM_CHANNEL_FETCH_REQUESTED,
     STREAM_CHANNEL_UPDATE_SEARCH_REQUESTED,
     STREAM_CHANNEL_UPDATE_FILTER_REQUESTED,
+    STREAM_CHANNEL_CLEAR_FILTER_REQUESTED,
     STREAM_CHANNEL_SELECT_REQUESTED,
     STREAM_CREATE_REQUESTED,
     STREAM_REMOVE_REQUESTED,
@@ -186,6 +187,13 @@ export const dxUpdateStreamChannelTypeFilter = (channelTypeFilter, val) => {
             channelTypeFilter,
             val,
         },
+    }
+}
+
+export const dxClearStreamChannelFilter = () => {
+    return {
+        type: STREAM_CHANNEL_CLEAR_FILTER_REQUESTED,
+        payload: {},
     }
 }
 

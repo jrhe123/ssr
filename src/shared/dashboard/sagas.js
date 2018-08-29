@@ -76,6 +76,10 @@ import {
     STREAM_CHANNEL_UPDATE_FILTER__SUCCEEDED,
     STREAM_CHANNEL_UPDATE_FILTER__FAILED,
 
+    STREAM_CHANNEL_CLEAR_FILTER_REQUESTED,
+    STREAM_CHANNEL_CLEAR_FILTER__SUCCEEDED,
+    STREAM_CHANNEL_CLEAR_FILTER__FAILED,
+
     STREAM_CHANNEL_SELECT_REQUESTED,
     STREAM_CHANNEL_SELECT__SUCCEEDED,
     STREAM_CHANNEL_SELECT__FAILED,
@@ -897,6 +901,41 @@ export function* dxStreamChannelTypeFilterUpdate(action) {
 
 export function* dxStreamChannelTypeFilterUpdateSaga() {
     yield takeEvery(STREAM_CHANNEL_UPDATE_FILTER_REQUESTED, dxStreamChannelTypeFilterUpdate);
+}
+
+// Stream Channel clear filter
+export function* dxStreamChannelClearFilter(action) {
+    try {
+        const response = yield call(dxFetchChannelUrl, action.payload);
+        let { Confirmation, Response, Message } = response;
+        if (Confirmation !== 'SUCCESS') {
+            yield put({
+                type: STREAM_CHANNEL_CLEAR_FILTER__FAILED,
+                payload: {
+                    message: 'Experience channel fetch api error'
+                },
+            });
+        } else {
+            yield put({
+                type: STREAM_CHANNEL_CLEAR_FILTER__SUCCEEDED,
+                payload: {
+                    totalRecord: Response.TotalRecord,
+                    expereienceChannels: Response.ExperienceChannels,
+                },
+            });
+        }
+    } catch (error) {
+        yield put({
+            type: STREAM_CHANNEL_CLEAR_FILTER__FAILED,
+            payload: {
+                message: 'Experience channel fetch api error'
+            },
+        });
+    }
+}
+
+export function* dxStreamChannelClearFilterSaga() {
+    yield takeEvery(STREAM_CHANNEL_CLEAR_FILTER_REQUESTED, dxStreamChannelClearFilter);
 }
 
 // Stream channel select
