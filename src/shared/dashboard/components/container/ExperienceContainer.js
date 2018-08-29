@@ -189,28 +189,35 @@ class ExperienceContainer extends Component {
     handleLoadMoreExperience = (experienceType) => {
         const {
             ExperienceSearchInput,
+            CurrentCardOnlyExperiencesFilter,
+            CurrentCardAndPagesExperiencesFilter,
             CurrentCardOnlyExperiencesPageIndex,
             CurrentCardAndPagesExperiencesPageIndex,
         } = this.props;
-        this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex, ExperienceSearchInput);
+        this.props.dxFetchMoreExperienceAction(experienceType, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesPageIndex : CurrentCardAndPagesExperiencesPageIndex, ExperienceSearchInput, experienceType == 'CARD_ONLY' ? CurrentCardOnlyExperiencesFilter : CurrentCardAndPagesExperiencesFilter);
     }
 
     handleSearchInputChange = (val) => {
-        this.props.dxUpdateExperienceSearchAction(val);
+        const {
+            CurrentCardOnlyExperiencesFilter,
+            CurrentCardAndPagesExperiencesFilter,
+        } = this.props;
+        this.props.dxUpdateExperienceSearchAction(val, CurrentCardOnlyExperiencesFilter, CurrentCardAndPagesExperiencesFilter);
     }
 
     handleSelectFilter = (filterType, option) => {
         const {
+            ExperienceSearchInput,
             CurrentCardOnlyExperiencesFilter,
             CurrentCardAndPagesExperiencesFilter,
         } = this.props;
         if (filterType == 'CARD_ONLY') {
             if (option != CurrentCardOnlyExperiencesFilter) {
-                this.props.dxUpdateExperienceFilterAction(filterType, option);
+                this.props.dxUpdateExperienceFilterAction(filterType, option, ExperienceSearchInput);
             }
         } else if (filterType == 'CARD_AND_PAGES') {
             if (option != CurrentCardAndPagesExperiencesFilter) {
-                this.props.dxUpdateExperienceFilterAction(filterType, option);
+                this.props.dxUpdateExperienceFilterAction(filterType, option, ExperienceSearchInput);
             }
         }
     }

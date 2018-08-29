@@ -126,6 +126,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
             updated.CurrentCardAndPagesExperiencesPageIndex = 0;
             updated.CardAndPagesExperiences = payload.cardAndPgesExperiences;
             updated.TotalCardAndPagesExperienceRecord = payload.cardAndPgesTotal;
+            // total
+            updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
             return updated;
 
         case EXPERIENCE_UPDATE_FILTER__SUCCEEDED:
@@ -156,6 +158,8 @@ const dashboardReducer = (previousState = initialState, { type, payload }) => {
                 updated.CurrentCardAndPagesExperiencesFilter = payload.option;
                 updated.CurrentCardAndPagesExperiencesFilterLabel = tmpFilterLabel;
             }
+            // total
+            updated.TotalExperienceRecord = updated.TotalCardOnlyExperienceRecord + updated.TotalCardAndPagesExperienceRecord;
             return updated;
 
         case EXPERIENCE_FETCH__SUCCEEDED:

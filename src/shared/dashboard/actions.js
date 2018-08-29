@@ -66,21 +66,24 @@ export const dxHtmlFetch = (experienceGUID, pageGUID, sectionGUID, guid, experie
     }
 }
 
-export const dxUpdateExperienceSearch = (val) => {
+export const dxUpdateExperienceSearch = (val, currentCardOnlyExperiencesFilter, currentCardAndPagesExperiencesFilter) => {
     return {
         type: EXPERIENCE_UPDATE_SEARCH_REQUESTED,
         payload: {
-            val
+            val,
+            currentCardOnlyExperiencesFilter,
+            currentCardAndPagesExperiencesFilter,
         },
     }
 }
 
-export const dxUpdateExperienceFilter = (experienceType, option) => {
+export const dxUpdateExperienceFilter = (experienceType, option, experienceSearchVal) => {
     return {
         type: EXPERIENCE_UPDATE_FILTER_REQUESTED,
         payload: {
             experienceType,
             option,
+            experienceSearchVal,
         },
     }
 }
@@ -94,13 +97,14 @@ export const dxFetchExperience = (experienceType) => {
     }
 }
 
-export const dxFetchMoreExperience = (experienceType, currentPageIndex, experienceSearch) => {
+export const dxFetchMoreExperience = (experienceType, currentPageIndex, experienceSearch, filterType) => {
     return {
         type: EXPERIENCE_FETCH_MORE_REQUESTED,
         payload: {
             experienceType,
             currentPageIndex,
             experienceSearch,
+            filterType,
         },
     }
 }

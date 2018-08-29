@@ -264,6 +264,7 @@ export const dxExperienceSearchUpdateUrl = (payload, experienceType) => {
         || experienceType == 'CARD_AND_PAGES') {
         searchParams = {
             ExperienceType: experienceType,
+            FilterType: experienceType == 'CARD_ONLY' ? payload.currentCardOnlyExperiencesFilter : payload.currentCardAndPagesExperiencesFilter,
             SearchType: "EXPERIENCE_TITLE",
             SearchField: payload.val,
         }
@@ -325,9 +326,9 @@ export const dxExperienceFilterUpdateUrl = (payload) => {
         || payload.experienceType == 'CARD_AND_PAGES') {
         searchParams = {
             ExperienceType: payload.experienceType,
-            FilterType: payload.option
-            // SearchType: "EXPERIENCE_TITLE",
-            // SearchField: payload.val,
+            FilterType: payload.option,
+            SearchType: "EXPERIENCE_TITLE",
+            SearchField: payload.experienceSearchVal,
         }
     }
     return (
@@ -434,6 +435,7 @@ export const dxFetchMoreExperienceUrl = (payload) => {
         || payload.experienceType == 'CARD_AND_PAGES') {
         searchParams = {
             ExperienceType: payload.experienceType,
+            FilterType: payload.filterType,
             SearchType: "EXPERIENCE_TITLE",
             SearchField: payload.experienceSearch,
         }
