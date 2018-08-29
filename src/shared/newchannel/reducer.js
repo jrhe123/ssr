@@ -13,6 +13,7 @@ const defaultChannel = {
     ChannelDescription: '',
     ChannelCode: '',
     ChannelCodeAvailable: false,
+    ChannelSyncing: false,
 }
 
 const initialState = {

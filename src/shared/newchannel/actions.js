@@ -1,6 +1,7 @@
 import {
     CHANNEL_TYPE_REQUESTED,
     CHANNEL_VALUE_REQUESTED,
+    CHANNEL_CODE_VALUE_REQUESTED,
     CHANNEL_CREATE_REQUESTED,
     CHANNEL_VIEW_REQUESTED,
     CHANNEL_UPDATE_REQUESTED,
@@ -19,6 +20,17 @@ export const dxChannelType = (channelType) => {
 export const dxChannelValueUpdate = (type, val, experienceChannelGUID) => {
     return {
         type: CHANNEL_VALUE_REQUESTED,
+        payload: {
+            type, 
+            val,
+            experienceChannelGUID,
+        },
+    }
+}
+
+export const dxChannelCodeValueUpdate = (type, val, experienceChannelGUID) => {
+    return {
+        type: CHANNEL_CODE_VALUE_REQUESTED,
         payload: {
             type, 
             val,

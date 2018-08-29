@@ -99,7 +99,13 @@ class ChannelPanel extends Component {
                                                             <InputAdornment
                                                                 position="end">
                                                                 {
-                                                                    Channel.ChannelCodeAvailable ?
+                                                                    Channel.ChannelSyncing ?
+                                                                        <p>sync ing</p>
+                                                                        :
+                                                                        null
+                                                                }
+                                                                {
+                                                                    !Channel.ChannelSyncing && Channel.ChannelCodeAvailable ?
                                                                         <CheckCircle style={{ color: colors.greenColor }} />
                                                                         :
                                                                         <a className="dx_promo_code_view dx_tool_tip">
