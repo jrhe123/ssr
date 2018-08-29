@@ -289,7 +289,33 @@ class ExperienceContainer extends Component {
         return (
             <div>
                 {
-                    TotalExperienceRecord ?
+                    !TotalExperienceRecord
+                        && !ExperienceSearchInput
+                        && CurrentCardOnlyExperiencesFilter == 'ALL'
+                        && CurrentCardAndPagesExperiencesFilter == 'ALL'
+                        ?
+                        (
+                            <div style={newContentContainerStyle}>
+                                <div style={tableContainerStyle}>
+                                    <div style={tableWrapperStyle}>
+                                        <img
+                                            style={imgStyle}
+                                            src={require('../../../../../assets/images/experience.png')}
+                                        />
+                                        <p style={labelStyle}>
+                                            Let's create an amzing experiences for your audience!
+                                    </p>
+                                        <Button
+                                            onClick={() => this.handleCreateExperience()}
+                                            style={addBtnStyle}
+                                            variant="Add new experience">
+                                            Create an experience
+                                    </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        :
                         (
                             <div style={mainContainerStyle}>
                                 <div style={topBarContainerStyle}>
@@ -538,26 +564,6 @@ class ExperienceContainer extends Component {
                                 </div>
                             </div>
                         )
-                        :
-                        <div style={newContentContainerStyle}>
-                            <div style={tableContainerStyle}>
-                                <div style={tableWrapperStyle}>
-                                    <img
-                                        style={imgStyle}
-                                        src={require('../../../../../assets/images/experience.png')}
-                                    />
-                                    <p style={labelStyle}>
-                                        Let's create an amzing experiences for your audience!
-                                    </p>
-                                    <Button
-                                        onClick={() => this.handleCreateExperience()}
-                                        style={addBtnStyle}
-                                        variant="Add new experience">
-                                        Create an experience
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
                 }
 
                 <NewExperienceModal
